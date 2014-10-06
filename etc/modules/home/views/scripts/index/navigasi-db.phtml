@@ -1,0 +1,328 @@
+<?
+/*  if ($this->auth->hasIdentity()) {
+			$id = $this->auth->getIdentity(); 
+			$user = $id['username'];
+			$userId = $id['userid'];
+            $role = $id['role'];
+			$groups = $id['groups'];
+			$dept = $id['dept'];
+			$admin_role = $id['admin_role'];
+			
+			
+			
+	   } else {
+	        $user = 'anonymous';
+			$role = 'anonymous';
+	    } 
+	   if (!$this->acl->hasRole($role)) {
+            $role = 'userBumn';
+       } */	 	 
+        require_once 'Oa/Service/AclStore.php';
+   
+       $aclStore = Oa_Service_AclStore::getInstance();
+	   $menuList = $aclStore->readAllMenuMap();
+	  // var_dump($menuList );
+	   $base = trim($this->basePath);
+	   
+	   $serverName = "http://".$_SERVER["SERVER_NAME"];
+	   
+	   $userLevel = $this->userLevel;
+	   
+?>
+	   
+<ul id="maintab" class="tabs">
+  	<!--li class="selected"><span>OA</span></li>
+	<li class=""><a href="#" class="enclose"><span>EIS</span></a></li>
+	<li class=""><a href="#" class="enclose"><span>Publik</span></a></li>
+	<li class=""><a href="#" class="enclose"><span>SDM</span></a></li>
+	<li class=""><a href="#" class="enclose"><span>PKBL</span></a></li>
+	<li class=""><a href="#" class="enclose"><span>Aset</span></a></li-->
+	<?
+	//var_dump($this->dataPortalUser);
+	/* for($x=0; $x<count($this->dataPortalUser); $x++)
+	   {
+			$namaPortal = $this->dataPortalUser[$x]['namaPortal'];
+			$url = $this->dataPortalUser[$x]['url'];
+
+			if(strtoupper($namaPortal) == "OA")
+			{
+				$url = "http://10.1.99.162";
+			}
+			
+			if($serverName == $url)
+			{
+			?>
+				<li class="selected"><span><? echo strtoupper($namaPortal);?></span></li>
+				
+			<?
+			}
+			else
+			{
+			?>
+				<li class=""><a href="<? echo $url;?>" class="enclose"><span><? echo strtoupper($namaPortal);?></span></a></li>
+			<?
+			}
+	   } */
+	   ?>
+</ul>
+
+<div id="nav">
+<?
+   //
+   //  CREATE MENU ARRAY berdasarkan otiritas user
+   //
+   //echo "<font size=3>BENTAR YA LAGI DI TEST MENU SAMA AGIEN </font><br><br>";
+   //echo "group = $group | $role";
+   
+   
+  if($userLevel == "au") // oleh candra 24 April 2008
+   {
+		echo "<ul id=\"pmenu\" >";
+		echo "<li><a href=\"#\">Administrasi</a>";
+		echo "<ul>";
+		echo "<li class=\"sub\"><a href=\"#\" onClick=\"open_url_to_div('$base/adm/admutama/listadmsys','$base/adm/admutama/admutamajs');\" title=\"Memelihara Admin System\">Memelihara Admin System</a>";
+		echo "</li>";
+		echo "</ul>";
+		echo "</li>";
+		echo "</ul>";
+   }
+   else if($userLevel == "as") // oleh candra 28 April 2008
+   {
+		echo "<ul id=\"pmenu\" >";
+		echo "<li><a href=\"#\">Administrasi</a>";
+		echo "<ul>";
+		echo "<li class=\"sub\"><a href=\"#\" onClick=\"open_url_to_div('$base/adm/admuser/daftaruser ','$base/adm/admuser/buatuserjs ');\" title=\"Memelihara Admin Lain\">Administrasi User</a>";
+		echo "</li>";
+		echo "<li class=\"sub\"><a href=\"#\" onClick=\"open_url_to_div('$base/adm/admgroup/daftargroup ','$base/adm/admgroup/groupjs ');\" title=\"Memelihara Admin Lain\">Administrasi Group</a>";
+		echo "</li>";
+		echo "</ul>";
+		echo "</li>";
+		echo "</ul>";
+
+   }  
+   /* if($userId == "juli")
+   {
+		echo "<ul id=\"pmenu\" >";
+			echo "<li><a href=\"#\">Administrasi</a>";
+			echo "<ul>";
+			echo "<li class=\"sub\"><a href=\"#\" onClick=\"open_url_to_div('$base/adm/admuser/daftaruser ','$base/adm/admuser/buatuserjs ');\" title=\"Memelihara Admin Lain\">Administrasi User</a>";
+			echo "</li>";
+			echo "<li class=\"sub\"><a href=\"#\" onClick=\"open_url_to_div('$base/adm/admgroup/daftargroup ','$base/adm/admgroup/groupjs ');\" title=\"Memelihara Admin Lain\">Administrasi Group</a>";
+			echo "</li>";
+			echo "</ul>";
+			echo "</li>";
+			echo "</ul>";
+   } */
+   else
+   {
+		
+		   $menuAuth = array();
+		   try {
+		       for ($i = 0;$i < count($menuList);$i++ ){
+				$modul = $menuList[$i]->modul;
+				$title = $menuList[$i]->menu;
+				$level = $menuList[$i]->level;
+		        $type  = $menuList[$i]->type;
+		        $ket   = $menuList[$i]->ket; 
+		        $onclick = $menuList[$i]->onclick;		
+				$res = trim($menuList[$i]->resource);
+				
+		        $allowed = false;
+					 //
+					 //      CHECK AUTORITAS BY ROLE DAN USERID
+					 //
+					//
+					$allowed = true;
+					$proses = false;
+					
+		           /*  if ($res) {
+						
+						 if ($this->acl->has($res)) {
+						     
+						     // Resource ada 
+							 //     periksa otoritas pada group dan user
+							 //
+							 //echo "AKSES ".$role." ".$res." ".$userId."<br>";
+								 $gAkses = $this->acl->isAllowed($role,$res);				 
+								 $uAkses = $this->acl->isAllowed($userId,$res);
+								 //echo "TEST RESC ".$gAkses." ".$uAkses."<br>";
+								 
+								 //ditambahi sama candra
+								 for($e=0; $e<count($groups); $e++)
+								 {
+								 //echo "masuk for";
+									$gAkses2 = $aclStore->isAllowedCandra($groups[$e],$res);
+									
+									if($gAkses2)
+									{
+										break;
+									}
+									
+									
+								 } */
+								 
+								 $allowed = $uAkses || $gAkses2;
+									//echo "TEST ".$gAkses2."<br>";
+									
+									//if($allowed) {
+									    //echo "TEST ".$modul." ".$level." ".$title." ".$type." ".$onclick."<br>";
+						                $menuAuth[] = array("modul"=>$modul,"level"=>$level,"menu"=>$title,
+										                    "type" =>$type,"ket"=>$ket,"onclick"=>$onclick);
+															
+										$proses = true;
+						           // }
+								 
+								 
+								 //echo "TEST ".$modul." ".$level." ".$allowed."<br>";	
+					    /*  } else {
+						      // Resource diperinci tapi tidak Ada
+							     $allowed = true;
+								 
+						 } */
+						  $allowed = true;
+						
+					/* } else {
+						    // Menu tanpa Resource Id  ->  Allowed
+			                     $allowed = true;
+					} */
+						 
+						 //echo "TEST RESC ".$allowed." ".$type." ".$title." ".$onclick."<br>";
+					
+						if(!$proses)
+						{
+				            if($allowed) {
+							    //echo "TEST ".$modul." ".$level." ".$title." ".$type." ".$onclick."<br>";
+				                $menuAuth[] = array("modul"=>$modul,"level"=>$level,"menu"=>$title,
+								                    "type" =>$type,"ket"=>$ket,"onclick"=>$onclick);
+							}
+						}	 
+				  }
+			  //}
+			  }catch (Exception $e) {
+			  echo $e->getMessage().'<br>';
+			        //echo "exception Euy";
+			  }
+	   
+		  ?>
+<?  
+
+	   
+	    $modul = $menuAuth[0]["modul"];
+		$oDeep = 0;
+		$closing = "";
+		echo "<ul id=\"pmenu\" >";
+	    for($i = 0; $i < count($menuAuth);$i++ ) {
+		   	$type  = trim($menuAuth[$i]["type"]);
+		    $title = $menuAuth[$i]["menu"];
+			$ket   = htmlentities($menuAuth[$i]["ket"]);
+			$level = $menuAuth[$i]["level"];
+			$cDeep =  substr_count($level,".");
+			$clickAction = $menuAuth[$i]["onclick"];
+			$dif   = $cDeep - $oDeep;
+			if ($type == "Y" ) {
+			    $li_class = "sub";
+				if($clickAction) {
+				   //echo "TEST 1 ".$clickAction;
+				   $cAction = explode(",",$clickAction);
+				   $action = trim($cAction[0]);
+				   $actionjs = trim($cAction[1]);
+				   //$onclick = " onclick=\"open_url_to_div('$base/$action','$base/$actionjs');\"";
+				   $actionprm = $cAction[2];
+				   //echo "TEST 1 ".$actionprm;
+				   if ($actionprm=="")
+				   { $onclick = " onclick=\"open_url_to_div('$base/$action','$base/$actionjs');\""; }
+				   else
+				   { $onclick = " onclick=\"open_url_to_div2('$base/$action','$base/$actionjs','$actionprm');\""; }
+				}else {
+				   $onclick = "onclick=\"open_url_to_div('$base/home/index/noMenu','$base/home/index/noMenujs');\"";
+				}
+			} else {
+			    $li_class = "fly";
+				$onclick = "";
+			}
+		    if($i == 0) {
+			     echo   " <li><a href=\"#\">$modul</a>
+								<!--[if IE 7]><!--></a><!--<![endif]-->
+								<!--[if lte IE 6]><table><tr><td><![endif]-->
+								<ul>
+									<li class=$li_class><a href=\"#\" $onclick title=\"$ket\">$title</a>";
+				 $oDeep = 0;
+				 $mClosing = "</ul></li>";
+				 continue;
+	         } 
+			//echo $modul." ".$menuAuth[$i]["modul"];
+		    if   ($modul != $menuAuth[$i]["modul"]) {
+			      $modul = $menuAuth[$i]["modul"];
+				  //echo "SCOPE TEST ' $oDeep ' END SCOPE <br>";
+				  $closing = "";
+				  for($cls = 0; $cls <= $oDeep; $cls++ ) {
+				      $closing = "</ul></li>" .$closing;
+				  }
+				 echo "$closing<li><a href=\"#\">$modul</a>
+							<ul><li class=$li_class ><a href=\"#\" $onclick title=\"$ket\">$title</a>";
+	             /*			 
+				 if ($oDeep == 0) {
+	                echo "</li>$iClosing $uClosing $mClosing <li><a href=\"#\">$modul</a><ul><li class=$li_class ><a href=\"#\" $onclick title=\"$ket\">$title</a>";
+				  } else if ($oDeep == 1) {
+	                echo "$iClosing $uClosing $mClosing <li><a href=\"#\">$modul</a><ul><li class=$li_class ><a href=\"#\" $onclick title=\"$ket\">$title</a>";
+				  } else if ($oDeep == 2){
+				    echo "$iClosing $uClosing $mClosing <li><a href=\"#\">$modul</a><ul><li class=$li_class ><a href=\"#\" $onclick title=\"$ket\">$title</a>";
+				   
+					if ($iClosing == "") {
+					  //if ($uClosing == "</li></ul></li>" && $mClosing == "</ul></li>") {
+					    //echo "masuk satu";
+						echo "$iClosing $uClosing $mClosing </ul></li><li><a href=\"#1\">$modul</a><ul><li class=$li_class ><a href=\"#\" $onclick title=\"$ket\">$title</a>";
+					  //} else {
+					  //  echo "masuk dua";
+					  //  echo ",$iClosing, $uClosing, $mClosing, <li><a href=\"#1\">$modul</a><ul><li class=$li_class ><a href=\"#\" $onclick title=\"$ket\">$title</a>";
+					  //}
+					} else if ($uClosing == "") {
+					  //echo "masuk dua";
+					  echo "$iClosing $uClosing $mClosing </ul></li><li><a href=\"#1\">$modul</a><ul><li class=$li_class ><a href=\"#\" $onclick title=\"$ket\">$title</a>";
+					} else if ($mClosing == "") {
+					  //echo "masuk tiga";
+					  echo "$iClosing $uClosing $mClosing </ul></li><li><a href=\"#1\">$modul</a><ul><li class=$li_class ><a href=\"#\" $onclick title=\"$ket\">$title</a>";
+					} else {
+					  //echo "masuk empat";
+					  if ($iClosing == "</li>" && $uClosing == "</ul></li>") {
+					    //echo "masuk empat satu";
+					    echo "$iClosing $uClosing $mClosing </ul></li><li><a href=\"#2\">$modul</a><ul><li class=$li_class ><a href=\"#\" $onclick title=\"$ket\">$title</a>";
+					  } else {
+					    //echo "masuk empat dua";
+					    echo "$iClosing $uClosing $mClosing <li><a href=\"#2\">$modul</a><ul><li class=$li_class ><a href=\"#\" $onclick title=\"$ket\">$title</a>";
+					  }
+					}
+					
+				  }*/
+			      $oDeep = 0;
+				  $mClosing = "</ul></li>";
+				  $iClosing = "";
+				  $uClosing = "";
+				 
+			}else {
+			      
+			      if($dif  == 0 ) {
+				       echo "$iClosing <li class=$li_class><a class=\"enclose\" href=\"#\" $onclick title=\"$ket\" >$title</a>";
+					   $iClosing = "</li>" .$iClosing;
+				  }
+				  if($dif  < 0 ) { // IN
+				      $liClosing = "";
+				      for ($li=0 ;$dif < $li ;$li--) {
+					     $liClosing = "</li></ul>" .$liClosing;
+					  }
+				      echo "$liClosing  <li class=$li_class><a class=\"enclose\" href=\"#\"  $onclick title=\"$ket\">$title</a> ";
+					  $uClosing = "";
+		              $iClosing = "";
+
+				  }
+				  if($dif  > 0 ) { // OUT
+				     echo "<ul><li class=$li_class ><a class=\"enclose\" href=\"#\"  $onclick title=\"$ket\">$title</a> ";
+					 $uClosing = "</ul></li>" .$uClosing;
+				  }
+			}
+			$oDeep = $cDeep;
+		}
+		echo "</ul></li></ul>";
+	}
+
+?>    

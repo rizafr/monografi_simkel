@@ -1,0 +1,135 @@
+<? require_once 'Zend/View.php';
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+
+
+	//$jenjang = $_REQUEST['jenjang'];
+	$nip = $_REQUEST['nip'];
+	//echo "test".$test;
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+
+
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA RIWAYAT HUKUMAN</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data riwayat hukuman yang pernah diterima pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line">
+		<div class="title2">Data Riwayat Hukuman</div>
+		<fieldset  class="panel-form">	
+			<form id="frmVHukumView" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/hukumanview" method="post" name="frmVHukumView">
+				<dl>
+					<dt>Surat Peringatan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$sp = $this->escape($this->sp);
+						echo $sp;
+					?>
+					</dd>
+				</dl>
+<!--				<dl>
+					<dt>Jenis Peringatan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$jenisSp = $this->escape($this->jenisSp);
+						if ($jenisSp == 'L') {
+							$jenisSp = 'Lisan';
+						}
+						else if ($jenisSp == 'T') {
+							$jenisSp = 'Tertulis';
+						}
+						echo $jenisSp;
+					?>
+					</dd>
+				</dl>
+-->
+				<dl>
+					<dt>Tanggal</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$tanggal = $this->escape($this->tanggal);
+						$thnSpt = substr($tanggal,0,4);
+						$blnSpt = substr($tanggal,5,2);
+						$hrSpt = substr($tanggal,8,2);
+						$tanggal = $hrSpt."-".$blnSpt."-".$thnSpt;
+						echo $tanggal;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Yang Mengeluarkan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$dari = $this->escape($this->dari);
+						echo $dari;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Kasus</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$kasus = $this->escape($this->kasus);
+						echo $kasus;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tingkat Sanksi</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$tkSanksi = $this->escape($this->tkSanksi);
+						echo $tkSanksi;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Keterangan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$keterangan = $this->escape($this->keterangan);
+						echo $keterangan;
+					?>
+					</dd>
+				</dl>
+ 			<dl>
+				<?php 
+				  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">&nbsp;</dd>			
+				<div class="back" onClick="javascript:kembaliHukumView('<? echo $this->escape($this->nip); ?>');" title="Kembali"><input type="button" value="Kembali" id="kembaliHukumView"></div>
+			</dl>
+		  	</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>		
+
+<!--			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliHukumView('<? echo $this->escape($this->nip); ?>');" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

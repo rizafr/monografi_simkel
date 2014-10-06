@@ -1,0 +1,212 @@
+<? require_once 'Zend/View.php';
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+   $thnList = $thnskrg - 11;
+   $thnList2 = $thnskrg - 55;
+	
+   $thnArrayList['#'] = '--';
+   		
+   for ($i = 0; $i < 21; $i++) {
+     $thnList = $thnList + 1;
+     $thnArrayList[$thnList] = $thnList;
+   }
+
+	
+   $thnArrayList2['#'] = '--';
+   	 
+   for ($i = 0; $i < 60; $i++) {
+     $thnList2 = $thnList2 + 1;
+     $thnArrayList2[$thnList2] = $thnList2;
+   }
+		
+		
+   $pnjngArray = count($thnArrayList);
+
+	  $blnList = 0;
+	  for ($j = 0; $j < 12; $j++) {
+        $blnList = $blnList + 1;
+		if ($blnList < 10) {
+		  $blnBaruList = "0".$blnList;
+		  $blnArrayList[] = $blnBaruList;
+		} else {
+		  $blnBaruList = $blnList;
+		  $blnArrayList[] = $blnBaruList;
+		}
+      }
+		
+	  $hrList = 0;
+	  for ($k = 0; $k < 31; $k++) {
+        $hrList = $hrList + 1;
+		if ($hrList < 10) {
+		  $hrBaruList = "0".$hrList;
+		  $hrArrayList[] = $hrBaruList;
+		} else {
+		  $hrBaruList = $hrList;
+		  $hrArrayList[] = $hrBaruList;
+		}
+      }
+
+
+
+$nip = $_REQUEST['nip'];
+$_SESSION['nip'] = $nip;
+
+	$jumKerList = count($this->kerList);
+  //echo "jumKerList= ".$jumKerList;
+   for ($j = 0; $j < $jumKerList; $j++) {
+     $ker[$j] = array("no"=>$j+1,
+						  "i_peg_nip"  		=>(string)$this->kerList[$j]['nip'],
+						  "hubungan"		=>(string)$this->kerList[$j]['hubungan'],
+						  "kdHub"			=>(string)$this->kerList[$j]['kdHub'],
+	                      "nama"      		=>(string)$this->kerList[$j]['nama'],
+	                      "jenisKelamin"    =>(string)$this->kerList[$j]['jenisKelamin'],
+	                      "pekerjaan"      	=>(string)$this->kerList[$j]['pekerjaan'],
+						  "a_jalan"  		=>(string)$this->kerList[$j]['a_jalan'],
+						  "a_rt"  			=>(string)$this->kerList[$j]['a_rt'],
+						  "a_rw"  			=>(string)$this->kerList[$j]['a_rw'],
+						  "a_kel"  			=>(string)$this->kerList[$j]['a_kel'],
+						  "a_kec"  			=>(string)$this->kerList[$j]['a_kec'],
+						  "a_kota"  		=>(string)$this->kerList[$j]['a_kota'],
+						  "a_prop"  		=>(string)$this->kerList[$j]['a_prop'],
+						  "telp"  			=>(string)$this->kerList[$j]['telp'],
+						  "hp"  			=>(string)$this->kerList[$j]['hp'],
+						  "email"  			=>(string)$this->kerList[$j]['email'],
+						  "keterangan"  	=>(string)$this->kerList[$j]['keterangan']);						  
+   } 
+   //echo "a_kec----->".$this->kerList[0]['a_kec'];
+  
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+
+					 
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA ORANG TUA & KERABAT</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data orang tua, mertua dan saudara kandung/saudara ipar pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">	
+			<form id="frmKer" action="/sdm/viewpegawai/kerabat" method="post" name="frmKer">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+			</form>
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line"></div>	
+	<fieldset class="fields">
+		<div class="title2">Data Orang Tua & Kerabat</div>
+		<div class="blank"></div>
+
+				
+<? 	if ($jumKerList == 0) {
+		echo "<font color=\"red\">Data Orang Tua & Kerabat Tidak Ditemukan</font>";		
+?>
+		<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+			    <th width="4%">No</th>
+			    <th width="15%">Nama</th>
+				<th width="11%">Hub. Keluarga</th>
+				<th width="7%">Jenis Kelamin</th>
+				<th width="10%">Pekerjaan</th>
+				<th width="20%">Alamat</th>
+				<th width="9%">Telepon</th>
+				<th width="9%">HP</th>
+				<th width="10%">Email</th>
+				<th width="5%">Keterangan</th>
+			</tr>
+		</table>
+<? } else { ?>
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+			    <th width="4%">No</th>
+			    <th width="15%">Nama</th>
+				<th width="11%">Hub. Keluarga</th>
+				<th width="7%">Jenis Kelamin</th>
+				<th width="10%">Pekerjaan</th>
+				<th width="20%">Alamat</th>
+				<th width="9%">Telepon</th>
+				<th width="9%">HP</th>
+				<th width="10%">Email</th>
+				<th width="5%">Keterangan</th>
+			</tr>
+			 
+		<?php 
+			foreach ($ker as $key => $val): 
+					   if ($key%2==0) { ?>
+				      <tr class="event">
+					<? } else if ($key%2==1) { ?>
+					  <tr class="event2">
+					<? } ?>
+				<?php
+					$no = $this->escape($val['no']);
+					$jenisKelamin = $this->escape($val['jenisKelamin']);
+					if ($jenisKelamin == 'P') {
+						$jenisKelamin = 'Perempuan';
+					} else if ($jenisKelamin == 'L') {
+						$jenisKelamin = 'Laki-laki';
+					}
+					
+					$jalan = $this->escape($val['a_jalan']);
+					$rt = $this->escape($val['a_rt']);
+					$rw = $this->escape($val['a_rw ']);
+					$kel = $this->escape($val['a_kel']);
+					$kec = $this->escape($val['a_kec']);
+					$kota = $this->escape($val['a_kota']);
+					$prop = $this->escape($val['a_prop']);
+					if ($rt == null){
+						$rt = '-';
+					}
+					if ($rw == null){
+						$rw = '-';
+					}
+					if ($kel == null){
+						$kel = '-';
+					}
+					if ($kec == null) {
+						$kec = '-';
+					}
+					if ($kota == null){
+						$kota = '-';
+					}
+					if ($prop == null){
+						$prop = '-';
+					}
+					
+					//$alamat = $jalan."Rt:".$rt." Rw:".$rw." Kel:".$kel." Kec:".$kec." Kota:".$kota." Prop:".$prop;
+					$alamat = $jalan." ".$kec." ".$kota." ".$prop;
+					//echo "nama= ".$this->escape($val['hubungan']);	
+//echo "kec=> ".$kec;					
+				?>
+				<td>&nbsp; <?php echo $no;?></td>
+				<td>&nbsp;<a href="#" onClick="javascript:viewKer('<? echo $this->escape($val['i_peg_nip']); ?>','<?php echo $this->escape($val['hubungan']);?>');" class="link" title="View"><?php echo $this->escape($val['nama']);?> </a></td>
+				<td>&nbsp;<?php echo $this->escape($val['hubungan']);?></td>
+				<td class="clcenter"> <?php echo $jenisKelamin;?></td>
+				<td>&nbsp;<?php echo $this->escape($val['pekerjaan']);?></td>
+				<td>&nbsp; <?php echo $alamat; ?></td>
+				<td>&nbsp;<?php echo $this->escape($val['telp']);?></td>
+				<td>&nbsp;<?php echo $this->escape($val['hp']);?></td>
+				<td>&nbsp;<?php echo $this->escape($val['email']);?></td>
+				<td>&nbsp; <?php echo $this->escape($val['keterangan']);?></td>
+		  </tr>
+	<?php endforeach;?> 		  
+	  
+		</table>
+	<? } ?>
+ 			<dl>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">
+				<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+				</dd>			
+				<div class="back" onClick="javascript:kembaliKer();" title="Kembali"><input type="button" value="Kembali" id="kembaliKer"></div>
+			</dl>
+	
+			</div>
+ 	</fieldset>
+</div>			

@@ -1,0 +1,13 @@
+pos_1;Insert Data Pengumuman ;08/02/2014 00:12:08; di lokasi  dengan id_pengadaan (113);
+pos_1;Insert Data Pengumuman ;08/02/2014 00:20:27; di lokasi  dengan id_pengadaan (113);
+pos_1;Insert Data Pengumuman ;08/02/2014 00:27:07; di lokasi  dengan id_pengadaan (113);
+pos_1;Insert Data Pengumuman ;08/02/2014 00:28:50; di lokasi  dengan id_pengadaan (113);
+barang;Ubah Nilai Penawaran ;08/02/2014 00:57:16; ();
+barang;Ubah Nilai Penawaran ;08/02/2014 01:00:12; ();
+barang;Ubah Nilai Penawaran ;08/02/2014 01:01:33; ();
+barang;Ubah Nilai Penawaran Terakhir ;08/02/2014 01:01:55; ();
+admin;Insert Data Format Dokumen Pengadaan 34304;08/02/2014 13:29:27; di lokasi  dengan id ();
+;Update Data Pelanggaran Pengadaan ;08/02/2014 14:49:32; di lokasi  dengan id_pengadaan ();
+;Insert data;08/02/2014 14:58:37; ();
+admin;Insert Data Format Dokumen Pengadaan 45056;08/02/2014 15:32:02; di lokasi  dengan id ();
+admin;Insert Data Format Dokumen Pengadaan 45056;08/02/2014 15:33:01; di lokasi  dengan id ();

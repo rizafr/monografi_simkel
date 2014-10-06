@@ -1,0 +1,95 @@
+<?php 
+require_once 'Zend/View.php';
+require_once "share/tanggal.php";  
+require_once 'share/Portalconf.php'; 
+$tanggal = new tanggal();
+$ctrlFrm = new Zend_View();
+$pesancek=$this->pesancek;
+$cstatus=$this->status;
+
+
+if ($this->tglpengumuman!='') {
+  $dates=formatDate4($this->tglpengumuman);
+  $xtime=substr($this->tglpengumuman,11,8);
+  list($jam,$mnt,$det)=split(":",$xtime);
+} else {
+  $dates=date('d/m/Y');
+  $jam=date("H");
+  $mnt=date("i");
+}
+if ($cstatus!='') {
+	if ($cstatus==1) $status1='checked';
+	else $status0='checked';
+} else $status1='checked';
+
+if ($pesancek=='gagal'){$confirm ='confirmfail';}
+else {$confirm ='confirm';}
+
+
+?>
+ <script type="text/javascript" src="<?echo $this->baseUrl;?>/content/init.js"></script>
+	<script type="text/javascript">
+
+	$(function() {
+		$("#d_pengumuman").datepicker();
+	});
+	</script>
+
+
+		   <div class="navlink">
+				<a  href="<? echo $this->basePath; ?>cms">Halaman Utama</a> 
+				<strong> &#8250; </strong> <a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/cmsmodule/pengumuman/listpengumuman','<?php echo $this->basePath; ?>/cmsmodule/pegawai/pegawaijs');">Kelola Data pengumuman</a>
+				<strong> &#8250; </strong><?=$this->jdl;?> Data pengumuman
+			</div>
+			<br>
+<div id="top"></div>
+<div id="confirm" class="<?=$confirm?>" style="display: none">
+	<h3><?echo $pesan = $this->pesan;?></h3>				
+</div>
+
+	
+<form id="formpengumuman" method="post" name="formpengumuman"  action="">
+<input type="hidden" value="<?=$this->idpengumuman?>" name="idpengumuman"> 
+<input type="hidden" value="<?=$this->par?>" name="action"> 
+<h2 class="title"><?=$this->jdl;?> Data pengumuman</h2>
+
+		<div class="spacer"></div> 
+
+<table  width="100%">
+ <tr>
+   <td width="20%">Tanggal pengumuman</td>
+   <td width="1%">:</td>
+   <td width="79%"><input type="text" id="d_pengumuman" name="date" value="<?=$dates?>" size="10">
+	Pkl <input type="text" id="jam" name="jam" value="<?=$jam?>" size="2" maxlength="2" tabindex="4" />:<input type="text" id="mnt" name="mnt" value="<?=$mnt?>" size="2" maxlength="2" tabindex="4" />
+  </td>
+ </tr>
+ <tr>
+   <td width="20%">Status pengumuman</td>
+   <td width="1%">:</td>
+   <td width="79%">
+   	<label for="post_status_publish" class="selectit"><input id="post_status_publish" class="radio" name="status" type="radio" value="1" <?=$status1?> /> Diterbitkan</label>
+    <label for="post_status_pengumuman" class="selectit"><input id="post_status_pengumuman" class="radio" name="status" type="radio" value="0"  <?=$status0?> /> Tidak Diterbitkan</label>
+
+   </td>
+ </tr>
+ <tr>
+   <td width="20%">Judul pengumuman <span class="highlight">*</span></td>
+   <td width="1%">:</td>
+   <td width="79%"><input type="text" name="title" size="30" tabindex="1" value="<?=$this->jdlpengumuman?>" id="title"/></td>
+ </tr>
+ <tr>
+   <td width="20%">Isi pengumuman</td>
+   <td width="1%">:</td>
+   <td width="79%"><textarea id="content" name="content" style="height:300px"><?=$this->detilpengumuman?></textarea></td>
+ </tr>
+</table>
+ket :&nbsp;(<span class="highlight">*</span>)&nbsp;harus diisi
+		<p class="submit">
+		<span id="autosave"></span>
+
+		<input name="cancel" type="button" id="publish" tabindex="5" accesskey="p" value="Batal" onClick="open_url_to_div('<?php echo $this->basePath; ?>/cmsmodule/pengumuman/listpengumuman','<?php echo $this->basePath; ?>/cmsmodule/pengumuman/pengumumanjs');"/>
+		<input type="submit" name="submit" value="<?=$this->pars;?>" onClick="insertpengumuman()" style="font-weight: bold;" />
+
+
+	
+</form>	

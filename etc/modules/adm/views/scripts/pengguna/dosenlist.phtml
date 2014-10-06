@@ -1,0 +1,169 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+$referensi = Aplikasi_Referensi_Service::getInstance();
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+		
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+<div class="navlink">
+	<a  href="index_login.php">Halaman Utama</a> <strong> &#8250; </strong>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Data Dosen</h2>
+		<div class="search-panel">
+			<form method="post" id="frmCariMatakuliah" name="frmCariMatakuliah">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+	<tr>
+	<td align="left" width="180"> Program Studi :</td>
+	<td>
+	<?
+				$jmlprodiList = count($this->prodiList);
+				$prodiList['-'] = '--Pilih--';
+				for ($i = 0; $i < $jmlprodiList; $i++) {
+					$prodiList[$this->prodiList[$i]->id] = (string)$this->prodiList[$i]->n_prodi;			 
+				}
+				$c_prodiAtrib = array("id"=>"prodi", "tabindex"=>"17");
+				echo $ctrlFrm->formSelect('prodi', $this->prodi, $c_prodiAtrib, $prodiList);
+				?>
+	</td>
+	</tr>
+	<tr>
+	<td align="left" width="180"> Tahun Ajaran :</td>
+	<td>
+	<?
+	$jmlthnAjaranList = count($this->thnAjaranList);
+	$thnAjaranList['-'] = '--Pilih--';
+		for ($i = 0; $i < $jmlthnAjaranList; $i++) {
+		$thnAjaranList[$this->thnAjaranList[$i]->c_thnajaran] = (string)$this->thnAjaranList[$i]->c_thnajaran;			 
+		}
+	$c_thnAjaranAtrib = array("id"=>"tahun", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('tahun', trim($this->tahun), $c_thnAjaranAtrib, $thnAjaranList);
+	?>
+	</td>
+	</tr>
+	<tr>
+	<td align="left" width="180"> Semester :</td>
+	<td>
+	<?
+	$n_semesterAttrib = array("id"=>"semester","size" => 10,"maxlength" => 10);
+	echo $ctrlFrm->formText('semester', $this->semester, $n_semesterAttrib);
+	$atribSubmit = array("onclick"=>"javascript:cariMatakuliah();");
+	echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+	?>
+	</td>
+	</tr>
+</table>
+			</form>
+		</div>
+		<div class="space-line"></div>
+
+		
+		<fieldset class="fields"> 
+			<div class="spacer"> </div>
+			<? 
+			
+			$status = $this->hasil;
+			$proses = $this->proses;
+			$keterangan = $this->keterangan;
+			
+			$pesan->show_message($proses, $keterangan, "$status" ); ?>
+			<div class="spacer"> </div>	
+			
+			<div class="add" title="Tambah Data" onClick="dosenForm('insert','');"></div> 
+
+			<div class="blank"></div>
+			
+			
+			<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th width=5%  class="nosort">No</th> 
+				<th width=7% class="sorted order2 sortable">Kode</th> 
+				<th width=40% class="sorted order2 sortable">Matakuliah</th> 
+				<th width=5% class="sorted order2 sortable">Sks</th> 
+				<th width=5% class="sorted order2 sortable">Bobot Teori</th> 
+				<th width=5% class="sorted order2 sortable">Bobot Praktikum</th> 
+				<th width=30% class="sorted order2 sortable">Koordinator</th> 
+				<th width=10% class="nosort">Status Aktif</th>
+				<th width=10% colspan="2"  class="nosort">Tindakan</th>
+				
+				<?
+				if (count($this->dosenList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {
+						
+						
+						foreach ($this->dosenList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } 
+						$id = $this->escape($val['id']); 
+						$c_dosen = $this->escape($val['c_dosen']); 
+						$n_dosen = $this->escape($val['n_dosen']); 
+						$n_sks = $this->escape($val['n_sks']);
+						$v_jamteori = $this->escape($val['v_jamteori']);
+						$v_jampraktek = $this->escape($val['v_jampraktek']);
+						$n_nama = $this->escape($val['n_nama']);
+						$cStatusaktif = $this->escape($val['c_statusaktif']);
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						
+						// form Hidden 
+						echo $ctrlFrm->formHidden('id', $id, null);
+						
+						?>
+						
+						<td class="clright"><? echo $noUrut;?>&nbsp;&nbsp;</td>
+						<td class="clleft">&nbsp;<? echo $c_dosen;?></td>
+						<td class="clleft">&nbsp;<? echo $n_dosen;?></td>
+						<td class="clleft">&nbsp;<? echo $n_sks;?></td>
+						<td class="clleft">&nbsp;<? echo $v_jamteori;?></td>
+						<td class="clleft">&nbsp;<? echo $v_jampraktek;?></td>
+						<td class="clleft">&nbsp;<? echo $n_nama;?></td>
+						<? 
+						if($kdStatus == '1') { $statusAktif = "checked";}
+						else {$statusAktif = "";}
+					
+						?>
+						<td align="center">
+							<input type="checkbox" name="statusAktif_<? echo $key;?>" id="statusAktif_<? echo $key;?>" <? echo $statusAktif;?> value="<?echo $id;?>" onClick="ubahStatus(<?echo $key?>);">
+						</td>
+						
+						<td><div onClick="dosenForm('update','<? echo $id;?>');" class="edit" title="Ubah Data"></div></td>
+						<td><div class="delete" title="Hapus Data" onClick="dosenHapus('Matakuliah', '<? echo $id; ?>')" ></td>
+						
+					
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+			<?	
+			$totalData = $this->totMatakuliahList;
+			$modul = $this->basePath."/bak/dosen/dosenlist";
+			$param1 = $this->prodi;$param2 = $this->tahun;$param3 = $this->semester;$param4 = $this->kelas;$param5 = $this->matakuliah;
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4, $param5);		
+			//echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
+			?>
+		</fieldset>		 
+		
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>

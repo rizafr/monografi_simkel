@@ -1,0 +1,136 @@
+/* SITE SPECIFIC LAYOUT */
+    body {
+        margin: 0;
+        padding: 0;
+                
+    }
+#container {
+        width:990px;
+	padding:0;
+        margin: 0 auto 0 auto;
+	border:0px solid;
+        text-align:center;
+}
+#undel_msg{
+     position:relative;
+     display:none;
+     margin:0 auto;
+     width:auto;
+     padding-top:4px;
+     height:23px;
+     vertical-align:middle;
+     line-height:20px;
+     font-size:12px;
+     color:red;
+}
+#undel_msg .closed {
+  float:left;
+  width:17px;
+  height:13px;
+  margin-top:-15px;
+  CURSOR: default;
+  BACKGROUND: url('../images/x.gif') no-repeat;
+  CURSOR: pointer;
+  border :0px solid;
+}
+#undel_title{
+     font-size:12px;
+     color:#000;
+}     
+    /* HEADER */
+        div#header {
+            display:block;
+            margin:0 auto 0 auto;
+            padding: 0px;
+            text-align: left;
+            height:80px;
+        }
+
+
+    /* END HEADER */
+    
+    
+    /* CONTENT */
+        #content {
+            
+        }
+        
+        /* MAIN */
+            #main {
+                
+            }
+        /* END MAIN */
+        
+        /* SUB */
+            #sub {
+                
+            }
+        /* END SUB */
+        
+    /* END CONTENT */
+    
+    
+    /* FOOTER */
+
+        #footer{
+            display:block;
+            margin: 5px 0 0 0;
+            padding:0;
+            
+        }
+    /* END FOOTER */
+/* END LAYOUT */
+
+	a,
+	a:link 
+	a:active {
+		color: blue;
+		background-color: transparent;
+		text-decoration: underline;
+	}
+	a:visited {
+		color: #505D47;
+		background-color: transparent;
+	}
+	a:hover {
+        color: red;
+		text-decoration: underline;
+	}
+
+
+/* UL.SUBNAV */
+    ul.subnav {
+        margin: 0;
+        padding: 0;
+        
+        font-size: 0.8em;
+        list-style: none;
+    }
+    ul.subnav li {
+        margin: 0 0 1em 0;
+        padding: 0;
+        list-style: none;
+    }
+    ul.subnav li a,
+    ul.subnav li a:link,
+    ul.subnav li a:visited,
+    ul.subnav li a:active {
+        text-decoration: none;
+        font-weight: bold;
+        color: black;
+    }
+    ul.subnav li a:hover {
+        text-decoration: underline;
+    }
+    ul.subnav li strong {
+        padding: 0 0 0 12px;
+        background: url("") left top no-repeat transparent;
+    }
+    ul.subnav li strong a,
+    ul.subnav li strong a:link,
+    ul.subnav li strong a:visited,
+    ul.subnav li strong a:active {
+        color: white;
+        background-color: black;
+    }
+/* END UL.SUBNAV */

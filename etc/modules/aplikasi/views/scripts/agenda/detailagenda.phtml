@@ -1,0 +1,133 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$format_date = new format_date();
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Popup</title>
+<link href="<? echo $this->basePath;?>/css/style.css" rel="stylesheet" type="text/css" />
+<link href="<? echo $this->basePath;?>/css/default.css" rel="stylesheet" type="text/css" title="Brown-Gray style"/>
+<link rel="alternate stylesheet" href="<? echo $this->basePath;?>/css/ice_blue.css" type="text/css" title="Ice Blue style" />
+
+
+
+</head>
+<body>
+<div class="popups">
+<h2 class="title">Detail Agenda</h2>
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+				<tr>
+				    <td align="right" width="180">* Nomor Agenda :</td>
+					<td><?
+						$iAgendaAttrib = array("size" => 50,
+													"maxlength" => 11);
+						echo $ctrlFrm->formText('iAgenda', $this->detailAgenda['i_agenda'], $iAgendaAttrib);	
+						echo $ctrlFrm->formHidden('iAgendaHidden', $this->detailAgenda['i_agenda'], null);							
+						?>
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Dari :</td>
+					<td>
+						<a name="lineIUserKirim"/>
+						<?
+						$iUserKirimAttrib = array("size" => 50,
+													"maxlength" => 40);
+						echo $ctrlFrm->formText('nUserKirim', $this->detailAgenda['n_user_kirim'], $iUserKirimAttrib);
+						echo $ctrlFrm->formHidden('iUserKirim', $this->detailAgenda['i_user_kirim'], null);
+						
+						
+						?>
+						
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Kepada :</td>
+					<td>
+						<a name="lineIUserTerima"/>
+						<?
+						$iUserTerimaAttrib = array("size" => 50,
+													"maxlength" => 40);
+						echo $ctrlFrm->formText('nUserTerima', $this->detailAgenda['n_user_terima'], $iUserTerimaAttrib);
+						echo $ctrlFrm->formHidden('iUserTerima', $this->detailAgenda['i_user_terima'], null);
+						
+						?>
+					</td>	
+				</tr>
+				<tr>
+					<td align="right" width="180">* No Telepon :</td>
+					<td>
+						<?
+						$iPegTelponhpAttrib = array("size" => 20,
+													"maxlength" => 15);
+						echo $ctrlFrm->formText('iPegTelponhp', $this->detailAgenda['i_peg_telponhp'], $iPegTelponhpAttrib);
+						?>
+					</td>	
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Judul Pesan:</td>
+					<td><textarea rows=3 name="nAgendaPesan"><?echo $this->detailAgenda['n_agenda_pesan']; ?></textarea></td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Tanggal:</td>
+					<td>
+						<?
+						$dAgendaAttrib = array("size" => 20,
+												"maxlength" => 50);
+						echo $ctrlFrm->formText('dAgenda', $dAgenda, $dAgendaAttrib);
+						
+						?>
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Jam Mulai Pelaksanaan :</td>
+					<td>
+						<?
+						$dAgendaJammulaiAttrib = array("size" => 5,
+													"maxlength" => 5);
+						echo $ctrlFrm->formText('dAgendaJammulai', $this->detailAgenda['d_agenda_jammulai'], $dAgendaJammulaiAttrib);					
+						?>
+						<i>(hh.mm)</i></td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Jam Akhir Pelaksanaan :</td>
+					<td>
+					<?
+						$dAgendaJamakhirAttrib = array("size" => 5,
+													"maxlength" => 5);
+						echo $ctrlFrm->formText('dAgendaJamakhir', $this->detailAgenda['d_agenda_jamakhir'], $dAgendaJamakhirAttrib);					
+						?>
+						<i>(hh.mm)</i></td>
+					</td>
+				</tr>
+				<tr>
+					<td align="right" width="180">* Isi Pesan :</td>
+					<td>
+						<textarea id="wysiwyg" name="eAgendaPesan" id="eAgendaPesan"><?echo $this->detailAgenda['e_agenda_pesan'];?></textarea>
+						<script language="javascript1.2">
+						  //generate_wysiwyg('wysiwyg');
+						</script>	
+					</td>
+				</tr>
+			</table> 
+
+<?
+
+?>
+</div>
+<div class="closebox">
+<FORM>
+  <INPUT TYPE="BUTTON" VALUE="Tutup" onClick="window.close()">
+</FORM>
+</div>
+<div class="spacer"></div>
+</body>
+</html>

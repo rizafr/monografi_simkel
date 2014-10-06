@@ -1,0 +1,201 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+
+$ctrlFrm = new Zend_View();
+?>
+<? if(strtolower($this->jenisForm) == 'insert') {
+		$namaForm = 'frmtambahpengguna'; 
+		$jenisAksi = 'Tambah';
+		$c_group = $this->c_group;
+		$n_level = $this->n_level;
+		}
+    else if (strtolower($this->jenisForm) == 'update') {
+		$namaForm = 'frmubahpengguna';  
+		$jenisAksi = 'Ubah';
+		$c_group = $this->detailPengguna['c_group'];
+		$n_level = $this->detailPengguna['n_level'];
+		}
+	  else {	
+	        $namaForm = 'frmhapuspengguna';  
+		$jenisAksi = 'Hapus';
+		$c_group = $this->detailPengguna['c_group'];
+		}
+		
+?>
+		
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title"><? echo $jenisAksi;?> Data Pengguna</h2>
+	    <div class="spacer"></div> 
+		
+		<form method="post" name="<? echo $namaForm;?>" userid="<? echo $namaForm;?>">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+	<input name="divre" userid="divre" type="huseridden" value="<?echo $this->divre;?>" />
+	<input name="upt" userid="upt" type="huseridden" value="<?echo $this->upt;?>" />
+	<input name="level" userid="level" type="huseridden"value="<?echo $this->level;?>" />
+	
+	<input name="kategoriCari" userid="kategoriCari" type="huseridden" value="<? echo $this->kategoriCari; ?>" /> 
+	<input name="carii" userid="carii" type="huseridden" value="<? echo $this->carii; ?>" /> 
+
+				<tr>
+				    <td align="right" width="180">* Area</td>
+					<td>
+					<?
+	$areaList['-'] = '--Pilih--';
+	$jmlareaList = count($this->areaList);
+		for ($i = 0; $i < $jmlareaList; $i++) {
+		$areaList[$this->areaList[$i]->c_divre] = (string)$this->areaList[$i]->c_divre." - ".(string)$this->areaList[$i]->n_divre;			 
+		}
+	$areaAtrib = array("userid"=>"c_area", "tabindex"=>"17","onchange"=>"javascript:getUpt();");
+	echo $ctrlFrm->formSelect('c_area', trim($this->detailPengguna['c_area']), $areaAtrib, $areaList);
+	?>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* UPT</td>
+					<td>
+					<?
+	$uptList['-'] = '--Pilih--';
+	$jmluptList = count($this->uptList);
+		for ($i = 0; $i < $jmluptList; $i++) {
+		$uptList[$this->uptList[$i]->nopend] = (string)$this->uptList[$i]->nopend." - ".(string)$this->uptList[$i]->NamaKtr;			 
+		}
+	$uptAtrib = array("userid"=>"c_upt", "tabindex"=>"17","onchange"=>"javascript:getPegawaikantor();");
+	echo $ctrlFrm->formSelect('c_upt', trim($this->detailPengguna['c_upt']), $uptAtrib, $uptList);
+					?>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Nama</td>
+					<td>
+					<?
+	$pegawaiList['-'] = '--Pilih--';
+	$jmlpegawaiList = count($this->pegawaiList);
+		for ($i = 0; $i < $jmlpegawaiList; $i++) {
+		$pegawaiList[$this->pegawaiList[$i]->userid] = (string)$this->pegawaiList[$i]->n_nama." - ".(string)$this->pegawaiList[$i]->n_nip." - ".(string)$this->pegawaiList[$i]->n_jabatan;			 
+		}
+	$pegawaiAtrib = array("userid"=>"userid_pegawai", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('userid_pegawai', trim($this->detailPengguna['pengguna_userid']), $pegawaiAtrib, $pegawaiList);
+					?>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Group :</td>
+					<td>
+					<?
+						$jmlgroupList = count($this->groupList);
+						$groupList['-'] = '--Pilih--';
+						for ($i = 0; $i < $jmlgroupList; $i++) {
+						    $groupList[$this->groupList[$i]->userid] = (string)$this->groupList[$i]->n_nama;			 
+						}
+						
+						$c_groupAtrib = array("userid"=>"c_group", "tabindex"=>"17");
+						echo $ctrlFrm->formSelect('c_group', $c_group, $c_groupAtrib, $groupList);
+
+						?>
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Level :</td>
+					<td>
+					<?
+						$n_levelList['-'] = '--Pilih--';
+						$n_levelList['P'] = 'Pusat';
+						$n_levelList['D'] = 'Area';
+						$n_levelList['U'] = 'Upt';
+						$n_levelList['S'] = 'SGLK';
+						$n_levelAtrib = array("userid"=>"n_level", "tabindex"=>"17");
+						echo $ctrlFrm->formSelect('n_level', $n_level, $n_levelAtrib, $n_levelList);
+
+						?>
+					</td>
+				</tr>
+				<!--tr>
+				    <td align="right" width="180">* Nama :</td>
+					<td>
+						
+					<?
+						$jmlpegawaiList = count($this->pegawaiList);
+						$pegawaiList['-'] = '--Pilih--';
+						for ($i = 0; $i < $jmlpegawaiList; $i++) {
+						    $pegawaiList[$this->pegawaiList[$i]->userid] = (string)$this->pegawaiList[$i]->n_nama;			 
+						}
+						
+						$c_pegawaiAtrib = array("userid"=>"userid_pegawai", "tabindex"=>"17");
+						echo $ctrlFrm->formSelect('userid_pegawai', $this->detailPengguna['pengguna_userid'], $c_pegawaiAtrib, $pegawaiList);
+
+					?>
+					</td>
+				</tr-->
+				
+				<tr>
+				    <td align="right" width="180">* Penggunaname :</td>
+					<td>
+						<?
+						$usernameAttrib = array("size" => 50,"maxlength" => 50);
+						echo $ctrlFrm->formText('username', $this->detailPengguna['username'], $usernameAttrib);
+						echo $ctrlFrm->formHuseridden('userid', $this->detailPengguna['userid'], null);
+						?>
+						
+					</td>
+				</tr>
+				
+
+				<tr>
+				    <td align="right" width="180">* Status :</td>
+					<td>
+						<?
+						$statusList['-'] = '--Pilih--';
+						$statusList['1'] = 'Aktif';
+						$statusList['0'] = 'Tuseridak Aktif';
+						$kd_statusAtrib = array("userid"=>"kd_status", "tabindex"=>"17");
+						echo $ctrlFrm->formSelect('kd_status', $this->detailPengguna['kd_status'], $kd_statuspAtrib, $statusList);
+
+						?>
+					</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* Password :</td>
+					<td>
+						<?
+						$passwordAttrib = array("size" => 20,"maxlength" => 20);
+						echo $ctrlFrm->formPassword('password', '', $passwordAttrib);
+						?>
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Confirm Password :</td>
+					<td>
+						<input type="password"  size ="20" name="confirmPassword"  Value="<?php echo $password; ?>" userid="confirmPassword" >
+					</td>
+				</tr>
+				<tr>
+				    <td></td>
+				    <td>
+						<div class="right">
+							<input type="button" value="Batal" onClick="penggunalist();"> 
+							<input type="reset" value="Ulangi"> 
+							<input   type="submit" value="Simpan">
+						</div>
+					</td>
+				</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>

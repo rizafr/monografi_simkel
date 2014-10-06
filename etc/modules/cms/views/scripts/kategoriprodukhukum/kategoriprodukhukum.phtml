@@ -1,0 +1,69 @@
+<?php 
+require_once 'Zend/View.php';
+require_once "share/tanggal.php";  
+require_once 'share/Portalconf.php'; 
+$tanggal = new tanggal();
+$ctrlFrm = new Zend_View();
+$pesancek=$this->pesancek;
+
+$status1="";
+$status0="";
+if ($this->c_status!='') {
+	if (trim($this->c_status)==1) {$status1='checked';$status0='unchecked';}
+	if (trim($this->c_status)==0) {$status0='checked';$status1='unchecked';}
+} else $status1='checked';
+if ($pesancek=='gagal'){$confirm ='confirmfail';}
+else {$confirm ='confirm';}
+
+?>
+		   <div class="navlink">
+				<a  href="<? echo $this->basePath; ?>cms">Halaman Utama</a> 
+				<strong> &#8250; </strong> <a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/cms/pengumuman/listpengumuman','<?php echo $this->basePath; ?>/cms/pegawai/pegawaijs');">Kelola Data pengumuman</a>
+				<strong> &#8250; </strong><?=$this->jdl;?> Data Kategori Produk Hukum
+			</div>
+			<br>
+<div id="top"></div>
+<div id="confirm" class="<?=$confirm?>" style="display: none">
+	<h3><?echo $pesan = $this->pesan;?></h3>				
+</div>
+
+<div id="top"></div>
+<div id="confirm" class="<?=$confirm?>" style="display: none">
+	<h3><?echo $pesan = $this->pesan;?></h3>				
+</div>
+
+	
+<form id="formktgrhukum" name="formktgrhukum" enctype="multipart/form-data" method="post" action="">
+
+<h2 class="title"><?=$this->jdl;?> Data Kategori Produk Hukum</h2>
+
+		<div class="spacer"></div> 
+
+<table  width="100%">
+ <tr>
+   <td width="20%" align="left">Status Kategori Produk Hukum</td>
+   <td width="1%">:</td>
+   <td width="79%" align="left">
+		<label for="post_status_publish" class="selectit"><input id="post_status_publish" class="radio" name="c_status" type="radio" value="1" <?=$status1?> /> Diterbitkan</label>
+		<label for="post_status_pengumuman" class="selectit"><input id="post_status_notpublish" class="radio" name="c_status" type="radio" value="0"  <?=$status0?> /> Tidak Diterbitkan</label>
+  </td>
+ </tr>
+ <tr>
+   <td width="20%" align="left">Judul Kategori Produk Hukum<span class="highlight">*</span></td>
+   <td width="1%">:</td>
+   <td width="79%" align="left"><input type="text" name="n_judul" size="60" tabindex="1" value="<?=$this->n_judul?>" id="n_judul"/></td>
+ </tr>
+ 
+</table>
+<input type="hidden" value="<?=$this->c_kategori?>" name="c_kategori" id="c_kategori" > 
+<input type="hidden" value="<?=$this->par?>" name="action" id="action"> 
+ket :&nbsp;(<span class="highlight">*</span>)&nbsp;harus diisi
+		<p class="submit">
+		<span id="autosave"></span>
+
+		<input name="cancel" type="button" id="publish" tabindex="5" accesskey="p" value="Batal" onClick="open_url_to_div('<?php echo $this->basePath; ?>/cms/kategoriprodukhukum/listkategoriprodukhukum','<?php echo $this->basePath; ?>/cms/kategoriprodukhukum/kategoriprodukhukumjs');"/>
+		<input type="submit"  value="<?=$this->pars;?>" onClick="insertKtgrHukum()" style="font-weight: bold;" />
+
+
+	
+</form>	

@@ -1,0 +1,159 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Data Pegawai Pengguna</h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {	$namaForm = 'frmtambahpegawai'; }
+			else if (strtolower($this->jenisForm) == 'update') {	$namaForm = 'frmubahpegawai'; }
+			else {	$namaForm = 'frmhapuspegawai'; }
+		
+		?>
+<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+	<input name="divre" id="divre" type="hidden" value="<?echo $this->divre;?>" />
+	<input name="upt" id="upt" type="hidden" value="<?echo $this->upt;?>" />
+	<input name="jabatan" id="jabatan" type="hidden" value="<?echo $this->jabatan;?>" />
+	<input name="id" id="id" type="hidden" value="<?echo $this->id;?>" />
+
+	<!--tr>
+	<td align="left">Divre :</td>
+	<td>:</td>
+	<td colspan ="2"><? echo $this->n_divre; ?></td>
+	</tr-->
+	
+	<tr>
+	<td align="left">* UPT :</td>
+	<td>:</td>
+	<td colspan ="2">
+	<?
+	$jmluptList = count($this->uptList);
+	$uptList['-'] = '--Pilih--';
+		for ($i = 0; $i < $jmluptList; $i++) {
+		$uptList[$this->uptList[$i]->nopend] = (string)$this->uptList[$i]->nopend." - ".(string)$this->uptList[$i]->NamaKtr;			 
+		}
+	$uptAtrib = array("id"=>"c_upt", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_upt', $this->detailpegawai['c_upt'], $uptAtrib, $uptList);
+	
+	?>
+	</td>
+	</tr>
+
+	<tr>
+	<td align="left" width="180">* Nama </td>
+	<td>:</td>
+	<td>
+	<? 
+
+		//$n_gelardepanAttrib = array("size" => 10,"maxlength" => 10);
+		//echo $ctrlFrm->formText('n_gelardepan', $this->detailpegawai['n_gelardepan'], $n_gelardepanAttrib);
+	?>
+	<? 
+		$n_namaAttrib = array("size" => 70,"maxlength" => 70);
+		echo $ctrlFrm->formText('n_nama', $this->detailpegawai['n_nama'], $n_namaAttrib);
+	?>
+	<? 
+		//$n_gelarbelakangAttrib = array("size" => 15,"maxlength" => 15);
+		//echo $ctrlFrm->formText('n_gelarbelakang', $this->detailpegawai['n_gelarbelakang'], $n_gelarbelakangAttrib);
+	?>
+	</td>
+	</tr>
+
+	<tr>
+	<td align="left" width="180">* NIPPOS</td>
+	<td>:</td>
+	<td colspan ="2">
+		<?
+		$n_nipAttrib = array("size" => 10,"maxlength" => 9);
+		echo $ctrlFrm->formText('n_nip', $this->detailpegawai['n_nip'], $n_nipAttrib);
+		?>
+	</td>
+	</tr>
+
+	<tr>
+	<td align="left" width="180">* Jabatan</td>
+	<td>:</td>
+	<td colspan ="2">
+	<?
+	$jmljabatanList = count($this->jabatanList);
+	$jabatanList['-'] = '--Pilih--';
+		for ($i = 0; $i < $jmljabatanList; $i++) {
+		$jabatanList[$this->jabatanList[$i]->n_jabatan] = (string)$this->jabatanList[$i]->n_jabatan;			 
+		}
+	$n_jabatanAtrib = array("id"=>"n_jabatan", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('n_jabatan', trim($this->detailpegawai['n_jabatan']), $n_jabatanAtrib, $jabatanList);
+	
+	?>
+	</td>
+	</tr>
+
+	<tr>
+	<td align="left" width="180">* NPWP</td>
+	<td>:</td>
+	<td colspan ="2">
+	<?
+		$k_npwp1Attrib = array("size" => 2,"maxlength" => 2, "onBlur" => "cekformatNPWP('k_npwp1','2')");
+		echo $ctrlFrm->formText('k_npwp1', $this->detailpegawai['k_npwp1'], $k_npwp1Attrib);
+	?>.
+	<?
+		$k_npwp2Attrib = array("size" => 3,"maxlength" => 3, "onBlur" => "cekformatNPWP('k_npwp2','3')");
+		echo $ctrlFrm->formText('k_npwp2', $this->detailpegawai['k_npwp2'], $k_npwp2Attrib);
+	?>.
+	<?
+		$k_npwp3Attrib = array("size" => 3,"maxlength" => 3, "onBlur" => "cekformatNPWP('k_npwp3','3')");
+		echo $ctrlFrm->formText('k_npwp3', $this->detailpegawai['k_npwp3'], $k_npwp3Attrib);
+	?>.
+	<?
+		$k_npwp4Attrib = array("size" => 1,"maxlength" => 1, "onBlur" => "cekformatNPWP('k_npwp4','1')");
+		echo $ctrlFrm->formText('k_npwp4', $this->detailpegawai['k_npwp4'], $k_npwp4Attrib);
+	?>-
+	<?
+		$k_npwp5Attrib = array("size" => 3,"maxlength" => 3, "onBlur" => "cekformatNPWP('k_npwp5','3')");
+		echo $ctrlFrm->formText('k_npwp5', $this->detailpegawai['k_npwp5'], $k_npwp5Attrib);
+	?>.
+	<?
+		$k_npwp6Attrib = array("size" => 3,"maxlength" => 3, "onBlur" => "cekformatNPWP('k_npwp6','3')");
+		echo $ctrlFrm->formText('k_npwp6', $this->detailpegawai['k_npwp6'], $k_npwp6Attrib);
+	?>
+	</td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td></td>
+		<td colspan ="2">
+						<div class="right">
+							<? if($this->c_group != '2'){?>
+							<input type="button" value="Batal" onClick="pegawailist();"> 
+							<input type="reset" value="Ulangi"> 
+							<input   type="submit" value="Simpan">
+							<? } else { ?>
+							<input type="button" value="Tutup" onClick="pegawailist();"> 
+							<? } ?>
+						</div>
+		</td>
+	</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td colspan ="3"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$("#d_tgl").datepicker();
+		$("#d_sk").datepicker();
+	});
+</script>	

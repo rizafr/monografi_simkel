@@ -1,0 +1,11 @@
+SM Disbang;Ubah Data Permintaan Anggaran Pengadaan Truck;08/12/2013 22:44:50; di lokasi Bandung dengan id_pengadaan (100);
+SM Disbang;Ubah Data Permintaan Anggaran Pengadaan Truck;08/12/2013 22:46:48; di lokasi Bandung dengan id_pengadaan (100);
+SM Disbang;Ubah Data Permintaan Anggaran Pengadaan Truck;08/12/2013 22:47:29; di lokasi Bandung dengan id_pengadaan (100);
+SM Disbang;Ubah Data Permintaan Anggaran Pengadaan Truck;08/12/2013 22:52:52; di lokasi Bandung dengan id_pengadaan (100);
+SM Disbang;Ubah Data Permintaan Anggaran sssssssssss;08/12/2013 22:53:00; di lokasi cmh dengan id_pengadaan (103);
+SM Disbang;Ubah Data Permintaan Anggaran sssssssssss;08/12/2013 22:53:14; di lokasi cmh dengan id_pengadaan (103);
+SM Disbang;Ubah Data Deskripsi Pengadaan ;08/12/2013 23:32:19; di lokasi Bandung dengan id_pengadaan (100);
+SM Disbang;Ubah Data Dokumen Pengadaan ;08/12/2013 23:43:03; di lokasi  dengan id_pengadaan (100);
+SM Disbang;Ubah Data Dokumen Pengadaan ;08/12/2013 23:45:18; di lokasi  dengan id_pengadaan (100);
+SM Disbang;Insert Data Syarat Pengadaan ;08/12/2013 23:46:52; di lokasi  dengan id_pengadaan (100);
+SM Disbang;Insert Data Jadwal Pengadaan ;08/12/2013 23:49:08; di lokasi  dengan id_pengadaan (100);

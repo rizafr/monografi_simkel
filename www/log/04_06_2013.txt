@@ -1,0 +1,11 @@
+;Insert data pengumuman;06/04/2013 14:47:49; ();
+;Ubah data pengumuman;06/04/2013 14:51:38; (7);
+;Insert data pengumuman;06/04/2013 14:51:52; ();
+;Ubah data pengumuman;06/04/2013 15:05:49; (8);
+;Ubah data pengumuman;06/04/2013 15:06:19; (8);
+;Ubah data pengumuman;06/04/2013 15:07:52; (8);
+;Ubah data pengumuman;06/04/2013 15:10:00; (8);
+;Ubah data pengumuman;06/04/2013 15:10:19; (8);
+;Ubah data pengumuman;06/04/2013 15:15:02; (8);
+;Ubah data pengumuman;06/04/2013 15:16:56; (8);
+;Insert data pengumuman;06/04/2013 15:41:23; ();

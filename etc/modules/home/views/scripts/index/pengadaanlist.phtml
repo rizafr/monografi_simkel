@@ -1,0 +1,73 @@
+<?php 
+	require_once 'share/format_page.php';
+	$halaman = new format_page();
+        
+	$ctrlFrm = new Zend_View(); 
+	$currentPage = $this->currentPage;
+	$numToDisplay = $this->numToDisplay;
+?>
+<div style="padding-top:20px;">
+		<table width="600" id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th   class="nosort">No</th> 
+				<th >Paket</th>
+				<th >Metode</th>
+				<th >Pendaftar</th>
+				<?
+				if (count($this->pengadaanList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {
+						foreach ($this->pengadaanList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } 
+						$id = $this->escape($val['id']); 
+						$paket = $this->escape($val['paket']); 
+						$mtd_pengadaan = $this->escape($val['mtd_pengadaan']); 
+						$d_blokir = $this->escape($val['d_blokir']); 
+						
+if($mtd_pengadaan =='1'){$metode_pengadaan='Pelelangan Terbuka.';}
+if($mtd_pengadaan =='2'){$metode_pengadaan='Pelelangan Terbatas.';}
+if($mtd_pengadaan =='3'){$metode_pengadaan='';}
+if($mtd_pengadaan =='4'){$metode_pengadaan='Pemilihan Langsung.';}
+if($mtd_pengadaan =='5'){$metode_pengadaan='';}
+
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						echo $ctrlFrm->formHidden('id', $id, null);
+						?>
+						
+						<td class="clcenter"><? echo $noUrut;?></td>
+						<td align = "left">&nbsp;<? echo $paket;?></td>
+						<td align = "center">&nbsp;<? echo $metode_pengadaan;?></td>
+						<td align = "center">&nbsp;<? echo $d_blokir;?></td>
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+				</tr>
+			</table>
+		<div id="controls">
+			<div>
+		  	<?php
+		  		/*$totalData = $this->totalpengadaanList;
+			  	$modul = $this->basePath."/home/index/pengadaanlist";
+			  	$param1 = $this->kategoriCariSb;
+			  	$param2 = $this->cariiSb;
+			  	$param3 = NULL;
+			  	$param4 = NULL;
+			  	
+			  	
+			    echo $halaman->showPage2($totalData, $numToDisplay, $currentPage, $modul,NULL,  $param1, $param2, $param3, $param4,'table-standar-belanja');
+		    */?>
+			</div> 
+			<br><br><br>		 
+		</div>
+	
+<script type="text/javascript">
+	var sorter = new table.sorter("sorter");
+	sorter.init("sorter",0);
+</script>
+</div>

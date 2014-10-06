@@ -1,0 +1,124 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>>  Data Pasien
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">DATA PASIEN</h2>
+			<form method="post" id="frmcaripendaftaran" name="frmcaripendaftaran">
+				<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+				</table>
+<div class="add" title="Tambah Data" onClick="pendaftaranForm('insert','');"></div>			
+				Filter :
+				<?
+				$kategoriCari = array("n_nama" => "Nama", "n_alamat" => "Alamat","n_phone" => "Telepon" ,"n_hp" => "HP");
+	echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
+				?>
+<input type="text" name="carii" id="carii" align="center" value ="<? echo $this->carii;?>">
+				<?
+			         $atribSubmit = array("onclick"=>"javascript:caripendaftaran();");
+			         echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+				?>
+	</form>
+<fieldset class="fields"> 
+<? 
+$status = $this->hasil;
+$proses = $this->proses;
+$pesan->show_message($proses, $k_pendaftaran, "$status" ); 
+?>
+<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th >No</th>
+				<th >No Pendaftaran</th> 
+				<th >Nama</th> 
+				<th >Alamat</th> 
+				<th >Telp/HP</th> 
+				<th >Jenis Kelamin</th> 
+				<th >Pekerjaan</th> 
+				<th colspan="3" class="nosort">FUNGSI</th>
+				
+				<?
+				if (count($this->pendaftaranList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {
+						
+						
+						foreach ($this->pendaftaranList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } 
+						$id		= $this->escape($val['id']); 
+						$kode_pasien	= $this->escape($val['kode_pasien']); 
+						$n_nama		= $this->escape($val['n_nama']);
+						$d_lahir	= $this->escape($val['d_lahir']);
+						$n_alamat	= $this->escape($val['n_alamat']);
+						$n_phone	= $this->escape($val['n_phone']);
+						$n_hp		= $this->escape($val['n_hp']);
+						$n_email	= $this->escape($val['n_email']);
+						$n_pekerjaan	= $this->escape($val['n_pekerjaan']);
+						$gender		= $this->escape($val['gender']);
+						$n_gender ='';
+						if($gender =='L'){$n_gender ='Laki-Laki';}
+						if($gender =='P'){$n_gender ='Perumpuan';}
+					
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						echo $ctrlFrm->formHidden('id', $id, null);
+						
+						?>
+<td align="center"><? echo $noUrut;?></td>
+<td align="center"><a href="#" title= "detail" onclick="open_url_to_div('<?php echo $this->basePath; ?>/pasien/rekampasien/rekampasien?jenisForm=update&kode_pasien=<?echo $kode_pasien;?>','<?php echo $this->basePath; ?>/pasien/rekampasien/rekampasienjs');"><? echo $kode_pasien;?></a></td>
+<td class="clleft"><? echo $n_nama;?></td>
+<td class="clleft"><? echo $n_alamat;?></td>
+<td align="center"><? echo $n_phone;?></td>
+<td align="center"><? echo $n_gender;?></td>
+<td class="clleft"><? echo $n_pekerjaan;?></td>
+
+<td><div onClick="cetak('<? echo $id;?>');" class="pdf" title="Cetak Data"></div></td>
+<td><div onClick="pendaftaranForm('update','<? echo $id;?>');" class="edit" title="Ubah Data"></div></td>
+<td><div onClick="pendaftaranHapus('Data','<? echo $id;?>','<? echo $n_nama;?>');" class="delete" title="Hapus Data"></div></td>
+
+
+						
+					
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+
+			<?	
+			$totalData = $this->totPendaftaranList;
+			$modul = $this->basePath."/pasien/pendaftaran/pendaftaranlist";
+			$param1 = $this->cabang;$param2 = $this->tahun;$param3 = $this->bulan;$param4 = $this->jenis;$param5 = $this->status;
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
+			
+			?>
+		</fieldset>		 
+		
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>

@@ -1,0 +1,11 @@
+;Ubah data;05/03/2014 08:46:03; (3);
+;Ubah data;05/03/2014 08:52:57; (2);
+;Ubah data;05/03/2014 09:20:33; (3);
+;Ubah data;05/03/2014 09:20:45; (3);
+;Ubah data;05/03/2014 09:21:39;Verifikator (50);
+;Ubah data;05/03/2014 11:48:33;Sita Purnadewi, S.T (34);
+;Ubah data;05/03/2014 11:49:39;Prof. Dr. Firman F. Wirakusumah, dr., SpOG-K, Ph.D (35);
+;Ubah data;05/03/2014 11:50:02;Ipur Purwatiningsih, (50);
+;Ubah data;05/03/2014 11:51:00;Maulana Syam, A.Md (52);
+;Insert data;05/03/2014 11:52:13;Dr. Yoni Fuadah Syukriani, dr., Sp.F., DFM ();
+;Ubah data;05/03/2014 11:52:51;Rovina Ruslami, dr., SpPD, Ph.D (51);

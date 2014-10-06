@@ -1,0 +1,134 @@
+<? require_once 'Zend/View.php';
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+
+
+	$nip = $_REQUEST['nip'];
+	$_SESSION['nip'] = $nip;
+	//echo "nip_ket_session = ".$nip;
+
+
+	$spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+
+
+
+?>
+<html>
+  <head>
+    <title>..:: BUMN, Office Automation ::..</title>
+  </head>
+  <body>
+	<form id="frmVOrtu" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/orangtua" method="post" name="frmVOrtu">
+	<?php include "menulink.phtml";?>  
+	<?php include "datapokok.phtml";?>  
+
+<fieldset class="fields1">
+<legend>DATA ORANG TUA</legend>
+<table border="0" align="center" width="100%">
+	<tr>
+		  <td width=5%>&nbsp;</td>
+		  <td width=20% >Nama</td>
+		  <td width=70%>:
+			<?php 
+			$namaOrtu = $this->escape($this->namaOrtu);
+			echo $namaOrtu;
+			?>
+		  </td>
+		</tr>
+		<tr>
+		  <td width=5%>&nbsp;</td>
+		  <td>Alamat</td>
+		  <td>:
+			<?php 
+			$alamatOrtu = $this->escape($this->alamatOrtu);
+			  echo $alamatOrtu;
+			?>
+		  </td>
+		</tr>
+		<tr>
+		  <td width=5%>&nbsp;</td>
+		  <td>RT / RW</td>
+		  <td>:
+			<?php 
+			$rtOrtu = $this->escape($this->rtOrtu);
+			$rwOrtu = $this->escape($this->rwOrtu);
+			  echo $rtOrtu." / ".$rwOrtu;
+			?>
+		  </td>
+		</tr>
+		<tr>
+		  <td width=5%>&nbsp;</td>
+		  <td>Kelurahan</td>
+		  <td>:
+			<?php 
+			$kelurahanOrtu = $this->escape($this->kelurahanOrtu);
+			  echo $kelurahanOrtu;
+			?>
+		  </td>
+		</tr>
+		<tr>
+		  <td width=5%>&nbsp;</td>
+		  <td>Kecamatan</td>
+		  <td>:
+			<?php 
+			$kecamatanOrtu = $this->escape($this->kecamatanOrtu);
+			  echo $kecamatanOrtu;
+			?>
+		  </td>
+		 </tr>
+		<tr>
+		  <td width=5%>&nbsp;</td>
+		  <td>Kabupaten</td>
+		  <td>:
+			<?php 
+			$kabupatenOrtu = $this->escape($this->kabupatenOrtu);
+			echo $kabupatenOrtu;
+			?>
+		  </td>
+		</tr>
+		<tr>
+		  <td width=5%>&nbsp;</td>
+		  <td>Propinsi</td>
+		  <td>:
+			<?php 
+			$propinsiOrtu = $this->escape($this->propinsiOrtu);
+			echo $propinsiOrtu;
+			?>
+		  </td>
+		</tr>		
+		<tr>
+		  <td width=5%>&nbsp;</td>
+		  <td>Telepon Rumah</td>
+		  <td>:
+			<?php 
+			$teleponRumahOrtu = $this->escape($this->teleponRumahOrtu);
+			  echo $teleponRumahOrtu;
+			?>
+		  </td>
+		</tr>
+		<tr>
+		  <td width=5%>&nbsp;</td>
+		  <td>Telepon Genggam</td>
+		  <td>:
+			<?php 
+			$tlpGenggamOrtu = $this->escape($this->tlpGenggamOrtu);
+			  echo $tlpGenggamOrtu;
+			?>
+		  </td>
+		</tr>
+		<tr>
+		  <td colspan="2">&nbsp;</td>
+		</tr>
+	</table>
+	</fieldset>	 
+		<tr align=center>
+	</form>
+ 			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliOrtu();" class="back" title="Kembali">Kembali</a>
+			  <!--<a href="#top" class="top" title="Kembali ke atas">Top</a>-->
+			</div>
+ </body>
+</html>

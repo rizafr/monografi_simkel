@@ -1,0 +1,15 @@
+
+function cariListProdukhukum(){
+	var pil=document.getElementById('pil').value;
+	var key=document.getElementById('key').value;
+	if ((pil=='thn') && (key=='') ) alert ("Masukan tahun, mis. 2011");
+	else if ((pil=='thn') && (isNaN(key)) ) alert ("Masukan Salah ! Harap dalam angka tahun, mis. 2011");
+	else {
+	var url = '<?php echo $this->basePath; ?>/portalmodule/produkhukum/indeksprodukhukum';	
+	var param = {pil:pil,key:key};
+		jQuery.get(url, param, function(data) {
+			jQuery("#middle").html(data);
+		});
+	}	
+} 
+

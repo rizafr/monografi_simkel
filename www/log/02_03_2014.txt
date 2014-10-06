@@ -1,0 +1,5 @@
+Bagian Pengadaan Jasa Pusat;Insert Data Ambil Dokumen ;03/02/2014 16:19:26; di lokasi  dengan id_pengadaan ();
+jasa;Ubah Kehadiran Penjelasan/Aanwijzing ;03/02/2014 16:20:27; ();
+jasa;Ubah Kehadiran Penjelasan/Aanwijzing ;03/02/2014 16:20:31; ();
+jasa;Ubah Kehadiran Pembukaan Dokumen ;03/02/2014 16:21:07; ();
+Bagian Pengadaan Jasa Pusat;Insert Data Pengumuman ;03/02/2014 17:02:41; di lokasi  dengan id_pengadaan (114);

@@ -1,0 +1,102 @@
+<?php 
+require_once 'Zend/View.php';
+require_once "share/tanggal.php";  
+require_once 'share/Portalconf.php'; 
+$tanggal = new tanggal();
+$ctrlFrm = new Zend_View();
+$pesancek=$this->pesancek;
+$cstatus=$this->status;
+
+//$maxid=$this->maxid;
+
+
+
+if ($this->tglagenda!='') {
+  $dates=formatDate4($this->tglagenda);
+  $xtime=substr($this->tglagenda,11,8);
+  list($jam,$mnt,$det)=split(":",$xtime);
+} else {
+  $dates=date('d/m/Y');
+  $jam=date("H");
+  $mnt=date("i");
+}
+if ($cstatus!='') {
+	if ($cstatus==1) $status1='checked';
+	else $status0='checked';
+} else $status1='checked';
+
+if ($pesancek=='gagal'){$confirm ='confirmfail';}
+else {$confirm ='confirm';}
+
+
+?>
+ <script type="text/javascript" src="<?echo $this->baseUrl;?>/content/init.js"></script>
+	<script type="text/javascript">
+
+	$(function() {
+		$("#d_agenda").datepicker();
+	});
+	</script>
+
+
+		   <div class="navlink">
+				<a  href="<? echo $this->basePath; ?>cms">Halaman Utama</a> 
+				<strong> &#8250; </strong> <a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/cmsmodule/agenda/listagenda','<?php echo $this->basePath; ?>/cmsmodule/pegawai/pegawaijs');">Kelola Data agenda</a>
+				<strong> &#8250; </strong><?=$this->jdl;?> Data agenda
+			</div>
+			<br>
+<div id="top"></div>
+<div id="confirm" class="<?=$confirm?>" style="display: none">
+	<h3><?echo $pesan = $this->pesan;?></h3>				
+</div>
+
+	
+<form id="formagenda" method="post" name="formagenda"  action="">
+<input type="hidden" value="<?=$this->idagenda;?>" name="idagenda"> 
+<input type="hidden" value="<?=$this->par?>" name="action"> 
+<h2 class="title"><?=$this->jdl;?> Data agenda</h2>
+
+		<div class="spacer"></div> 
+
+<table  width="100%">
+ <tr>
+   <td width="20%">Tanggal agenda</td>
+   <td width="1%">:</td>
+   <td width="79%"><input type="text" id="d_agenda" name="date" value="<?=$dates?>" size="10">
+  </td>
+ </tr>
+ <tr>
+   <td width="20%">Status agenda</td>
+   <td width="1%">:</td>
+   <td width="79%">
+   	<label for="post_status_publish" class="selectit"><input id="post_status_publish" class="radio" name="status" type="radio" value="1" <?=$status1?> /> Diterbitkan</label>
+    <label for="post_status_agenda" class="selectit"><input id="post_status_agenda" class="radio" name="status" type="radio" value="0"  <?=$status0?> /> Tidak Diterbitkan</label>
+
+   </td>
+ </tr>
+ <tr>
+   <td width="20%">Tempat</td>
+   <td width="1%">:</td>
+   <td width="79%"><input type="text" name="place" size="100" tabindex="1" value="<?=$this->tempat?>" class="inputbox2"/></td>
+ </tr>
+ <tr>
+   <td width="20%">Judul agenda <span class="highlight">*</span></td>
+   <td width="1%">:</td>
+   <td width="79%"><input type="text" name="title" size="30" tabindex="1" value="<?=$this->jdlagenda?>" id="title"/></td>
+ </tr>
+ <tr>
+   <td width="20%">Isi agenda</td>
+   <td width="1%">:</td>
+   <td width="79%"><textarea id="content" name="content" style="height:200px"><?=$this->detilagenda?></textarea></td>
+ </tr>
+</table>
+ket :&nbsp;(<span class="highlight">*</span>)&nbsp;harus diisi
+		<p class="submit">
+		<span id="autosave"></span>
+
+		<input name="cancel" type="button" id="publish" tabindex="5" accesskey="p" value="Batal" onClick="open_url_to_div('<?php echo $this->basePath; ?>/cmsmodule/agenda/listagenda','<?php echo $this->basePath; ?>/cmsmodule/agenda/agendajs');"/>
+		<input type="submit" name="submit" value="<?=$this->pars;?>" onClick="insertagenda()" style="font-weight: bold;" />
+
+
+	
+</form>	

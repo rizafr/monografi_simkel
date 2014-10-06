@@ -1,0 +1,79 @@
+<? require_once 'Zend/View.php';
+    require_once 'share/halaman_list_portal.php';
+    require_once 'share/Portalconf.php';
+  
+   $ctrlFrm = new Zend_View();
+   $halaman = new halaman_list(); 
+    $jmlprodukhukumList = count($this->produkhukumList);
+	//echo $jmlprodukhukumList;
+   for ($j = 0; $j < $jmlprodukhukumList; $j++) {
+     $produkhukum[$j] = array("c_kategori"=>(string)$this->produkhukumList[$j]['c_kategori'],
+			      "c_produkhukum"=>(string)$this->produkhukumList[$j]['c_produkhukum'],
+			      "n_judul"=>(string)$this->produkhukumList[$j]['n_judul'],
+			      "n_detil"=>(string)$this->produkhukumList[$j]['n_detil'],
+			      "i_nomor_produkhukum"=>(string)$this->produkhukumList[$j]['i_nomor_produkhukum'],
+			      "d_tahun_produkhukum"=>(string)$this->produkhukumList[$j]['d_tahun_produkhukum']);
+   } 
+    $jmlkategoriprodhukumList = count($this->kategoriprodhukumList);
+	//echo $jmlkategoriprodhukumList;
+$thn=date(Y);
+$thnx=$_REQUEST['thn'];
+if ($thnx=='') $thn=$thn;
+else $thn=$thnx;
+$key=$_REQUEST['key'];
+$pil=$_REQUEST['pil'];
+if ($pil=='thn') $sel1="selected";
+else if ($pil=='no') $sel2="selected";
+if ($pil=='hal') $sel3="selected";
+?>
+<div class="widget">
+	<h4 class="widgettitle">Konten</h4>
+<div class="content">
+	<h2 class="title">Arsip Produk Hukum</h2>
+
+<fieldset class="searchpanel center">
+	<form id="frmSearch" method="post" name="frmSearch">
+		<select name="pil" id="pil">
+		  <option value="thn" <?=$sel1?>>Tahun</option>
+		  <option value="no" <?=$sel2?>>No</option>
+		  <option value="hal" <?=$sel3?>>Perihal</option>
+		</select>  
+		<input id="key" type="text" name="key" class="inputbox" value="<?=$key?>" size="40">
+		<input type="button" class="button2" value="Cari" onclick="javascript:cariListProdukhukum();">		   
+	</form>						
+	</fieldset>	
+
+<? 		if ($jmlprodukhukumList == 0) {?>
+<span class="highlight">Data produk hukum Tidak Ditemukan !</span><br>
+<a  href="#indexprodukhukum" onclick="goExec_Script('<?php echo $this->basePath; ?>/portalmodule/produkhukum/indeksprodukhukum','<?php echo $this->basePath; ?>/portalmodule/produkhukum/produkhukumjs', 'produkhukum')">Kembali</a>
+
+<?}else{
+
+?>
+	<ul>
+
+
+
+<?php
+				foreach ($produkhukum as $key => $val): 
+				$noUrut = (($this->currentPage -1)* $this->numToDisplay) + $key +1;
+				
+				?>
+
+	<li>
+      <h3><a href="#" onclick="showDetilmed('<?php echo $this->basePath; ?>/portalmodule/produkhukum/produkhukumdetil','<?=$this->escape($val['c_produkhukum'])?>','<?php echo $this->basePath; ?>/portalmodule/produkhukum/indeksprodukhukum','<?php echo $this->basePath; ?>/portalmodule/produkhukum/produkhukumjs','produkhukum');">
+      <?php echo $this->escape($val['c_kategori'])." No ".$this->escape($val['i_nomor_produkhukum'])." Tahun ".$this->escape($val['d_tahun_produkhukum'])." Perihal ".$this->escape($val['n_judul']);?></a></h3></li>
+
+				<?php endforeach;}?>
+</ul>				
+
+	<div class="space"></div>
+<div id="targetdetil"></div>
+
+<?
+$modul = $this->basePath."/portalmodule/produkhukum/indeksprodukhukum";
+if ($jmlprodukhukumList != 0) echo $halaman->halamanList($this->totalprodukhukumList, $this->numToDisplay, $this->currentPage, $modul)
+?>	
+
+	<div class="space"></div>
+</div>

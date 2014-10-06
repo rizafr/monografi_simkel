@@ -1,0 +1,178 @@
+<? require_once 'Zend/View.php';
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+   $thnList = $thnskrg - 11;
+   $thnList2 = $thnskrg - 55;
+	
+   $thnArrayList['#'] = '--';
+   		
+   for ($i = 0; $i < 21; $i++) {
+     $thnList = $thnList + 1;
+     $thnArrayList[$thnList] = $thnList;
+   }
+
+	
+   $thnArrayList2['#'] = '--';
+   	 
+   for ($i = 0; $i < 60; $i++) {
+     $thnList2 = $thnList2 + 1;
+     $thnArrayList2[$thnList2] = $thnList2;
+   }
+		
+		
+   $pnjngArray = count($thnArrayList);
+
+	  $blnList = 0;
+	  for ($j = 0; $j < 12; $j++) {
+        $blnList = $blnList + 1;
+		if ($blnList < 10) {
+		  $blnBaruList = "0".$blnList;
+		  $blnArrayList[] = $blnBaruList;
+		} else {
+		  $blnBaruList = $blnList;
+		  $blnArrayList[] = $blnBaruList;
+		}
+      }
+		
+	  $hrList = 0;
+	  for ($k = 0; $k < 31; $k++) {
+        $hrList = $hrList + 1;
+		if ($hrList < 10) {
+		  $hrBaruList = "0".$hrList;
+		  $hrArrayList[] = $hrBaruList;
+		} else {
+		  $hrBaruList = $hrList;
+		  $hrArrayList[] = $hrBaruList;
+		}
+      }
+
+
+
+$nip = $_REQUEST['nip'];
+$_SESSION['nip'] = $nip;
+
+	$jumSerList = count($this->serList);
+  // echo "jumSerList= ".$jumSerList;
+   for ($j = 0; $j < $jumSerList; $j++) {
+     $ser[$j] = array("i_peg_nip"  		=>(string)$this->serList[$j]['i_peg_nip'],
+						  "noSer"		=>(string)$this->serList[$j]['noSer'],
+	                      "nmSer"      	=>(string)$this->serList[$j]['nmSer'],
+	                      "lembaga"     =>(string)$this->serList[$j]['lembaga'],
+						  "tglSer"  	=>(string)$this->serList[$j]['tglSer'],
+						  "mulai"  		=>(string)$this->serList[$j]['mulai'],
+						  "akhir"  		=>(string)$this->serList[$j]['akhir'],
+						  "keterangan"  =>(string)$this->serList[$j]['keterangan']);	
+//echo "noSer= ".$this->serList[$j]['noSer'];				  
+   } 
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+   
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA SERTIFIKASI</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data sertifikasi pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+			<form id="frmSertifikasi" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/sertifikasi" method="post" name="frmSertifikasi">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+			</form>
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line"></div>	
+	<fieldset class="fields">
+		<div class="title2">Data Sertifikasi</div>
+		<div class="blank"></div>
+
+<?
+	if ($jumSerList == 0) {
+		echo "<font color=\"red\">Data Sertifikasi Tidak Ditemukan</font>";		
+?>
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+		<tr>
+		    <th width="20%">Nama Sertifikat Keahlian</th>
+			<th width="15%">No. Sertifikat</th>
+			<th width="10%">Tanggal Sertifikat</th>
+			<th width="20%">Lembaga Yang Mengeluarkan</th>
+			<th width="10%">Berlaku Mulai</th>
+			<th width="10%">Berlaku Sampai</th>
+			<th width="15%">Keterangan</th>
+		</tr>
+	</table>
+<? 	}	else { ?>
+	</center>
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+		<tr>
+		    <th width="20%">Nama Sertifikat Keahlian</th>
+			<th width="15%">No. Sertifikat</th>
+			<th width="10%">Tanggal Sertifikat</th>
+			<th width="20%">Lembaga Yang Mengeluarkan</th>
+			<th width="10%">Berlaku Mulai</th>
+			<th width="10%">Berlaku Sampai</th>
+			<th width="15%">Keterangan</th>
+		</tr>
+		<?php foreach ($ser as $key => $val): 
+					   if ($key%2==0) { ?>
+				      <tr class="event">
+					<? } else if ($key%2==1) { ?>
+					  <tr class="event2">
+					<? } ?>
+			
+				<?php
+				$mulai =  $this->escape($val['mulai']);	
+				$thnMulai = substr($mulai,0,4);
+				$blnMulai = substr($mulai,5,2);
+				$hrMulai = substr($mulai,8,2);
+				$mulai = $hrMulai."-".$blnMulai."-".$thnMulai;
+				//echo "mulai= ".$mulai;
+
+				$akhir = $this->escape($val['akhir']);		
+				$thnAkhir = substr($akhir,0,4);
+				$blnAkhir = substr($akhir,5,2);
+				$hrAkhir = substr($akhir,8,2);
+				$akhir = $hrAkhir."-".$blnAkhir."-".$thnAkhir;
+				
+				$tglSer = $this->escape($val['tglSer']);		
+				$thnSer = substr($tglSer,0,4);
+				$blnSer = substr($tglSer,5,2);
+				$hrSer = substr($tglSer,8,2);
+				$tglSer = $hrSer."-".$blnSer."-".$thnSer;
+				?>
+				<td>&nbsp;<a href="#" onClick="javascript:viewSer('<? echo $this->escape($val['i_peg_nip']); ?>','<?php echo $this->escape($val['nmSer']);?>');" class="link" title="View"><?php echo $this->escape($val['nmSer']);?> </a></td>
+				<td>&nbsp;<?php  echo $this->escape($val['noSer']);?></td>
+				<td class="clcenter"> <?php echo $tglSer;?></td>
+				<td>&nbsp;<?php echo $this->escape($val['lembaga']);?></td>
+				<td class="clcenter"> <?php echo $mulai;?></td>
+				<td class="clcenter"> <?php echo $akhir;?></td>
+				<td>&nbsp;<?php echo $this->escape($val['keterangan']);?></td>
+		  </tr>
+	<?php endforeach;?> 		  	  
+		</table>
+<?	}	?>
+ 			<dl>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">
+				<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+				</dd>			
+				<div class="back" onClick="javascript:kembaliSer();" title="Kembali"><input type="button" value="Kembali" id="kembaliSer"></div>
+			</dl>
+	
+			</div>
+ 	</fieldset>
+</div>	
+
+<!--
+		<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliSem();" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

@@ -1,0 +1,5 @@
+SM Disbang;Insert Data Faktur Permintaan dgn Pembeli ;13/12/2013 09:41:26; di Nopend ;
+pos_1;Ubah Data Deskripsi Pengadaan Pengadaan meja kursi pimpinan;13/12/2013 09:43:18; di lokasi VP Umum dengan id_pengadaan (107);
+pos_1;Ubah Data Dokumen Pengadaan ;13/12/2013 11:39:37; di lokasi  dengan id_pengadaan (107);
+pja_pusat;Ubah Status Pengadaan ;13/12/2013 12:47:32;104 (104);
+pja_pusat;Ubah Status Pengadaan ;13/12/2013 12:47:39;104 (104);

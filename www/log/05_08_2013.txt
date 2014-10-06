@@ -1,0 +1,11 @@
+FP-1;Ubah data user;08/05/2013 09:00:30;9803905521 ();
+982390786;Terkait Biayaabac;08/05/2013 13:24:56; di Nopend 46200;
+982390786;Terkait Biaya;08/05/2013 13:25:16; di Nopend 46200 dengan id (2259);
+982390786;Terkait Biaya;08/05/2013 13:25:55; di Nopend 46200 dengan id (2259);
+982390786;Terkait Biaya;08/05/2013 13:26:23; di Nopend 46200 dengan id (2259);
+;Ubah data jnstransaksi;08/05/2013 13:50:26; (508);
+;Ubah data jnstransaksi;08/05/2013 13:51:09; (508);
+;Ubah data rangewaktu;08/05/2013 14:15:33; (8);
+FP-1;Ubah data user;08/05/2013 15:18:51;986391750 ();
+FP-1;Ubah data user;08/05/2013 17:05:41;969324819 ();
+FP-1;Ubah data user;08/05/2013 17:06:09;960158618 ();

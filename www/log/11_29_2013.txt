@@ -1,0 +1,2 @@
+;Ubah data;29/11/2013 10:23:16; (73);
+;Tambah Data Sanggahan Pengadaan ;29/11/2013 11:32:02; di lokasi  dengan id_pengadaan (98);

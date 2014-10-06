@@ -1,0 +1,12 @@
+;Ubah data;20/03/2014 09:45:17;Pengaruh Pendidikan Kesehatan Gigi dan Mulut Terhadap Teknik Menyikat Gigi Pada Tunanetra (10);
+;Ubah data;20/03/2014 10:26:16;Pengaruh Pendidikan Kesehatan Gigi dan Mulut Terhadap Teknik Menyikat Gigi Pada Tunanetra (10);
+;Ubah data;20/03/2014 10:32:28;Pengaruh Pendidikan Kesehatan Gigi dan Mulut Terhadap Teknik Menyikat Gigi Pada Tunanetra (10);
+;Ubah data;20/03/2014 10:33:55;Pengaruh Pendidikan Kesehatan Gigi dan Mulut Terhadap Teknik Menyikat Gigi Pada Tunanetra (10);
+;Verifikasi Penerimaan;20/03/2014 11:17:21; (10);
+;Verifikasi Penerimaan;20/03/2014 15:08:11; (11);
+;Ubah data;20/03/2014 15:09:12;Perbedaan Ekspresi  (11);
+;Ubah data;20/03/2014 15:10:47; (11);
+;Ubah data;20/03/2014 15:24:24;Perbedaan Ekspresi CD69 pada Limfosit T serta Kada IFN-alfa dan IL-12 antara Galur Beijing dan Galur Non-Beijing dari Isolat Klinik Mycobacterium Penderita Tuberkulosis Paru (11);
+;Ubah data;20/03/2014 15:25:04;Perbedaan Ekspresi CD69 pada Limfosit T serta Kada IFN-gamma dan IL-12 antara Galur Beijing dan Galur Non-Beijing dari Isolat Klinik Mycobacterium Penderita Tuberkulosis Paru (11);
+;Ubah data;20/03/2014 15:28:39; (11);
+;Ubah data;20/03/2014 15:52:04;Perbedaan Ekspresi CD69 pada Limfosit T serta Kada IFN-gamma dan IL-12 antara Galur Beijing dan Galur Non-Beijing dari Isolat Klinik Mycobacterium Penderita Tuberkulosis Paru (11);

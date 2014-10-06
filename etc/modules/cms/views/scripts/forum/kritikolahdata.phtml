@@ -1,0 +1,97 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$format_date = new format_date();
+
+if($this->jenisForm == 'insert'){ $title = 'Tambah Data';}
+else if ($this->jenisForm == 'update'){ $title = 'Ubah Data';}
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+</div>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Data Kritik / Saran</h2>
+	    <div class="spacer"></div> 
+		<div class="blank"></div>
+		<div id="targetview" class="" style="display:none"></div>
+		<div class="blank"></div>
+		<? if($this->jenisForm == 'insert'){?>
+			<form name="frmtambahkritik" id="frmtambahkritik" method="POST">
+		<?} else {?>
+			<form name="frmubahkritik" id="frmubahkritik" method="POST">
+		<?}?>
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+				
+								<?
+				echo $ctrlFrm->formHidden('id', $this->detailKritik['id'], null); 							
+				?>
+				
+				<tr>
+				    <td align="right" width="180">* Nama :</td>
+					<td>
+						<?
+						$NAMAAttrib = array("size" => 80, "maxlength" => 80);
+						echo $ctrlFrm->formText('NAMA', $this->detailKritik['NAMA'], $NAMAAttrib);
+						
+						?>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Telepon :</td>
+					<td>
+						<?
+						$TELPAttrib = array("size" => 30, "maxlength" => 30);
+						echo $ctrlFrm->formText('TELP', $this->detailKritik['TELP'], $TELPAttrib);
+						
+						?>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+				    <td align="right" width="180">* Saran :</td>
+					<td>
+						<?
+						$SARANAttrib = array("cols" => 2,"rows" => 4);
+						echo $ctrlFrm->formTextArea('SARAN', $this->detailKritik['SARAN'], $SARANAttrib);
+						
+						?>
+					</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+				    <td>
+						<div class="right">
+						<input type="button" value="Batal" onClick="kritiklist()"> 
+						<input type="reset"   value="Ulangi"> 
+						<input   type="submit" value="Simpan">
+						</div>
+					</td>
+				</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>         
+
+		</form>
+		<div class="blank"></div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		$("#d_rencana_kunjungan").datepicker();
+		$("#d_kunjungan").datepicker();
+	});
+</script>

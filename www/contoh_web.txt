@@ -1,0 +1,33 @@
+public function view_user($username) {
+		
+		$data = file_get_contents($this->_LDAP['server_integrasi_user'].'services.php?ref=kelola&pid=oa'.
+							  '&ppwd=93563a4fdef66b26fe9386720e7389ba'.
+							  '&userid='.$this->userid.
+							  '&cmd=view_user'.
+							  '&username='.$username);
+										
+		$hasil = simplexml_load_string($data);
+
+		$status = $hasil->status;
+
+		$hasilAkhir = array();
+		//if(($status == 'OK') || ($status == 'ok'))
+		//{
+			$list = $hasil->result;
+			for($i=0;$i<count($list);$i++)
+			{
+				$username = $list[$i]->username; 
+				$emp_id = $list[$i]->emp_id;
+				$email = $list[$i]->email;
+				$phone = $list[$i]->phone;
+				$status = $list[$i]->status; 
+				
+				$hasilAkhir[$i] = array("username" 	=> $username,
+										"emp_id" 	=> $emp_id,
+										"email" 	=> $email,
+										"phone" 	=> $phone,
+										"status" 	=> $status);
+			}
+		//}
+		return $hasilAkhir;
+	}

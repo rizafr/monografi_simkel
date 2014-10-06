@@ -1,0 +1,100 @@
+
+function cariListpengumuman(){
+	var status=document.getElementById('status').value;
+	var key=document.getElementById('key').value;
+	var url = '<?php echo $this->basePath; ?>/cmsmodule/pengumuman/listpengumuman';	
+	var param = {status:status,key:key};
+		jQuery.get(url, param, function(data) {
+			jQuery("#tableview").html(data);
+		});
+} 
+
+function pengumumanM(par,idpengumuman){
+
+	var url = '<?php echo $this->basePath;?>/cmsmodule/pengumuman/pengumuman';	
+	var param = {par:par,idpengumuman:idpengumuman};
+		jQuery.get(url, param, function(data) {
+			jQuery("#tableview").html(data);
+			jQuery("#formpengumuman").ajaxForm(maintain_pengumuman);
+		});
+}
+function insertpengumuman(){
+	jQuery("#formpengumuman").ajaxForm(maintain_pengumuman);
+}
+var maintain_pengumuman = {
+	target:'#tableview',
+	beforeSubmit: function() {		
+		aobj= document.formpengumuman;
+		astr= "document.formpengumuman";
+		var cekVal="";
+		with(aobj){      
+			var Proceed = 1;
+			while (Proceed == 1)
+			{
+				/*sdmValidasiData (navigation.js)*/
+				if((!title.value)){cekVal = sdmValidasiData(astr,"i_peg_nip","Judul pengumuman harus diisi....!");return false;break;}
+				// if((!i_orgb.value)){cekVal = sdmValidasiData(astr,"i_orgb","Unit Kerja harus diisi....!");return false;break;}
+				// if((!c_unit_kerja.value)){cekVal = sdmValidasiData(astr,"c_unit_kerja","Satuan Kerja harus diisi....!");return false;break;}
+				// if((!c_peg_status.value)){cekVal = sdmValidasiData(astr,"c_peg_status","Status pengumuman harus diisi....!");return false;break;}				
+				// if((!c_peg_jeniskelamin.value)){cekVal = sdmValidasiData(astr,"c_peg_jeniskelamin","Jenis Kelamin harus diisi....!");return false;break;}
+				// if((!a_peg_lahir.value)){cekVal = sdmValidasiData(astr,"a_peg_lahir","Tempat lahir harus diisi....!");return false;break;}
+				// if((!d_peg_lahir.value)){cekVal = sdmValidasiData(astr,"d_peg_lahir","Tanggal lahir harus diisi....!");return false;break;}
+				//if((!c_peg_statusnikah.value)){cekVal = sdmValidasiData(astr,"d_peg_lahir","Status pernikahan harus diisi....!");return false;break;}
+				// if((!n_peg_wn.value)){cekVal = sdmValidasiData(astr,"n_peg_wn","Kewarganegaraan harus diisi....!");return false;break;}
+				// if((!c_peg_identitas.value)){cekVal = sdmValidasiData(astr,"c_peg_identitas","Identitas Diri harus diisi....!");return false;break;}
+				// if((!i_peg_identitas.value)){cekVal = sdmValidasiData(astr,"i_peg_identitas","Nomor Identitas Diri harus diisi....!");return false;break;}
+				// if((!c_golongan_darah.value)){cekVal = sdmValidasiData(astr,"c_golongan_darah","Golongan Darah harus diisi....!");return false;break;}
+				break;
+			}
+			
+		}
+		
+		//if (cekVal == false) {return false;}
+	
+	}, 
+	success:function(){
+		location.href="#top";
+		doCounter(5);
+		jQuery("#formpengumuman").ajaxForm(maintain_pengumuman);
+	},
+	url: '<?php echo $this->basePath; ?>/cmsmodule/pengumuman/maintaindata',
+	type: 'post',
+	resetForm: false
+};
+
+
+
+function HapusDatapengumuman(idpengumuman,jdl)
+{
+	var where_to= confirm("Yakin anda akan hapus data pengumuman :"+jdl);
+	 if (where_to== true)
+	 {
+		url = "<?php echo $this->basePath; ?>/cmsmodule/pengumuman/hapusdata"
+		 
+		var opt = {idpengumuman:idpengumuman};
+		jQuery.get(url,opt,function(data) {
+			jQuery("#tableview").html(data);
+				location.href="#top";
+				doCounter(5);
+			});
+	 }
+}
+
+function setvalueuplpdf(v,n,f) { 
+
+	  if (f!="") {
+	    var pass=false;
+	    var af=f.split("/");
+        var nval=eval("document.forms[0]."+n);
+		var ext=v.substring(v.lastIndexOf(".")+1,v.length);
+		if ((ext==f)||(ext=='png')||(ext=='gif')){ 
+		document.forms[0].a_file.value=v; 
+		}
+		else{
+		  alert ("Hanya untuk file berekstensi '"+f+"',jpg,gif,png ");
+		  nval.value="";
+		  document.forms[0].a_file.value=""; 
+		  return;	  
+		}
+	  }
+}

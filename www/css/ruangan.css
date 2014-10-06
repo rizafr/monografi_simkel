@@ -1,0 +1,86 @@
+/*tambahan hendar*/
+/* TABLE */
+	table {
+        font-size: 12px;
+		margin:0;
+	}
+	th {
+		font-weight: bold;
+		text-align: center;
+	}
+	td {
+		font-size: 12px;
+	}
+.event, .bg1 {
+	background-color: #E5E5E5;
+}
+table.tbl {
+    clear:both;
+	width:100%;
+	padding:0;	
+	margin: 0 auto;
+	background:#999999;
+	font-size:1em;
+	text-align:left;
+}
+.biru {
+		background:transparent url(../images/biru.jpg) repeat;
+		font-family:     Arial, Geneva, Helvetica, sans-serif;
+		font-size:10px;
+		COLOR: #FFFFFF;
+		height:80px;
+		width:80px;
+		text-align:center;
+		vertical-align:middle;
+}
+.kuning {
+		background:transparent url(../images/kuning.jpg) repeat;
+		font-family:     Arial, Geneva, Helvetica, sans-serif;
+		font-size:10px;
+		COLOR: #000000;
+		height:80px;
+		width:80px;
+		text-align:center;
+		vertical-align:middle;
+}
+.hujau {
+		background:transparent url(../images/hijau.jpg) repeat;
+		font-family:     Arial, Geneva, Helvetica, sans-serif;
+		font-size:10px;
+		COLOR: #FFFFFF;
+		height:80px;
+		width:80px;
+		text-align:center;
+		vertical-align:middle;
+}
+.merah {
+		background:transparent url(../images/merah.jpg) repeat;
+		font-family:     Arial, Geneva, Helvetica, sans-serif;
+		font-size:10px;
+		COLOR: #000000;
+		height:80px;
+		width:80px;
+		text-align:center;
+		vertical-align:middle;
+}
+.coklat {
+		background:transparent url(../images/coklat.jpg) repeat;
+		font-family:     Arial, Geneva, Helvetica, sans-serif;
+		font-size:10px;
+		COLOR: #000000;
+		height:80px;
+		width:80px;
+		text-align:center;
+		vertical-align:middle;
+}
+.oranye {
+		background:transparent url(../images/oranye.jpg) repeat;
+		font-family:     Arial, Geneva, Helvetica, sans-serif;
+		font-size:10px;
+		COLOR: #000000;
+		height:80px;
+		width:80px;
+		text-align:center;
+		vertical-align:middle;
+}
+										

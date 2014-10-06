@@ -1,0 +1,31 @@
+<?php
+
+//$sqlqueryx="SELECT DISTINCT (userid) from plus_login where tm > '$tm' and status='ON'";
+//echo $sqlqueryx;
+
+//while($nt=mysql_fetch_array($qt)){
+//echo "<b>$nt[jml] User Online</b>";
+//}
+//echo $qt;
+
+echo "<b>".$this->jmluserol." User Online :</b>";
+echo "<p><ul class=\"media userol\">\n";
+$jmluseronlineList = count($this->useronlinelist); 
+$k=0;
+if ($jmluseronlineList!=0) {
+ foreach ($this->useronlinelist as $val): 
+ $k++;
+$dat = $listtmuseronline[$k];
+	$objtmuseronline = unserialize($dat); 
+$userid=trim($this->escape($val['userid']));
+$i_ym=trim($this->escape($val['i_ym']));
+//echo $i_ym;
+if (($i_ym=='') ||($i_ym=='NULL') ) $ym="";
+else $ym="<a href='ymsgr:sendIM?$i_ym' style='opacity: 1;'><img border='0' src='http://opi.yahoo.com/online?u=$i_ym&m=g&t=1' title='$userid'/></a>";
+
+echo "<li>".$userid." ".$ym."</li>\n";
+endforeach;
+echo "</ol>\n";
+}
+?>
+</span>

@@ -1,0 +1,107 @@
+function caritindakan()
+{
+	$("#frmcaritindakan").ajaxForm(frmcaritindakan_opt);
+}
+var frmcaritindakan_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/adm/tindakan/tindakanlist',
+		type: 'post', 
+		resetForm: false
+};
+function tindakanlist()
+{
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	var param = {kategoriCari:kategoriCari,carii:carii};
+	
+	var url = '<?php echo $this->basePath; ?>/adm/tindakan/tindakanlist';
+	jQuery.get(url, param, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+function tindakanForm(jenisForm, id_tindakan)
+{
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	var url = '<?php echo $this->basePath; ?>/adm/tindakan/tindakandata';
+	var param = { jenisForm:jenisForm, id_tindakan:id_tindakan,kategoriCari:kategoriCari,carii:carii};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahtindakan").ajaxForm(tambahTindakan_opt);
+		jQuery("#frmubahtindakan").ajaxForm(ubahTindakan_opt);
+	});
+}
+
+var tambahTindakan_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/adm/tindakan/tindakan',
+	beforeSubmit : function() {
+		
+		if (document.getElementById('n_tindakan').value == ''){
+			alert('Nama Tindakan harus Diisi');
+			return false;
+		}
+
+	answer = confirm('\n\   Apakah data yang anda masukan adalah benar.\n\n   \'OK\' Jika setuju, \'Cancel\' Jika tidak setuju.');
+		if(answer !=0) { 
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+var ubahTindakan_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/adm/tindakan/tindakanupdate',
+	beforeSubmit : function() {
+		
+		if (document.getElementById('n_tindakan').value == ''){
+			alert('Nama Tindakan harus Diisi');
+			return false;
+		}
+	answer = confirm('\n\   Apakah data yang anda masukan adalah benar.\n\n   \'OK\' Jika setuju, \'Cancel\' Jika tidak setuju.');
+		if(answer !=0) { 
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+function tindakanHapus(param1, nama, param2)
+{ 
+	
+	if(ConfirmDelete(param1,nama))
+	{	
+		handler = '<?php echo $this->basePath; ?>/adm/tindakan/tindakanhapus';
+		var opt = {id_tindakan : param2};
+		jQuery.get(handler,opt,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+}
+
+function BukaWindows(){
+	var w = 0; 
+	var h = 0;
+	w = screen.availWidth;
+	h = screen.availHeight;
+	var popW = 800, popH = 600;
+	var leftc = (w-popW)/2;
+	var topc = (h-popH)/2;
+	var selectWindow = window.open(url,'Selection', 'left=' + leftc + ',top=' + topc + ', width='+popW+',height='+popH+',resizable=0,scrollbars=yes');
+}
+

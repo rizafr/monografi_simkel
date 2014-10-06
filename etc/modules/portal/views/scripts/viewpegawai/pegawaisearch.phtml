@@ -1,0 +1,215 @@
+<? require_once 'Zend/View.php';
+    require_once 'share/oa_page.php';
+   
+   $ctrlFrm = new Zend_View();
+   $halaman = new oa_page();
+
+
+   $thnskrg = date("Y");
+   $thnList = $thnskrg - 11;
+   $thnList2 = $thnskrg - 55;
+	
+   $thnArrayList['#'] = '--';
+   		
+   for ($i = 0; $i < 21; $i++) {
+     $thnList = $thnList + 1;
+     $thnArrayList[$thnList] = $thnList;
+   }
+
+	
+   $thnArrayList2['#'] = '--';
+   	 
+   for ($i = 0; $i < 60; $i++) {
+     $thnList2 = $thnList2 + 1;
+     $thnArrayList2[$thnList2] = $thnList2;
+   }
+		
+		
+   $pnjngArray = count($thnArrayList);
+
+	  $blnList = 0;
+	  for ($j = 0; $j < 12; $j++) {
+        $blnList = $blnList + 1;
+		if ($blnList < 10) {
+		  $blnBaruList = "0".$blnList;
+		  $blnArrayList[] = $blnBaruList;
+		} else {
+		  $blnBaruList = $blnList;
+		  $blnArrayList[] = $blnBaruList;
+		}
+      }
+		
+	  $hrList = 0;
+	  for ($k = 0; $k < 31; $k++) {
+        $hrList = $hrList + 1;
+		if ($hrList < 10) {
+		  $hrBaruList = "0".$hrList;
+		  $hrArrayList[] = $hrBaruList;
+		} else {
+		  $hrBaruList = $hrList;
+		  $hrArrayList[] = $hrBaruList;
+		}
+      }
+
+
+
+   $xxxIdList = array("#"=>"--",
+                     "nip"=>"NIP",
+					 "nama"=>"Nama Pegawai");
+
+
+   $jmlPegawaiList = count($this->pegawaiList);
+   //echo "jmlPegawaiList= ".$jmlPegawaiList."<br>";
+   for ($j = 0; $j < $jmlPegawaiList; $j++) {
+   //echo $this->pegawaiList[$j]['i_peg_nip']." ".$thispegawaiList[$j]['n_peg']." ".$this->pegawaiList[$j]['n_jabatan']."<br>";
+     $pegawai[$j] = array("i_peg_nip"  		=>(string)$this->pegawaiList[$j]['i_peg_nip'],
+	                      "n_peg"      		=>(string)$this->pegawaiList[$j]['n_peg'],
+						  "eselon"  		=>(string)$this->pegawaiList[$j]['eselon'],
+						  //"n_jabatan"  		=>(string)$this->pegawaiList[$j]['n_jabatan'],
+						  //"gol"  			=>(string)$this->pegawaiList[$j]['gol'],   //gol dr tabel e_sdm_pegawai_0_tm
+						  //"pangkat"  		=>(string)$this->pegawaiList[$j]['pangkat'],        //pangkat dr tabel e_sdm_pegawai_0_tm
+						  "gol"  			=>(string)$this->pegawaiList[$j]['golMax'],    //gol dr tabel e_sdm_peg_golonganterakhir_vm
+						  "pangkat"  		=>(string)$this->pegawaiList[$j]['pangkatMax'],   //pangkat dr tabel e_sdm_peg_golonganterakhir_vm
+						  "statusPeg"  		=>(string)$this->pegawaiList[$j]['statusPeg'],
+						  "unitKerja"  		=>(string)$this->pegawaiList[$j]['unitKerja']);
+						 // "i_nip_baru"  	=>(string)$this->pegawaiList[$j]['i_nip_baru']);
+						  //echo $this->pegawaiList[$j]['n_peg'];
+   }
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+	$numToDisplay = $this->numToDisplay;
+	$currentPage = $this->currentPage;  
+?>
+<div class="contentdata-modul" id="modul">
+   <div class="navlink">
+		<a  href="<? echo $this->basePath; ?>/home/index/main">Halaman Utama</a> 
+		<strong> &#8250; </strong> SDM 
+		<strong> &#8250; </strong> Maintain Data Pegawai
+		<strong> &#8250; </strong> Melihat Data Pegawai
+	</div>
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA PEGAWAI</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data pegawai yang berupa data pokok, riwayat pendidikan, pelatihan, keluarga, ciri-ciri fisik, riwayat kepangkatan, organisasi, seminar, penghargaan, riwayat jabatan, riwayat hukuman, ke luar negeri. Proses pemeliharaan data pegawai hanya bisa dilakukan oleh bagian SDM.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+			<form id="frmVSearch" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch" method="post" name="frmVSearch">
+				<dl>
+					<dt>Pencarian berdasarkan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right3">
+					<?php 
+						$xxxId = $_POST['xxxId'];
+					   if ($xxxId == null) {
+							$xxxId = $_REQUEST['param2'];
+					   }
+						echo $ctrlFrm->formSelect('xxxId', $xxxId, null, $xxxIdList);
+					 
+						$idAtrib = array("size"=>"20",
+										 //"maxlength"=>"9",
+										 "maxlength"=>"20",
+										 "class"=>""); 
+						$id = $_POST['id'];
+					   if ($id == null) {
+							$id = $_REQUEST['param1'];
+					   }
+					?>
+					&nbsp;				
+					<?
+						echo $ctrlFrm->formText('id', $id, $idAtrib);
+					    
+						$atribSubmit = array("onclick"=>"javascript:commandSubmit();");
+						echo $ctrlFrm->formSubmit('perintah', 'CARI', $atribSubmit)."&nbsp;";
+					?>
+					</dd>
+				</dl>
+			</form>
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line"></div>
+	
+	<fieldset class="fields">
+		<div class="title2">Data Pegawai</div>
+			<div class="blank"></div>
+<? 	if ($jmlPegawaiList == 0) {
+		echo "<font color=\"red\">Data Tidak Ditemukan</font>";
+?>
+		<table align="center" width="80%" border="0" cellspacing="1" cellpadding="2" class="tbl">
+		   <tr>
+				<th width="4%">No.</th>
+				<th width="17%">Nama Pegawai</th>
+				<th width="15%">NIP</th>
+				<!--<th width="13%">NIP Baru</th>-->
+			<!--	<th width="30%">Jabatan</th> -->
+				<th width="17%">Gol./Pangkat</th>
+				<th width="7%">Eselon</th>
+				<th width="11%">Status Pegawai</th>
+			<!--	<th width="29%">Satuan Kerja</th>-->
+	  	</tr> 
+		</table>
+<? } else { ?>
+		<table align="center" width="80%" border="0" cellspacing="1" cellpadding="2" class="tbl">
+			<tr>
+				<th width="4%">No.</th>
+				<th width="17%" onClick="javascript:sortByJudul('<? echo $id; ?>','<? echo $xxxId; ?>','<? echo $judul = 'nama';?>')">Nama Pegawai</th>
+				<th width="15%" onClick="javascript:sortByJudul('<? echo $id; ?>','<? echo $xxxId; ?>','<? echo $judul = 'nip';?>')">NIP</th>
+			<!--	<th width="13%" onClick="javascript:sortByJudul('<? //echo $id; ?>','<? //echo $xxxId; ?>','<? //echo $judul = 'nip';?>')">NIP Baru</th>-->
+			<!--	<th width="30%">Jabatan</th> -->
+				<th width="17%" onClick="javascript:sortByJudul('<? echo $id; ?>','<? echo $xxxId; ?>','<? echo $judul = 'gol';?>')">Gol./Pangkat</th>
+				<th width="7%" onClick="javascript:sortByJudul('<? echo $id; ?>','<? echo $xxxId; ?>','<? echo $judul = 'eselon';?>')">Eselon</th>
+				<th width="11%" onClick="javascript:sortByJudul('<? echo $id; ?>','<? echo $xxxId; ?>','<? echo $judul = 'stat';?>')">Status Pegawai</th>
+			<!--	<th width="29%" onClick="javascript:sortByJudul('<? echo $id; ?>','<? echo $xxxId; ?>','<? echo $judul = 'uK';?>')">Satuan Kerja</th>-->
+			</tr> 
+	  			<?php 
+					   foreach ($pegawai as $key => $val): 
+					   if ($key%2==0) { ?>
+				      <tr class="event">
+					<? } else if ($key%2==1) { ?>
+					  <tr class="event2">
+					<? } 
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						$pangkat = $this->escape($val['pangkat']);
+						$gol = $this->escape($val['gol']);
+						$golPangkat = $gol." - ".$pangkat;
+						$eselon = $this->escape($val['eselon']);
+						if ($eselon == 'NE') {
+							$eselon = 'Non Eselon';
+						}
+				?>
+				<td class="clcenter">&nbsp;<?php echo $noUrut;?></td>
+			    <td>&nbsp;
+					<a href="#" onClick="javascript:viewPegawai('<? echo $this->escape($val['i_peg_nip']); ?>');" class="link" title="View"><?php echo $this->escape($val['n_peg']);?> </a></td>
+			    <td>&nbsp;<?php echo $this->escape($val['i_peg_nip']);?></td>
+				<!--<td>&nbsp;<?php //echo $this->escape($val['i_nip_baru']);?></td>-->
+				<!--<td>&nbsp;<?php //echo $this->escape($val['n_jabatan']);?></td>-->
+				<td>&nbsp;<?php echo $golPangkat;?></td>
+				<td>&nbsp;<?php echo $eselon;?></td>
+				<td>&nbsp;<?php echo $this->escape($val['statusPeg']);?></td>
+				<!--<td>&nbsp;<?php //echo $this->escape($val['unitKerja']);?></td>-->
+			</tr>
+	<?php endforeach;?> 	
+
+	</table>
+			<a name="pageCursor"></a>
+			<?			
+ 			$totalData = $this->totPegawai;			
+			$modul = $this->basePath."/sdm/viewpegawai/pegawaisearch";
+			//echo $halaman->showPage($totalData, $numToDisplay, $currentPage, $modul);
+			//$fungsi = 'pegSearch';
+			$fungsi = "sortByJudul";
+			$judul = $_REQUEST['param3'];
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, $modul, $fungsi, $id, $xxxId, $judul,'');
+ 			//echo $hal;
+			?>
+	<? } ?>
+	
+
+	</fieldset>
+</div>		   			   
+	<?php// }	  ?>     
+		  

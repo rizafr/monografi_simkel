@@ -1,0 +1,142 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+$format_date = new format_date();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>> Laporan Pasien
+</div>
+
+<div id="dialog-browse">  
+</div>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">REKAP KEDATANGAN PASIEN TANGGAL <? echo $format_date->convertTglMachineToHuman($this->id);?></h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {$namaForm = 'frmtambahanalisispasien'; }
+			else if (strtolower($this->jenisForm) == 'update') {$namaForm = 'frmubahanalisispasien'; }
+			else {$namaForm = 'frmhapusanalisispasien'; }
+		?>
+
+<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
+<input name="id" id="id" type="hidden" value="<?echo $this->id;?>" />
+<input name="t_awal" id="t_awal" type="hidden" value="<?echo $this->t_awal;?>" />
+<input name="t_akhir" id="t_akhir" type="hidden" value="<?echo $this->t_akhir;?>" />
+<input name="kategoriCari" id="kategoriCari" type="hidden" value="<? echo $this->kategoriCari; ?>" /> 
+<input name="carii" id="carii" type="hidden" value="<? echo $this->carii; ?>" /> 
+<? 
+$status = $this->hasil;
+$proses = $this->proses;
+$keterangan = $this->keterangan;
+$pesan->show_message($proses, $keterangan, "$status" ); ?>
+
+<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th >No</th>
+				<th >Nama Pasien</th> 
+				<th >Alasan Kedatangan</th> 
+				<th >Tindakan</th> 
+				<th >Lab. Rematik</th> 
+				<th >Lab. Alergi</th> 
+				
+				<?
+				if (count($this->detailAnalisispasienList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {
+						
+						
+						foreach ($this->detailAnalisispasienList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } 
+						$id		= $this->escape($val['id']); 
+						$n_nama		= $this->escape($val['n_nama']); 
+						$n_klasifikasi	= $this->escape($val['n_klasifikasi']);
+						$n_tindakan	= $this->escape($val['n_tindakan']); 
+						$c_alergi	= $this->escape($val['c_alergi']);
+						$c_rematik	= $this->escape($val['c_rematik']); 
+
+						$n_alergi ='';
+						if($c_alergi =='N'){$n_alergi ='Normal';}
+						if($c_alergi =='T'){$n_alergi ='Tidak Normal';}
+						$n_rematik ='';
+						if($c_rematik =='N'){$n_rematik ='Normal';}
+						if($c_rematik =='T'){$n_rematik ='Tidak Normal';}
+						
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						echo $ctrlFrm->formHidden('id', $id, null);
+						
+						?>
+<td align="center"><? echo $noUrut;?></td>
+<td class="clleft"><? echo $n_nama;?></td>
+<td align="left"><? echo $n_klasifikasi;?></td>
+<td align="left"><? echo $n_tindakan;?></td>
+<td align="center"><? echo $n_alergi;?></td>
+<td align="center"><? echo $n_rematik;?></td>
+					
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+
+	
+			</table>
+<BR>
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+
+	<tr>
+		<td></td>
+		<td>
+		<div class="right">
+		<input type="button" value="Kembali" onclick="analisispasienlist();"> 
+		</div>
+		</td>
+	
+</table>
+
+</form>
+
+
+</div>
+</div>
+
+<script>
+
+ 	$(function() {
+		$("#d_medrec").datepicker();
+	});
+
+
+function showDialog(val) {      
+    $( "#dialog-browse" ).dialog({
+      autoOpen: false,
+      height: 380,
+      width: 640,
+      modal: true,
+      resizable:false,
+      title: "Data Pasien"
+    });
+    if(val =='pasien'){pasienlist();}  
+    return false;
+  }
+
+</script>
+

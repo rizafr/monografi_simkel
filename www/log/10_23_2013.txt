@@ -1,0 +1,13 @@
+;Hapus Data Blacklist;23/10/2013 00:54:05; dgn id_blacklist (23);
+;Hapus Data Blacklist;23/10/2013 00:55:28; dgn id_blacklist (23);
+;Hapus Data Blacklist;23/10/2013 00:56:22; dgn id_blacklist (23);
+;Hapus Data Blacklist;23/10/2013 00:58:05; dgn id_blacklist (23);
+;Hapus Data Blacklist;23/10/2013 00:58:48; dgn id_blacklist (23);
+;Hapus Data Blacklist;23/10/2013 01:00:24; dgn id_blacklist (23);
+;Hapus Data Blacklist;23/10/2013 01:01:03; dgn id_blacklist (23);
+;Hapus Data Blacklist;23/10/2013 01:01:53; dgn id_blacklist (23);
+;Hapus Data Blacklist;23/10/2013 01:03:00; dgn id_blacklist (23);
+;Hapus Data Blacklist;23/10/2013 01:03:48; dgn id_blacklist (23);
+;Hapus Data Blacklist;23/10/2013 01:07:17; dgn id_blacklist (23);
+;Insert Data Pendaftar ;23/10/2013 01:15:07; id_supp 424 dengan id_pengadaan (94);
+;Ubah Data Pendaftaran Pengadaan ;23/10/2013 01:17:10; di lokasi  dengan id_pengadaan (94);

@@ -1,0 +1,136 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$format_date = new format_date();
+$halaman = new format_page();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+
+<div class="navlink">
+<a href="" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a><strong> &#8250; </strong> Kritik dan Saran
+</div>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Forum</h2>
+		<div class="search-panel">
+		<form method="post" id="frmCariKritik" name="frmCariKritik">
+			   Pencarian berdasarkan :
+			      <select size="1" id="kategoriCari" name="kategoriCari">      
+	                   <option value="SARAN">SARAN</option>
+	                   <option value="NAMA">Nama</option>
+	                   
+	                 </select>
+			      <input type="text" id="katakunciCari" name="katakunciCari" value="">
+			     <?
+				$atribSubmit = array("onclick"=>"javascript:cariKritikList();");
+				echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+			    ?>	   
+		</form>
+	</div>
+	
+	<div class="space-line"></div>
+	<div class="add" title="Input Kritik / SARAN " onClick="kritikForm('insert','');"></div><BR>
+	    <form action="" method="post"> 
+	        <fieldset class="fields"> 
+				<div class="spacer"> </div>
+				<? 
+				
+				$status = $this->hasil;
+				$proses = $this->proses;
+				$keterangan = $this->keterangan;
+				
+				$pesan->show_message($proses, $keterangan, "$status" ); ?>
+				<div class="spacer"> </div>	
+				<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+					<th >No</th> 
+					<th >Nama</th> 
+					<th >TELP</th> 
+					<th >SARAN</th>
+					<th >TGL SARAN</th>
+					<? if($this->user == '1') { ?>
+					<th >STATUS AKTIF</th>
+					<th  colspan="1">Tindakan</th>
+					<? }  ?>
+					<?
+					if (count($this->kritikList) == 0){ 
+					?>
+						<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+					<?} else {
+							
+							
+							foreach ($this->kritikList as $key => $val): 
+							if ($key%2==0) { ?>
+								<tr class="event">
+							<? } else if ($key%2==1) { ?>
+								<tr class="event2">
+							<? } 
+							$id = $this->escape($val['ID_SISTEM_WEB_SARAN']); 
+							$TGL_SARAN = $this->escape($val['TGL_SARAN']); 
+							$NAMA = $this->escape($val['NAMA']);
+							$TELP = $this->escape($val['TELP']); 
+							$SARAN = $this->escape($val['SARAN']); 
+							$STATUS = $this->escape($val['STATUS']);
+							$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+							
+							// form Hidden 
+							echo $ctrlFrm->formHidden('id', $id, null);
+
+							if(trim($STATUS) == 'AKTIF') { $status = "checked";}
+							else {$status = "";}
+
+							?>
+							
+							<td class="clright"><? echo $noUrut;?>&nbsp;&nbsp;</td>
+							<td class="clleft">&nbsp;<? echo $NAMA;?></td>
+							<td class="clleft">&nbsp;<? echo $TELP;?></td>
+							<td class="clleft">&nbsp;<? echo $SARAN;?></td>
+							<td class="clleft">&nbsp;<? echo $TGL_SARAN;?></td>
+							<? if($this->user == '1') { ?>
+					
+							<td>
+							<input type="checkbox" name="status_<? echo $key;?>" id="status_<? echo $key;?>" <? echo $status;?>  value="<?echo $id;?>" onClick="ubahStatus('<?echo $key;?>');">
+							</td-->
+							<td><div onClick="kritikForm('update','<? echo $id;?>');" class="edit" title="Ubah Data"></div></td>
+							<!--td><div class="delete" title="Hapus Data" onClick="kritikHapus('Kritik', '<? echo $id; ?>')" ></td-->
+							<? }  ?>
+					
+						
+							</tr>
+						<?
+						endforeach;
+					}
+					?>
+
+				</table>
+							<?	
+			$totalData = $this->totkritikList;
+			$modul = $this->basePath."/cms/forum/kritiklist";
+			$param1 = $this->prodi;
+			$param2 = $this->tahun;
+			$param4 = $this->semester;
+			$param3 = $this->tingkat;
+			$param5 = $this->matakuliah;
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4, $param5, $param6);		
+			?>
+
+
+			</fieldset>		 
+		</form>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>			

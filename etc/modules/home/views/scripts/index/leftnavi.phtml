@@ -1,0 +1,158 @@
+    <div class="hd">Surat</div>
+	   <div class="bd">
+             <ul id="lsn">
+               <li class="icon-inbox" >Surat Masuk
+                 <ul id="lsn2">
+                   <li><a class="icon-file" href="">Surat</a></li>
+                   <li><a class="icon-file" href="">Nota Dinas</a></li>
+                   <li><a class="icon-file" href="">Memo</a></li>
+                 </ul>  
+               </li>
+               <li class="icon-sent" href="">Surat Keluar
+                 <ul id="lsn2">
+                   <li><a class="icon-file" href="">Surat</a></li>
+                   <li><a class="icon-file" href="">Nota Dinas</a></li>
+                 </ul>  
+               </li>
+               <li class="icon-inbox">Konsep Surat</li>
+             </ul>
+	   </div>
+    <div class="hd">Email</div>
+	   <div class="bd">
+             <ul id="lsn">
+               <li><a class="icon-compose" href="">Kirim Email</a></li>
+               <li><a class="icon-inbox" href="">Email Masuk</a></li>
+               <li><a class="icon-sent" href="">Email Keluar</a></li>
+             </ul>
+	   </div>
+<div id="featureBalloonPos">
+		<div id="featureBalloonTop"></div>
+		<div id="featureBalloonContent"></div>
+		
+</div>
+<script type="text/javascript">
+//<![CDATA[
+//IE PNG bug workarround
+
+if(navigator.userAgent.toLowerCase().indexOf("msie")>0 && navigator.userAgent.toLowerCase().indexOf("msie 7.0")<=0){
+	var imgArr = Array();
+	imgArr[imgArr.length] = document.getElementById("featureBalloonTop");
+	//imgArr[imgArr.length] = document.getElementById("featureBalloonLeft");
+	imgArr[imgArr.length] = document.getElementById("featureBalloonContent");
+	for(i=0;i<imgArr.length;i++)	{
+		if(imgArr[i].currentStyle.backgroundImage.lastIndexOf(".png") != -1){
+			var img = imgArr[i].currentStyle.backgroundImage.substring(5,imgArr[i].currentStyle.backgroundImage.length-2);
+			//alert(img);
+			imgArr[i].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+img+"', sizingMethod='scale')";
+			imgArr[i].style.backgroundImage = "url(images/spacer.gif)";
+		}
+	}
+}
+ACProdArr = Array();
+function Prod(id, text, description, url) {
+	this.id		= id;
+	this.text	= text;
+	this.description = description;
+	this.url	= '';//url;
+}
+
+					//<![CDATA[
+					ACProdArr[ACProdArr.length] = new Prod("1392007","13 September 2007","Rapat Paripurna di Gedung Keuangan.","");
+					//]]>
+					//<![CDATA[
+					ACProdArr[ACProdArr.length] = new Prod("2892007","28 September 2007","Update Data SDM.","");
+					//]]>
+					//<![CDATA[
+					ACProdArr[ACProdArr.length] = new Prod("1102007","1 Oktober 2007","Hari Kesaktian Pancasila.","");
+					//]]>
+function balloonText(featureId, aObj, e) {
+	var posObj = document.getElementById("featureBalloonPos");
+	var conObj = document.getElementById("featureBalloonContent");
+	var accUrl = "";
+	var accDesc = "";
+	var accText = "";
+	var lc = "id".toLowerCase();
+	
+	for(i = 0; i < ACProdArr.length; i++){
+		if(ACProdArr[i].id == featureId){
+			accDesc = ACProdArr[i].description;
+			accText = ACProdArr[i].text;
+			accUrl	= ACProdArr[i].url
+			break;
+		}
+	}
+	
+	if(accUrl != ''){
+		accDesc += "<br /><a href='spg.jsp?cc=id&amp;lc=id&amp;ver=4000&template=" + accUrl + "&zone=pp&lm=pp2&fid=" + featureId + "' class='link'><img  src='popup_files/CWS31AFW_9382high_56_0_4000.gif' border='0' alt='' />Baca selengkapnya</a>";
+	}
+	
+	tmpObj = aObj;
+	if (lc == 'he' || lc == 'ar' ){
+		aObj.style.display = "block";
+		aObj.style.width = "120px";
+	}
+	var curleft = 0;
+	var curtop = 0;
+	if (tmpObj.offsetParent){
+		while (tmpObj.offsetParent)	{
+			curtop += tmpObj.offsetTop;
+			curleft += tmpObj.offsetLeft;
+			tmpObj = tmpObj.offsetParent;
+		}
+	}
+	else if (tmpObj.x){
+		curtop += tmpObj.y;
+		curleft += tmpObj.x;
+	}
+	
+	
+	posObj.style.display = "block";
+	posObj.style.position = "absolute";
+	
+	if (lc == 'he' || lc == 'ar' ){
+		posObj.style.left = (curleft-20) + "px";
+	}
+	else {
+		posObj.style.left = (curleft+20) + "px";
+	}
+	
+	posObj.style.top = (curtop) + "px";
+	
+	//headObj.innerHTML = accText;
+	conObj.innerHTML = '<b>'+accText+'</b><br />'+accDesc+'<br /><br /><a href="javascript:closeBalloonText();void(0);" class="arrow" style="position:relative">Tutup jendela</a>';
+	
+	//IE bug workarround, stop for 350 milisecs, otherwise images are not shown.
+	if(navigator.userAgent.toLowerCase().indexOf("msie")>0){
+		d = new Date() //today's date
+		while (1){
+			mill=new Date() // Date Now
+			diff = mill-d //difference in milliseconds
+			if( diff > 350 ){
+				break;
+			}
+		}
+	}
+}
+
+function closeBalloonText() {
+	document.getElementById("featureBalloonPos").style.display = "none";
+}
+//]]>
+</script>
+
+	<div class="hd">Agenda</div>
+	   <div class="bd">
+			<?
+			  $todayd=date("d",time())*1;
+			  $todaym=date("m",time())*1;
+			  $todayy=date("Y",time());
+			  $today="$todayd/$todaym/$todayy";
+			  $dated="'13/9/2007','28/9/2007','1/10/2007'";
+			  echo "<DIV  id='MYCAL'></DIV>";
+			?>
+			<script>
+			  var datedarray=new Array(<?=$dated?>);
+			  var today="<?=$today?>";
+			</script>
+		    <script type="text/javascript" src="<?php echo $this->basePath; ?>/js/kalender.js"></script>
+       </div>

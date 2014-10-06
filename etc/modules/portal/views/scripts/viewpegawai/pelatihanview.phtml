@@ -1,0 +1,177 @@
+<? require_once 'Zend/View.php';
+   require_once 'share/oa_date.php'; 
+   
+	$ctrlDate = new oa_date();   
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+
+
+	//$jenjang = $_REQUEST['jenjang'];
+	$nip = $_REQUEST['nip'];
+	//echo "test".$test;
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+
+
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA PELATIHAN</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data pelatihan yang pernah diikuti pegawai, baik pelatihan yang bersifat struktural maupun pelatihan yang bersifat fungsional.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line">
+		<div class="title2">Melihat Data Pelatihan</div>
+		<fieldset  class="panel-form">	
+			<form id="frmVLatihView" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/pelatihanview" method="post" name="frmVLatihView">
+				<dl>
+					<dt>Jenis Pelatihan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						//$jenisLatih = $_REQUEST['jenis'];
+						$jenisLatih = $this->escape($this->jenisLatih);
+						if ($jenisLatih == 'N') {
+							$jenisLatih  = 'Non Struktural';
+						}
+						else if ($jenisLatih == 'S') {
+							$jenisLatih  = 'Struktural';
+						}
+						echo $jenisLatih;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Nama Pelatihan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$namaPelatihan = $this->escape($this->nmPelatihan);
+						//$namaPelatihan = $_REQUEST['latih'];
+						echo $namaPelatihan;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Penyelenggara</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$penyelenggara = $this->escape($this->penyelenggara);
+						//$penyelenggara = $_REQUEST['penyelenggara'];
+						echo $penyelenggara;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Mulai</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$mulai = $this->escape($this->mulai);
+						//$mulai = $_REQUEST['mulai'];
+						echo $ctrlDate->convertTglMachineToHuman($mulai);
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Selesai</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$akhir = $this->escape($this->akhir);
+						//$akhir = $_REQUEST['akhir'];
+						echo $ctrlDate->convertTglMachineToHuman($akhir);
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tempat</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$tempat = $this->escape($this->tempat);
+						//$tempat = $_REQUEST['tempat'];
+						echo $tempat;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Nomor Sertifikat</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$noSertifikat = $this->escape($this->noSertifikat);
+						if ($noSertifikat == '') {
+						    $noSertifikat = null;
+						} 
+						echo $noSertifikat;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tanggal Sertifikat</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$tglSertifikat = $this->escape($this->tglSertifikat);
+						if ($tglSertifikat == '') {
+						    $tglSertifikat = null;
+						} 
+						echo $ctrlDate->convertTglMachineToHuman($tglSertifikat);
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Keterangan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$keterangan = $this->escape($this->keterangan);
+						//$keterangan = $_REQUEST['keterangan'];
+						echo $keterangan;
+					?>
+					</dd>
+				</dl>
+ 			<dl>
+				<?php 
+				  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">&nbsp;</dd>			
+				<div class="back" onClick="javascript:kembaliLatihView('<? echo $this->escape($this->nip); ?>');" title="Kembali"><input type="button" value="Kembali" id="kembaliLatihView"></div>
+			</dl>
+		  	</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>		
+
+<!--				
+<table width=100% align=center>		
+		<tr>
+		  <td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+		  <td colspan="2" align="center">
+			<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+		  </td>
+		</tr>
+</table>
+			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliLatihView('<? echo $this->escape($this->nip); ?>');" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

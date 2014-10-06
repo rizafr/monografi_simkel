@@ -1,0 +1,209 @@
+<? require_once 'Zend/View.php';
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+   $thnList = $thnskrg - 11;
+   $thnList2 = $thnskrg - 55;
+	
+   $thnArrayList['#'] = '--';
+   		
+   for ($i = 0; $i < 21; $i++) {
+     $thnList = $thnList + 1;
+     $thnArrayList[$thnList] = $thnList;
+   }
+
+	
+   $thnArrayList2['#'] = '--';
+   	 
+   for ($i = 0; $i < 60; $i++) {
+     $thnList2 = $thnList2 + 1;
+     $thnArrayList2[$thnList2] = $thnList2;
+   }
+		
+		
+   $pnjngArray = count($thnArrayList);
+
+	  $blnList = 0;
+	  for ($j = 0; $j < 12; $j++) {
+        $blnList = $blnList + 1;
+		if ($blnList < 10) {
+		  $blnBaruList = "0".$blnList;
+		  $blnArrayList[] = $blnBaruList;
+		} else {
+		  $blnBaruList = $blnList;
+		  $blnArrayList[] = $blnBaruList;
+		}
+      }
+		
+	  $hrList = 0;
+	  for ($k = 0; $k < 31; $k++) {
+        $hrList = $hrList + 1;
+		if ($hrList < 10) {
+		  $hrBaruList = "0".$hrList;
+		  $hrArrayList[] = $hrBaruList;
+		} else {
+		  $hrBaruList = $hrList;
+		  $hrArrayList[] = $hrBaruList;
+		}
+      }
+
+
+
+$nip = $_REQUEST['nip'];
+$_SESSION['nip'] = $nip;
+
+	$jumKelList = count($this->kelList);
+   //echo $jumPendList;
+   for ($j = 0; $j < $jumKelList; $j++) {
+     $kel[$j] = array("i_peg_nip"  				=>(string)$this->kelList[$j]['nip'],
+						  "hubungan"			=> (string)$this->kelList[$j]['hubungan'],
+						  "kdHub"				=> (string)$this->kelList[$j]['kdHub'],
+	                      "nama"      			=>(string)$this->kelList[$j]['nama'],
+						  "tempatLahir"  		=>(string)$this->kelList[$j]['tempatLahir'],
+						  "tglLahir"  			=>(string)$this->kelList[$j]['tglLahir'],
+						  "jenisKelamin"  		=>(string)$this->kelList[$j]['jenisKelamin'],
+						  "tglMenikah"  		=>(string)$this->kelList[$j]['tglMenikah'],
+						  "pekerjaan"  			=>(string)$this->kelList[$j]['pekerjaan'],
+						  "statusTanggungan"  	=>(string)$this->kelList[$j]['statusTanggungan'],
+						  "karis"  				=>(string)$this->kelList[$j]['karis'],
+						  "pendidikan"  		=>(string)$this->kelList[$j]['pendidikan'],
+						  "nipSuami"  			=>(string)$this->kelList[$j]['nipSuami'],
+						  "keterangan"  		=>(string)$this->kelList[$j]['keterangan']);						  
+   //echo "nip----->".$this->kelList[0]['i_peg_nip'];
+   } 
+   
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+
+					 
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA KELUARGA</h3>
+			&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data anggota keluarga pegawai. Yang dimaksud dengan anggota keluarga adalah istri/suami dan anak-anak.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+			<form id="frmVKel" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/keluarga" method="post" name="frmVKel">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+			</form>
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line"></div>	
+	<fieldset class="fields">
+		<div class="title2">Data Keluarga</div>
+		<div class="blank"></div>
+
+<? 	if ($jumKelList == 0) {
+		echo "<font color=\"red\">Data KeluargaTidak Ditemukan</font>";		
+?>
+		<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+			    <th width="10%">Nama</th>
+				<th width="10%">Hub. Keluarga</th>
+				<th width="8%">Tempat Lahir</th>
+				<th width="7%">Tanggal Lahir</th>
+				<th width="7%">Jenis Kelamin</th>
+				<th width="7%">Tanggal Menikah</th>
+				<th width="11%">Pekerjaan</th>
+				<th width="11%">Status Tanggungan</th>
+				<th width="8%">Nomor KARIS/KARSU</th>
+				<th width="7%">Pendidikan</th>
+				<th width="8%">NIP</th>
+				<th width="6%">Keterangan</th>
+			</tr>
+		</table>
+<? } else { ?>
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+			    <th width="10%">Nama</th>
+				<th width="10%">Hub. Keluarga</th>
+				<th width="8%">Tempat Lahir</th>
+				<th width="7%">Tanggal Lahir</th>
+				<th width="7%">Jenis Kelamin</th>
+				<th width="7%">Tanggal Menikah</th>
+				<th width="11%">Pekerjaan</th>
+				<th width="11%">Status Tanggungan</th>
+				<th width="8%">Nomor KARIS/KARSU</th>
+				<th width="7%">Pendidikan</th>
+				<th width="8%">NIP</th>
+				<th width="6%">Keterangan</th>
+			</tr>
+		<?php foreach ($kel as $key => $val): 
+					   if ($key%2==0) { ?>
+				      <tr class="event">
+					<? } else if ($key%2==1) { ?>
+					  <tr class="event2">
+					<? } ?>
+				<?php
+					$tglLahir = $this->escape($val['tglLahir']);
+						$thnLahir = substr($tglLahir,0,4);
+						$blnLahir = substr($tglLahir,5,2);
+						$hrLahir = substr($tglLahir,8,2);
+						$tglLahir = $hrLahir."-".$blnLahir."-".$thnLahir;
+					$tglNikah = $this->escape($val['tglMenikah']);
+						$thnNikah = substr($tglNikah,0,4);
+						$blnNikah = substr($tglNikah,5,2);
+						$hrNikah = substr($tglNikah,8,2);
+						$tglMenikah = $hrNikah."-".$blnNikah."-".$thnNikah;	
+						if ($tglNikah == null) {
+							$tglMenikah = '-';
+						}
+					$statusTanggungan = $this->escape($val['statusTanggungan']);
+					if ($statusTanggungan == 'Y') {
+						$statusTanggungan = 'Ditanggung';
+					} else if ($statusTanggungan == 'N') {
+						$statusTanggungan = 'Tidak Ditanggung';
+					}
+					
+					$jenisKelamin = $this->escape($val['jenisKelamin']);
+					if ($jenisKelamin == 'P') {
+						$jenisKelamin = 'Perempuan';
+					} else if ($jenisKelamin == 'L') {
+						$jenisKelamin = 'Laki-laki';
+					}
+				?>
+				<td>&nbsp;<a href="#" onClick="javascript:viewKel('<? echo $this->escape($val['i_peg_nip']); ?>','<? echo $this->escape($val['hubungan']); ?>');" class="link" title="View"><?php echo $this->escape($val['nama']);?> </a></td>
+				<td>&nbsp;<?php echo $this->escape($val['hubungan']);?></td>
+				<td>&nbsp;<?php echo $this->escape($val['tempatLahir']);?></td>
+				<td class="clcenter"> <?php echo $tglLahir; ?></td>
+				<td class="clcenter"> <?php echo $jenisKelamin;?></td>
+				<td class="clcenter"> <?php echo $tglMenikah;?></td>
+				<td>&nbsp;<?php echo $this->escape($val['pekerjaan']);?></td>
+				<td>&nbsp; <?php echo $statusTanggungan;?></td>
+				<td>&nbsp; <?php echo $this->escape($val['karis']);?></td>
+				<td>&nbsp; <?php echo $this->escape($val['pendidikan']);?></td>
+				<td>&nbsp; <?php echo $this->escape($val['nipSuami']);?></td>
+				<td>&nbsp;<?php echo $this->escape($val['keterangan']);?></td>
+		  </tr>
+	<?php endforeach;?> 		  
+	  
+		</table>
+	<? } ?>
+          
+ 			<dl>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">
+				<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+				</dd>			
+				<div class="back" onClick="javascript:kembaliKel();" title="Kembali"><input type="button" value="Kembali" id="kembaliKel"></div>
+			</dl>
+			</div>
+ 	</fieldset>
+</div>
+		  
+<!--
+    <p align="center">
+		<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+   </p>
+ 
+			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliKel();" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

@@ -1,0 +1,273 @@
+<?php
+require_once 'Zend/Controller/Action.php';
+require_once 'Zend/Session.php';
+require_once "service/sso/Sso_User_Service.php";
+require_once "service/aplikasi/Aplikasi_Pengumuman_Service.php";
+require_once "service/tamu/Tamu_Kritik_Service.php";
+require_once "service/adm/Adm_Admuser_Service.php";
+require_once "service/cms/Cms_Berita_Service.php";
+require_once 'Zend/Session/Namespace.php';
+require_once "service/cms/Cms_produkhukum.php";
+
+
+
+
+class Home_IndexController extends Zend_Controller_Action {
+    private $sso_serv;
+	
+    public function init() {
+       // Local to this controller only; affects all actions, as loaded in init:
+	   //UNTUK SETTING GLOBAL BASE PATH
+		$registry = Zend_Registry::getInstance();
+		$this->auth = Zend_Auth::getInstance();	   
+		$this->view->baseData = $registry->get('baseData');
+		$this->view->basePath = $registry->get('basepath');
+		$this->view->procPath = $registry->get('procpath');	   
+		$this->sso_serv = Sso_User_Service::getInstance();
+		$this->adm_serv = Adm_Admuser_Service::getInstance();
+		$this->pengumuman_serv = Aplikasi_Pengumuman_Service::getInstance();
+		$this->kritik_serv = Tamu_Kritik_Service::getInstance();
+		$this->berita_serv = Cms_Berita_Service::getInstance();
+		$this->produkhukum_serv = Cms_produkhukum_Service::getInstance();
+		
+		$ssousergroup = new Zend_Session_Namespace('ssousergroup');
+		$ssouserid = new Zend_Session_Namespace('ssouserid');
+		$ssouseridpswd = new Zend_Session_Namespace('ssouseridpswd');
+		
+		$ssogroup = new Zend_Session_Namespace('ssogroup');
+		$this->group_user =$ssogroup->n_level;
+		
+		$this->user_paswd =$ssouseridpswd->user_paswd;			
+		$this->userid =$ssouserid->user_id;
+		$this->c_group =$ssousergroup->c_group;
+
+    }
+	
+    public function indexAction() {
+		//indexAction default kepunyaan Home_IndexController dalam modul home
+		$this->view->p = $_REQUEST['p'];
+		$this->view->user_id = $_REQUEST['u'];
+		$this->view->username = $this->sso_serv->getUsername($this->view->user_id);
+		$request = $this->getRequest();   
+		$ns = new Zend_Session_Namespace('HelloWorld'); 
+	    
+		if(!isset($ns->yourLoginRequest)){ 
+			$ns->yourLoginRequest = 1; 
+		}else{ 
+			$ns->yourLoginRequest++; 
+		} 
+		$this->runningtextAction();
+		$this->kritiklistAction();
+		$this->view->beritaPubList = $this->berita_serv->getBeritaPubList($cari);	
+		$cari5 = "";
+		$this->view->produkhukumPubList = $this->produkhukum_serv->getprodukhukumTenPubList($cari5);	
+
+		$this->view->checksess = $ns->yourLoginRequest;
+    }
+	
+	public function mainAction() {
+		$username = $_POST['log'];
+	    $passwd = $_POST['pwd'];
+		$par = $_POST['par'];
+		$usergroup = $_POST['usergroup'];
+		$this->view->usergroup=$_POST['usergroup'];
+		$this->view->par=$_POST['par']; 
+		$ubahpwd = $_POST['ubahpwd'];
+		$user_id = $_POST['user_id'];
+		$pwdBaru = $_POST['pwdBaru'];
+		$ulangpwdBaru = $_POST['ulangpwdBaru'];
+		if(!$ubahpwd){	
+			
+			if ($username && $passwd) {				
+				
+					$hasiluser = $this->sso_serv->getDataUser1($username,$passwd,$usergroup);
+					if($hasiluser){
+						$ssousergroup	= new Zend_Session_Namespace('ssousergroup');
+						$ssouserid		= new Zend_Session_Namespace('ssouserid');///berdasarkan user group
+						$ssogroup		= new Zend_Session_Namespace('ssogroup');///berdasarkan user group
+						$ssouseridpswd	= new Zend_Session_Namespace('ssouseridpswd');///berdasarkan user group
+						$ssousergroup->setExpirationSeconds(6000);	
+						$user_id		= $hasiluser->user_id;	
+
+						$id				= $hasiluser->id;	
+						$c_group		= $hasiluser->c_group;
+						$username		= $hasiluser->username;
+						$c_divre		= $hasiluser->c_divre;
+						$c_upt			= $hasiluser->c_upt;
+						$n_level		= $hasiluser->n_level;
+						
+						$ssogroup->user_id     = $hasiluser->user_id;	
+						$ssogroup->c_group     = $hasiluser->c_group;
+						$ssogroup->n_nama     = $hasiluser->n_nama;
+						$ssogroup->c_divre     = $hasiluser->c_divre;
+						$ssogroup->c_upt     = $hasiluser->c_upt;
+						$ssogroup->n_level     = $hasiluser->n_level;
+						$ssogroup->username     = $hasiluser->username;
+					
+
+						$this->view->user_id = $ssogroup->user_id;
+						$this->view->id = $ssogroup->id;
+						$this->view->username = $ssogroup->username;
+						$this->view->c_group =$ssogroup->c_group;
+						$this->view->n_nama =$ssogroup->n_nama;
+						$this->view->c_divre =$ssogroup->c_divre;
+					    $this->view->c_upt =$ssogroup->c_upt;
+					    $this->view->n_level =$ssogroup->n_level;	
+						
+
+						if (!$user_id){$user_id =$this->userid;$c_group =$this->c_group;}
+
+							$ssousergroup->c_group     = $c_group;
+							$ssouserid->user_id			= $user_id;
+						
+							$ssouseridpswd->user_paswd     = $passwd;
+
+							$this->view->c_group =$c_group;
+							$this->view->user_id =$user_id;
+							$this->view->id =$id;
+							$this->view->username =$username;
+						
+							$this->runningtextAction();
+							$this->view->n_nama = $ssogroup->n_nama;
+							$this->view->NIP = $ssogroup->NIP;
+							$this->view->n_group = $this->adm_serv->getnamaGroup($c_group);
+						//cari ultah
+							$dultah=date(Y-m);
+							$tgl=date(d);
+							$bln=date(F);						
+							$cari= " and DATENAME(d, d_tglLahir)='$tgl' and DATENAME(m, d_tglLahir)='$bln'  ";
+						//$this->view->ultah = $this->adm_serv->getUltah($cari);
+					}
+					else
+					{
+
+						$this->view->log=$_POST['log'];
+						$this->view->pwd=$_POST['pwd'];
+						$this->view->pesanlogin ="salah";
+						$this->view->pesanKesalahan = 'Nama Pengguna atau Kata Sandi Salah atau menu aplikasi ini bukan autorisasi anda';
+						$this->indexAction();
+						$this->render('index');
+						$this->view->par=$_POST['par']; 
+					}
+				
+
+
+		   } else {
+		     $this->view->pesanlogin ="kosong";
+			 $this->view->pesan = "User dan Password Kosong 2";
+			 $this->indexAction();
+		     $this->render('index');
+			 $this->view->par=$_POST['par']; 
+		  } 
+		}
+		else {
+			$user_id = $_POST['user_id'];
+			$pwdBaru = $_POST['pwdBaru'];
+			$ulangpwdBaru = $_POST['ulangpwdBaru'];
+			
+			if($pwdBaru == $ulangpwdBaru){
+				$encryptedPasswd = $pwdBaru;
+				$dataMasukan = array("password" => $encryptedPasswd,
+									 "user_id" => $user_id);
+									 
+				$hasil = $this->adm_serv->ubahPasswd($dataMasukan);
+				$this->indexAction();
+			    $this->render('index');
+				$this->view->par=$_POST['par']; 
+			}
+			else{
+				$_REQUEST['u'] = $user_id;
+				$_REQUEST['p'] = 'ubahpwd';
+				$this->indexAction();
+				$this->render('index');
+				$this->view->par=$_POST['par']; 
+				
+			}
+		}
+
+    }
+	
+	public function kritiklistAction()
+	{
+		$currentPage = $_REQUEST['currentPage']; 
+			
+		if((!$currentPage) || ($currentPage == 'undefined'))
+		{
+			$currentPage = 1;
+		} 
+		
+		$kategoriCari 	= $_REQUEST['kategoriCari'];
+		$katakunciCari 	= $_REQUEST['katakunciCari'];
+		$sortBy			= 'NAMA';
+		$sort			= 'desc';
+		
+		$dataMasukan = array(
+							"kategoriCari" => $kategoriCari,
+							"katakunciCari" => $katakunciCari,
+							"sortBy" => $sortBy,
+							"sort" => $sort);
+		$numToDisplay = 60;
+		$this->view->numToDisplay = $numToDisplay;
+		$this->view->currentPage = $currentPage;
+		$this->view->totkritikList = $this->kritik_serv->cariKritikList($dataMasukan,0,0,0);
+		
+		$this->view->kritikList = $this->kritik_serv->cariKritikList($dataMasukan,$currentPage, $numToDisplay,$this->view->totkritikList);
+		
+	}
+	public function runningtextAction() {
+		$pageNumber 	= 1;
+		$itemPerPage 	= 20;
+		$kategoriCari 	= 'c_statusaktif';
+		$katakunciCari 	= 'Y';
+		$sortBy			= 'e_pengumuman';
+		$sort			= 'asc';
+		
+		$dataMasukan = array("pageNumber" => $pageNumber,
+							"itemPerPage" => $itemPerPage,
+							"kategoriCari" => $kategoriCari,
+							"katakunciCari" => $katakunciCari,
+							"sortBy" => $sortBy,
+							"sort" => $sort);
+		
+		$this->view->pengumumanList = $this->pengumuman_serv->cariPengumumanList($dataMasukan);
+	}
+	
+	public function headerAction() {
+	  
+    }
+
+	public function depanAction() {
+						
+		
+		
+		$ssogroup		= new Zend_Session_Namespace('ssogroup');///berdasarkan user group
+		/* $user_id =$this->userid;
+		$user_paswd =$this->user_paswd;
+		$c_group =$this->group_user;
+
+		$this->view->n_level =$c_group;
+		$this->view->user_id =$user_id;	*/	
+		
+		$this->runningtextAction();
+		
+		$this->view->n_nama = $ssogroup->n_nama;
+		$this->view->n_level =$ssogroup->n_level;	
+		$this->view->c_group =$ssogroup->c_group;
+										
+	   $this->render('main');
+    }
+	public function loginAction(){
+		// $this->view->login=$_GET['login'];
+		$this->view->par=$_GET['par'];
+		$this->view->usergroup=$_GET['usergroup'];
+		$this->view->log=$_POST['log'];
+		$this->view->pwd=$_POST['pwd'];
+		
+	}
+	public function login2Action(){
+		$this->view->par=$_GET['par'];
+		$this->view->usergroup=$_GET['usergroup'];
+		$this->render('indexaltr');
+	}	
+}
+?>

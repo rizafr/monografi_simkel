@@ -1,0 +1,3 @@
+967363548;Insert Data Faktur Penjualan dgn Pemebeli CV. PUTRATAMA;18/07/2013 10:29:36; di Nopend 40005;
+967363548;Ubah Data Faktur Penjualan 020.900-13.46773972;18/07/2013 11:43:05; di Nopend 40005 dengan id (42993);
+967363548;Ubah Data Faktur Penjualan 020.900-13.46773972;18/07/2013 11:43:51; di Nopend 40005 dengan id (42993);

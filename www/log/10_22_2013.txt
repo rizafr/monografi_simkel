@@ -1,0 +1,7 @@
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;22/10/2013 22:20:50; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;22/10/2013 22:22:40; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;22/10/2013 22:23:28; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;22/10/2013 22:26:04; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;22/10/2013 22:31:48; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;22/10/2013 22:32:08; di lokasi  dengan id_supp (424);
+;Insert Data Pelanggaran Pengadaan ;22/10/2013 23:24:21; di lokasi  dengan id_pengadaan ();

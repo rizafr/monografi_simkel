@@ -1,0 +1,163 @@
+<?php 
+require_once 'Zend/View.php';
+require_once "share/tanggal.php";  
+$tanggal = new tanggal();
+$ctrlFrm = new Zend_View();
+$jmlPegawaiList = count($this->PegawaiList);  
+?>
+<div id="backgroundPopup">
+	<div id="popupContact">
+		<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std" >
+		<tr>
+		<td><input class="cancel" type= "button" name="cancel" onClick="return closeDetil();" value="Close"></td>
+		</tr>
+		</table>
+		<div style="overflow: hidden;">
+			<div class="wrap">
+				<div class="panel" style="height: 500px;overflow: auto;border: solid 1px #000;padding: 5px;" >
+					<h2 class="title">Daftar Nama Pegawai</h2>					
+					<div class="inner">					
+						<span class="corners-top"><span></span></span>
+						<div class="spacer"></div> 
+						   <table align="center" border="1" cellspacing="1" cellpadding="2" class="tbl">
+								<tr>
+									<th width="4%">No.</th>
+									<th width="10%">Kode Jabatan</th>
+									<th>Nama Jabatan</th>
+								</tr> 
+<? 		if ($jmlPegawaiList == 0) {?>
+								<tr class="event">
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>	
+<?		}else{
+				foreach ($this->PegawaiList as $key => $val):  
+										if ($key%2==0) { ?>
+										<tr class="event">
+										<? } else if ($key%2==1) { ?>
+										<tr class="event2">
+										<? } 
+										$noUrut = (($this->currentPage -1)* $this->numToDisplay) + $key +1;
+										?>
+											<td class="center"><?php echo $noUrut;?></td>
+											<td align="center"><input type="checkbox" name="i_peg_nip" id="i_peg_nip" value="<?php echo $this->escape($val['i_peg_nip']);?>"></td>
+											<input type="hidden" name="n_peg" id="n_peg" value="<?php echo $this->escape($val['n_peg']);?>">
+											<td><?php echo $this->escape($val['i_peg_nip']);?></td>
+											<td><?php echo $this->escape($val['n_peg']);?></td>	
+										</tr>
+<?php 
+				endforeach;}
+?>
+							
+							</table>
+						<input class="cancel" type= "button" name="cancel" onClick="Proses('')" value="Pilih">							
+						<span class="corners-bottom"><span></span></span>
+					</div>
+				</div>
+			</div><!-- wrap -->	
+		</div>
+		</div>
+	</div>
+</div>	
+<script>
+/* function Proses(){
+	var html="";
+	var npeg="";
+	var ipeg ="";
+	var countpar="";
+	var counttbl=document.getElementById('counttable').value;
+	var Table = document.getElementById('tgtkpd').innerHTML;
+	var countparx=0;
+	if (counttbl*1!=0){countparx=counttbl*1;}
+
+for (var i=0; i < document.formagenda.i_peg_nip.length; i++)
+{
+
+	if (document.formagenda.i_peg_nip[i].checked)
+	{
+		npeg = npeg + document.formagenda.n_peg[i].value + "~";
+		ipeg = ipeg + document.formagenda.i_peg_nip[i].value + "~";
+
+		if (i==0){
+			countpar=countparx*1+1;
+			alert (countpar);
+			document.getElementById('n_peg_1').value=document.formagenda.n_peg[i].value;
+			document.getElementById('i_peg_nip_1').value=document.formagenda.i_peg_nip[i].value;		
+			
+			}
+		else{
+		countpar=countpar*1+1;		
+		npeg = npeg + document.formagenda.n_peg[i].value + "~";
+		ipeg = ipeg + document.formagenda.i_peg_nip[i].value + "~";
+ 		html = html + '<table  width="100%" id="tblIndikator_'+countpar+'" >';
+		html = html + '<tr >'; 
+		html = html + '<td width="20%">&nbsp;</td>';
+		html = html + '<td width="1%">:</td>';
+		html = html + '<td width="79%">';		
+		html = html + '<input type="text" name="n_peg_'+countpar+'" size="100" tabindex="1" value="'+document.formagenda.n_peg[i].value+'" class="inputbox2"/>&nbsp;';
+		html = html + '<input type="hidden" name="i_peg_nip_'+countpar+'" size="100" tabindex="1" value="'+document.formagenda.i_peg_nip[i].value+'" class="inputbox2"/>';
+		html = html + '<img src="/images/del.gif" title="Hapus Baris" class=link onclick=javascript:hapusBaris("'+countpar+'",this); >';
+		html = html + '</td>'; 
+		html = html + '</tr>';
+		html = html + '</table>';
+		document.getElementById("tgtkpd").innerHTML = html; 
+		
+		}
+		
+	}
+}
+	
+	document.getElementById('nip').value=ipeg;
+	document.getElementById("tgtkpd").innerHTML = Table+html;
+	document.getElementById('counttable').value=countpar*1+counttbl*1;	
+	closeDetil();
+} */
+
+
+function Proses(){
+	var npeg="";
+	var ipeg ="";
+	var ipegb =document.getElementById('nip').value;
+	var npegb=document.getElementById('nama').value;
+	for (var i=0; i < document.formagenda.i_peg_nip.length; i++)
+	{
+		if (document.formagenda.i_peg_nip[i].checked)
+		{
+			npeg = npeg + document.formagenda.n_peg[i].value + "~";
+			ipeg = ipeg + document.formagenda.i_peg_nip[i].value + "~";
+		}
+	}
+	//document.getElementById('nip').value=ipeg+ipegb;	
+	//document.getElementById('nama').value=npeg+npegb;
+	ipeg=ipegb+ipeg;
+	npeg=npegb+npeg;
+	var url = '<?php echo $this->basePath; ?>/cmsmodule/agenda/cmbkpd';
+	var param = {npeg:npeg,ipeg:ipeg};
+	jQuery.get(url,param,function(data) {
+	jQuery("#tgtkpd").html(data);
+		
+	 });
+	 closeDetil();
+}
+
+
+
+
+//
+function hapusBaris(nip,cek) {
+	var ipeg =document.getElementById('nip').value;
+	var npeg=document.getElementById('nama').value;
+	var url = '<?php echo $this->basePath; ?>/cmsmodule/agenda/cmbkpd';
+	var param = {npeg:npeg,ipeg:ipeg,nip:nip,cek:cek};
+	jQuery.get(url,param,function(data) {
+	jQuery("#tgtkpd").html(data);		
+	 });
+}
+// function hapusBaris(induk,r) {
+	// var i=r.parentNode.parentNode.rowIndex;
+	// document.getElementById("tblIndikator_"+induk+"").deleteRow(i);
+	//var counttbl=document.getElementById('counttable').value;
+	//document.getElementById('counttable').value=counttbl*1-1;
+//}
+</script>

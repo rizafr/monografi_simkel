@@ -1,0 +1,11 @@
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;21/10/2013 00:00:28; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;21/10/2013 00:16:32; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;21/10/2013 00:17:49; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;21/10/2013 00:18:08; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;21/10/2013 00:22:55; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;21/10/2013 00:23:44; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;21/10/2013 00:24:03; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;21/10/2013 00:24:49; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;21/10/2013 00:25:17; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 424;21/10/2013 10:52:55; di lokasi  dengan id_supp (424);
+Verifikator Rekanan Pusat;Ubah Data Penetapan DRP dgn id_supp 424;21/10/2013 15:38:04; tgl 2013-10-21 dengan id_supp (424);

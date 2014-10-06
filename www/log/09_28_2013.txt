@@ -1,0 +1,8 @@
+pos_1;Ubah Data Deskripsi Pengadaan Pengadaan Kendaraan Angkut Barang;28/09/2013 11:02:05; di lokasi Jakarta dengan id_pengadaan (85);
+pos_1;Ubah Data Deskripsi Pengadaan Pengadaan Kendaraan Angkut Barang;28/09/2013 11:06:27; di lokasi Jakarta dengan id_pengadaan (85);
+pos_1;Ubah Data Deskripsi Pengadaan Pengadaan Kendaraan Angkut Barang;28/09/2013 11:09:53; di lokasi Jakarta dengan id_pengadaan (85);
+pos_1;Ubah Data Deskripsi Pengadaan Pengadaan Kendaraan Angkut Barang;28/09/2013 11:21:52; di lokasi Jakarta dengan id_pengadaan (85);
+pos_1;Ubah Data Deskripsi Pengadaan Pengadaan Kendaraan Angkut Barang;28/09/2013 11:40:24; di lokasi Jakarta dengan id_pengadaan (85);
+pos_1;Ubah Data Deskripsi Pengadaan Pengadaan Kendaraan Angkut Barang;28/09/2013 11:44:57; di lokasi Jakarta dengan id_pengadaan (85);
+pos_1;Ubah Data Deskripsi Pengadaan Pengadaan Kendaraan Angkut Barang;28/09/2013 11:57:26; di lokasi Jakarta dengan id_pengadaan (85);
+pos_1;Hapus data deskripsi dgn id_item ;28/09/2013 18:01:36;356 (356);

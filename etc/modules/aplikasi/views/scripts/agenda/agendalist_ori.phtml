@@ -1,0 +1,116 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$format_date = new format_date();
+$format_page = new format_page();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+
+<div class="navlink2"><a href="<?echo $this->basepath;?>/home/index/main">Halaman Utama</a><strong> &#8250; </strong>Pencatatan Surat Masuk<strong> &#8250; </strong><?echo $title;?></div>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Agenda</h2>
+		<div class="search-panel">
+		<form action="" method="post" name="frmHalSatu">
+			   Pencarian berdasarkan :
+			      <select size="1" name="site">      
+	                   <option value="">Tanggal Dikirim</option>
+	                   <option value="">Ditujukan</option>
+	                   <option value="">Judul Pesan</option>
+	                 </select>
+			      <input type="text" name="Cari">
+			      <input type="button" name="Search" value="Cari">
+			   
+		</form>
+	</div>
+	<div class="space-line"></div>
+
+	    <form action="" method="post"> 
+	        <fieldset class="fields"> 
+				<div class="spacer"> </div>
+				<? 
+				
+				$status = $this->hasil;
+				$proses = $this->proses;
+				$keterangan = $this->keterangan;
+				
+				$pesan->show_message($proses, $keterangan, "$status" ); ?>
+				<div class="spacer"> </div>	
+				<div class="add" title="Tambah Data" onClick="agendaForm('insert','');"></div> 
+				<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+					<th width=4%>No</th> 
+					<th width=14%>Tanggal Dikirim</th> 
+					<th width=20% class="sorted order2 sortable">Ditujukan</a></th>
+					<th width=40%>Judul Pesan</th>
+					<th width=8%>Jam Awal Pelaksanaan</th>
+					<th width=8%>Jam Awal Pelaksanaan</th>
+					<th width=6% colspan="2">&nbsp;</th>
+					
+					<?
+					if (count($this->agendaList) == 0){ 
+					?>
+						<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+					<?} else {
+							
+							
+							foreach ($this->agendaList as $key => $val): 
+							if ($key%2==0) { ?>
+								<tr class="event">
+							<? } else if ($key%2==1) { ?>
+								<tr class="event2">
+							<? } 
+							$iAgenda = $this->escape($val['i_agenda']); 
+							$dAgenda = $this->escape($val['d_agenda']); 
+							$iUserTerima = $this->escape($val['i_user_terima']);
+							$nUserTerima = $this->escape($val['n_user_terima']);
+							$nAgendaPesan = $this->escape($val['n_agenda_pesan']);
+							$eAgendaPesan = $this->escape($val['e_agenda_pesan']);
+							$dAgendaJammulai = $this->escape($val['d_agenda_jammulai']);
+							$dAgendaJamakhir = $this->escape($val['d_agenda_jamakhir']);
+							$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+							
+							// form Hidden 
+							echo $ctrlFrm->formHidden('iPengumuman', $iPengumuman, null);
+							
+							?>
+							
+							<td class="clright"><? echo $noUrut;?>&nbsp;&nbsp;</td>
+							<td class="clleft">&nbsp;<? echo $format_date->convertTglMachineToHuman($dAgenda);?></td>
+							<td class="clleft">&nbsp;<? echo $nUserTerima;?></td>
+							<td class="clleft">&nbsp;<? echo $nAgendaPesan;?></td>
+							<td class="clleft">&nbsp;<? echo substr($dAgendaJammulai,0,5);?></td>
+							<td class="clleft">&nbsp;<? echo substr($dAgendaJamakhir,0,5);?></td>
+							
+							
+							<td><div onClick="agendaForm('update','<? echo $iAgenda;?>');" class="edit" title="Ubah Data"></div></td>
+							<td><div class="delete" title="Hapus Data" onClick="agendaHapus('Agenda', '<? echo $iAgenda; ?>')" ></td>
+							
+						
+							</tr>
+						<?
+						endforeach;
+					}
+					?>
+
+				</table>
+
+			</fieldset>		 
+		</form>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>			

@@ -1,0 +1,163 @@
+<? require_once 'Zend/View.php';
+   require_once 'share/oa_date.php'; 
+   
+	$ctrlDate = new oa_date();   
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+   $thnList = $thnskrg - 11;
+   $thnList2 = $thnskrg - 55;
+	
+   $thnArrayList['#'] = '--';
+   		
+   for ($i = 0; $i < 21; $i++) {
+     $thnList = $thnList + 1;
+     $thnArrayList[$thnList] = $thnList;
+   }
+
+	
+   $thnArrayList2['#'] = '--';
+   	 
+   for ($i = 0; $i < 60; $i++) {
+     $thnList2 = $thnList2 + 1;
+     $thnArrayList2[$thnList2] = $thnList2;
+   }
+		
+		
+   $pnjngArray = count($thnArrayList);
+
+	  $blnList = 0;
+	  for ($j = 0; $j < 12; $j++) {
+        $blnList = $blnList + 1;
+		if ($blnList < 10) {
+		  $blnBaruList = "0".$blnList;
+		  $blnArrayList[] = $blnBaruList;
+		} else {
+		  $blnBaruList = $blnList;
+		  $blnArrayList[] = $blnBaruList;
+		}
+      }
+		
+	  $hrList = 0;
+	  for ($k = 0; $k < 31; $k++) {
+        $hrList = $hrList + 1;
+		if ($hrList < 10) {
+		  $hrBaruList = "0".$hrList;
+		  $hrArrayList[] = $hrBaruList;
+		} else {
+		  $hrBaruList = $hrList;
+		  $hrArrayList[] = $hrBaruList;
+		}
+      }
+
+
+
+$nip = $_REQUEST['nip'];
+$_SESSION['nip'] = $nip;
+
+	$jumSehatList = count($this->sehatList);
+  //echo "jumSehatList= ".$jumSehatList; 
+   for ($j = 0; $j < $jumSehatList; $j++) {
+     $sehat[$j] = array("nip"  				=>(string)$this->sehatList[$j]['nip'],
+						  "namaPenyakit"	=>(string)$this->sehatList[$j]['namaPenyakit'],
+						  "tglSakit"		=>(string)$this->sehatList[$j]['tglSakit'],
+	                      "tglSembuh"     	=>(string)$this->sehatList[$j]['tglSembuh'],
+						  "namaRS"  		=>(string)$this->sehatList[$j]['namaRS'],
+						  "alamatRS"  		=>(string)$this->sehatList[$j]['alamatRS'],
+						  "keterangan"  	=>(string)$this->sehatList[$j]['keterangan']);	
+   } 
+
+	$pesan = $this->pesan;
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+   
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA KESEHATAN</h3>
+		&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat riwayat kesehatan pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+			<form id="frmVKes" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/kesehatan" method="post" name="frmVKes">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+			</form>
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line"></div>	
+	<fieldset class="fields">
+		<div class="title2">Data Riwayat Kesehatan</div>
+		<div class="blank"></div>
+<?
+	if ($jumSehatList == 0) {
+		echo "<font color=\"red\">Data Kesehatan Tidak Ditemukan</font>";		
+?>
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+		    <th width="20%">Nama Penyakit</th>
+			<th width="12%">Tanggal Sakit</th>
+			<th width="12%">Tanggal Sembuh</th>
+			<th width="20%">Nama Rumah Sakit</th>
+			<th width="21%">Alamat Rumah Sakit</th>
+			<th width="15%">Keterangan</th>
+			</tr>
+	</table>
+</center>
+<? 	} else { ?>
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+		    <th width="20%">Nama Penyakit</th>
+			<th width="12%">Tanggal Sakit</th>
+			<th width="12%">Tanggal Sembuh</th>
+			<th width="20%">Nama Rumah Sakit</th>
+			<th width="21%">Alamat Rumah Sakit</th>
+			<th width="15%">Keterangan</th>
+			</tr>
+		<?php foreach ($sehat as $key => $val): 
+					   if ($key%2==0) { ?>
+				      <tr class="event">
+					<? } else if ($key%2==1) { ?>
+					  <tr class="event2">
+					<? } ?>
+			
+				<?php
+					$tglSakit = $this->escape($val['tglSakit']);		
+				?>
+				<td>
+				<a href="#" onClick="javascript:viewsehat('<? echo $this->escape($val['nip']); ?>','<? echo $this->escape($val['tglSakit']); ?>');" class="link" title="View"><?php echo $this->escape($val['namaPenyakit']);?> </a></td>
+				<td>&nbsp; <?php echo $ctrlDate->convertTglMachineToHuman($this->escape($val['tglSakit']));?></td>
+				<td>&nbsp; <?php echo $ctrlDate->convertTglMachineToHuman($this->escape($val['tglSembuh']));?></td>
+				<td>&nbsp; <?php echo $this->escape($val['namaRS']);?></td>
+				<td>&nbsp; <?php echo $this->escape($val['alamatRS']);?></td>
+				<td>&nbsp; <?php echo $this->escape($val['keterangan']);?></td>
+		  </tr>
+	<?php endforeach;?> 		  	  
+		</table>
+<? 	} ?>	
+ 			<dl>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">
+				<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+				</dd>			
+				<div class="back" onClick="javascript:kembaliLN();" title="Kembali"><input type="button" value="Kembali" id="kembaliLN"></div>
+			</dl>
+			</div>
+ 	</fieldset>
+</div>
+		  
+
+<!--    <p align="center">
+		<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+    </p>
+ 
+			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliOrg();" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

@@ -1,0 +1,239 @@
+<?php
+require_once 'Zend/Controller/Action.php';
+//require_once 'Zend/Session.php';
+require_once "service/sso/Sso_User_Service.php";
+require_once "service/aplikasi/Aplikasi_Pengumuman_Service.php";
+require_once "service/adm/Adm_Admuser_Service.php";
+require_once 'Zend/Session/Namespace.php';
+
+
+
+
+class Home_IndexController extends Zend_Controller_Action {
+    private $sso_serv;
+	
+    public function init() {
+       // Local to this controller only; affects all actions, as loaded in init:
+	   //UNTUK SETTING GLOBAL BASE PATH
+	   $registry = Zend_Registry::getInstance();
+	   $this->auth = Zend_Auth::getInstance();
+	   $this->view->basePath = $registry->get('basepath');
+	   $this->view->baseData = $registry->get('baseData');
+	   $this->sso_serv = Sso_User_Service::getInstance();
+	   $this->adm_serv = Adm_Admuser_Service::getInstance();
+	   $this->pengumuman_serv = Aplikasi_Pengumuman_Service::getInstance();
+	  // $this->serv_notifikasi = ntfy_notifikasi_Service::getInstance();
+    }
+	
+    public function indexAction() {
+		//indexAction default kepunyaan Home_IndexController dalam modul home
+		$this->view->p = $_REQUEST['p'];
+		$this->view->user_id = $_REQUEST['u'];
+		$this->view->username = $this->sso_serv->getUsername($this->view->user_id);
+		//var_dump($this->view->detailKabupaten);
+		$request = $this->getRequest();   
+	 
+		$ns = new Zend_Session_Namespace('HelloWorld'); 
+	    
+		if(!isset($ns->yourLoginRequest)){ 
+			$ns->yourLoginRequest = 1; 
+		}else{ 
+			$ns->yourLoginRequest++; 
+		} 
+		
+		$this->view->checksess = $ns->yourLoginRequest;
+    }
+	
+	public function mainAction() {
+		$username = $_POST['log'];
+	    $passwd = $_POST['pwd'];
+		
+		$ubahpwd = $_POST['ubahpwd'];
+		$user_id = $_POST['user_id'];
+		$pwdBaru = $_POST['pwdBaru'];
+		$ulangpwdBaru = $_POST['ulangpwdBaru'];
+		
+		if(!$ubahpwd){
+		
+		
+			/* $request = $this->getRequest();   
+		 
+		$ns = new Zend_Session_Namespace('HelloWorld'); 
+		    
+		if(!isset($ns->yourLoginRequest)){ 
+		  $ns->yourLoginRequest = 1; 
+		}else{ 
+		  $ns->yourLoginRequest++; 
+} 
+		    
+		$this->view->assign('request', $ns->yourLoginRequest); 
+			$this->view->assign('action', $request->getBaseURL()."/user/auth");   
+			$this->view->assign('title', 'Login Form'); 
+			$this->view->assign('username', 'User Name');     
+			$this->view->assign('password', 'Password');   */
+			
+			if ($username && $passwd) {
+				
+				$hasiluser = $this->sso_serv->getDataUser1($username,$passwd);
+				//echo "khdlkhdslkhglkdhgldhsl ".$hasiluser;
+				//$jmlKesalahan =0;
+				if($hasiluser){
+					$ssogroup = new Zend_Session_Namespace('ssogroup');
+					$ssogroup->setExpirationSeconds(6000);	
+					$ssogroup->user_id     = $hasiluser->user_id;	
+					$ssogroup->username     = $hasiluser->username;
+					$ssogroup->c_group     = $hasiluser->c_group;
+					$ssogroup->n_dosen     = $hasiluser->n_dosen;
+					$ssogroup->n_mhs     = $hasiluser->n_mhs;
+					
+					$this->view->user_id = $ssogroup->user_id;
+					$this->view->username = $ssogroup->username;
+					$this->view->c_group =$ssogroup->c_group;
+					$this->view->n_dosen =$ssogroup->n_dosen;
+					$this->view->n_mhs =$ssogroup->n_mhs;
+					
+
+
+
+					/*$ssogroup->user_id     = $hasiluser->user_id;	
+					$ssogroup->username     = $hasiluser->username;
+					$ssogroup->nip     = $hasiluser->nip;
+					$ssogroup->nama     = $hasiluser->nama;
+					$ssogroup->kd_struktur_org     = $hasiluser->kd_struktur_org;
+					$ssogroup->kd_jabatan = $hasiluser->kd_jabatan; 
+					$ssogroup->level = $hasiluser->level; 
+					$ssogroup->nm_level = $hasiluser->nm_level; 
+					$ssogroup->nm_jabatan = $hasiluser->nm_jabatan; 
+					$ssogroup->nm_struktur_org = $ssogroup->nm_jabatan." ".$ssogroup->level." ".$ssogroup->nm_level; 
+					$ssogroup->c_group     = $hasiluser->c_group;
+					
+					$this->view->user_id = $ssogroup->user_id;
+					$this->view->username = $ssogroup->username;
+					$this->view->nip = $ssogroup->nip;
+					$this->view->nama = $ssogroup->nama;
+					$this->view->kd_struktur_org = $ssogroup->kd_struktur_org;
+					$this->view->kd_jabatan = $ssogroup->kd_jabatan;
+					$this->view->level = $ssogroup->level;
+					$this->view->nm_level = $ssogroup->nm_level;
+					$this->view->nm_jabatan = $ssogroup->nm_jabatan;
+					$this->view->nm_struktur_org = $ssogroup->nm_struktur_org;
+					$this->view->c_group =$ssogroup->c_group;*/
+					$this->runningtextAction();
+					$user_id = $ssogroup->user_id;
+					//echo "djksgfjgdsjfgsjdh ".$user_id;
+					//$this->view->namauser = $this->sso_serv->getDataUserNama($user_id);
+					$this->view->nama = $this->adm_serv->getnamaDosen($user_id);
+                    //echo "jdsgfjdsgjf ".$this->view->nama;
+					
+
+				}
+				else
+				{
+					/*$jmlKesalahan++;
+					
+					if($jmlKesalahan == 3){
+					}*/
+					$this->view->pesanKesalahan = 'Nama Pengguna atau Kata Sandi Salah.';
+					$this->indexAction();
+					$this->render('index');
+				}
+				/*else
+				{
+					echo "Nama Pengguna atau Kata Sandi Salah.";
+					$pesan = "Nama Pengguna atau Kata Sandi Salah.";
+					$option = array("username" => $username,
+									"passwd" => "",
+									"pesan" => $pesan);
+					$this->_redirect("http://sipt/", $option);
+				}  */
+				/* if (is_array($hasiluser)) {
+					if ($hasiluser[0]->user_id != '') {
+						if ($hasiluser[0]->username == $username) {
+							$userid = $hasiluser[0]->user_id;
+							
+							$ssogroup = new Zend_Session_Namespace('ssogroup');
+							
+							$ssogroup->user_id     = $this->sso_serv->getDataUser2($userid);	
+							$ssogroup->user_org     = $this->sso_serv->getDataOrg($userid);	
+							$this->view->iduser = $this->sso_serv->getDataUser2($userid);
+							$this->view->namauser = $this->sso_serv->getDataUserNama($userid);
+							$this->view->nipuser = $this->sso_serv->getDataUserNip($userid);
+
+							$this->runningtextAction();
+						} else {
+							echo "password salah euy...";
+						}
+			   } else {
+			     $this->view->pesan = "User dan Password Salah";
+				 $this->indexAction();
+			     $this->render('index');
+			   }
+			 } else {
+			   $this->view->pesan = "User dan Password Kosong 1";
+			   $this->indexAction();
+			   $this->render('index');
+			 }*/
+		   } else {
+		     $this->view->pesan = "User dan Password Kosong 2";
+			 $this->indexAction();
+		     $this->render('index');
+		  } 
+		}else {
+			$user_id = $_POST['user_id'];
+			$pwdBaru = $_POST['pwdBaru'];
+			$ulangpwdBaru = $_POST['ulangpwdBaru'];
+			
+			if($pwdBaru == $ulangpwdBaru){
+				$encryptedPasswd = $pwdBaru;
+				$dataMasukan = array("password" => $encryptedPasswd,
+									 "user_id" => $user_id);
+									 
+				$hasil = $this->adm_serv->ubahPasswd($dataMasukan);
+				$this->indexAction();
+			    $this->render('index');
+			}
+			else{
+				$_REQUEST['u'] = $user_id;
+				$_REQUEST['p'] = 'ubahpwd';
+				$this->indexAction();
+				$this->render('index');
+			}
+		}	
+    }
+	
+	public function runningtextAction() {
+		$pageNumber 	= 1;
+		$itemPerPage 	= 20;
+		$kategoriCari 	= 'c_statusaktif';
+		$katakunciCari 	= 'Y';
+		$sortBy			= 'e_pengumuman';
+		$sort			= 'asc';
+		
+		$dataMasukan = array("pageNumber" => $pageNumber,
+							"itemPerPage" => $itemPerPage,
+							"kategoriCari" => $kategoriCari,
+							"katakunciCari" => $katakunciCari,
+							"sortBy" => $sortBy,
+							"sort" => $sort);
+		
+		$this->view->pengumumanList = $this->pengumuman_serv->cariPengumumanList($dataMasukan);
+	}
+	
+	public function headerAction() {
+	   //loginAction default kepunyaan Home_IndexController dalam modul home
+    }
+
+	public function depanAction() {
+		$this->view->user_id = $ssogroup->user_id;
+					$this->view->username = $ssogroup->username;
+					$this->view->c_group =$ssogroup->c_group;
+					$this->view->n_dosen =$ssogroup->n_dosen;
+					$this->view->n_mhs =$ssogroup->n_mhs;
+	   $this->render('main');
+    }
+	public function loginAction(){
+		$this->view->login=$_GET['login'];
+		$this->view->par=$_GET['par'];
+	}
+}
+?>

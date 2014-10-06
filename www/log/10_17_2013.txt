@@ -1,0 +1,14 @@
+;Insert Data Pelanggaran Pengadaan ;17/10/2013 12:08:23; di lokasi  dengan id_pengadaan ();
+;Insert Data Pelanggaran Pengadaan ;17/10/2013 12:09:56; di lokasi  dengan id_pengadaan ();
+;Insert Data Pelanggaran Pengadaan ;17/10/2013 12:33:24; di lokasi  dengan id_pengadaan ();
+;Insert Data Pelanggaran Pengadaan ;17/10/2013 13:50:02; di lokasi  dengan id_pengadaan ();
+;Insert Data Pelanggaran Pengadaan ;17/10/2013 13:52:54; di lokasi  dengan id_pengadaan ();
+;Insert Data Pelanggaran Pengadaan ;17/10/2013 13:54:48; di lokasi  dengan id_pengadaan ();
+;Update Data Pelanggaran Pengadaan ;17/10/2013 14:42:09; di lokasi  dengan id_pengadaan ();
+;Update Data Pelanggaran Pengadaan ;17/10/2013 15:30:16; di lokasi  dengan id_pengadaan ();
+;Update Data Pelanggaran Pengadaan ;17/10/2013 15:31:42; di lokasi  dengan id_pengadaan ();
+;Update Data Pelanggaran Pengadaan ;17/10/2013 16:12:18; di lokasi  dengan id_pengadaan ();
+;Update Data Pelanggaran Pengadaan ;17/10/2013 16:20:49; di lokasi  dengan id_pengadaan ();
+;Hapus Data Blacklist;17/10/2013 16:47:24; dgn id_blacklist (21);
+;Hapus Data Blacklist;17/10/2013 16:47:30; dgn id_blacklist (21);
+;Hapus Data Blacklist;17/10/2013 16:48:57; dgn id_blacklist (21);

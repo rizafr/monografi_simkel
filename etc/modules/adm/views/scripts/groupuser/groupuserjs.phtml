@@ -1,0 +1,115 @@
+function carigroupuser()
+{
+	$("#frmcarigroupuser").ajaxForm(frmcarigroupuser_opt);
+}
+var frmcarigroupuser_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/adm/groupuser/groupuserlist',
+		type: 'post', 
+		resetForm: false
+};
+function groupuserlist()
+{
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	var param = {kategoriCari:kategoriCari,carii:carii};
+	
+	var url = '<?php echo $this->basePath; ?>/adm/groupuser/groupuserlist';
+	jQuery.get(url, param, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+function groupuserForm(jenisForm, id)
+{
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	var url = '<?php echo $this->basePath; ?>/adm/groupuser/groupuserdata';
+	var param = { jenisForm:jenisForm, id:id,kategoriCari:kategoriCari,carii:carii};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahgroupuser").ajaxForm(tambahGroupuser_opt);
+		jQuery("#frmubahgroupuser").ajaxForm(ubahGroupuser_opt);
+	});
+}
+
+var tambahGroupuser_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/adm/groupuser/groupuser',
+	beforeSubmit : function() {
+		
+		if (document.getElementById('n_group').value == ''){
+			alert('Group harus Diisi');
+			return false;
+		}
+
+	answer = confirm('\n\   Apakah data yang anda masukan adalah benar.\n\n   \'OK\' Jika setuju, \'Cancel\' Jika tidak setuju.');
+		if(answer !=0) { 
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+var ubahGroupuser_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/adm/groupuser/groupuserupdate',
+	beforeSubmit : function() {
+		
+		if (document.getElementById('n_group').value == ''){
+			alert('Group harus Diisi');
+			return false;
+		}
+	answer = confirm('\n\   Apakah data yang anda masukan adalah benar.\n\n   \'OK\' Jika setuju, \'Cancel\' Jika tidak setuju.');
+		if(answer !=0) { 
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+function groupuserHapus(param1, nama, param2)
+{ 
+	
+	if(ConfirmDelete(param1,nama))
+	{	
+		handler = '<?php echo $this->basePath; ?>/adm/groupuser/groupuserhapus';
+		var opt = {id : param2};
+		jQuery.get(handler,opt,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+}
+
+function BukaWindows(){
+	var w = 0; 
+	var h = 0;
+	w = screen.availWidth;
+	h = screen.availHeight;
+	var popW = 800, popH = 600;
+	var leftc = (w-popW)/2;
+	var topc = (h-popH)/2;
+	var selectWindow = window.open(url,'Selection', 'left=' + leftc + ',top=' + topc + ', width='+popW+',height='+popH+',resizable=0,scrollbars=yes');
+}
+
+function CariPengadaan()
+{
+	document.getElementById('n_pengadaan').readOnly = true;
+	id_pengadaan = document.getElementById('id_pengadaan').value;
+
+	url = "<?php echo $this->basePath; ?>/adm/groupuser/namapengadaan?id_pengadaan="+id_pengadaan;
+	BukaWindows();
+}

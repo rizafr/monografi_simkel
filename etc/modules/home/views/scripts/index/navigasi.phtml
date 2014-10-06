@@ -1,0 +1,1179 @@
+<script language="javascript">
+// Current Server Time script (SSI or PHP)- By JavaScriptKit.com (http://www.javascriptkit.com)
+// For this and over 400+ free scripts, visit JavaScript Kit- http://www.javascriptkit.com/
+// This notice must stay intact for use.
+
+//Depending on whether your page supports SSI (.shtml) or PHP (.php), UNCOMMENT the line below your page supports and COMMENT the one it does not:
+//Default is that SSI method is uncommented, and PHP is commented:
+
+//var currenttime = '<!--#config timefmt="%B %d, %Y %H:%M:%S"--><!--#echo var="DATE_LOCAL" -->' //SSI method of getting server date
+var currenttime = '<? print date("F d, Y H:i:s", time())?>' //PHP method of getting server date
+
+///////////Stop editting here/////////////////////////////////
+
+var dayarray=new Array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
+var montharray=new Array("Januari","Februari","Maret","April","Mei","Juni","July","Agustus","September","Oktober","November","Desember")
+var serverdate=new Date(currenttime)
+
+function padlength(what){
+var output=(what.toString().length==1)? "0"+what : what
+return output
+}
+
+function displaytime(){
+serverdate.setSeconds(serverdate.getSeconds()+1)
+var datestring=dayarray[serverdate.getDay()]+", "+padlength(serverdate.getDate())+" "+montharray[serverdate.getMonth()]+" "+serverdate.getFullYear()
+var timestring=padlength(serverdate.getHours()-1)+":"+padlength(serverdate.getMinutes())+":"+padlength(serverdate.getSeconds())
+document.getElementById("servertime").innerHTML=datestring+" | "+timestring
+}
+
+window.onload=function(){
+setInterval("displaytime()", 1000)
+}
+
+</script>
+<div id="nav">
+   <ul id="pmenu">
+	  <li><a href="#">Perencanaan<!--[if IE 7]><!--></a><!--<![endif]-->
+	      <!--[if lte IE 6]><table><tr><td><![endif]-->
+		  <ul>
+			<li class="fly"><a href="#" class="enclose">PAGU<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/pagu/viewall','<?php echo $this->basePath; ?>/prnc/pagu/pagujs');">Memasukan Data</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/pagu/setuju','<?php echo $this->basePath; ?>/prnc/pagu/pagusetujujs');">Persetujuan</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+            </li>
+			<li class="fly"><a href="#" class="enclose">RENSTRA<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/renstra/listrenstra','<?php echo $this->basePath; ?>/prnc/renstra/renstrajs');" >Memasukan Data</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/renstra/listsetujurenstra','<?php echo $this->basePath; ?>/prnc/renstra/renstrajs');" >Persetujuan</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+            </li>
+			<li class="fly"><a href="#" class="enclose">RAB<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/rab/listrab','<?php echo $this->basePath; ?>/prnc/rab/rabjs');">Memasukan RAB</a></li>
+				<li class="fly"><a href="#" class="enclose">Penggabungan RAB<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/rabgabung/listgabungrab','<?php echo $this->basePath; ?>/prnc/rabgabung/rabgabungunitjs');">Unit</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/renja/listRenja','<?php echo $this->basePath; ?>/prnc/renja/masukprogramaktifitasjs');" >Kementerian</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Menyetujui RAB<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose">Unit</a></li>
+					<li class="sub"><a href="#" class="enclose">Kementerian</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="sub"><a href="#" class="enclose">Revisi Intern</a></li>
+				<li class="sub"><a href="#" class="enclose">Revisi Keluar</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+            </li>
+			<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/renja/listRenja','');">RENJA</a></li>
+			<li class="fly"><a href="#" class="enclose">REALISASI PEKERJAAN<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/realisasi/masukrealisasi','<?php echo $this->basePath; ?>/prnc/realisasi/realisasijs');"  >Memasukan Data</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/realisasi/listrealisasisetuju','<?php echo $this->basePath; ?>/prnc/realisasi/realisasijs');" >Persetujuan</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+            </li>
+			<li class="fly"><a href="#" class="enclose">RKAK<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose">Download RKAK</a></li>
+				<!--<li><a href="#" class="enclose">Laporan RKAK</a></li>-->
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">DIPA<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/dipa/masukPrakiraan','<?php echo $this->basePath; ?>/prnc/dipa/dipajs');"  >Memasukkan Prakiraan Penarikan Anggaran</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/dipa/setujuPrakiraan','<?php echo $this->basePath; ?>/prnc/dipa/dipajs');"  >Menyetujui Prakiraan Penarikan Anggaran</a></li>
+				<!--<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/dipa/downloaddipa','<?php echo $this->basePath; ?>/prnc/dipa/dipajs');"  >Download DIPA</a></li>-->
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/dipa/masukdipa','');"  >Memasukkan Nomor DIPA</a></li>
+				<!--<li><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/dipa/listlaporandipa','<?php echo $this->basePath; ?>/prnc/dipa/dipajs');"  >Laporan DIPA</a></li>-->
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">POK<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/pok/listpokunit','<?php echo $this->basePath; ?>/prnc/pok/pokjs');" >UNIT</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/pok/listpokkementerian','<?php echo $this->basePath; ?>/prnc/pok/pokjs');" >KEMENTERIAN</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">PELAPORAN<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="fly"><a href="#" class="enclose">History<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose">PAGU</a></li>
+					<li class="sub"><a href="#" class="enclose">RENSTRA</a></li>
+					<li class="sub"><a href="#" class="enclose">RENJA/RAB</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                </li>
+				<li class="sub"><a href="#" class="enclose">Realisasi Anggaran</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+            </li>
+			<li class="fly"><a href="#" class="enclose">ORGANISASI<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/org/listorg','<?php echo $this->basePath; ?>/prnc/org/orgjs');" >Memelihara Data</a></li>
+			    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/org/setujuorg','<?php echo $this->basePath; ?>/prnc/org/orgjs');" >Persetujuan</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">PEMBENTUKKAN TIM KERJA<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/org/listbentuktim','<?php echo $this->basePath; ?>/prnc/org/orgjs');" >Memelihara Data</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/org/setujubentuktim','<?php echo $this->basePath; ?>/prnc/org/orgjs');" >Persetujuan</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/org/listpembentukantim','<?php echo $this->basePath; ?>/prnc/org/orgjs');" >Pembentukan Tim</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">URAIAN JABATAN<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/org/listanalisajabatan','<?php echo $this->basePath; ?>/prnc/org/orgjs');" >Memelihara Data</a></li>
+				<li><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/org/setujuanalisajabatan','<?php echo $this->basePath; ?>/prnc/org/orgjs');" >Persetujuan</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+            <li class="fly"><a class="enclose" href="#">Data RKAKL<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a class="enclose" href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/rkakl/maininsertdbf','<?php echo $this->basePath; ?>/js/uploadfile.js');">Create data dbf RKAKL</a></li>
+				<li class="sub"><a class="enclose" href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/prnc/rkakl/maindownload','<?php echo $this->basePath; ?>/js/uploadfile.js');">Download file dbf RKAKL</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+            </li>
+		  </ul>
+		  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	  </li> 
+	  
+	  <li><a href="#" class="enclose">Keuangan<!--[if IE 7]><!--></a><!--<![endif]-->
+	      <!--[if lte IE 6]><table><tr><td><![endif]-->
+	      <ul>
+		    <li class="fly"><a href="#" class="enclose">Permintaan Permohonan<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			    <li class="sub"><a href="open_url_to_div('<?php echo $this->basePath; ?>/keu/PermintaanPermohonan','<?php echo $this->basePath; ?>/js/modul_keu.js');">Permintaan Permohonan</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		    </li>
+	        <li class="fly"><a href="#" class="enclose">SPP<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			    <li class="fly"><a href="#" class="enclose">UP<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			      <ul>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/sppmembuatup','<?php echo $this->basePath; ?>/js/modul_keu.js');">Menyimpan</a></li>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/sppmembuatup/getListDataSPPUPSetuju','<?php echo $this->basePath; ?>/js/modul_keu.js');">Memverifikasi</a></li>
+			      </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			    <li class="fly"><a href="#" class="enclose">TUP<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			      <ul>
+			        <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/sppMembuatTUP','<?php echo $this->basePath; ?>/js/modul_keu.js');">Menyimpan</a></li>
+                    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/sppMembuatTUP/getListDataSPPTUPSetuju','<?php echo $this->basePath; ?>/js/modul_keu.js');">Memverifikasi</a></li>		         
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>  
+		        <li class="fly"><a href="#" class="enclose">GUP<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			      <ul>
+			        <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/sppMembuatGUP','<?php echo $this->basePath; ?>/js/modul_keu.js');">Menyimpan</a></li>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/sppMembuatGUP/getListDataSPPGUPSetuju','<?php echo $this->basePath; ?>/js/modul_keu.js');">Memverifikasi</a></li>
+			      </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>  
+		        <li class="fly"><a href="#" class="enclose">LS<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/sppmembuatls','<?php echo $this->basePath; ?>/js/modul_keu.js');">Memasukan</a></li>
+                    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/sppmembuatls/getListDataSPPLSSetuju','<?php echo $this->basePath; ?>/js/modul_keu.js');">Memverifikasi</a></li>				 
+				 </ul>
+				 <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>  
+                <li class="fly"><a href="#" class="enclose">GUP Nihil<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="open_url_to_div('<?php echo $this->basePath; ?>/keu/SppMembuatGUPNihil','<?php echo $this->basePath; ?>/js/modul_keu.js');">Memasukan</a></li>
+					<li class="sub"><a href="open_url_to_div('<?php echo $this->basePath; ?>/keu/SppMembuatGUPNihil/getListDataSPPGUP','<?php echo $this->basePath; ?>/js/modul_keu.js');">Memelihara</a></li>
+					   <!--<li><a href="/keu/SppMembuatGUP/getListDataSPPGUPSetuju">Memverifikasi</a></li>
+						<li><a href="/keu/SppMembuatGUP/getListDataSPPGUPLihat">Melihat</a></li>
+						<li><a href="#" class="enclose">Mencetak</a></li>-->
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>  
+		        <li class="fly"><a href="#" class="enclose">Memverifikasi<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+				    <li class="sub"><a href="open_url_to_div('<?php echo $this->basePath; ?>/keu/SppMembuatTUP/getListDataSPPTUPSetuju','<?php echo $this->basePath; ?>/js/modul_keu.js');">Memverifikasi</a></li>
+			      </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>  
+		        <li class="fly"><a href="#" class="enclose">Melihat<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+				    <li class="sub"><a href="open_url_to_div('<?php echo $this->basePath; ?>/keu/SppMembuatTUP/getListDataSPPTUPLihat','<?php echo $this->basePath; ?>/js/modul_keu.js');">Melihat</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>  
+			    <li class="fly"><a href="#" class="enclose">Mencetak<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			    </li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>  
+		    <li class="fly"><a href="#" class="enclose">SPM<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/spmMembuat','<?php echo $this->basePath; ?>/js/modul_keu.js');">Menyimpan</a></li>
+				<li class="sub"><a href="open_url_to_div('<?php echo $this->basePath; ?>/keu/SpmMenyetujui','<?php echo $this->basePath; ?>/js/modul_keu.js');">Menyetujui</a></li>
+				<li class="sub"><a href="open_url_to_div('<?php echo $this->basePath; ?>/keu/spmMencetak','<?php echo $this->basePath; ?>/js/modul_keu.js');">Mencetak</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>	
+		    <li class="fly"><a href="#" class="enclose">SP2D<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/Sppd','<?php echo $this->basePath; ?>/js/modul_keu.js');">SP2D</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		    </li>
+		    <li class="fly"><a href="#" class="enclose">Pembayaran<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			    <li class="fly"><a href="#" class="enclose">Tunai<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/pembayarantunai','<?php echo $this->basePath; ?>/js/modul_keu.js');" >Pembayaran UP</a></li>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/pembayaranls','<?php echo $this->basePath; ?>/js/modul_keu.js');" >Pembayaran LS</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+			    <li class="fly"><a href="#" class="enclose">Transfer<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/transfer','<?php echo $this->basePath; ?>/js/modul_keu.js');">Transfer UP</a></li>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/transferls','<?php echo $this->basePath; ?>/js/modul_keu.js');">Transfer LS</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	            </li>
+		      </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		    </li>	
+		    <li class="fly"><a href="#" class="enclose">Pengembalian<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			    <li class="fly"><a href="#" class="enclose">Depkeu<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			      <ul>
+			        <li class="sub"><a href="#" class="enclose">Surat Setoran Bukan Pajak</a></li>
+			        <li class="sub"><a href="#" class="enclose">Surat Setoran Pengembalian Bukan Pajak</a></li>
+			      </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+			    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/pengembalianbendahara','<?php echo $this->basePath; ?>/js/modul_keu.js');">Bendahara/PUM</a></li>
+			  </ul>	
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>  
+		    <li class="fly"><a href="#" class="enclose">Memasukan Pertanggungjawaban<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			    <li class="sub"><a href="open_url_to_div('<?php echo $this->basePath; ?>/keu/MemasukanSuratPertanggungJawabanTunai','<?php echo $this->basePath; ?>/js/modul_keu.js');">Tunai</a></li>
+			    <li class="sub"><a href="open_url_to_div('<?php echo $this->basePath; ?>/keu/MemasukanSuratPertanggungJawabanUP','<?php echo $this->basePath; ?>/js/modul_keu.js');">Uang Muka</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		    </li>
+		    <li class="fly"><a href="#" class="enclose">Buku Kas<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			    <li class="sub"><a href="open_url_to_div('<?php echo $this->basePath; ?>/keu/BukuKasUmum','<?php echo $this->basePath; ?>/js/modul_keu.js');">Buku Kas Umum</a></li>
+			    <li class="sub"><a href="#" class="enclose">Buku Kas Tunai</a></li>
+			    <li class="sub"><a href="#" class="enclose">Buku Kas Bank</a></li>
+			    <li class="sub"><a href="#" class="enclose">Buku Kas Selisih</a></li>
+			    <li class="sub"><a href="#" class="enclose">Buku Kas Uang Muka</a></li>
+			    <li class="sub"><a href="#" class="enclose">Buku Kas Pajak</a></li>
+			    <li class="sub"><a href="#" class="enclose">Buku Pembantu UP</a></li>
+			    <li class="sub"><a href="#" class="enclose">Buku Lain - lain</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		    </li>
+            <li class="fly"><a href="#" class="enclose">Buku Cek<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/keu/MemasukanCek','<?php echo $this->basePath; ?>/js/modul_keu.js');">Buku Cek</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		    </li>
+		    <li class="fly"><a href="#" class="enclose">Laporan Realisasi Anggaran<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			    <li class="sub"><a href="#" class="enclose">Belanja</a></li>
+			    <li class="sub"><a href="#" class="enclose">Pengembalian Belanja</a></li>
+			    <li class="sub"><a href="#" class="enclose">Pendapatan Negara dan Hibah</a></li>
+        	    <li class="sub"><a href="#" class="enclose">Pengembalian Negara dan Hibah</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		    </li>
+			<li class="fly"><a href="#" class="enclose">Referensi<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose">Harga</a></li>
+				<li class="sub"><a href="#" class="enclose">Hotel</a></li>
+				<li class="sub"><a href="#" class="enclose">Jenis SPP</a></li>
+				<li class="sub"><a href="#" class="enclose">KPPN</a></li>
+				<li class="sub"><a href="#" class="enclose">Kurs</a></li>
+				<li class="sub"><a href="#" class="enclose">MAK</a></li>
+				<li class="sub"><a href="#" class="enclose">PD</a></li>
+				<li class="sub"><a href="#" class="enclose">PDLN</a></li>
+				<li class="sub"><a href="#" class="enclose">REKENING</a></li>
+				<li class="sub"><a href="#" class="enclose">Struk Harga</a></li>
+				<li class="sub"><a href="#" class="enclose">UP PAGU</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+		  </ul>
+		  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	  </li>
+	  
+	  <li><a href="#" class="enclose">Pengadaan<!--[if IE 7]><!--></a><!--<![endif]-->
+	      <!--[if lte IE 6]><table><tr><td><![endif]-->
+		  <ul>
+			<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/pngpublic/pendaftaran/pngpendaftaranbaruview','<?php echo $this->basePath; ?>/pngpublic/pendaftaran/pendaftaranjs');"  >Pendaftaran</a></li>
+			<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/pngpublic/identitasperusahaan/pngidentitasperusahaanview','<?php echo $this->basePath; ?>/pngpublic/identitasperusahaan/identitasperusahaanjs');" >Properti Perusahaan</a></li>
+			<li class="fly"><a href="#" class="enclose">Pemaketan<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/persiapan/prosespersiapan','<?php echo $this->basePath; ?>/png/persiapan/persiapanjs');">Paket Pekerjaan</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/rinciananggaranbiaya/rinciananggaranbiayaviewall','<?php echo $this->basePath; ?>/png/rinciananggaranbiaya/rinciananggaranbiayajs');" >RAB/POK</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Pendefinisian<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/pemilihan/prosespemilihan','<?php echo $this->basePath; ?>/png/pemilihan/pemilihanjs');">Pemilihan</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/jasa/prosesjasa','<?php echo $this->basePath; ?>/png/jasa/jasajs');" >Evaluasi JK</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/definisinonjk/pngdefinisinonjkviewall','<?php echo $this->basePath; ?>/png/definisinonjk/definisinonjkjs');" >Evaluasi Non JK</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Pencalonan Panitia<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/calonpanitia/pngcalonpanitiaviewall','<?php echo $this->basePath; ?>/png/calonpanitia/panitiajs');" >Daftar Personil</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/calonpanitiadraft/pngcalonpanitiapaketviewall','<?php echo $this->basePath; ?>/png/calonpanitiadraft/calonpanitiadraftjs');" >Draft SK</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/pendaftaranpeserta/pngdaftarpaketviewall','<?php echo $this->basePath; ?>/png/pendaftaranpeserta/pendaftaranpesertajs');">Pendaftaran Peserta</a></li>
+			<li class="fly"><a href="#" class="enclose">Evaluasi<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" >PraKualifikasi</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/valuas/prosesvaluas','<?php echo $this->basePath; ?>/png/calonpanitiadraft/calonpanitiadraftjs');" >Penawaran Teknis</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/evaluasinonjk/pngevaluasinonjkviewall','<?php echo $this->basePath; ?>/png/evaluasinonjk/evaluasinonjkjs');" >Non JK</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Berita Acara<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" >Hasil Prakualifikasi</a></li>
+				<li class="sub"><a href="#" class="enclose" >Penjelasan</a></li>
+				<li class="sub"><a href="#" class="enclose" >Pembukaan Penawaran</a></li>
+				<li class="sub"><a href="#" class="enclose" >Hasil Evaluasi</a></li>
+				<li class="sub"><a href="#" class="enclose" >Hasil Negosiasi</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="sub"><a href="#" class="enclose">Kontrak</a></li>
+			<li class="fly"><a href="#" class="enclose">Informasi <!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/informasipeserta/informasipesertaviewall','<?php echo $this->basePath; ?>/png/informasipeserta/informasipesertajs');" >Peserta Pemilihan</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/informasirekanan/informasirekananviewall','<?php echo $this->basePath; ?>/png/informasirekanan/informasirekananjs');" >Rekanan</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Surat<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" >Penunjukan Langsung</a></li>
+				<li class="sub"><a href="#" class="enclose" >SPPBJ</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="sub"><a href="#" class="enclose">Pelaporan</a></li>
+			<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/png/persetujuanrekanan/persetujuanrekananviewall','<?php echo $this->basePath; ?>/png/persetujuanrekanan/persetujuanrekananjs');">Persetujuan Menjadi Rekanan</a></li>
+		  </ul>
+		  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	  </li>
+	 
+	  <li><a href="#" class="enclose">Aset & Inventori<!--[if IE 7]><!--></a><!--<![endif]-->
+	      <!--[if lte IE 6]><table><tr><td><![endif]-->
+          <ul>
+			<li class="fly"><a href="#" class="enclose">Management Aset<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			    <li class="fly"><a href="#" class="enclose">Penyerahan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/penyerahan/inventarisruanganview','<?php echo $this->basePath; ?>/ast/penyerahan/penyerahanjs');">Barang Inventaris Ruangan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/penyerahan/inventarislainview','<?php echo $this->basePath; ?>/ast/penyerahan/penyerahanjs');">Barang Inventaris Lainnya</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/penyerahan/inventarisbarangview','<?php echo $this->basePath; ?>/ast/penyerahan/penyerahanjs');">Inventaris Barang</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			    </li>
+			    <li class="fly"><a href="#" class="enclose">Peminjaman<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/peminjaman/pengajuanpinjamanbarangview','<?php echo $this->basePath; ?>/ast/peminjaman/peminjamanjs');">Pengajuan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/peminjaman/persetujuanpeminjamanbarangTUview','<?php echo $this->basePath; ?>/ast/peminjaman/peminjamanjs');">Persetujuan KaSubBag TU</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/peminjaman/persetujuanpeminjamanbarangview','<?php echo $this->basePath; ?>/ast/peminjaman/peminjamanjs');">Persetujuan KaBag Perlengkapan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/peminjaman/serahterimapeminjamanbarangview','<?php echo $this->basePath; ?>/ast/peminjaman/peminjamanjs');">Serah Terima Peminjaman Barang</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/peminjaman/pengembalianpinjamanbarangview','<?php echo $this->basePath; ?>/ast/peminjaman/peminjamanjs');">Pengembalian Peminjaman</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			    </li>
+				<li class="fly"><a href="#" class="enclose">Pemindahan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/pemindahan/pengajuanpindahbarangview','<?php echo $this->basePath; ?>/ast/pemindahan/pemindahanjs');">Pengajuan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/pemindahan/persetujuanpemindahanbarangTUview','<?php echo $this->basePath; ?>/ast/pemindahan/pemindahanjs');">Persetujuan KaSubBag. TU</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/pemindahan/persetujuanpemindahanbarangview','<?php echo $this->basePath; ?>/ast/pemindahan/pemindahanjs');">Persetujuan KaBag. Perlengkapan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/pemindahan/serahterimapemindahanbarangview','<?php echo $this->basePath; ?>/ast/pemindahan/pemindahanjs');">Serah Terima Pemindahan Barang</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Perbaikan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perbaikan/perbaikanbarangview','<?php echo $this->basePath; ?>/js/Asset.js');">Pengajuan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perbaikan/perbaikanbarangapproveTUview','<?php echo $this->basePath; ?>/js/Asset.js');">Persetujuan KaSubBag TU</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perbaikan/perbaikanbarangapproveview','<?php echo $this->basePath; ?>/js/Asset.js');">Persetujuan KaBag Perlengkapan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perbaikan/lapperbaikanbarangview','<?php echo $this->basePath; ?>/js/Asset.js');">Laporan Pengerjaan Perbaikan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perbaikan/perbaikanserahterimaview','<?php echo $this->basePath; ?>/js/Asset.js');">Serah Terima</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Penghapusan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/penghapusan/pengajuanhapusbarangview','<?php echo $this->basePath; ?>/js/Asset.js');">Pengajuan BIRO</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/penghapusan/persetujuanhapusbarangview','<?php echo $this->basePath; ?>/js/Asset.js');">Persetujuan SESMEN</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/astmanagement/pengajuanhapusbarang1view','<?php echo $this->basePath; ?>/js/Asset.js');">Pengajuan SESMEN</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Pengelolaan Ruang Rapat<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/ruangrapat/ruangrapatview','/ast/ruangrapat/ruangrapatjs');">Pengajuan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/ruangaju/setuju','<?php echo $this->basePath; ?>/ast/ruangaju/ruangajujs');">Persetujuan Ka-Sub-Bag TU</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/ruangaju/setujuperlengkapan','<?php echo $this->basePath; ?>/ast/ruangaju/ruangajujs');">Persetujuan Ka-Sub-Bag RT</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/ruangaju/konfirmasi','<?php echo $this->basePath; ?>/ast/ruangaju/ruangajujs');">Konfirmasi Perubahan Waktu / Ruang</a></li>
+					<li class="fly"><a href="#" class="enclose">Informasi<!--[if IE 7]><!--></a><!--<![endif]-->
+					  <!--[if lte IE 6]><table><tr><td><![endif]-->
+	  		          <ul>
+						<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/ruangrapatinfo/informasiruang','/ast/ruangrapatinfo/ruangrapatinfojs');">Ruang Rapat</a></li>
+						<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/ruangrapatinfo/informasisetuju','/ast/ruangrapatinfo/ruangrapatinfojs');">Pengajuan Sudah Disetujui</a></li>
+						<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/ruangrapatinfo/informasiblmsetuju','/ast/ruangrapatinfo/ruangrapatinfojs');">Pengajuan Belum Disetujui</a></li>
+						<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/ruangrapatinfo/informasiblmsetuju','/ast/ruangrapatinfo/ruangrapatinfojs');">Pengajuan Perubahan Waktu / Ruang</a></li>
+					  </ul>
+					  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+					</li>
+			      </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Pengelolaan Barang Sewa Masuk<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/astmanagement/barangsewaview','<?php echo $this->basePath; ?>/js/Asset.js');">Pendaftaran</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/astmanagement/barangsewapenerimaanview','<?php echo $this->basePath; ?>/js/Asset.js');">Penerimaan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/astmanagement/barangsewaverifikasiview','<?php echo $this->basePath; ?>/js/Asset.js');">Verifikasi</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/astmanagement/barangsewacetakview','<?php echo $this->basePath; ?>/js/Asset.js');">Cetak Daftar Penerimaan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/astmanagement/barangsewapengajuanview','<?php echo $this->basePath; ?>/js/Asset.js');">Pengajuan Permintaan Unit</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/astmanagement/barangsewapersetujuan','<?php echo $this->basePath; ?>/js/Asset.js');">Persetujuan Permintaan Unit</a></li>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/astmanagement/barangsewadistribusiview','<?php echo $this->basePath; ?>/js/Asset.js');">Distribusi</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Buku / Daftar<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/inventaris/prosesinventaris','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Buku Inventaris</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/barang/prosesbarang','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Buku Barang Bersejarah</a></li>
+					<li class="fly"><a href="#" class="enclose">Kartu Inventaris Barang<!--[if IE 7]><!--></a><!--<![endif]-->
+					  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			          <ul>
+						<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/tanah/prosestanah','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">T a n a h</a></li>
+						<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/gedung/prosesgedung','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Gedung dan Bangunan</a></li>
+					  	<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/angkut/prosesangkut','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">A l a t &nbsp;&nbsp;A n g k u t a n</a></li>
+						<li class="sub"><a href="#" class="enclose">Alat Persenjataan</a></li>
+					  </ul>
+					  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+					</li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/mutasi/prosesmutasi','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Catatan Mutasi Perubahan</a></li>		  					
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/ruang/prosesruang','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Daftar Inventaris Ruangan</a></li>					
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/lain/proseslain','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Daftar Inventaris Lainnya</a></li>					
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/jenis/prosesjenis','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Daftar Inventaris BMN</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/tiga/prosestiga','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Daftar Barang Pihak Ketiga</a></li>		  					
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/dirdilkib/prosesdirdilkib','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Daftar Barang Belum Terdistribusi</a></li>		  
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Laporan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul> 					
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/kuasa/proseskuasa','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Barang Milik Negara</a></li>		
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/kondisi/proseskondisi','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Kondisi Barang</a></li>		  				
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/saldo/prosessaldo','<?php echo $this->basePath; ?>/js/modul_pengadaan.js');">Rincian Saldo Awal</a></li>
+					<li class="sub"><a href="#" class="enclose">Penggunaan Ruang Rapat</a></li>
+					<li class="sub"><a href="#" class="enclose">Daftar Kebutuhan Pemeliharaan Barang</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/lain/proseslain','<?php echo $this->basePath; ?>/ast/lain/lainjs');">Daftar Iventarsi Lain</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Pengelolaan ATK<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="fly"><a href="#" class="enclose">Pembelian<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/ajuanbeliatk/ajuanatkview','<?php echo $this->basePath; ?>/ast/ajuanbeliatk/ajuanbeliatkjs');">Pengajuan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/setujubeliatk/persetujuanatkview','<?php echo $this->basePath; ?>/ast/setujubeliatk/setujubeliatkjs');">Persetujuan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/daftarbeliatk/daftaratkview','<?php echo $this->basePath; ?>/ast/daftarbeliatk/daftarbeliatkjs');">Cetak Daftar Pembelian</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Penerimaan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/penerimaanatk/penerimaanlangsungatk','<?php echo $this->basePath; ?>/ast/penerimaanatk/penerimaanatkjs');">Tanpa Pengajuan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/penerimaanatk/penerimaantdklangsungatk','<?php echo $this->basePath; ?>/ast/penerimaanatk/penerimaanatkjs');">Lewat Pengajuan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/verifikasi/prosesverifikasi','<?php echo $this->basePath; ?>/ast/verifikasi/verifikasijs');">Verifikasi</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/monitor/prosesmonitor','<?php echo $this->basePath; ?>/ast/monitor/monitorjs');">Monitoring</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Permintaan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/pengajuanatksedia/pengajuanmintaatkview','<?php echo $this->basePath; ?>/ast/pengajuanatksedia/pengajuanatksediajs');">Pengajuan Stock Tersedia</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/pengajuanatkks/pengajuanmintaatkkosongview','<?php echo $this->basePath; ?>/ast/pengajuanatkks/pengajuanatkksjs');">Pengajuan Stock Kosong</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/persetujuantuatk/persetujuanmintaatkview','<?php echo $this->basePath; ?>/ast/persetujuantuatk/persetujuantujs');">Persetujuan Sub-Bag TU</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/persetujuankbatk/persetujuanmintaatkview','<?php echo $this->basePath; ?>/ast/persetujuankbatk/persetujuankbatkjs');">Persetujuan Sub-Bag Perlengkapan</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/atkdistribusi/distribusibarang','<?php echo $this->basePath; ?>/ast/atkdistribusi/atkdistribusiJs');">Distribusi ATK</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/atkmonitoring/atkmonitoringpersediaan','<?php echo $this->basePath; ?>/ast/atkmonitoring/atkmonitoringJs');">Monitoring Persediaan ATK</a></li>
+				<li class="fly"><a href="#" class="enclose">Penghapusan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/hapuseditajuanatk/hapuseditajuanview','<?php echo $this->basePath; ?>/ast/hapuseditajuanatk/hapusajuanJs');">Pengajuan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/hapussubbagatk/proseshapussubbag','<?php echo $this->basePath; ?>/ast/hapussubbagatk/hapussubbagjs');">Persetujuan KaSubBag Perlengkapan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/hapuskabagatk/proseshapuskabag','<?php echo $this->basePath; ?>/ast/hapuskabagatk/hapuskabagjs');">Persetujuan Ka-Bag Perlengkapan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/hapusprosesatk/proseshapusproses','<?php echo $this->basePath; ?>/ast/hapusprosesatk/hapusprosesjs');">Proses Penghapusan</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Laporan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/lapers/proseslapers','<?php echo $this->basePath; ?>/js/Asset.js');">Persediaan ATK</a></li>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/lapeng/proseslapeng','<?php echo $this->basePath; ?>/js/Asset.js');">Pengadaan & Pengeluaran ATK</a></li>
+					<li class="sub"><a href="#" class="enclose">Permintaan ATK belum terpenuhi</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Pengelolaan Aset-TI<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="fly"><a href="#" class="enclose">Perbaikan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perbaikanti/perbaikantiview','<?php echo $this->basePath; ?>/js/Asset.js');">Pengajuan Perbaikan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perbaikanti/permohonanperbaikanview','<?php echo $this->basePath; ?>/js/Asset.js');">Persetujuan SubBag TU</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perbaikanti/persetujuanperbaikanti','<?php echo $this->basePath; ?>/js/Asset.js');">Persetujuan Bagian SI</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perbaikanti/pengerjaanperbaikantiview','<?php echo $this->basePath; ?>/js/Asset.js');">Penerimaan Barang User</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Perawatan PC<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perawatanti/pengajuanperawatantiview','<?php echo $this->basePath; ?>/js/Asset.js');">Pengajuan Perawatan PC</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perawatanti/persetujuanperawatanpctu','<?php echo $this->basePath; ?>/js/Asset.js');">Persetujuan SubBag TU</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perawatanti/persetujuanperawatanpcsi','<?php echo $this->basePath; ?>/js/Asset.js');">Persetujuan Bagian SI</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/perawatanti/pengerjaanperawatantiview','<?php echo $this->basePath; ?>/js/Asset.js');">Laporan Perawatan PC</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/daftarpc/daftarpcview','<?php echo $this->basePath; ?>/ast/daftarpc/daftarpcjs');">Daftar PC</a></li>
+				<li class="fly"><a href="#" class="enclose">Pencatatan Software<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/server/vendor','<?php echo $this->basePath; ?>/ast/server/serverjs');">Vendor</a></li>				
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/datasoftware/datasoftwareView','<?php echo $this->basePath; ?>/ast/datasoftware/softwarejs');">Data Software</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/toolkit/toolkit','<?php echo $this->basePath; ?>/ast/toolkit/toolkitjs');">Toolkit</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/swdistribusi/distribusi','<?php echo $this->basePath; ?>/ast/swdistribusi/distribusijs');">Distribusi</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Pencatatan Peralatan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+		          <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/pencatatanserver/server','<?php echo $this->basePath; ?>/ast/pencatatanserver/pencatatanserverjs');">Server</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/pencatatandevice/servermdv','<?php echo $this->basePath; ?>/ast/pencatatandevice/pencatatandevicejs');">Device Machine</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/pencatatanlan/serverldv','<?php echo $this->basePath; ?>/ast/pencatatanlan/pencatatanlanjs');">Lan Device</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/pencatatannetwork/servernte','<?php echo $this->basePath; ?>/ast/pencatatannetwork/pencatatannetworkjs');">Network Equipment</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Referensi<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/referensi/referensiruanganview','<?php echo $this->basePath; ?>/ast/referensi/referensijs');">Ruangan </a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/reffer/atkview','<?php echo $this->basePath; ?>/ast/reffer/refferjs');">Barang ATK</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a class="enclose" href="#">Upload Data SABM<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a class="enclose" href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/sabm/uploadfile','<?php echo $this->basePath; ?>/js/uploadfile.js');">Upload file dbf SABM</a></li>
+				<li class="sub"><a class="enclose" href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/ast/sabm/mainupload','<?php echo $this->basePath; ?>/js/uploadfile.js');">Insert data SABM ke OA</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+		  </ul>
+		  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	  </li>
+	   
+	  <li><a href="#">Dokumen<!--[if IE 7]><!--></a><!--<![endif]-->
+	      <!--[if lte IE 6]><table><tr><td><![endif]-->
+		  <ul>
+			<li class="fly"><a href="#" class="enclose">Hukum<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hum/hukum/hukum','<?php echo $this->basePath; ?>/hum/hukum/hukumjs');">Kegiatan Hukum</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hum/litigasi/litigasi','<?php echo $this->basePath; ?>/js/modul_hukum.js');">Kegiatan Litigasi</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hum/cgc/cgc','<?php echo $this->basePath; ?>/js/modul_hukum.js');">GCG</a></li>
+				<li class="fly"><a href="#" class="enclose">Produk Hukum<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="fly"><a href="#" class="enclose">Kementerian Negara BUMN<!--[if IE 7]><!--></a><!--<![endif]-->
+					  <!--[if lte IE 6]><table><tr><td><![endif]-->
+					  <ul>
+						<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hum/produk/produk','<?php echo $this->basePath; ?>/js/modul_hukum.js');">Kementerian Negara BUMN</a></li>
+						<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hum/produk/produkpenelusuran','<?php echo $this->basePath; ?>/js/modul_hukum.js');">Penelusuran</a></li>
+					  </ul>
+					  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+					</li>  
+					<li class="fly"><a href="#" class="enclose">Sektoral<!--[if IE 7]><!--></a><!--<![endif]-->
+					  <!--[if lte IE 6]><table><tr><td><![endif]-->
+					  <ul>
+						<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hum/produk/sektoral','<?php echo $this->basePath; ?>/js/modul_hukum.js');">Sektoral</a></li>
+						<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hum/produk/sektoralpenelusuran','<?php echo $this->basePath; ?>/js/modul_hukum.js');">Penelusuran</a></li>
+					  </ul>
+					  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+					</li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hum/templete/templete','<?php echo $this->basePath; ?>/js/modul_hukum.js');">Template</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Humas<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hms/kliping/kliping','<?php echo $this->basePath; ?>/hms/kliping/klipingjs');">Kliping</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hms/berita/berita','<?php echo $this->basePath; ?>/hms/berita/beritajs');">Analisa Berita</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hms/buletin/buletin','<?php echo $this->basePath; ?>/hms/buletin/buletinjs');">Buletin</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hms/publikasi/publikasi','<?php echo $this->basePath; ?>/hms/publikasi/publikasijs');">Publikasi</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hms/agenda/agenda','<?php echo $this->basePath; ?>/hms/agenda/agendajs');">Agenda Kementerian Negara BUMN</a></li>
+				<li class="fly"><a href="#" class="enclose">Kegiatan DPR<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hms/kegiatan/kegiatan','<?php echo $this->basePath; ?>/js/modul_humas.js');">Rakerja</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/hms/dprd/dprd','<?php echo $this->basePath; ?>/js/modul_humas.js');">Kunjungan Kerja</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	            </li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Tata Persuratan<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="fly"><a href="#" class="enclose">Surat Masuk<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratmasuk/suratmasuk','<?php echo $this->basePath; ?>/srt/suratmasuk/suratmasukjs');">Surat</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratnotamasuk/suratnotamasuk','<?php echo $this->basePath; ?>/srt/suratnotamasuk/suratnotamasukjs');">Nota Dinas</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratmemomasuk/suratmemomasuk','<?php echo $this->basePath; ?>/srt/suratmemomasuk/suratmemomasukjs');">Memo</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Surat Keluar<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratkeluar/suratkeluar','<?php echo $this->basePath; ?>/srt/suratkeluar/suratkeluarjs');">Surat</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratnotakeluar/suratnotakeluar','<?php echo $this->basePath; ?>/srt/suratnotakeluar/suratnotakeluarjs');">Nota Dinas</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratmemokeluar/suratmemokeluar','<?php echo $this->basePath; ?>/srt/suratmemokeluar/suratmemokeluarjs');">Memo</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Disposisi<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratdisposisi/suratdisposisi','<?php echo $this->basePath; ?>/srt/suratdisposisi/suratdisposisijs');">Surat</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratnotadisposisi/suratnotadisposisi','<?php echo $this->basePath; ?>/srt/suratnotadisposisi/suratnotadisposisijs');">Nota Dinas</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratmemodisposisi/suratmemodisposisi','<?php echo $this->basePath; ?>/srt/suratmemodisposisi/suratmemodisposisijs');">Memo</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Konsep Surat<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratkonsep/suratkonsep','<?php echo $this->basePath; ?>/srt/suratkonsep/suratkonsepjs');">Membuat Konsep Surat</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/persetujuan/persetujuan','<?php echo $this->basePath; ?>/js/modul_srt.js');">Persetujuan Konsep Surat</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratproses/suratproses','<?php echo $this->basePath; ?>/srt/suratproses/suratprosesjs');">Surat Proses</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratterproses/suratterproses','<?php echo $this->basePath; ?>/srt/suratterproses/suratterprosesjs');">Surat Terproses</a></li>
+				<li class="fly"><a href="#" class="enclose">List Surat Masuk<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratmasuk/listsuratmasuk','<?php echo $this->basePath; ?>/srt/suratmasuk/suratmasukjs');">Surat</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratnotamasuk/listsuratnotamasuk','<?php echo $this->basePath; ?>/srt/suratnotamasuk/suratnotamasukjs');">Nota Dinas</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratmemomasuk/listsuratmemomasuk','<?php echo $this->basePath; ?>/srt/suratmemomasuk/suratmemomasukjs');">Memo</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">List Surat Keluar<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratkeluar/listsuratkeluar','<?php echo $this->basePath; ?>/srt/suratkeluar/suratkeluarjs');">Surat</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratnotakeluar/listsuratnotakeluar','<?php echo $this->basePath; ?>/srt/suratnotakeluar/suratnotakeluarjs');">Nota Dinas</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratmemokeluar/listsuratmemokeluar','<?php echo $this->basePath; ?>/srt/suratmemokeluar/suratmemokeluarjs');">Memo</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="sub"><a href="#" class="enclose">Statistik</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/templete/templete','<?php echo $this->basePath; ?>/js/modul_srt.js');">Template</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/srt/suratdigital/suratdigital','<?php echo $this->basePath; ?>/srt/suratdigital/suratdigitaljs');">Digitalisasi Surat</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Aset BUMN<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/bukuan/bukuan','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Penghapus Bukuan</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/operasi/operasi','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Kerjasama Operasi</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/penelusuran/penelusuran','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Penelusuran</a></li>
+				<li class="fly"><a href="#" class="enclose">Pelaporan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose">Kinerja Triwulan</a></li>
+					<li class="sub"><a href="#" class="enclose">Kinerja Semesteran</a></li>
+					<li class="sub"><a href="#" class="enclose">Kinerja Tahunan</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	            </li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+	  <li class="fly"><a href="#">Perpustakaan<!--[if IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+            <ul>
+	      <li class="fly"><a href="#" class="enclose">Koleksi<!--[if IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+                <ul class="left">
+		  <li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/arsip/pstcatatArsip','<?php echo $this->basePath; ?>/js/modul_koleksi_perpustakaan.js');">Buku/Kliping</a></li>
+                  <li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/laporan/index','<?php echo $this->basePath; ?>/js/modul_koleksi_perpustakaan.js');">Laporan</a></li>
+		</ul>
+	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	      </li>
+	      <li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/pinjam/peminjaman','<?php echo $this->basePath; ?>/js/modul_koleksi_perpustakaan.js');">Sirkulasi</a></li>
+ 	      <!--<li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/pengembalian/kembali','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Pengembalian</a></li>-->
+	      <li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/pengajuan/index','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Hapus Koleksi Arsip</a></li>
+	      <li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/pencarian/index','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Penelusuran</a></li>
+	      <li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/tunggu/ruangTunggu','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Daftar Tunggu</a></li>
+	      <li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/tamu/index','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Buku Tamu</a></li>
+	      <li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/baca/index','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Baca Ditempat</a></li>
+	      <li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/Son/index','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Stock Opname</a></li>						  
+		  <li class="fly"><a href="#">Pengadaan Buku<!--[if IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+                <ul class="left">
+		  <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/pengadaankoleksi/pengadaankoleksi','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Pengajuan</a></li>						  
+		  <li class="sub"><a href="#">Persetujuan<!--[if IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+                    <ul>		  
+		      <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/pengajuan/persetujuan','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Pengadaan</a>
+		      <li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/pengajuan/persetujuaninventori','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Inventory</a>
+		    </ul>
+	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+		  </li>						  
+		  <li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/Koleksi/pengadaanKoleksiInv','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Realisasi</a></li>
+                </ul>
+	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	      </li>	
+		<li class="sub"><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/dok/report/index','<?php echo $this->basePath; ?>/js/modul_dokumen.js');">Pelaporan</a></li> 		  
+	    </ul>
+	<!--[if lte IE 6]></td></tr></table></a><![endif]-->	
+	  </li>
+		
+	 </ul>
+	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+      </li>	  
+	  <li><a href="./">SDM<!--[if IE 7]><!--></a><!--<![endif]-->
+	      <!--[if lte IE 6]><table><tr><td><![endif]-->
+		  <ul>
+		    <li class="fly"><a href="#" class="enclose">Perencanaan Pegawai<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			  	<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/rencana/masuk','<?php echo $this->basePath; ?>/js/modul_perencanaan.js');">Entri Kebutuhan</a></li>
+			  	<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/rencana/setuju','<?php echo $this->basePath; ?>/js/modul_perencanaan.js');">Persetujuan SDM</a></li>
+			    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/rencana/rekap','<?php echo $this->basePath; ?>/js/modul_perencanaan.js');">Rekap Kebutuhan Pegawai</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>  
+			<li class="fly"><a href="#" class="enclose">Rekruitmen<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<!--<li><a href="#" class="enclose">Pengumuman</a>
+				  <ul 101">
+					<li><a href="#" class="enclose">Upload</a></li>
+					<li><a href="#" class="enclose">Hapus</a></li>
+					<li><a href="#" class="enclose">View</a></li>
+				  </ul>
+				</li> -->
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pengadaan/listPelamar','<?php echo $this->basePath; ?>/js/modul_sdm.js')">Maintain Data Pelamar</a></li>
+				<li class="sub"><a href="#" class="enclose">Seleksi Pelamar</a></li>
+				<!--<li class="sub"><a href="#" class="enclose">Memasukkan Data Hasil Seleksi</a></li>
+				<li class="sub"><a href="#" class="enclose">Rekap Hasil Seleksi</a></li>
+				<li><a href="#" class="enclose">Penempatan Pegawai Baru</a></li>
+				<li><a href="#" class="enclose">Persetujuan Penempatan Pegawai Baru</a></li>
+				<li><a href="#" class="enclose">Rekap Penempatan Pegawai Baru</a></li> -->
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Pengembangan Karir<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="fly"><a href="#" class="enclose">Pengangkatan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<!--<li style="z-index: 1;"><a class="" href="#">Pengajuan NIP</a></li>-->
+					<li class="sub"><a class="enclose" href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pengangkatan/usulcpns','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Usulan Pengangkatan CPNS</a></li>
+					<li class="sub"><a class="enclose" href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pengangkatan/setujucpns','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Persetujuan Usulan Pengangkatan CPNS</a></li>
+					<li class="sub"><a class="enclose" href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pengangkatan/rekapcpns','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Rekap Usulan Pengangkatan CPNS</a></li>
+					<!--<li><a href="#" class="enclose">Pemberhentian CPNS</a>
+					  <ul 103">
+						<li><a href="#" class="enclose">Permohonan Sendiri</a></li>
+						<li><a href="#" class="enclose">Usulan Pemberhentian</a></li>
+						<li><a href="#" class="enclose">Persetujuan SDM</a></li>
+						<li><a href="#" class="enclose">Persetujuan KARO CAN dan SDM</a></li>
+					  </ul>
+					</li>-->
+					<li class="sub"><a href="#" class="enclose">Usulan Pengangkatan PNS</a></li>
+					<li class="sub"><a class="enclose" href="#">Persetujuan Usulan Pengangkatan PNS</a></li>
+					<li class="sub"><a class="enclose" href="#">Rekap Usulan Pengangkatan PNS</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Kenaikan Pangkat<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			      <ul>
+			        <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pangkat/reguler','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Reguler</a></li>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pangkat/pilihsearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Pilihan</a></li>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pangkat/usulkp','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Persetujuan Usulan Kenaikan Pangkat</a></li>
+			  	    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pangkat/rekapctk','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Rekap Usulan dan Cetak Surat</a></li>
+					<!--<li><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pangkat/catatskkp','<?php echo $this->basePath; ?>/js/modul_perencanaan.js');">Mencatat SK Kenaikan Pangkat</a></li>
+					<li><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pangkat/rekapkp','<?php echo $this->basePath; ?>/js/modul_perencanaan.js');">Rekap Kenaikan Pangkat</a></li> -->
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Promosi<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/promosi/promosisearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Usulan Promosi</a></li>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/promosi/setujupromosi','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Persetujuan Usulan Promosi</a></li>
+				    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/promosi/rekapsuratpromosi','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Rekap Data Usulan Promosi dan Cetak Surat</a></li>
+					<!--<li><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/promosi/catatpromosi','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Mencatat SK Mutasi</a></li>
+					<li><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/promosi/rekappromosi','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Rekap Data Mutasi</a></li>-->
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Gaji Berkala<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/gaji/daftarkgb','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Daftar Usulan KGB</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/gaji/setujukgb','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Persetujuan Usulan KGB</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/gaji/rekapsuratkgb','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Rekap Usulan KGB dan Cetak Surat</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/gaji/gajisearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Mencatat SK KGB</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/gaji/rekapkgb','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Rekap Data KGB</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Mutasi<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			      <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/mutasi/mutasisearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Usulan Mutasi</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/mutasi/setujumutasi','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Persetujuan Usulan Mutasi</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/mutasi/rekapsuratmutasi','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Rekap Data Usulan Mutasi dan Cetak Surat</a></li>
+					<!--<li><a href="#" class="enclose">Mencatat SK Mutasi</a></li>
+					<li><a href="#" class="enclose">Rekap Data Mutasi</a></li> -->
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Penghargaan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/penghargaan/penghargaansearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Usulan Penghargaan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/penghargaan/setujupenghargaan','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Persetujuan Usulan Penghargaan</a></li>
+					<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/penghargaan/rekapsuratpenghargaan','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Rekap Data Usulan Penghargaan dan Cetak Surat</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+		      </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Cuti<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/cuti/pegawaisearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Pengajuan Cuti</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/cuti/lstajuatasan','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Persetujuan Atasan</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/cuti/lstajusdm','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Persetujuan Bagian SDM</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/cuti/rekapcuti','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Rekap Cuti Pegawai</a></li>
+				<!--<li class="sub"><a href="#" class="enclose">Penundaan</a></li>
+				<li class="sub"><a href="#" class="enclose">Pembatalan</a></li>-->
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Absensi<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/absensi/absensisearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Pencatatan Absensi</a></li>
+				<!--<li class="sub"><a href="#" class="enclose">Entry Surat Ijin Atasan</a></li>-->
+				<li class="sub"><a href="#" class="enclose">Rekap Absensi Pegawai</a></li>
+				<!--<li class="sub"><a href="#" class="enclose">Laporan Bulanan Ketertiban Pegawai</a></li>-->
+				<li class="sub"><a href="#" class="enclose">Laporan Tata Tertib</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Daftar Urut Kepangkatan<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pelaporan/duk','<?php echo $this->basePath; ?>/js/modul_sdmPelaporan.js');">DUK versi BKN</a></li>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pelaporan/duklokal','<?php echo $this->basePath; ?>/js/modul_sdmPelaporan.js');">DUK versi Lokal (K BUMN)</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Pensiun<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<!--<li><a href="#" class="enclose">Pengajuan Pensiun</a></li>
+				<li><a href="#" class="enclose">Persetujuan Pensiun Dini</a></li> -->
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pensiun/listUsul','');">Usulan Pensiun</a></li>
+      			<li class="sub"><a href="#" class="enclose">Persetujuan Usulan Pensiun</a></li>
+				<li class="sub"><a href="#" class="enclose">Rekap Data Usulan dan Cetak Surat</a></li>
+				<li class="sub"><a href="#" class="enclose">Mencatat SK Pensiun</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<!--<li><a href="#" class="enclose">Pemberhentian</a>
+			  <ul>
+				<li><a href="#" class="enclose">Penerbitan SPT</a></li>
+				<li><a href="#" class="enclose">Pengajuan Pemberhentian</a></li>
+				<li><a href="#" class="enclose">Administrasi Pemberhentian</a></li>
+			  </ul>
+			</li> -->
+			<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/cv/cvsearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Daftar Riwayat Hidup</a></li>
+			<li class="fly"><a href="#" class="enclose">Penilaian Kinerja Pegawai<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/dp3/listpegawai','');">Pengajuan DP3</a></li>
+				<li class="sub"><a href="#" class="enclose">Rekap Penilaian DP3</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">LP2P<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose">Entry Data LP2P</a></li>
+				<li class="sub"><a href="#" class="enclose">Rekap Data LP2P</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Pendidikan & Latihan<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+			  	<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/latih/jadwal','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Agenda Pelatihan</a></li>
+			    <li class="fly"><a href="#" class="enclose">Peserta Pelatihan<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			      <ul>
+					<!--<li><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/latih/jadwal','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Jadwal Pelatihan</a></li>-->
+			  	    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/latih/daftar','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Pendaftaran</a></li>
+			  	    <li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/latih/seleksi','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Seleksi Peserta</a></li>
+					<!--<li><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/latih/peserta','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Peserta</a></li>-->
+			      </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			    </li>
+			  	<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/latih/peserta','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Rekap Pelaksanaan Pelatihan</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Dossier<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<!--<li><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/dossier/sdmdossiersearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Upload Dossier</a></li>-->
+			  	<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/dossier/sdmdossiersearch','<?php echo $this->basePath; ?>/sdm/dossier/dossierjs');">Upload Dossier</a></li>
+			  	<li class="sub"><a href="#" class="enclose">Lihat Dossier</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Administrasi Data Pegawai<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pegawai/pegawaisearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Maintain Data Pegawai</a></li>
+           		<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Melihat Data Pegawai</a></li>
+				<!--<li><a href="#" class="enclose">Riwayat Pendidikan</a></li>
+				<li><a href="#" class="enclose">Riwayat Pelatihan</a></li>
+				<li><a href="#" class="enclose">Keluarga</a></li>
+				<li><a href="#" class="enclose">Keterangan</a></li>
+				<li><a href="#" class="enclose">Riwayat Kepangkatan</a></li>
+				<li><a href="#" class="enclose">Organisasi</a></li>
+				<li><a href="#" class="enclose">Seminar</a></li>
+				<li><a href="#" class="enclose">Penghargaan</a></li>
+				<li><a href="#" class="enclose">Riwayat Jabatan</a></li>
+				<li><a href="#" class="enclose">Riwayat Hukuman</a></li>
+				<li><a href="#" class="enclose">Ke Luar Negeri</a></li>-->
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<!--<li><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pegawai/pegawaisearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Maintain Data Pegawai</a></li>-->
+			<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/pejabat/pejabat','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Maintain Data Jabatan</a></li>
+			<li class="fly"><a href="#" class="enclose">Pelaporan<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<!--<li class="fly"><a href="#" class="enclose">Laporan Pernikahan<!--[if IE 7]><!--</a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <!--<ul>
+					<li class="sub"><a href="#" class="enclose">Entry Laporan Pernikahan Pertama</a></li>
+					<li class="sub"><a href="#" class="enclose">Entry Laporan Pernikahan Janda Duda</a></li>
+					<li class="sub"><a href="#" class="enclose">Rekap Data Pernikahan</a></li>
+				  </ul>-->
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]--
+				</li>-->
+				<!--<li class="fly"><a href="#" class="enclose">Laporan Perceraian<!--[if IE 7]><!--</a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <!--<ul>
+					<li class="sub"><a href="#" class="enclose">Entry Laporan Perceraian</a></li>
+					<li class="sub"><a href="#" class="enclose">Lihat Data Perceraian</a></li>
+				  </ul>-->
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]--
+				</li>
+				<!--<li class="fly"><a href="#" class="enclose">Laporan Kelahiran<!--[if IE 7]><!--</a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <!--<ul>
+					<li class="sub"><a href="#" class="enclose">Entry Data Kelahiran</a></li>
+					<li class="sub"><a href="#" class="enclose">Rekap Data Kelahiran</a></li>
+				  </ul>-->
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]--
+				</li>
+				<!--<li class="fly"><a href="#" class="enclose">Laporan Kematian<!--[if IE 7]><!--</a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <!--<ul>
+					<li class="sub"><a href="#" class="enclose">Entry Data Kematian</a></li>
+					<li class="sub"><a href="#" class="enclose">Rekap Data Kematian</a></li>
+				  </ul>-->
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]--
+				</li>-->
+				<li class="fly"><a href="#" class="enclose">Laporan LHKPN<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose">Entry Penyerahan LHKPN</a></li>
+					<li class="sub"><a href="#" class="enclose">Rekap Data Penyerahan LHKPN</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+				<li class="fly"><a href="#" class="enclose">Eksekutif<!--[if IE 7]><!--></a><!--<![endif]-->
+				  <!--[if lte IE 6]><table><tr><td><![endif]-->
+				  <ul>
+					<li class="sub"><a href="#" class="enclose">Komp. Peg. berdasarkan Usia</a></li>
+					<li class="sub"><a href="#" class="enclose">Komp. Peg. berdasarkan Pangkat</a></li>
+					<li class="sub"><a href="#" class="enclose">Komp. Peg. berdasarkan Jenis Kelamin</a></li>
+					<li class="sub"><a href="#" class="enclose">Komp. Peg. berdasarkan Eselon</a></li>
+					<li class="sub"><a href="#" class="enclose">Komp. Peg. berdasarkan Pendidikan</a></li>
+				  </ul>
+				  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+				</li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+			<li class="fly"><a href="#" class="enclose">Referensi<!--[if IE 7]><!--></a><!--<![endif]-->
+			  <!--[if lte IE 6]><table><tr><td><![endif]-->
+			  <ul>
+				<li class="sub"><a href="#" class="enclose" onclick="open_url_to_div('<?php echo $this->basePath; ?>/sdm/referensi/sdmagamasearch','<?php echo $this->basePath; ?>/js/modul_sdm.js');">Agama</a></li>
+				<li class="sub"><a href="#" class="enclose">Cuti</a></li>
+				<li class="sub"><a href="#" class="enclose">DP3</a></li>
+				<li class="sub"><a href="#" class="enclose">Eselon</a></li>
+				<li class="sub"><a href="#" class="enclose">Gaji Pokok</a></li>
+				<li class="sub"><a href="#" class="enclose">Golongan Pangkat</a></li>
+				<li class="sub"><a href="#" class="enclose">Hubungan Keluarga</a></li>
+				<li class="sub"><a href="#" class="enclose">Kabupaten</a></li>
+				<li class="sub"><a href="#" class="enclose">Pendidikan</a></li>
+				<li class="sub"><a href="#" class="enclose">Penghargaan</a></li>
+				<li class="sub"><a href="#" class="enclose">Propinsi</a></li>
+				<li class="sub"><a href="#" class="enclose">Status Pegawai</a></li>
+			  </ul>
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+		  </ul>
+		  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	  </li>
+	  <li>
+	    <a href="#" class="enclose">Interaksi<!--[if IE 7]><!--></a><!--<![endif]-->
+      </li>
+	  <li>
+	    <a href="#" class="enclose">Administrasi<!--[if IE 7]><!--></a><!--<![endif]-->
+	  </li>
+   </ul>	  
+</div>

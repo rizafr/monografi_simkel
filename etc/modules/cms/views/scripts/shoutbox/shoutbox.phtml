@@ -1,0 +1,90 @@
+<?php 
+require_once 'Zend/View.php';
+require_once "share/tanggal.php";  
+require_once 'share/Portalconf.php'; 
+$tanggal = new tanggal();
+$ctrlFrm = new Zend_View();
+$pesancek=$this->pesancek;
+
+
+if ($this->dentri!='') {
+  $dates=formatDate4($this->dentri);
+  $xtime=substr($this->dentri,11,8);
+  list($jam,$mnt,$det)=split(":",$xtime);
+} else {
+  $dates=date('d/m/Y');
+  $jam=date("H");
+  $mnt=date("i");
+}
+if ($cstatus!='') {
+	if ($cstatus==1) $status1='checked';
+	else $status0='checked';
+} else $status1='checked';
+
+if ($pesancek=='gagal'){$confirm ='confirmfail';}
+else {$confirm ='confirm';}
+
+
+?>
+ <script type="text/javascript" src="<?echo $this->baseUrl;?>/content/init.js"></script>
+	<script type="text/javascript">
+
+	$(function() {
+		$("#d_shoutbox").datepicker();
+	});
+	</script>
+
+
+		   <div class="navlink">
+				<a  href="<? echo $this->basePath; ?>cms">Halaman Utama</a> 
+				<strong> &#8250; </strong> <a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/cmsmodule/shoutbox/listshoutbox','<?php echo $this->basePath; ?>/cmsmodule/pegawai/pegawaijs');">Kelola Data shoutbox</a>
+				<strong> &#8250; </strong><?=$this->jdl;?> Data Shoutbox
+			</div>
+			<br>
+<div id="top"></div>
+<div id="confirm" class="<?=$confirm?>" style="display: none">
+	<h3><?echo $pesan = $this->pesan;?></h3>				
+</div>
+
+	
+<form id="formshoutbox" method="post" name="formshoutbox" action="">
+<input type="hidden" value="<?=$this->id?>" name="id"> 
+<input type="hidden" value="<?=$this->par?>" name="action"> 
+<h2 class="title"><?=$this->jdl;?> Data shoutbox</h2>
+
+		<div class="spacer"></div> 
+
+<table  width="100%">
+ <tr>
+   <td width="20%">Tanggal shoutbox</td>
+   <td width="1%">:</td>
+   <td width="79%"><input type="text" id="d_shoutbox" name="date" value="<?=$dates?>" size="10">
+	Pkl <input type="text" id="jam" name="jam" value="<?=$jam?>" size="2" maxlength="2" tabindex="4" />:<input type="text" id="mnt" name="mnt" value="<?=$mnt?>" size="2" maxlength="2" tabindex="4" />
+  </td>
+ </tr>
+ <tr>
+   <td width="20%">UserID</td>
+   <td width="1%">:</td>
+   <td width="79%"><input type="text" name="userid" size="50" readonly tabindex="1" value="<?=$this->userid?>" class="inputbox2"/></td>
+ </tr>
+ <tr>
+   <td width="20%">Nama</td>
+   <td width="1%">:</td>
+   <td width="79%"><input type="text" name="nama" size="50" readonly  tabindex="1" value="<?=$this->nama?>" class="inputbox2"/></td>
+ </tr>
+ <tr>
+   <td width="20%">Isi shoutbox</td>
+   <td width="1%">:</td>
+   <td width="79%"><textarea  name="message" style="width:90%;height:100px"><?=$this->message?></textarea></td>
+ </tr>
+</table>
+ket :&nbsp;(<span class="highlight">*</span>)&nbsp;harus diisi
+		<p class="submit">
+		<span id="autosave"></span>
+
+		<input name="cancel" type="button" id="publish" tabindex="5" accesskey="p" value="Batal" onClick="open_url_to_div('<?php echo $this->basePath; ?>/cmsmodule/shoutbox/listshoutbox','<?php echo $this->basePath; ?>/cmsmodule/shoutbox/shoutboxjs');"/>
+		<input type="submit" name="submit" value="<?=$this->pars;?>" onClick="insertshoutbox()" style="font-weight: bold;" />
+
+
+	
+</form>	

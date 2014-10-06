@@ -1,0 +1,287 @@
+<? require_once 'Zend/View.php';
+   require_once 'share/oa_date.php'; 
+   
+	$ctrlDate = new oa_date();   
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+
+
+	//$jenjang = $_REQUEST['jenjang'];
+	$nip = $_REQUEST['nip'];
+	//echo "testnip".$nip;
+
+   $jenisKelaminList = array("#"=>"--",
+                  "L"=>"Laki-laki",
+				  "P"=>"Perempuan");	
+	
+   $thnList = $thnskrg - 60;
+   //$thnList2 = $thnskrg - 55;
+	
+   $thnArrayList['#'] = '--';
+   		
+   for ($i = 0; $i < 60; $i++) {
+     $thnList = $thnList + 1;
+     $thnArrayList[$thnList] = $thnList;
+   }
+
+	  $blnArrayList['#'] = '--';	
+	  $blnList = 0;
+	  for ($j = 0; $j < 12; $j++) {
+        $blnList = $blnList + 1;
+		if ($blnList < 10) {
+		  $blnBaruList = "0".$blnList;
+		  $blnArrayList[$blnBaruList] = $blnBaruList;
+		} else {
+		  $blnBaruList = $blnList;
+		  $blnArrayList[$blnBaruList] = $blnBaruList;
+		}
+      }
+	
+	 $hrArrayList['#'] = '--';	
+	  $hrList = 0;
+	  for ($k = 0; $k < 31; $k++) {
+        $hrList = $hrList + 1;
+		if ($hrList < 10) {
+		  $hrBaruList = "0".$hrList;
+		  $hrArrayList[$hrBaruList] = $hrBaruList;
+		} else {
+		  $hrBaruList = $hrList;
+		  $hrArrayList[$hrBaruList] = $hrBaruList;
+		}
+      }
+
+   $jmlPropList = count($this->propinsiList);
+   $propinsiList['#'] = '--';
+   for ($i = 0; $i < $jmlPropList; $i++) {
+   $propinsiList[(string)$this->propinsiList[$i]->c_propinsi."|".$this->propinsiList[$i]->n_propinsi] = (string)$this->propinsiList[$i]->n_propinsi;			 
+   //$propinsiList[(string)$this->propinsiList[$i]->n_propinsi] = (string)$this->propinsiList[$i]->n_propinsi;			 
+   }
+
+   $jmlKabList = count($this->kabupatenList);
+   //echo "jumlah".$jmlKabList;
+   $kabupatenList['#'] = '--';
+   for ($i = 0; $i < $jmlKabList; $i++) {
+   $kabupatenList[(string)$this->kabupatenList[$i]->c_kabupaten."|".$this->kabupatenList[$i]->n_kabupaten] = (string)$this->kabupatenList[$i]->n_kabupaten;			 
+   //$kabupatenList[(string)$this->kabupatenList[$i]->n_kabupaten] = (string)$this->kabupatenList[$i]->n_kabupaten;			 
+   }
+
+	  
+   
+   $jmlNmKelList = count($this->nmKelList);
+   //echo "Jumlah =".$jmlNmJenjangList;
+   $nmKelList['#'] = '--';
+   for ($i = 0; $i < $jmlNmKelList; $i++) {
+   $nmKelList[(string)$this->nmKelList[$i]->c_keluarga_hub."|".$this->nmKelList[$i]->n_keluarga_hub] = (string)$this->nmKelList[$i]->n_keluarga_hub;			 
+   }
+
+   $statusTanggunganList = array("-"=>"--",
+                  "Y"=>"Ditanggung",
+				  "N"=>"Tidak Ditanggung");	
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+
+
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA ORANG TUA & KERABAT</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data orang tua, mertua dan saudara kandung/saudara ipar pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+								
+	<div class="space-line">
+		<div class="title2">Data Orang Tua & Kerabat</div>
+		<fieldset  class="panel-form">
+			<form id="frmKerView" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/kerabatview" method="post" name="frmKerView">
+				<dl>
+					<dt>Hubungan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$nmHub = $this->escape($this->namaHub);
+						$kdHub = $this->escape($this->kdHub);
+						$hubungan = $kdHub."|".$nmHub;
+						echo $nmHub;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Nama</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						  $nama = $this->escape($this->nama);
+						  echo $nama;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Jenis Kelamin</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php
+						$jenisKelamin = $this->escape($this->jenisKelamin);
+						
+						if ($jenisKelamin == 'L') {
+							$jenisKelamin = 'Laki-laki';
+						}
+						else if ($jenisKelamin == 'P') {
+							$jenisKelamin = 'Perempuan';
+						}
+						echo $jenisKelamin;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Pekerjaan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$pekerjaan = $this->escape($this->pekerjaan);
+						echo $pekerjaan;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>ALAMAT</dt>
+					<dd class="dot2">&nbsp;</dd> 
+					<dd class="col-right">&nbsp;</dd>
+				</dl>
+				<dl>
+					<dt>Jalan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$jalan = $this->escape($this->jalan);
+						echo $jalan;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Rt</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$rt = $this->escape($this->rt);
+						echo $rt;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Rw</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$rw = $this->escape($this->rw);
+						echo $rw;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Kelurahan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$kel = $this->escape($this->kel);
+						echo $kel;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Kecamatan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$kec = $this->escape($this->kec);
+						echo $kec;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Kota / Kabupaten</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$kabupatenOrtu = $this->escape($this->kota);
+						echo $kabupatenOrtu;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Propinsi</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$propinsiOrtu = $this->escape($this->prop);
+						echo $propinsiOrtu;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Telepon</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$telp = $this->escape($this->telp);
+						echo $telp;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Handphone</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$hp = $this->escape($this->hp);
+						echo $hp;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Email</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$email = $this->escape($this->email);
+						echo $email;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Keterangan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$keterangan = $this->escape($this->keterangan);
+						echo $keterangan;
+					?>
+					</dd>
+				</dl>
+
+ 			<dl>
+				<?php 
+				  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">&nbsp;</dd>			
+				<div class="back" onClick="javascript:kembaliKerView('<? echo $this->escape($this->nip); ?>');" title="Kembali"><input type="button" value="Kembali" id="kembaliKerView"></div>
+			</dl>
+		  	</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>		
+				

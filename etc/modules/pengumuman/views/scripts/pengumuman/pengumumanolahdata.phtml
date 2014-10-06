@@ -1,0 +1,66 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Tambah Data Pengumuman</h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {	$namaForm = 'frmtambahpengumuman'; }
+			else if (strtolower($this->jenisForm) == 'update') {	$namaForm = 'frmubahpengumuman'; }
+			else {	$namaForm = 'frmhapuspengumuman'; }
+		
+		?>
+<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+	<input name="prodi" id="prodi" type="hidden" value="<?echo $this->prodi;?>" />
+	<input name="jenisPengumuman" id="jenisPengumuman" type="hidden" value="<?echo $this->jenisPengumuman;?>" />
+	<input name="status" id="status" type="hidden" value="<?echo $this->status;?>" />
+	<input name="id" id="id" type="hidden" value="<?echo $this->id;?>" />
+
+	
+
+	<tr>
+	<td align="left" width="180"> Pengumuman </td>
+	<td>:</td>
+	<td colspan ="2">
+		<?
+		$PengumumanAttrib = array("cols" => 1,"rows" => 1);
+		echo $ctrlFrm->formTextArea('e_pengumuman', $this->detailpengumuman['e_pengumuman'], $PengumumanAttrib);
+		?>
+	</td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td></td>
+		<td colspan ="2">
+						<div class="right">
+							<input type="button" value="Batal" onClick="pengumumanlist();"> 
+							<input type="reset" value="Ulangi"> 
+							<input   type="submit" value="Simpan">
+						</div>
+		</td>
+	</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td colspan ="3"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$("#d_tgl").datepicker();
+		$("#d_sk").datepicker();
+	});
+</script>	

@@ -1,0 +1,970 @@
+/*
+Author: Irwan Setiawan
+Created :13/08/08
+Date Modified:14/08/2008
+*/
+ body{
+	background-color:#8C784B;
+	font-family:   Tahoma, Verdana, Arial, Geneva, Helvetica, sans-serif;
+	font-size:11px;
+	COLOR: #000000;
+}
+    div#container {
+        padding: 0;
+        margin:10px auto;
+        border:0px solid #6D5315;
+        width:994px;
+    }
+*html    div#container {
+	width:1000px;
+	}
+/* Header */
+        div#header {
+            color: #F8F4E8;
+            padding:0;
+            margin:0;
+            height:100px;
+	    background:#A38845 url('../images/header_nice_brown.jpg');            
+	    width:994px;
+        }
+        div#footer {
+            height:42px;
+            width:998px;
+            margin:0;
+            padding:0;
+	    padding-top:10px;
+	    vertical-align:middle;
+            text-align:center;
+            color:#AE9F7E;	    
+	    background:url('../images/bg_footer.gif') no-repeat; 
+        }
+/* NAV */
+.nav {
+        background:#CCC0B0 url(../images/bar_menu2.gif) repeat-x;
+        width:974px;
+	margin:0 auto;
+	padding:0;
+	height:24px;
+	border:1px solid #B1A589;
+	border-width:1px 0;
+	z-index:1000;
+	font-family:tahoma,verdana,arial;
+	font-size:11px;
+	font-weight:bold;
+	}
+*html #nav {
+	width:976px;
+	}
+
+/* Set up the link size, color and borders */
+#pmenu a, #pmenu a:visited {
+	color:#000000; 
+	border:1px solid #B1A589; 
+	border-width:0px 1px 0px 0px;
+	}
+/* Make the hovered list color persist */
+#pmenu li:hover > a {
+	background:#E5DFCE; 
+	color:#0360A2;
+	}
+/* For IE5.5 and IE6 give the hovered links a position relative and a change of background and foreground color. This is needed to trigger IE to show the sub levels */
+* html #pmenu li a:hover {
+	background:#E5DFCE; 
+	color:#0360A2;
+	}
+
+/* For accessibility of the top level menu when tabbing */
+#pmenu li a:active, #pmenu li a:focus {
+	background:#F9E4B3; 
+	color:#0360A2;
+	}
+
+/* Set up the pointers for the sub level indication */
+#pmenu li.sub {background:#F4E9CE; font-weight:normal;}
+#pmenu li.fly {background:#F4E9CE url(../images/fly.gif) no-repeat right center;font-weight:normal}
+#pmenu li.drop {background:#F4E9CE url(../images/drop.gif) no-repeat right center;}
+	
+ /* END NAV */
+#content {background:#F1EBDD url(../images/bg_content.gif) repeat-y;}
+.bottom {clear:both;width:994px;height:18px;background:url(../images/bot_content.gif) no-repeat;}
+#content .contentdata {
+	font-family:   Verdana, Tahoma, Arial, Geneva, Helvetica, sans-serif;
+}
+h2.title {
+	border-bottom:3px solid #D2C8B9;
+	padding-bottom:2px;
+	font-weight:normal;
+        color: #634D38;
+   }
+        
+.ct-login {
+	float:right;
+	width:239px;
+	margin:0;
+	padding:0;
+	}
+.head-login {
+	background:#DED3B9;
+	text-align:center;
+	padding:6px 0;
+	margin-bottom:20px;
+	font-size:1.3em;
+	height:23px;
+	font-weight:bold;
+	font-family:Georgia,"Bitstream Vera Serif","Times New Roman",Times,serif;
+	color:#524229;
+}        
+.ct-login .bd {
+	    background:#EEE url('../images/bg_shadow.gif') bottom repeat-x;
+	    border-right:1px #ddd solid;      
+	    text-align:center;
+	    padding:0;
+	    padding-top:15px;    
+	    padding-bottom:15px;    
+}
+.ct-news {
+	float:right;
+	width:230px;
+	margin:10px 5px;
+	padding:0;
+	}        
+.ct-news .hd {
+	    background:#FFF url('../images/news_header.gif') no-repeat;
+	    height:36px;            
+} 
+.ct-news .bd {
+	padding:10px 2px 10px 10px;
+	}
+	
+.news-title {
+        font-family:   Geneva, Tahoma, Verdana, Arial, , Helvetica, sans-serif;
+	font-weight:bold;
+	margin-bottom:10px;
+	}
+.read-more{
+	color:#FF6600;
+	}
+    .read-more a,
+    .read-more a:link,
+    .read-more a:active,
+    .read-more a:visited {
+        color: #FF6600;
+        text-decoration:underline;
+    }
+    .read-more a:hover {
+        color: #999;
+        text-decoration:none
+    }        	
+.ct-menu {
+	float:left;
+	width:100%;
+	margin:0;
+	padding:0;
+	}        
+.ct-menu .hd, .ct-menu .hd2 {
+	height:21px;
+	line-height:20px;
+	font-weight:bold;
+	color:#FFFFFF;
+	font-size:11px;            
+}       
+.ct-menu .hd {
+	background:transparent url(../images/box_header.gif) no-repeat left;
+	text-align:right;
+	padding-right:10px;
+	}
+.ct-menu .hd2 {
+	background:transparent url(../images/box_headerl.gif) no-repeat right;
+	text-align:left;
+	padding-left:10px;
+	}
+.ct-menu .bd {
+	    text-align:left;
+	    padding:0px 0 5px 0;
+	    margin-bottom:10px;
+	    border:1px solid #CCCCCC;
+	    border-top:none;
+}
+.ct-notif {
+	float:left;
+	width:100%;
+	margin:0;
+	padding:0;
+	text-align:left;
+	}        
+.ct-notif .hd {
+	            background:red;// url(../images/box_header.gif) no-repeat;
+
+	    height:21px;
+	    line-height:20px;
+	    font-weight:bold;
+	    padding-right:10px;
+	    text-align:center;
+	    font-size:12px;
+	    color:#FFF;
+	    font-family:Verdana;            
+            border:1px solid red;
+	    border-bottom:none;
+}        
+.ct-notif .bd {
+	    text-align:left;
+	    padding:0px 10px 5px 10px;
+	    margin-bottom:10px;
+	    background:#FEE7E7;
+	    border:1px solid #CCCCCC;
+}
+.ct-notif a,
+.ct-notif a:link,
+.ct-notif a:active,
+.ct-notif a:visited {
+	color: #60391F;
+	}
+.ct-notif a:hover {
+	color:red;
+	}
+.ct-welcome {
+	float:left;
+	width:100%;
+	margin:0;
+	padding:0;
+	text-align:left;
+	}        
+.ct-welcome .bd {
+	    text-align:left;
+	    padding:10px;
+	    margin-bottom:10px;
+	border:1px solid #CCCCCC;
+}
+
+
+.msg {
+	width:976px;
+	padding:0;
+	height:20px;
+	line-height:24px;
+	margin:0 auto 5px auto;
+	font-size:1em;
+	background:#E2D5C3 url(../images/bg_info.gif) repeat-x;
+	font-family: Helvetica, Arial, Sans-serif;
+	} 
+.msg .crdate {
+	float:right;
+	padding:3px 10px 2px 0;
+	color:#96521E;
+	}
+.msg .username {
+	float:left;
+	color:#000000;
+	padding:3px 0 2px 10px;
+	font-weight:bold;
+	}
+    .username a,
+    .username a:link,
+    .username a:active,
+    .username a:visited {
+        color: #666;
+        text-decoration:underline;
+	font-weight: normal;
+    }
+    .username a:hover {
+        color: red;
+    }        
+
+h3.title{
+	margin:0 0 8px 0;
+  	padding:0px;
+  	font-weight:normal;
+	color:#524229;
+	font-size:14px;
+	text-align:left;
+	border-bottom: 2px solid #6D5315;
+}
+div.title2{
+	float:left;
+	margin:0 0 0px 0;
+  	padding:2px;
+	font-family:Georgia,"Bitstream Vera Serif","Times New Roman",Times,serif;
+  	font-weight:bold;
+	color:#766D51;
+	font-size:12px;
+	text-align:left;
+}
+h2.welcome {
+	color:#FF6600;
+	font-family:Georgia,"Bitstream Vera Serif","Times New Roman",Times,serif;
+       	font-size:16px;
+       	font-weight:bold;
+	}
+.date {
+	color:red;
+	}	
+.index {
+	clear:both;
+	float:right;
+	margin-top:10px;
+	}
+/* LINKS */
+	a,
+	a:link 
+	a:active,
+	a:visited {
+		color: #60391F;
+		text-decoration: underline;
+	}
+	a:hover {
+        color: #0360A2;
+	}
+/* END LINKS */ 
+/* STYLE untuk navigasi halaman */
+/* Pagination
+---------------------------------------- */
+.pagination {
+	height: 1%; /* IE tweak (holly hack) */
+	clear:both;
+	text-align: left;
+	margin:3px 0 5px 0 ;
+	height:16px;
+	border:0px solid;
+}
+
+.pagination span.page-sep {
+	display:none;
+}
+
+li.pagination {
+	margin-top: 0;
+}
+
+.pagination strong, .pagination b {
+	font-weight: normal;
+}
+
+.pagination span strong {
+	padding: 0 4px;
+	margin: 0 2px;
+	font-weight: normal;
+	color: #FFFFFF;
+	background-color: #75674F;
+	border: 1px solid #75674F;
+	font-size: 0.9em;
+}
+
+.pagination span a, .pagination span a:link, .pagination span a:visited, .pagination span a:active {
+	font-weight: normal;
+	color: #444;
+	margin: 0 2px;
+	padding: 0 4px;
+	background-color: #EBE2CC;
+	border: 1px solid #CCCCCC;
+	font-size: 0.9em;
+}
+
+.pagination span a:hover {
+	border-color: #75674F;
+	background-color: #75674F;
+	color: #FFF;
+	
+}
+
+.pagination img {
+	vertical-align: middle;
+}
+
+/*FORM
+
+input,select {
+	border:1px solid #999;
+	padding:1px 0;
+	}
+input:hover,select:hover {
+	border:1px solid #FC8404;
+	}
+input.text,select,textarea {
+	border:1px solid #999;
+	}
+input.text:hover,select:hover,textarea:hover {
+	border:1px solid #FC8404;
+	}
+	
+input.button-image {
+	cursor:pointer;
+	border:none;
+	}*/
+		
+.back2, .back2home {
+	clear: both;
+	height: 11px;
+}
+.link {
+	cursor:pointer;
+	}
+
+.klik {
+	cursor:pointer;
+	}
+a.arrow,
+a.arrow:hover,
+a.arrow:visited {
+	font-weight:bold;
+	color:red;
+	text-decoration:underline;
+	padding-left:13px;
+	font-size:10px;
+	background:url(../images/arrowb.gif) no-repeat;
+	
+}
+#featureBalloonPos {
+	position: absolute; 
+	width: 251px; 
+	top: 0px; 
+	left: 0px; 
+	z-index: 10; 
+	display: none;
+	}
+#featureBalloonTop {
+	height: 5px
+	}
+#featureBalloonContent {
+	padding: 5px 5px 5px 11px; 
+	border:1px solid #DDDDDD;
+	color:#000
+	}
+		
+
+/*Kalender*/
+  .boxed {
+    font-size:10px;
+    font-family:Verdana,Tahoma,Helvetica;
+    border-bottom:solid 1px #eee;
+    border-right:solid 1px #eee;
+    text-align:center;
+    width:15px;
+    line-height:15px;
+    background-color:#fff;
+  }
+  .boxedm {
+    color: #ffffff;
+    background-color: #ff0000;
+    font-size:10px;
+    font-family:Verdana,Tahoma,Helvetica;
+    border-bottom:solid 1px #eee;
+    border-right:solid 1px #eee;
+    text-align:center;
+    width:15px;
+    line-height:15px;
+  }
+  .boxedmo {
+    color: #0000ff;
+    background-color: #ff0000;
+    font-size:10px;
+    font-weight:bold;
+    font-family:Verdana,Tahoma,Helvetica;
+    border-bottom:solid 1px #eee;
+    border-right:solid 1px #eee;
+    text-align:center;
+    width:15px;
+    line-height:15px;
+  }
+  .boxedn {
+    color: #0000ff;
+    background-color: #ffffff;
+    font-size:10px;
+    font-family:Verdana,Tahoma,Helvetica;
+    border-bottom:solid 1px #eee;
+    border-right:solid 1px #eee;
+    text-align:center;
+    width:15px;
+    line-height:15px;
+  }
+  .boxedo {
+    color: #ffffff;
+    background-color: #0000ff;
+    font-size:10px;
+    font-family:Verdana,Tahoma,Helvetica;
+    border-bottom:solid 1px #eee;
+    border-right:solid 1px #eee;
+    text-align:center;
+    width:15px;
+    line-height:15px;
+  }
+  .boxedh {
+    color: #000;
+    background-color: #ddd;
+    font-size:10px;
+    font-family:Verdana,Tahoma,Helvetica;
+    border-bottom:solid 1px #eee;
+    border-right:solid 1px #eee;
+    text-align:center;
+    width:15px;
+    line-height:15px;
+  }
+  
+/* MENU TAB */  
+    .tabs {
+      float:left;
+      font-family:Tahoma, Verdana, Arial;
+      font-weight:bold;
+      line-height:15px;
+      margin:0;
+      top:1px;
+      }
+    .tabs ul {
+	  margin:0;
+	  padding:10px 10px 0 50px;
+	  list-style:none;
+      }
+    .tabs li {
+      display:inline;
+      margin:0;
+      padding:0;
+      }
+    .tabs a, .tabs .selected {
+      float:left;
+      background:url("../images/tableft.gif") no-repeat left top;
+      margin:0 0 0 2px;
+      padding:0px 0 0 4px;
+      text-decoration:none;
+      }
+    .tabs a span, .tabs .selected span  {
+      float:left;
+      display:block;
+      background:url("../images/tabright.gif") no-repeat right top;
+      padding:5px 10px 4px 4px;
+      color:#444444;
+      }
+    .tabs .selected span  {
+      background-position:100% -83px;
+      }
+    .tabs .selected  {
+      background-position:0% -83px;
+      }
+    .tabs a,
+    .tabs a:link,
+    .tabs a:visited,
+    .tabs a:active {
+      text-decoration:none;
+     }    
+    /* Commented Backslash Hack hides rule from IE5-Mac \*/
+    .tabs a span {float:none;}
+    /* End IE5-Mac hack */
+    .tabs a:hover span {
+	color: #0360A2;
+	  background-position:100% -41px;
+      }
+    .tabs a:hover {
+      background-position:0% -41px;
+      }
+    .tabs a:hover span {
+      background-position:100% -41px;
+	  }
+.v-outer {
+	display: table;
+	#position: relative;
+	float:left;
+	overflow: hidden;
+	width: 105px;
+	height: 47px;
+	background: black;
+	color: black;
+	background:url(../images/tab2.gif) no-repeat top left;
+	}
+
+.v-middle {
+	display: table-cell;
+	#position: absolute;
+	#top: 50%;
+	width: 105px;
+	vertical-align: middle;
+	line-height:11px;
+	font:bold 11px tahoma;
+	text-align:center;
+	}
+.v-middle a:link,
+.v-middle a:visited,
+.v-middle a:active {
+	text-decoration:none;	
+	color: #60391F;
+	}
+.v-middle a:hover {
+        color: #0360A2;
+	}
+
+.v-inner {
+	#position: relative;
+	#top: -50%;
+	}
+
+table.tblmenu {
+	height:48px;
+	margin:0 auto;
+	}
+table.tblmenu td.lmenu {
+        background:url("../images/tableft2.gif") no-repeat;
+        width:15px;
+        padding:0;
+        margin:0;
+        height:48px;
+	}	  
+table.tblmenu td.mmenu {
+        background:url("../images/tabmid.gif") repeat-x;
+        width:70px;
+        padding:5px;
+        font: bold 11px tahoma;
+        text-align:center;
+        line-height:11px;
+	/*text-transform:uppercase;*/
+        vertical-align:middle;
+        margin:0;
+	}	  
+table.tblmenu td.rmenu {
+        background:url("../images/tabright2.gif") no-repeat;
+        width:15px;
+        padding:0;
+        margin:0;
+	}
+table.tblmenu td.mmenu a{
+	text-decoration:none;
+	}
+	
+#cont-hexagon {
+	margin:0 auto;
+	width:370px;
+	height:400px;
+	font-weight:bold;
+	text-transform:uppercase;
+	}
+#cont-hexagon h1 {
+	font-size:1.4em;
+	line-height:1em;
+	font-family:Arial;
+	}
+#cont-hexagon .hexagon1 a, #cont-hexagon .hexagon3 a{
+	float:left;
+	background:url(../images/segi6.png) no-repeat left top;
+	width:123px;
+	height:60px;
+	padding-top:45px;
+	text-align:center;
+	margin:0;
+	color:#000000;
+	margin-top:70px;
+	border:0px solid;
+	text-decoration:none;
+}
+#cont-hexagon .hexagon1 a:hover,
+#cont-hexagon .hexagon2 a:hover,
+#cont-hexagon .hexagon3 a:hover,
+#cont-hexagon .hexagon4 a:hover,
+#cont-hexagon .hexagon5 a:hover,
+#cont-hexagon .hexagon6 a:hover{
+	background-position:0% -106px;
+	}
+
+#cont-hexagon .hexagon2 a{
+	float:left;
+	background:url(../images/segi6.png) no-repeat left top;
+	width:123px;
+	height:67px;
+	padding-top:38px;
+	text-align:center;
+	border:0px solid;
+	color:#000000;
+	text-decoration:none;
+}
+#cont-hexagon .hexagon4 a{
+	clear:both;
+	float:left;
+	background:url(../images/segi6.png) no-repeat left top;
+	width:123px;
+	height:60px;
+	margin-top:-41px;
+	padding-top:45px;
+	text-align:center;
+	border:0px solid;
+	color:#000000;
+	text-decoration:none;
+}
+#cont-hexagon .hexagon5 a{
+	float:left;
+	background:url(../images/segi6.png) no-repeat left top;
+	width:123px;
+	height:60px;
+	padding-top:45px;
+	margin-top:26px;
+	text-align:center;
+	border:0px solid;
+	color:#000000;
+	text-decoration:none;
+}
+*html #cont-hexagon .hexagon5 a{
+	margin-top:17px;
+	}
+#cont-hexagon .hexagon6 a{
+	float:left;
+	background:url(../images/segi6.png) no-repeat left top;
+	width:123px;
+	height:63px;
+	padding-top:42px;
+	text-align:center;
+	margin-top:-42px;
+	border:0px solid;
+	color:#000000;
+	text-decoration:none;
+}
+*html #cont-hexagon .hexagon6 a{
+	margin-top:-50px;
+	}
+#cont-hexagon .hexagon_center{
+	float:left;
+	background:url(../images/segi6_center.png) no-repeat top left;
+	width:135px;
+	height:82px;
+	padding-top:35px;
+	margin-top:-45px;
+	margin-left:116px;
+	text-align:center;
+	border:0px solid;
+	text-indent:-5000px;
+}
+*html #cont-hexagon .hexagon_center{
+	margin-left:58px;
+	}
+#cont-hexagon .selected a{
+	background-position:0% -212px;
+	}
+
+/*background for IE specific*/
+*html #cont-hexagon .hexagon1 a,
+*html #cont-hexagon .hexagon2 a,
+*html #cont-hexagon .hexagon3 a,
+*html #cont-hexagon .hexagon4 a,
+*html #cont-hexagon .hexagon5 a,
+*html #cont-hexagon .hexagon6 a {
+	background:url(../images/segi6.gif) no-repeat left top;		
+}
+*html #cont-hexagon .hexagon_center{
+	background:url(../images/segi6_center.gif) no-repeat top left;
+	}
+*html #cont-hexagon .selected a{
+	background-position:0% -212px;
+	}
+			      
+/* PANEL FORM */
+.panel {
+	background-color:#E4DDCC;
+	color:#28313F;
+	padding:0pt 10px;
+	border:0px solid;
+	}
+span.corners-top, span.corners-bottom, span.corners-top span, span.corners-bottom span {
+	font-size: 1px;
+	line-height: 1px;
+	display: block;
+	height: 5px;
+	background-repeat: no-repeat;
+}
+span.corners-top {
+	background-image: none;
+	background-position: 0 0;
+	margin: 0 -5px;
+}	
+span.corners-top span {
+	background-image: none;
+	background-position: 100% 0;
+}
+span.corners-bottom {
+	background-image: none;
+	background-position: 0 100%;
+	margin: 0 -5px;
+	clear: both;
+}
+span.corners-bottom span {
+	background-image: none;
+	background-position: 100% 100%;
+}
+.panel span.corners-top, .panel span.corners-bottom {
+	margin: 0 -10px;
+}
+span.corners-top {
+	background-image: url("../images/corners_left.png");
+}
+span.corners-top span {
+	background-image: url("../images/corners_right.png");
+}
+span.corners-bottom {
+	background-image: url("../images/corners_left.png");
+}
+span.corners-bottom span {
+	background-image: url("../images/corners_right.png");
+}
+* html span.corners-top, * html span.corners-bottom { background-image: url("../images/corners_left.gif"); }
+* html span.corners-top span, * html span.corners-bottom span { background-image: url("../images/corners_right.gif"); }
+
+.panel-form {
+	font-size:11px;
+	font-family:Verdana;
+}
+fieldset.panel {
+margin:0 auto;
+padding:0;
+width:350px;
+}
+.panel-form, .panel-form4, fieldset.panel, #featureBalloonContent, .confirm {
+	background-color:#E4DDCC;
+	border:0px solid #BBBBBB;
+}
+.nobgcolor {
+	background-color:transparent;
+	}
+.head-login, #featureBalloonTop,th,.search-panel,.search-panel2,.forabg, .forumbg {
+	background:#DED3B9;
+}
+
+/* TABLE */
+
+table.tbl td a:hover,table.tbl2 td a:hover {
+	color: #0360A2;
+	text-decoration: underline;
+}
+table.tbl tr:hover,table.tbl2 tr:hover {
+	text-decoration: none;
+	background:#FDFBF9;
+}
+table.tbl th.sorted {
+    background-color: #DCD8CF;   /*707634    4AA5FF #666699;*/
+}
+.event {
+	background-color: #F9F5EA; /*#F9F7F1;*/
+}
+.event2 {
+	background-color: #ECE6D7;
+}
+	
+/*TAB PAGE*/
+
+.shadetabs li a{
+text-decoration: none;
+color:#000000;
+border: 1px solid #BBBBBB;
+background: #C7B68D url(shade.gif) top left repeat-x;
+}
+
+.shadetabs li a:visited{
+        color:#000000;
+}
+
+.shadetabs li a:hover{
+ color:#0360A2;
+}
+
+.shadetabs li.selected a{ /*selected main tab style */
+background-color:#E4DDCC;
+border-bottom-color: transparent;
+}
+
+
+.tabcontentstyle{ /*style of tab content oontainer*/
+border-top: 1px solid gray;
+}
+
+.tabs-panel:after {
+	content: "."; 
+	display: block; 
+	height: 0; 
+	clear: both; 
+	visibility: hidden;
+}
+
+.tabs-panel {
+	height: 1%;
+}
+.tabs-panel a {
+	background-image: url("../images/bg_tabs12.gif");
+	text-decoration:none;
+}
+
+.tabs-panel a span {
+	background-image: url("../images/bg_tabs22.gif");
+	color: #536482;
+}
+
+.tabs-panel a:hover span {
+	color: #0360A2;
+}
+
+.tabs-panel .selected a {
+	border-bottom-color: #E4DDCC;
+}
+
+.tabs-panel .selected a span {
+	color: #333333;
+}
+
+.tabs-panel .selected a:hover span {
+	color: #000000;
+}
+.popups {
+	margin:5px;
+        background-color:#F1EBDD;
+        padding:10px;
+}
+/* Profil navigation menu
+----------------------------------------*/
+
+/* Link styles for the sub-section links */
+#navigation a {
+	color: #536482;
+	background:#CBD6E1 url(../images/bg_nav.gif) repeat-y right;
+}
+
+#navigation a:hover {
+	color: #0360A2;
+	background-color:#FCF4E1;
+}
+
+#navigation .selected a {
+	color: #000000;
+	background:#FCF4E1 url(../images/bg_nav2.gif) repeat-y right;;
+}
+
+#navigation #active-subsection a:hover {
+	color: #0360A2;
+}	
+/*Style for Forum */
+ul.forums {
+	background: #ECE6D7 none repeat-x 0 0;
+}
+li.row:hover {
+	background-color: #FDFBF9;
+}
+
+@media print {
+#nav {
+ display:none;
+}
+}
+div#container-login {
+	background:url(../images/bg_panel_login.gif) no-repeat;
+	}			
+
+.copy {margin:52px auto 0 auto;	text-align:center;color:#AE9F7E;}		
+
+span.corners-top, span.corners-bottom, span.corners-top span, span.corners-bottom span {
+	background-repeat:no-repeat;
+	display:block;
+	font-size:1px;
+	height:5px;
+	line-height:1px;
+	}
+
+span.corners-top span {
+	background-image:none;
+	background-position:100% 0pt;
+	}
+
+span.corners-top span {background-image:url(../images/corners_right.png);}
+.box-login {
+	background:url(../images/box_login.gif) no-repeat;
+	}
+
+			

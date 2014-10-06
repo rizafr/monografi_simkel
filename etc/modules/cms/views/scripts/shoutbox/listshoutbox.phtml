@@ -1,0 +1,98 @@
+<? require_once 'Zend/View.php';
+    require_once 'share/halaman_list.php';
+    require_once 'share/Portalconf.php';
+  
+   $ctrlFrm = new Zend_View();
+   $halaman = new halaman_list(); 
+  
+    $jmlshoutboxList = count($this->shoutboxList);
+	//echo $jmlshoutboxList;
+   for ($j = 0; $j < $jmlshoutboxList; $j++) {
+     $shoutbox[$j] = array("id"  		=>(string)$this->shoutboxList[$j]['id'],
+						"n_message"      		=>(string)$this->shoutboxList[$j]['n_message'],
+						  "n_userid"  		=>(string)$this->shoutboxList[$j]['n_userid'],
+						  "d_entri"  		=>(string)$this->shoutboxList[$j]['d_entri']);
+   } 
+ $pesancek=$this->pesancek;
+	if ($pesancek=='gagal'){$confirm ='confirmfail';}
+	else {$confirm ='confirm';} 
+$cat=$_REQUEST['cat'];
+$key=$_REQUEST['key'];
+
+	  if ($cat==1) $select1="selected";
+	  else if ($cat==2) $select2="selected";
+?>
+	<div class="navlink">
+	<a href="<? echo $this->basePath; ?>/cms">Halaman Utama</a>&nbsp;<strong>&#8250;</strong>&nbsp;Kelola Data shoutbox&nbsp;
+	</div>
+<br style="clear:both;" />
+	<div id="top"></div>
+	<div id="confirm" class="<?=$confirm?>" style="display: none">
+		<h3><?echo $pesan = $this->pesan;?></h3>				
+	</div>
+	<h2 class="title">Kelola Data shoutbox</h2>
+<div class="tablenav">
+				<form id="frmSearch" method="post" name="frmSearch">
+					Pencarian berdasarkan :
+						<select size="1" name="cat" id="cat">  
+							<option value='n_userid' <?=$select1?>>UserID</option>
+							<option value='n_message' <?=$select2?>>Pesan</option>
+						</select>
+					    <input id="key" type="text" name="key" value="<?=$key?>">
+					    <input type="button" class="button2" value="Cari" onclick="javascript:cariListshoutbox();">		   
+				</form>						
+	</div>	
+<br style="clear:both;" />
+	<form action="" method="post"> 
+<br style="clear:both;" />
+<table class="widefat sortable" cellspacing="1">
+		<tr>
+			<th class="nosort" width="5%">No.</th>
+			<th class="<?=$this->orderbya?>" width="15%" onclick="orderBy('d_entri','<?=$this->orderbyb?>','<?php echo $this->basePath; ?>/cmsmodule/shoutbox/listshoutbox')">Tanggal</th>
+			<th class="<?=$this->orderbya?>" width="15%" onclick="orderBy('n_userid','<?=$this->orderbyb?>','<?php echo $this->basePath; ?>/cmsmodule/shoutbox/listshoutbox')">UserID</th>
+			<th width="55%">Pesan</th>
+			<th width="10%" colspan="2">&nbsp;</th>
+		</tr> 
+<? 		if ($jmlshoutboxList == 0) {?>
+		<tr class="event">
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>	
+<?}else{
+				foreach ($shoutbox as $key => $val): 
+				if ($key%2==0) { ?>
+				<tr class="alternate">
+				<? } else if ($key%2==1) { ?>
+				<tr class="alternate2">
+				<? } 
+				$noUrut = (($this->currentPage -1)* $this->numToDisplay) + $key +1;
+				$nuserid = $this->escape($val['n_userid']);
+				$date=formatDate2($this->escape($val['d_entri']));
+				
+				?>
+					<td class="clcenter"><?php echo $noUrut;?></td>
+					<td><?php echo $date ?></td>	
+				    <td align="center"><?php echo $nuserid;?></td>
+					<td><?php echo $this->escape($val['n_message']);?></td>
+					<td align="center"><a href="#" title="Ubah Data" onclick="shoutboxM('update','<?=$this->escape($val['id'])?>');">Ubah</a>	
+					</td>
+					<td align="center"><a href="#" title="Hapus Data"  onClick="javascript:HapusDatashoutbox('<?php echo $this->escape($val['id']);?>','<?php echo $this->escape($val['n_message']);?>')">Hapus</a>
+					</td>					
+				</tr>
+				<?php endforeach;}?>
+	
+	</table>
+	<div class="spacer"></div>
+
+<?
+$orderBy=$this->orderBy;
+$modul = $this->basePath."/cmsmodule/shoutbox/listshoutbox?orderBy=$orderBy&order=$this->orderbya";
+echo $halaman->halamanList($this->totalshoutboxList, $this->numToDisplay, $this->currentPage, $modul)
+?>	
+	</form>
+	<div class="spacer"></div>
+

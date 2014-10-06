@@ -1,0 +1,59 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+?>
+<div class="navlink">
+	<a  href="index_login.php">Halaman Utama</a> <strong> &#8250; </strong> <a href="?p=konsep_surat">Pengumuman</a>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Tambah Data Konsep Surat</h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {	$namaForm = 'frmtambahpengumuman'; }
+			else if (strtolower($this->jenisForm) == 'update') {	$namaForm = 'frmubahpengumuman'; }
+			else {	$namaForm = 'frmhapuspengumuman'; }
+		
+		?>
+		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+				<tr>
+				    <td align="right" width="180">* Pengumuman :</td>
+					<td>
+						<textarea name="ePengumuman"  id="ePengumuman" class="medium"><? echo $this->detailPengumuman['e_pengumuman'];?></textarea>
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">Status Aktif :</td>
+					<td>
+					<?
+						$cStatusaktifList[""] = "---Pilih---";
+						$cStatusaktifList["Y"] = "Ditampilkan";
+						$cStatusaktifList["N"] = "Tidak Ditampilkan";
+						echo $ctrlFrm->formSelect('cStatusaktif', $this->detailPengumuman['c_statusaktif'], null, $cStatusaktifList);
+					?>
+					</td>
+				</tr>
+				<tr>
+				    <td></td>
+				    <td>
+						<div class="right">
+							<input type="button" value="Batal" onClick="pengumumanlist();"> 
+							<input type="reset" value="Ulangi"> 
+							<? echo $ctrlFrm->formHidden('id', $this->detailPengumuman['id'], null);?>
+							<input   type="submit" value="Simpan">
+						</div>
+					</td>
+				</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>

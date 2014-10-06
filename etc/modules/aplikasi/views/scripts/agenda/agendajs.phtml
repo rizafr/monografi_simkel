@@ -1,0 +1,116 @@
+function cariAgendaList()
+{
+	$("#frmCariAgenda").ajaxForm(frmCariAgenda_opt);
+}
+var frmCariAgenda_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/aplikasi/agenda/agendalist',
+		type: 'post', 
+		resetForm: false
+};
+
+
+function agendalist()
+{
+	var url = '<?php echo $this->basePath; ?>/aplikasi/agenda/agendalist';
+	jQuery.get(url, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+function agendaxForm(jenisForm, iAgenda)
+{
+	var url = '<?php echo $this->basePath; ?>/aplikasi/agenda/agendaolahdata';
+	
+	var param = { jenisForm:jenisForm, iAgenda:iAgenda};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahagenda").ajaxForm(tambahAgenda_opt);
+		jQuery("#frmubahagenda").ajaxForm(ubahAgenda_opt);
+	});
+}
+
+function daftarPegawai(fieldTujuan)
+{
+	var url = '<?php echo $this->basePath; ?>/aplikasi/agenda/daftarpegawai';
+	var param = { fieldTujuan : fieldTujuan}
+	jQuery.get(url, param, function(data) {
+		$("div#targetview").html(data);
+		document.getElementById('targetview').style.display='block';
+	});
+}
+
+function cariAgenda(){ 
+	kategoriCari = document.getElementById('kategoriCari').value;
+	katakunciCari = document.getElementById('katakunciCari').value;
+	var param = { kategoriCari:kategoriCari, katakunciCari:katakunciCari};
+	
+	var url = '<?php echo $this->basePath; ?>/aplikasi/agenda/agendalist';
+	jQuery.get(url, param, function(data) {
+		$("#targetview").html(data);
+	});	
+}
+
+function pilihPegawai(textField, nip, nama)
+{
+	document.getElementById('iUser'+textField).value = nip;
+	document.getElementById('nUser'+textField).value = nama;
+	
+	document.getElementById('targetview').style.display = 'none';
+}
+
+var tambahAgenda_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/aplikasi/agenda/agenda',
+	beforeSubmit : function() {
+		var dAgenda = document.getElementById('dAgenda').value;
+		
+				if(!dAgenda){
+					alert('Tanggal Agenda harus diisi.');
+					return false;
+				} else {
+					return true;
+				}
+			
+	},
+	success : function() {
+		doCount(5);
+	},
+	type: 'post', 
+	resetForm: false
+};
+
+var ubahAgenda_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/aplikasi/agenda/agendaupdate',
+	beforeSubmit : function() {
+		var dAgenda = document.getElementById('dAgenda').value;
+		
+				if(!dAgenda){
+					alert('Tanggal Agenda harus diisi.');
+					return false;
+				} else {
+					return true;
+				}
+			
+	},
+	success : function() {
+		doCount(5);
+	},
+	type: 'post', 
+	resetForm: false
+};
+
+function agendaHapus(param1, param2)
+{ 
+	
+	if(ConfirmDelete(param1, param2))
+	{	//alert("test");
+		handler = '<?php echo $this->basePath; ?>/aplikasi/agenda/agendahapus';
+		var opt = {iAgenda : param2};
+		jQuery.get(handler,opt,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+}  

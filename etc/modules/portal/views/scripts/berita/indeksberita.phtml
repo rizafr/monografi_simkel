@@ -1,0 +1,92 @@
+<? require_once 'Zend/View.php';
+    require_once 'share/halaman_list_portal.php';
+    require_once 'share/Portalconf.php';
+  
+   $ctrlFrm = new Zend_View();
+   $halaman = new halaman_list(); 
+    $jmlBeritaList = count($this->BeritaList);
+	//echo $jmlBeritaList;
+   for ($j = 0; $j < $jmlBeritaList; $j++) {
+     $berita[$j] = array("c_berita"  		=>(string)$this->BeritaList[$j]['c_berita'],
+						"n_judul"      		=>(string)$this->BeritaList[$j]['n_judul'],
+						 "n_detil"  		=>(string)$this->BeritaList[$j]['n_detil'],
+						  "c_status"  		=>(string)$this->BeritaList[$j]['c_status'],
+						  "d_berita"  		=>(string)$this->BeritaList[$j]['d_berita']);
+   } 
+$tgl=$_REQUEST['tgl'];
+$bln=$_REQUEST['bln'];
+$thn=date(Y);
+$thnx=$_REQUEST['thn'];
+if ($thnx=='') $thn=$thn;
+else $thn=$thnx;
+$key=$_REQUEST['key'];
+
+?>
+<div class="widget">
+	<h4 class="widgettitle">Konten</h4>
+<div class="content">
+	<h2 class="title">Arsip Berita</h2>
+
+	<ul class="nostyle">
+
+
+<? 		if ($jmlBeritaList == 0) {?>
+<span class="highlight">Data Berita Tidak Ditemukan !</span><br>
+<a href="#indexberita" onclick="goExec_Script('<?php echo $this->basePath; ?>/portalmodule/berita/indeksberita','<?php echo $this->basePath; ?>/portalmodule/berita/beritajs', 'Berita')">Kembali</a>
+
+<?}else{
+?>
+<fieldset class="searchpanel center">
+				<form id="frmSearch" method="post" name="frmSearch">
+					<select size="1" name="tgl" id="tgl">  
+<?
+
+  echo "<option value=''>Tgl</option>";
+  for ($i=1; $i<=31; $i++) {
+    if($i<10) $i='0'.$i;
+    echo "<option value=$i";
+    if ($tgl==$i) echo " selected";
+    echo ">$i</option>";
+  }
+?>
+  </select>
+  <select size="1" name="bln" id="bln">  
+<?
+  echo "<option value=''>Bln</option>";
+  while(list($x,$v)=each($BULAN)) {
+    if($x<10) $x='0'.$x;
+    echo "<option value=$x";
+    if ($bln==$x) echo " selected";
+    echo ">$v</option>";
+  }
+?>
+</select>
+					<input id="thn" type="text" name="thn" class="inputbox" size="4" maxlength="4" value="<?=$thn?>">
+					<input id="key" type="text" name="key" class="inputbox" value="<?=$key?>" size="40">
+					<input type="button" class="button2" value="Cari" onclick="javascript:cariListBerita();">		   
+				</form>						
+	</fieldset>	
+
+<?php
+				foreach ($berita as $key => $val): 
+				$noUrut = (($this->currentPage -1)* $this->numToDisplay) + $key +1;
+				$date=formatDate($this->escape($val['d_berita']));
+				
+				?>
+
+	<li><span class="date"><?php echo $date ?></span>
+      <h3><a href="#" onclick="showDetilmed('<?php echo $this->basePath; ?>/portalmodule/berita/beritadetil','<?=$this->escape($val['c_berita'])?>','<?php echo $this->basePath; ?>/portalmodule/berita/indeksberita','<?php echo $this->basePath; ?>/portalmodule/berita/beritajs','Berita');"><?php echo $this->escape($val['n_judul']);?></a></h3></li>
+
+				<?php endforeach;}?>
+</ul>				
+
+	<div class="space"></div>
+<div id="targetdetil"></div>
+
+<?
+$modul = $this->basePath."/portalmodule/berita/indeksberita";
+if ($jmlBeritaList != 0) echo $halaman->halamanList($this->totalBeritaList, $this->numToDisplay, $this->currentPage, $modul)
+?>	
+
+	<div class="space"></div>
+</div>

@@ -1,0 +1,5 @@
+;Insert data;03/04/2014 07:26:06;Sita Purnadewi, S.T ();
+;Ubah data;03/04/2014 10:13:43; (14);
+;Ubah data;03/04/2014 12:03:17; ();
+;Ubah data;03/04/2014 12:06:23; ();
+;Ubah data;03/04/2014 13:41:32;Sita Purnadewi, S.T (507);

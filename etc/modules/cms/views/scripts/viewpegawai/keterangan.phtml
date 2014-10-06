@@ -1,0 +1,125 @@
+<? require_once 'Zend/View.php';
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+
+
+	$nip = $_REQUEST['nip'];
+	$_SESSION['nip'] = $nip;
+	//echo "nip_ket_session = ".$nip;
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+
+
+
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">CIRI-CIRI FISIK</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk memasukkan/memelihara data ciri-ciri fisik pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line">
+		<div class="title2">Ciri-ciri Fisik</div>
+		<fieldset  class="panel-form">	
+			<form id="frmVKet" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/keterangan" method="post" name="frmVKet">
+				<dl>
+					<dt>Tinggi</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$tinggi = $this->escape($this->tinggi);
+						echo $tinggi." cm"; 
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Berat</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$berat = $this->escape($this->berat);
+						echo $berat." kg";
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Rambut</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$rambut = $this->escape($this->rambut);
+						echo $rambut;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Bentuk Muka</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$bentukMuka = $this->escape($this->bentukMuka);
+						echo $bentukMuka;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Warna Kulit</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$warnaKulit = $this->escape($this->warnaKulit);
+						echo $warnaKulit;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Ciri Khas</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$ciriKhas = $this->escape($this->ciriKhas);
+						echo $ciriKhas;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Cacat Tubuh</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$cacatTubuh = $this->escape($this->cacatTubuh);
+						echo $cacatTubuh;
+					?>
+					</dd>
+				</dl>
+	 
+ 			<dl>
+				<?php 
+				  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">&nbsp;</dd>			
+				<div class="back" onClick="javascript:kembaliKet('<? echo $this->escape($this->nip); ?>');" title="Kembali"><input type="button" value="Kembali" id="kembaliKet"></div>
+			</dl>
+		  	</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>		
+
+<!--			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliKet();" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

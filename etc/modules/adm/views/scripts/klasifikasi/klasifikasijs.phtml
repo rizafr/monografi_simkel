@@ -1,0 +1,107 @@
+function cariklasifikasi()
+{
+	$("#frmcariklasifikasi").ajaxForm(frmcariklasifikasi_opt);
+}
+var frmcariklasifikasi_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/adm/klasifikasi/klasifikasilist',
+		type: 'post', 
+		resetForm: false
+};
+function klasifikasilist()
+{
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	var param = {kategoriCari:kategoriCari,carii:carii};
+	
+	var url = '<?php echo $this->basePath; ?>/adm/klasifikasi/klasifikasilist';
+	jQuery.get(url, param, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+function klasifikasiForm(jenisForm, id_klasifikasi)
+{
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	var url = '<?php echo $this->basePath; ?>/adm/klasifikasi/klasifikasidata';
+	var param = { jenisForm:jenisForm, id_klasifikasi:id_klasifikasi,kategoriCari:kategoriCari,carii:carii};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahklasifikasi").ajaxForm(tambahKlasifikasi_opt);
+		jQuery("#frmubahklasifikasi").ajaxForm(ubahKlasifikasi_opt);
+	});
+}
+
+var tambahKlasifikasi_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/adm/klasifikasi/klasifikasi',
+	beforeSubmit : function() {
+		
+		if (document.getElementById('n_klasifikasi').value == ''){
+			alert('Klasifikasi Kedatangan harus Diisi');
+			return false;
+		}
+
+	answer = confirm('\n\   Apakah data yang anda masukan adalah benar.\n\n   \'OK\' Jika setuju, \'Cancel\' Jika tidak setuju.');
+		if(answer !=0) { 
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+var ubahKlasifikasi_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/adm/klasifikasi/klasifikasiupdate',
+	beforeSubmit : function() {
+		
+		if (document.getElementById('n_klasifikasi').value == ''){
+			alert('Klasifikasi Kedatangan harus Diisi');
+			return false;
+		}
+	answer = confirm('\n\   Apakah data yang anda masukan adalah benar.\n\n   \'OK\' Jika setuju, \'Cancel\' Jika tidak setuju.');
+		if(answer !=0) { 
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+function klasifikasiHapus(param1, nama, param2)
+{ 
+	
+	if(ConfirmDelete(param1,nama))
+	{	
+		handler = '<?php echo $this->basePath; ?>/adm/klasifikasi/klasifikasihapus';
+		var opt = {id_klasifikasi : param2};
+		jQuery.get(handler,opt,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+}
+
+function BukaWindows(){
+	var w = 0; 
+	var h = 0;
+	w = screen.availWidth;
+	h = screen.availHeight;
+	var popW = 800, popH = 600;
+	var leftc = (w-popW)/2;
+	var topc = (h-popH)/2;
+	var selectWindow = window.open(url,'Selection', 'left=' + leftc + ',top=' + topc + ', width='+popW+',height='+popH+',resizable=0,scrollbars=yes');
+}
+

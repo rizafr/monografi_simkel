@@ -1,0 +1,29 @@
+<h2 class="accessibility">Navigation</h2><!--start nav-->
+<div class="menuback">
+<ul id="menu" class="menu">
+
+	<li>
+	<a title=pendaftaran href="#" class=menulink onclick="open_url_to_div('<?php echo $this->basePath; ?>/pasien/pendaftaran/pendaftaranlist?','<?php echo $this->basePath; ?>/pasien/pendaftaran/pendaftaranjs');"><span>Registrasi Pasien</span></a>
+	</li>
+
+	<li>
+	<a title=pendaftaran href="#" class=menulink onclick="open_url_to_div('<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasienlist?','<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasienjs');"><span>Laporan Pasien</span></a>
+	</li>
+
+
+
+ </ul>
+ </div>
+
+<script type="text/javascript">tabdropdown.init("colortab", "auto")</script> 
+
+<script type="text/javascript">
+var menu = new menu.dd("menu");
+menu.init("menu","menuhover");
+
+</script>
+<!--end nav-->
+
+
+
+	

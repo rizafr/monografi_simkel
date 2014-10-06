@@ -1,0 +1,129 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+		
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Pengguna</h2>
+		<div class="add" title="Tambah Data" onClick="penggunaForm('insert','');"></div> 
+		<div class="search-panel">
+		<form method="post" userid="frmCariPengguna" name="frmCariPengguna">Pencarian Berdasarkan :
+<table wuseridth="100%" border="0" cellpadding="0" cellspacing="1" align="center">
+<?
+	$kategoriCari = array("username" => "Pengguna");
+	echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
+?>
+	<input type="text" name="carii" userid="carii" align="center" value ="<? echo $this->carii;?>">
+				<?
+			         $atribSubmit = array("onclick"=>"javascript:cariPengguna();");
+			         echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+				?>
+</table>		
+				
+			</form>
+		</div>
+		<fieldset class="fields"> 
+			<? 
+			$status = $this->hasil;
+			$proses = $this->proses;
+			$keterangan = $this->keterangan;
+			$pesan->show_message($proses, $keterangan, "$status" ); ?>
+			<table userid="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th class="nosort">No</th> 
+				<th class="sorted order2 sortable">Pengguna Name</th> 
+				<th class="sorted order2 sortable">Nama</th> 
+				<th class="sorted order2 sortable">Group</th> 
+				<th class="sorted order2 sortable">Nopend</th> 
+				<th class="sorted order2 sortable">Nama Kantor</th> 
+				<th class="nosort">Status Aktif</th>
+				<th colspan="2"  class="nosort">Tindakan</th>
+				
+				<?
+				if (count($this->penggunaList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tuseridak Ditemukan</font></td></tr>
+				<?} else {
+						
+						
+						foreach ($this->penggunaList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } 
+						$userid = $this->escape($val['userid']); 
+						$username = $this->escape($val['username']); 
+						$pengguna_userid = $this->escape($val['pengguna_userid']); 
+						$NIP = $this->escape($val['NIP']); 
+						$n_nama = $this->escape($val['n_nama']); 
+						$grup = $this->escape($val['grup']); 
+						$c_upt = $this->escape($val['c_upt']); 
+						$n_upt = $this->escape($val['n_upt']); 
+						$c_divre = $this->escape($val['c_divre']); 
+						$kdStatus = $this->escape($val['kd_status']);
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						
+						/*$n_mhs = $referensi->getnamaMahasiswa($pengguna_userid);
+						$n_nama = $referensi->getnamaDosen($pengguna_userid);
+						$i_nuseridn = $referensi->getnuseridnDosen($pengguna_userid);*/
+						// form Huseridden 
+						echo $ctrlFrm->formHuseridden('userid', $userid, null);
+						
+						?>
+						
+						<td class="clcenter"><? echo $noUrut;?>&nbsp;&nbsp;</td>
+						<td class="clleft">&nbsp;<? echo $username;?></td>
+						<td class="clleft">&nbsp;<? echo $n_nama;?></td>
+						<td class="clleft">&nbsp;<? echo $grup;?></td>
+						<td align="center">&nbsp;<? echo $c_upt;?></td>
+						<td align="left">&nbsp;<? echo $n_upt;?></td>
+						<? 
+						if($kdStatus == '1') { $statusAktif = "checked";}
+						else {$statusAktif = "";}
+					
+						?>
+						<td align="center">
+							<input type="checkbox" name="statusAktif_<? echo $key;?>" userid="statusAktif_<? echo $key;?>" <? echo $statusAktif;?> value="<?echo $userid;?>" onClick="ubahStatus(<?echo $key?>);">
+						</td>
+						
+						<td><div onClick="penggunaForm('update','<? echo $userid;?>');" class="edit" title="Ubah Data"></div></td>
+						<td><div class="delete" title="Hapus Data" onClick="penggunaHapus('Pengguna', '<? echo $userid; ?>')" ></td>
+						
+					
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+			<?	
+			$totalData = $this->totPenggunaList;
+			$modul = $this->basePath."/adm/pengguna/penggunalist";
+			$param1 = $this->divre;$param2 = $this->upt;$param3 = $this->level;
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
+			?>
+		</fieldset>		 
+		
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>

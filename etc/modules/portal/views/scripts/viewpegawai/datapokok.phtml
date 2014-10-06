@@ -1,0 +1,95 @@
+
+
+
+
+	<?php
+		$nip = $_REQUEST['nip'];
+		if ($nip == ''){
+		$nip = $this->escape($this->nip);
+		}
+     $vFoto = $this->basePath."/util/tampilfoto/tampilfoto?f=".$this->nip;
+	
+     //$Directory = "/sdm/foto";
+     $Directory = "../../../../../data/sdm/foto";
+     //$Directory = "/foto";
+     $filename = $nip.".jpg"; 
+	 $fullpath = $this->basePath."../etc/data/sdm/foto/$filename"; //"$Directory/$filename";
+	 //echo "dir=".$fullpath;
+	 //echo $this->render('sdm/foto/$filename');
+
+	
+       $filename = $nip.".jpg"; 
+	$fullpath = "../etc/data/sdm/foto/$filename"; //"$Directory/$filename";
+	 
+	if (!file_exists($fullpath)) {
+		$vFoto = $this->basePath."/images/photo.jpg";
+	} 
+
+	 ?>
+  
+
+
+				<dl>
+					<dd class="col-left">&nbsp;</dd>
+					<dd class="col-left">
+						<img src="<?=$vFoto?>" width="90" height="120" ></td>
+					</dd>
+				</dl>
+				<dl>
+					<dd class="col-left">&nbsp;</dd>
+					<dd class="dot2">&nbsp;</dd>
+					<dd class="col-right2">&nbsp;</dd>	
+					<dd class="col-left">&nbsp;</dd>
+					<dd class="dot2">&nbsp;</dd>
+				</dl>
+				<dl>
+					<dd class="col-left">Nama Pegawai</dd>
+					<dd class="dot2">:</dd>
+					<dd class="col-right2">
+					<?php 
+						echo $this->escape($this->namaPegawai);
+					?>
+					</dd>	
+					<dd class="col-left">&nbsp;</dd>
+					<dd class="dot2">&nbsp;</dd>
+				</dl>
+				<dl>
+					<dd class="col-left">NIP</dd>
+					<dd class="dot2">:</dd>
+					<dd class="col-right2">
+					<?php 
+						$nip = $_REQUEST['nip'];
+						if ($nip == ''){
+						$nip = $this->escape($this->nip);
+						}
+						echo $nip;
+					?>
+					<dd class="col-left">&nbsp;</dd>
+					<dd class="dot2">&nbsp;</dd>
+				</dl>
+<!--				<dl>
+					<dd class="col-left">Jabatan</dd>
+					<dd class="dot2">:</dd>
+					<dd class="col-right2">
+					<?php 
+						echo $this->escape($this->namaJab);
+					?>
+				</dl>
+-->
+				<dl>
+					<dd class="col-left">Gol/Pangkat</dd>
+					<dd class="dot2">:</dd>
+					<dd class="col-right2">
+					<?php 
+/* 						$kdGol = $this->escape($this->kdGol);
+						$nmGol = $this->escape($this->nmGol);
+						$gol = $kdGol." - ".$nmGol;
+ */						
+						//echo $this->escape($this->namaJab);
+						$kGol = $this->escape($this->kGol);
+						$nGol = $this->escape($this->nGol);
+						$gol = $kGol." - ".$nGol;
+						
+						echo $gol;
+					?>
+				</dl>

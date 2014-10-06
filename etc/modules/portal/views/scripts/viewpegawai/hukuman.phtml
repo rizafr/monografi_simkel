@@ -1,0 +1,135 @@
+<? require_once 'Zend/View.php';
+   
+   $ctrlFrm = new Zend_View();
+
+$nip = $_REQUEST['nip'];
+$_SESSION['nip'] = $nip;
+
+	$jumHukumList = count($this->hukumList);
+   //echo $jumHukumList;
+   for ($j = 0; $j < $jumHukumList; $j++) {
+     $hukum[$j] = array("i_peg_nip"  	=>(string)$this->hukumList[$j]['i_peg_nip'],
+						  "sp"			=>(string)$this->hukumList[$j]['sp'],
+						  "jenisSp"		=>(string)$this->hukumList[$j]['jenisSp'],
+	                      "tanggal"     =>(string)$this->hukumList[$j]['tanggal'],
+						  "dari"  		=>(string)$this->hukumList[$j]['dari'],
+						  "kasus"  		=>(string)$this->hukumList[$j]['kasus'],
+						  "tkSanksi"  	=>(string)$this->hukumList[$j]['tkSanksi'],
+						  "keterangan"  =>(string)$this->hukumList[$j]['keterangan']);	
+   } 
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA RIWAYAT HUKUMAN</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data riwayat hukuman yang pernah diterima pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+			<form id="frmVHukum"action="<?php echo $this->basePath; ?>/sdm/viewpegawai/hukuman" method="post" name="frmVHukum">
+			<?php include "menulink.phtml";?>  
+			<?php include "datapokok.phtml";?>  
+			</form>
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line"></div>	
+	<fieldset class="fields">
+		<div class="title2">Data Riwayat Hukuman</div>
+		<div class="blank"></div>
+
+<?
+	if ($jumHukumList == 0) {
+		echo "<font color=\"red\">Data Hukuman Tidak Ditemukan</font>";		
+?>	
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+		    <th width="25%">Surat Peringatan</th>
+		    <!--<th width="12%">Jenis Peringatan</th>-->
+			<th width="10%">Tanggal</th>
+			<th width="15%">Yang Mengeluarkan</th>
+			<th width="20%">Kasus</th>
+			<th width="10%">Tingkat Sanksi</th>
+			<th width="20%">Keterangan</th>
+			</tr>
+	</table>
+<?	}	else { ?>
+	</center>
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+		    <th width="25%">Surat Peringatan</th>
+		    <!--<th width="12%">Jenis Peringatan</th>-->
+			<th width="10%">Tanggal</th>
+			<th width="15%">Yang Mengeluarkan</th>
+			<th width="20%">Kasus</th>
+			<th width="10%">Tingkat Sanksi</th>
+			<th width="20%">Keterangan</th>
+			</tr>
+		<?php foreach ($hukum as $key => $val): 
+					   if ($key%2==0) { ?>
+				      <tr class="event">
+					<? } else if ($key%2==1) { ?>
+					  <tr class="event2">
+					<? } ?>
+				<?php
+				$tanggal = $this->escape($val['tanggal']);
+					$thn = substr($tanggal,0,4);
+					$bln = substr($tanggal,5,2);
+					$hr = substr($tanggal,8,2);
+					$tanggal1 = $hr."-".$bln."-".$thn;
+					if ($thn == ''){
+						$tanggal1 = null;
+					}
+					else if ($bln == '#'){
+						$tanggal1 = null;
+					}
+					else if ($hr == '#'){
+						$tanggal1 = null;
+					}
+					
+				$jenisSp = $this->escape($val['jenisSp']);
+				if ($jenisSp == 'L') {
+					$jenisSp = 'Lisan';
+				}
+				else if ($jenisSp == 'T') {
+					$jenisSp = 'Tertulis';
+				}
+				?>
+				<td>&nbsp;
+				<a href="#" onClick="javascript:viewHukum('<? echo $this->escape($val['i_peg_nip']); ?>','<? echo $tanggal; ?>');" class="link" title="View"><?php echo $this->escape($val['sp']);?> </a></td>
+				<!--<td class="clcenter"> <?php echo $jenisSp;?></td>-->
+				<td class="clcenter"> <?php echo $tanggal1;?></td>
+				<td>&nbsp;<?php echo $this->escape($val['dari']);?></td>
+				<td>&nbsp;<?php echo $this->escape($val['kasus']);?></td>
+				<td>&nbsp; <?php echo $this->escape($val['tkSanksi']);?></td>
+				<td>&nbsp;<?php echo $this->escape($val['keterangan']);?></td>
+		  </tr>
+	<?php endforeach;?> 		  
+		</table>
+<? }	?>
+ 			<dl>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">
+				<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+				</dd>			
+				<div class="back" onClick="javascript:kembaliHukum();" title="Kembali"><input type="button" value="Kembali" id="kembaliHukum"></div>
+			</dl>
+			</div>
+ 	</fieldset>
+</div>
+	  
+
+<!--    <p align="center">
+		<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+    </p>
+ 
+			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliHukum();" class="back" title="Kembali">Kembali</a>
+			</div>
+ -->

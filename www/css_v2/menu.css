@@ -1,0 +1,182 @@
+/*
+Author: Irwan Setiawan
+Created :13/08/08
+Date Modified:14/08/2008
+*/
+/* Get rid of the margin, padding and bullets in the unordered lists */
+#pmenu, #pmenu ul {
+	padding:0; 
+	margin:0; 
+	list-style-type: none;
+	z-index:1; 
+	}
+
+/* Set up the link size, color and borders */
+#pmenu a, #pmenu a:visited {
+	display:block;
+	padding:4px 10px; 
+	text-align:center; 
+	font-size:11px; 
+	min-height:16px;  
+	text-decoration:none; 
+	}
+*html #pmenu a, #pmenu a:visited {
+	padding:5px 10px 5px 10px;
+	}
+*html #pmenu ul li {
+	height:24px;
+	}		
+/* Set up the sub level borders */
+#pmenu li ul li a, #pmenu li ul li a:visited {
+	border-width:0 1px 1px 1px;
+	width:130px;
+	text-align:left;
+	}
+#pmenu li ul li .up {
+	top:-71px;
+	}
+#pmenu li ul li .up2 {
+	top:-246px;
+	}
+#pmenu li a.enclose, #pmenu li a.enclose:visited {
+	border-width:1px;
+	}
+
+/* Set up the list items */
+#pmenu li {
+	float:left;  
+	background-color:transparent;
+	}
+
+/* For Non-IE browsers and IE7 */
+#pmenu li:hover {
+	position:relative;
+	}
+/* Make the hovered list color persist */
+#pmenu li:hover > a {
+	background:#DBE7EE; 
+	color:#814000;
+	}
+/* Set up the sublevel lists with a position absolute for flyouts and overrun padding. The transparent gif is for IE to work */
+#pmenu li ul {
+	display:none;
+	}
+/* For Non-IE and IE7 make the sublevels visible on list hover. This is all it needs */
+#pmenu li:hover > ul {
+	display:block; 
+	position:absolute; 
+	top:-6px; 
+	left:135px; 
+	padding:10px; 
+	background:transparent url(../images/transparent.gif); 
+	}
+#pmenu li:hover > ul.left {
+	left:-150px;
+	}	
+/* Position the first sub level beneath the top level liinks */
+#pmenu > li:hover > ul {
+	left:-10px; 
+	top:14px;
+	}
+
+/* get rid of the table */
+#pmenu table {
+	position:absolute; 
+	border-collapse:collapse; 
+	top:0px; 
+	left:-10px; 
+	z-index:1; 
+	}
+
+/* For IE5.5 and IE6 give the hovered links a position relative and a change of background and foreground color. This is needed to trigger IE to show the sub levels */
+* html #pmenu li a:hover {
+	position:relative; 
+	background:#DBE7EE; 
+	color:#814000;
+	z-index:1; 
+	}
+
+/* For accessibility of the top level menu when tabbing */
+#pmenu li a:active, #pmenu li a:focus {
+	background:#DBE7EE; 
+	color:#814000;
+	}
+
+/* Set up the pointers for the sub level indication */
+#pmenu li.sub {background:#BACCD7; font-weight:normal;}
+#pmenu li.fly {background:#BACCD7 url(../images/fly.gif) no-repeat right center;font-weight:normal}
+#pmenu li.drop {background:#BACCD7 url(../images/drop.gif) no-repeat right center;}
+
+/* This lot is for IE5.5 and IE6 ONLY and is necessary to make the sublevels appear */
+
+/* change the drop down levels from display:none; to visibility:hidden; */
+* html #pmenu li ul {
+	visibility:hidden; 
+	display:block; 
+	position:absolute; 
+	top:-11px; 
+	left:80px; 
+	padding:10px; 
+	background:transparent url(images/transparent.gif);
+	}
+
+/* keep the third level+ hidden when you hover on first level link */
+#pmenu li a:hover ul ul{
+	visibility:hidden;
+	}
+/* keep the fourth level+ hidden when you hover on second level link */
+#pmenu li a:hover ul a:hover ul ul{
+	visibility:hidden;
+	}
+
+/* keep the fifth level hidden when you hover on third level link */
+#pmenu li a:hover ul a:hover ul a:hover ul ul{
+	visibility:hidden;
+	}
+/* keep the sixth level hidden when you hover on fourth level link */
+#pmenu li a:hover ul a:hover ul a:hover ul a:hover ul ul {
+	visibility:hidden;
+	}
+
+/* make the second level visible when hover on first level link and position it */
+#pmenu li a:hover ul {
+	visibility:visible; 
+	left:-10px; 
+	top:14px; 
+	lef\t:-11px; 
+	to\p:14px;
+	}
+
+/* make the third level visible when you hover over second level link and position it and all further levels */
+#pmenu li a:hover ul a:hover ul{ 
+	visibility:visible; 
+	top:-7px; 
+	left:144px;
+	}
+/* make the fourth level visible when you hover over third level link */
+#pmenu li a:hover ul a:hover ul a:hover ul { 
+	visibility:visible;
+	}
+#pmenu li a:hover ul a:hover ul.up{
+	top:-15px;
+	} 
+#pmenu li a:hover ul a:hover ul.up2{
+	top:-183px;
+	} 
+
+/* position the fourth level flyout menu for a left flyout */	
+#pmenu li a:hover ul a:hover ul a:hover ul.left{
+	left:-182px;
+	} 
+#pmenu li a:hover ul a:hover ul a:hover ul.up{
+	top:-133px;
+	} 
+/* make the fifth level visible when you hover over fourth level link */
+#pmenu li a:hover ul a:hover ul a:hover ul a:hover ul { 
+	visibility:visible;
+	}
+/* make the sixth level visible when you hover over fifth level link */
+#pmenu li a:hover ul a:hover ul a:hover ul a:hover ul a:hover ul { 
+	visibility:visible;
+	}
+/* If you can see the pattern in the above IE5.5 and IE6 style then you can add as many sub levels as you like */

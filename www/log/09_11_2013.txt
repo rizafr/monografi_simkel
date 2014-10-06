@@ -1,0 +1,6 @@
+;Insert data;11/09/2013 18:02:08; ();
+;Hapus data Pembelian;11/09/2013 18:02:14; (13519);
+;Ubah Status Verifikasi;11/09/2013 18:32:20; (3338);
+;Ubah Status Verifikasi;11/09/2013 19:11:19; (728);
+;Ubah Status Verifikasi;11/09/2013 19:12:36; (728);
+;Ubah Status Verifikasi;11/09/2013 19:12:50; (728);

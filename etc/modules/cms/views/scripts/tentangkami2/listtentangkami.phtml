@@ -1,0 +1,59 @@
+<? require_once 'Zend/View.php';
+  
+   $ctrlFrm = new Zend_View();
+  
+    $jmlTentangKamiList = count($this->TentangKamiList);
+	//echo $jmlTentangKamiList;
+   for ($j = 0; $j < $jmlTentangKamiList; $j++) {
+     $tentangkami[$j] = array("c_tentangkami"  		=>(string)$this->TentangKamiList[$j]['c_tentangkami'],
+						"n_judul"      		=>(string)$this->TentangKamiList[$j]['n_judul'],
+						 "n_detil"  		=>(string)$this->TentangKamiList[$j]['n_detil'],
+						  "c_status"  		=>(string)$this->TentangKamiList[$j]['c_status']);
+   } 
+ $pesancek=$this->pesancek;
+	if ($pesancek=='gagal'){$confirm ='confirmfail';}
+	else {$confirm ='confirm';} 
+$status=$_REQUEST['status'];
+?>
+	<div class="navlink">
+	<a href="<? echo $this->basePath; ?>/cms">Halaman Utama</a>&nbsp;<strong>&#8250;</strong>&nbsp;Kelola Data Tentang Kami&nbsp;
+	</div>
+<br style="clear:both;" />
+	<div id="top"></div>
+	<div id="confirm" class="<?=$confirm?>" style="display: none">
+		<h3><?echo $pesan = $this->pesan;?></h3>				
+	</div>
+	<h2 class="title">Kelola Data Tentang Kami</h2>
+<table class="widefat" cellspacing="1">
+		<tr>
+			<th width="15%">Judul</th>
+			<th width="65%">Detil</th>
+			<th width="13%">Status</th>
+			<th width="7%">&nbsp;</th>
+		</tr> 
+
+<?
+				foreach ($tentangkami as $key => $val): 
+				?>
+				<tr class="alternate2">
+				<?  
+				$noUrut = (($this->currentPage -1)* $this->numToDisplay) + $key +1;
+				$cstatus = $this->escape($val['c_status']);
+				if ($cstatus == 1) 	$status = 'Diterbitkan';
+				else $status = 'Tidak Diterbitkan';
+				
+				?>
+					<td><?php echo $this->escape($val['n_judul']);?></td>
+					<td><?php echo $this->escape($val['n_detil']);?></a></td>
+				    <td align="center"><?php echo $status;?></td>
+					<td align="center"><a href="#" title="Ubah Data" onclick="tentangkamiM('update','<?=$this->escape($val['c_tentangkami'])?>');">Ubah</a>	
+					</td>
+				</tr>
+				<?php endforeach;?>
+	
+	</table>
+	<div class="spacer"></div>
+<div id="targetdetil"></div>
+
+	<div class="spacer"></div>
+

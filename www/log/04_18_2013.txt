@@ -1,0 +1,7 @@
+FP-1;Ubah status data user;18/04/2013 15:28:51;600 (1);
+FP-1;Ubah data user;18/04/2013 15:29:03;967300265 ();
+986391827;Terkait BiayaPT. BANK TABUNGAN PENSIUNAN NASIONAL, Tbk KCP KUNINGAN;18/04/2013 15:57:13; di Nopend 45500;
+986391827;Terkait Daftarbuktipotong;18/04/2013 15:57:56; di Nopend 45500 dengan id ();
+;Ubah Status Verifikasi;18/04/2013 16:00:44; (2256);
+986391827;Terkait Ssppph23biaya ;18/04/2013 16:04:06; di Nopend 45500 dengan id ();
+986391827;Entry bukti Lapor SPT;18/04/2013 16:04:29; di Nopend 45500 dengan id ();

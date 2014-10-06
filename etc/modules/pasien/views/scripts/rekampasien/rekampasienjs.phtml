@@ -1,0 +1,433 @@
+function carirekampasien()
+{
+	$("#frmcarirekampasien").ajaxForm(frmcarirekampasien_opt);
+}
+var frmcarirekampasien_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/pasien/rekampasien/rekampasienlist',
+		type: 'post', 
+		resetForm: false
+};
+function rekampasienlist()
+{
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	kode_pasien = document.getElementById('kode_pasien').value;
+	var param = {kode_pasien:kode_pasien,kategoriCari:kategoriCari,carii:carii};
+	var url = '<?php echo $this->basePath; ?>/pasien/rekampasien/rekampasienlist';
+	jQuery.get(url, param, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+function rekampasienForm(jenisForm, id)
+{
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	kode_pasien = document.getElementById('kode_pasien').value;
+	var url = '<?php echo $this->basePath; ?>/pasien/rekampasien/rekampasiendata';
+	var param = { jenisForm:jenisForm,kode_pasien:kode_pasien,id:id,kategoriCari:kategoriCari,carii:carii};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahrekampasien").ajaxForm(tambahRekampasien_opt);
+		jQuery("#frmubahrekampasien").ajaxForm(ubahRekampasien_opt);
+	});
+}
+
+var tambahRekampasien_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/pasien/rekampasien/rekampasien',
+	beforeSubmit : function() {
+		
+		if (document.getElementById('c_noreg').value == ''){
+			alert('Kode harus Diisi');
+			return false;
+		}
+
+		
+
+		if (document.getElementById('t_berat').value == '-'){
+			alert('berat harus Dipilih');
+			return false;
+		}
+
+		if (document.getElementById('t_tinggi').value == ''){
+			alert('tgl harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('t_tekanan').value == ''){
+			alert('tekanan harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('t_denyut').value == ''){
+			alert('denyut harus Diisi');
+			return false;
+		}
+		
+		if (document.getElementById('t_frequensi').value == ''){
+			alert('frequensi Diisi');
+			return false;
+		}
+		if (document.getElementById('t_suhu').value == ''){
+			alert('suhu Diisi');
+			return false;
+		}
+
+		if (document.getElementById('n_mata').value == ''){
+			alert('mata harus Diisi');
+			return false;
+		}
+		if (document.getElementById('n_tht').value == '-'){
+			alert('tht harus Dipilih');
+			return false;
+		}
+
+		if (document.getElementById('n_gigi').value == ''){
+			alert('gigi harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('n_leher').value == ''){
+			alert('leher harus Diisi');
+			return false;
+		}
+		
+		if (document.getElementById('n_jantung').value == ''){
+			alert('jantung Diisi');
+			return false;
+		}
+		if (document.getElementById('n_paru').value == ''){
+			alert('paru Diisi');
+			return false;
+		}
+
+		if (document.getElementById('n_perut').value == ''){
+			alert('perut harus Diisi');
+			return false;
+		}
+		
+	answer = confirm('Apakah data anda masukan sudah benar?.\n\'OK\' Jika benar, \'Cancel\' jika tidak.' );
+
+	//alert(answer);
+	if(answer !=0) { 
+		return true;
+	}
+	else{
+		return false;
+	}
+		
+	},
+	success: function(){
+	doCount(5);
+	
+	},
+	type: 'post', 
+	resetForm: false
+};
+
+var ubahRekampasien_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/pasien/rekampasien/rekampasienupdate',
+	beforeSubmit : function() {
+
+		if (document.getElementById('c_noreg').value == ''){
+			alert('Kode harus Diisi');
+			return false;
+		}
+
+		
+
+		if (document.getElementById('t_berat').value == '-'){
+			alert('berat harus Dipilih');
+			return false;
+		}
+
+		if (document.getElementById('t_tinggi').value == ''){
+			alert('tgl harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('t_tekanan').value == ''){
+			alert('tekanan harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('t_denyut').value == ''){
+			alert('denyut harus Diisi');
+			return false;
+		}
+		
+		if (document.getElementById('t_frequensi').value == ''){
+			alert('frequensi Diisi');
+			return false;
+		}
+		if (document.getElementById('t_suhu').value == ''){
+			alert('suhu Diisi');
+			return false;
+		}
+
+		if (document.getElementById('n_mata').value == ''){
+			alert('mata harus Diisi');
+			return false;
+		}
+		if (document.getElementById('n_tht').value == '-'){
+			alert('tht harus Dipilih');
+			return false;
+		}
+
+		if (document.getElementById('n_gigi').value == ''){
+			alert('gigi harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('n_leher').value == ''){
+			alert('leher harus Diisi');
+			return false;
+		}
+		
+		if (document.getElementById('n_jantung').value == ''){
+			alert('jantung Diisi');
+			return false;
+		}
+		if (document.getElementById('n_paru').value == ''){
+			alert('paru Diisi');
+			return false;
+		}
+
+		if (document.getElementById('n_perut').value == ''){
+			alert('perut harus Diisi');
+			return false;
+		}
+		if (document.getElementById('n_gerak').value == ''){
+			alert('gerak harus Diisi');
+			return false;
+		}
+	answer = confirm('Apakah data anda masukan sudah benar?.\n\'OK\' Jika benar, \'Cancel\' jika tidak.' );
+	if(answer !=0) { 
+		return true;
+	}
+	else{
+		return false;
+	}
+
+	},
+	success: function(){
+	doCount(5);
+	jQuery("#frmubahrekampasien").ajaxForm(ubahRekampasien_opt);
+	},
+	type: 'post', 
+	resetForm: false
+};
+
+
+function rekampasienHapus(param1, id, n_nama)
+{ 
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	kode_pasien = document.getElementById('kode_pasien').value;
+	
+	if(ConfirmDelete(param1,n_nama))
+	{	
+		handler = '<?php echo $this->basePath; ?>/pasien/rekampasien/rekampasienhapus';
+		var opt = {id : id,kode_pasien:kode_pasien,id:id,kategoriCari:kategoriCari,carii:carii};
+		jQuery.get(handler,opt,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+}
+
+function BukaWindows(){
+	var w = 0; 
+	var h = 0;
+	w = screen.availWidth;
+	h = screen.availHeight;
+	var popW = 800, popH = 600;
+	var leftc = (w-popW)/2;
+	var topc = (h-popH)/2;
+	var selectWindow = window.open(url,'Selection', 'left=' + leftc + ',top=' + topc + ', width='+popW+',height='+popH+',resizable=0,scrollbars=yes');
+}
+
+function CariPengadaan()
+{
+	document.getElementById('n_pengadaan').readOnly = true;
+	id_pengadaan = document.getElementById('id_pengadaan').value;
+
+	url = "<?php echo $this->basePath; ?>/adm/rekampasien/n_namapengadaan?id_pengadaan="+id_pengadaan;
+	BukaWindows();
+}
+
+
+function tambahKepada()
+{
+	var table = document.getElementById('kepada'); 
+	var rowCount = (table.rows.length);  
+	var idRow = (rowCount)*1;
+	var row = table.insertRow(rowCount);
+	row.className = "event";	
+	
+	var cell0 = row.insertCell(0);  
+	var num = (rowCount)*1+1;
+	cell0.innerHTML = num+".";
+	
+	var cell1 = row.insertCell(1);  
+	cell1.innerHTML = "<input type=\"text\" size = \"120\" maxlength = \"150\" name=\"n_nama_"+idRow+"\" id=\"n_nama_"+idRow+"\" value=\"\" > <input type=\"button\" value=\"Cari\" onclick=\"showDialog('dosen','"+idRow+"');\" >";
+	
+	var cell2 = row.insertCell(2);  
+	var rowDelete = (idRow*1)+1;
+	cell2.innerHTML = "<input type=\"hidden\" name=\"id_pegawai_"+idRow+"\" id=\"id_pegawai_"+idRow+"\" value=\"\" ><input type=\"hidden\" name=\"id_pembimbing_"+idRow+"\" id=\"id_pembimbing_"+idRow+"\" value=\"\"><img src=\"/images/cross.png\" title=\"Hapus Data\" onclick=\"deleteRow('kepada', this);getjumlahx();\"><a name=\"baris_"+idRow+"\"/>";
+	
+	document.getElementById('jumlahItem').value = (rowCount*1)+1;
+
+}
+
+function deleteRow(tableID, r) {
+	var i=r.parentNode.parentNode.rowIndex;
+	document.getElementById(tableID).deleteRow(i);
+	var table = document.getElementById(tableID); 
+	var rowCount = table.rows.length;  
+	var idRow = rowCount*1;
+	document.getElementById("jumlahItem").value = idRow;
+	
+}
+function deleteRow2(param,id_item,no_item)
+{ 
+	if(ConfirmDelete(param, no_item))
+	{	
+		handler = '<?php echo $this->basePath; ?>/pasien/rekampasien/rekampasienhapus';
+		//var opt = {id_item:id_item,tahun:tahun,cabang:cabang,kategoriCari:kategoriCari,carii:carii};
+		jQuery.get(handler,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+}
+
+function getKab(){
+	var url = '<?php echo $this->basePath; ?>/pasien/rekampasien/get-kab';
+	var propinsi = document.getElementById('c_propinsi').value;
+	var param = {propinsi:propinsi};	
+	$.getJSON(url,param,function(data){
+		$('#kota').find('option').remove().end();
+		
+		$('#kota').attr('disabled',false).end();
+		$('.someElement').attr('disabled', '');
+		$('#kota').append($('<option>').text("--Pilih--").attr('value', "-"));
+		$.each(data, function(i, value) {
+				$('#kota').append($('<option>').text(value.n_kab).attr('value', value.id_kab));
+		  });
+	});
+}
+
+
+
+function dosenlist(jum) {
+  var url        = '<?php echo $this->basePath; ?>/pasien/rekampasien/dosenlist';
+  var param      = {jum:jum};
+  jQuery.get(url,param,function(data) {   
+    $("#dialog-browse").html(data);
+    $("#dialog-browse").dialog("open");
+  }); 
+}
+
+function cariDosen(jum)  {
+  $("#frmCariDosen").ajaxForm(frmCariDosen_opt);
+}
+
+var frmCariDosen_opt = {
+    target : '#dialog-browse',
+    url: '<?php echo $this->basePath; ?>/pasien/rekampasien/dosenlist',
+    type: 'get', 
+    resetForm: false
+};
+
+function closeDialogDosen(id_pegawai,nama,jum) {  
+  $("#dialog-browse").dialog("close");
+  $("#id_pegawai_"+jum).val(id_pegawai);
+  $("#n_nama_"+jum).val(nama);
+}
+
+
+
+
+function pasienlist() {
+    var url        = '<?php echo $this->basePath; ?>/pasien/rekampasien/pasienlist';
+    jQuery.get(url,function(data) {   
+    $("#dialog-browse").html(data);
+    $("#dialog-browse").dialog("open");
+  }); 
+}
+
+function cariPasien()  {
+  $("#frmCariPasien").ajaxForm(frmCariPasien_opt);
+}
+
+var frmCariPasien_opt = {
+    target : '#dialog-browse',
+    url: '<?php echo $this->basePath; ?>/pasien/rekampasien/pasienlist',
+    type: 'get', 
+    resetForm: false
+};
+
+function closeDialogPasien(kode_pasien,n_pasien) {  
+  $("#dialog-browse").dialog("close");
+  $("#kode_pasien").val(kode_pasien);
+  $("#n_nama").val(n_pasien);
+}
+
+function closeWinCam(n_file) {  
+  window.close();
+  $("#poto").val("/pasien/"+n_file);
+}
+function umumproses()
+{
+	$("#frmubahrekampasien").ajaxForm(frmubahrekampasien_opt);
+}
+var frmubahrekampasien_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/pasien/rekampasien/rekampasienupdate',
+		beforeSubmit : function() {
+
+		if (document.getElementById('n_nik').value == ''){
+			alert('NIK harus Diisi');
+			return false;
+		}
+		if (document.getElementById('n_nama').value == ''){
+			alert('Nama harus Diisi');
+			return false;
+		}
+		if (document.getElementById('n_nip').value == ''){
+			alert('NPM/NIP harus Diisi');
+			return false;
+		}
+		if (document.getElementById('n_cp').value == ''){
+			alert('Kontak Person harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('n_tensi').value == ''){
+			alert('HP harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('n_diagnosis').value == ''){
+			alert('Email harus Diisi');
+			return false;
+		}
+	answer = confirm('\n\   Saya menyetujui dan mematuhi peraturan yang dikeluarkan oleh Komite Etik Fakultas Kedokteran UNPAD. \n\n\   Dan saya menyatakan bahwa data yang saya masukan adalah benar, \n\n\   jika terbukti bahwa data yang saya masukan tidak benar maka saya bersedia ditutut\n\n\   secara hukum berdasarkan peraturan perundangan yang berlaku.\n\n   \'OK\' Jika setuju, \'Cancel\' Jika tidak setuju.');
+		if(answer !=0) { 
+			return true;
+		}
+		else{
+			return false;
+		}
+		},
+		type: 'post', 
+		success: function(){doCount(5);},
+		resetForm: false
+};
+
+
+

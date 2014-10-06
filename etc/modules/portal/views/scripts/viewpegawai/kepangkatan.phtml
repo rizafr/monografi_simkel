@@ -1,0 +1,179 @@
+<? require_once 'Zend/View.php';
+	require_once "share/oa_dec_cur_conv.php";
+   
+	$ctrlFrm = new Zend_View();
+	$convDec = new oa_dec_cur_conv();
+
+$nip = $_REQUEST['nip'];
+$_SESSION['nip'] = $nip;
+
+	$jumPangkatList = count($this->pangkatList);
+   //echo $jumPendList;
+   for ($j = 0; $j < $jumPangkatList; $j++) {
+     $pangkat[$j] = array("i_peg_nip"  		=>(string)$this->pangkatList[$j]['i_peg_nip'],
+						  "gol"				=>(string)$this->pangkatList[$j]['gol'],
+						  "nmPangkat"		=>(string)$this->pangkatList[$j]['nmPangkat'],
+	                      "tmtGol"      	=>(string)$this->pangkatList[$j]['tmtGol'],
+						  "gaji"  			=>(string)$this->pangkatList[$j]['gaji'],
+						  "namaSK"  		=>(string)$this->pangkatList[$j]['namaSK'],
+						  "nomorSK"  		=>(string)$this->pangkatList[$j]['nomorSK'],
+						  "tglSK"  			=>(string)$this->pangkatList[$j]['tglSK'],
+						  "jenis"  			=>(string)$this->pangkatList[$j]['jenis'],
+						  "kerjaThn"  		=>(string)$this->pangkatList[$j]['kerjaThn'],
+						  "kerjaBln"  		=>(string)$this->pangkatList[$j]['kerjaBln'],
+						  "keterangan"  	=>(string)$this->pangkatList[$j]['keterangan']);	
+   } 
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA KEPANGKATAN</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat riwayat kenaikan pangkat pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+			<form id="frmVPangkat"action="<?php echo $this->basePath; ?>/sdm/viewpegawai/kepangkatan" method="post" name="frmVPangkat">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+			</form>
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line"></div>	
+	<fieldset class="fields">
+		<div class="title2">Data Kepangkatan</div>
+		<div class="blank"></div>
+		
+		
+<?	if ($jumPangkatList == 0) {
+		echo "<font color=\"red\">Data Kepangkatan Tidak Ditemukan</font>";
+?>
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+		    <th width="5%">Pangkat</th>
+			<th width="10%">TMT</th>
+			<th width="9%">Masa Kerja Golongan</th>
+			<th width="10%">Gaji Pokok</th>
+			<th width="10%">SK Pejabat</th>
+			<th width="11%">Nomor SK</th>
+			<th width="10%">Tanggal SK</th>
+			<th width="20%">Jenis Kenaikan</th>
+			<th width="15%">Keterangan</th>
+			</tr>
+	</table>
+<? } else { ?>	
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+		    <th width="5%">Pangkat</th>
+			<th width="10%">TMT</th>
+			<th width="9%">Masa Kerja Golongan</th>
+			<th width="10%">Gaji Pokok</th>
+			<th width="10%">SK Pejabat</th>
+			<th width="11%">Nomor SK</th>
+			<th width="10%">Tanggal SK</th>
+			<th width="20%">Jenis Kenaikan</th>
+			<th width="15%">Keterangan</th>
+			</tr>
+		<?php foreach ($pangkat as $key => $val): 
+					   if ($key%2==0) { ?>
+				      <tr class="event">
+					<? } else if ($key%2==1) { ?>
+					  <tr class="event2">
+					<? } ?>
+				<?php
+				$tmt = $this->escape($val['tmtGol']);
+					$thnTmt = substr($tmt,0,4);
+					$blnTmt = substr($tmt,5,2);
+					$hrTmt = substr($tmt,8,2);
+					$tglTmt = $hrTmt."-".$blnTmt."-".$thnTmt;
+					if ($thnTmt == ''){
+						$tglTmt = null;
+					}
+					if ($blnTmt == '#'){
+						$tglTmt = null;
+					}
+					if ($hrTmt == '#'){
+						$tglTmt = null;
+					}
+				$tglSK = $this->escape($val['tglSK']);
+				//echo $tglSK;
+					$thnSK = substr($tglSK,0,4);
+					$blnSK = substr($tglSK,5,2);
+					$hrSK = substr($tglSK,8,2);
+					$tglSK = $hrSK."-".$blnSK."-".$thnSK;
+					if ($thnSK == ''){
+						$tglSK = null;
+					}
+					if ($blnSK == '#'){
+						$tglSK = null;
+					}
+					if ($hrSK == '#'){
+						$tglSK = null;
+					}
+					$gol = $this->escape($val['gol']);					
+					$golTmt = $gol." TMT: ".$tglTmt;
+					$jenis = $this->escape($val['jenis']);
+					if ($jenis == 'P') {
+						$jenis = 'Kenaikan Golongan Pangkat';
+					}
+					else if ($jenis == 'G') {
+						$jenis = 'Kenaikan Gaji Berkala';
+					}
+					else if ($jenis == 'N') {
+						$jenis = 'Pengangkatan PNS';
+					}
+					else if ($jenis == 'C') {
+						$jenis = 'Pengangkatan CPNS';
+					}
+					
+					$kerjaThn = $this->escape($val['kerjaThn']);		
+					$kerjaBln = $this->escape($val['kerjaBln']);	
+					if ($kerjaThn == null) {
+						$kerjaThn = 0;
+					}
+					if ($kerjaBln == null) {
+						$kerjaBln = 0;
+					}
+					$masaKerja = $kerjaThn." thn ".$kerjaBln." bln ";
+				?>
+				<td class="clcenter">	
+				<a href="#" onClick="javascript:viewPangkat('<? echo $this->escape($val['i_peg_nip']); ?>','<? echo $this->escape($val['gol']); ?>','<? echo $this->escape($val['tmtGol']); ?>');" class="link" title="View"><?php echo $this->escape($val['gol']);?> </a></td>
+				<td class="clcenter"> <?php echo $tglTmt;?></td>
+				<td class="clcenter"> <?php echo $masaKerja;?></td>
+				<td class="clright"> <?php echo $convDec->convertDecToCur($this->escape($val['gaji']));?></td>
+				<td>&nbsp;<?php echo $this->escape($val['namaSK']);?></td>
+				<td>&nbsp;<?php echo $this->escape($val['nomorSK']);?></td>
+				<td class="clcenter"> <?php echo $tglSK;?></td>
+				<td>&nbsp; <?php echo $jenis;?></td>
+				<td>&nbsp;<?php echo $this->escape($val['keterangan']);?></td>
+		  </tr>
+	<?php endforeach;?> 		  
+		</table>
+	<? } ?>
+
+ 			<dl>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">
+				<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+				</dd>			
+				<div class="back" onClick="javascript:kembaliPangkat();" title="Kembali"><input type="button" value="Kembali" id="kembaliPangkat"></div>
+			</dl>
+			</div>
+ 	</fieldset>
+</div>
+	
+<!--
+    <p align="center">
+		<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+    </p>
+
+			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliPangkat();" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

@@ -1,0 +1,2 @@
+Keuangan;Ubah Data Persetujuan Anggaran ;02/10/2013 19:08:33; di lokasi  dengan id_pengadaan (83);
+Keuangan;Ubah Data Persetujuan Anggaran ;02/10/2013 19:24:33; di lokasi  dengan id_pengadaan (68);

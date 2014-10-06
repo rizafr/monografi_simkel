@@ -1,0 +1,213 @@
+<? require_once 'Zend/View.php';
+   require_once 'share/oa_date.php'; 
+   
+	$ctrlDate = new oa_date();   
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+
+
+	//$jenjang = $_REQUEST['jenjang'];
+	$nip = $_REQUEST['nip'];
+	//echo "test".$test;
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+
+
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA KELUARGA</h3>
+			&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data anggota keluarga pegawai. Yang dimaksud dengan anggota keluarga adalah istri/suami dan anak-anak.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line">
+		<div class="title2">Data Keluarga</div>
+		<fieldset  class="panel-form">	
+			<form id="frmVKelView" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/keluargaview" method="post" name="frmVKelView">
+				<dl>
+					<dt>Nama</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$nama = $this->escape($this->nama);
+						echo $nama;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Hubungan Keluarga</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$namaHub = $this->escape($this->namaHub);
+						echo $namaHub;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tempat Lahir</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$tempatLahir = $this->escape($this->tempatLahir);
+						echo $tempatLahir;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tanggal Lahir</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$tglLahir = $this->escape($this->tglLahir);
+						$thnLahir = substr($tglLahir,0,4);
+						$blnLahir = substr($tglLahir,5,2);
+						$hrLahir = substr($tglLahir,8,2);
+						$tglLahir = $hrLahir."-".$blnLahir."-".$thnLahir;
+						echo $tglLahir;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Jenis Kelamin</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$jenisKelamin = $this->escape($this->jenisKelamin);
+						if ($jenisKelamin == 'L'){
+							$jenisKelamin = 'Laki-laki';
+						}
+						if ($jenisKelamin == 'P'){
+							$jenisKelamin = 'Perempuan';
+						}
+						echo $jenisKelamin;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tanggal Menikah</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$tglMenikah = $this->escape($this->tglMenikah);
+						// $thnNikah = substr($tglMenikah,0,4);
+						// $blnNikah = substr($tglMenikah,5,2);
+						// $hrNikah = substr($tglMenikah,8,2);
+						// $tglMenikah = $hrNikah."-".$blnNikah."-".$thnNikah;	
+						// if ($tglNikah == null) {
+							// $tglMenikah = '-';
+						// }
+						echo $ctrlDate->convertTglMachineToHuman($tglMenikah);
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Pekerjaan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$pekerjaan = $this->escape($this->pekerjaan);
+						echo $pekerjaan;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Status Tanggungan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$statusTanggungan = $this->escape($this->statusTanggungan);
+						if ($statusTanggungan == 'Y') {
+							$stTanggungan = 'Ditanggung';
+						} else if ($statusTanggungan == 'N') {
+							$stTanggungan = 'Tidak Ditanggung';
+						}
+						echo $stTanggungan;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Nomor KARIS/KARSU</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$karis = $this->escape($this->karis);
+						echo $karis;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Pendidikan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$pendidikan = $this->escape($this->pendidikan);
+						echo $pendidikan;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>NIP</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$nipSuami = $this->escape($this->nipSuami);
+						echo $nipSuami;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Keterangan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$keterangan = $this->escape($this->keterangan);
+						echo $keterangan;
+					?>
+					</dd>
+				</dl>
+ 			<dl>
+				<?php 
+				  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">&nbsp;</dd>			
+				<div class="back" onClick="javascript:kembaliKelView('<? echo $this->escape($this->nip); ?>');" title="Kembali"><input type="button" value="Kembali" id="kembaliKelView"></div>
+			</dl>
+		  	</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>		
+
+<!--
+<table border="0" align=center width=100%>		
+		<tr>
+		  <td >&nbsp;</td>
+		</tr>
+		<tr>
+		  <td align="center">
+			<?php 
+			  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+			?>
+		  </td>
+		</tr>
+</table></form>
+			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliKelView('<? echo $this->escape($this->nip); ?>');" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

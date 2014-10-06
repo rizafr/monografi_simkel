@@ -1,0 +1,104 @@
+<?php 
+require_once 'Zend/View.php';
+require_once "share/tanggal.php";  
+require_once 'share/Portalconf.php'; 
+$tanggal = new tanggal();
+$ctrlFrm = new Zend_View();
+$pesancek=$this->pesancek;
+$cstatus=$this->status;
+
+//$maxid=$this->maxid;
+
+
+
+if ($this->tglberita!='') {
+  $dates=formatDate4($this->tglberita);
+  $xtime=substr($this->tglberita,11,5);
+  echo  $xtime."/".$this->tglberita;
+  list($jam,$mnt,$det)=split(":",$xtime);
+} else {
+  $dates=date('d/m/Y');
+  $jam=date("H");
+  $mnt=date("i");
+}
+if ($cstatus!='') {
+	if ($cstatus==1) $status1='checked';
+	else $status0='checked';
+} else $status1='checked';
+
+if ($pesancek=='gagal'){$confirm ='confirmfail';}
+else {$confirm ='confirm';}
+
+
+?>
+<script type="text/javascript" src="/content/init.js"> </script>
+<script type="text/javascript">
+
+	$(function() {
+		$("#d_berita").datepicker();
+	});
+</script>
+
+
+		   <div class="navlink">
+				<a  href="<? echo $this->basePath; ?>cms">Halaman Utama</a> 
+				<strong> &#8250; </strong> <a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/cms/berita/listberita','<?php echo $this->basePath; ?>/cms/pegawai/pegawaijs');">Kelola Data Berita</a>
+				<strong> &#8250; </strong><?=$this->jdl;?> Data Berita
+			</div>
+			<br>
+<div id="top"></div>
+<div id="confirm" class="<?=$confirm?>" style="display: none">
+	<h3><?echo $pesan = $this->pesan;?></h3>				
+</div>
+
+	
+<form id="formberita" method="post" name="formberita" action="">
+<input type="hidden" value="<?=$this->idberita?>" name="idberita"> 
+<input type="hidden" value="<?=$this->par?>" name="action"> 
+<h2 class="title"><?=$this->jdl;?> Data berita</h2>
+
+		<div class="spacer"></div> 
+
+<table  width="100%">
+ <tr>
+   <td width="20%" align="left">Tanggal Berita</td>
+   <td width="1%">:</td>
+   <td width="79%" align="left"><input type="text" id="d_berita" name="date" value="<?= $this->tglberita1 ?>" size="10">
+	Pkl <input type="text" id="jam" name="jam" value="<?=$jam?>" size="2" maxlength="2" tabindex="4" />:<input type="text" id="mnt" name="mnt" value="<?=$mnt?>" size="2" maxlength="2" tabindex="4" />
+  </td>
+ </tr>
+ <tr>
+   <td width="20%" align="left">Status berita</td>
+   <td width="1%">:</td>
+   <td width="79%" align="left">
+   	<label for="post_status_publish" class="selectit"><input id="post_status_publish" class="radio" name="status" type="radio" value="1" <?=$status1?> /> Diterbitkan</label>
+    <label for="post_status_berita" class="selectit"><input id="post_status_berita" class="radio" name="status" type="radio" value="0"  <?=$status0?> /> Tidak Diterbitkan</label>
+
+   </td>
+ </tr>
+ <tr>
+   <td width="20%" align="left">Sumber berita</td>
+   <td width="1%">:</td>
+   <td width="79%" align="left"><input type="text" name="source" size="50" tabindex="1" value="<?=$this->sumber?>" class="inputbox2"/></td>
+ </tr>
+ <tr>
+   <td width="20%" align="left">Judul berita <span class="highlight">*</span></td>
+   <td width="1%">:</td>
+   <td width="79%" align="left"><input type="text" name="title" size="100" tabindex="1" value="<?=$this->jdlberita?>" id="title"/></td>
+ </tr>
+ <tr>
+   <td width="20%" align="left">Isi berita</td>
+   <td width="1%">:</td>
+   <td width="79%" align="left"><textarea id="content1" name="content1" style="height:300px"><?=$this->detilberita?></textarea></td>
+ </tr>
+</table>
+ket :&nbsp;(<span class="highlight">*</span>)&nbsp;harus diisi
+		<p class="submit">
+		<span id="autosave"></span>
+
+		<input name="cancel" type="button" id="publish" tabindex="5" accesskey="p" value="Batal" onClick="open_url_to_div('<?php echo $this->basePath; ?>/cms/berita/listberita','<?php echo $this->basePath; ?>/cms/berita/beritajs');"/>
+		<input type="submit" name="submit" value="<?=$this->pars;?>" onClick="insertBerita()" style="font-weight: bold;" />
+
+
+	
+</form>	

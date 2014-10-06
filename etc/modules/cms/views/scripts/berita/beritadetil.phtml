@@ -1,0 +1,33 @@
+<?php 
+require_once 'Zend/View.php';
+require_once "share/tanggal.php";  
+require_once 'share/Portalconf.php'; 
+$tanggal = new tanggal();
+$ctrlFrm = new Zend_View();
+
+if ($this->tglberita!='') {
+  $dates=formatDate4($this->tglberita);
+  $xtime=substr($this->tglberita,11,8);
+  list($jam,$mnt,$det)=split(":",$xtime);
+} else {
+  $dates=date('d/m/Y');
+  $jam=date("H");
+  $mnt=date("i");
+}
+
+?>
+<div id="backgroundPopup">
+  <div id="popupContact">  
+    <div id="popupContactClose" title="Close" onclick="closeDetil()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    		<div style="overflow: hidden;">
+			<div class="wrapper">
+				<div class="panel" style="height: 600px;overflow: auto;border: solid 1px #000;padding: 5px;" >
+					<div class="delete" title="Close" onclick="closeDetil()"></div>
+<h3><?=$this->jdlberita;?></h3>
+					<span class="date"><?=$this->tglberita1?> Sumber : <?=$this->sumber?></span>
+					<p>
+					<?=$this->detilberita?>
+				</div>
+			</div>	
+		</div>
+</div>	

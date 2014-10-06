@@ -1,0 +1,190 @@
+<? require_once 'Zend/View.php';
+   require_once 'share/oa_date.php'; 
+   
+	$ctrlDate = new oa_date();   
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+   $thnList = $thnskrg - 11;
+   $thnList2 = $thnskrg - 55;
+	
+   $thnArrayList['#'] = '--';
+   		
+   for ($i = 0; $i < 21; $i++) {
+     $thnList = $thnList + 1;
+     $thnArrayList[$thnList] = $thnList;
+   }
+
+	
+   $thnArrayList2['#'] = '--';
+   	 
+   for ($i = 0; $i < 60; $i++) {
+     $thnList2 = $thnList2 + 1;
+     $thnArrayList2[$thnList2] = $thnList2;
+   }
+		
+		
+   $pnjngArray = count($thnArrayList);
+
+	  $blnList = 0;
+	  for ($j = 0; $j < 12; $j++) {
+        $blnList = $blnList + 1;
+		if ($blnList < 10) {
+		  $blnBaruList = "0".$blnList;
+		  $blnArrayList[] = $blnBaruList;
+		} else {
+		  $blnBaruList = $blnList;
+		  $blnArrayList[] = $blnBaruList;
+		}
+      }
+		
+	  $hrList = 0;
+	  for ($k = 0; $k < 31; $k++) {
+        $hrList = $hrList + 1;
+		if ($hrList < 10) {
+		  $hrBaruList = "0".$hrList;
+		  $hrArrayList[] = $hrBaruList;
+		} else {
+		  $hrBaruList = $hrList;
+		  $hrArrayList[] = $hrBaruList;
+		}
+      }
+
+
+
+$nip = $_REQUEST['nip'];
+$_SESSION['nip'] = $nip;
+
+	$jumLatihList = count($this->latihList);
+   //echo $jumLatihList;
+   for ($j = 0; $j < $jumLatihList; $j++) {
+     $latih[$j] = array("i_peg_nip"  		=>(string)$this->latihList[$j]['i_peg_nip'],
+						  "namaPelatihan"	=>(string)$this->latihList[$j]['namaLatih'],
+						  "jenisLatih"		=>(string)$this->latihList[$j]['jenisLatih'],
+	                      "mulai"      		=>(string)$this->latihList[$j]['mulai'],
+						  "akhir"  			=>(string)$this->latihList[$j]['akhir'],
+						  "tempat"  		=>(string)$this->latihList[$j]['tempat'],
+						  "noSertifikat"	=>(string)$this->latihList[$j]['noSertifikat'],
+						  "penyelenggara"	=>(string)$this->latihList[$j]['penyelenggara'],
+						  "tglSertifikat"	=>(string)$this->latihList[$j]['tglSertifikat'],
+						  "keterangan"  	=>(string)$this->latihList[$j]['keterangan']);	
+//echo "coba=".$this->latihList[0]['keterangan'];						  
+   } 
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+   
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA RIWAYAT PELATIHAN</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data pelatihan yang pernah diikuti pegawai, baik pelatihan yang bersifat struktural maupun pelatihan yang bersifat fungsional.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+			<form id="frmVLatih" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/pelatihan" method="post" name="frmVLatih">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+			</form>
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line"></div>	
+	<fieldset class="fields">
+		<div class="title2">Data Pelatihan</div>
+		<div class="blank"></div>
+<?
+	if ($jumLatihList == 0) {
+		echo "<font color=\"red\">Data Pelatihan Tidak Ditemukan</font>";
+?>
+		<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+			    <th width="20%">Nama Pelatihan</th>
+				<th width="15%">Jenis Pelatihan</th>
+				<th width="5%">Penyelenggara</th>
+				<th width="10%">Mulai</th>
+				<th width="10%">Selesai</th>
+				<th width="10%">Tempat</th>
+				<th width="10%">Nomor Sertifikat</th>
+				<th width="10%">Tanggal Sertifikat</th>
+				<th width="10%">Keterangan</th>
+			</tr>
+		</table>
+<? } else { ?>
+		<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+			    <th width="20%">Nama Pelatihan</th>
+				<th width="15%">Jenis Pelatihan</th>
+				<th width="5%">Penyelenggara</th>
+				<th width="10%">Mulai</th>
+				<th width="10%">Selesai</th>
+				<th width="10%">Tempat</th>
+				<th width="10%">Nomor Sertifikat</th>
+				<th width="10%">Tanggal Sertifikat</th>
+				<th width="10%">Keterangan</th>
+			</tr>
+		<?php foreach ($latih as $key => $val): 
+					   if ($key%2==0) { ?>
+				      <tr class="event">
+					<? } else if ($key%2==1) { ?>
+					  <tr class="event2">
+					<? } ?>
+			
+				<?php
+				$mulai = $this->escape($val['mulai']);
+					$thnMulai = substr($mulai,0,4);
+					$blnMulai = substr($mulai,5,2);
+					$hrMulai = substr($mulai,8,2);
+					$tglMulai = $hrMulai."-".$blnMulai."-".$thnMulai;
+				$akhir = $this->escape($val['akhir']);
+					$thnAkhir = substr($akhir,0,4);
+					$blnAkhir = substr($akhir,5,2);
+					$hrAkhir = substr($akhir,8,2);
+					$tglAkhir = $hrAkhir."-".$blnAkhir."-".$thnAkhir;
+				$jenisLatih = $this->escape($val['jenisLatih']);
+				if ($jenisLatih == 'N') {
+					$jenisLatih  = 'Non Struktural';
+				}
+				else if ($jenisLatih == 'S') {
+					$jenisLatih  = 'Struktural';
+				}
+				
+				?>
+				<td>&nbsp;
+				<a href="#" onClick="javascript:viewLatih('<? echo $this->escape($val['i_peg_nip']); ?>','<?php echo $this->escape($val['jenisLatih']);?>','<?php echo $this->escape($val['namaPelatihan']);?>','<? echo $mulai; ?>','<? echo $tglAkhir;?>','<? echo $this->escape($val['tempat']); ?>','<? echo $this->escape($val['keterangan']); ?>');" class="link" title="View"><?php echo $this->escape($val['namaPelatihan']);?> </a></td>
+				<td>&nbsp;<?php echo $jenisLatih;?></td>
+				<td>&nbsp;<?php echo $this->escape($val['penyelenggara']);?></td>
+				<td class="clcenter"> <?php echo $tglMulai;?></td>
+				<td class="clcenter"> <?php echo $tglAkhir;?></td>
+				<td>&nbsp; <?php echo $this->escape($val['tempat']);?></td>
+				<td>&nbsp;<?php echo $this->escape($val['noSertifikat']);?></td>
+				<td>&nbsp;<?php echo $ctrlDate->convertTglMachineToHuman($this->escape($val['tglSertifikat']));?></td>
+				<td>&nbsp; <?php echo $this->escape($val['keterangan']);?></td>
+		  </tr>
+	<?php endforeach;?> 		  	  
+		</table>
+	<? } ?>
+	
+ 			<dl>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">
+				<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+				</dd>			
+				<div class="back" onClick="javascript:kembaliLatih();" title="Kembali"><input type="button" value="Kembali" id="kembaliLatih"></div>
+			</dl>
+	
+			</div>
+ 	</fieldset>
+</div>		  
+
+ <!--   <p align="center">
+		<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+    </p>
+ 			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliLatih();" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

@@ -1,0 +1,372 @@
+<? require("header.phtml")?>
+<body>
+<!--div id="halutama"-->
+<div id="container"><!--start container-->  
+<?
+
+		if(trim($this->c_group) == "1"){
+		$modul = "Modul Administrator";
+		}
+		if(trim($this->c_group) =="2"){
+		$modul = "Modul Operator".$level;
+		}
+		if(trim($this->c_group) == "3"){
+		$modul = "Modul Dokter";
+		}
+		
+		
+		if(trim($this->c_group) == "1"){
+		require("menu_admin.phtml");
+		}
+		if(trim($this->c_group)=="2"){
+		require("menu_operator.phtml");
+		}
+		if(trim($this->c_group) == "3"){
+		require("menu_dokter.phtml");
+		}
+		
+		
+?>
+
+		<div id="header" class="clear">
+         <div id="mod">
+              <div class="tl"></div>
+              <h2><?=$modul?></h2>
+              <div class="tr"></div>
+         </div>
+		</div>
+
+
+		<?require("msg_login.phtml");?>	
+			
+		<div id="content" class="clearfix">
+			<div id="main">
+				<div id="tableview">
+						<?
+							$i_nip=$this->user_id;
+							$vFoto1 = "http://".$_SERVER['SERVER_NAME'].$this->basePath.'/util/tampilfoto/tampilfoto?f='.$i_nip;
+							$filename = trim($i_nip).".jpg"; 
+							$a = "../etc/data/kp/photo/".$filename;
+							$fullpath= "/util/tampilfoto/tampilfoto?f=$i_nip";
+								
+							if (!file_exists($a)) {
+								$vFoto = $this->basePath."/images/nophoto.jpg";	
+							} 
+							else
+							{
+								$vFoto = $vFoto1;
+							}
+						?>						
+						
+					<div class="leftbox"  id="leftbox"><!--start leftmenu-->
+						<div class="ct-menu">
+							<div class="hd">Identitas</div>
+								<div class="bd">
+									<img src="<?=$vFoto?>" class="foto" width=65 height=90>
+									<? echo $this->n_nama;?>
+									<div class="clear"></div>
+						</div>
+						<div class="ft"></div>		   
+					</div> 
+				<div id="featureBalloonPos">
+					<div id="featureBalloonTop"></div>
+					<div id="featureBalloonContent"></div>
+					
+				</div>
+<script type="text/javascript">
+//<![CDATA[
+//IE PNG bug workarround
+
+if(navigator.userAgent.toLowerCase().indexOf("msie")>0 && navigator.userAgent.toLowerCase().indexOf("msie 7.0")<=0){
+	var imgArr = Array();
+	imgArr[imgArr.length] = document.getElementById("featureBalloonTop");
+	//imgArr[imgArr.length] = document.getElementById("featureBalloonLeft");
+	imgArr[imgArr.length] = document.getElementById("featureBalloonContent");
+	for(i=0;i<imgArr.length;i++)	{
+		if(imgArr[i].currentStyle.backgroundImage.lastIndexOf(".png") != -1){
+			var img = imgArr[i].currentStyle.backgroundImage.substring(5,imgArr[i].currentStyle.backgroundImage.length-2);
+			//alert(img);
+			imgArr[i].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+img+"', sizingMethod='scale')";
+			imgArr[i].style.backgroundImage = "url(images/spacer.gif)";
+		}
+	}
+}
+ACEventArr = Array();
+function Event(id, text, description, url) {
+	this.id		= id;
+	this.text	= text;
+	this.description = description;
+	this.url	= '';//url;
+}
+
+<?
+  $sFile = file("../etc/data/event.txt");
+  $s=sizeof($sFile);
+    if ($s > 0) {
+	while (list($c,$line) = each($sFile)) {
+		list($TGL,$EVENT) = explode(";;",$line);
+		$TGLID=ereg_replace("/","",$TGL);
+		$MONTHARRAY = array('Januari','Februari','Maret','April','Mei','Juni','July','Agustus','September','Oktober','November','Desember');
+		list($DAY,$MONTH,$YEAR) = explode("/",$TGL);
+		
+?>		
+				   //<![CDATA[
+				   ACEventArr[ACEventArr.length] = new Event("<?=$TGLID;?>","<?=$DAY." ".$MONTHARRAY[$MONTH-1]." ".$YEAR;?>","<?=$EVENT;?>");
+				   //]]>
+<?
+	}	
+   }
+?>
+function balloonText(featureId, aObj, e) {
+	var posObj = document.getElementById("featureBalloonPos");
+	var conObj = document.getElementById("featureBalloonContent");
+	var accUrl = "";
+	var accDesc = "";
+	var accText = "";
+	var lc = "id".toLowerCase();
+	
+	for(i = 0; i < ACEventArr.length; i++){
+		if(ACEventArr[i].id == featureId){
+			accDesc = ACEventArr[i].description;
+			accText = ACEventArr[i].text;
+			accUrl	= ACEventArr[i].url
+			break;
+		}
+	}
+	
+	if(accUrl != ''){
+		accDesc += "<br /><a href='spg.jsp?cc=id&amp;lc=id&amp;ver=4000&template=" + accUrl + "&zone=pp&lm=pp2&fid=" + featureId + "' class='link'><img  src='popup_files/CWS31AFW_9382high_56_0_4000.gif' border='0' alt='' />Baca selengkapnya</a>";
+	}
+	
+	tmpObj = aObj;
+	if (lc == 'he' || lc == 'ar' ){
+		aObj.style.display = "block";
+		aObj.style.width = "120px";
+	}
+	var curleft = 0;
+	var curtop = 0;
+	if (tmpObj.offsetParent){
+		while (tmpObj.offsetParent)	{
+			curtop += tmpObj.offsetTop;
+			curleft += tmpObj.offsetLeft;
+			tmpObj = tmpObj.offsetParent;
+		}
+	}
+	else if (tmpObj.x){
+		curtop += tmpObj.y;
+		curleft += tmpObj.x;
+	}
+	
+	
+	posObj.style.display = "block";
+	posObj.style.position = "absolute";
+	//posObj.style.width = "200px";
+	
+	if (lc == 'he' || lc == 'ar' ){
+		posObj.style.left = (curleft-20) + "px";
+	}
+	else {
+		posObj.style.left = (curleft+20) + "px";
+	}
+	
+	posObj.style.top = (curtop) + "px";
+
+	//headObj.innerHTML = accText;
+	conObj.innerHTML = '<b>'+accText+'</b><br />'+accDesc+'<br /><br /><a href="javascript:closeBalloonText();void(0);" class="arrow" style="position:relative ">Tutup jendela</a>';
+	
+	//IE bug workarround, stop for 350 milisecs, otherwise images are not shown.
+	if(navigator.userAgent.toLowerCase().indexOf("msie")>0){
+		d = new Date() //today's date
+		while (1){
+			mill=new Date() // Date Now
+			diff = mill-d //difference in milliseconds
+			if( diff > 350 ){
+				break;
+			}
+		}
+	}
+}
+
+function closeBalloonText() {
+	document.getElementById("featureBalloonPos").style.display = "none";
+}
+
+
+//]]>
+
+function popup(idAgenda) {
+	var w = 0; 
+	var h = 0;
+	w = screen.availWidth;
+	h = screen.availHeight;
+	var popW = 600, popH = 400;
+	var leftc = (w-popW)/2;
+	var topc = (h-popH)/2;
+	var url = "<?php echo $this->basePath; ?>/aplikasi/agenda/detailagenda?idAgenda="+idAgenda;
+	var selectWindow = window.open(url,'Selection', 'left=' + leftc + ',top=' + topc + ', width='+popW+',height='+popH+',resizable=0,scrollbars=yes');
+}
+</script>
+
+
+					<div class="ct-menu">
+							<div class="hd">Kalender</div>
+								<div class="bd">
+					<?
+						$todayd=date("d",time())*1;
+						$todaym=date("m",time())*1;
+						$todayy=date("Y",time());
+						$today="$todayd/$todaym/$todayy";
+						echo "<DIV class=\"contentModule\" id='MYCAL'></DIV>\n";
+						$sFile = file($this->baseData."/event.txt");
+						$sFile2 = file($this->baseData."/event2.txt");
+						$s=sizeof($sFile);
+						$n=$s-1;
+						$s2=sizeof($sFile2);
+						$n2=$s2-1;
+						echo "<script>\n";
+						echo "var datedarray=new Array(";
+						if ($s > 0) {
+						while (list($c,$line) = each($sFile)) {
+							list($TGL,$EVENT) = explode(";;",$line);
+							if ($c==$n)  echo "'$TGL'";
+							 else    echo "'$TGL', ";
+							
+						}	
+						}
+						echo ")\n";
+						echo "var datedarray2=new Array(";
+						if ($s2 > 0) {
+						while (list($c2,$line2) = each($sFile2)) {
+							list($TGL2,$EVENT2) = explode(";;",$line2);
+							if ($c2==$n2)  echo "'$TGL2'";
+							 else    echo "'$TGL2', ";
+							
+						}	
+						}
+						echo ")\n";
+						?>							
+						var today="<?=$today?>";
+						</script>
+
+						<script type="text/javascript" src="<?echo $this->basepath; ?>/js/kalender.js"></script>
+						</div>
+					<div class="ft"></div>
+				</div>
+
+
+<?if(trim($this->n_level) =="kp"){
+?>
+					<div class="ct-menu">
+					<div class="hd">Ulang Tahun Hari Ini</div>
+					<div class="bd scroll-medium">
+<?					
+   $jmldata = count($this->ultah);
+   if ($jmldata!=0){
+?>
+						
+						
+<?	   
+   }
+ else{
+?>
+<div class="bd">
+Tidak ada yang berulang tahun
+</div>	
+<div class="ft"></div>
+<?} 
+    for ($j = 0; $j < $jmldata; $j++) {
+
+								$i_nip=(string)$this->ultah[$j]['i_nip'];
+								$i_nik=(string)$this->ultah[$j]['i_nik'];
+								$n_nama=(string)$this->ultah[$j]['n_nama'];
+								$n_gelar=(string)$this->ultah[$j]['n_gelar'];
+								$n_tmplahir=(string)$this->ultah[$j]['n_tmplahir'];
+								$d_tgllahir=(string)$this->ultah[$j]['d_tgllahir'];
+								$n_jnskelamin=(string)$this->ultah[$j]['n_jnskelamin'];								
+								$tanggallahir=(string)$this->ultah[$j]['tanggallahir'];
+								$bulanlahir=(string)$this->ultah[$j]['bulanlahir'];
+								$tahunlahir=(string)$this->ultah[$j]['tahunlahir'];
+								$n_jurusan=(string)$this->ultah[$j]['n_jurusan'];
+
+
+							$vFoto1 = "http://".$_SERVER['SERVER_NAME'].$this->basePath.'/util/tampilfoto/tampilfoto?f='.$i_nip;
+							$filename = trim($i_nip).".jpg"; 
+							$a = "../etc/data/kp/photo/".$filename;
+							$fullpath= "/util/tampilfoto/tampilfoto?f=$i_nip";
+								
+							if (!file_exists($a)) {
+								$vFoto = $this->basePath."/images/nophoto.jpg";	
+							} 
+							else
+							{
+								$vFoto = $vFoto1;
+							}
+?>					
+	
+						
+							<img src="<?=$vFoto?>" class="foto" width=50 height=60>
+							<div class="boxright"><font size="1" face="arial">
+							<?=substr($n_nama,0,20)//." ".$n_gelar;?>
+							<br>		   
+							<?=$i_nik?>
+							</font>
+							</div>
+							<div class="space"></div>
+<?
+					}
+?>
+	<div class="space"></div>	   
+	</div>
+<?	
+
+}?>
+ 
+
+			<div class="ft"></div>					
+			</div>
+<?if(trim($this->n_level) =="kp"){?>	
+</div>
+<?}?>	   
+		<div class="contentdata"  id="contentdata"><!--start contentdata-->
+ 
+			<div class="ct-welcome">
+					<div class="hd">Selamat Datang <span class="user"></span></div>		   
+					<div class="bd">
+						   <p>Selamat Datang di Sistem Informasi Monografi Kelurahan	 
+					        </p>
+					           
+			        </div>
+			        <div class="ft"></div>
+			</div>      
+			<div class="ct-welcome">
+<?if(trim($this->n_level) =="kp"){?>				
+				<div class="hd">KGG</div>		   		
+				<div class="bd"></div>
+			<div class="ft"></div>
+<?}?>			
+			</div>
+      </div><!--end contentdata-->	  
+	  </div><!--end tableview-->
+<?if(trim(!$this->n_level) =="kp"){?>	
+</div>
+<?}?>		  
+        					
+</div>
+</div>
+
+</div><!-- end container -->
+     <div id="footer" class="clear"><!--start footer-->
+     <div class="copyright">Monografi 2014</div>
+     </div><!-- end footer --> 
+</div>	 
+</body>
+</html>	
+
+<script>
+	$(document).ready(function() {
+	$("#<?php echo $namaForm?>").validate();
+});
+</script>	
+	
+	
+	

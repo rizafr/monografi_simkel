@@ -1,0 +1,20 @@
+		<h4 class="widgettitle">Shoutbox</h4>
+<div id="ctshoutbox" style="display:block;z-index:1000">
+<fieldset class="shoutbox">
+<div id="shoutboxdata">
+<?php include('showdata.phtml');?>
+</div>
+<form id="formshoutbox" method="post" name="formshoutbox" action="">
+		
+		<!--h4>Tinggalkan Pesan</h4-->
+        <input name="userid" type="hidden" id="userid" size="22" value="<?=$_SESSION["UserSession"]?>"><br style="clear:both">
+		<input name="name" type="hidden" id="name" size="22" value="<?=$_SESSION["NameSession"]?>">
+        <label>Pesan</label><br style="clear:both">
+
+		<textarea cols=18 style="width:95%;height:50px" name="message" id="message" onkeydown="characterCount(this.form.message,this.form.remaining,400);" onkeyup="characterCount(this.form.message,this.form.remaining,400);" ></textarea><br><br>
+		Jumlah karakter tersisa: <INPUT disabled maxLength=3 size=3 id="remaining" value=400 name="remaining"><br>
+        <input type="button" value="Kirim" onclick="masukadata()"/>
+		<input type="reset" value="Ulangi" />
+</form>
+</fieldset>
+</div>	  

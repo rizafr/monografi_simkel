@@ -1,0 +1,117 @@
+<? require_once 'Zend/View.php';
+   require_once 'share/oa_date.php'; 
+   
+	$ctrlDate = new oa_date();   
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+
+
+	//$jenjang = $_REQUEST['jenjang'];
+	$nip = $_REQUEST['nip'];
+	//echo "test".$test;
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+
+
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA KESEHATAN</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data riwayat kesehatan pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line">
+		<div class="title2">Data Riwayat Kesehatan</div>
+		<fieldset  class="panel-form">	
+			<form id="frmVSehatView" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/kesehatanview" method="post" name="frmVSehatView">
+				<dl>
+					<dt>Nama Penyakit</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$namaPenyakit = $this->escape($this->namaPenyakit);
+						echo $namaPenyakit;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tanggal Sakit</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$tglSakit = $ctrlDate->convertTglMachineToHuman($this->escape($this->tglSakit));
+						echo $tglSakit; 			 
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tanggal Sembuh</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$tglSembuh = $ctrlDate->convertTglMachineToHuman($this->escape($this->tglSembuh));
+						echo $tglSembuh; 			 
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Nama Rumah Sakit</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$namaRS = $this->escape($this->namaRS);
+						echo $namaRS;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Alamat Rumah Sakit</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$alamatRS = $this->escape($this->alamatRS);
+						echo $alamatRS;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Keterangan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$keterangan = $this->escape($this->keterangan);
+						echo $keterangan;
+					?>
+					</dd>
+				</dl>
+ 			<dl>
+				<?php 
+				  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">&nbsp;</dd>			
+				<div class="back" onClick="javascript:kembaliSehatView('<? echo $nip; ?>');" title="Kembali"><input type="button" value="Kembali" id="kembaliSehatView"></div>
+			</dl>
+		  	</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>		
+
+<!--			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliHukumView('<? echo $this->escape($this->nip); ?>');" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

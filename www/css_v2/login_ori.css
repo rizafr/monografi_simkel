@@ -1,0 +1,95 @@
+
+body {
+	background:#015766;
+	font-family:   Tahoma, Verdana, Arial, Geneva, Helvetica, sans-serif;
+	font-size:11px;
+	COLOR: #333;
+}
+* { margin: 0; padding: 0; }
+
+form {
+	margin-left: 8px;
+	padding: 90px 26px 35px 40px;
+	font-weight: normal;
+	
+	background:#EEE url(../images/login_panel.gif) no-repeat;
+}
+
+form .forgetmenot { font-weight: normal; float: left; margin-bottom: 0; }
+.box-login{
+	margin:0 auto;
+	width:412px;
+	}
+#login form .submit input {
+	font-family: "Lucida Grande", Verdana, Arial, "Bitstream Vera Sans", sans-serif;
+	width:90px;
+	padding: 5px 10px 5px 10px;
+	border: none;
+	font-size: 12px;
+    background:#EEE url(../images/box_btn.gif) no-repeat;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+#login form p {
+	margin-bottom: 0;
+}
+
+label {
+	color:#444;
+	font-size: 13px;
+}
+
+form .forgetmenot label {
+	font-size: 11px;
+	line-height: 19px;
+}
+
+form .submit { float: right; }
+
+form p { margin-bottom: 24px; }
+
+h1 a {
+	background: url(../images/login_header.jpg) no-repeat  center;
+	width: 490px;
+	height: 143px;
+	text-indent: -9999px;
+	overflow: hidden;
+	padding-bottom: 15px;
+	display: block;
+}
+a:link,a:visited,a:active{color:#ccc}
+a:hover{color:#eee;text-decoration:none}
+#backtoblog a {
+	position: absolute;
+	top: 7px;
+	left: 15px;
+	text-decoration: none;
+}
+
+#login { width:490px; margin: 3em auto; }
+
+#login_error, .message {
+	margin: 0 0 16px 8px;
+	border-width: 1px;
+	border-style: solid;
+	padding: 12px;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#F5F7D2;
+}
+
+#nav { margin: 0 0 0 16px; padding: 5px 16px; }
+
+#user_pass, #user_login, #user_email {
+	font-size: 24px;
+	width: 97%;
+	padding: 3px;
+	margin-top: 2px;
+	margin-right: 6px;
+	margin-bottom: 16px;
+	border: 1px solid #ccc;
+	background: #fbfbfb;
+}

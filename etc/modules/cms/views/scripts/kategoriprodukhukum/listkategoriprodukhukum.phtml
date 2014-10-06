@@ -1,0 +1,104 @@
+<? require_once 'Zend/View.php';
+    require_once 'share/halaman_list.php';
+    require_once 'share/Portalconf.php';
+  
+   $ctrlFrm = new Zend_View();
+   $halaman = new halaman_list(); 
+  
+    $jmlkategoriprodhukumList = count($this->kategoriprodhukumList);
+   for ($j = 0; $j < $jmlkategoriprodhukumList; $j++) {
+     $kategoriprodhukum[$j] = array("c_kategori"  		=>(string)$this->kategoriprodhukumList[$j]['c_kategori'],
+						"n_judul"      		=>(string)$this->kategoriprodhukumList[$j]['n_judul'],
+						  "c_status"  		=>(string)$this->kategoriprodhukumList[$j]['c_status']);
+   } 
+ $pesancek=$this->pesancek;
+	if ($pesancek=='gagal'){$confirm ='confirmfail';}
+	else {$confirm ='confirm';} 
+$status=$_REQUEST['status'];
+$key=$_REQUEST['key'];
+
+   if ($status!='') {
+	  if ($status==0) $select0="selected";
+	  else if ($status==1) $select1="selected";
+   } else  $select2="selected";	
+?>
+	<div class="navlink">
+	<a href="<? echo $this->basePath; ?>/cms">Halaman Utama</a>&nbsp;<strong>&#8250;</strong>&nbsp;Kelola Data Kategori Produk Hukum&nbsp;
+	</div>
+<br style="clear:both;" />
+	<div id="top"></div>
+	<div id="confirm" class="<?=$confirm?>" style="display: none">
+		<h3><?echo $pesan = $this->pesan;?></h3>				
+	</div>
+	<h2 class="title">Kelola Data Kategori Produk Hukum</h2>
+<div class="tablenav">
+				<form id="frmSearch" method="post" name="frmSearch">
+					Pencarian berdasarkan :
+					    <input id="key" type="text" name="key" value="<?=$this->key?>">
+						<?
+							$tingkat = array(""=>"--Pilih--",
+														"S"=>"Lihat semua status",
+														"D"=>"Diterbitkan",
+														"T"=>"Tidak Diterbitkan",
+														"J"=>"Judul");
+							$attr = array("onclick"=>"CekCari()");
+							echo $ctrlFrm->formSelect('status', $this->status, $attr, $tingkat); 							
+						?>
+						
+					    <input type="button" class="button2" value="Cari" onclick="javascript:cariListkategoriprodhukum();">
+				</form>						
+	</div>	
+<br style="clear:both;" />
+	<form action="" method="post"> 
+<div class="alignright"><input type="button" class="button2" value="Tambah Data Ketegori Produk Hukum"  onclick="kategoriprodhukumM('insert','');"></div>
+<br style="clear:both;" />
+<table class="widefat sortable" cellspacing="1">
+		<tr>
+			<th class="nosort" width="5%">No.</th>
+			<th width="55%">Judul</th>
+			<th width="15%">Status</th>
+			<th width="10%" colspan="2">&nbsp;</th>
+		</tr> 
+<? 		if ($jmlkategoriprodhukumList == 0) {?>
+		<tr class="event">
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>	
+<?}else{
+				foreach ($kategoriprodhukum as $key => $val): 
+				if ($key%2==0) { ?>
+				<tr class="alternate">
+				<? } else if ($key%2==1) { ?>
+				<tr class="alternate2">
+				<? } 
+				$noUrut = (($this->currentPage -1)* $this->numToDisplay) + $key +1;
+				$cstatus = $this->escape($val['c_status']);
+				$date=formatDate2($this->escape($val['d_kategoriprodhukum']));
+				if ($cstatus == 1) 	$status = 'Diterbitkan';
+				else $status = 'Tidak Diterbitkan';
+				
+				?>
+					<td class="clcenter"><?php echo $noUrut;?></td>
+					<td align="left"><?php echo $this->escape($val['n_judul']);?></td>
+				    <td align="center"><?php echo $status;?></td>
+					<td align="center"><a href="#" title="Ubah Data" onclick="kategoriprodhukumM('update','<?=$this->escape($val['c_kategori'])?>');">Ubah</a>	
+					</td>
+					<td align="center"><a href="#" title="Hapus Data"  onClick="javascript:HapusDataKategoriHukum('<?php echo $this->escape($val['c_kategori']);?>')">Hapus</a>
+					</td>					
+				</tr>
+				<?php endforeach;}?>
+	
+	</table>
+	<div class="spacer"></div>
+<div id="targetdetil"></div>
+
+<?
+$orderBy=$this->orderBy;
+$modul = $this->basePath."/cms/kategoriprodukhukum/listkategoriprodukhukum?par=cari&key=$this->key&status=$this->status";
+echo $halaman->halamanList($this->totalkategoriprodhukumList, $this->numToDisplay, $this->currentPage, $modul)
+?>	
+	</form>
+	<div class="spacer"></div>

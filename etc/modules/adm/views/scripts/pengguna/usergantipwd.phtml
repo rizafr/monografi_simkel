@@ -1,0 +1,112 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+$referensi = Aplikasi_Referensi_Service::getInstance();
+
+
+$ctrlFrm = new Zend_View();
+?>
+<div class="navlink">
+	<a  href="index_login.php">Halaman Utama</a> <strong> &#8250; </strong> <a href="?p=konsep_surat">User</a>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Ganti Password</h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {	$namaForm = 'frmtambahuser'; }
+			else if (strtolower($this->jenisForm) == 'update') {	$namaForm = 'frmubahuser'; }
+			else {	$namaForm = 'frmhapususer'; }
+		
+		?>
+		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+				<tr>
+				    <td align="right" width="180">* NIDN/NPM :</td>
+					<td>
+						<?
+						$user_idAttrib = array("size" => 50,"maxlength" => 50);
+						echo $ctrlFrm->formText('user_id', $this->detailUser['user_id'], $user_idAttrib);
+						
+						?>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Username :</td>
+					<td>
+						<?
+						$usernameAttrib = array("size" => 50,"maxlength" => 50);
+						echo $ctrlFrm->formText('username', $this->detailUser['username'], $usernameAttrib);
+						echo $ctrlFrm->formHidden('id', $this->detailUser['id'], null);
+						?>
+						
+					</td>
+				</tr>
+				
+
+				
+
+				<tr>
+				    <td align="right" width="180">* Status :</td>
+					<td>
+					<?
+						//$jmlstatusList = count($this->statusList);
+						$statusList['-'] = '--Pilih--';
+						$statusList['1'] = 'Aktif';
+						$statusList['0'] = 'Tidak Aktif';
+						/*for ($i = 0; $i < $jmlstatusList; $i++) {
+						    $statusList[$this->statusList[$i]->kd_status] = (string)$this->statusList[$i]->nm_status;			 
+						}
+						*/
+						$kd_statusAtrib = array("id"=>"kd_status", "tabindex"=>"17");
+						echo $ctrlFrm->formSelect('kd_status', $this->detailUser['kd_status'], $kd_statuspAtrib, $statusList);
+						echo $ctrlFrm->formHidden('c_group', $this->detailUser['c_group'], null);
+						?>
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Password Lama :</td>
+					<td>
+						<?
+						$passwordlmAttrib = array("size" => 20,"maxlength" => 20);
+						echo $ctrlFrm->formPassword('passwordlm', '', $passwordlmAttrib);
+						?>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Password Baru :</td>
+					<td>
+						<?
+						$passwordAttrib = array("size" => 20,"maxlength" => 20, "onClick" => "cekPasswd();");
+						echo $ctrlFrm->formPassword('password', '', $passwordAttrib);
+						?>
+					</td>
+				</tr>
+				<tr>
+				    <td align="right" width="180">* Confirm Password Baru :</td>
+					<td>
+						<input type="password"  size ="20" name="confirmPassword"  Value="<?php echo $password; ?>" id="confirmPassword" >
+					</td>
+				</tr>
+				<tr>
+				    <td></td>
+				    <td>
+						<div class="right">
+							<input type="button" value="Batal" onClick="javascript:history.go(-1);"> 
+							<input type="reset" value="Ulangi"> 
+							<input   type="submit" value="Simpan">
+						</div>
+					</td>
+				</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>

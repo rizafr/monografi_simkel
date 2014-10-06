@@ -1,0 +1,152 @@
+<? require_once 'Zend/View.php';
+	require_once "share/oa_dec_cur_conv.php";
+   
+   $ctrlFrm = new Zend_View();
+	$convDec = new oa_dec_cur_conv();
+
+$nip = $_REQUEST['nip'];
+$_SESSION['nip'] = $nip;
+
+	$jumJabatList = count($this->jabatList);
+   //echo $jumJabatList;
+   for ($j = 0; $j < $jumJabatList; $j++) {
+     $jabat[$j] = array("i_peg_nip"  	=>(string)$this->jabatList[$j]['i_peg_nip'],
+						  "nmJabat"		=>(string)$this->jabatList[$j]['nmJabat'],
+	                      "mulai"      	=>(string)$this->jabatList[$j]['mulai'],
+						  "akhir"  		=>(string)$this->jabatList[$j]['akhir'],
+						  "gol"  		=>(string)$this->jabatList[$j]['gol'],
+						  "gaji"  		=>(string)$this->jabatList[$j]['gaji'],
+						  "nmSK"  		=>(string)$this->jabatList[$j]['nmSK'],
+						  "noSK"  		=>(string)$this->jabatList[$j]['noSK'],
+						  "keterangan"  =>(string)$this->jabatList[$j]['keterangan']);	
+   } 
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA RIWAYAT JABATAN</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data riwayat jabatan pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+			<form id="frmVJabat" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/jabatan" method="post" name="frmVJabat">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+
+			</form>
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line"></div>	
+	<fieldset class="fields">
+		<div class="title2">Data Riwayat Jabatan</div>
+		<div class="blank"></div>
+<?
+	if ($jumJabatList == 0) {
+		echo "<font color=\"red\">Data Jabatan Tidak Ditemukan</font>";
+?>	
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+		    <th width="26%">Jabatan </th>
+			<th width="9%">Mulai</th>
+			<th width="9%">Selesai</th>
+			<th width="8%">Golongan</th>
+			<th width="10%">Gaji Pokok</th>
+			<th width="10%">SK Pejabat</th>
+			<th width="18%">Nomor SK</th>
+			<th width="10%">Keterangan</th>
+			</tr>
+	</table>
+<?	} else { ?>
+	</center>
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+		    <th width="26%">Jabatan </th>
+			<th width="9%">Mulai</th>
+			<th width="9%">Selesai</th>
+			<th width="8%">Golongan</th>
+			<th width="10%">Gaji Pokok</th>
+			<th width="10%">SK Pejabat</th>
+			<th width="18%">Nomor SK</th>
+			<th width="10%">Keterangan</th>
+			</tr>
+		<?php foreach ($jabat as $key => $val): 
+					   if ($key%2==0) { ?>
+				      <tr class="event">
+					<? } else if ($key%2==1) { ?>
+					  <tr class="event2">
+					<? } ?>
+				<?php
+				$mulai = $this->escape($val['mulai']);
+					$thnMulai = substr($mulai,0,4);
+					$blnMulai = substr($mulai,5,2);
+					$hrMulai = substr($mulai,8,2);
+					$tglMulai = $hrMulai."-".$blnMulai."-".$thnMulai;
+					if ($thnMulai == ''){
+						$tglMulai = null;
+					}
+					else if ($blnMulai == '#'){
+						$tglMulai = null;
+					}
+					else if ($hrMulai == '#'){
+						$tglMulai = null;
+					}
+				$tglAkhir = $this->escape($val['akhir']);				
+					$thnAkhir = substr($tglAkhir,0,4);
+					$blnAkhir = substr($tglAkhir,5,2);
+					$hrAkhir = substr($tglAkhir,8,2);
+					$tglAkhir = $hrAkhir."-".$blnAkhir."-".$thnAkhir;
+					if ($thnAkhir == ''){
+						$tglAkhir = null;
+					}
+					else if ($blnAkhir == '#'){
+						$tglAkhir = null;
+					}
+					else if ($hrAkhir == '#'){
+						$tglAkhir = null;
+					}
+					
+				$gol = $this->escape($val['gol']);
+				if ($gol =='#'){
+					$gol = null;
+				}
+				?>
+				<td align=left>	
+				<a href="#" onClick="javascript:viewJabat('<? echo $this->escape($val['i_peg_nip']); ?>','<? echo $this->escape($val['nmJabat']); ?>');" class="link" title="View"><?php echo $this->escape($val['nmJabat']);?> </a></td>
+				<td class="clcenter"> <?php echo $tglMulai;?></td>
+				<td class="clcenter"> <?php echo $tglAkhir;?></td>
+				<td class="clcenter"> <?php echo $gol;?></td>
+				<td class="clright"> <?php echo $convDec->convertDecToCur($this->escape($val['gaji']));?></td>
+				<td> <?php echo $this->escape($val['nmSK']);?></td>
+				<td> <?php echo $this->escape($val['noSK']);?></td>
+				<td> <?php echo $this->escape($val['keterangan']);?></td>
+		  </tr>
+	<?php endforeach;?> 		  
+		</table>
+<?		} ?>
+ 			<dl>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">
+				<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+				</dd>			
+				<div class="back" onClick="javascript:kembaliJabat();" title="Kembali"><input type="button" value="Kembali" id="kembaliJabat"></div>
+			</dl>
+			</div>
+ 	</fieldset>
+</div>
+	  
+<!--
+    <p align="center">
+		<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+    </p>
+ 
+			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliJabat();" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

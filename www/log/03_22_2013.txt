@@ -1,0 +1,12 @@
+FP-1;Ubah data user;22/03/2013 13:36:03;967259046 ();
+FP-1;Ubah data user;22/03/2013 13:39:28;970336135 ();
+FP-1;Ubah data user;22/03/2013 13:39:59;984400394 ();
+FP-1;Ubah data user;22/03/2013 13:40:30;965282417 ();
+FP-1;Ubah data user;22/03/2013 13:40:54;988400881 ();
+967363548;Insert Data Faktur Penjualan dgn Pemebeli CV. HASIL USAHA;22/03/2013 13:48:43; di Nopend 40005;
+;Insert data;22/03/2013 14:18:55; ();
+;Insert data;22/03/2013 14:19:26; ();
+973351792;Insert Data Faktur Penjualan dgn Pemebeli BANK CNB;22/03/2013 14:38:27; di Nopend 61200;
+;Insert data;22/03/2013 15:03:11; ();
+;Ubah data;22/03/2013 15:17:40; (9);
+988400881;Insert Data Faktur Penjualan dgn Pemebeli KSP PURNABAKTI;22/03/2013 15:29:41; di Nopend 97000;

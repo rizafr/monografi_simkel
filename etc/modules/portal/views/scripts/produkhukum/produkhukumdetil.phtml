@@ -1,0 +1,33 @@
+<?php 
+require_once 'Zend/View.php';
+require_once "share/tanggal.php";  
+require_once 'share/Portalconf.php'; 
+
+/*$vFoto = $this->basePath."../data/sdm/photo/".trim($this->i_peg_nip).".jpg";
+
+	if (!file_exists($vFoto)) {
+		$vFoto = $this->basePath."../images/nophoto.jpg";
+	} 
+*/
+?>
+<div class="widget">
+	<h4 class="widgettitle">Konten</h4>
+	<div class="content">		
+		<h2 class="title"><?php echo $this->c_kategori." No ".$this->i_nomor_produkhukum." Tahun ".$this->d_tahun_produkhukum." Perihal ".$this->n_judul;?></h2>
+		<p>
+		<?php echo $this->n_detil;?>
+<?php
+$file=$this->n_file;
+$file_ext = strtolower(substr($file, strrpos($file, '.') + 1));
+if ($file_ext=="pdf") $filetype="ico-pdf";
+else if (($file_ext=="doc") || ($file_ext=="docx")) $filetype="ico-doc";
+else if (($file_ext=="ppt") || ($file_ext=="pptx")) $filetype="ico-ppt";
+
+if($file!='') echo "<a class=\"$filetype\" href=\"$path_data_produkhukum$this->n_file\">Download File</a>\n"; 
+?>
+		<div class="space"></div>
+
+		<div class="hr"></div>
+<a class="all" href="#indexprodukhukum" onclick="goExec_Script('<?php echo $this->basePath; ?>/portalmodule/produkhukum/indeksprodukhukum','<?php echo $this->basePath; ?>/portalmodule/produkhukum/produkhukumjs', 'produkhukum')">Arsip Produk Hukum</a>
+	</div>
+</div>

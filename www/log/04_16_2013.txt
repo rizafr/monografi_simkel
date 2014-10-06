@@ -1,0 +1,4 @@
+;Ubah data pengumuman;16/04/2013 06:34:41; (7);
+FP-1;Ubah data user;16/04/2013 10:09:21;984397206 ();
+FP-1;Insert data user;16/04/2013 10:10:01;viewpusat ();
+FP-1;Ubah data user;16/04/2013 10:11:38;viewpusat ();

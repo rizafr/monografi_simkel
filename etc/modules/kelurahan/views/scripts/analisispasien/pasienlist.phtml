@@ -1,0 +1,91 @@
+<?php 
+	require_once 'share/format_page.php';
+	require_once 'share/format_date.php';
+	$halaman = new format_page();
+	$tgl = new format_date();
+        
+	$ctrlFrm = new Zend_View(); 
+	$currentPage = $this->currentPage;
+	$numToDisplay = $this->numToDisplay;
+?>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<div class="search-panel">
+			<form method="post" id="frmCariPasien" name="frmCariPasien">					
+				<table width="100%" border="0" cellpadding="0" cellspacing="1" align="center">
+					<tr>
+						<td align="center">
+							<?php
+								$kategoriCari = array( "n_nama" => "Nama", "NIP" => "NIP");
+								echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
+							?>
+							<input type="text" name="carii" id="carii" align="center" value ="<? echo $this->carii;?>">				
+							<?php
+					     	$atribSubmit = array("onclick"=>"javascript:cariPasien();");
+					     	echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+							?>
+						</td>
+					</tr>			
+				</table>
+			</form>
+		</div>
+	
+		<div id="confirm" class="confirm" style="display: none">
+			<h2 class="title"><?php echo $this->pesan; ?></h2>				
+		</div>		
+
+		<div class="blank"></div>			
+   
+  <table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th class="nosort">No</th> 
+				<th class="sorted order2 sortable">Nama Pasien</th> 
+				
+				<?
+				if (count($this->pasienList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="11"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {
+						foreach ($this->pasienList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } 
+						$kode_pasien = $this->escape($val['kode_pasien']); 
+						$n_nama = $this->escape($val['n_nama']); 
+						
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						echo $ctrlFrm->formHidden('kode_pasien', $id, null);
+						?>
+						
+						<td align="center"><? echo $noUrut;?>&nbsp;</td>
+<td align="left"><a href="#" onclick="closeDialogPasien('<? echo $kode_pasien;?>','<? echo $n_nama;?>');"><? echo $n_nama;?></a></td>
+						<td align="left">&nbsp;<? echo $n_pasien;?></td>
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+			<?	
+			$totalData = $this->totPasienList ;
+			$modul = $this->basePath."/pasien/rekampasien/pasienlist";
+			$param1 = $this->prodi;
+			$param2 = $this->tahun;
+			$param3 = $this->semester;
+echo $halaman->showPage($totalData, $numToDisplay, $currentPage, $divId, $modul, $param1, $param2, $param3, $param4, $param5, $param6, $param7, $param8, $param9, $param10)
+?>
+
+
+
+				
+				<span class="corners-bottom"><span></span></span>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			var sorter = new table.sorter("sorter");
+			sorter.init("sorter",0);
+		</script>

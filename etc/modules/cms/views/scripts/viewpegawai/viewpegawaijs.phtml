@@ -1,0 +1,804 @@
+<SCRIPT src="<? echo $this->basePath;?>/js/jquery.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="<? echo $this->basePath;?>/js/jquery.form.js" type="text/javascript"></SCRIPT>
+<script type="text/javascript">
+ var optCmdSubmit = {target : '#tableview'};
+ jQuery('#frmVSearch').ajaxForm(optCmdSubmit);
+   $("a[@class=newPage]").bind("click",pegSearch); //coba paging
+
+ //================DATA POKOK=======================
+ $("a[@class=cDP]").bind("click",dpLinkDP);
+ 
+
+ 
+//================PENDIDIKAN=======================
+ $("a[@class=cDidik]").bind("click",dpDidik);
+ 
+ var optSimpanDidikUpdate = {target : '#tableview'};
+ jQuery('#frmDidikUpdate').ajaxForm(optSimpanDidikUpdate);
+ 
+ var optSimpanDidikTambah = {target : '#tableview'};
+ jQuery('#frmDidikTambah').ajaxForm(optSimpanDidikTambah);
+ 
+// $("a[@class=cVDidik]").bind("click",dpVDidik);
+
+//===============================PELATIHAN=============================
+ $("a[@class=cLatih]").bind("click",dpLatih);
+
+ 
+//================================KELUARGA=============================
+ $("a[@class=cKel]").bind("click",dpKel);
+
+ var optSimpanKelTambah = {target : '#tableview'};
+ jQuery('#frmKelTambah').ajaxForm(optSimpanKelTambah);
+
+ var optSimpanKelUpdate = {target : '#tableview'};
+ jQuery('#frmKelUpdate').ajaxForm(optSimpanKelUpdate);
+
+ //================================KERABAT=============================
+ $("a[@class=cKer]").bind("click",dpKer);
+
+ var optSimpanKerTambah = {target : '#tableview'};
+ jQuery('#frmKerTambah').ajaxForm(optSimpanKerTambah);
+
+ var optSimpanKerUpdate = {target : '#tableview'};
+ jQuery('#frmKerUpdate').ajaxForm(optSimpanKerUpdate);
+ 
+//================================KETERANGAN=============================
+ $("a[@class=cKet]").bind("click",dpKet);
+ 
+ var optSimpanKet = {target : '#tableview'};
+ jQuery('#frmKet').ajaxForm(optSimpanKet);
+ 
+ var optHapusKet = {target : '#tableview'};
+ jQuery('#frmKet').ajaxForm(optHapusKet);
+
+//================================ORANGTUA=============================
+ $("a[@class=cOrtu]").bind("click",dpOrtu);
+ 
+ var optSimpanOrtu = {target : '#tableview'};
+ jQuery('#frmOrtu').ajaxForm(optSimpanOrtu);
+ 
+ var optHapusOrtu = {target : '#tableview'};
+ jQuery('#frmOrtu').ajaxForm(optHapusOrtu);
+ 
+ 
+//================================KEPANGKATAN=============================
+ $("a[@class=cPangkat]").bind("click",dpPangkat);
+
+ var optSimpanPangkatTambah = {target : '#tableview'};
+ jQuery('#frmPangkatTambah').ajaxForm(optSimpanPangkatTambah);
+ 
+ var optSimpanPangkatUpdate = {target : '#tableview'};
+ jQuery('#frmPangkatUpdate').ajaxForm(optSimpanPangkatUpdate);
+ 
+//================================ORGANISASI=============================
+ $("a[@class=cOrg]").bind("click",dpOrg);
+
+ $("a[@class=cViewOrg]").bind("click",viewOrg);
+ 
+ var optSimpanOrgTambah = {target : '#tableview'};
+ jQuery('#frmOrgTambah').ajaxForm(optSimpanOrgTambah);
+ 
+ var optSimpanOrgUpdate = {target : '#tableview'};
+ jQuery('#frmOrgUpdate').ajaxForm(optSimpanOrgUpdate);
+
+//================================SERTIFIKASI=============================
+ $("a[@class=cSer]").bind("click",dpSer);
+ 
+ var optSimpanSerTambah = {target : '#tableview'};
+ jQuery('#frmSerTambah').ajaxForm(optSimpanSerTambah);
+ 
+ var optSimpanSerUpdate = {target : '#tableview'};
+ jQuery('#frmSerUpdate').ajaxForm(optSimpanSerUpdate);
+ 
+ 
+//================================SEMINAR=============================
+ $("a[@class=cSeminar]").bind("click",dpSeminar);
+ 
+ var optSimpanSemTambah = {target : '#tableview'};
+ jQuery('#frmSemTambah').ajaxForm(optSimpanSemTambah);
+ 
+ var optSimpanSemUpdate = {target : '#tableview'};
+ jQuery('#frmSemUpdate').ajaxForm(optSimpanSemUpdate);
+ 
+//================================PENGHARGAAN=============================
+ $("a[@class=cHarga]").bind("click",dpHarga);
+ 
+ var optSimpanHargaTambah = {target : '#tableview'};
+ jQuery('#frmHargaTambah').ajaxForm(optSimpanHargaTambah);
+ 
+ var optSimpanHargaUpdate = {target : '#tableview'};
+ jQuery('#frmHargaUpdate').ajaxForm(optSimpanHargaUpdate);
+  
+//================================JABATAN=============================
+ $("a[@class=cJabat]").bind("click",dpJabat);
+ 
+ var optSimpanJabatTambah = {target : '#tableview'};
+ jQuery('#frmJabatTambah').ajaxForm(optSimpanJabatTambah);
+ 
+ var optSimpanJabatUpdate = {target : '#tableview'};
+ jQuery('#frmJabatUpdate').ajaxForm(optSimpanJabatUpdate);
+  
+//================================HUKUMAN=============================
+ $("a[@class=cHukum]").bind("click",dpHukum);
+ 
+ var optSimpanHukumTambah = {target : '#tableview'};
+ jQuery('#frmHukumTambah').ajaxForm(optSimpanHukumTambah);
+ 
+ var optSimpanHukumUpdate = {target : '#tableview'};
+ jQuery('#frmHukumUpdate').ajaxForm(optSimpanHukumUpdate);
+  
+//================================LUAR NEGERI=============================
+ $("a[@class=cLN]").bind("click",dpLN);
+ 
+ var optSimpanLNTambah = {target : '#tableview'};
+ jQuery('#frmHukumTambah').ajaxForm(optSimpanLNTambah);
+ 
+ var optSimpanLNUpdate = {target : '#tableview'};
+ jQuery('#frmLNUpdate').ajaxForm(optSimpanLNUpdate);
+ 
+//================================KESEHATAN=============================
+ $("a[@class=cKes]").bind("click",dpKes);
+ 
+ //================================ALAMAT=============================
+ $("a[@class=cAlamat]").bind("click",dpAlamat);
+ 
+
+  function pegSearch() //coba paging
+{//alert("test");
+	var handler = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch?param1='+param1+'&param2='+param2;
+	var currentPage = $(this).attr("currentPage");
+	var param1 = $(this).attr("param1");
+	var param2 = $(this).attr("param2");
+	var param3 = $(this).attr("param3");
+	var param4 = $(this).attr("param4");
+		
+	var opt = {currentPage : currentPage, param1 : param1, param2 : param2, param3 : param3 , param4 : param4};
+	jQuery.get(handler,opt,function(data) {
+		$("#tableview").html(data);
+		$("a[@class=newPage]").bind("click",pegSearch);
+	});
+
+}
+ 
+ 
+ 
+ function sortByJudul(param1, param2, param3) //coba paging
+{ //alert ("param2="+param2);
+	var currentPage = $(this).attr("currentPage");
+	var handler = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch?currentPage='+currentPage+'&param1='+param1+'&param2='+param2+'&param3='+param3;
+	var param1 = $(this).attr("param1");
+	var param2 = $(this).attr("param2");
+	var param3 = $(this).attr("param3");
+	//var param4 = $(this).attr("param4");
+		
+	//var opt = {currentPage : currentPage, param1 : param1, param2 : param2, param3 : param3 , param4 : param4 , param5 : param5 , param6 : param6};
+	jQuery.get(handler,function(data) {
+		$("#tableview").html(data);
+		//$("a[@class=newPage]").bind("click",pegSearch);
+		$("a[@class=newPage]").bind("click",sortByJudul);
+	});
+
+} 
+ 
+ 
+ 
+ 
+ //##########################################################################
+  
+ function commandSubmit() {
+   jQuery('#perintah').bind('click',function () {
+                                       jQuery("#frmVSearch").ajaxSubmit(optCmdSubmit); 
+									   return false;
+									 });
+ }
+
+ function kembaliSearch() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/pegawai/index';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+ 
+
+function viewPegawai(nip)
+{
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaiview?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+} 
+
+ function kembaliView() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+ 
+ function dpLinkDP()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaiview';
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+//======================================PENDIDIKAN================================= 
+ function dpDidik()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pendidikan';
+	
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliDidik() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+ 
+ function viewDidik(nip, jenjang) {
+	//alert ("Test"+nip);
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pendidikanview?nip='+nip+'&jenjang='+jenjang;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 //jQuery.getScript('<?php echo $this->basePath; ?>/js/modul_perencanaan.js',function (data) {});
+	 // function () {}
+   });
+ } 
+
+ function kembaliDidikView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pendidikan?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+ 
+
+//===================================PELATIHAN============================================= 
+ function dpLatih()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pelatihan';
+	
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliLatih() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+
+ function viewLatih(nip, jenis, latih, mulai, akhir, tempat, keterangan) {
+	//alert ("Test"+nip);
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pelatihanview?nip='+nip+'&jenis='+jenis+'&latih='+latih+'&mulai='+mulai+'&akhir='+akhir+'&tempat='+tempat+'&keterangan='+keterangan;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+
+ function kembaliLatihView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pelatihan?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+//============================KERABAT===================================
+ function dpKer()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/kerabat';	
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliKer() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+  
+ function viewKer(nip, hub) {
+	//alert ("Test= "+nip+"  hub= "+hub);
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/kerabatview?nip='+nip+'&hub='+hub;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+ function kembaliKerView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/kerabat?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+ 
+
+//============================KELUARGA===================================
+ function dpKel()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/keluarga';	
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliKel() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+  
+ function viewKel(nip, hub) {
+	//alert ("Test"+nip);
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/keluargaview?nip='+nip+'&hub='+hub;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+ function kembaliKelView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/keluarga?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+
+//===================================KETERANGAN============================================= 
+ function dpKet()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/keterangan';	
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliKet() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+//===================================ORANGTUA============================================= 
+ function dpOrtu()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/orangtua';	
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliOrtu() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+
+ 
+//===================================KEPANGKATAN============================================= 
+ function dpPangkat()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/kepangkatan';		
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliPangkat() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+function viewPangkat(nip, gol, tmt)
+{
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/kepangkatanview?nip='+nip+'&gol='+gol+'&tmt='+tmt;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+} 
+
+ function kembaliPangkatView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/kepangkatan?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+
+//===================================ORGANISASI============================================= 
+ function dpOrg()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/organisasi';			
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliOrg() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+function viewOrg(nip, nmOrg)
+{
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/organisasiview?nip='+nip+'&nmOrg='+nmOrg;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+} 
+
+ function kembaliOrgView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/organisasi?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ }  
+ 
+//===================================SERTIFIKASI============================================= 
+ function dpSer()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/sertifikasi';				
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliSer() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+ 
+function viewSer(nip, nmSer)
+{
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/sertifikasiview?nip='+nip+'&nmSer='+nmSer;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+} 
+
+ function kembaliSerView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/sertifikasi?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ }   
+ 
+//===================================SEMINAR============================================= 
+ function dpSeminar()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/seminar';				
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliSem() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+ 
+function viewSem(nip, nmSem)
+{
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/seminarview?nip='+nip+'&nmSem='+nmSem;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+} 
+
+ function kembaliSemView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/seminar?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ }   
+//===================================PENGHARGAAN============================================= 
+ function dpHarga()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/penghargaan';					
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliHarga() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+function viewHarga(nip, nmHarga)
+{
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/penghargaanview?nip='+nip+'&nmHarga='+nmHarga;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+} 
+
+ function kembaliHargaView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/penghargaan?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ }    
+//===================================JABATAN============================================= 
+ function dpJabat()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/jabatan';						
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliJabat() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+function viewJabat(nip, nmJabat)
+{
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/jabatanview?nip='+nip+'&nmJabat='+nmJabat;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+} 
+
+ function kembaliJabatView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/jabatan?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ }     
+//===================================HUKUMAN============================================= 
+ function dpHukum()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/hukuman';							
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliHukum() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+function viewHukum(nip, tanggal)
+{
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/hukumanview?nip='+nip+'&tanggal='+tanggal;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+} 
+
+ function kembaliHukumView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/hukuman?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ }     
+
+//===================================LUAR NEGERI============================================= 
+ function dpLN()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/luarnegeri';								
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+}
+
+ function kembaliLN() {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/pegawaisearch';
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ } 
+
+function viewLN(nip, negara, tanggal)
+{
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/luarnegeriview?nip='+nip+'&negara='+negara+'&tanggal='+tanggal;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+} 
+
+ function kembaliLNView(nip) {
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/luarnegeri?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ }
+
+//===================================KESEHATAN============================================= 
+ function dpKes()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/kesehatan';								
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+} 
+
+ function kembaliSehatView(nip) {
+ //alert ("nip="+nip);
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/kesehatan?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ }
+
+function viewsehat(nip, tanggal)
+{//alert ("nip="+nip);
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/kesehatanview?nip='+nip+'&tanggal='+tanggal;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+} 
+
+//===================================ALAMAT============================================= 
+ function dpAlamat()
+ {
+ 	var isiNip = $(this).attr("nip");
+	var url = '<?php echo $this->basePath; ?>/sdm/viewpegawai/alamat';								
+	var par = { nip : isiNip }
+	     jQuery.get(url, par, function(data) 
+		 {
+			$('#tableview').html(data);
+		 }
+		 );
+} 
+
+ function kembaliAlamatView(nip) {
+ //alert ("nip="+nip);
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/alamat?nip='+nip;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+ }
+
+function viewAlamat(nip, tanggal, jalan)
+{//alert ("nip="+nip);
+   var urlDepan = '<?php echo $this->basePath; ?>/sdm/viewpegawai/alamatview?nip='+nip+'&tanggal='+tanggal+'&jalan='+jalan;
+   jQuery.get(urlDepan, function(data) {
+	 $("div#tableview").html(data);
+	 // function () {}
+   });
+} 
+
+</script>

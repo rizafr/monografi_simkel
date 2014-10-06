@@ -1,0 +1,130 @@
+function caridList()
+{
+	$("#frmCarid").ajaxForm(frmCarid_opt);
+}
+var frmCarid_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/cms/forum/kritiklist',
+		type: 'post', 
+		resetForm: false
+};
+
+
+function kritiklist()
+{
+	var url = '<?php echo $this->basePath; ?>/cms/forum/kritiklist';
+	jQuery.get(url, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+function cariKritikList(){ 
+	kategoriCari = document.getElementById('kategoriCari').value;
+	katakunciCari = document.getElementById('katakunciCari').value;
+	var param = { kategoriCari:kategoriCari, katakunciCari:katakunciCari};
+	
+	var url = '<?php echo $this->basePath; ?>/cms/forum/kritiklist';
+	jQuery.get(url, param, function(data) {
+		$("#targetview").html(data);
+	});	
+}
+
+function kritikForm(jenisForm, id)
+{
+	var url = '<?php echo $this->basePath; ?>/cms/forum/kritikolahdata';
+	
+	var param = { jenisForm:jenisForm, id:id};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahkritik").ajaxForm(tambahKritik_opt);
+		jQuery("#frmubahkritik").ajaxForm(ubahKritik_opt);
+	});
+}
+
+var tambahKritik_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/cms/forum/kritik',
+	beforeSubmit : function() {
+		var dKritik = document.getElementById('n_nama').value;
+		
+				if(!dKritik){
+					alert('Nama harus diisi.');
+					return false;
+				} else {
+					return true;
+				}
+			
+	},
+	success : function() {
+		doCount(5);
+	},
+	type: 'post', 
+	resetForm: false
+};
+
+var ubahKritik_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/cms/forum/kritikupdate',
+	beforeSubmit : function() {
+		var dKritik = document.getElementById('n_nama').value;
+		
+				if(!dKritik){
+					alert('Nama harus diisi.');
+					return false;
+				} else {
+					return true;
+				}
+			
+	},
+	success : function() {
+		doCount(5);
+	},
+	type: 'post', 
+	resetForm: false
+};
+
+function kritikHapus(param1, param2)
+{ 
+	
+	if(ConfirmDelete(param1, param2))
+	{	//alert("test");
+		handler = '<?php echo $this->basePath; ?>/cms/forum/kritikhapus';
+		var opt = {id : param2};
+		jQuery.get(handler,opt,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+} 
+
+
+function pilihPegawai(textField, nip, nama)
+{
+	document.getElementById('iUser'+textField).value = nip;
+	document.getElementById('nUser'+textField).value = nama;
+	
+	document.getElementById('targetview').style.display = 'none';
+}
+
+function ubahStatus(key)
+{
+	var status= '';
+
+	if(document.getElementById('status_'+key).checked == true)
+	{
+		id = document.getElementById('status_'+key).value;
+		status = 'AKTIF';
+	}
+	else
+	{
+		id = document.getElementById('status_'+key).value;
+		status = 'TIDAK AKTIF';
+	}
+	var url = '<?php echo $this->basePath; ?>/cms/forum/ubahStatus';
+	var param = { id:id,status:status};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		doCount(5);
+	});
+}
+

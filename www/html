@@ -1,0 +1,44 @@
+
+<html><body>
+	
+	<table width="100%" border="0">
+  <tr>
+    <td width="29%">Nama</td>
+    <td width="2%"><div align="center">:</div></td>
+    <td width="69%">Dawam Suherlan</td>
+  </tr>
+  <tr>
+    <td>Honor Bulan </td>
+    <td><div align="center">:</div></td>
+    <td>Januari 2011</td>
+  </tr>
+</table>
+
+<BR />
+
+
+<table width="100%" border="1">
+  <tr>
+    <td align="center" width="2%" heigth="20%"><font face="1">No</font></td>
+    <td align="center" width="68%"><font face="1">Nama Kegiatan </font></td>
+    <td align="center" width="8%"><font face="1">Volume</font></td>
+    <td align="center" width="8%"><font face="1">Honor </font></td>
+    <td align="center" width="15%"><font face="1">Total Honor </font> </td>
+
+  </tr>
+    <tr height="4%">
+      <td colspan="4" align="center">Jumlah Honor</td>
+      <td align="right">&nbsp;Rp. 0,00</td>
+    </tr>
+    <tr height="4%">
+      <td colspan="4" align="center">Jumlah Pajak</td>
+      <td align="right">&nbsp;Rp. 0,00</td>
+    </tr>
+  <tr height="4%">
+    <td colspan="4" align="center">Jumlah Honor Bersih</td>
+    <td align="right">&nbsp;Rp. 0,00</td>
+  </tr>
+</table>
+			
+			</body>
+			</html>

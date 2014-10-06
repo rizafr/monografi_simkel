@@ -1,0 +1,947 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+$format_date = new format_date();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>> Data Rekam Pasien
+</div>
+
+<div id="dialog-browse">  
+</div>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">FORM DATA REKAM PASIEN</h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {$namaForm = 'frmtambahrekampasien'; }
+			else if (strtolower($this->jenisForm) == 'update') {$namaForm = 'frmubahrekampasien'; }
+			else {$namaForm = 'frmhapusrekampasien'; }
+		?>
+
+<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+	<input name="id" id="id" type="hidden" value="<?echo $this->id;?>" />
+
+	<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
+	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
+	<input name="id_user" id="id_user" type="hidden" value="<?echo $this->detailRekampasien['id_user'];?>" />
+	
+	<input name="kategoriCari" id="kategoriCari" type="hidden" value="<? echo $this->kategoriCari; ?>" /> 
+	<input name="carii" id="carii" type="hidden" value="<? echo $this->carii; ?>" /> 
+<? 
+$status = $this->hasil;
+$proses = $this->proses;
+$keterangan = $this->keterangan;
+$pesan->show_message($proses, $keterangan, "$status" ); ?>
+
+<script type="text/javascript">
+$(function(){
+	$("#tabs").tabs();
+	});
+</script>
+
+<tr>
+	<td colspan="4">
+	<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Fisik</a></li>
+		<li><a href="#tabs-2" onClick="labForm('insert','<? echo $this->id;?>');" >Bapak Kandung</a></li>
+		<li><a href="#tabs-3" onClick="fotoForm('insert','<? echo $this->id;?>');" >Ibu Kandung</a></li>
+		<li><a href="#tabs-4" onClick="fotoForm('insert','<? echo $this->id;?>');" >Riwayat kesehatan</a></li>
+		<li><a href="#tabs-5" onClick="fotoForm('insert','<? echo $this->id;?>');" >Pemeriksaan Fisik</a></li>
+		<li><a href="#tabs-6" onClick="fotoForm('insert','<? echo $this->id;?>');" >Pemeriksaan Lab</a></li>
+		
+	</ul>
+<div id="tabs-1">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+
+	<tr>
+	<td align="right" width="180">* no reg :</td>
+	<td>	
+	<input name="c_noreg" id="c_noreg" type="text" value="<?echo $this->kode_pasien;?>" readonly />
+	
+	<!--input type="button" value="Cari" onClick="showDialog('pasien');"-->
+
+	
+				</td>
+				</tr>
+				
+				
+				
+	<tr>
+				    <td align="right" width="180">* Tanggal :</td>
+					<td>
+<input name="t_waktu" id="d_medrec" type="text" value="<?echo $format_date->convertTglMachineToHuman($this->detailRekampasien['t_waktu']);?>" /></td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* berat :</td>
+					<td>	
+	<? 
+	$t_beratAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_berat", $this->detailRekampasien['t_berat'], $t_beratAttrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* tinggi :</td>
+					<td>	
+	<? 
+	$t_tinggiAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_tinggi", $this->detailRekampasien['t_tinggi'], $t_tinggiAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* tekanan :</td>
+					<td>	
+	<? 
+	$t_tekananAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_tekanan", $this->detailRekampasien['t_tekanan'], $t_tekananAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* denyut :</td>
+					<td>	
+	<? 
+	$t_denyutAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_denyut", $this->detailRekampasien['t_denyut'], $t_denyutAttrib);
+	?>
+				</td>
+				</tr>
+				
+				
+
+				<tr>
+				    <td align="right" width="180">* frequensi :</td>
+					<td>	
+	<? 
+	$t_frequensiAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_frequensi", $this->detailRekampasien['t_frequensi'], $t_frequensiAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* suhu :</td>
+					<td>	
+	<? 
+	$t_suhuAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_suhu", $this->detailRekampasien['t_suhu'], $t_suhuAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* n_mata :</td>
+					<td>	
+	<? 
+	$n_mataAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_mata", $this->detailRekampasien['n_mata'], $n_mataAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* tht :</td>
+					<td>	
+	<? 
+	$n_thtAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_tht", $this->detailRekampasien['n_tht'], $n_thtAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* gigi :</td>
+					<td>	
+	<? 
+	$n_gigiAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_gigi", $this->detailRekampasien['n_gigi'], $n_gigiAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* leher :</td>
+					<td>	
+	<? 
+	$n_leherAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_leher", $this->detailRekampasien['n_leher'], $n_leherAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* jantung :</td>
+					<td>	
+	<? 
+	$n_jantungAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_jantung", $this->detailRekampasien['n_jantung'], $n_jantungAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* paru :</td>
+					<td>	
+	<? 
+	$n_paruAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_paru", $this->detailRekampasien['n_paru'], $n_paruAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* perut :</td>
+					<td>	
+	<? 
+	$n_perutAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_perut", $this->detailRekampasien['n_perut'], $n_perutAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* gerak :</td>
+					<td>	
+	<? 
+	$n_gerakAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_gerak", $this->detailRekampasien['n_gerak'], $n_gerakAttrib);
+	?>
+				</td>
+				</tr>		
+			
+			
+			<tr>
+				    <td align="right" width="180">* gizi :</td>
+					<td>	
+	<? 
+	$n_giziAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_gizi", $this->detailRekampasien['n_gizi'], $n_giziAttrib);
+	?>
+				</td>
+				</tr>		
+	
+	
+	<tr>
+				    <td align="right" width="180">* potensi :</td>
+					<td>	
+	<? 
+	$n_potensiAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_potensi", $this->detailRekampasien['n_potensi'], $n_potensiAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* mental :</td>
+					<td>	
+	<? 
+	$n_mentalAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_mental", $this->detailRekampasien['n_mental'], $n_mentalAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* reproduksi :</td>
+					<td>	
+	<? 
+	$n_reproduksiAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_reproduksi", $this->detailRekampasien['n_reproduksi'], $n_reproduksiAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* kematangan :</td>
+					<td>	
+	<? 
+	$n_kematanganAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_kematangan", $this->detailRekampasien['n_kematangan'], $n_kematanganAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* hb :</td>
+					<td>	
+	<? 
+	$n_hbAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_hb", $this->detailRekampasien['n_hb'], $n_hbAttrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* feses :</td>
+					<td>	
+	<? 
+	$n_fesesAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_feses", $this->detailRekampasien['n_feses'], $n_fesesAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* jasmani :</td>
+					<td>	
+	<? 
+	$n_jasmaniAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_jasmani", $this->detailRekampasien['n_jasmani'], $n_jasmaniAttrib);
+	?>
+				
+				
+				<tr>
+	
+	
+					
+				
+
+</table>
+</div>
+
+<div id="tabs-2">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+<tr>
+				    <td align="right" width="180">* Golongan darah :</td>
+					<td>
+	<?
+	$genderList['-'] = '--Pilih--';
+	$genderList['A'] = 'A';
+	$genderList['B	'] = 'B';
+	$genderList['O'] = 'O';
+	$jenis_pendAtrib = array("id"=>"c_golongan", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_golongan', trim($this->detailPendaftaran['c_golongan']), $genderAtrib, $genderList);
+	?>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Jantung :</td>
+					<td align="center">
+							<input type="checkbox" name="c_jantung" id="c_jantung" value="Y">
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Lainnya :</td>
+					<td align="center">
+							<input type="checkbox" name="c_lain" id="c_lain" value="Y">
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Asma :</td>
+					<td align="center">
+							<input type="checkbox" name="c_asma" id="c_asma" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* thalassemia :</td>
+					<td align="center">
+							<input type="checkbox" name="c_thalassimia" id="c_thalassimia" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Gangguan jiwa :</td>
+					<td align="center">
+							<input type="checkbox" name="c_jiwa" id="c_jiwa" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Tekanan darah tinngi :</td>
+					<td align="center">
+							<input type="checkbox" name="c_darting" id="c_darting" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Kencing manis :</td>
+					<td align="center">
+							<input type="checkbox" name="c_manis" id="c_manis" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Kanker :</td>
+					<td align="center">
+							<input type="checkbox" name="c_kanker" id="c_kanker" value="Y">	
+						</td>
+				</tr>
+				
+</table>
+</div>
+
+
+<div id="tabs-3">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+
+
+<tr>
+				    <td align="right" width="180">* Golongan darah :</td>
+					<td>
+	<?
+	$genderList['-'] = '--Pilih--';
+	$genderList['A'] = 'A';
+	$genderList['B	'] = 'B';
+	$genderList['O'] = 'O';
+	$jenis_pendAtrib = array("id"=>"c_golongani", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_golongani', trim($this->detailPendaftaran['c_golongani']), $genderAtrib, $genderList);
+	?>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Jantung :</td>
+					<td align="center">
+							<input type="checkbox" name="c_jantungi" id="c_jantungi" value="Y">
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Lainnya :</td>
+					<td align="center">
+							<input type="checkbox" name="c_laini" id="c_laini" value="Y">
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Asma :</td>
+					<td align="center">
+							<input type="checkbox" name="c_asmai" id="c_asmai" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* thalassemia :</td>
+					<td align="center">
+							<input type="checkbox" name="c_thalassimiai" id="c_thalassimiai" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Gangguan jiwa :</td>
+					<td align="center">
+							<input type="checkbox" name="c_jiwai" id="c_jiwai" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Tekanan darah tinngi :</td>
+					<td align="center">
+							<input type="checkbox" name="c_dartingi" id="c_dartingi" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Kencing manis :</td>
+					<td align="center">
+							<input type="checkbox" name="c_manisi" id="c_manisi" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Kanker :</td>
+					<td align="center">
+							<input type="checkbox" name="c_kankeri" id="c_kankeri" value="Y">	
+						</td>
+				</tr>
+
+
+
+				</table>
+</div>
+
+
+<div id="tabs-4">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+
+
+<tr>
+				    <td align="right" width="180">* Golongan darah :</td>
+					<td>
+	<?
+	$genderList['-'] = '--Pilih--';
+	$genderList['A'] = 'A';
+	$genderList['B	'] = 'B';
+	$genderList['O'] = 'O';
+	$jenis_pendAtrib = array("id"=>"c_golongan1", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_golongan1', trim($this->detailPendaftaran['c_golongan1']), $genderAtrib, $genderList);
+	?>
+					</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* Rhesus :</td>
+					<td>	
+	<? 
+	$n_rhesusAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_rhesus", $this->detailRekampasien['n_rhesus'], $n_rhesusAttrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				
+				<tr>
+				    <td align="right" width="180">* Jantung :</td>
+					<td align="center">
+							<input type="checkbox" name="c_jantung1" id="c_jantung1" value="Y">
+						</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* Lainnya :</td>
+					<td>	
+	<? 
+	$n_lainAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_lain", $this->detailRekampasien['n_lain'], $n_lainAttrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* Asma :</td>
+					<td align="center">
+							<input type="checkbox" name="asma" id="asma" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* thalassemia :</td>
+					<td align="center">
+							<input type="checkbox" name="c_thalassimia1" id="c_thalassimia1" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Gangguan jiwa :</td>
+					<td align="center">
+							<input type="checkbox" name="c_jiwa1" id="c_jiwa1" value="Y">	
+						</td>
+						
+						<tr>
+						
+						
+						<tr>
+				    <td align="right" width="180">* penyakit menular :</td>
+					<td align="center">
+							<input type="checkbox" name="c_menular" id="c_menular" value="Y">	
+						</td>
+						
+						<tr>
+						
+				    <td align="right" width="180">* Sebutkan :</td>
+					<td>	
+	<? 
+	$n_sebutAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_sebut", $this->detailRekampasien['n_sebut'], $n_sebutAttrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* Merokok :</td>
+					<td align="center">
+							<input type="checkbox" name="c_rokok" id="c_rokok" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Minum minuman keras :</td>
+					<td align="center">
+							<input type="checkbox" name="c_minum" id="c_minum" value="Y">	
+						</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Narkoba :</td>
+					<td align="center">
+							<input type="checkbox" name="c_narkoba" id="c_narkoba" value="Y">	
+						</td>
+						
+						<tr>
+				    <td align="right" width="180">* Lainnya :</td>
+					<td>	
+	<? 
+	$n_lain1Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_lain1", $this->detailRekampasien['n_lain1'], $n_lain1Attrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* Haid pertama kali :</td>
+					<td>	
+	<? 
+	$n_haidAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_haid", $this->detailRekampasien['n_haid'], $n_haidAttrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* Teratur/tiddak :</td>
+					<td align="center">
+							<input type="checkbox" name="c_teratur" id="c_teratur" value="Y"> Ya 
+							<input type="checkbox" name="c_teratur" id="c_teratur" value="Y"> Tidak							
+						</td>
+						
+						<tr>
+						
+						
+						
+						<tr>
+				    <td align="right" width="180">* Mimpi basah pertama kali :</td>
+					<td>	
+	<? 
+	$n_mimpiAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_mimpi", $this->detailRekampasien['n_mimpi'], $n_mimpiAttrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* TT Dasar :</td>
+					<td align="center">
+							<input type="checkbox" name="c_dasar" id="c_dasar" value="Y">	
+						</td>
+						
+						</tr>
+						
+						<tr>
+				    <td align="right" width="180">* TT Lengkap :</td>
+					<td align="center">
+							<input type="checkbox" name="c_lengkap" id="c_lengkap" value="Y">	
+						</td>
+						
+						</tr>
+				
+				
+
+</table>
+</div>
+
+<div id="tabs-5">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+
+
+<tr>
+				    <td align="right" width="180">* berat :</td>
+					<td>	
+	<? 
+	$t_berat2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_berat2", $this->detailRekampasien['t_berat2'], $t_berat2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* tinggi :</td>
+					<td>	
+	<? 
+	$t_tinggi2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_tinggi2", $this->detailRekampasien['t_tinggi2'], $t_tinggi2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* tekanan :</td>
+					<td>	
+	<? 
+	$t_tekanan2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_tekanan2", $this->detailRekampasien['t_tekanan2'], $t_tekanan2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* denyut :</td>
+					<td>	
+	<? 
+	$t_denyut2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_denyut2", $this->detailRekampasien['t_denyut2'], $t_denyut2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				
+
+				<tr>
+				    <td align="right" width="180">* frequensi :</td>
+					<td>	
+	<? 
+	$t_frequensi2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_frequensi2", $this->detailRekampasien['t_frequensi2'], $t_frequensi2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* suhu :</td>
+					<td>	
+	<? 
+	$t_suhu2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("t_suhu2", $this->detailRekampasien['t_suhu2'], $t_suhu2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* n_mata :</td>
+					<td>	
+	<? 
+	$n_mata2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_mata2", $this->detailRekampasien['n_mata2'], $n_mata2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* tht :</td>
+					<td>	
+	<? 
+	$n_tht2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_tht2", $this->detailRekampasien['n_tht2'], $n_tht2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* gigi :</td>
+					<td>	
+	<? 
+	$n_gigi2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_gigi2", $this->detailRekampasien['n_gigi2'], $n_gigi2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* jantung :</td>
+					<td>	
+	<? 
+	$n_jantung2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_jantung2", $this->detailRekampasien['n_jantung2'], $n_jantung2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* paru :</td>
+					<td>	
+	<? 
+	$n_paru2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_paru2", $this->detailRekampasien['n_paru2'], $n_paru2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* perut :</td>
+					<td>	
+	<? 
+	$n_perut2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_perut2", $this->detailRekampasien['n_perut2'], $n_perut2Attrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* gerak :</td>
+					<td>	
+	<? 
+	$n_gerak2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_gerak2", $this->detailRekampasien['n_gerak2'], $n_gerak2Attrib);
+	?>
+				</td>
+				</tr>	
+
+					<tr>
+				    <td align="right" width="180">* Status gizi :</td>
+					<td>	
+	<? 
+	$n_gizi2Attrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_gizi2", $this->detailRekampasien['n_gizi2'], $n_gizi2Attrib);
+	?>
+				</td>
+				</tr>					
+
+</table>
+</div>
+
+
+<div id="tabs-6">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+
+
+<tr>
+				    <td align="right" width="180">* Darah :</td>
+					<td>	
+	<? 
+	$n_darahAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_darah", $this->detailRekampasien['n_darah'], $n_darahAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Hoemoglobin (hb) :</td>
+					<td>	
+	<? 
+	$n_hemoglobinAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_hemoglobin", $this->detailRekampasien['n_hemoglobin'], $n_hemoglobinAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Urin Rutin :</td>
+					<td>	
+	<? 
+	$n_urinAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_urin", $this->detailRekampasien['n_urin'], $n_urinAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Faeces Rutin :</td>
+					<td>	
+	<? 
+	$n_faecesAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_faeces", $this->detailRekampasien['n_faeces'], $n_faecesAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Thalasimia :</td>
+					<td>	
+	<? 
+	$n_thalassimiaAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_thalassimia", $this->detailRekampasien['n_thalassimia'], $n_thalassimiaAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Diagnosa Kerja :</td>
+					<td>	
+	<? 
+	$n_diagnosaAttrib = array("size" => 50,"maxlength" => 50);
+	echo $ctrlFrm->formText("n_diagnosa", $this->detailRekampasien['n_diagnosa'], $n_diagnosaAttrib);
+	?>
+				</td>
+				</tr>
+
+</table>
+</div>
+
+
+
+
+
+</div>
+	<tr>
+		<td></td>
+		<td>
+		<div class="right">
+		<input type="button" value="Kembali" onclick="rekampasienlist();"> 
+		<input type="reset" value="Ulangi"> 
+		<input   type="submit" value="Simpan">
+		</div>
+		</td>
+	</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>
+
+</form>
+
+
+</div>
+
+<script>
+
+ 	$(function() {
+		$("#d_medrec").datepicker();
+	});
+
+
+function showDialog(val) {      
+    $( "#dialog-browse" ).dialog({
+      autoOpen: false,
+      height: 380,
+      width: 640,
+      modal: true,
+      resizable:false,
+      title: "Data Pasien"
+    });
+    if(val =='pasien'){pasienlist();}  
+    return false;
+  }
+
+</script>
+
+<script language="JavaScript">
+    webcam.set_api_url( 'test.php' );
+		webcam.set_quality( 90 ); // JPEG quality (1 - 100)
+		webcam.set_shutter_sound( true ); // play shutter click sound
+		webcam.set_hook( 'onComplete', 'my_completion_handler' );
+
+		function take_snapshot(){
+			// take snapshot and upload to server
+			document.getElementById('upload_results').innerHTML = '<h1>Uploading...</h1>';
+			webcam.snap();
+		}
+
+		function my_completion_handler(msg) {
+			// extract URL out of PHP output
+			if (msg.match(/(http\:\/\/\S+)/)) {
+				// show JPEG image in page
+				document.getElementById('upload_results').innerHTML ='<h1>Upload Successful!</h1>';
+				// reset camera for another shot
+				webcam.reset();
+			}
+			else {alert("PHP Error: " + msg);}
+		}
+	</script>

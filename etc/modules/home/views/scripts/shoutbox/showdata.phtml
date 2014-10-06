@@ -1,0 +1,19 @@
+<?php
+require_once 'share/Portalconf.php'; 
+$jumshoutboxList = count($this->shoutboxList); 
+//echo "n=".$jumshoutboxList;    
+if ($jumshoutboxList!=0) {
+ foreach ($this->shoutboxList as $val): 
+	$id=trim($this->escape($val['id']));
+	$n_userid=trim($this->escape($val['n_userid']));
+	$n_name=trim($this->escape($val['n_name']));
+	$n_message=trim($this->escape($val['n_message']));
+	$d_entri=formatDate2(trim($this->escape($val['d_entri'])));
+
+ ?>
+<div class="shoutbox-row">
+<span class="name"><?=$n_userid?></span>, <span class="datex"><?=$d_entri?></span><br>
+	<span class="message"><?=$n_message?></span></div>
+	<?php endforeach;?> 	
+<?php } else "Tidak ada data\n"; ?>
+

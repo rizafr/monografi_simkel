@@ -1,0 +1,17 @@
+pos_1;Insert Data Evaluasi Kualifikasi ;12/11/2013 06:02:57; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Teknik ;12/11/2013 06:34:51; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Harga Pengadaan ;12/11/2013 06:55:54; di lokasi  dengan id_pengadaan ();
+pos_1;ubah data peringkat dgn id_supp ;12/11/2013 09:55:46; ();
+pos_1;Ubah Data Penetapan Pemenang dengan id_pengadaan 98;12/11/2013 10:51:44; di lokasi  dengan id_pengadaan (98);
+pos_1;Ubah Data Penetapan Pemenang dengan id_pengadaan 98;12/11/2013 11:09:15; di lokasi  dengan id_pengadaan (98);
+pos_1;Ubah Data Penetapan Pemenang dengan id_pengadaan 98;12/11/2013 11:16:55; di lokasi  dengan id_pengadaan (98);
+pos_1;Ubah Data Penetapan Pemenang dengan id_pengadaan 98;12/11/2013 11:19:29; di lokasi  dengan id_pengadaan (98);
+pos_1;Ubah Data Penetapan Pemenang dengan id_pengadaan 98;12/11/2013 11:22:17; di lokasi  dengan id_pengadaan (98);
+pos_1;Ubah Data Penetapan Pemenang dengan id_pengadaan 98;12/11/2013 11:22:23; di lokasi  dengan id_pengadaan (98);
+pos_1;Ubah Data Umumpemenang Pengadaan ;12/11/2013 14:59:54; di lokasi  dengan id_pengadaan (98);
+pos_1;Ubah Data Umumpemenang Pengadaan ;12/11/2013 16:17:55; di lokasi  dengan id_pengadaan (98);
+pos_1;Ubah Data Dokumen Pengumuman Pemenang Dokumen Pengumuman Pemenang;12/11/2013 16:23:43; di lokasi  dengan id_pengadaan (98);
+pos_1;Hapus Data Umumpemenang Pengadaan;12/11/2013 16:34:50; dgn id_pengadaan ();
+pos_1;Hapus Data Umumpemenang Pengadaan;12/11/2013 16:34:59; dgn id_pengadaan ();
+pos_1;Hapus Data Umumpemenang Pengadaan;12/11/2013 16:35:28; dgn id_pengadaan ();
+pos_1;Hapus Data Umumpemenang Pengadaan;12/11/2013 16:36:41; dgn id_pengadaan ();

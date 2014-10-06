@@ -1,0 +1,2 @@
+pos_1;Ubah Data Deskripsi Pengadaan Pengadaan server;14/11/2013 14:39:53; di lokasi Bandung dengan id_pengadaan (99);
+pos_1;Ubah Data Dokumen Pengadaan ;14/11/2013 14:57:00; di lokasi  dengan id_pengadaan (99);

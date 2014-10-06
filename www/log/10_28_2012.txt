@@ -1,0 +1,3 @@
+989399370;Insert Data Faktur Penjualan dgn Pemebeli PO;28/10/2012 19:05:48; di Nopend 86300;
+989399370;Pembatalan Faktur Pajak Keluaran 010.000-12.00007541;28/10/2012 19:06:46; id : (8836);
+989399370;Pembatalan Faktur Pajak Keluaran 010.000-12.00007541;28/10/2012 19:07:00; id : (8836);

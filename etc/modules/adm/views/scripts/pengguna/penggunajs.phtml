@@ -1,0 +1,208 @@
+
+function cariPengguna()
+{
+	$("#frmCariPengguna").ajaxForm(frmCariPengguna_opt);
+}
+var frmCariPengguna_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/adm/pengguna/penggunalist',
+		type: 'post', 
+		resetForm: false
+};
+function penggunalist()
+{	
+	divre = document.getElementById('divre').value;
+	upt = document.getElementById('upt').value;
+	level = document.getElementById('level').value;
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	
+	var param = {divre:divre,upt:upt,level:level,kategoriCari:kategoriCari,carii:carii};
+	var url = '<?php echo $this->basePath; ?>/adm/pengguna/penggunalist';
+	jQuery.get(url,param, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+function penggunaForm(jenisForm, userid)
+{
+	
+	divre = document.getElementById('divre').value;
+	upt = document.getElementById('upt').value;
+	level = document.getElementById('level').value;
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	
+	var url = '<?php echo $this->basePath; ?>/adm/pengguna/penggunaolahdata';
+	var param = { jenisForm:jenisForm, userid:userid,divre:divre,upt:upt,level:level,kategoriCari:kategoriCari,carii:carii};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahpengguna").ajaxForm(tambahPengguna_opt);
+		jQuery("#frmubahpengguna").ajaxForm(ubahPengguna_opt);
+		jQuery("#frmgantipass").ajaxForm(gantiPass_opt);
+		
+		});
+	
+}
+
+var tambahPengguna_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/adm/pengguna/pengguna',
+	beforeSubmit : function() {
+		if (document.getElementById('username').value == ''){
+			alert('Pengguna harus Diisi');
+			return false;
+		}
+		if (document.getElementById('userid_pegawai').value == ''){
+			alert('Nama harus Diisi');
+			return false;
+		}
+		if (document.getElementById('password').value == ''){
+			alert('Password harus Diisi');
+			return false;
+		}
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+var ubahPengguna_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/adm/pengguna/penggunaupdate',
+	beforeSubmit : function() {
+		if (document.getElementById('username').value == ''){
+			alert('Pengguna harus Diisi');
+			return false;
+		}
+		if (document.getElementById('userid_pegawai').value == ''){
+			alert('Nama harus Diisi');
+			return false;
+		}
+		if (document.getElementById('password').value == ''){
+			alert('Password harus Diisi');
+			return false;
+		}
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+var gantiPass_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/adm/pengguna/penggunaupdate',
+	beforeSubmit : function() {
+		if (document.getElementById('username').value == ''){
+			alert('Pengguna harus Diisi');
+			return false;
+		}
+		if (document.getElementById('userid_pegawai').value == ''){
+			alert('Nama harus Diisi');
+			return false;
+		}
+		if (document.getElementById('password').value == ''){
+			alert('Password harus Diisi');
+			return false;
+		}
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+function penggunaHapus(param1, param2)
+{ 
+	
+	divre = document.getElementById('divre').value;
+	upt = document.getElementById('upt').value;
+	level = document.getElementById('level').value;
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	
+	if(ConfirmDelete(param1, param2))
+	{	//alert("test");
+		handler = '<?php echo $this->basePath; ?>/adm/pengguna/penggunahapus';
+		var opt = {userid : param2,divre:divre,upt:upt,level:level,kategoriCari:kategoriCari,carii:carii};
+		jQuery.get(handler,opt,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+}  
+
+function ubahStatus(key)
+{
+	divre = document.getElementById('divre').value;
+	upt = document.getElementById('upt').value;
+	level = document.getElementById('level').value;
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	
+	var penggunauserid= '';
+	var status= '';
+	if(document.getElementById('statusAktif_'+key).checked == true)
+	{
+		penggunauserid = document.getElementById('statusAktif_'+key).value;
+		status = '1';
+	}
+	else
+	{
+		penggunauserid = document.getElementById('statusAktif_'+key).value;
+		status = '0';
+	}
+	
+	var url = '<?php echo $this->basePath; ?>/adm/pengguna/ubahstatus';
+	
+	var param = { penggunauserid:penggunauserid, status:status,divre:divre,upt:upt,level:level,kategoriCari:kategoriCari,carii:carii};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		doCount(5);
+	});
+}
+function cariNama()
+{
+	//var penggunauserid= '';
+	//var status= '';
+	nip = document.getElementById('nip').value;
+	var url = '<?php echo $this->basePath; ?>/adm/pengguna/getnamaPegawai';
+	
+	var param = { nip:nip};
+	jQuery.get(url, param, function(data) {
+		document.getElementById('nama').value = data;
+	});
+}
+
+
+function getUpt(){
+	var url = '<?php echo $this->basePath; ?>/adm/pengguna/get-upt';
+	var c_area = document.getElementById('c_area').value;
+	var param = {c_area:c_area};	
+	$.getJSON(url,param,function(data){
+		$('#c_upt').find('option').remove().end();
+		
+		$('#c_upt').attr('disabled',false).end();
+		$('.someElement').attr('disabled', '');
+		$('#c_upt').append($('<option>').text("--Pilih--").attr('value', "-"));
+		$.each(data, function(i, value) {
+				$('#c_upt').append($('<option>').text(value.nopend + " - "+ value.NamaKtr).attr('value', value.nopend));
+		  });
+	});
+}
+
+function getPegawaikantor(){
+	var url = '<?php echo $this->basePath; ?>/adm/pengguna/get-pegawaikantor';
+	var c_upt = document.getElementById('c_upt').value;
+	var param = {c_upt:c_upt};	
+	$.getJSON(url,param,function(data){
+		$('#userid_pegawai').find('option').remove().end();
+		
+		$('#userid_pegawai').attr('disabled',false).end();
+		$('.someElement').attr('disabled', '');
+		$('#userid_pegawai').append($('<option>').text("--Pilih--").attr('value', "-"));
+		$.each(data, function(i, value) {
+				$('#userid_pegawai').append($('<option>').text(value.n_nama + " - "+ value.n_nip + " - "+ value.n_jabatan).attr('value', value.userid));
+		  });
+	});
+}
+

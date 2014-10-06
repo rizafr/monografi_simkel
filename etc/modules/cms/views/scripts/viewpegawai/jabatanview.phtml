@@ -1,0 +1,226 @@
+<? require_once 'Zend/View.php';
+ 	require_once "share/oa_dec_cur_conv.php";
+   require_once 'share/oa_date.php'; 
+ 
+	$ctrlDate = new oa_date();      
+   $ctrlFrm = new Zend_View();
+	$convDec = new oa_dec_cur_conv();
+   $thnskrg = date("Y");
+
+
+	//$jenjang = $_REQUEST['jenjang'];
+	$nip = $_REQUEST['nip'];
+	//echo "test".$test;
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+
+
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA RIWAYAT JABATAN</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data riwayat jabatan pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line">
+		<div class="title2">Data Riwayat Jabatan</div>
+		<fieldset  class="panel-form">	
+			<form id="frmVJabatView" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/jabatanview" method="post" name="frmVJabatView">
+				<dl>
+					<dt>Jabatan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$nmJabat = $this->escape($this->nmJabat);
+						echo $nmJabat; 
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Mulai</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$mulai = $this->escape($this->mulai);
+						$thnMulai = substr($mulai,0,4);
+						$blnMulai = substr($mulai,5,2);
+						$hrMulai = substr($mulai,8,2);
+						$tglMulai = $hrMulai."-".$blnMulai."-".$thnMulai;
+						echo $tglMulai;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Selesai</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$akhir = $this->escape($this->akhir);
+						$thnAkhir = substr($akhir,0,4);
+						$blnAkhir = substr($akhir,5,2);
+						$hrAkhir = substr($akhir,8,2);
+						$tglAkhir = $hrAkhir."-".$blnAkhir."-".$thnAkhir;
+						echo $tglAkhir;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Golongan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$gol = $this->escape($this->gol);
+						echo $gol;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Gaji Pokok</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$gaji = $this->escape($this->gaji);
+						echo $convDec->convertDecToCur($gaji);
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>SK Pejabat</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$nmSK = $this->escape($this->nmSK);
+						echo $nmSK;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Nomor SK</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$noSK = $this->escape($this->noSK);
+						echo $noSK;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tanggal SK</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$tglSK = $this->escape($this->tglSK);
+						echo $ctrlDate->convertTglMachineToHuman($tglSK);
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Eselon</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$eselon = $this->escape($this->eselon);
+						echo $eselon;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>UNIT KERJA</dt>
+					<dd class="dot2">&nbsp;</dd> 
+			 		<dd class="col-right">&nbsp;</dd>
+				</dl>
+				<dl>
+					<dt>Eselon I</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$eselon1 = $this->escape($this->eselon1);
+						echo $eselon1;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Eselon II</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$eselon2 = $this->escape($this->eselon2);
+						echo $eselon2;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Eselon III</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$eselon3 = $this->escape($this->eselon3);
+						echo $eselon3;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Eselon IV</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$eselon4 = $this->escape($this->eselon4);
+						echo $eselon4;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Nomor Surat Pelantikan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$noLantik = $this->escape($this->noLantik);
+						echo $noLantik;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tanggal Pelantikan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$tglLantik = $this->escape($this->tglLantik);
+						echo $ctrlDate->convertTglMachineToHuman($tglLantik);
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Keterangan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$keterangan = $this->escape($this->keterangan);
+						echo $keterangan;
+					?>
+					</dd>
+				</dl>
+ 			<dl>
+				<?php 
+				  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">&nbsp;</dd>			
+				<div class="back" onClick="javascript:kembaliJabatView('<? echo $this->escape($this->nip); ?>');" title="Kembali"><input type="button" value="Kembali" id="kembaliJabatView"></div>
+			</dl>
+		  	</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>		

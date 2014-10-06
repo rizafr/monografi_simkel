@@ -1,0 +1,6 @@
+;Insert data;28/09/2012 12:09:52; ();
+971336556;Ubah Data Faktur Penjualan 030.000-12.00007215;28/09/2012 15:47:11; di Nopend 46100 dengan id (8510);
+;Ubah Status Verifikasi;28/09/2012 15:54:24; (8528);
+;Insert data jnstransaksi;28/09/2012 16:52:42; ();
+971336556;Ubah Data Faktur Penjualan 030.000-12.00007215;28/09/2012 17:24:28; di Nopend 46100 dengan id (8510);
+;Ubah data;28/09/2012 17:38:12; (2400);

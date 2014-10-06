@@ -1,0 +1,67 @@
+function CekCari(){
+	var status =document.getElementById('status').value;
+	if (status!='J'){document.getElementById('key').value="";}
+}
+function cariListkategoriprodhukum(){
+	var par="cari";
+	var key =document.getElementById('key').value;
+	var status =document.getElementById('status').value;
+	var url = '<?php echo $this->basePath;?>/cms/kategoriprodukhukum/listkategoriprodukhukum';	
+	var param = {par:par,key:key,status:status};
+		jQuery.get(url, param, function(data) {
+			jQuery("#tableview").html(data);
+			jQuery("#formktgrhukum").ajaxForm(maintain_ktgrhukum);
+		});
+}
+function kategoriprodhukumM(par,c_kategori){
+	var url = '<?php echo $this->basePath;?>/cms/kategoriprodukhukum/kategoriprodukhukum';	
+	var param = {par:par,c_kategori:c_kategori};
+		jQuery.get(url, param, function(data) {
+			jQuery("#tableview").html(data);
+			jQuery("#formktgrhukum").ajaxForm(maintain_ktgrhukum);
+		});
+}
+
+function insertKtgrHukum(){
+
+	jQuery("#formktgrhukum").ajaxForm(maintain_ktgrhukum);	
+}
+var maintain_ktgrhukum = {
+	target:'#tableview',
+	beforeSubmit: function() {		
+		aobj= document.formktgrhukum;
+		astr= "document.formktgrhukum";
+		var cekVal="";
+		with(aobj){      
+			var Proceed = 1;
+			while (Proceed == 1)
+			{
+				if((!n_judul.value)){cekVal = sdmValidasiData(astr,"n_judul","Judul Kategori Produk Hukum harus diisi....!");return false;break;}				
+				break;
+			}			
+		}
+	}, 
+	success:function(){
+		location.href="#top";
+		doCounter(5);
+		
+	},
+	url: '<?php echo $this->basePath; ?>/cms/kategoriprodukhukum/maintaindata',
+	type: 'post',
+	resetForm: false
+};
+
+function HapusDataKategoriHukum(c_kategori)
+{
+	var where_to= confirm("Yakin anda akan hapus data ini ???");
+	 if (where_to== true)
+	 {
+		url = "<?php echo $this->basePath; ?>/cms/kategoriprodukhukum/hapusdata"
+		var opt = {c_kategori:c_kategori};
+		jQuery.get(url,opt,function(data) {
+			jQuery("#tableview").html(data);
+				location.href="#top";
+				doCounter(5);
+			});
+	 }
+}

@@ -1,0 +1,15 @@
+<?php 
+require_once 'Zend/View.php';
+require_once "share/tanggal.php";  
+require_once 'share/Portalconf.php'; 
+
+$idberita = $_REQUEST['idberita'];
+/*$vFoto = $this->basePath."../data/sdm/photo/".trim($this->i_peg_nip).".jpg";
+
+	if (!file_exists($vFoto)) {
+		$vFoto = $this->basePath."../images/nophoto.jpg";
+	} 
+*/
+?>
+<h2><?=$this->n_judul?></h2>
+<span class="date"><?=$this->d_berita?></span>

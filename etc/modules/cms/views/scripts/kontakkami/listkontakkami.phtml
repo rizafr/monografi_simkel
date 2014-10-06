@@ -1,0 +1,55 @@
+<? require_once 'Zend/View.php';
+  
+   $ctrlFrm = new Zend_View();
+  
+    $jmlkontakkamiList = count($this->kontakkamiList);
+	//echo $jmlkontakkamiList;
+   for ($j = 0; $j < $jmlkontakkamiList; $j++) {
+     $kontakkami[$j] = array("c_kontakkami"  		=>(string)$this->kontakkamiList[$j]['c_kontakkami'],
+						"n_judul"      		=>(string)$this->kontakkamiList[$j]['n_judul'],
+						 "n_detil"  		=>(string)$this->kontakkamiList[$j]['n_detil'],
+						  "c_status"  		=>(string)$this->kontakkamiList[$j]['c_status']);
+   } 
+ $pesancek=$this->pesancek;
+	if ($pesancek=='gagal'){$confirm ='confirmfail';}
+	else {$confirm ='confirm';} 
+$status=$_REQUEST['status'];
+?>
+	<div class="navlink">
+	<a href="<? echo $this->basePath; ?>/cms">Halaman Utama</a>&nbsp;<strong>&#8250;</strong>&nbsp;Kelola Data kontakkami&nbsp;
+	</div>
+<br style="clear:both;" />
+	<div id="top"></div>
+	<div id="confirm" class="<?=$confirm?>" style="display: none">
+		<h3><?echo $pesan = $this->pesan;?></h3>				
+	</div>
+	<h2 class="title">Kelola Data kontakkami</h2>
+
+<table class="widefat" cellspacing="1">
+		<tr>
+			<th width="12%">Judul</th>
+			<th width="65%">Detil</th>
+			<th width="13%">Status</th>
+			<th width="10%">&nbsp;</th>
+		</tr> 
+<?
+				foreach ($kontakkami as $key => $val): 
+					$cstatus = $this->escape($val['c_status']);
+					if ($cstatus == 1) 	$status = 'Diterbitkan';
+					else $status = 'Tidak Diterbitkan';
+				
+				?>
+				<tr class="alternate2">
+					<td><?php echo $this->escape($val['n_judul']);?></a></td>
+					<td><?php echo $val['n_detil'];?></a></td>
+				    <td align="center"><?php echo $status;?></td>
+					<td align="center"><a href="#" title="Ubah Data" onclick="kontakkamiM('update','<?=$this->escape($val['c_kontakkami'])?>');">Ubah</a>	
+					</td>
+				</tr>
+				<?php endforeach;?>
+	
+	</table>
+	<div class="spacer"></div>
+
+	<div class="spacer"></div>
+

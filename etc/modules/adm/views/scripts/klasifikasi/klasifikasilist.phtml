@@ -1,0 +1,98 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>>  Referensi 
+>>  Klasifikasi
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Data Klasifikasi Kedatangan</h2>
+		<form method="post" id="frmcariklasifikasi" name="frmcariklasifikasi">
+		<div class="add" title="Tambah Data" onClick="klasifikasiForm('insert','');"></div>
+				Filter :
+				<?
+				$kategoriCari = array("n_klasifikasi" => "Klasifikasi Kedatangan");
+	echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
+				?>
+<input type="text" name="carii" id="carii" align="center" value ="<? echo $this->carii;?>">
+				<?
+			         $atribSubmit = array("onclick"=>"javascript:cariklasifikasi();");
+			         echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+				?>
+	</form>
+		<fieldset class="fields"> 
+			<? 
+			$status = $this->hasil;
+			$proses = $this->proses;
+			$k_klasifikasi = $this->k_klasifikasi;
+			$pesan->show_message($proses, $k_klasifikasi, "$status" ); ?>
+			<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th >No</th>
+				<th >Klasifikasi Kedatangan</th> 
+				<th colspan="2" class="nosort">FUNGSI</th>
+				
+				<?
+				if (count($this->klasifikasiList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {
+						
+						
+						foreach ($this->klasifikasiList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } //username, nama, email, password, id_cabang
+						$id_klasifikasi = $this->escape($val['id_klasifikasi']); 
+						$n_klasifikasi = $this->escape($val['n_klasifikasi']); 
+
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						echo $ctrlFrm->formHidden('id_klasifikasi', $id_klasifikasi, null);
+						
+						?>
+						<td align="center"><? echo $noUrut;?></td>
+						<td class="clleft"><? echo $n_klasifikasi;?></td>
+						<td><div onClick="klasifikasiForm('update','<? echo $id_klasifikasi;?>');" class="edit" title="Ubah Data"></div></td>
+						<td><div onClick="klasifikasiHapus('User Id :','<? echo $username;?>','<? echo $id_klasifikasi;?>');" class="delete" title="Ubah Data"></div></td>
+						
+					
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+
+			<?	
+			$totalData = $this->totKlasifikasiList;
+			$modul = $this->basePath."/adm/klasifikasi/klasifikasilist";
+			$param1 = $this->cabang;$param2 = $this->tahun;$param3 = $this->bulan;$param4 = $this->jenis;$param5 = $this->status;
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
+			
+			?>
+		</fieldset>		 
+		
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>

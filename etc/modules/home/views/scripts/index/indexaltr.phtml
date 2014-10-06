@@ -1,0 +1,29 @@
+		<div id="main">
+		    <div class="menu">
+				<div id="tableview">
+				<?
+					
+					$paswd=$this->pesanlogin;
+					if (($paswd=="salah")||($paswd=="kosong")){
+						require("login.phtml");
+					}
+				?>
+				</div>
+				<div class="icon-menu">
+				  <ul>
+<!--[if !IE]>-->
+				  <li><a href="#" class="thickbox" title="Silakan Login" onclick="OpenLogin ('<?php echo $this->basePath; ?>/home/index/login?login=login&par=BAAK&usergroup=6,11,12,13,14,15')"><img src="<?php echo $this->basePath; ?>/images/icon_baak.png" title="BAAK"></a><br>BAAK</li>
+				  <li><a href="#" class="thickbox" title="Silakan Login" onclick="OpenLogin ('<?php echo $this->basePath; ?>/home/index/login?login=login&par=JURUSAN&usergroup=2,7,8,9,10,16')"><img src="<?php echo $this->basePath; ?>/images/icon_jur.png" title="Jurusan"></a><br>Jurusan</li>
+				  <li><a href="#" class="thickbox" title="Silakan Login" onclick="OpenLogin ('<?php echo $this->basePath; ?>/home/index/login?login=login&par=MAHASISWA&usergroup=3')"><img src="<?php echo $this->basePath; ?>/images/icon_keu.png" title="Mahasiswa"></a><br>Mahasiswa</li>
+				  <li><a href="#" class="thickbox" title="Silakan Login" onclick="OpenLogin ('<?php echo $this->basePath; ?>/home/index/login?login=login&par=DOSENWALI&usergroup=1')"><img src="<?php echo $this->basePath; ?>/images/icon_doli.png" title="Dosen Wali"></a><br>Dosen Wali</li>				  
+				  <li><a href="#" class="thickbox" title="Silakan Login" onclick="OpenLogin ('<?php echo $this->basePath; ?>/home/index/login?login=login&par=IKU&usergroup=18')"><img src="<?php echo $this->basePath; ?>/images/icon_inku.png" title="IKU"></a><br>IKU</li>
+				  <li><a href="#" class="thickbox" title="Silakan Login" onclick="OpenLogin ('<?php echo $this->basePath; ?>/home/index/login?login=login&par=SDM&usergroup=5')"><img src="<?php echo $this->basePath; ?>/images/icon_sdm.png" title="SDM"></a><br>SDM</li>
+				  <li><a href="#" class="thickbox" title="Silakan Login" onclick="OpenLogin ('<?php echo $this->basePath; ?>/home/index/login?login=login&par=ADMUSER&usergroup=1')"><img src="<?php echo $this->basePath; ?>/images/icon_user.png" title="Administrasi User"></a><br>Adm. User</li>
+<!--<![endif]-->
+				  </ul>
+			 	</div>
+					<div class="spacer"></div>
+					
+
+			</div>
+		</div>

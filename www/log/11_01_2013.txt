@@ -1,0 +1,2 @@
+;Update Data Pelanggaran Pengadaan ;01/11/2013 15:55:45; di lokasi  dengan id_pengadaan ();
+pos_1;Ubah Data Penjelasan Pengadaan ;01/11/2013 16:04:30; di lokasi  dengan id_pengadaan (94);

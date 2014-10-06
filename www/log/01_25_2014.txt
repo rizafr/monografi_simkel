@@ -1,0 +1,7 @@
+;Ubah data;25/01/2014 20:13:11;pos_1 (35);
+;Ubah Status Pengadaan dengan id_pengadaan ;25/01/2014 20:18:14; dengan status pengadaan (15);
+;Ubah Status Pengadaan dengan id_pengadaan ;25/01/2014 20:18:21; dengan status pengadaan (16);
+pos_1@posindonesia.co.id;Ubah Status Pengadaan ;25/01/2014 20:24:28; ();
+pos_1;Verifikasi Pendaftar dengan id_supp 64;25/01/2014 20:31:32;   dengan id_daftar (12);
+pos_1@posindonesia.co.id;Ubah Status Pengadaan ;25/01/2014 21:33:46; ();
+pos_1@posindonesia.co.id;Ubah Status Pengadaan ;25/01/2014 21:33:52; ();

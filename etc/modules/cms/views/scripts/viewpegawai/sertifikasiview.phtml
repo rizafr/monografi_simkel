@@ -1,0 +1,144 @@
+<? require_once 'Zend/View.php';
+   require_once 'share/oa_date.php'; 
+   
+	$ctrlDate = new oa_date();   
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+
+
+	$nip = $_REQUEST['nip'];
+	
+   $thnList = $thnskrg - 40;
+ 	
+   $thnArrayList['#'] = '--';
+   		
+   for ($i = 0; $i < 40; $i++) {
+     $thnList = $thnList + 1;
+     $thnArrayList[$thnList] = $thnList;
+   }
+
+	  $blnArrayList['#'] = '--';	
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+
+
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA SERTIFIKASI</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data sertifikasi pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+				
+				
+	<div class="space-line">
+		<div class="title2">Data Sertifikasi</div>
+		<fieldset  class="panel-form">
+			<form id="frmSerView" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/sertifikasiview" method="post" name="frmSerView">
+				<dl>
+					<dt>Nama Sertifikasi Keahlian</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$nmSer = $this->escape($this->nmSer);	
+						echo $nmSer;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>No. Sertifikat</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$noSer = $this->escape($this->noSer);
+						echo $noSer;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tanggal Sertifikat</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<? 
+						$tglSer = $this->escape($this->tglSer);	
+						$thnSer = substr($tglSer,0,4);
+						$blnSer = substr($tglSer,5,2);
+						$hrSer = substr($tglSer,8,2);
+						$tglSer = $hrSer."-".$blnSer."-".$thnSer;
+						echo $tglSer;
+					?>		 
+					</dd>
+				</dl>
+				<dl>
+					<dt>Lembaga Yang Mengeluarkan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$lembaga = $this->escape($this->lembaga);	
+						echo $lembaga;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Berlaku Mulai</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<? 
+						$mulai = $this->escape($this->mulai);	
+						$thnMulai = substr($mulai,0,4);
+						$blnMulai = substr($mulai,5,2);
+						$hrMulai = substr($mulai,8,2);
+						$mulai = $hrMulai."-".$blnMulai."-".$thnMulai;
+						echo $mulai;
+					?>		 
+					</dd>
+				</dl>
+				<dl>
+					<dt>Berlaku Akhir</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<? 
+						$akhir = $this->escape($this->akhir);	
+						$thnAkhir = substr($akhir,0,4);
+						$blnAkhir = substr($akhir,5,2);
+						$hrAkhir = substr($akhir,8,2);
+						$akhir = $hrAkhir."-".$blnAkhir."-".$thnAkhir;
+						echo $akhir;
+					?>		 
+					</dd>
+				</dl>
+				<dl>
+					<dt>Keterangan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$keterangan = $this->escape($this->keterangan);
+						echo $keterangan;
+					?>
+					</dd>
+				</dl>
+ 			<dl>
+				<?php 
+				  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">&nbsp;</dd>			
+				<div class="back" onClick="javascript:kembaliSerView('<? echo $this->escape($this->nip); ?>');" title="Kembali"><input type="button" value="Kembali" id="kembaliSerView"></div>
+			</dl>
+		  	</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>		

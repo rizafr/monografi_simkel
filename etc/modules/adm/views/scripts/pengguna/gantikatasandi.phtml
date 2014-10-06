@@ -1,0 +1,113 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+$jmldata = count($this->datauser);
+   for ($j = 0; $j < $jmldata; $j++) {	
+			$id=(string)$this->datauser[$j]['id'];
+			$nama=trim((string)$this->datauser[$j]['nama']);
+			$userid=(string)$this->datauser[$j]['userid'];
+			$passwordasal=(string)$this->datauser[$j]['password'];
+			$ngroup=(string)$this->datauser[$j]['c_group'];
+	}	
+$ctrlFrm = new Zend_View();
+?>
+<div class="navlink">
+	<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+</div>	
+<? 
+$pesancek=$this->pesancek;
+if ($pesancek=='gagal'){$confirm ='confirmfail';}
+	else {$confirm ='confirm';}
+?>
+	<div id="confirm" class="<?=$confirm?>" style="display: none">
+		<?echo $pesan = $this->pesan;?>
+	</div>
+<fieldset class="fields">	
+<script type="text/javascript">
+function SimpanGKS ()
+{
+	var id =document.getElementById("id").value;
+	var userid =document.getElementById("userid").value;
+	var passwordlama =document.getElementById("passwordlama").value;
+	var passwordasal =document.getElementById("passwordasal").value;
+	var passwordbaru =document.getElementById("passwordbaru").value;
+	var confirmpassword =document.getElementById("confirmpassword").value;
+
+ 	url = "<?php echo $this->basePath; ?>/adm/user/katasandiubah"
+	var opt = {id:id,userid:userid,passwordlama:passwordlama,passwordasal:passwordasal,passwordbaru:passwordbaru,confirmpassword:confirmpassword};
+	jQuery.get(url,opt,function(data) {
+		$("#tableview").html(data);
+		}); 
+		
+}
+function doCounter(countdown) {
+	document.getElementById("confirm").style.display="block";
+	if (countdown > 0) {
+        countdown=countdown-1;
+		window.status=countdown + " seconds left to view this page.";
+		setTimeout('doCounter()',5000); 
+    }
+    else {
+        document.getElementById("confirm").style.display="none";
+    } 
+}
+
+</script>
+	<form id="frmgantikatasandi"  method="post" name="frmgantikatasandi" enctype="multipart/form-data">
+		<fieldset class="panel-form">
+						<table width="90%" border="0" cellpadding="0" cellspacing="1" >
+							<tr>
+								<td width="180">User Id</td>
+								<td width="2">:</td>
+								<td>
+									<input type="hidden"  name="id" id="id" value="<?=$id?>"/>
+									<input type="text"  readonly="true" class="text" name="userid" id="userid" value="<?=$userid?>" size="35" readonly ="true" />
+								</td>
+							</tr>							
+							<tr>
+								<td width="180">Nama</td>
+								<td width="2">:</td>
+								<td>
+									<input type="text"  readonly="true"   class="text" name="username" id="username" value="<?=$nama?>" size="80" readonly ="true"/>
+								</td>
+							</tr>
+<!--							
+							<tr>
+								<td width="180">Group</td>
+								<td width="2">:</td>
+								<td>
+									<input type="text"  readonly="true"   class="text" name="ngroup" id="ngroup" value="<?=$ngroup?>" size="20"/>
+								</td>
+							</tr>
+-->							
+							<tr>
+								<td width="180">Password Lama</td>
+								<td width="2">:</td>
+								<td>
+									<input type="password"  class="text" name="passwordlama" id="passwordlama" value="<?=$this->passwordlama?>" size="20"/>									
+									<input type="text"  class="hidden" name="passwordasal" id="passwordasal" value="<?=$passwordasal?>" size="20"/>
+								</td>
+							</tr>							
+							<tr>
+								<td width="180">Password Baru</td>
+								<td width="2">:</td>
+								<td>
+									<input type="password"  class="text" name="passwordbaru" id="passwordbaru" value="<?=$this->passwordbaru?>" size="20"/>
+								</td>
+							</tr>
+							<tr>
+								<td width="180">Konfirmasi Password</td>
+								<td width="2">:</td>
+								<td>
+									<input type="password"  class="text" name="confirmpassword" id="confirmpassword" value="<?=$this->confirmpassword?>" size="20"/>
+								</td>
+							</tr>							
+							
+						</table>
+		</fieldset>
+<div class="right">		
+	<input   name="perintah" id="perintah" type="button" style="font-weight: bold;" class="button2" value="Ubah" onclick="SimpanGKS()">		
+</div>	
+</form>	

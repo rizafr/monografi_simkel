@@ -1,0 +1,87 @@
+<?php 
+require_once 'Zend/View.php';
+require_once "share/tanggal.php";  
+require_once 'share/Portalconf.php'; 
+$tanggal = new tanggal();
+$ctrlFrm = new Zend_View();
+$pesancek=$this->pesancek;
+$cstatus=$this->status;
+
+$maxid=$this->maxid;
+
+if ($this->par=='insert') $idtentangkami=$maxid+1;
+else $idtentangkami=$this->idtentangkami;
+
+if ($this->tgltentangkami!='') {
+  $dates=formatDate4($this->tgltentangkami);
+  $xtime=substr($this->tgltentangkami,11,8);
+  list($jam,$mnt,$det)=split(":",$xtime);
+} else {
+  $dates=date('d/m/Y');
+  $jam=date("H");
+  $mnt=date("i");
+}
+if ($cstatus!='') {
+	if ($cstatus==1) $status1='checked';
+	else $status0='checked';
+} else $status1='checked';
+
+if ($pesancek=='gagal'){$confirm ='confirmfail';}
+else {$confirm ='confirm';}
+
+
+?>
+ <script type="text/javascript" src="<?echo $this->baseUrl;?>/content/init.js"></script>
+
+
+
+		   <div class="navlink">
+				<a  href="<? echo $this->basePath; ?>cms">Halaman Utama</a> 
+				<strong> &#8250; </strong> <a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/cmsmodule/tentangkami/listtentangkami','<?php echo $this->basePath; ?>/cmsmodule/pegawai/pegawaijs');">Kelola Data tentangkami</a>
+				<strong> &#8250; </strong><?=$this->jdl;?> Data tentangkami
+			</div>
+			<br>
+<div id="top"></div>
+<div id="confirm" class="<?=$confirm?>" style="display: none">
+	<h3><?echo $pesan = $this->pesan;?></h3>				
+</div>
+
+	
+<form id="formtentangkami" method="post" name="formtentangkami">
+<input type="hidden" value="<?=$idtentangkami?>" name="idtentangkami"> 
+<input type="hidden" value="<?=$this->par?>" name="action"> 
+<h2 class="title"><?=$this->jdl;?> Data tentang kami</h2>
+
+		<div class="spacer"></div> 
+
+<table  width="100%">
+ <tr>
+   <td width="20%">Status tentangkami</td>
+   <td width="1%">:</td>
+   <td width="79%">
+   	<label for="post_status_publish" class="selectit"><input id="post_status_publish" class="radio" name="status" type="radio" value="1" <?=$status1?> /> Diterbitkan</label>
+    <label for="post_status_tentangkami" class="selectit"><input id="post_status_tentangkami" class="radio" name="status" type="radio" value="0"  <?=$status0?> /> Tidak Diterbitkan</label>
+
+   </td>
+ </tr>
+ <tr>
+   <td width="20%">Judul tentangkami <span class="highlight">*</span></td>
+   <td width="1%">:</td>
+   <td width="79%"><input type="text" name="title" size="30" tabindex="1" value="<?=$this->jdltentangkami?>" id="title"/></td>
+ </tr>
+ <tr>
+   <td width="20%">Isi tentangkami</td>
+   <td width="1%">:</td>
+   <td width="79%"><textarea id="content" name="content" style="height:300px"><?=$this->detiltentangkami?></textarea></td>
+ </tr>
+</table>
+ket :&nbsp;(<span class="highlight">*</span>)&nbsp;harus diisi
+		<p class="submit">
+		<span id="autosave"></span>
+
+		<input name="cancel" type="button" id="publish" tabindex="5" accesskey="p" value="Batal" onClick="open_url_to_div('<?php echo $this->basePath; ?>/cmsmodule/tentangkami/listtentangkami','<?php echo $this->basePath; ?>/cmsmodule/tentangkami/tentangkamijs');"/>
+		<input type="submit" name="submit" value="<?=$this->pars;?>" onClick="inserttentangkami()" style="font-weight: bold;" />
+
+
+	
+</form>	

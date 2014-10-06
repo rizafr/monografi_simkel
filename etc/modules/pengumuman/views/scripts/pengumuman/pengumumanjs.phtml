@@ -1,0 +1,90 @@
+function cariPengumuman()
+{
+	$("#frmCariPengumuman").ajaxForm(frmcaripengumuman_opt);
+}
+var frmcaripengumuman_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/pengumuman/pengumuman/pengumumanlist',
+		type: 'post', 
+		resetForm: false
+};
+
+function pengumumanlist()
+{
+	//status = document.getElementById('status').value;
+	//kegiatan = document.getElementById('kegiatan').value;
+	//prodi = document.getElementById('prodi').value;
+	//var param = {prodi:prodi,status:status};
+	var url = '<?php echo $this->basePath; ?>/pengumuman/pengumuman/pengumumanlist';
+	jQuery.get(url, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+
+
+function pengumumanForm(jenisForm, id)
+{
+	//status = document.getElementById('status').value;
+	//kegiatan = document.getElementById('kegiatan').value;
+	//prodi = document.getElementById('prodi').value;
+	
+	var url = '<?php echo $this->basePath; ?>/pengumuman/pengumuman/pengumumanolahdata';
+	var param = { jenisForm:jenisForm, id:id};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahpengumuman").ajaxForm(tambahpaguDipa_opt);
+		jQuery("#frmubahpengumuman").ajaxForm(ubahpaguDipa_opt);
+	});
+}
+
+var tambahpaguDipa_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/pengumuman/pengumuman/pengumuman',
+	beforeSubmit : function() {
+		/*if (document.getElementById('n_pengumuman').value == ''){
+			alert('Tahun Ajaran harus Diisi');
+			return false;
+		}*/
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+var ubahpaguDipa_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/pengumuman/pengumuman/pengumumanupdate',
+	beforeSubmit : function() {
+		/*if (document.getElementById('n_pengumuman').value == ''){
+			alert('Tahun Ajaran harus Diisi');
+			return false;
+		}*/
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+
+
+function pengumumanHapus(param1, param2)
+{ 
+	//status = document.getElementById('status').value;
+	//prodi = document.getElementById('prodi').value;
+
+	if(ConfirmDelete(param1, param2))
+	{	
+		handler = '<?php echo $this->basePath; ?>/pengumuman/pengumuman/pengumumanhapus';
+		var opt = {id : param2};
+		jQuery.get(handler,opt,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+} 
+
+
+

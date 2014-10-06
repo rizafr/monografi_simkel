@@ -1,0 +1,7 @@
+SM Disbang;Insert Data Faktur Permintaan dgn Pembeli ;17/01/2014 00:08:56; di Nopend ;
+;Ubah Status Pengadaan dengan id_pengadaan ;17/01/2014 07:32:19;98 dengan status pengadaan (18);
+;Ubah Status Pengadaan dengan id_pengadaan ;17/01/2014 07:32:28;98 dengan status pengadaan (17);
+pos_1@posindonesia.co.id;Ubah Status Pengadaan ;17/01/2014 08:18:48; ();
+pos_1;Ubah Data Deskripsi Pengadaan kantung;17/01/2014 21:35:34; di lokasi jakarta dengan id_pengadaan ();
+pos_1;Ubah Data Deskripsi Pengadaan kantung;17/01/2014 22:53:41; di lokasi jakarta dengan id_pengadaan ();
+pos_1;Ubah Data Deskripsi Pengadaan sssssssssss;17/01/2014 23:12:15; di lokasi cmh dengan id_pengadaan ();

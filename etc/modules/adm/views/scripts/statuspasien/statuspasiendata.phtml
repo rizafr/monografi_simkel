@@ -1,0 +1,58 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>>  Referensi 
+>>  Status Pasien
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Form Status Pasien</h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {	$jenisForm = 'frmtambahstatuspasien'; }
+			else if (strtolower($this->jenisForm) == 'update') {	$jenisForm = 'frmubahstatuspasien'; }
+			else {	$jenisForm = 'frmhapusstatuspasien'; }
+		
+		?>
+		<form method="post" name="<? echo $jenisForm;?>" id="<? echo $jenisForm;?>">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+<input name="id_status" id="id_status" type="hidden" value="<?echo $this->id_status;?>" />
+<input name="cabang" id="cabang" type="hidden" value="<?echo $this->cabang;?>" />
+<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
+<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
+				<tr>
+				    <td align="right" width="180">* Status Pasien :</td>
+					<td>
+						<? 
+						$n_statusAttrib = array("size" => 53,"maxlength" => 50);
+						echo $ctrlFrm->formText('n_status', $this->detailStatuspasien['n_status'], $n_statusAttrib);
+						?>
+					</td>
+				</tr>
+				
+				
+				<tr>
+				    <td></td>
+				    <td>
+						<div class="right">
+							<input type="button" value="Batal" onClick="statuspasienlist();"> 
+							<input type="reset" value="Ulangi"> 
+							<input   type="submit" value="Simpan">
+						</div>
+					</td>
+				</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>

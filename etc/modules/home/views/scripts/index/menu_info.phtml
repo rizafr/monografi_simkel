@@ -1,0 +1,27 @@
+ <h2 class="accessibility">Navigation</h2><!--start nav-->
+<!--div id='colortab' class='ddcolortabs'>
+  <ul>
+	<li class=round><a title="Dasar Hukum" rel=uu><span>Peraturan Perundangan</span></a></li>
+	<li class=round><a title="Status Pengurusan Izin" href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/pengumuman/status/statuslist','<?php echo $this->basePath; ?>/pengumuman/status/statusjs');"><span>Status Izin</span></a></li>
+	<li class=round><a title="Download Form" rel=download><span>Download</span></a></li>
+	<li class=round><a title="Hubungi Kami" href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/organisasi/kontak/kontaklist?','<?php echo $this->basePath; ?>/organisasi/kontak/kontakjs');"><span>Kontak</span></a></li>
+		
+   </ul>
+</div-->	
+
+
+<div id=download class='dropmenudiv_a'>
+	<a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/infoijin/ijin/ijinlist','<?php echo $this->basePath; ?>/infoijin/ijin/ijinjs');">Form Permohonan Izin</a>
+	<a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/pd/absenmhs/absenmhslist?','<?php echo $this->basePath; ?>/pd/absenmhs/absenmhsjs');">Daftar Persyaratan</a>
+	<a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/bak/absendosen/absendosenlist?','<?php echo $this->basePath; ?>/bak/absendosen/absendosenjs');">Form IKM</a>
+	<a href="#" onclick="window.open('http://gis.cimahikota.go.id','','');">GIS KPPT Kota Cimahi</a>
+
+</div>
+
+<div id=uu class='dropmenudiv_a'>
+	<a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/peraturan/uu/uulist?jenisForm=update','<?php echo $this->basePath; ?>/peraturan/uu/uujs');">Undang - Undang</a>
+	<a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/peraturan/gubernur/uulist?jenisForm=update','<?php echo $this->basePath; ?>/peraturan/gubernur/uujs');">Peraturan Pemerintah</a>
+	<a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/peraturan/perda/uulist?jenisForm=update','<?php echo $this->basePath; ?>/peraturan/perda/uujs');">Peraturan Daerah</a>
+</div>
+<script type="text/javascript">tabdropdown.init("colortab", 'auto')</script>
+<!--end nav-->

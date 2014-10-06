@@ -1,0 +1,22 @@
+<?php 
+require_once 'Zend/View.php';
+require_once "share/tanggal.php";  
+require_once 'share/Portalconf.php'; 
+
+/*$vFoto = $this->basePath."../data/sdm/photo/".trim($this->i_peg_nip).".jpg";
+
+	if (!file_exists($vFoto)) {
+		$vFoto = $this->basePath."../images/nophoto.jpg";
+	} 
+*/
+?>
+<div class="widget">
+	<h4 class="widgettitle">Konten</h4>
+	<div class="content">		
+		<h2 class="title"><?=$this->jdlberita?></h2>
+		<span class="date"><?=formatdate($this->tglberita)?></span><br>
+		<?=$this->detilberita?>
+		<div class="hr"></div>
+		<a class="all" href="#indexberita" onclick="goExec_Script('<?php echo $this->basePath; ?>/portalmodule/berita/indeksberita','<?php echo $this->basePath; ?>/portalmodule/berita/beritajs', 'Berita')">Arsip Berita</a>		
+	</div>
+</div>

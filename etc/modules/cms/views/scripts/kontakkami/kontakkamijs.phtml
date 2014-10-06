@@ -1,0 +1,61 @@
+function kontakkamiM(par,idkontakkami){
+
+	var url = '<?php echo $this->basePath;?>/cmsmodule/kontakkami/kontakkami';	
+	var param = {par:par,idkontakkami:idkontakkami};
+		jQuery.get(url, param, function(data) {
+			jQuery("#tableview").html(data);
+			jQuery("#formkontakkami").ajaxForm(maintain_kontakkami);
+		});
+}
+function insertkontakkami(){
+	jQuery("#formkontakkami").ajaxForm(maintain_kontakkami);
+}
+var maintain_kontakkami = {
+	target:'#tableview',
+	beforeSubmit: function() {		
+		aobj= document.formkontakkami;
+		astr= "document.formkontakkami";
+		var cekVal="";
+		with(aobj){      
+			var Proceed = 1;
+			while (Proceed == 1)
+			{
+				/*sdmValidasiData (navigation.js)*/
+				if((!content.value)){cekVal = sdmValidasiData(astr,"content","Konten tentang kami harus diisi....!");return false;break;}
+				break;
+			}
+			
+		}
+		
+		//if (cekVal == false) {return false;}
+	
+	}, 
+	success:function(){
+		location.href="#top";
+		doCounter(5);
+		//jQuery("#tableview").reload('<?php echo $this->basePath; ?>/cmsmodule/kontakkami/maintaindata');
+		jQuery("#formkontakkami").ajaxForm(maintain_kontakkami);
+	},
+	url: '<?php echo $this->basePath; ?>/cmsmodule/kontakkami/maintaindata',
+	type: 'post',
+	resetForm: false
+};
+
+
+
+function HapusDatakontakkami(idkontakkami,jdl)
+{
+	var where_to= confirm("Yakin anda akan hapus data kontakkami :"+jdl);
+	 if (where_to== true)
+	 {
+		url = "<?php echo $this->basePath; ?>/cmsmodule/kontakkami/hapusdata"
+		 
+		var opt = {idkontakkami:idkontakkami};
+		jQuery.get(url,opt,function(data) {
+			jQuery("#tableview").html(data);
+				location.href="#top";
+				doCounter(5);
+			});
+	 }
+}
+

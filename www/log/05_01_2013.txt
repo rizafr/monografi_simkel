@@ -1,0 +1,18 @@
+FP-1;Ubah data user;01/05/2013 12:54:26;967363548 ();
+;Ubah data rangewaktu;01/05/2013 13:16:36; (8);
+;Ubah data jnstransaksi;01/05/2013 13:19:55; (458);
+;Ubah data jnstransaksi;01/05/2013 13:20:11; (459);
+;Ubah data jnstransaksi;01/05/2013 13:20:27; (460);
+;Ubah data jnstransaksi;01/05/2013 13:20:41; (461);
+;Insert data;01/05/2013 13:22:00; ();
+;Ubah data jnstransaksi;01/05/2013 13:23:08; (445);
+;Ubah data jnstransaksi;01/05/2013 13:23:22; (447);
+;Insert data;01/05/2013 13:23:28; ();
+;Insert data;01/05/2013 13:24:29; ();
+;Insert data;01/05/2013 13:24:44; ();
+;Insert data;01/05/2013 13:24:48; ();
+;Ubah data jnstransaksi;01/05/2013 13:30:41; (627);
+;Ubah data jnstransaksi;01/05/2013 13:30:56; (627);
+;Ubah data jnstransaksi;01/05/2013 15:10:22; (627);
+;Ubah data jnstransaksi;01/05/2013 15:23:53; (627);
+;Ubah data jnstransaksi;01/05/2013 15:24:02; (628);

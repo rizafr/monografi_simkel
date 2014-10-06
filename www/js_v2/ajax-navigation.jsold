@@ -1,0 +1,54 @@
+var please_wait = null;
+var xmlHttp = null;
+
+try {
+    // Firefox, Opera 8.0+, Safari
+    xmlHttp=new XMLHttpRequest();
+} catch (e) {
+    // Internet Explorer
+    try {
+        xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (e) {
+        xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+}
+
+function open_url(url, target) {
+ 	if ( ! document.getElementById) {
+  		return false;
+ 	}
+
+ 	if (please_wait != null) {
+  		document.getElementById(target).innerHTML = please_wait;
+ 	}
+
+ 	if (window.ActiveXObject) {
+  		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+ 	} else if (window.XMLHttpRequest) {
+  		xmlHttp = new XMLHttpRequest();
+ 	}
+
+ 	if (xmlHttp == undefined) {
+  		return false;
+ 	}
+ 	xmlHttp.onreadystatechange = function() { response(url, target); }
+ 	xmlHttp.open("GET", url, true);
+ 	xmlHttp.send(null);
+}
+
+function response(url, target) {
+ 	if (xmlHttp.readyState == 4) {
+	 	document.getElementById(target).innerHTML = (xmlHttp.status == 200) ? xmlHttp.responseText : "Ooops!! A broken link! Please contact the webmaster of this website ASAP and give him the fallowing errorcode: " + xmlHttp.status;
+	}
+}
+
+function set_loading_message(msg) {
+ 	please_wait = msg;
+}
+
+function validateForm(idform, actionform, target) {
+    var form = document.getElementById(idform);
+	//form.action = actionform;
+	//form.submit();
+	open_url(form, target);
+}

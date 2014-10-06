@@ -1,0 +1,98 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>>  Referensi 
+>>  Golongan Darah
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Data Golongan Darah</h2>
+		<form method="post" id="frmcarigoldarah" name="frmcarigoldarah">
+		<div class="add" title="Tambah Data" onClick="goldarahForm('insert','');"></div>
+				Filter :
+				<?
+				$kategoriCari = array("n_goldar" => "Golongan Darah");
+	echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
+				?>
+<input type="text" name="carii" id="carii" align="center" value ="<? echo $this->carii;?>">
+				<?
+			         $atribSubmit = array("onclick"=>"javascript:carigoldarah();");
+			         echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+				?>
+	</form>
+		<fieldset class="fields"> 
+			<? 
+			$status = $this->hasil;
+			$proses = $this->proses;
+			$k_goldarah = $this->k_goldarah;
+			$pesan->show_message($proses, $k_goldarah, "$status" ); ?>
+			<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th >No</th>
+				<th >Golongan Darah</th> 
+				<th colspan="2" class="nosort">FUNGSI</th>
+				
+				<?
+				if (count($this->goldarahList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {
+						
+						
+						foreach ($this->goldarahList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } //username, nama, email, password, id_cabang
+						$id_goldar = $this->escape($val['id_goldar']); 
+						$n_goldar = $this->escape($val['n_goldar']); 
+
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						echo $ctrlFrm->formHidden('id_goldar', $id_goldar, null);
+						
+						?>
+						<td align="center"><? echo $noUrut;?></td>
+						<td class="clleft"><? echo $n_goldar;?></td>
+						<td><div onClick="goldarahForm('update','<? echo $id_goldar;?>');" class="edit" title="Ubah Data"></div></td>
+						<td><div onClick="goldarahHapus('User Id :','<? echo $username;?>','<? echo $id_goldar;?>');" class="delete" title="Ubah Data"></div></td>
+						
+					
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+
+			<?	
+			$totalData = $this->totGoldarahList;
+			$modul = $this->basePath."/adm/goldarah/goldarahlist";
+			$param1 = $this->cabang;$param2 = $this->tahun;$param3 = $this->bulan;$param4 = $this->jenis;$param5 = $this->status;
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
+			
+			?>
+		</fieldset>		 
+		
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>

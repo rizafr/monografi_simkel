@@ -1,0 +1,183 @@
+<? require_once 'Zend/View.php';
+   require_once 'share/oa_date.php'; 
+   
+	$ctrlDate = new oa_date();   
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+
+	$nip = $_REQUEST['nip'];
+
+   $jmlPropList = count($this->propinsiList);
+   $propinsiList['-'] = '--Pilih--';
+   for ($i = 0; $i < $jmlPropList; $i++) {
+   $propinsiList[(string)$this->propinsiList[$i]->c_propinsi."|".$this->propinsiList[$i]->n_propinsi] = (string)$this->propinsiList[$i]->n_propinsi;			 
+   }
+
+   $jmlKabList = count($this->kabupatenList);
+   $kabupatenList['-'] = '--Pilih--';
+   for ($i = 0; $i < $jmlKabList; $i++) {
+   $kabupatenList[(string)$this->kabupatenList[$i]->c_kabupaten."|".$this->kabupatenList[$i]->n_kabupaten] = (string)$this->kabupatenList[$i]->n_kabupaten;			 
+   }
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA ALAMAT</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data riwayat alamat pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+								
+	<div class="space-line">
+		<div class="title2">Melihat Data Riwayat Alamat</div>
+		<fieldset  class="panel-form">
+			<form id="frmAlamatUpdate" action="<?php echo $this->basePath; ?>/sdm/pegawai/alamatupdate" method="post" name="frmAlamatUpdate">
+				<dl>
+					<dt>Tanggal Mulai Tinggal</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$tglMulai = $this->escape($this->tglMulai);
+						echo $ctrlDate->convertTglMachineToHuman($tglMulai);
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tanggal Terakhir Tinggal</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$tglAkhir = $this->escape($this->tglAkhir);
+						echo $ctrlDate->convertTglMachineToHuman($tglAkhir);
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>ALAMAT</dt>
+					<dd class="dot2">&nbsp;</dd> 
+					<dd class="col-right">&nbsp;</dd>
+				</dl>
+				<dl>
+					<dt>Jalan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$jalan = $this->escape($this->jalan);
+						echo $jalan;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Rt</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$rt = $this->escape($this->rt);
+						echo $rt;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Rw</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$rw = $this->escape($this->rw);
+						echo $rw;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Kelurahan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$kel = $this->escape($this->kel);
+						echo $kel;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Kecamatan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$kec = $this->escape($this->kec);
+						echo $kec;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Propinsi</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$nmProp = $this->escape($this->nmProp);
+						echo $nmProp;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Kota / Kabupaten</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$nmKota = $this->escape($this->nmKota);
+						echo $nmKota;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Kode Pos</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$kodePos = $this->escape($this->kodePos);
+						echo $kodePos;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Telepon Rumah</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$telpRumah = $this->escape($this->telpRumah);
+						echo $telpRumah;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Keterangan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$keterangan = $this->escape($this->keterangan);
+						echo $keterangan;
+					?>
+					</dd>
+				</dl>
+		
+				<div class="right">
+				<?	
+					echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+					<input type="button" value="Kembali"  onClick="javascript:kembaliAlamatView('<? echo $this->escape($this->nip); ?>');" >
+				</div>
+			</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>

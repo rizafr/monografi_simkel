@@ -1,0 +1,75 @@
+<? require_once 'Zend/View.php';
+   require_once "share/tanggal.php";  
+   require_once "share/pesan.php";
+   
+    $pesan = new pesan();
+	$ctrlDate = new tanggal();
+	$ctrlFrm = new Zend_View();
+
+	$par=$this->par;
+
+   $jmldatax = count($this->dataphoto);
+    for ($j = 0; $j < $jmldatax; $j++) {
+								$a_photofile=(string)$this->dataphoto[$j]['a_photofile'];
+								$n_mhs=(string)$this->dataphoto[$j]['n_mhs'];
+					}	
+
+$id_npm=$this->id_npm;
+//$n_mhs=$n_mhs;
+
+
+							
+?>	
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+</div>
+<? 
+$pesancek=$this->pesancek;
+if ($pesancek=='gagal'){$confirm ='confirmfail';}
+	else {$confirm ='confirm';}
+?>
+<div id="top"></div>	
+	<div id="confirm" class="<?=$confirm?>" style="display: none">
+		<?echo $pesan = "Ubah photo ".$this->pesan;?>
+	</div>
+<?
+//include "menulink/menulink.php";
+?>
+<h2 class="title">Photo</h2>
+<?
+{include "menulink/namaMhs.php";}
+?>
+<fieldset class="fields">
+   	
+	<form id="frmcatatphoto"  method="post" name="frmcatatphoto" enctype="multipart/form-data">
+		<fieldset class="panel-form">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" >
+				<tr>
+					<td width="120">* Ambil Photo</td>
+					<td width="2">:</td>
+					<td>
+						<div class="fileinputs">
+							<input type="file" size=50 id="a_photofilex" name="a_photofilex"  value="<? echo $a_photofile; ?>" onChange="setvalueuplpdf(this.value,'a_photofilex','jpg')" />
+						<div class="fakefile">
+							<input type="text" size=49 name="a_photofile" value="<? echo $a_photofile; ?>"/>
+						</div>
+						</div>
+							<input type="hidden" size=49 name="a_photofile2" value="<? echo $a_photofile; ?>"/>
+						<input type="hidden" class="text"  name="id_npm" id="id_npm" value="<?=$id_npm?>" size="80" maxlength="100"  />
+						<input type="hidden" class="text"  name="n_mhs" id="n_mhs" value="<?=$n_mhs?>" size="80" maxlength="100"  />
+
+					</td>	
+				</tr>				
+			  </table>	
+		</fieldset>
+<span class="highlight left">* Harus diisi</span>	 
+<div class="right">
+<input  type="submit" value="Simpan" onClick="mhspriproses();">
+<? if(trim($this->n_level) !="mh"){?>
+<!--a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/km/mhspri/mhsprilist?','<?php echo $this->basePath; ?>/km/mhspri/mhsprijs');">Biodata</a-->
+	
+<input type="button" value="Batal" onclick="open_url_to_div('<?php echo $this->basePath; ?>/km/mhspri/mhsprilist?','<?php echo $this->basePath; ?>/km/mhspri/mhsprijs');"> 
+<? } ?>
+</form>
+</div>
+</fieldset>

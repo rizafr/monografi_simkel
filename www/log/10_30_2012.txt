@@ -1,0 +1,3 @@
+971361368;Ubah data user;30/10/2012 09:58:15;983390370 ();
+;Insert data pegawai;30/10/2012 15:10:08; ();
+Daryana;Insert data user;30/10/2012 15:11:41;982392655 ();

@@ -1,0 +1,124 @@
+<? require_once 'Zend/View.php';
+   
+   $ctrlFrm = new Zend_View();
+
+$nip = $_REQUEST['nip'];
+$_SESSION['nip'] = $nip;
+
+	$jumLNList = count($this->lnList);
+   //echo $jumLNList;
+   for ($j = 0; $j < $jumLNList; $j++) {
+     $ln[$j] = array("i_peg_nip"  		=>(string)$this->lnList[$j]['i_peg_nip'],
+						  "negara"		=>(string)$this->lnList[$j]['negara'],
+						  "tanggal"		=>(string)$this->lnList[$j]['tanggal'],
+	                      "tujuan"     	=>(string)$this->lnList[$j]['tujuan'],
+						  "lama"  		=>(string)$this->lnList[$j]['lama'],
+						  "biaya"  		=>(string)$this->lnList[$j]['biaya'],
+						  "keterangan"  =>(string)$this->lnList[$j]['keterangan']);	
+   } 
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA KE LUAR NEGERI</h3>
+		&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data riwayat perjalanan ke luar
+ negeri pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+			<form id="frmVLN"action="<?php echo $this->basePath; ?>/sdm/viewpegawai/luarnegeri" method="post" name="frmVLN">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+			</form>
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line"></div>	
+	<fieldset class="fields">
+		<div class="title2">Data Ke Luar Negeri</div>
+		<div class="blank"></div>
+<?
+	if ($jumLNList == 0) {
+		echo "<font color=\"red\">Data Ke Luar Negeri Tidak Ditemukan</font>";		
+?>	
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+		    <th width="25%">Negara</th>
+			<th width="10%">Tanggal Berangkat</th>
+			<th width="20%">Tujuan</th>
+			<th width="9%">Lamanya (hari)</th>
+			<th width="15%">Sumber Biaya</th>
+			<th width="15%">Keterangan</th>
+			</tr>
+	</table>
+<? 	}	else { ?>
+	</center>
+	<table class="tbl" cellspacing="1" cellpadding="2" border="0" align="center">
+			<tr>
+		    <th width="25%">Negara</th>
+			<th width="10%">Tanggal Berangkat</th>
+			<th width="20%">Tujuan</th>
+			<th width="9%">Lamanya (hari)</th>
+			<th width="15%">Sumber Biaya</th>
+			<th width="15%">Keterangan</th>
+			</tr>
+		<?php foreach ($ln as $key => $val): 
+					   if ($key%2==0) { ?>
+				      <tr class="event">
+					<? } else if ($key%2==1) { ?>
+					  <tr class="event2">
+					<? } ?>
+					<?
+				$tanggal = $this->escape($val['tanggal']);
+				//echo $tglSK;
+					$thn = substr($tanggal,0,4);
+					$bln = substr($tanggal,5,2);
+					$hr = substr($tanggal,8,2);
+					$tgl = $hr."-".$bln."-".$thn;
+					if ($thn == ''){
+						$tanggal = null;
+					}
+					else if ($bln == '#'){
+						$tanggal = null;
+					}
+					else if ($hr == '#'){
+						$tanggal = null;
+					}
+					
+					?>
+				<td>&nbsp;
+				<a href="#" onClick="javascript:viewLN('<? echo $this->escape($val['i_peg_nip']); ?>','<? echo $this->escape($val['negara']); ?>','<? echo $this->escape($val['tanggal']); ?>');" class="link" title="View"><?php echo $this->escape($val['negara']);?> </a></td>
+				<td class="clcenter"><?php echo $tgl?></td>
+				<td>&nbsp; <?php echo $this->escape($val['tujuan']);;?></td>
+				<td class="clright">&nbsp; <?php echo $this->escape($val['lama']);?></td>
+				<td>&nbsp; <?php echo $this->escape($val['biaya']);?></td>
+				<td>&nbsp; <?php echo $this->escape($val['keterangan']);?></td>
+		  </tr>
+	<?php endforeach;?> 		  
+		</table>
+<?	}	?>
+ 			<dl>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">
+				<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+				</dd>			
+				<div class="back" onClick="javascript:kembaliLN();" title="Kembali"><input type="button" value="Kembali" id="kembaliLN"></div>
+			</dl>
+			</div>
+ 	</fieldset>
+</div>
+
+ <!--   <p align="center">
+		<?php echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";?>
+    </p>
+
+			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliLN();" class="back" title="Kembali">Kembali</a>
+			</div>
+ -->

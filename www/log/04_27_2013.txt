@@ -1,0 +1,7 @@
+982390786;Insert Data Faktur Penjualan dgn Pemebeli PT. Bank BTPN Kantor Cabang Pembantu Ciamis;27/04/2013 12:57:26; di Nopend 46200;
+;Insert data;27/04/2013 13:03:44; ();
+;Insert data;27/04/2013 13:16:49; ();
+;Insert data;27/04/2013 13:55:18; ();
+969322033;Insert Data Faktur Penjualan dgn Pemebeli KOPERASI ALIANSI;27/04/2013 14:24:08; di Nopend 41300;
+;Insert data;27/04/2013 14:31:54; ();
+967363548;Hapus data item faktur pajak penjualan;27/04/2013 14:50:22; (35399);

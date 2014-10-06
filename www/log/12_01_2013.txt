@@ -1,0 +1,9 @@
+SM Disbang;Ubah Data Penerimaan ;01/12/2013 08:10:20; di lokasi  dengan id_pengadaan (98);
+SM Disbang;Insert Data Faktur Permintaanlsg dgn Pembeli ;01/12/2013 12:06:02; di Nopend ;
+SM Disbang;Ubah Data Permintaan Langsung ;01/12/2013 14:31:20; di lokasi  dengan id_pengadaan (101);
+SM Disbang;Ubah Data Permintaan Langsung ;01/12/2013 14:42:16; di lokasi  dengan id_pengadaan (101);
+SM Disbang;Hapus data dokumen id_dok;01/12/2013 15:00:22;155 (155);
+SM Disbang;Hapus data dokumen id_dok;01/12/2013 15:02:07;155 (155);
+SM Disbang;Hapus data dokumen id_dok;01/12/2013 15:02:12;156 (156);
+SM Disbang;Hapus Data Permintaanlsg Anggaran;01/12/2013 15:03:23; dgn id_pengadaan (101);
+SM Disbang;Ubah Data Permintaan Langsung Pengadaan Upgrade Aplikasi Web E-Procurement;01/12/2013 15:04:00; di lokasi Bandung dengan id_pengadaan (101);

@@ -1,0 +1,119 @@
+<? require_once 'Zend/View.php';
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+
+
+	//$jenjang = $_REQUEST['jenjang'];
+	$nip = $_REQUEST['nip'];
+	//echo "test".$test;
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+
+
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA KE LUAR NEGERI</h3>
+		&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data riwayat perjalanan ke luar
+ negeri pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line">
+		<div class="title2">Data Ke Luar Negeri</div>
+		<fieldset  class="panel-form">	
+			<form id="frmVLNView" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/luarnegerinview" method="post" name="frmVLNView">
+				<dl>
+					<dt>Negara</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$negara = $this->escape($this->negara);
+						echo $negara;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tanggal Berangkat</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php
+						$tanggal = $this->escape($this->tanggal);
+						$thn = substr($tanggal,0,4);
+						$bln = substr($tanggal,5,2);
+						$hr = substr($tanggal,8,2);
+						$tgl = $hr."-".$bln."-".$thn;
+						echo $tgl; 			 
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tujuan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$tujuan = $this->escape($this->tujuan);
+						echo $tujuan;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Lamanya</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$lama = $this->escape($this->lama);
+						echo $lama." hari";
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Sumber Biaya</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$biaya = $this->escape($this->biaya);
+						echo $biaya;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Keterangan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$keterangan = $this->escape($this->keterangan);
+						echo $keterangan;
+					?>
+					</dd>
+				</dl>
+ 			<dl>
+				<?php 
+				  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">&nbsp;</dd>			
+				<div class="back" onClick="javascript:kembaliLNView('<? echo $this->escape($this->nip); ?>');" title="Kembali"><input type="button" value="Kembali" id="kembaliLNView"></div>
+			</dl>
+		  	</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>		
+
+<!--			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliLNView('<? echo $this->escape($this->nip); ?>');" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

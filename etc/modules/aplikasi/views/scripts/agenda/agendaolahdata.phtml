@@ -1,0 +1,78 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$format_date = new format_date();
+
+if($this->jenisForm == 'insert'){ $title = 'Tambah Data';}
+else if ($this->jenisForm == 'update'){ $title = 'Ubah Data';}
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+</div>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Kirim Agenda</h2>
+	    <div class="spacer"></div> 
+		<div class="blank"></div>
+		<div id="targetview" class="" style="display:none"></div>
+		<div class="blank"></div>
+		<? if($this->jenisForm == 'insert'){?>
+			<form name="frmtambahagenda" id="frmtambahagenda" method="POST">
+		<?} else {?>
+			<form name="frmubahagenda" id="frmubahagenda" method="POST">
+		<?}?>
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+				
+				<?
+				echo $ctrlFrm->formHidden('iAgendaHidden', $this->detailAgenda['i_agenda'], null); 							
+				?>
+				
+				<tr>
+				    <td align="right" width="180">* Tanggal:</td>
+					<td>
+						<?
+						$dAgendaAttrib = array("size" => 20, "maxlength" => 50);
+						echo $ctrlFrm->formText('dAgenda', $this->detailAgenda['d_agenda'], $dAgendaAttrib);
+						
+						?>
+					</td>
+				</tr>
+				
+				<tr>
+					<td align="right" width="180">Isi Pesan :</td>
+					<td>
+						<textarea id="wysiwyg" name="eAgendaPesan" id="eAgendaPesan"><?echo $this->detailAgenda['e_agenda_pesan'];?></textarea>
+						<script language="javascript1.2">
+						  //generate_wysiwyg('wysiwyg');
+						</script>	
+					</td>
+				</tr>
+		
+				<tr>
+					<td></td>
+				    <td>
+						<div class="right"><input type="button"    value="Batal" onClick="agendalist()"> <input type="reset"   value="Ulangi"> <input   type="submit" value="Simpan"></div>
+					</td>
+				</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>         
+
+		</form>
+		<div class="blank"></div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		$("#dAgenda").datepicker();
+	});
+</script>

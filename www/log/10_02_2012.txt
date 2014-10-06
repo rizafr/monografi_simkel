@@ -1,0 +1,9 @@
+;Ubah data rangewaktu;02/10/2012 11:18:02; (1);
+;Ubah data rangewaktu;02/10/2012 11:18:24; (8);
+;Ubah data rangewaktu;02/10/2012 11:18:57; (4);
+972346521;Insert Data Faktur Penjualan dgn Pemebeli KOPERASI PEGAWAI KANTOR TUKAR POS LAUT TANJUNGPRIOK;02/10/2012 11:22:31; di Nopend 10900;
+972346521;Ubah Data Faktur Penjualan 030.000-12.00007243;02/10/2012 11:22:48; di Nopend 10900 dengan id (8538);
+972346521;Ubah Data Faktur Penjualan 030.000-12.00007243;02/10/2012 11:23:15; di Nopend 10900 dengan id (8538);
+;Insert data;02/10/2012 11:37:39; ();
+;Insert data;02/10/2012 11:39:25; ();
+;Insert data;02/10/2012 11:43:31; ();

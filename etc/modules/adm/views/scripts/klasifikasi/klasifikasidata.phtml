@@ -1,0 +1,58 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>>  Referensi 
+>>  Klasifikasi
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Form Klasifikasi Kedatangan</h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {	$jenisForm = 'frmtambahklasifikasi'; }
+			else if (strtolower($this->jenisForm) == 'update') {	$jenisForm = 'frmubahklasifikasi'; }
+			else {	$jenisForm = 'frmhapusklasifikasi'; }
+		
+		?>
+		<form method="post" name="<? echo $jenisForm;?>" id="<? echo $jenisForm;?>">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+<input name="id_klasifikasi" id="id_klasifikasi" type="hidden" value="<?echo $this->id_klasifikasi;?>" />
+<input name="cabang" id="cabang" type="hidden" value="<?echo $this->cabang;?>" />
+<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
+<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
+				<tr>
+				    <td align="right" width="180">* Nama Klasifikasi :</td>
+					<td>
+						<? 
+						$n_klasifikasiAttrib = array("size" => 53,"maxlength" => 50);
+						echo $ctrlFrm->formText('n_klasifikasi', $this->detailKlasifikasi['n_klasifikasi'], $n_klasifikasiAttrib);
+						?>
+					</td>
+				</tr>
+				
+				
+				<tr>
+				    <td></td>
+				    <td>
+						<div class="right">
+							<input type="button" value="Batal" onClick="klasifikasilist();"> 
+							<input type="reset" value="Ulangi"> 
+							<input   type="submit" value="Simpan">
+						</div>
+					</td>
+				</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>

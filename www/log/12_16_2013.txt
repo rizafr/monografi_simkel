@@ -1,0 +1,12 @@
+pos_1;Ubah Data Evaluasi Harga ;16/12/2013 13:07:11; di lokasi  dengan id_pengadaan (98);
+pos_1;Ubah Data Evaluasi Harga ;16/12/2013 13:17:37; di lokasi  dengan id_pengadaan (98);
+pos_1;Ubah Data Evaluasi Harga ;16/12/2013 13:18:46; di lokasi  dengan id_pengadaan ();
+pos_1;Ubah Data Evaluasi Harga ;16/12/2013 13:19:24; di lokasi  dengan id_pengadaan ();
+pos_1;Ubah Data Evaluasi Harga ;16/12/2013 13:19:39; di lokasi  dengan id_pengadaan ();
+pos_1;Ubah Data Evaluasi Harga ;16/12/2013 13:19:52; di lokasi  dengan id_pengadaan ();
+ ;Ubah Data Ijin Usaha ;16/12/2013 14:13:11; di id_supp 64 dengan id_hukum (6);
+ ;Insert Data Landasan Hukum  111;16/12/2013 14:13:26; di Supplier ;
+ ;Insert Data Landasan Hukum  123;16/12/2013 14:14:22; di Supplier ;
+ ;Ubah Data Ijin Usaha ;16/12/2013 14:16:37; di id_supp 64 dengan id_hukum (6);
+ ;Ubah Data Ijin Usaha ;16/12/2013 14:17:13; di id_supp 64 dengan id_hukum (7);
+ ;Insert Data Landasan Hukum  3333;16/12/2013 14:17:29; di Supplier ;

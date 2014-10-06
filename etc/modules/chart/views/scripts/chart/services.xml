@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<services>
+  <stock>
+     <s01>module_stock_getcontent</s01>
+     <s02>module_stock_getMostActivities</s02>
+	 <s03>module_stock_getGainers</s03>
+	 <s04>module_stock_getLosers</s04>
+	 <s05>module_stock_getList</s05>
+	 <s06>module_stock_getchart</s06>
+	<s07>module_stock_getLang</s07>
+   </stock>
+</services>

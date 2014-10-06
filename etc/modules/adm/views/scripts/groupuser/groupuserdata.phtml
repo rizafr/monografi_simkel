@@ -1,0 +1,58 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>>  Group User 
+>>  Pengguna
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Form Ubah Data Group User</h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {	$n_groupuserForm = 'frmtambahgroupuser'; }
+			else if (strtolower($this->jenisForm) == 'update') {	$n_groupuserForm = 'frmubahgroupuser'; }
+			else {	$n_groupuserForm = 'frmhapusgroupuser'; }
+		
+		?>
+		<form method="post" name="<? echo $n_groupuserForm;?>" id="<? echo $n_groupuserForm;?>">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+<input name="id" id="id" type="hidden" value="<?echo $this->id;?>" />
+<input name="cabang" id="cabang" type="hidden" value="<?echo $this->cabang;?>" />
+<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
+<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
+				<tr>
+				    <td align="right" width="180">* Group :</td>
+					<td>
+						<? 
+						$n_groupAttrib = array("size" => 23,"maxlength" => 20);
+						echo $ctrlFrm->formText('n_group', $this->detailGroupuser['n_group'], $n_groupAttrib);
+						?>
+					</td>
+				</tr>
+				
+				
+				<tr>
+				    <td></td>
+				    <td>
+						<div class="right">
+							<input type="button" value="Batal" onClick="groupuserlist();"> 
+							<input type="reset" value="Ulangi"> 
+							<input   type="submit" value="Simpan">
+						</div>
+					</td>
+				</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>

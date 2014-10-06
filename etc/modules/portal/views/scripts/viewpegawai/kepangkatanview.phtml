@@ -1,0 +1,173 @@
+<? require_once 'Zend/View.php';
+   require_once "share/oa_date.php";  
+	require_once "share/oa_dec_cur_conv.php";
+   
+	$ctrlDate = new oa_date();   
+   $ctrlFrm = new Zend_View();
+	$convDec = new oa_dec_cur_conv();
+
+ 
+
+	$nip = $_REQUEST['nip'];
+	
+  
+   
+   
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+   
+		
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA KEPANGKATAN</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat riwayat kenaikan pangkat pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line">
+		<div class="title2">Data Kepangkatan</div>
+		<fieldset  class="panel-form">	
+			<form action="<?php echo $this->basePath; ?>/sdm/viewpegawai/kepangkatanview" method="post">
+				<dl>
+					<dt>Pangkat</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$gol = $this->escape($this->gol);
+						echo $gol;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Berlaku</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$tglTmt = $this->escape($this->tmtGol);
+						//echo "tglTmt->".$tglTmt;
+						$thnTmt = substr($tglTmt,0,4);
+						$blnTmt = substr($tglTmt,5,2);
+						$hrTmt = substr($tglTmt,8,2);
+						$tglTmt = $hrTmt."-".$blnTmt."-".$thnTmt;
+						echo $tglTmt;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Masa Kerja Golongan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$kerjaThn = $this->escape($this->kerjaThn);
+						if ($kerjaThn == '') {
+							$kerjaThn = 0;
+						} 
+						$kerjaBln = $this->escape($this->kerjaBln);
+						if ($kerjaBln == '') {
+							$kerjaBln = 0;
+						} 
+						$masaKerja = $kerjaThn." tahun ".$kerjaBln." bulan ";
+						echo $masaKerja;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Jenis Kenaikan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">					
+					<?php 
+						$jenis = $this->escape($this->jenis);
+						if ($jenis == 'P') {
+							$jenis = 'Kenaikan Golongan Pangkat';
+						}
+						else if ($jenis == 'G') {
+							$jenis = 'Kenaikan Gaji Berkala';
+						}
+						echo $jenis;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Gaji Pokok</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$gaji = $this->escape($this->gaji);
+						echo $convDec->convertDecToCur($gaji);
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>SK Pejabat</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$namaSK = $this->escape($this->namaSK);
+						echo $namaSK; 
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Nomor SK</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$nomorSK = $this->escape($this->nomorSK);
+						echo $nomorSK; 
+					?>			
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tanggal SK</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$tglSK = $this->escape($this->tglSK);
+						$thnSK = substr($tglSK,0,4);
+						$blnSK = substr($tglSK,5,2);
+						$hrSK = substr($tglSK,8,2);
+						$tglSK = $hrSK."-".$blnSK."-".$thnSK;
+						echo $tglSK;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Keterangan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$keterangan = $this->escape($this->keterangan);
+						echo $keterangan; 
+					?>
+					</dd>
+				</dl>
+ 			<dl>
+				<?php 
+				  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">&nbsp;</dd>			
+				<div class="back" onClick="javascript:kembaliPangkatView('<? echo $this->escape($this->nip); ?>');" title="Kembali"><input type="button" value="Kembali" id="kembaliPangkatView"></div>
+			</dl>
+		  	</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>		
+		
+<!--
+			<div class="back2">
+			  <a href="#" onClick="javascript:kembaliPangkatView('<? echo $this->escape($this->nip); ?>');" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

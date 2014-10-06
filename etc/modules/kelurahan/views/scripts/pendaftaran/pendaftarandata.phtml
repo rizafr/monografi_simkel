@@ -1,0 +1,201 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+$format_date = new format_date();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>> Data Kelurahan
+</div>
+
+<div id="dialog-browse">  
+</div>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">FORM DATA KELURAHAN</h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {$namaForm = 'frmtambahpendaftaran'; }
+			else if (strtolower($this->jenisForm) == 'update') {$namaForm = 'frmubahpendaftaran'; }
+			else {$namaForm = 'frmhapuspendaftaran'; }
+		?>
+
+		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi">
+<?
+	$status = $this->hasil;
+	$proses = $this->proses;
+	$keterangan = $this->keterangan;
+	$pesan->show_message($proses, $keterangan, "$status" ); 
+?>
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+<input name="id" id="id" type="hidden" value="<?echo $this->id;?>" />
+<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
+<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
+<input name="id_user" id="id_user" type="hidden" value="<?echo $this->detailPendaftaran['id_user'];?>" />
+
+				
+				
+				<tr>
+				    <td align="right" width="180">* KODE WILAYAH :</td>
+					<td>	
+						<? 
+							$c_noregAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
+							echo $ctrlFrm->formText("kode_wilayah", $this->detailPendaftaran['kode_wilayah'], $c_noregAttrib);
+						?>
+				</td>
+				</tr>
+
+				
+				
+				<tr>
+				    <td align="right" width="180">* Nama Kelurahan :</td>
+					<td>	
+						<? 
+							$n_namaAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
+							echo $ctrlFrm->formText("n_nama", $this->detailPendaftaran['n_nama'], $n_namaAttrib);
+						?>
+				</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Tahun Pembentukan :</td>
+					<td>
+						<? 
+							$n_namaAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
+							echo $ctrlFrm->formText("tahun_pembentukan", $this->detailPendaftaran['tahun_pembentukan'], $n_namaAttrib);
+						?>
+					</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Dasar Hukum Pembentukan :</td>
+					<td>	
+						<? 
+						$t_waktuAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
+						echo $ctrlFrm->formText("t_waktu", $this->detailPendaftaran['t_waktu'], $t_waktuAttrib);
+						?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Nomor Kode Wilayah :</td>
+					<td>	
+	<? 
+	$n_tempatAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
+	echo $ctrlFrm->formText("n_tempat", $this->detailPendaftaran['n_tempat'], $n_tempatAttrib);
+	?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Nomor Kode Pos :</td>
+					<td>	
+	<? 
+	$t_beratAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
+	echo $ctrlFrm->formText("t_berat", $this->detailPendaftaran['t_berat'], $t_beratAttrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Kecamatan :</td>
+					<td>	
+						<? 
+						$t_tinggiAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
+						echo $ctrlFrm->formText("t_tinggi", $this->detailPendaftaran['t_tinggi'], $t_tinggiAttrib);
+						?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Kabupaten / Kota :</td>
+					<td>	
+					<? 
+					$t_tekananAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
+					echo $ctrlFrm->formText("t_tekanan", $this->detailPendaftaran['t_tekanan'], $t_tekananAttrib);
+					?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Provinsi :</td>
+					<td>	
+						<? 
+						$t_denyutAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
+						echo $ctrlFrm->formText("t_denyut", $this->detailPendaftaran['t_denyut'], $t_denyutAttrib);
+						?>
+				</td>
+				</tr>
+				
+				
+				
+				
+				
+					
+				<tr>
+				    <td></td>
+				    <td>
+						<div class="right">
+<input type="button" value="Batal" onclick="pendaftaranlist()"> 
+<input type="reset" value="Ulangi"> 
+<input   type="submit" value="Simpan">
+
+
+						</div>
+					</td>
+				</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+	$(".validasi").validate();
+});
+</script>
+
+<script>
+
+ 	$(function() {
+		$("#d_lahir").datepicker();
+	});
+
+
+function showDialog(val,jum) {      
+    $( "#dialog-browse" ).dialog({
+      autoOpen: false,
+      height: 380,
+      width: 640,
+      modal: true,
+      resizable:false,
+      title: "Data"
+    });
+    if(val =='dosen'){dosenlist(jum);}  
+    if(val =='prodi'){prodilist();}  
+    return false;
+  }
+
+</script>
+

@@ -1,0 +1,267 @@
+function cariPegawai()
+{
+	$("#frmCariPegawai").ajaxForm(frmcaripegawai_opt);
+}
+var frmcaripegawai_opt = {
+		target : '#tableview',
+		url: '<?php echo $this->basePath; ?>/pegawai/pegawai/pegawailist',
+		type: 'post', 
+		resetForm: false
+};
+
+function pegawailist()
+{
+	divre = document.getElementById('divre').value;
+	upt = document.getElementById('upt').value;
+	jabatan = document.getElementById('jabatan').value;
+
+	var param = {upt:upt,divre:divre,jabatan:jabatan};
+	var url = '<?php echo $this->basePath; ?>/pegawai/pegawai/pegawailist';
+	jQuery.get(url,param, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+function pegawaiby(jenisForm, id)
+{
+	divre = document.getElementById('divre').value;
+	upt = document.getElementById('upt').value;
+	jabatan = document.getElementById('jabatan').value;
+
+	var param = {upt:upt,divre:divre,jabatan:jabatan};
+	var url = '<?php echo $this->basePath; ?>/pegawai/pegawai/pegawaiolahdata';
+	jQuery.get(url,param, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+
+function pegawaiForm(jenisForm, id)
+{
+	divre = document.getElementById('divre').value;
+	upt = document.getElementById('upt').value;
+	jabatan = document.getElementById('jabatan').value;
+
+	if(jenisForm == 'insert'){
+	if (divre == '' || divre == '-'){alert('Pilih dulu Divre'); return false;}
+	}
+	var url = '<?php echo $this->basePath; ?>/pegawai/pegawai/pegawaiolahdata';
+	var param = { jenisForm:jenisForm, id:id,upt:upt,divre:divre,upt:upt};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahpegawai").ajaxForm(tambahpaguDipa_opt);
+		jQuery("#frmubahpegawai").ajaxForm(ubahpaguDipa_opt);
+	});
+}
+
+var tambahpaguDipa_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/pegawai/pegawai/pegawai',
+	beforeSubmit : function() {
+		if (document.getElementById('c_upt').value == ''){
+			alert('UPT harus Dipilih');
+			return false;
+		}
+		if (document.getElementById('n_nama').value == ''){
+			alert('Nama harus Diisi');
+			return false;
+		}
+		if (document.getElementById('n_nip').value == ''){
+			alert('NIPPOS harus Dipilih');
+			return false;
+		}
+		if(isNaN(document.getElementById('n_nip').value)){
+			alert("NIPPOS harus angka");
+			return false;
+		}
+		if (document.getElementById('n_jabatan').value == ''){
+			alert('Jabatan harus Dipilih');
+			return false;
+		}
+		if ((new String(document.getElementById('k_npwp1').value)).length < 2  || (new String(document.getElementById('k_npwp2').value)).length < 3 || (new String(document.getElementById('k_npwp3').value)).length < 3 || (new String(document.getElementById('k_npwp4').value)).length < 1 || (new String(document.getElementById('k_npwp5').value)).length < 3 || (new String(document.getElementById('k_npwp6').value)).length < 3){
+			alert('NPWP harus 15 digit');
+			return false;
+		}
+		
+
+
+		if (document.getElementById('k_npwp1').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp1').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		if (document.getElementById('k_npwp2').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp2').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		if (document.getElementById('k_npwp3').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp3').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		if (document.getElementById('k_npwp4').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp4').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		if (document.getElementById('k_npwp5').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp5').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		if (document.getElementById('k_npwp6').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp6').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+var ubahpaguDipa_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/pegawai/pegawai/pegawaiupdate',
+	beforeSubmit : function() {
+		if (document.getElementById('c_upt').value == ''){
+			alert('UPT harus Dipilih');
+			return false;
+		}
+		if (document.getElementById('n_nama').value == ''){
+			alert('Nama harus Diisi');
+			return false;
+		}
+		if (document.getElementById('n_nip').value == ''){
+			alert('NIPPOS harus Dipilih');
+			return false;
+		}
+		if(isNaN(document.getElementById('n_nip').value)){
+			alert("NIPPOS harus angka");
+			return false;
+		}
+		if (document.getElementById('n_jabatan').value == ''){
+			alert('Jabatan harus Dipilih');
+			return false;
+		}
+		if ((new String(document.getElementById('k_npwp1').value)).length < 2  || (new String(document.getElementById('k_npwp2').value)).length < 3 || (new String(document.getElementById('k_npwp3').value)).length < 3 || (new String(document.getElementById('k_npwp4').value)).length < 1 || (new String(document.getElementById('k_npwp5').value)).length < 3 || (new String(document.getElementById('k_npwp6').value)).length < 3){
+			alert('NPWP harus 15 digit');
+			return false;
+		}
+		
+
+
+		if (document.getElementById('k_npwp1').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp1').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		if (document.getElementById('k_npwp2').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp2').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		if (document.getElementById('k_npwp3').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp3').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		if (document.getElementById('k_npwp4').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp4').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		if (document.getElementById('k_npwp5').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp5').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		if (document.getElementById('k_npwp6').value == ''){
+			alert('NPWP harus Diisi');
+			return false;
+		}
+		if(isNaN(document.getElementById('k_npwp6').value)){
+			alert("NPWP harus angka");
+			return false;
+		}
+		
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+
+
+
+function pegawaiHapus(param1, param2, param3)
+{ 
+	divre = document.getElementById('divre').value;
+	upt = document.getElementById('upt').value;
+	jabatan = document.getElementById('jabatan').value;
+
+	if(ConfirmDelete(param1, param3))
+	{	
+		handler = '<?php echo $this->basePath; ?>/pegawai/pegawai/pegawaihapus';
+		var opt = {id : param2,upt:upt,divre:divre,jabatan:jabatan};
+		jQuery.get(handler,opt,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+} 
+
+
+
+function deletepegawai(param1, param2,n_nama)
+{ 
+	
+	if(ConfirmDelete(param1, n_nama))
+	{	
+		handler = '<?php echo $this->basePath; ?>/pegawai/pegawai/pegawaihapus';
+		var opt = {id : param2};
+		jQuery.get(handler,opt,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+} 
+
+
+
+
+

@@ -1,0 +1,107 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$format_date = new format_date();
+$format_page = new format_page();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+</div>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Kalender Akademik</h2>
+		<div class="search-panel">
+		<form method="post" id="frmCariAgenda" name="frmCariAgenda">
+			   Pencarian berdasarkan :
+			      <select size="1" id="kategoriCari" name="kategoriCari">      
+	                   <option value="d_agenda">Tanggal Kegiatan</option>
+	                   <option value="e_agenda_pesan">Kegiatan</option>
+	                   
+	                 </select>
+			      <input type="text" id="katakunciCari" name="katakunciCari" value="">
+			     <?
+				$atribSubmit = array("onclick"=>"javascript:cariAgendaList();");
+				echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+			    ?>	   
+		</form>
+	</div>
+	<div class="space-line"></div>
+
+	    <form action="" method="post"> 
+	        <fieldset class="fields"> 
+				<div class="spacer"> </div>
+				<? 
+				
+				$status = $this->hasil;
+				$proses = $this->proses;
+				$keterangan = $this->keterangan;
+				
+				$pesan->show_message($proses, $keterangan, "$status" ); ?>
+				<div class="spacer"> </div>	
+				<div class="add" title="Tambah Data" onClick="agendaxForm('insert','');"></div> 
+				<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+					<th width=4%>No</th> 
+					<th width=14%>Tanggal Kegiatan</th> 
+					<th width=40%>Kegiatan</th>
+					<th width=6% colspan="2">Tindakan</th>
+					
+					<?
+					if (count($this->agendaList) == 0){ 
+					?>
+						<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+					<?} else {
+							
+							
+							foreach ($this->agendaList as $key => $val): 
+							if ($key%2==0) { ?>
+								<tr class="event">
+							<? } else if ($key%2==1) { ?>
+								<tr class="event2">
+							<? } 
+							$iAgenda = $this->escape($val['i_agenda']); 
+							$dAgenda = $this->escape($val['d_agenda']); 
+							$eAgendaPesan = $this->escape($val['e_agenda_pesan']);
+							$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+							
+							// form Hidden 
+							echo $ctrlFrm->formHidden('i_agenda', $iAgenda, null);
+							
+							?>
+							
+							<td class="clright"><? echo $noUrut;?>&nbsp;&nbsp;</td>
+							<td class="clleft">&nbsp;<? echo $dAgenda;?></td>
+							<td class="clleft">&nbsp;<? echo $eAgendaPesan;?></td>
+							<td><div onClick="agendaxForm('update','<? echo $iAgenda;?>');" class="edit" title="Ubah Data"></div></td>
+							<td><div class="delete" title="Hapus Data" onClick="agendaHapus('Agenda', '<? echo $iAgenda; ?>')" ></td>
+							
+						
+							</tr>
+						<?
+						endforeach;
+					}
+					?>
+
+				</table>
+
+			</fieldset>		 
+		</form>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>			

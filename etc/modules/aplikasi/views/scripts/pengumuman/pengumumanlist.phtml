@@ -1,0 +1,110 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+<div class="navlink">
+	<a  href="index_login.php">Halaman Utama</a> <strong> &#8250; </strong> <a href="?p=konsep_surat">Pengumuman</a>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Pengumuman</h2>
+		<div class="search-panel">
+			<form method="post" name="caripengumuman" id="caripengumuman">Kata Kunci :
+				<input type="text" name="Cari">
+				<input type="button" name="Search" value="Cari">
+			</form>
+		</div>
+		<div class="space-line"></div>
+
+		
+		<fieldset class="fields"> 
+			<div class="spacer"> </div>
+			<? 
+			
+			$status = $this->hasil;
+			$proses = $this->proses;
+			$keterangan = $this->keterangan;
+			
+			$pesan->show_message($proses, $keterangan, "$status" ); ?>
+			<div class="spacer"> </div>	
+			
+			<div class="add" title="Tambah Data" onClick="pengumumanForm('insert','');"></div> 
+
+			<div class="blank"></div>
+			
+			
+			<table align="center" border="0" cellspacing="1" cellpadding="2" class="tbl">
+				<th width=5%>No</th> 
+				<th width=65% class="sorted order2 sortable"><a href="">Deskripsi Pengumuman</a></th> 
+				<th width=20%>Status Aktif</th>
+				<th width=10% colspan="2">Tindakan</th>
+				
+				<?
+				if (count($this->pengumumanList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {
+						
+						
+						foreach ($this->pengumumanList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } 
+						$id = $this->escape($val['id']); 
+						$ePengumuman = $this->escape($val['e_pengumuman']); 
+						$cStatusaktif = $this->escape($val['c_statusaktif']);
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						
+						// form Hidden 
+						echo $ctrlFrm->formHidden('id', $id, null);
+						
+						?>
+						
+						<td class="clright"><? echo $noUrut;?>&nbsp;&nbsp;</td>
+						<td class="clleft">&nbsp;<? echo $ePengumuman;?></td>
+						<? 
+						if($cStatusaktif == 'Y') { $statusAktif = "checked";}
+						else {$statusAktif = "";}
+					
+						?>
+						<td class="clcenter">
+							<input type="checkbox" name="statusAktif_<? echo $key;?>" id="statusAktif_<? echo $key;?>" <? echo $statusAktif;?> disabled>
+						</td>
+						
+						<td><div onClick="pengumumanForm('update','<? echo $id;?>');" class="edit" title="Ubah Data"></div></td>
+						<td><div class="delete" title="Hapus Data" onClick="pengumumanHapus('Pengumuman', '<? echo $id; ?>')" ></td>
+						
+					
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+
+			<div class="left">Data 1 - 20 dari total 23 data</div>
+			<div class="pagination">
+				<a title="Klik untuk langsung ke halaman ... " onclick="jumpto(); return false;" href="#">Halaman</a> : 
+				<a href="./viewberita.php?f=18&st=0&sk=t&sd=d&start=20"><strong>&#60;&#60;</strong></a> <a href="./viewberita.php?f=18&st=0&sk=t&sd=d&start=75">&#60;</a> 
+				<span><strong>1</strong><span class="page-sep">, </span><a href="./viewberita.php?f=18&st=0&sk=t&sd=d&start=25">2</a></span>
+				<a href="./viewberita.php?f=18&st=0&sk=t&sd=d&start=20"><strong>&#62;</strong></a> <a href="./viewberita.php?f=18&st=0&sk=t&sd=d&start=75">&#62;&#62;</a> 
+			</div>
+		  
+		</fieldset>		 
+		
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>

@@ -1,0 +1,494 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+$format_date = new format_date();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>> Data Rekam Pasien
+</div>
+
+<div id="dialog-browse">  
+</div>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">FORM DATA REKAM PASIEN</h2>
+	    <div class="spacer"></div> 
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {$namaForm = 'frmtambahrekampasien'; }
+			else if (strtolower($this->jenisForm) == 'update') {$namaForm = 'frmubahrekampasien'; }
+			else {$namaForm = 'frmhapusrekampasien'; }
+		?>
+
+<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+	<input name="id" id="id" type="hidden" value="<?echo $this->id;?>" />
+
+	<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
+	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
+	<input name="id_user" id="id_user" type="hidden" value="<?echo $this->detailRekampasien['id_user'];?>" />
+	
+	<input name="kategoriCari" id="kategoriCari" type="hidden" value="<? echo $this->kategoriCari; ?>" /> 
+	<input name="carii" id="carii" type="hidden" value="<? echo $this->carii; ?>" /> 
+<? 
+$status = $this->hasil;
+$proses = $this->proses;
+$keterangan = $this->keterangan;
+$pesan->show_message($proses, $keterangan, "$status" ); ?>
+
+<script type="text/javascript">
+$(function(){
+	$("#tabs").tabs();
+	});
+</script>
+
+<tr>
+	<td colspan="4">
+	<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">UMUM</a></li>
+		<li><a href="#tabs-2" onClick="labForm('insert','<? echo $this->id;?>');" >TEST LAB</a></li>
+		<li><a href="#tabs-3" onClick="fotoForm('insert','<? echo $this->id;?>');" >DETAIL LAB</a></li>
+		<li><a href="#tabs-4" onClick="fotoForm('insert','<? echo $this->id;?>');" >FOTO</a></li>
+	</ul>
+<div id="tabs-1">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+
+	<tr>
+	<td align="right" width="180">* Kode/Nama Pasien :</td>
+	<td>	
+	<input name="kode_pasien" id="kode_pasien" type="text" value="<?echo $this->kode_pasien;?>" readonly />
+	/<? 
+	$n_namaAttrib = array("id"=>"n_nama","size" => 53,"maxlength" => 50 , "readonly" => "true");
+	echo $ctrlFrm->formText("n_nama", $this->detailPasien['n_nama'], $n_namaAttrib);
+	?>
+	<!--input type="button" value="Cari" onClick="showDialog('pasien');"-->
+
+				</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Tanggal Rekam :</td>
+					<td>
+<input name="d_medrec" id="d_medrec" type="text" value="<?echo $format_date->convertTglMachineToHuman($this->detailRekampasien['d_medrec']);?>" /></td>
+				</tr>
+				
+				<tr>
+	<td align="left" width="180">* Klasifikasi alasan kedatangan :</td>
+	<td>
+	<?
+	$klasifikasiList['-'] = '--Pilih--';
+	$jmlklasifikasiList = count($this->klasifikasiList);
+		for ($i = 0; $i < $jmlklasifikasiList; $i++) {
+		$klasifikasiList[$this->klasifikasiList[$i]->id_klasifikasi] = (string)$this->klasifikasiList[$i]->n_klasifikasi;			 
+		}
+	$klasifikasiAtrib = array("id"=>"c_klasifikasi", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_klasifikasi', trim($this->detailRekampasien['c_klasifikasi']), $klasifikasiAtrib, $klasifikasiList);
+	?>
+	</td>
+	</tr>
+
+	<tr>
+	<td align="left" width="180">* Tindakan yg diperlukan :</td>
+	<td>
+	<?
+	$tindakanList['-'] = '--Pilih--';
+	$jmltindakanList = count($this->tindakanList);
+		for ($i = 0; $i < $jmltindakanList; $i++) {
+		$tindakanList[$this->tindakanList[$i]->id_tindakan] = (string)$this->tindakanList[$i]->n_tindakan;			 
+		}
+	$tindakanAtrib = array("id"=>"c_tindakan", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_tindakan', trim($this->detailRekampasien['c_tindakan']), $tindakanAtrib, $tindakanList);
+	?>
+	</td>
+	</tr>
+	
+
+
+				<tr>
+				    <td align="right" width="180">* Berat Badan :</td>
+					<td>
+	<? 
+	$b_badanAttrib = array("id"=>"b_badan","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("b_badan", $this->detailRekampasien['b_badan'], $b_badanAttrib);
+	?> Kg / Tinggi Badan : <? 
+	$t_badanAttrib = array("id"=>"t_badan","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("t_badan", $this->detailRekampasien['t_badan'], $t_badanAttrib);
+	?> Cm
+					</td>
+				</tr>
+
+
+				<!--tr>
+				    <td align="right" width="180">* Tinggi Badan :</td>
+					<td>
+	<? 
+	$t_badanAttrib = array("id"=>"t_badan","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("t_badan", $this->detailRekampasien['t_badan'], $t_badanAttrib);
+	?> Cm
+					</td>
+				</tr-->
+				
+				<tr>
+				    <td align="right" width="180">* Tekanan Darah :</td>
+					<td>
+	<? 
+	$n_tensiAttrib = array("id"=>"n_tensi","size" => 22,"maxlength" => 20 );
+	echo $ctrlFrm->formText("n_tensi", $this->detailRekampasien['n_tensi'], $n_tensiAttrib);
+	?>
+					</td>
+				</tr>
+
+
+				<tr>
+	<td align="left" width="180">* Diagnosis :</td>
+	<td>
+	<? 
+		$n_diagnosisAttrib = array("id" =>"n_diagnosis" ,"rows" => 1,"cols" => 2);
+		echo $ctrlFrm->formTextArea('n_diagnosis', $this->detailRekampasien['n_diagnosis'], $n_diagnosisAttrib);
+	?>	
+	</td>
+	</tr>
+
+	<tr>
+	<td align="left" width="180">* Terapi :</td>
+	<td>
+	<? 
+		$n_terapiAttrib = array("id" =>"n_terapi" ,"rows" => 1,"cols" => 2);
+		echo $ctrlFrm->formTextArea('n_terapi', $this->detailRekampasien['n_terapi'], $n_terapiAttrib);
+	?>	
+	</td>
+	</tr>
+
+				
+
+</table>
+</div>
+
+<div id="tabs-2">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+
+				<tr>
+				    <td align="right" width="180">* Hematologi :</td>
+					<td>
+	<?
+	$hematologiList['-'] = '--Pilih--';
+	$hematologiList['N'] = 'Normal';
+	$hematologiList['T'] = 'Tidak Normal';
+	$c_hematologiAtrib = array("id"=>"c_hematologi", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_hematologi', trim($this->detailRekampasien['c_hematologi']), $c_hematologiAtrib, $hematologiList);
+	?>
+
+					</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Kimia Hati :</td>
+					<td>
+	<?
+	$kimiahatiList['-'] = '--Pilih--';
+	$kimiahatiList['N'] = 'Normal';
+	$kimiahatiList['T'] = 'Tidak Normal';
+	$c_kimiahatiAtrib = array("id"=>"c_kimiahati", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_kimiahati', trim($this->detailRekampasien['c_kimiahati']), $c_kimiahatiAtrib, $kimiahatiList);
+	?>
+	
+					</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Glukosa :</td>
+					<td>
+	<?
+	$glukosaList['-'] = '--Pilih--';
+	$glukosaList['N'] = 'Normal';
+	$glukosaList['T'] = 'Tidak Normal';
+	$c_glukosaAtrib = array("id"=>"c_glukosa", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_glukosa', trim($this->detailRekampasien['c_glukosa']), $c_glukosaAtrib, $glukosaList);
+	?>
+					</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Cholesterol :</td>
+					<td>
+	<?
+	$cholesterolList['-'] = '--Pilih--';
+	$cholesterolList['N'] = 'Normal';
+	$cholesterolList['T'] = 'Tidak Normal';
+	$c_cholesterolAtrib = array("id"=>"c_cholesterol", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_cholesterol', trim($this->detailRekampasien['c_cholesterol']), $c_cholesterolAtrib, $cholesterolList);
+	?>
+					</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* Alergi :</td>
+					<td>
+	<?
+	$alergiList['-'] = '--Pilih--';
+	$alergiList['N'] = 'Normal';
+	$alergiList['T'] = 'Tidak Normal';
+	$c_alergiAtrib = array("id"=>"c_alergi", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_alergi', trim($this->detailRekampasien['c_alergi']), $c_alergiAtrib, $alergiList);
+	?>
+	
+					</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Rematik :</td>
+					<td>
+	<?
+	$rematikList['-'] = '--Pilih--';
+	$rematikList['N'] = 'Normal';
+	$rematikList['T'] = 'Tidak Normal';
+	$c_rematikAtrib = array("id"=>"c_rematik", "tabindex"=>"17");
+	echo $ctrlFrm->formSelect('c_rematik', trim($this->detailRekampasien['c_rematik']), $c_rematikAtrib, $rematikList);
+	?>
+	
+				</td>
+				</tr>
+
+				
+</table>
+</div>
+
+
+<div id="tabs-3">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+
+				<tr>
+				    <td align="right" width="180">* Hematologi :</td>
+					<td>
+	Hemoglobin : <? 
+	$v_hemoglobinAttrib = array("id"=>"v_hemoglobin","size" => 22,"maxlength" => 20 );
+	echo $ctrlFrm->formText("v_hemoglobin", $this->detailRekampasien['v_hemoglobin'], $v_hemoglobinAttrib);
+	?>
+	Leukosit : <? 
+	$v_leukositAttrib = array("id"=>"v_leukosit","size" => 22,"maxlength" => 20 );
+	echo $ctrlFrm->formText("v_leukosit", $this->detailRekampasien['v_leukosit'], $v_leukositAttrib);
+	?>
+	<BR>Trombosit : <? 
+	$v_trombositAttrib = array("id"=>"v_trombosit","size" => 22,"maxlength" => 20 );
+	echo $ctrlFrm->formText("v_trombosit", $this->detailRekampasien['v_trombosit'], $v_trombositAttrib);
+	?>
+	Eritrosit : <? 
+	$v_eritrositAttrib = array("id"=>"v_eritrosit","size" => 22,"maxlength" => 20 );
+	echo $ctrlFrm->formText("v_eritrosit", $this->detailRekampasien['v_eritrosit'], $v_eritrositAttrib);
+	?>
+					</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Kimia Hati :</td>
+					<td>
+	GOT : <? 
+	$v_gotAttrib = array("id"=>"v_got","size" => 22,"maxlength" => 20 );
+	echo $ctrlFrm->formText("v_got", $this->detailRekampasien['v_got'], $v_gotAttrib);
+	?>
+	GPT : <? 
+	$v_gptAttrib = array("id"=>"v_gpt","size" => 22,"maxlength" => 20 );
+	echo $ctrlFrm->formText("v_gpt", $this->detailRekampasien['v_gpt'], $v_gptAttrib);
+	?>
+	
+					</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Glukosa :</td>
+					<td>
+	<? 
+	$v_glukosaAttrib = array("id"=>"v_glukosa","size" => 22,"maxlength" => 20 );
+	echo $ctrlFrm->formText("v_glukosa", $this->detailRekampasien['v_glukosa'], $v_glukosaAttrib);
+	?>
+					</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Cholesterol :</td>
+					<td>
+	<? 
+	$v_cholesterolAttrib = array("id"=>"v_cholesterol","size" => 22,"maxlength" => 20 );
+	echo $ctrlFrm->formText("v_cholesterol", $this->detailRekampasien['v_cholesterol'], $v_cholesterolAttrib);
+	?>
+					</td>
+				</tr>
+				
+				
+				<tr>
+				    <td align="right" width="180">* Alergi :</td>
+					<td>
+	IgE Total : <? 
+	$v_igetotalAttrib = array("id"=>"v_igetotal","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("v_igetotal", $this->detailRekampasien['v_igetotal'], $v_igetotalAttrib);
+	?>
+	IgE Atopi : <? 
+	$v_igeatopiAttrib = array("id"=>"v_igeatopi","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("v_igeatopi", $this->detailRekampasien['v_igeatopi'], $v_igeatopiAttrib);
+	?>
+	<BR>IgE Spesifik :
+	<? 
+		$n_igeketAttrib = array("id" =>"n_igeket" ,"rows" => 1,"cols" => 2);
+		echo $ctrlFrm->formTextArea('n_igeket', $this->detailRekampasien['n_igeket'], $n_igeketAttrib);
+	?>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Rematik :</td>
+					<td>
+	ASTO : <? 
+	$v_astoAttrib = array("id"=>"v_asto","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("v_asto", $this->detailRekampasien['v_asto'], $v_astoAttrib);
+	?> ANA (IF) :
+	<? 
+	$v_anaifAttrib = array("id"=>"v_anaif","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("v_anaif", $this->detailRekampasien['v_anaif'], $v_anaifAttrib);
+	?>
+	ANA (ELISA) :
+	<? 
+	$v_anaelisaAttrib = array("id"=>"v_anaelisa","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("v_anaelisa", $this->detailRekampasien['v_anaelisa'], $v_anaelisaAttrib);
+	?> LE Test :
+	<? 
+	$v_letestAttrib = array("id"=>"v_letest","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("v_letest", $this->detailRekampasien['v_letest'], $v_letestAttrib);
+	?> Anti-ds-DNA :
+	<? 
+	$v_antidsdnaAttrib = array("id"=>"v_antidsdna","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("v_antidsdna", $this->detailRekampasien['v_antidsdna'], $v_antidsdnaAttrib);
+	?> Anti-Parietal Sel :
+	<? 
+	$v_antiparietalselAttrib = array("id"=>"v_antiparietalsel","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("v_antiparietalsel", $this->detailRekampasien['v_antiparietalsel'], $v_antiparietalselAttrib);
+	?>
+				</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180"></td>
+					<td>
+	Imunoelektroforesis :
+	<? 
+	$v_imunAttrib = array("id"=>"v_imun","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("v_imun", $this->detailRekampasien['v_imun'], $v_imunAttrib);
+	?>
+	Imunoelektroforesis (Kappa-Lambda) :
+	<? 
+	$v_imunkaAttrib = array("id"=>"v_imunka","size" => 4,"maxlength" => 3 );
+	echo $ctrlFrm->formText("v_imunka", $this->detailRekampasien['v_imunka'], $v_imunkaAttrib);
+	?>
+					</td>
+				</tr>
+</table>
+</div>
+
+
+<div id="tabs-4">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+
+<tr>
+<td align="right" width="180" colspan ="2">
+<script language="JavaScript">
+		//document.write( webcam.get_html(320, 240) );
+</script>
+<img src="/pasien/<? echo $this->detailRekampasien['n_foto']; ?>" class="foto" width=65 height=90 id="poto">
+
+<input type="file" size=80 id="a_file" name="a_file"  value="<? echo $this->detailRekampasien['n_foto']; ?>"/>
+<?if($this->detailRekampasien['n_foto']){
+//$n_foto =$this->detailRekampasien['n_foto'];
+
+$n_file =$this->detailRekampasien['n_foto'];
+$nfile = split("@",$n_file);
+	
+?>
+<BR>File Tersimpan : <?echo $nfile['1'];?>
+<?}?>
+<input name="file_tersimpan" id="file_tersimpan" type="hidden" value="<?echo $this->detailRekampasien['n_foto'];?>" />
+<input type="button" value="Foto" onclick="window.open('<?echo $this->basePath;?>/pasien/rekampasien/camera?id=<?echo $this->id;?>');"> 
+</td>
+</tr>
+</table>
+</div>
+	<tr>
+		<td></td>
+		<td>
+		<div class="right">
+		<input type="button" value="Kembali" onclick="rekampasienlist();"> 
+		<input type="reset" value="Ulangi"> 
+		<input   type="submit" value="Simpan">
+		</div>
+		</td>
+	</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
+			</table>
+
+</form>
+
+
+</div>
+</div>
+
+<script>
+
+ 	$(function() {
+		$("#d_medrec").datepicker();
+	});
+
+
+function showDialog(val) {      
+    $( "#dialog-browse" ).dialog({
+      autoOpen: false,
+      height: 380,
+      width: 640,
+      modal: true,
+      resizable:false,
+      title: "Data Pasien"
+    });
+    if(val =='pasien'){pasienlist();}  
+    return false;
+  }
+
+</script>
+
+<script language="JavaScript">
+    webcam.set_api_url( 'test.php' );
+		webcam.set_quality( 90 ); // JPEG quality (1 - 100)
+		webcam.set_shutter_sound( true ); // play shutter click sound
+		webcam.set_hook( 'onComplete', 'my_completion_handler' );
+
+		function take_snapshot(){
+			// take snapshot and upload to server
+			document.getElementById('upload_results').innerHTML = '<h1>Uploading...</h1>';
+			webcam.snap();
+		}
+
+		function my_completion_handler(msg) {
+			// extract URL out of PHP output
+			if (msg.match(/(http\:\/\/\S+)/)) {
+				// show JPEG image in page
+				document.getElementById('upload_results').innerHTML ='<h1>Upload Successful!</h1>';
+				// reset camera for another shot
+				webcam.reset();
+			}
+			else {alert("PHP Error: " + msg);}
+		}
+	</script>

@@ -1,0 +1,92 @@
+<? 
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once "share/oa_dec_cur_conv.php";
+require_once "share/share_message.php";
+require_once "service/aplikasi/Aplikasi_Referensi_Service.php";
+  
+$ctrlFrm = new Zend_View();
+   
+?>
+<script>
+	function PilihanPegawai(nama, nip, Tujuan){
+		document.getElementById('nUser'+Tujuan).value = nama;
+		document.getElementById('iUser'+Tujuan).value = nip;
+		
+		tutupPencarian();
+	}
+	
+	function tutupPencarian(){
+		document.getElementById('targetview').style.display = 'none';
+	}
+</script>
+<div class="popups">
+<h2 class="title">Daftar Pegawai</h2>
+
+	<table  border="0" cellspacing="1" cellpadding="2" class="tbl2" id="std">
+		<tr>
+			<td>Kategori Pencarian :</td>
+			<td>
+				<select id="kategoriCari" name="kategoriCari">
+					<option value="nip" selected>NIP</option>
+					<option value="nama">Nama</option>
+				</select>
+			</td>
+			<td>
+				<input type="text" id="kataKunci" name="kataKunci" value="<?echo $kataKunci;?>">
+				<input type="button" id="cari" name="cari" value="Cari" onClick="cariPegawai();">
+			</td>
+		</tr>
+	</table>
+	<?
+	if(count($this->pejabatList) == 0)
+	{
+		echo "<font color=\"red\">Data tidak ada</font>";
+	}
+	else
+	{
+	?>
+
+ <table  border="0" cellspacing="1" cellpadding="2" class="tbl2" id="std">
+	  <th>No</th>
+	  <th>NIP</th>	  
+	  <th>Nama</th>	  
+	  
+	  <tr>
+ 			<?php foreach ($this->pejabatList as $key => $val): 
+			if ($key%2==0) {?>
+				      <tr class="event">
+					<? } else if ($key%2==1) { ?>
+					  <tr class="event2">
+					<? } 
+				$noUrut = $key+1;
+				$kd_jabatan=$this->escape($val['kd_jabatan']);
+				$nm_jabatan=$this->escape($val['nm_jabatan']);
+				$kd_struktur_org=$this->escape($val['kd_struktur_org']);
+				$nm_level=$this->escape($val['nm_level']);
+				$nm_struktur_org=$this->escape($val['level']).' '.$this->escape($val['nm_level']);
+				$nmLengkap = $nm_jabatan.' '.$nm_struktur_org;
+				$nama=$this->escape($val['nama']);
+				$nip=$this->escape($val['nip']);
+				
+			?>
+					<td align="right">&nbsp;<?php echo $noUrut;?></td>
+					<td align="left">&nbsp;
+						<a class="enclose" href="#" onclick="return PilihanPegawai('<? echo $nama ?>', '<? echo $nip ?>', 'Terima')"><? echo $nip ; ?></a>
+					</td>
+					<td align="left">&nbsp;
+						<? echo $nama; ?>	
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		</table>
+	<?
+	}	
+	?>
+<div class="closebox">
+<FORM>
+  <INPUT TYPE="BUTTON" VALUE="Tutup" onClick="tutupPencarian();">
+</FORM>
+</div>
+<div class="spacer"></div>
+</div>

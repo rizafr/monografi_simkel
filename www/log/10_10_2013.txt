@@ -1,0 +1,1 @@
+Verifikator Rekanan Pusat;Ubah Data Verifikasiulang Supplier dgn id_supp 417;10/10/2013 10:58:53; di lokasi  dengan id_supp (417);

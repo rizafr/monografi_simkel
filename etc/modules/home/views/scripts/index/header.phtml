@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml2/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title>Sistem Informasi Monografi Kelurahan</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<link rel="stylesheet" href="<? echo $this->basePath;?>/css/default.css" type="text/css" title="Nice Blue style" />
+<link href="<? echo $this->basePath;?>/css/tools.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<? echo $this->basePath;?>/css/thickbox.css" type="text/css" media="screen" />
+<link href="<? echo $this->basePath;?>/css/main.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<? echo $this->basePath;?>/css/style.css" type="text/css" title="Nice Blue style" />
+<link rel="stylesheet" type="text/css" href="<? echo $this->basePath;?>/menu/ddcolortabs.css" />
+<link rel='stylesheet' href='<?echo $this->basePath;?>/css/themes/ui-lightness/jquery.ui.all.css' type='text/css' />
+<script type="text/javascript" src="<? echo $this->basepath;?>/js/popup.js"></script>
+<!--link rel="stylesheet" href="<? echo $this->basePath;?>/css/ui.datepicker.css" type="text/css"/-->
+
+<!--link rel="icon" href="<? echo $this->basePath;?>/images/logo_poltekpos.gif" type="image/png"-->
+<script type="text/javascript" src="<?echo $this->basePath;?>/js/webcam.js"></script>
+<script type="text/javascript" src="<?echo $this->basePath;?>/js/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/jquery.form2.js"></script>
+<script type="text/javascript" src="<?echo $this->basePath;?>/js/jquery-ui-1.8.18.custom.min.js"></script>
+
+<script type="text/javascript" src="<? echo $this->basePath;?>/content/tiny_mce.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/content/init.js"></script>
+<script type="text/javascript" src="<? echo $this->basepath; ?>/js/portal.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/tabcontent.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/ui.core.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/ui.datepicker.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/common.js"></script>
+<SCRIPT type="text/javascript" src="<? echo $this->basePath;?>/js/table.sorter.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="<? echo $this->basePath;?>/js/ajax-navigation.js"></SCRIPT>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/fsmenu.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/oa_fn.js" ></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/menu/dropdowntabs.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/dropdown_menu.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/jquery.validate.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/messages_id.js"></script>
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/number.js"></script>
+<script>
+	$(document).ready(function() {
+	$("#validasi").validate();
+});
+</script>
+
+    <!-- GC -->
+ 	<!-- LIBS -->
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/ext-base.js"></script>
+ 	<!-- ENDLIBS -->
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/ext-all.js"></script>
+
+
+
+<script type="text/javascript" src="<? echo $this->basePath;?>/js/tabcontent.js"></script>
+<!--script src="<? echo $this->basePath;?>/js/thickbox-compressed.js" type="text/javascript"></script-->
+
+
+<link rel="icon" href="<? echo $this->basePath;?>/images/icon.gif" type="image/png">
+
+<script type="text/javascript">
+function Display(ID) {
+    scroll(0,0);
+	document.getElementById(ID).style.display='block';
+    	}
+function View(ID) {
+	document.getElementById(ID).style.display='block';
+	document.getElementById('ADD_PEND').style.display='none';
+    	}
+function Close(ID) {
+	document.getElementById(ID).style.display='none';
+	document.getElementById('ADD_PEND').style.display='block';
+    	}
+
+function Add(URL) {
+    	window.location.href=URL;
+    	}
+function Open(URL) {
+    	window.location.href=URL;
+    	}		
+function Popup(URL) {
+	window.open(URL,'Baru','menubar=no,toolbar=no,scrollbars=Yes,width=740,height=500');
+}
+
+function Add(URL) {
+    	window.location.href=URL;
+    	}
+
+// <![CDATA[
+	var jump_page = 'Masukkan no halaman yang ingin Anda tuju:';
+	var on_page = '1';
+	var per_page = '25';
+	var base_url = './viewforum.php?f=18&amp;st=0&amp;sk=t&amp;sd=d';
+	var style_cookie = 'oastyle';
+	var onload_functions = new Array();
+	var onunload_functions = new Array();
+
+
+	/**
+	* New function for handling multiple calls to window.onload and window.unload by pentapenguin
+	*/
+	window.onload = function()
+	{
+		for (var i = 0; i < onload_functions.length; i++)
+		{
+			eval(onload_functions[i]);
+		}
+	}
+
+	window.onunload = function()
+	{
+		for (var i = 0; i < onunload_functions.length; i++)
+		{
+			eval(onunload_functions[i]);
+		}
+	}
+
+// ]]>
+
+
+// Current Server Time script (SSI or PHP)- By JavaScriptKit.com (http://www.javascriptkit.com)
+// For this and over 400+ free scripts, visit JavaScript Kit- http://www.javascriptkit.com/
+// This notice must stay intact for use.
+
+//Depending on whether your page supports SSI (.shtml) or PHP (.php), UNCOMMENT the line below your page supports and COMMENT the one it does not:
+//Default is that SSI method is uncommented, and PHP is commented:
+
+//var currenttime = '<!--#config timefmt="%B %d, %Y %H:%M:%S"--><!--#echo var="DATE_LOCAL" -->' //SSI method of getting server date
+var currenttime = '<? print date("F d, Y H:i:s", time())?>' //PHP method of getting server date
+
+///////////Stop editting here/////////////////////////////////
+
+var dayarray=new Array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
+var montharray=new Array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember")
+var serverdate=new Date(currenttime)
+
+function padlength(what){
+var output=(what.toString().length==1)? "0"+what : what
+return output
+}
+
+function displaytime(){
+serverdate.setSeconds(serverdate.getSeconds()+1)
+var datestring=dayarray[serverdate.getDay()]+", "+padlength(serverdate.getDate())+" "+montharray[serverdate.getMonth()]+" "+serverdate.getFullYear()
+var timestring=padlength(serverdate.getHours()-1)+":"+padlength(serverdate.getMinutes())+":"+padlength(serverdate.getSeconds())
+document.getElementById("servertime").innerHTML=datestring+" | "+timestring
+}
+
+window.onload=function(){
+setInterval("displaytime()", 1000)
+}
+
+//tambah untuk pilihan jenis input data
+
+function changeDiv(the_div,the_change)
+{
+  //alert('Please change div !');
+  var the_style = getStyleObject(the_div);
+  if (the_style != false)
+  {
+    the_style.display = the_change;
+  }
+}
+
+function hideAll()
+{
+  changeDiv("cat_questions","none");
+  changeDiv("dog_questions","none");
+  changeDiv("bird_questions","none");
+}
+
+function getStyleObject(objectId) {
+  if (document.getElementById && document.getElementById(objectId)) {
+    return document.getElementById(objectId).style;
+  } else if (document.all && document.all(objectId)) {
+    return document.all(objectId).style;
+  } else {
+    return false;
+  }
+}
+
+function userFormx(jenisForm, id)
+{
+	var url = '<?php echo $this->basePath; ?>/adm/user/usergantipwd';
+	
+	var param = { jenisForm:jenisForm, id:id};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmubahuser").ajaxForm(ubahUser_opt);
+		
+		
+	});
+	
+}
+
+function userFormOrtu(jenisForm, user_id)
+{
+	var url = '<?php echo $this->basePath; ?>/mh/mhsortu/mhsortuview';
+	
+	var param = { jenisForm:jenisForm, user_id:user_id};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		//jQuery("#frmtambahuser").ajaxForm(tambahUser_opt);
+		jQuery("#frmubahuser").ajaxForm(ubahUser_opt);
+		
+		/*eval ( 'var nip_array = [' + document.getElementById('containernip').value +']');
+		$("#nip").autocompleteArray(
+			nip_array,		
+			{
+				delay:10,
+				minChars:1,
+				matchSubset:1,
+				autoFill:true,
+				maxItemsToShow:10
+			}
+		);*/ 
+	});
+	
+}
+
+function clnmhspmdkForm(jenisForm,id)
+{
+        var url = '<?php echo $this->basePath; ?>/pmb/clnmhs/clnpmdkolahdata';
+	//alert(jenisForm); return false;
+	var param = { jenisForm:jenisForm, id:id};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahclnmhs").ajaxForm(tambahClnmhs_opt);
+		jQuery("#frmubahclnmhs").ajaxForm(ubahClnmhs_opt);
+		});
+	
+}
+function clnmhsregForm(jenisForm,id)
+{
+        var url = '<?php echo $this->basePath; ?>/pmb/clnmhs/clnregolahdata';
+	//alert(jenisForm); return false;
+	var param = { jenisForm:jenisForm, id:id};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahclnmhs").ajaxForm(tambahClnmhs_opt);
+		jQuery("#frmubahclnmhs").ajaxForm(ubahClnmhs_opt);
+		});
+	
+}
+var tambahClnmhs_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/pmb/clnmhs/clnmhs',
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+var ubahClnmhs_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/pmb/clnmhs/clnmhsupdate',
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+function linkForm(url_in,jenisForm, user_id)
+{
+	var url = url_in;
+	
+	var param = { jenisForm:jenisForm, user_id:user_id};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		//jQuery("#frmtambahuser").ajaxForm(tambahUser_opt);
+		jQuery("#frmubahuser").ajaxForm(ubahUser_opt);
+		
+		/* eval ( 'var nip_array = [' + document.getElementById('containernip').value +']');
+		$("#nip").autocompleteArray(
+			nip_array,		
+			{
+				delay:10,
+				minChars:1,
+				matchSubset:1,
+				autoFill:true,
+				maxItemsToShow:10
+			} 
+		); */
+	});
+	
+}
+
+
+var ubahUser_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/adm/user/userupdate',
+	beforeSubmit : function() {
+		if (document.getElementById('username').value == ''){
+			alert('User harus Diisi');
+			return false;
+		}
+		if (document.getElementById('nip').value == ''){
+			alert('NIP harus Diisi');
+			return false;
+		}
+		if (document.getElementById('password').value == ''){
+			alert('Password harus Diisi');
+			return false;
+		}
+		var pass = document.getElementById('password').value;
+		var confpass = document.getElementById('confirmPassword').value;
+		if (pass != confpass){
+			alert('Password tidak sesuai--'+pass+'----'+confpass);
+			return false;
+		}
+	},
+	success: function(){doCount(5);},
+	type: 'post', 
+	resetForm: false
+};
+function cekPasswd()
+{
+	var userid= '';
+	var status= '';
+	user_id = document.getElementById('user_id').value;
+	passwordlm = document.getElementById('passwordlm').value;
+	var url = '<?php echo $this->basePath; ?>/adm/user/getpasswdpegawai';
+	
+	var param = { passwordlm:passwordlm,user_id:user_id};
+	jQuery.get(url, param, function(data) {
+		if (data == 0){
+			alert('Password lama salah!!!');
+			document.getElementById('passwordlm').value = '';
+			return false;
+		}
+		
+	});
+}
+
+
+// -->
+
+//end
+</script>
+</head>
+
+
+

@@ -1,0 +1,211 @@
+.panel {
+	background-color:#ECF1F3;
+	color:#28313F;
+	margin-bottom:4px;
+	padding:0pt 10px;
+	border:0px solid;
+	}
+span.corners-top, span.corners-bottom, span.corners-top span, span.corners-bottom span {
+	font-size: 1px;
+	line-height: 1px;
+	display: block;
+	height: 5px;
+	background-repeat: no-repeat;
+}
+
+span.corners-top {
+	background-image: none;
+	background-position: 0 0;
+	margin: 0 -5px;
+}	
+span.corners-top span {
+	background-image: none;
+	background-position: 100% 0;
+}
+
+span.corners-bottom {
+	background-image: none;
+	background-position: 0 100%;
+	margin: 0 -5px;
+	clear: both;
+}
+
+span.corners-bottom span {
+	background-image: none;
+	background-position: 100% 100%;
+}
+
+
+
+.panel span.corners-top, .panel span.corners-bottom {
+	margin: 0 -10px;
+}
+
+span.corners-top {
+	background-image: url("../images/corners_left.png");
+}
+
+span.corners-top span {
+	background-image: url("../images/corners_right.png");
+}
+
+span.corners-bottom {
+	background-image: url("../images/corners_left.png");
+}
+
+span.corners-bottom span {
+	background-image: url("../images/corners_right.png");
+}
+* html span.corners-top, * html span.corners-bottom { background-image: url("../images/corners_left.gif"); }
+* html span.corners-top span, * html span.corners-bottom span { background-image: url("../images/corners_right.gif"); }
+
+
+.cont-panel{
+	color:#333333;
+	font-family:"Lucida Grande","Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
+	font-size:1em;
+	line-height:1.4em;
+	min-height:3em;
+	overflow:hidden;
+	}	
+/* Definition list layout for forms
+---------------------------------------- */
+
+/* Specific layout 1 */
+fieldset.fields1 dt {
+	width: 15em;
+	border-right-width: 0;
+}
+
+fieldset.fields1 dd {
+	margin-left: 15em;
+	border-left-width: 0;
+}
+
+fieldset.fields1 {
+	background-color: transparent;
+}
+
+fieldset.fields1 div {
+	margin-bottom: 3px;
+}
+
+/* Specific layout 2 */
+fieldset.fields2 dt {
+	width: 15em;
+	border-right-width: 0;
+}
+
+fieldset.fields2 dd {
+	margin-left: 16em;
+	border-left-width: 0;
+}
+/* Hover effects */
+fieldset dl:hover dt label {
+	color: #000000;
+}
+
+fieldset.fields2 dl:hover dt label {
+	color: inherit;
+}
+.clearfix,fieldset dl {
+	height: 1%;
+	overflow: hidden;
+}
+/* Form elements */
+dt label {
+	font-weight: bold;
+	text-align: left;
+}
+
+dd label {
+	white-space: nowrap;
+	color: #333;
+}
+
+dd input, dd textarea {
+	margin-right: 3px;
+}
+
+dd select {
+	width: auto;
+}
+
+dd textarea {
+	width: 85%;
+}
+
+/* Definition list layout for forms
+---------------------------------------- */
+dd.dot2 {
+	width: 10px;
+
+}
+dd.space {
+	width: 18px;
+
+}
+
+dd.col-left {
+	width: 140px;
+	}
+dd.col-left2 {
+	width: 100px;
+	}
+dd.col-right {
+	width: 535px;
+}
+dd.col-right2 {
+	width: 200px;
+}
+dd.col-right3 {
+	width: 300px;
+}
+dd.col-right4 {
+	width: 595px;
+}
+dd.col-right5 {
+	width: 705px;
+}
+dd.hg2 {
+	height:27px;
+	}
+dd.hg3 {
+	height:40px;
+	}
+
+
+.panel-form {
+	display: block;
+	clear:both;
+	margin: 0;
+	padding:10px;
+	}
+.panel-form  dl {	
+	padding: 0;
+	margin:0;
+	float:left;
+	border:0px solid;
+	}
+
+.panel-form  dt{
+	display: block;
+	float: left;
+	width: 195px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border:0px solid;
+}
+.panel-form dd{
+	display: block;
+	float: left;
+	min-height:23px;
+	padding: 3px 0 0 0;
+	border:0px solid;
+	vertical-align:middle;
+}
+*html .panel-form dd {
+	height:25px;
+	padding: 2px 0 2px 0;
+}
+

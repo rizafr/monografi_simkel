@@ -1,0 +1,133 @@
+<? require_once 'Zend/View.php';
+   
+   $ctrlFrm = new Zend_View();
+   $thnskrg = date("Y");
+
+
+	//$jenjang = $_REQUEST['jenjang'];
+	$nip = $_REQUEST['nip'];
+	//echo "test".$test;
+
+   $spath = $this->getScriptPaths();
+   $this->addScriptPath($spath[0] . 'viewpegawai');
+   echo $this->render('viewpegawaijs.phtml'); 
+
+
+?>
+<div class="contentdata-modul" id="modul">
+	<div class="navlink">Halaman Utama Pegawai</div>
+	<h3 class="title">MELIHAT DATA SEMINAR</h3>
+	&nbsp;&nbsp;&nbsp;&nbsp;Menu ini digunakan untuk melihat data seminar yang pernah diikuti pegawai.
+	<div class="spacer"></div>
+	<a name="top"></a>	
+	<div class="search-panel">
+		<fieldset class="panel-form3">
+				<?php include "menulink.phtml";?>  
+				<?php include "datapokok.phtml";?>  
+		</fieldset>
+	</div> <!--end div Search Panel-->
+
+	<div class="space-line">
+		<div class="title2">Data Seminar</div>
+		<fieldset  class="panel-form">	
+			<form id="frmVSemView" action="<?php echo $this->basePath; ?>/sdm/viewpegawai/seminarview" method="post" name="frmVSemView">
+				<dl>
+					<dt>Nama Seminar/Simposium</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+					  $nmSem = $this->escape($this->nmSem);
+					  echo $nmSem;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Peran</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$peran = $this->escape($this->peran);
+						echo $peran;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Mulai</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$mulai = $this->escape($this->mulai);	
+						$thnMulai = substr($mulai,0,4);
+						$blnMulai = substr($mulai,5,2);
+						$hrMulai = substr($mulai,8,2);
+						$mulai = $hrMulai."-".$blnMulai."-".$thnMulai;
+						echo $mulai;		 
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Akhir</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$akhir = $this->escape($this->akhir);	
+						$thnAkhir = substr($akhir,0,4);
+						$blnAkhir = substr($akhir,5,2);
+						$hrAkhir = substr($akhir,8,2);
+						$akhir = $hrAkhir."-".$blnAkhir."-".$thnAkhir;
+						echo $akhir;		 
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Penyelenggara</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$penyelenggara = $this->escape($this->penyelenggara);
+						echo $penyelenggara;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Tempat</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$tempat = $this->escape($this->tempat);
+						echo $tempat;
+					?>
+					</dd>
+				</dl>
+				<dl>
+					<dt>Keterangan</dt>
+					<dd class="dot2">:</dd> 
+					<dd class="col-right">
+					<?php 
+						$keterangan = $this->escape($this->keterangan);
+						echo $keterangan;
+					?>
+					</dd>
+				</dl>
+ 			<dl>
+				<?php 
+				  echo $ctrlFrm->formHidden('nipH', $nip, null)."&nbsp;";
+				?>
+				<dt>&nbsp;</dt>
+				<dd class="dot2">&nbsp;</dd> 
+				<dd class="col-right">&nbsp;</dd>			
+				<div class="back" onClick="javascript:kembaliSemView('<? echo $this->escape($this->nip); ?>');" title="Kembali"><input type="button" value="Kembali" id="kembaliSemView"></div>
+			</dl>
+		  	</form>
+		  	<div class="space-line"></div>
+		  	<div><a href="#top" class="top" title="Kembali ke atas">Kembali ke atas</a></div>	  	
+	         
+		</fieldset>
+	</div>
+</div>		
+
+
+<!--				<div class="back2">
+			  <a href="#" onClick="javascript:kembaliSemView('<? echo $this->escape($this->nip); ?>');" class="back" title="Kembali">Kembali</a>
+			</div>
+-->

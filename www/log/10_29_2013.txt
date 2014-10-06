@@ -1,0 +1,11 @@
+pos_1;Insert Data Evakualifikasi Pengadaan ;29/10/2013 12:37:39; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Teknik ;29/10/2013 14:50:34; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Teknik ;29/10/2013 14:52:46; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Teknik ;29/10/2013 14:53:23; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Teknik ;29/10/2013 14:53:46; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Teknik ;29/10/2013 14:55:23; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Teknik ;29/10/2013 14:58:24; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Teknik ;29/10/2013 14:59:50; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Teknik ;29/10/2013 16:57:04; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Harga Pengadaan ;29/10/2013 17:33:44; di lokasi  dengan id_pengadaan ();
+pos_1;Insert Data Evaluasi Harga Pengadaan ;29/10/2013 17:34:22; di lokasi  dengan id_pengadaan ();

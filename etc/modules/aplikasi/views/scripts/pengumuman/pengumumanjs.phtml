@@ -1,0 +1,59 @@
+function pengumumanlist()
+{
+	var url = '<?php echo $this->basePath; ?>/aplikasi/pengumuman/pengumumanlist';
+	jQuery.get(url, function(data) {
+		$("div#tableview").html(data);
+	});
+}
+
+function pengumumanForm(jenisForm, iPengumuman)
+{
+	var url = '<?php echo $this->basePath; ?>/aplikasi/pengumuman/pengumumanolahdata';
+	
+	var param = { jenisForm:jenisForm, iPengumuman:iPengumuman};
+	jQuery.get(url, param, function(data) {
+		jQuery("div#tableview").html(data);
+		jQuery("#frmtambahpengumuman").ajaxForm(tambahPengumuman_opt);
+		jQuery("#frmubahpengumuman").ajaxForm(ubahPengumuman_opt);
+	});
+}
+
+var tambahPengumuman_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/aplikasi/pengumuman/pengumuman',
+	beforeSubmit : function() {
+		if (document.getElementById('ePengumuman').value == ''){
+			alert('Pengumuman harus Diisi');
+			return false;
+		}
+	},
+	type: 'post', 
+	resetForm: false
+};
+
+var ubahPengumuman_opt = {
+	target : '#tableview',
+	url: '<?php echo $this->basePath; ?>/aplikasi/pengumuman/pengumumanupdate',
+	beforeSubmit : function() {
+		if (document.getElementById('ePengumuman').value == ''){
+			alert('Pengumuman harus Diisi');
+			return false;
+		}
+	},
+	type: 'post', 
+	resetForm: false
+};
+
+function pengumumanHapus(param1, param2)
+{ 
+	
+	if(ConfirmDelete(param1, param2))
+	{	//alert("test");
+		handler = '<?php echo $this->basePath; ?>/aplikasi/pengumuman/pengumumanhapus';
+		var opt = {id : param2};
+		jQuery.get(handler,opt,function(data) {
+				$("#tableview").html(data);
+				doCount(5);
+			 });
+	}
+}  

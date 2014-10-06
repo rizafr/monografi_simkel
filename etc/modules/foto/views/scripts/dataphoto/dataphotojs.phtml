@@ -1,0 +1,114 @@
+$("#frmcatatphoto").ajaxForm(option_tambahdataphoto);
+
+var option_tambahdataphoto = {
+	target:'#tableview',
+	beforeSubmit: function() { 
+					aobj= document.frmcatatphoto;
+					astr= "document.frmcatatphoto";
+					var cekVal = validasidataphoto(aobj,astr);
+					if (cekVal == false) {
+						return false;
+					}
+				}, 
+	success:masukdataphotosukses,
+	url: '<?php echo $this->basePath; ?>/foto/dataphoto/maintaindata',
+	type: 'post',
+	resetForm: false
+};
+
+function masukdataphotosukses() {
+	location.href="#top";
+	//doCounter(5);
+	$("#frmcatatphoto").ajaxForm(option_tambahdataphoto);
+}
+
+function mhspriproses()
+{
+	$("#frmcatatphoto").ajaxForm(frmDetailMhspri_opt);
+}
+var frmDetailMhspri_opt = {
+		target : '#tableview',
+		beforeSubmit: function() { 
+					aobj= document.frmcatatphoto;
+					astr= "document.frmcatatphoto";
+					var cekVal = validasidataphoto(aobj,astr);
+					if (cekVal == false) {
+						return false;
+					}
+				}, 
+		success:masukdataphotosukses,
+		url: '<?php echo $this->basePath; ?>/foto/dataphoto/maintaindata',
+		type: 'post', 
+		resetForm: false
+};
+
+
+
+function validasidataphoto(xy,xstr)
+{
+	
+   with(xy){
+      
+         var Proceed = 1;
+         var Message;
+         var FocusField;
+         while (Proceed == 1)
+         {
+
+	    if(!n_nama.value){
+               Message = "Data Nama tidak boleh kosong";
+               FocusField = "n_nama";
+               Proceed = 0;
+               break;
+            }
+	  /*  if((!n_mhs.value)){
+               Message = "Data Nama tidak boleh kosong";
+               FocusField = "n_mhs";
+               Proceed = 0;
+               break;
+            }*/
+	    if((!a_photofile.value)){
+               Message = "File tidak boleh kosong";
+               FocusField = "a_photofile";
+               Proceed = 0;
+               break;
+            }
+
+            break;
+         }
+        
+         if (Proceed == 1){ 
+            return true;
+         }else{
+            alert( Message );
+            eval(xstr+"."+FocusField+".focus();");           	
+            return false;
+         }
+   }
+}
+
+
+function setvalueuplpdf(v,n,f) {
+
+ 	  if (f!="") {
+	    var pass=false;
+	    var af=f.split("/");
+        var nval=eval("document.forms[0]."+n);
+		var ext=v.substring(v.lastIndexOf(".")+1,v.length);
+		for(var n in af) {
+		  if (af[n].toLowerCase()==ext.toLowerCase()) {
+		    pass=true;
+			break;
+		  }
+		}
+		if (!pass) {
+		  alert ("Hanya untuk file berekstensi '"+f+"'");
+		  nval.value="";
+		  return;
+		}
+		
+	  }
+      document.forms[0].a_photofile.value=v; 
+    }
+
+

@@ -1,0 +1,66 @@
+<? require_once 'Zend/View.php';
+   require_once "share/tanggal.php";  
+   require_once "share/pesan.php";
+   
+   $pesan = new pesan();
+	$ctrlDate = new tanggal();
+	$ctrlFrm = new Zend_View();
+	$par=$this->par;
+
+   $jmldatax = count($this->dataphoto);
+    for ($j = 0; $j < $jmldatax; $j++) {
+	$a_photofile=(string)$this->dataphoto[$j]['a_photofile'];
+	$n_nama=(string)$this->dataphoto[$j]['n_nama'];
+	$id=(string)$this->dataphoto[$j]['id'];
+	}	
+$id_npm=$this->id_npm;
+							
+?>	
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+</div>
+<? 
+$pesancek=$this->pesancek;
+if ($pesancek=='gagal'){$confirm ='confirmfail';}
+	else {$confirm ='confirm';}
+?>
+<div id="top"></div>	
+	<div id="confirm" class="<?=$confirm?>" style="display: none">
+		<?echo $pesan = "Ubah photo ".$this->pesan;?>
+	</div>
+<?
+//include "menulink/menulink.php";
+?>
+<h2 class="title">Photo</h2>
+<?
+{include "menulink/nama.php";}
+?>
+<fieldset class="fields">
+   	
+	<form id="frmcatatphoto"  method="post" name="frmcatatphoto" enctype="multipart/form-data">
+		<fieldset class="panel-form">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" >
+				<tr>
+					<td width="120">* Ambil Photo</td>
+					<td width="2">:</td>
+					<td>
+						<div class="fileinputs">
+							<input type="file" size=50 id="a_photofilex" name="a_photofilex"  value="<? echo $a_photofile; ?>" onChange="setvalueuplpdf(this.value,'a_photofilex','jpg')" />
+						<div class="fakefile">
+							<input type="text" readonly size=49 name="a_photofile" value="<? echo $a_photofile; ?>"/>
+						</div>
+						</div>
+							<input type="hidden" size=49 name="a_photofile2" value="<? echo $a_photofile; ?>"/>
+						<input type="hidden" class="text"  name="id" id="id" value="<?=$id?>" size="80" maxlength="100"  />
+						<input type="hidden" class="text"  name="n_nama" id="n_nama" value="<?=$n_nama?>" size="80" maxlength="100"  />
+
+					</td>	
+				</tr>				
+			  </table>	
+		</fieldset>
+<span class="highlight left">* Harus diisi</span>	 
+<div class="right">
+<input  type="submit" value="Simpan" onClick="mhspriproses();">
+</form>
+</div>
+</fieldset>

@@ -1,0 +1,8 @@
+;Ubah;28/11/2013 11:35:24; ();
+;TAMBAH DATA SUPPLIER KLASIFIKASI DGN ID_SUPP 454;28/11/2013 11:36:12; SPECIAL Server, Komputer;
+;TAMBAH DATA SUPPLIER KLASIFIKASI DGN ID_SUPP 454;28/11/2013 11:36:12; SPECIAL Software;
+;TAMBAH DATA SUPPLIER KLASIFIKASI DGN ID_SUPP 454;28/11/2013 11:36:12; SPECIAL ;
+;TAMBAH DATA SUPPLIER IJIN USAHA DGN NAMA Siup;28/11/2013 11:36:31; NOMOR 12;
+Verifikator Rekanan Pusat;Hapus Data Supplier;28/11/2013 11:46:37; dgn id_supp (436);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 454;28/11/2013 11:47:21; di lokasi  dengan id_supp (454);
+SM Disbang;Insert Data Faktur Permintaan dgn Pembeli ;28/11/2013 13:10:18; di Nopend ;

@@ -1,0 +1,13 @@
+
+function cariListBerita(){
+	var tgl=document.getElementById('tgl').value;
+	var bln=document.getElementById('bln').value;
+	var thn=document.getElementById('thn').value;
+	var key=document.getElementById('key').value;
+	var url = '<?php echo $this->basePath; ?>/portalmodule/berita/indeksberita';	
+	var param = {tgl:tgl,bln:bln,thn:thn,key:key};
+		jQuery.get(url, param, function(data) {
+			jQuery("#middle").html(data);
+		});
+} 
+

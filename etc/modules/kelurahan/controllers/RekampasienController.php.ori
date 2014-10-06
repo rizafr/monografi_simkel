@@ -1,0 +1,433 @@
+<?php
+require_once 'Zend/Controller/Action.php';
+require_once 'Zend/Auth.php';
+require_once "service/pasien/Rekampasien_Service.php";
+require_once "service/pasien/Pendaftaran_Service.php";
+require_once "service/adm/Referensi_Service.php";
+
+require_once "service/adm/logfile.php";
+require_once "service/sso/Sso_User_Service.php";
+require_once "share/oa_dec_cur_conv.php";
+
+class Pasien_RekampasienController extends Zend_Controller_Action {
+	private $auditor_serv;
+	private $id;
+	private $kdorg;
+		
+    public function init() {
+		// Local to this controller only; affects all actions, as loaded in init:
+		//$this->_helper->viewRenderer->setNoRender(true);
+		$registry = Zend_Registry::getInstance();
+		$this->view->report_server = $registry->get('report_server'); 
+		$this->view->basePath = $registry->get('basepath'); 
+		$this->view->baseData = "../etc/data/pasien/";	
+
+		$this->basePath = $registry->get('basepath'); 
+        $this->view->pathUPLD = $registry->get('pathUPLD');
+        $this->view->procPath = $registry->get('procpath');
+	    $this->rekampasien  = 'cdr';
+	   
+		$this->rekampasien_serv = Rekampasien_Service::getInstance();
+		$this->pendaftaran_serv = Pendaftaran_Service::getInstance();
+		$this->ref_serv = Referensi_Service::getInstance();
+
+		$this->sso_serv = Sso_User_Service::getInstance();
+	    $ssorekampasien = new Zend_Session_Namespace('ssorekampasien');
+	    $this->iduser =$ssorekampasien->user_id;
+	   // $this->view->t_tensiuser = $this->sso_serv->getDataUserNama($this->iduser);
+		$this->Logfile = new logfile;
+		
+    }
+	
+    public function indexAction() {
+	   
+    }
+	public function cameraAction() {
+	   $this->view->id				= $_GET['id'];
+	   var_dump("xxx-->".$this->view->id);
+    }
+	public function uploadAction() {
+
+		$this->view->id				= $_REQUEST['id'];
+	   //var_dump("yyy-->".$this->view->id);
+	   $name = date('YmdHis');
+$newname="../www/pasien/".$name.".jpg";
+$file = file_put_contents( $newname, file_get_contents('php://input') );
+if (!$file){
+	print "ERROR: Failed to write data to $filename, check permissions\n";
+	exit();
+}
+else{
+	$this->view->rekampasienUpdate = $this->rekampasien_serv->rekampasienFotoUpdate($this->view->id,$name.".jpg");
+	exit();
+}
+/*else
+{
+    $sql="Insert into entry(images) values('$newname')";
+    $result=mysqli_query($con,$sql)
+            or die("Error in query");
+    $value=mysqli_insert_id($con);
+    $_SESSION["myvalue"]=$value;
+}*/
+
+$url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . '/' . $newname;
+print "$url\n";
+    }
+	public function rekampasienjsAction() 
+    {
+	 header('content-type : text/javascript');
+	 $this->render('rekampasienjs');
+    }
+	
+	//test OPen report
+	//----------------------
+	public function rekampasienlistAction()
+	{
+		$currentPage = $_REQUEST['currentPage']; 
+ 			
+		if((!$currentPage) || ($currentPage == 'undefined'))
+		{
+			$currentPage = 1;
+		} 
+
+		$ssogroup = new Zend_Session_Namespace('ssogroup');	
+		$this->view->c_group =$ssogroup->c_group;
+
+		if ( $_REQUEST['param1']){ $this->view->cabang= $_REQUEST['param1'];}
+		else {  $this->view->cabang= $_REQUEST['cabang']; 
+		}
+
+		if ( $_REQUEST['param2']){ $this->view->korek2= $_REQUEST['param2'];}
+		else {  $this->view->korek2= $_REQUEST['korek2']; 
+		}
+
+		$this->view->kode_pasien = $_REQUEST['kode_pasien'];
+
+		$this->view->detailPasien= $this->rekampasien_serv->detailPasienByKode($this->view->kode_pasien);
+
+		$this->view->agamaList = $this->ref_serv->getAgamaList();
+		$this->view->statusList = $this->ref_serv->getStatusList();
+		
+		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
+		$this->view->carii 			= $_REQUEST['carii'];
+
+		$sortBy			= 'n_rekampasien';
+		$sort			= 'asc';
+		
+		$dataMasukan = array("kategoriCari" => $this->view->kategoriCari,
+							"katakunciCari" => $this->view->carii,
+							"kode_pasien"	=> $_REQUEST['kode_pasien'],
+							"sortBy"		=> $sortBy,
+							"sort"			=> $sort);
+		
+		$numToDisplay = 20;
+		$this->view->numToDisplay = $numToDisplay;
+		$this->view->currentPage = $currentPage;
+		$this->view->totRekampasienList = $this->rekampasien_serv->cariRekampasienList($dataMasukan,0,0,0);
+		$this->view->rekampasienList = $this->rekampasien_serv->cariRekampasienList($dataMasukan,$currentPage, $numToDisplay,$this->view->totRekampasienList);		
+	}
+	
+	public function rekampasiendataAction()
+	{
+		$ssogroup = new Zend_Session_Namespace('ssogroup');	
+
+		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
+		$this->view->carii 			= $_REQUEST['carii'];
+
+		$this->view->jenisForm		= $_REQUEST['jenisForm'];
+		$this->view->id				= $_REQUEST['id'];
+		$this->view->kode_pasien	= $_REQUEST['kode_pasien'];
+		$this->view->detailPasien	= $this->rekampasien_serv->detailPasienByKode($this->view->kode_pasien);
+
+		$this->view->agamaList		= $this->ref_serv->getAgamaList();
+		$this->view->statusList		= $this->ref_serv->getStatusList();
+		$this->view->propinsiList	= $this->ref_serv->getPropinsiList();
+		$this->view->goldarList		= $this->ref_serv->getGoldarList();
+		$this->view->klasifikasiList = $this->ref_serv->getKlasifikasiList();
+		$this->view->tindakanList	= $this->ref_serv->getTindakanList();
+		$this->view->detailRekampasien				= $this->rekampasien_serv->detailRekampasienById($this->view->id);
+	}
+	
+	public function rekampasienAction()
+	{
+		$ssogroup = new Zend_Session_Namespace('ssogroup');	
+		$this->view->c_group =$ssogroup->c_group;
+		$this->view->user_id =$ssogroup->user_id;
+
+		$this->view->kode_pasien	= $_REQUEST['kode_pasien'];
+		$this->view->detailPasien	= $this->rekampasien_serv->detailPasienByKode($this->view->kode_pasien);
+
+
+		$id								= $_POST['id'];
+		$n_nama							= $_POST['n_nama'];
+		$kode_pasien					= $_POST['kode_pasien'];
+		$d_medrec						= $_POST['d_medrec'];
+		$b_badan						= $_POST['b_badan'];
+		$t_badan						= $_POST['t_badan'];
+		$n_tensi						= $_POST['n_tensi'];
+		$c_klasifikasi					= $_POST['c_klasifikasi'];
+		$c_tindakan						= $_POST['c_tindakan'];
+		$n_diagnosis					= $_POST['n_diagnosis'];
+		$n_terapi						= $_POST['n_terapi'];
+		$c_hematologi					= $_POST['c_hematologi'];
+		$c_kimiahati					= $_POST['c_kimiahati'];
+		$c_glukosa						= $_POST['c_glukosa'];
+		$c_cholesterol					= $_POST['c_cholesterol'];
+		$c_alergi						= $_POST['c_alergi'];
+		$c_rematik						= $_POST['c_rematik'];
+		$v_hemoglobin					= $_POST['v_hemoglobin'];
+		$v_leukosit						= $_POST['v_leukosit'];
+		$v_trombosit					= $_POST['v_trombosit'];
+		$v_eritrosit					= $_POST['v_eritrosit'];
+		$v_got							= $_POST['v_got'];
+		$v_gpt							= $_POST['v_gpt'];
+		$v_glukosa						= $_POST['v_glukosa'];
+		$v_cholesterol					= $_POST['v_cholesterol'];
+		$v_igetotal						= $_POST['v_igetotal'];
+		$v_igeatopi						= $_POST['v_igeatopi'];
+		$n_igeket						= $_POST['n_igeket'];
+		$v_asto							= $_POST['v_asto'];
+		$v_anaif						= $_POST['v_anaif'];
+		$v_anaelisa						= $_POST['v_anaelisa'];
+		$v_letest						= $_POST['v_letest'];
+		$v_antidsdna					= $_POST['v_antidsdna'];
+		$v_antiparietalsel				= $_POST['v_antiparietalsel'];
+		$v_imun							= $_POST['v_imun'];
+		$v_imunka						= $_POST['v_imunka'];
+		
+		if($d_medrec) {
+		$bln = substr($d_medrec, 3, 2);$tgl = substr($d_medrec, 0, 2);$thn = substr($d_medrec, 6, 4);
+		$d_medrec = $thn."-".$bln."-".$tgl; 
+		} else {$d_medrec ="-";}
+
+		$dataMasukan	= array("kode_pasien"           => $kode_pasien,
+								"n_nama"				=> $n_nama,
+								"d_medrec"	            => $d_medrec,
+								"b_badan"	            => $b_badan,
+								"t_badan"	            => $t_badan,
+								"n_tensi"	            => $n_tensi,
+								"c_klasifikasi"	        => $c_klasifikasi,
+								"c_tindakan"	        => $c_tindakan,
+								"n_diagnosis"           => $n_diagnosis,
+								"n_terapi"	            => $n_terapi,
+								"c_hematologi"			=> $c_hematologi,
+								"c_kimiahati"			=> $c_kimiahati,
+								"c_glukosa"				=> $c_glukosa,
+								"c_cholesterol"			=> $c_cholesterol,
+								"c_alergi"				=> $c_alergi,
+								"c_rematik"				=> $c_rematik,
+								"v_hemoglobin"          => $v_hemoglobin,
+								"v_leukosit"	        => $v_leukosit,
+								"v_trombosit"           => $v_trombosit,
+								"v_eritrosit"           => $v_eritrosit,
+								"v_got"		            => $v_got,
+								"v_gpt"		            => $v_gpt,
+								"v_glukosa"	            => $v_glukosa,
+								"v_cholesterol"         => $v_cholesterol,
+								"v_igetotal"	        => $v_igetotal,
+								"v_igeatopi"	        => $v_igeatopi,
+								"n_igeket"	            => $n_igeket,
+								"v_asto"		        => $v_asto,
+								"v_anaif"	            => $v_anaif,
+								"v_anaelisa"	        => $v_anaelisa,
+								"v_letest"	            => $v_letest,
+								"v_antidsdna"           => $v_antidsdna,
+								"v_antiparietalsel"		=> $v_antiparietalsel,
+								"v_imun"		        => $v_imun,
+								"v_imunka"	            => $v_imunka,
+								"cuid"					=> $ssogroup->user_id
+								);
+
+		$this->view->rekampasienInsert = $this->rekampasien_serv->rekampasienInsert($dataMasukan);
+
+		$this->view->proses = "1";	
+		$this->view->keterangan = "Judul";
+		$this->view->hasil = $this->view->rekampasienInsert;
+		
+		$this->rekampasienlistAction();
+		$this->render('rekampasienlist');
+
+	}
+	
+	public function rekampasienupdateAction()
+	{
+		$ssogroup = new Zend_Session_Namespace('ssogroup');	
+		$user_id =$ssogroup->user_id;
+
+		$id								= $_POST['id'];
+		$jenisForm						= $_POST['jenisForm'];
+		$this->view->kode_pasien	= $_REQUEST['kode_pasien'];
+		$this->view->detailPasien	= $this->rekampasien_serv->detailPasienByKode($this->view->kode_pasien);
+
+
+		$kode_pasien					= $_POST['kode_pasien'];
+		$n_nama							= $_POST['n_nama'];
+		$d_medrec						= $_POST['d_medrec'];
+		$b_badan						= $_POST['b_badan'];
+		$t_badan						= $_POST['t_badan'];
+		$n_tensi						= $_POST['n_tensi'];
+		$c_klasifikasi					= $_POST['c_klasifikasi'];
+		$c_tindakan						= $_POST['c_tindakan'];
+		$n_diagnosis					= $_POST['n_diagnosis'];
+		$n_terapi						= $_POST['n_terapi'];
+		$c_hematologi					= $_POST['c_hematologi'];
+		$c_kimiahati					= $_POST['c_kimiahati'];
+		$c_glukosa						= $_POST['c_glukosa'];
+		$c_cholesterol					= $_POST['c_cholesterol'];
+		$c_alergi						= $_POST['c_alergi'];
+		$c_rematik						= $_POST['c_rematik'];
+		$v_hemoglobin					= $_POST['v_hemoglobin'];
+		$v_leukosit						= $_POST['v_leukosit'];
+		$v_trombosit					= $_POST['v_trombosit'];
+		$v_eritrosit					= $_POST['v_eritrosit'];
+		$v_got							= $_POST['v_got'];
+		$v_gpt							= $_POST['v_gpt'];
+		$v_glukosa						= $_POST['v_glukosa'];
+		$v_cholesterol					= $_POST['v_cholesterol'];
+		$v_igetotal						= $_POST['v_igetotal'];
+		$v_igeatopi						= $_POST['v_igeatopi'];
+		$n_igeket						= $_POST['n_igeket'];
+		$v_asto							= $_POST['v_asto'];
+		$v_anaif						= $_POST['v_anaif'];
+		$v_anaelisa						= $_POST['v_anaelisa'];
+		$v_letest						= $_POST['v_letest'];
+		$v_antidsdna					= $_POST['v_antidsdna'];
+		$v_antiparietalsel				= $_POST['v_antiparietalsel'];
+		$v_imun							= $_POST['v_imun'];
+		$v_imunka						= $_POST['v_imunka'];
+		if($d_medrec) {
+		$bln = substr($d_medrec, 3, 2);$tgl = substr($d_medrec, 0, 2);$thn = substr($d_medrec, 6, 4);
+		$d_medrec = $thn."-".$bln."-".$tgl; 
+		} else {$d_medrec ="-";}
+
+
+		$dataMasukanUpd = array("id"					=> $id,
+								"kode_pasien"           => $kode_pasien,
+								"n_nama"				=> $n_nama,
+								"d_medrec"	            => $d_medrec,
+								"b_badan"	            => $b_badan,
+								"t_badan"	            => $t_badan,
+								"n_tensi"	            => $n_tensi,
+								"c_klasifikasi"	        => $c_klasifikasi,
+								"c_tindakan"	        => $c_tindakan,
+								"n_diagnosis"           => $n_diagnosis,
+								"n_terapi"	            => $n_terapi,
+								"c_hematologi"			=> $c_hematologi,
+								"c_kimiahati"			=> $c_kimiahati,
+								"c_glukosa"				=> $c_glukosa,
+								"c_cholesterol"			=> $c_cholesterol,
+								"c_alergi"				=> $c_alergi,
+								"c_rematik"				=> $c_rematik,
+								"v_hemoglobin"          => $v_hemoglobin,
+								"v_leukosit"	        => $v_leukosit,
+								"v_trombosit"           => $v_trombosit,
+								"v_eritrosit"           => $v_eritrosit,
+								"v_got"		            => $v_got,
+								"v_gpt"		            => $v_gpt,
+								"v_glukosa"	            => $v_glukosa,
+								"v_cholesterol"         => $v_cholesterol,
+								"v_igetotal"	        => $v_igetotal,
+								"v_igeatopi"	        => $v_igeatopi,
+								"n_igeket"	            => $n_igeket,
+								"v_asto"		        => $v_asto,
+								"v_anaif"	            => $v_anaif,
+								"v_anaelisa"	        => $v_anaelisa,
+								"v_letest"	            => $v_letest,
+								"v_antidsdna"           => $v_antidsdna,
+								"v_antiparietalsel"		=> $v_antiparietalsel,
+								"v_imun"		        => $v_imun,
+								"v_imunka"	            => $v_imunka,
+								"muid"					=> $ssogroup->user_id
+								);
+		$this->view->rekampasienUpdate = $this->rekampasien_serv->rekampasienUpdate($dataMasukanUpd);
+
+if((isset($_FILES['a_file']['error']) && $_FILES['a_file'] == 0) || (!empty($_FILES['a_file']['tmp_name']) && $_FILES['a_file']['tmp_name'] != 'none'))
+{
+$n_file =trim($id)."-@".trim($_FILES['a_file']['name']);
+$ukuran =$_FILES['a_file']['size'];
+
+$Filetersimpan		= $_POST['a_file'];
+$destDirtersimpan	= "../etc/data/pasien/$Filetersimpan";
+if($_POST['a_file']){unlink($destDirtersimpan);}
+
+
+$this->view->rekampasienUpdate = $this->rekampasien_serv->rekampasienFotoUpdate($id,$n_file);
+if ($this->view->rekampasienUpdate=="sukses" && $n_file){
+				if (!empty($_FILES['a_file'])){$FileName = $n_file;}
+				$FileName = $n_file;				
+				if (!empty($_FILES['a_file'])){$destDir = "../etc/data/pasien/$FileName";	
+					if (move_uploaded_file($_FILES['a_file']['tmp_name'], $destDir)) {$lampiran ="file";}
+				}
+			}
+
+
+
+}
+
+
+		$this->Logfile->createLog($this->view->t_tensiuser, "Ubah data", $t_tensi." (".$id.")");
+		$this->view->proses = "2";	
+		$this->view->keterangan = "Umum Rekampasien";
+		$this->view->hasil = $this->view->rekampasienUpdate;
+		
+		$this->rekampasienlistAction();
+		$this->render('rekampasienlist');
+	}
+
+
+
+	
+	public function rekampasienhapusAction()
+	{
+		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
+		$this->view->carii 			= $_REQUEST['carii'];
+
+		$this->view->jenisForm		= $_REQUEST['jenisForm'];
+		$id							= $_REQUEST['id'];
+
+		$this->view->kode_pasien	= $_REQUEST['kode_pasien'];
+		$this->view->detailPasien	= $this->rekampasien_serv->detailPasienByKode($this->view->kode_pasien);
+
+
+		$dataMasukan = array("id" => $id);
+
+		$this->view->rekampasienUpdate = $this->rekampasien_serv->rekampasienHapus($dataMasukan);
+		$this->Logfile->createLog($this->view->t_tensiuser, "Hapus data rekampasien user", $n_rekampasien." (".$id.")");
+		$this->view->proses = "3";	
+		$this->view->keterangan = "USER";
+		$this->view->hasil = $this->view->rekampasienUpdate;
+		
+		$this->rekampasienlistAction();
+		$this->render('rekampasienlist');
+	}
+
+	public function pasienlistAction() {
+		$pageNumber = $_REQUEST['currentPage'];
+		if(!$pageNumber) {$pageNumber = 1;}
+
+		$itemPerPage = $_REQUEST['numToDisplay'];
+		if(!$itemPerPage) {$itemPerPage 	= 30;}
+		
+		$this->view->numToDisplay = $itemPerPage;
+		$this->view->currentPage = $pageNumber;
+		$ssologin = new Zend_Session_Namespace('login_data');
+		
+		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
+		$this->view->carii 			= $_REQUEST['carii'];
+		
+		$dataMasukan = array("kategoriCari" => trim($this->view->kategoriCari),
+							"katakunciCari" => trim($this->view->carii)
+							);
+							 
+		$this->view->totPasienList 		= $this->pendaftaran_serv->cariPendaftaranList($dataMasukan, 0, 0, 0);
+		$this->view->itemPerPage		= $itemPerPage;
+		$this->view->pasienList 		= $this->pendaftaran_serv->cariPendaftaranList($dataMasukan, $pageNumber, $itemPerPage, $this->view->totPasienList);
+		
+	}
+
+	public function getKabAction(){
+		$this->view->list		=  $this->ref_serv->getKabByPropList(trim($_REQUEST["propinsi"]));
+	}
+
+}
+?>

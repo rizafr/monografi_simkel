@@ -1,0 +1,14 @@
+;Ubah data rangewaktu;21/10/2012 23:06:38; (1);
+;Ubah data rangewaktu;21/10/2012 23:08:35; (8);
+;Ubah data rangewaktu;21/10/2012 23:10:30; (5);
+;Ubah data rangewaktu;21/10/2012 23:11:56; (4);
+;Ubah data rangewaktu;21/10/2012 23:14:40; (6);
+;Ubah data rangewaktu;21/10/2012 23:15:54; (9);
+;Insert data;21/10/2012 23:36:13; ();
+;Ubah data rangewaktu;21/10/2012 23:48:22; (1);
+;Ubah data rangewaktu;21/10/2012 23:48:54; (5);
+;Ubah data rangewaktu;21/10/2012 23:52:21; (4);
+;Ubah data rangewaktu;21/10/2012 23:52:36; (8);
+;Ubah data rangewaktu;21/10/2012 23:52:53; (6);
+;Ubah data rangewaktu;21/10/2012 23:53:09; (9);
+;Ubah data Pkp AW Hutang Pajak;21/10/2012 23:56:28; (400);

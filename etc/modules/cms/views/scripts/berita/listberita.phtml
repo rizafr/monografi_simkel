@@ -1,0 +1,115 @@
+<? require_once 'Zend/View.php';
+    require_once 'share/halaman_list.php';
+    require_once 'share/Portalconf.php';
+  
+   $ctrlFrm = new Zend_View();
+   $halaman = new halaman_list(); 
+  
+    $jmlBeritaList = count($this->BeritaList);
+	//echo $jmlBeritaList;
+   for ($j = 0; $j < $jmlBeritaList; $j++) {
+     $berita[$j] = array("c_berita"  		=>(string)$this->BeritaList[$j]['c_berita'],
+						"n_judul"      		=>(string)$this->BeritaList[$j]['n_judul'],
+						 "n_detil"  		=>(string)$this->BeritaList[$j]['n_detil'],
+						  "c_status"  		=>(string)$this->BeritaList[$j]['c_status'],
+						  "d_berita"  		=>(string)$this->BeritaList[$j]['d_berita']);
+   } 
+ $pesancek=$this->pesancek;
+	if ($pesancek=='gagal'){$confirm ='confirmfail';}
+	else {$confirm ='confirm';} 
+$status=$_REQUEST['status'];
+$key=$_REQUEST['key'];
+
+   if ($status!='') {
+	  if ($status==0) $select0="selected";
+	  else if ($status==1) $select1="selected";
+   } else  $select2="selected";	
+?>
+	<div class="navlink">
+	<a href="<? echo $this->basePath; ?>/cms">Halaman Utama</a>&nbsp;<strong>&#8250;</strong>&nbsp;Kelola Data Berita&nbsp;
+	</div>
+<br style="clear:both;" />
+	<div id="top"></div>
+	<div id="confirm" class="<?=$confirm?>" style="display: none">
+		<h3><?echo $pesan = $this->pesan;?></h3>				
+	</div>
+	<h2 class="title">Kelola Data Berita</h2>
+<div class="tablenav">
+				<form id="frmSearch" method="post" name="frmSearch">
+					Pencarian berdasarkan :
+					    <input id="key" type="text" name="key" value="<?=$key?>">
+						<select size="1" name="status" id="status">  
+							<option value='' <?=$select2?>>Lihat semua status</option>
+							<option value='1' <?=$select1?>>Diterbitkan</option>
+							<option value='0' <?=$select0?>>Tidak Diterbitkan</option>
+						</select>
+					    <input type="button" class="button2" value="Cari" onclick="javascript:cariListBerita();">		   
+				</form>						
+	</div>	
+<br style="clear:both;" />
+	<form action="" method="post"> 
+<div class="alignright"><input type="button" class="button2" value="Tambah Data Berita"  onclick="BeritaM('insert');"></div>
+<br style="clear:both;" />
+<table class="widefat sortable" cellspacing="1">
+		<tr>
+			<th class="nosort" width="5%">No.</th>
+			<th class="<?=$this->orderbya?>" width="15%" onclick="orderBy('d_berita','<?=$this->orderbyb?>','<?php echo $this->basePath; ?>/cms/berita/listberita')">Tanggal</th>
+			<th class="<?=$this->orderbya?>" width="55%"  onclick="orderBy('n_judul','<?=$this->orderbyb?>','<?php echo $this->basePath; ?>/cms/berita/listberita')">Judul</th>
+			<th width="15%">Status</th>
+			<th width="10%" colspan="2">&nbsp;</th>
+		</tr> 
+<? 		if ($jmlBeritaList == 0) {?>
+		<tr class="event">
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>	
+<?}else{
+				foreach ($berita as $key => $val): 
+				if ($key%2==0) { ?>
+				<tr class="alternate">
+				<? } else if ($key%2==1) { ?>
+				<tr class="alternate2">
+				<? } 
+				$noUrut = (($this->currentPage -1)* $this->numToDisplay) + $key +1;
+				$cstatus = $this->escape($val['c_status']);
+				$date= $this->escape($val['d_berita']);
+				if ($cstatus == 1) 	$status = 'Diterbitkan';
+				else $status = 'Tidak Diterbitkan';
+				
+				?>
+					<td class="clcenter"><?php echo $noUrut;?></td>
+					<td><?php echo $date ?></td>	
+					<td align="left"><a href="#" onclick="detilBerita('<?php echo $this->escape($val['c_berita']);?>')"><?php echo $this->escape($val['n_judul']);?></a></td>
+				    <td align="center"><?php echo $status;?></td>
+					<td align="center"><a href="#" title="Ubah Data" onclick="BeritaM('update','<?=$this->escape($val['c_berita'])?>');">Ubah</a>	
+					</td>
+					<td align="center"><a href="#" title="Hapus Data"  onClick="javascript:HapusDataBerita('<?php echo $this->escape($val['c_berita']);?>','<?php echo $this->escape($val['n_judul']);?>')">Hapus</a>
+					</td>					
+				</tr>
+				<?php endforeach;}?>
+	
+	</table>
+	<div class="spacer"></div>
+<div id="targetdetil"></div>
+
+<?
+$orderBy=$this->orderBy;
+$modul = $this->basePath."/cms/berita/listberita?orderBy=$orderBy&order=$this->orderbya";
+echo $halaman->halamanList($this->totalBeritaList, $this->numToDisplay, $this->currentPage, $modul)
+?>	
+	</form>
+	<div class="spacer"></div>
+
+<script>
+function detilBerita(idberita){
+var url = '<?php echo $this->basePath; ?>/cms/berita/beritadetil';
+var param = {idberita:idberita};
+jQuery.get(url,param,function(data) {
+jQuery("#targetdetil").html(data);
+centerPopup();
+loadPopup();});}
+</script>		

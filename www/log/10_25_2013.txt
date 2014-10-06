@@ -1,0 +1,15 @@
+ ;Ubah Data Pemasukan Pengadaan ;25/10/2013 00:17:29; di lokasi  dengan id_pengadaan (94);
+ ;Ubah Data Pemasukan Pengadaan ;25/10/2013 00:19:19; di lokasi  dengan id_pengadaan (94);
+ ;Ubah Data Pemasukan Pengadaan ;25/10/2013 00:20:26; di lokasi  dengan id_pengadaan (94);
+ ;Ubah Data Pemasukan Pengadaan ;25/10/2013 00:21:54; di lokasi  dengan id_pengadaan (94);
+ ;Ubah Data Pemasukan Pengadaan ;25/10/2013 00:23:05; di lokasi  dengan id_pengadaan (94);
+pos_1;Ubah Data Pendaftaran Pengadaan ;25/10/2013 19:24:38; di lokasi  dengan id_pengadaan ();
+pos_1;Ubah Data Pendaftaran Pengadaan ;25/10/2013 19:24:58; di lokasi  dengan id_pengadaan ();
+pos_1;Verifikasi Pendaftar dengan id_supp 64;25/10/2013 19:35:26;   dengan id_daftar ();
+pos_1;Verifikasi Pendaftar dengan id_supp 424;25/10/2013 19:36:10;   dengan id_daftar ();
+pos_1;Verifikasi Pendaftar dengan id_supp 424;25/10/2013 19:36:56;   dengan id_daftar ();
+pos_1;Verifikasi Pendaftar dengan id_supp 424;25/10/2013 19:41:03;   dengan id_daftar (8);
+pos_1;Verifikasi Pendaftar dengan id_supp 424;25/10/2013 19:41:15;   dengan id_daftar (8);
+pos_1;Verifikasi Pendaftar dengan id_supp 424;25/10/2013 19:41:24;   dengan id_daftar (8);
+pos_1;Verifikasi Pendaftar dengan id_supp 424;25/10/2013 19:42:30;   dengan id_daftar (8);
+pos_1;Verifikasi Pendaftar dengan id_supp 424;25/10/2013 19:42:39;   dengan id_daftar (8);

@@ -1,0 +1,12 @@
+ ;Insert Data Dokumen Klasifikasi dgn judul judul 1;19/10/2013 00:16:42; dan nama file  64-112-7c822abb3b32f549d45749f4c97a4d41@judul1.pdf dengan id_klasifikasi (112);
+ ;Ubah Data Dokumen Klasifikasi dgn judul judul 1;19/10/2013 00:51:20; dan nama file  64-112-8574303657ecd329d20affc487977f61@judul1.pdf dengan id_klasifikasi (112);
+ ;Ubah Data Dokumen Klasifikasi dgn judul judul 1;19/10/2013 00:51:48; dan nama file  64-112-49b3b6c2a98d3032e2a5da8a0e7f801f@judul1.pdf dengan id_klasifikasi (112);
+ ;Ubah Data Dokumen Klasifikasi dgn judul judul 1;19/10/2013 00:55:19; dan nama file  64-112-3c54a9897c8b0bcb9247dc84f9255281@judul1.pdf dengan id_klasifikasi (112);
+ ;Ubah Data Dokumen Klasifikasi dgn judul judul 1;19/10/2013 00:55:55; dan nama file  64-112-e09269c5ac544273031b70705ac5a9bf@judul1.pdf dengan id_klasifikasi (112);
+ ;Ubah Data Dokumen Klasifikasi dgn judul judul 1;19/10/2013 00:56:19; dan nama file  64-112-a4c56b72239e46c0509d6e478ddb8f6a@judul1.pdf dengan id_klasifikasi (112);
+ ;Ubah Data Dokumen Klasifikasi dgn judul judul 1;19/10/2013 00:58:22; dan nama file  64-112-3af90a9b84d3b83debda50eed1d7051e@judul1.pdf dengan id_klasifikasi (112);
+ ;Ubah Data Dokumen Klasifikasi dgn judul judul 1;19/10/2013 00:59:14; dan nama file  64-112-7e2d5cd8a848c058e8ed4ee6e6ab05f5@judul3.pdf dengan id_klasifikasi (112);
+ ;Ubah Data Dokumen Klasifikasi dgn judul judul 1;19/10/2013 01:00:15; dan nama file  64-112-07edcd93f72c4d9f5391a1d34ddd94b5@judul3.pdf dengan id_klasifikasi (112);
+ ;Ubah Data Dokumen Ijin Usaha dgn judul gaga;19/10/2013 01:16:57; dan nama file  64-18-743ba0dae4890c66d218d4f3b4a87040@ijin1.pdf dengan id_ijin (18);
+ ;UBAH DATA SUPPLIER IJIN USAHA DGN NAMA Ijin Gangguan;19/10/2013 01:19:47; DAN NOMOR  256/HO/XII/2009;
+ ;UBAH DATA SUPPLIER IJIN USAHA DGN NAMA Ijin Gangguan;19/10/2013 01:20:33; DAN NOMOR  256/HO/XII/2009;

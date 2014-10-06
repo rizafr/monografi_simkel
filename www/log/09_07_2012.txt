@@ -1,0 +1,9 @@
+;Ubah data pegawai;07/09/2012 11:27:26; (510);
+;Ubah data pegawai;07/09/2012 11:27:56; (510);
+;Insert data pegawai;07/09/2012 11:54:29; ();
+;Insert data pegawai;07/09/2012 11:55:58; ();
+971361368;Ubah data user;07/09/2012 13:35:43;969324819 ();
+971361368;Ubah data user;07/09/2012 13:36:20;960158618 ();
+969324819;Insert Data Faktur Penjualan dgn Pemebeli BRI TANJUNG PERAK;07/09/2012 14:48:40; di Nopend 60000;
+;Insert data;07/09/2012 16:10:25; ();
+;Ubah data;07/09/2012 16:21:35; (2400);

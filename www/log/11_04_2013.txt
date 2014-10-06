@@ -1,0 +1,4 @@
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 436;04/11/2013 17:48:43; di lokasi  dengan id_supp (436);
+Verifikator Rekanan Pusat;Ubah Data Penetapan DRP dgn id_supp 436;04/11/2013 17:51:58; tgl 2013-11-04 dengan id_supp (436);
+;Insert Data Pelanggaran Pengadaan ;04/11/2013 19:20:47; di lokasi  dengan id_pengadaan ();
+Verifikator Rekanan Pusat;Update Data Ijin Habis dengan id_supp 436;04/11/2013 20:02:16; , dgn id_ijin 62 (62);

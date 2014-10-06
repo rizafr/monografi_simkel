@@ -1,0 +1,11 @@
+985390852;Terkait PendapatanBANK BTPN CABANG WATAMPONE;25/01/2013 17:42:44; di Nopend 92700;
+983390940;Insert Data Faktur Penjualan dgn Pemebeli BTPN Cab. Subang;25/01/2013 17:43:43; di Nopend 41200;
+985390852;Terkait PendapatanKSP NASARI CAB. MAKASSAR;25/01/2013 17:44:54; di Nopend 92700;
+967355862;Insert Data Faktur Penjualan dgn Pemebeli PT ADIRA DINAMIKA MULTI FINANCE TBK;25/01/2013 18:21:59; di Nopend 10000;
+967355862;Insert Data Faktur Penjualan dgn Pemebeli PT SOPHIE PARIS INDONESIA;25/01/2013 18:57:11; di Nopend 10000;
+967355862;Ubah Data Faktur Penjualan 010.000-13.00000472;25/01/2013 18:58:16; di Nopend 10000 dengan id (30737);
+967355862;Insert Data Faktur Penjualan dgn Pemebeli PT SOPHIE PARIS INDONESIA;25/01/2013 19:03:11; di Nopend 10000;
+967355862;Insert Data Faktur Penjualan dgn Pemebeli PT SOPHIE PARIS INDONESIA;25/01/2013 19:04:59; di Nopend 10000;
+967355862;Ubah Data Faktur Penjualan 010.000-13.00000472;25/01/2013 19:07:02; di Nopend 10000 dengan id (30737);
+969305242;Ubah Data Faktur Penjualan 010.000-13.00000342;25/01/2013 19:25:51; di Nopend 57700 dengan id (30607);
+969305242;Ubah Data Faktur Penjualan 010.000-13.00000342;25/01/2013 19:26:08; di Nopend 57700 dengan id (30607);

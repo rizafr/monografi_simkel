@@ -1,0 +1,160 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+$referensi = Aplikasi_Referensi_Service::getInstance();
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+		
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+<div class="navlink">
+	<a  href="index_login.php">Halaman Utama</a> <strong> &#8250; </strong>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Mahasiswa</h2>
+		<div class="search-panel">
+		<form method="post" id="frmCariMhspri" name="frmCariMhspri">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+			<tr>
+				<td align="left" width="180"> Program Studi :</td>
+				<td>
+				<?
+					$jmlprodiList = count($this->prodiList);
+					if(trim($this->n_level) =="bak0" || trim($this->n_level) =="jur0"){$prodiList['-'] = '--Pilih--';}
+					for ($i = 0; $i < $jmlprodiList; $i++) {
+						$prodiList[$this->prodiList[$i]->id] = (string)$this->prodiList[$i]->n_prodi;			 
+					}
+					$c_prodiAtrib = array("id"=>"prodi", "tabindex"=>"17");
+					echo $ctrlFrm->formSelect('prodi', $this->prodi, $c_prodiAtrib, $prodiList);
+				?>
+				</td>
+			</tr>
+			<tr>
+				<td align="left" width="180"> Angkatan :</td>
+			<td>
+			<?
+				$jmlthnAjaranList = count($this->thnAjaranList);
+				$thnAjaranList['-'] = '--Pilih--';
+				for ($i = 0; $i < $jmlthnAjaranList; $i++) {
+					$thnAjaranList[$this->thnAjaranList[$i]->c_thnajaran] = (string)$this->thnAjaranList[$i]->c_thnajaran;			 
+				}
+				$c_thnAjaranAtrib = array("id"=>"tahun", "tabindex"=>"17");
+				echo $ctrlFrm->formSelect('tahun', trim($this->tahun), $c_thnAjaranAtrib, $thnAjaranList);
+				$atribSubmit = array("onclick"=>"javascript:cariMhspri();");
+				echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+				?>
+			</td>
+			</tr>
+	
+			</table>
+
+<table width="50%" border="0" cellpadding="0" cellspacing="1" align="center">
+<?
+	$kategoriCari = array("n_mhs" => "Nama",  "id_npm" => "Npm");
+	echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
+?>
+	<input type="text" name="carii" align="center">
+				<?
+			         $atribSubmit = array("onclick"=>"javascript:cariMhspri();");
+			         echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+				?>
+</table>
+
+		</form>
+		</div>
+		<div class="space-line"></div>
+
+		
+		<fieldset class="fields"> 
+			<div class="spacer"> </div>
+			<? 
+			
+			$status = $this->hasil;
+			$proses = $this->proses;
+			$keterangan = $this->keterangan;
+			
+			$pesan->show_message($proses, $keterangan, "$status" ); ?>
+			<div class="spacer"> </div>	
+			
+			
+			<div class="blank"></div>
+			
+			<form method="post" id="frmubahmhspri" name="frmubahmhspri">
+		
+			<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th width=5%  class="nosort">No</th> 
+				<th width=25% class="sorted order2 sortable">Nama</th> 
+				<th width=10% class="sorted order2 sortable">NPM</th> 
+				<th width=10% class="sorted order2 sortable">Jenis Kelamin</th> 
+				<th width=10% class="sorted order2 sortable">Status</th> 
+				<?if(trim($this->c_group) !="3"){?>
+				<th width=10% colspan="4"  class="nosort">Tindakan</th><? }else{ ?>
+				<th width=10% colspan="1"  class="nosort">Tindakan</th><? } ?>
+				
+				<?
+				if (count($this->mhspriList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {
+						
+						
+						foreach ($this->mhspriList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } 
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						$id_npm = $this->escape($val['id_npm']); 
+						$n_mhs = $this->escape($val['n_mhs']); 
+						$c_jnskelamin = $this->escape($val['c_jnskelamin']); 
+						$n_statusmhs = $this->escape($val['n_statusmhs']);
+						
+						echo $ctrlFrm->formHidden('id_npm', $id_npm, null);
+						
+						?>
+						
+						<td align="center"><? echo $noUrut;?>&nbsp;&nbsp;</td>
+						<td class="clleft">&nbsp;<? echo $n_mhs;?></td>
+						<td class="clleft">&nbsp;<? echo $id_npm;?></td>
+						<td align="center">&nbsp;<? echo $c_jnskelamin;?></td>
+						<td align="center">&nbsp;<? echo $n_statusmhs;?></td>
+						<td><div onClick="open_url_to_div('<?php echo $this->basePath; ?>/mh/mhspri/mhspriolahdata?id_npm=<?echo $id_npm;?>&jenisForm=update','<?php echo $this->basePath; ?>/mh/mhspri/mhsprijs');" class="edit" title="Ubah Data"></div></td>
+						<?if(trim($this->c_group) !="3"){?>
+						<td><div onclick="open_url_to_div('<?php echo $this->basePath; ?>/mh/mhsortu/mhsortulist?id_npm=<?echo $id_npm;?>','<?php echo $this->basePath; ?>/mh/mhsortu/mhsortujs?id_npm=<?echo $id_npm;?>');" class="edit" title="Ubah Data Orang Tua / Wali"></div></td>
+						<td><div onclick="open_url_to_div('<?php echo $this->basePath; ?>/mh/mhspend/mhspendlist?id_npm=<?echo $id_npm;?>','<?php echo $this->basePath; ?>/mh/mhspend/mhspendjs?id_npm=<?echo $id_npm;?>');" class="edit" title="Ubah Data Riwayat Pendidikan"></div></td>
+						<td><div class="delete" title="Hapus Data" onClick="mhspriHapus('Data Mahasiswa', '<? echo $id_npm; ?>')" ></td>
+						<? } ?>
+					
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+			</form>
+			<?	
+			$totalData = $this->totMhspriList;
+			$modul = $this->basePath."/mh/mhspri/mhsprilist";
+			$param1 = $this->prodi;$param2 = $this->tahun;$param3 = $this->semester;$param4 = $this->kelas;
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
+			?>
+		</fieldset>		 
+		
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>

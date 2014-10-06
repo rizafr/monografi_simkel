@@ -1,0 +1,5 @@
+opr28000;Terkait PendapatanKOPERASI NUSANTARA;31/12/2012 11:51:48; di Nopend 28000;
+opr28000;Terkait PendapatanKOPERASI NUSANTARA;31/12/2012 11:53:08; di Nopend 28000;
+opr28000;Terkait PendapatanPT BTPN Cab Pekanbaru;31/12/2012 11:54:33; di Nopend 28000;
+opr28000;Terkait PendapatanKSP.NASARI;31/12/2012 11:56:17; di Nopend 28000;
+opr28000;Terkait PendapatanPT TASPEN (PERSERO) CABANG PADANG;31/12/2012 11:59:32; di Nopend 28000;

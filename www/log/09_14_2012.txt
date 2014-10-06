@@ -1,0 +1,8 @@
+;Insert data;14/09/2012 11:52:34; ();
+;Ubah data;14/09/2012 12:16:13; (117);
+971336556;Terkait Daftarbuktipotong;14/09/2012 12:48:28; di Nopend 46100 dengan id ();
+971336556;Terkait Daftarbuktipotong;14/09/2012 14:03:04; di Nopend 46100 dengan id ();
+971336556;Terkait Daftarbuktipotong;14/09/2012 14:05:35; di Nopend 46100 dengan id ();
+971336556;Bukti Setor SPT Masa PPH 23;14/09/2012 14:34:32; di Nopend 46100 dengan id ();
+971336556;Terkait BiayaPRIMKOPABRI;14/09/2012 14:47:06; di Nopend 46100;
+971336556;Terkait Daftarbuktipotong;14/09/2012 14:49:07; di Nopend 46100 dengan id ();

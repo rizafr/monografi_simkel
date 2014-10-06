@@ -1,0 +1,8 @@
+FP-1;Ubah data user;31/05/2013 15:46:28;971296923 ();
+FP-1;Ubah data user;31/05/2013 15:46:35;968365504 ();
+FP-1;Ubah data user;31/05/2013 15:46:41;968365504 ();
+FP-1;Ubah data user;31/05/2013 15:51:57;972361285 ();
+FP-1;Ubah data user;31/05/2013 15:52:42;984397206 ();
+;Insert data perusahaan;31/05/2013 18:32:35; ();
+;Insert data perusahaan;31/05/2013 18:34:43; ();
+;Ubah data perusahaan;31/05/2013 18:36:46; ();

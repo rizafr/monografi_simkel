@@ -1,0 +1,67 @@
+<?php 
+	require_once 'share/format_page.php';
+	$halaman = new format_page();
+        
+	$ctrlFrm = new Zend_View(); 
+	$currentPage = $this->currentPage;
+	$numToDisplay = $this->numToDisplay;
+?>
+
+<div style="padding-top:20px;">
+		<table width="400" id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th class="nosort">No</th> 
+				<th >Judul</th>
+				<th >Peneliti Utama</th>
+				<th >Tahun</th>
+				<?
+				if (count($this->penelitianList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {
+						foreach ($this->penelitianList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } 
+						$id = $this->escape($val['id']); 
+						$n_judul = $this->escape($val['n_judul']); 
+						$n_peneliti_u = $this->escape($val['n_peneliti_u']); 
+						$n_tahun = $this->escape($val['n_tahun']); 
+
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						echo $ctrlFrm->formHidden('id', $id, null);
+						?>
+						
+						<td class="clcenter"><? echo $noUrut;?></td>
+						<!--td align = "left"><a href="#" onclick="open_url_to_div();"><? echo $n_judul;?></a></td-->
+						<td align = "left"><? echo $n_judul;?></td>
+						<td align = "center"><? echo $n_peneliti_u;?></td>
+						<td align = "center"><? echo $n_tahun;?></td>
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+				</tr>
+			</table>
+		
+
+		<div id="controls">
+			<div>
+		  	<?php
+			$totalData = $this->totalpenelitianList;
+			$modul = $this->basePath."/home/index/daftarpenelitian";
+			$param1 = $this->cabang;$param2 = $this->tahun;$param3 = $this->bulan;$param4 = $this->jenis;$param5 = $this->status;
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
+			?>
+			</div> 
+			<br><br><br>		 
+		</div>	
+	
+<script type="text/javascript">
+	var sorter = new table.sorter("sorter");
+	sorter.init("sorter",0);
+</script>
+</div>
+

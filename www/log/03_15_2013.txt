@@ -1,0 +1,15 @@
+;Insert data;15/03/2013 10:14:20; ();
+;Hapus data ordernofaktur;15/03/2013 10:27:47; (1);
+;Insert data;15/03/2013 10:28:19; ();
+;Ubah data;15/03/2013 10:30:26; (2);
+;Ubah data rangewaktu;15/03/2013 10:38:53; (17);
+;Ubah data rangewaktu;15/03/2013 10:39:10; (16);
+972332303;Insert Data Faktur Penjualan dgn Pemebeli PT TELEKOMUNIKASI INDONESIA, TBK;15/03/2013 10:44:04; di Nopend 40000;
+972332303;Insert Data Faktur Penjualan dgn Pemebeli PT DAPENSI ABADI ;15/03/2013 10:45:37; di Nopend 40000;
+;Insert data;15/03/2013 10:48:47; ();
+967363548;Insert Data Faktur Penjualan dgn Pemebeli CV. YUDHA PUTRA;15/03/2013 10:51:00; di Nopend 40005;
+972332303;Insert Data Faktur Penjualan dgn Pemebeli PT ASURANSI CENTRAL ASIA ;15/03/2013 10:57:03; di Nopend 40000;
+967363548;Insert Data Faktur Penjualan dgn Pemebeli CV. HASIL USAHA;15/03/2013 10:58:36; di Nopend 40005;
+967363548;Ubah Data Faktur Penjualan 040.900-13.00000104;15/03/2013 10:59:20; di Nopend 40005 dengan id (35397);
+;Insert data;15/03/2013 11:03:11; ();
+;Insert data;15/03/2013 11:03:55; ();

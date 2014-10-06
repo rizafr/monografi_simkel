@@ -1,0 +1,4 @@
+;Ubah data;10/02/2014 13:11:40;Pengaruh Penerapan Model Pembelajaran Asuha Neonatus Terintegrasi Terhadap Peningkatan Kompetensi Terhadap Peningkatan D III Kebidanan (1);
+;Ubah data;10/02/2014 13:13:20;Pengaruh Penerapan Model pembelajaran Asuhan Neonatus Terintegrasi Terhadap Pengingkatan Kompetensi D III Kebidanan (1);
+;Ubah data;10/02/2014 13:14:18;Pengaruh Penerapan Model pembelajaran Asuhan Neonatus Terintegrasi Terhadap Pengingkatan Kompetensi D III Kebidanan (1);
+;Hapus data pengajuan user;10/02/2014 13:18:48; (1);

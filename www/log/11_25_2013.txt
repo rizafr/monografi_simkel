@@ -1,0 +1,9 @@
+Verifikator Rekanan Pusat;Ubah Data Verifikasi ulang Supplier dgn id_supp 417;25/11/2013 13:21:40; di lokasi  dengan id_supp (417);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi ulang Supplier dgn id_supp 417;25/11/2013 13:22:02; di lokasi  dengan id_supp (417);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi ulang Supplier dgn id_supp 417;25/11/2013 13:26:21; di lokasi  dengan id_supp (417);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi ulang Supplier dgn id_supp 417;25/11/2013 13:27:18; di lokasi  dengan id_supp (417);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi ulang Supplier dgn id_supp 417;25/11/2013 13:28:35; di lokasi  dengan id_supp (417);
+Verifikator Rekanan Pusat;Ubah Data Verifikasi ulang Supplier dgn id_supp 417;25/11/2013 13:30:59; di lokasi  dengan id_supp (417);
+;UBAH DATA SUPPLIER IJIN USAHA DGN NAMA SIUP;25/11/2013 16:07:04; DAN NOMOR  1234567/KO/2011;
+Verifikator Rekanan Pusat;Ubah Data Verifikasi Supplier dgn id_supp 436;25/11/2013 16:11:57; di lokasi  dengan id_supp (436);
+Verifikator Rekanan Pusat;Hapus Data Supplier;25/11/2013 16:39:18; dgn id_supp (423);

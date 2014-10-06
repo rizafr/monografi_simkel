@@ -1,0 +1,219 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+		
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/depan');">Halaman Utama</a>
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">Data Pegawai Pengguna</h2>
+		<div class="search-panel">
+			<form method="post" id="frmCariPegawai" name="frmCariPegawai">
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+	<tr>
+	<td align="left" width="180">Kriteria Pencarian</td>
+	</tr>
+	
+	<tr>
+	<td align="left" width="180"> Area :</td>
+	<td>
+	<?
+	$jmldivreList = count($this->divreList);
+	$divreList['-'] = '--Pilih--';
+		for ($i = 0; $i < $jmldivreList; $i++) {
+		$divreList[$this->divreList[$i]->c_divre] = (string)$this->divreList[$i]->c_divre." - ".(string)$this->divreList[$i]->n_divre;			 
+		}
+	$divreAtrib = array("id"=>"divre", "tabindex"=>"17" ,"onchange"=>"javascript:pegawailist();");
+	echo $ctrlFrm->formSelect('divre', trim($this->divre), $divreAtrib, $divreList);
+	?>
+	</td>
+	</tr>
+
+	<tr>
+	<td align="left" width="180"> UPT :</td>
+	<td>
+	<?
+	$jmluptList = count($this->uptList);
+	$uptList['-'] = '--Pilih--';
+		for ($i = 0; $i < $jmluptList; $i++) {
+		$uptList[$this->uptList[$i]->nopend] = (string)$this->uptList[$i]->nopend." - ".(string)$this->uptList[$i]->NamaKtr;			 
+		}
+	$uptAtrib = array("id"=>"upt", "tabindex"=>"17" ,"onchange"=>"javascript:pegawailist();");
+	echo $ctrlFrm->formSelect('upt', trim($this->upt), $uptAtrib, $uptList);
+	?>
+	</td>
+	</tr>
+
+	<tr>
+	<td align="left" width="180"> Jabatan :</td>
+	<td>
+	<?
+	$jmljabatanList = count($this->jabatanList);
+	$jabatanList['-'] = '--Pilih--';
+		for ($i = 0; $i < $jmluptList; $i++) {
+		$jabatanList[$this->jabatanList[$i]->n_jabatan] = (string)$this->jabatanList[$i]->n_jabatan;			 
+		}
+	$jabatanAtrib = array("id"=>"jabatan", "tabindex"=>"17" ,"onchange"=>"javascript:pegawailist();");
+	echo $ctrlFrm->formSelect('jabatan', trim($this->jabatan), $jabatanAtrib, $jabatanList);
+	?>
+	</td>
+	</tr>
+	<input name="jenisPegawai" id="jenisPegawai" type="hidden" value="<?echo $this->jenisPegawai;?>" />
+	<input name="status" id="status" type="hidden" value="<?echo $this->status;?>" />
+	<input name="golongan" id="golongan" type="hidden" value="<?echo $this->golongan;?>" />
+	
+	<!--tr>
+	<td align="left" width="180"> Golongan :</td>
+	<td>
+	<?
+	$golonganList['-'] = '--Pilih--';
+	$jmlgolonganList = count($this->golonganList);
+	$golonganList['-'] = '--Pilih--';
+		for ($i = 0; $i < $jmlgolonganList; $i++) {
+		$golonganList[$this->golonganList[$i]->n_golongan] = (string)$this->golonganList[$i]->n_golongan;			 
+		}
+	$golonganAtrib = array("id"=>"golongan", "tabindex"=>"17","onchange"=>"javascript:pegawailist();");
+	echo $ctrlFrm->formSelect('golongan', trim($this->golongan), $golonganAtrib, $golonganList);
+	
+	?>
+	</td>
+	</tr>
+
+	<tr>
+	<td align="left" width="180"> Status Pegawai :</td>
+	<td>
+	<?
+	$jenispegawaiList['-'] = '--Pilih--';
+	$jmljenispegawaiList = count($this->jenispegawaiList);
+	$jenispegawaiList['-'] = '--Pilih--';
+		for ($i = 0; $i < $jmljenispegawaiList; $i++) {
+		$jenispegawaiList[$this->jenispegawaiList[$i]->id] = (string)$this->jenispegawaiList[$i]->n_status;			 
+		}
+	$statusAtrib = array("id"=>"status", "tabindex"=>"17","onchange"=>"javascript:pegawailist();");
+	echo $ctrlFrm->formSelect('status', trim($this->status), $statusAtrib, $jenispegawaiList);
+	
+	$atribSubmit = array("onclick"=>"javascript:cariPegawai();");
+	echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+
+	?>
+	</td>
+	</tr-->
+
+
+</table>
+<table width="50%" border="0" cellpadding="0" cellspacing="1" align="center">
+<?
+	$kategoriCari = array("n_nama" => "Nama","n_nip" => "NIP POS");
+	echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
+?>
+	<input type="text" name="carii" align="center">
+				<?
+			         $atribSubmit = array("onclick"=>"javascript:cariPegawai();");
+			         echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+				?>
+</table>
+
+			</form>
+		</div>
+		<div class="space-line"></div>
+
+		
+		<fieldset class="fields"> 
+			<div class="spacer"> </div>
+			<? 
+			
+			$status = $this->hasil;
+			$proses = $this->proses;
+			$keterangan = $this->keterangan;
+			
+			$pesan->show_message($proses, $keterangan, "$status" ); ?>
+			<div class="spacer"> </div>	
+			<? if($this->c_group != '2'){?>
+			<div class="add" title="Tambah Data" onClick="pegawaiForm('insert','');"></div> 
+			<? } ?>
+			<div class="blank"></div>
+			
+			
+			<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th class="nosort">No</th> 
+				<th >Nama</th>
+				<th >NPWP</th>
+				<th >Nippos</th> 
+				<th >Jabatan</th> 
+				<th >Nopend</th> 
+				<th >Kantor</th> 
+				<th  colspan="1" class="nosort">Tindakan</th>
+
+				<?
+				if (count($this->pegawaiList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+				<?} else {
+						
+						
+						$id_kegiatanx = '';
+
+						foreach ($this->pegawaiList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } 
+
+						$id = $this->escape($val['id']); 
+						$n_nip = $this->escape($val['n_nip']); 
+						$n_nama = $this->escape($val['n_nama']); 
+						$n_npwp = $this->escape($val['n_npwp']); 
+						$n_jabatan = $this->escape($val['n_jabatan']); 
+						$c_upt = $this->escape($val['c_upt']); 
+						$n_upt = $this->escape($val['n_upt']); 
+						
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						echo $ctrlFrm->formHidden('id', $id, null);
+						?>
+						
+						<td class="clcenter"><? echo $noUrut;?>&nbsp;&nbsp;</td>
+						<td align = "justify">&nbsp;<? echo $n_nama;?></td>
+						<td align = "center">&nbsp;<? echo $n_npwp;?></td>
+						<td align = "center">&nbsp;<? echo $n_nip;?></td>
+						<td class="clcenter">&nbsp;<? echo $n_jabatan;?></td>
+						<td class="clcenter">&nbsp;<? echo $c_upt;?></td>
+						<td class="clleft">&nbsp;<? echo $n_upt;?></td>
+						
+						<td><div onClick="pegawaiForm('update','<? echo $id;?>');" class="edit" title="Edit Data"></div></td>
+						<!--td><div class="delete" title="Hapus Data" onClick="pegawaiHapus('data pegawai :', '<? echo $id; ?>', '<? echo $n_nama; ?>')" ></td-->
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+			<?	
+			$totalData = $this->totpegawaiList;
+			$modul = $this->basePath."/pegawai/pegawai/pegawailist";
+			$param1 = $this->divre;$param2 = $this->upt;$param3 = $this->jabatan;
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4, $param5);		
+			?>
+		</fieldset>		 
+		
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>
