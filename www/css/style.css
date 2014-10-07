@@ -6,7 +6,7 @@ Date Modified:04/08/2009
 /*@import "ui.theme.css";*/
 @import "ui.datepicker.css";
 body {
-	background: url('../background/tiny_grid.png');
+	background: url('../background/cc-pattern-light.png');
 	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
 	font-size:12px;
 	COLOR: #333;
@@ -17,17 +17,20 @@ body {
 	a,
 	a:link 
 	a:active {
-		color: #505D47;
-		background-color: transparent;
+		color: #006BA4;
 		text-decoration: underline;
+		transition: color 0.2s ease 0s;
+		text-shadow: none;
+		font-weight:bold;
 	}
-	a:visited {
-		color: #505D47;
-		background-color: transparent;
-	}
+	
 	a:hover {
-        color: red;
-		text-decoration: underline;
+        color: #0F0F1E;
+		text-decoration: none;
+		-webkit-transition: color 0.3s ease-in;
+		-moz-transition: color 0.3s ease-in;
+		-o-transition: color 0.3s ease-in;
+		
 	}
 
 	
@@ -506,8 +509,8 @@ div#header {
 	color: #E3EAEE;
 	padding:0;
 	margin:0;
-	height:100px;
-	background:#CCCCCC url('../images/header.png')  no-repeat;            
+	height:120px;
+	background:#E4E4E4 url('../images/header.png')  no-repeat;            
 	width:965px;
 	
 }
@@ -515,7 +518,7 @@ div#header {
 div#content {
 	clear:both;
 	
-	border-bottom:5px solid #AAA;
+	border-bottom:5px solid #E4E4E4;
 	border-top:none;
 	min-height:200px;
 	background:#FFFFF2 repeat-x;
@@ -525,13 +528,13 @@ div#footer {
 	clear:both;
 	width:980px;
 	margin:0 auto;
-	height:26px;
+	height:20px;
 	/*background:#FFF url(../images/bg_footer.gif) top repeat-x;*/	
 	text-align:center;
 }
 div#footer .copyright{
 	padding:0 0 10px 0;
-	font-size: 20px;
+	font-size: 18px;
 	font-style: uppercase;
 	color:#999;
 }
@@ -542,7 +545,7 @@ div#footer .copyright{
 	border:none;
 	z-index:4;
 	margin:0 auto;
-	background:#333 url('../images/bar_nav.gif') bottom repeat-x; 
+	background:#1E8BC3 url('../images/bar_nav.gif') bottom repeat-x; 
 	height:32px; 
 	color:#fff;
 	font-size:12px;
@@ -727,8 +730,8 @@ div#content .contentdata-modul {
 	width: 100%;
 	padding:0;
 	height:45px;
-	line-height:33px;
-	background:#666666;
+	line-height:31px;
+	background:#34495E;
 	font-size: 12px;
 	margin:0 auto;
 	color:#FFF;
@@ -739,14 +742,15 @@ div#content .contentdata-modul {
 	padding-right:10px;
 	height:20px;
 	line-height:20px;
-	background:#777;
-	font-size: 12px;
+	background:#B8BFAF;
+	font-size: 14px;
 	margin:0 auto;
-	color:#FFF;
+	color:#111111;
 	text-align:right;
 	font-family: Helvetica, Arial, Sans-serif;
 	} 
-.desc a:link,.desc a:visited {color:#FCF3AB}
+.desc a:link,.desc a:visited {color:#0F0F1E}
+.desc a:hover {background:#0F0F1E;color: #fff;}
 
 h2.title{
   	padding:0px;
@@ -1948,7 +1952,7 @@ input.file {
 	}
 #navigation a:hover {
 	text-decoration: none;
-	color: #bcbcbc;
+	color: #221F1F;
 	background-image: none;
 	border-left:5px solid #BBBBBB;
 }
@@ -2307,7 +2311,10 @@ ul.menu ul li a {display:block; padding:3px 7px 5px; background-color:#d1d1d1}
 ul.menu ul li a:hover {background-color:#c5c5c5}
 ul.menu ul ul {left:148px; top:-1px}
 ul.menu .menulink {border:0px solid #aaa;color:#FFFFFF; padding:7px 7px 7px; font-weight:bold; width:auto}
-ul.menu .menulink:hover, ul.menu .menuhover {border-botttom:2px solid #FF5C26;background-color:#535362;}
+ul.menu .menulink:hover, ul.menu .menuhover {border-botttom:2px solid #FF5C26;background-color:#221F1F; 
+	-webkit-transition: background 0.3s ease-in;
+	-moz-transition: background 0.3s ease-in;
+	-o-transition: background 0.3s ease-in;}
 ul.menu .sub {background:#d1d1d1 url(../images/arrow.gif) 136px 8px no-repeat}
 ul.menu .topline {border-top:0px solid #aaa}
 /*END OF DROPDOWN MENU */
