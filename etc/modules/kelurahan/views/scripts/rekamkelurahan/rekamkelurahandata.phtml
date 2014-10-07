@@ -79,6 +79,36 @@ $(function(){
 		<!--input type="button" value="Cari" onClick="showDialog('pasien');"-->
 			</td>
 	</tr>
+	<tr>
+		<td>
+			Pilih Bulan dan Tahun
+		</td>
+		<td>
+			<select name="bln">
+				<option selected="selected">Bulan</option>
+				<?php
+				echo date('m');
+				$bulan_ind=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+				$bulan=array("1","2","3","4","5","6","7","8","9","10","11","12");
+				$jlh_bln=count($bulan_ind);
+				for($c=0; $c<$jlh_bln; $c+=1){
+					if(date('mm') == $bulan[$c]){
+						echo"<option value=$bulan[$c] selected> $bulan_ind[$c] </option>";
+					}else
+					echo"<option value=$bulan[$c]> $bulan_ind[$c] </option>";
+				}
+				?>
+				</select>
+				<select name="thn">
+				<option selected="selected">Tahun</option>
+				<?php
+				for($i=date('Y'); $i>=2010; $i-=1){
+				echo"<option value=$i> $i </option>";
+				}
+				?>
+				</select>
+		</td>
+	</tr>
 	
 	<tr>
 		<td width="275px" align="right" >* 1. Tipologi Kelurahan :</td>

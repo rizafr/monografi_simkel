@@ -3,7 +3,7 @@
 <head>
 <title>Sistem Informasi Monografi Kelurahan</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-
+<?php date_default_timezone_set("Asia/Jakarta"); ?>
 <link rel="stylesheet" href="<? echo $this->basePath;?>/css/default.css" type="text/css" title="Nice Blue style" />
 <link href="<? echo $this->basePath;?>/css/tools.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="<? echo $this->basePath;?>/css/thickbox.css" type="text/css" media="screen" />
@@ -35,6 +35,7 @@
 <script type="text/javascript" src="<? echo $this->basePath;?>/js/oa_fn.js" ></script>
 <script type="text/javascript" src="<? echo $this->basePath;?>/menu/dropdowntabs.js"></script>
 <script type="text/javascript" src="<? echo $this->basePath;?>/js/dropdown_menu.js"></script>
+
 <script type="text/javascript" src="<? echo $this->basePath;?>/js/jquery.validate.js"></script>
 <script type="text/javascript" src="<? echo $this->basePath;?>/js/messages_id.js"></script>
 <script type="text/javascript" src="<? echo $this->basePath;?>/js/number.js"></script>
@@ -142,7 +143,7 @@ return output
 function displaytime(){
 serverdate.setSeconds(serverdate.getSeconds()+1)
 var datestring=dayarray[serverdate.getDay()]+", "+padlength(serverdate.getDate())+" "+montharray[serverdate.getMonth()]+" "+serverdate.getFullYear()
-var timestring=padlength(serverdate.getHours()-1)+":"+padlength(serverdate.getMinutes())+":"+padlength(serverdate.getSeconds())
+var timestring=padlength(serverdate.getHours())+":"+padlength(serverdate.getMinutes())+":"+padlength(serverdate.getSeconds())
 document.getElementById("servertime").innerHTML=datestring+" | "+timestring
 }
 

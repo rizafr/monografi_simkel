@@ -100,54 +100,25 @@ class Pendaftaran_Service {
 		$db = $registry->get('db');
 		try {
 		$db->beginTransaction();
-		/*$nama = subStr(trim(strToupper($dataMasukan['n_nama'])),0,1);
-		$urut = $db->fetchOne("select count(*) as jum from t_pasien where substring(n_nama,0,1) ='$nama' and c_status <> 'd' and c_status <> '' ");
-		if($urut){$k_urut = $urut;}
-		else{$k_urut = '1';}
-
-		if(strlen($k_urut) == '1'){$digit ="000".$k_urut;}
-		if(strlen($k_urut) == '2'){$digit ="00".$k_urut;}
-		if(strlen($k_urut) == '3'){$digit ="0".$k_urut;}
-		if(strlen($k_urut) == '4'){$digit =$k_urut;}
-
-			$kode_pasien =$nama."-".$digit;*/
-			$paramInput = array("c_noreg"			=> $dataMasukan['c_noreg'],
-								"n_nama"				=> $dataMasukan['n_nama'],
-								"c_kelamin"				=> $dataMasukan['c_kelamin'],
-								"t_waktu"			=> $dataMasukan['t_waktu'],
-								"n_tempat"				=> $dataMasukan['n_tempat'],
-								"t_berat"				=> $dataMasukan['t_berat'],
-								"t_tinggi"			=> $dataMasukan['t_tinggi'],
-								"t_tekanan"				=> $dataMasukan['t_tekanan'],
-								"t_denyut"				=> $dataMasukan['t_denyut'],
-								"t_frequensi"			=> $dataMasukan['t_frequensi'],
-								"t_suhu"				=> $dataMasukan['t_suhu'],
-								"n_mata"				=> $dataMasukan['n_mata'],
-								"n_tht"				=> $dataMasukan['n_tht'],
-								"n_gigi"			=> $dataMasukan['n_gigi'],
-								"n_leher"				=> $dataMasukan['n_leher'],
-								"n_jantung"				=> $dataMasukan['n_jantung'],
-								"n_paru"			=> $dataMasukan['n_paru'],
-								"n_perut"				=> $dataMasukan['n_perut'],
-								"n_gerak"				=> $dataMasukan['n_gerak'],
-								"n_gizi"				=> $dataMasukan['n_gizi'],
-								"n_potensi"				=> $dataMasukan['n_potensi'],
-								"n_mental"				=> $dataMasukan['n_mental'],
-								"n_reproduksi"				=> $dataMasukan['n_reproduksi'],
-								"n_kematangan"				=> $dataMasukan['n_kematangan'],
-								"n_hb"				=> $dataMasukan['n_hb'],
-								"n_feses"				=> $dataMasukan['n_feses'],
-								"n_jasmani"				=> $dataMasukan['n_jasmani'],
-								"c_bayi"				=> $dataMasukan['c_bayi'],
-								"c_imunisasi1"				=> $dataMasukan['c_imunisasi1'],
-								"c_imunisasi2"				=> $dataMasukan['c_imunisasi2'],
-								"c_imunisasi3"				=> $dataMasukan['c_imunisasi3'],
-								
-									
-								
-								);
+		$paramInput	= array(	"kd_kel"					=> $dataMasukan['kd_kel'],
+								"tahun_pembentukan"			=> $dataMasukan['tahun_pembentukan'],
+								"dasar_pembentukan"			=> $dataMasukan['dasar_pembentukan'],
+								"kode_wilayah"				=> $dataMasukan['kode_wilayah'],
+								"kode_pos"					=> $dataMasukan['kode_pos'],
+								"luas"						=> $dataMasukan['luas'],
+								"batas_utara"				=> $dataMasukan['batas_utara'],
+								"batas_selatan"				=> $dataMasukan['batas_selatan'],
+								"batas_barat"				=> $dataMasukan['batas_barat'],
+								"batas_timur"				=> $dataMasukan['batas_timur'],
+								"jarak_dari_kecamatan"		=> $dataMasukan['jarak_dari_kecamatan'],
+								"jarak_dari_kota"			=> $dataMasukan['jarak_dari_kota'],
+								"jarak_dari_ibukota_kota"	=> $dataMasukan['jarak_dari_ibukota_kota'],
+								"jarak_dari_ibukota_prov"	=> $dataMasukan['jarak_dari_ibukota_prov']
+							);
+						
+			
 			//var_dump($paramInput);
-			$db->insert('t_siswa',$paramInput);
+			$db->insert('SIMKEL.dbo.mon_kelurahan',$paramInput);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
@@ -165,45 +136,34 @@ class Pendaftaran_Service {
 	   }
 	}
 
-	public function detailPendaftaranById($id) {
+	public function detailPendaftaranById($kd_kel) {
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
 		try {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
-			$where = " where c_noreg = '$id' ";
-			$sqlProses = "SELECT * FROM t_siswa ";	
+			$where = " where kd_kel = '$kd_kel' ";
+			$sqlProses = "SELECT * FROM SIMKEL.dbo.mon_kelurahan ";	
 			$sqlData = $sqlProses.$where;
 			$result = $db->fetchRow($sqlData);
 			//echo $sqlData;
-			$hasilAkhir = array("c_noreg"   	=>(string)$result->c_noreg,
-								"n_nama"		=>(string)$result->n_nama,
-								"t_waktu" 	=>(string)$result->t_waktu,
-								"n_tempat"	=>(string)$result->n_tempat,
-								"t_berat"		=>(string)$result->t_berat,
-								"t_tinggi"	=>(string)$result->t_tinggi,
-								"t_tekanan"	=>(string)$result->t_tekanan,
-								"t_denyut"	=>(string)$result->t_denyut,
-								"t_frequensi"	=>(string)$result->t_frequensi,
-								"t_suhu"	=>(string)$result->t_suhu,
-								"n_mata"	=>(string)$result->n_mata,
-								"n_tht"	=>(string)$result->n_tht,
-								"n_gigi"	=>(string)$result->n_gigi,
-								"n_leher"	=>(string)$result->n_leher,
-								"n_jantung"	=>(string)$result->n_jantung,
-								"n_paru"	=>(string)$result->n_paru,
-								"n_perut"	=>(string)$result->n_perut,
-								"n_gerak"	=>(string)$result->n_gerak,
-								"n_gizi"	=>(string)$result->n_gizi,
-								"n_potensi"	=>(string)$result->n_potensi,
-								"n_mental"	=>(string)$result->n_mental,
-								"n_reproduksi"	=>(string)$result->n_reproduksi,
-								"n_kematangan"	=>(string)$result->n_kematangan,
-								"n_hb"	=>(string)$result->n_hb,
-								"n_feses"	=>(string)$result->n_feses,
-								"n_jasmani"	=>(string)$result->n_jasmani,
-								"n_bayi"	=>(string)$result->n_bayi,
-								
-								);
+			$hasilAkhir	= array("kd_kel"					=> (string)$result->kd_kel,
+								"tahun_pembentukan"			=> (string)$result->tahun_pembentukan,
+								"dasar_pembentukan"			=> (string)$result->dasar_pembentukan,
+								"kode_wilayah"				=> (string)$result->kode_wilayah,
+								"kode_pos"					=> (string)$result->kode_pos,
+								"luas"						=> (string)$result->luas,
+								"batas_utara"				=> (string)$result->batas_utara,
+								"batas_selatan"				=> (string)$result->batas_selatan,
+								"batas_barat"				=> (string)$result->batas_barat,
+								"batas_timur"				=> (string)$result->batas_timur,
+								"jarak_dari_kecamatan"		=> (string)$result->jarak_dari_kecamatan,
+								"jarak_dari_kota"			=> (string)$result->jarak_dari_kota,
+								"jarak_dari_ibukota_kota"	=> (string)$result->jarak_dari_ibukota_kota,
+								"jarak_dari_ibukota_prov"	=> (string)$result->jarak_dari_ibukota_prov
+							);
+						
+			
+			
 			return $hasilAkhir;						  
 			
 	   } catch (Exception $e) {
@@ -217,37 +177,26 @@ class Pendaftaran_Service {
 		$db = $registry->get('db');
 		try {
 			$db->beginTransaction();
-			$paramInput = array("c_noreg"   	=>(string)$result->c_noreg,
-								"n_nama"		=>(string)$result->n_nama,
-								"t_waktu" 	=>(string)$result->t_waktu,
-								"n_tempat"	=>(string)$result->n_tempat,
-								"t_berat"		=>(string)$result->t_berat,
-								"t_tinggi"	=>(string)$result->t_tinggi,
-								"t_tekanan"	=>(string)$result->t_tekanan,
-								"t_denyut"	=>(string)$result->t_denyut,
-								"t_frequensi"	=>(string)$result->t_frequensi,
-								"t_suhu"	=>(string)$result->t_suhu,
-								"n_mata"	=>(string)$result->n_mata,
-								"n_tht"	=>(string)$result->n_tht,
-								"n_gigi"	=>(string)$result->n_gigi,
-								"n_leher"	=>(string)$result->n_leher,
-								"n_jantung"	=>(string)$result->n_jantung,
-								"n_paru"	=>(string)$result->n_paru,
-								"n_perut"	=>(string)$result->n_perut,
-								"n_gerak"	=>(string)$result->n_gerak,
-								"n_gizi"	=>(string)$result->n_gizi,
-								"n_potensi"	=>(string)$result->n_potensi,
-								"n_mental"	=>(string)$result->n_mental,
-								"n_reproduksi"	=>(string)$result->n_reproduksi,
-								"n_kematangan"	=>(string)$result->n_kematangan,
-								"n_hb"	=>(string)$result->n_hb,
-								"n_feses"	=>(string)$result->n_feses,
-								"n_jasmani"	=>(string)$result->n_jasmani,
-								"n_bayi"	=>(string)$result->n_bayi,
-								);	
+			$paramInput	= array("kd_kel"					=> (string)$result->kd_kel,
+								"tahun_pembentukan"			=> (string)$result->tahun_pembentukan,
+								"dasar_pembentukan"			=> (string)$result->dasar_pembentukan,
+								"kode_wilayah"				=> (string)$result->kode_wilayah,
+								"kode_pos"					=> (string)$result->kode_pos,
+								"luas"						=> (string)$result->luas,
+								"batas_utara"				=> (string)$result->batas_utara,
+								"batas_selatan"				=> (string)$result->batas_selatan,
+								"batas_barat"				=> (string)$result->batas_barat,
+								"batas_timur"				=> (string)$result->batas_timur,
+								"jarak_dari_kecamatan"		=> (string)$result->jarak_dari_kecamatan,
+								"jarak_dari_kota"			=> (string)$result->jarak_dari_kota,
+								"jarak_dari_ibukota_kota"	=> (string)$result->jarak_dari_ibukota_kota,
+								"jarak_dari_ibukota_prov"	=> (string)$result->jarak_dari_ibukota_prov
+							);
+						
+			
 			//var_dump($dataMasukan['id']);
-			$where[] = " noreg = '".$dataMasukan['noreg']."'";
-			$db->update('t_siswa',$paramInput, $where);
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."'";
+			$db->update('SIMKEL.dbo.mon_kelurahan',$paramInput, $where);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
@@ -271,9 +220,8 @@ class Pendaftaran_Service {
 		$db = $registry->get('db');
 		try {
 			$db->beginTransaction();
-			$paramInput = array("c_status" =>'D');	
-			$where[] = " noreg = '".$dataMasukan['id']."'";
-			$db->delete('t_siswa', $where);
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."'";
+			$db->delete('SIMKEL.dbo.mon_kelurahan', $where);
 			
 			$db->commit();
 			return 'sukses';
