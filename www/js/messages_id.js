@@ -11,7 +11,7 @@ jQuery.extend(jQuery.validator.messages, {
 	date: "Harap memberikan tanggal yang valid.",
 	dateISO: "Harap memberikan tanggal yang valid (ISO).",
 	number: "Harap memberikan angka yang valid.",
-	digits: "Harap diisi hanya dengan angka.",
+	digits: "Diisi hanya dengan angka.",
 	creditcard: "Harap memberikan nomor kartu kredit yang valid.",
 	equalTo: "Harap memberikan nilai yang sama lagi.",
 	accept: "Silakan memberikan nilai dengan ekstensi yang valid.",

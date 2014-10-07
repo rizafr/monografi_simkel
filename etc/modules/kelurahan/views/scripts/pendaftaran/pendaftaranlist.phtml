@@ -45,7 +45,7 @@ $pesan->show_message($proses, $k_pendaftaran, "$status" );
 ?>
 <table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
 				<th >NoUrut</th>
-				<th >Noreg</th>
+				<th >Kode Kelurahan</th>
 				<th >Nama Kelurahan</th> 
 				<th >Tahun Pembentukan</th> 
 				<th >Dasar Hukum Pembentukan</th> 
@@ -83,7 +83,7 @@ $pesan->show_message($proses, $k_pendaftaran, "$status" );
 						
 						?>
 <td align="center"><? echo $noUrut;?></td>
-<td align="center"><a href="#" title= "detail" onclick="open_url_to_div('<?php echo $this->basePath; ?>/kelurahan/rekampasien/rekampasien?jenisForm=update&kode_pasien=<?echo $c_noreg;?>','<?php echo $this->basePath; ?>/kelurahan/rekampasien/rekampasienjs');"><? echo $c_noreg;?></a></td>
+<td align="center"><a href="#" title= "detail" onclick="open_url_to_div('<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahan?jenisForm=update&kode_pasien=<?echo $c_noreg;?>','<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanjs');"><? echo $c_noreg;?></a></td>
 
 <td class="clleft"><? echo $n_nama;?></td>
 <td align="center"><? echo $c_kelamin;?></td>

@@ -1,20 +1,20 @@
-function carirekampasien()
+function carirekamkelurahan()
 {
-	$("#frmcarirekampasien").ajaxForm(frmcarirekampasien_opt);
+	$("#frmcarirekamkelurahan").ajaxForm(frmcarirekamkelurahan_opt);
 }
-var frmcarirekampasien_opt = {
+var frmcarirekamkelurahan_opt = {
 		target : '#tableview',
-		url: '<?php echo $this->basePath; ?>/kelurahan/rekampasien/rekampasienlist',
+		url: '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanlist',
 		type: 'post', 
 		resetForm: false
 };
-function rekampasienlist()
+function rekamkelurahanlist()
 {
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
 	kode_pasien = document.getElementById('kode_pasien').value;
 	var param = {kode_pasien:kode_pasien,kategoriCari:kategoriCari,carii:carii};
-	var url = '<?php echo $this->basePath; ?>/kelurahan/rekampasien/rekampasienlist';
+	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanlist';
 	jQuery.get(url, param, function(data) {
 		$("div#tableview").html(data);
 	});
@@ -25,23 +25,23 @@ function generateKodeKegiatan(tgl){
 	document.getElementById('KodeKegiatan').value= KodeDetailSubKomponen + tgl;
 }
 
-function rekampasienForm(jenisForm, id)
+function rekamkelurahanForm(jenisForm, id)
 {
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
 	kode_pasien = document.getElementById('kode_pasien').value;
-	var url = '<?php echo $this->basePath; ?>/kelurahan/rekampasien/rekampasiendata';
+	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandata';
 	var param = { jenisForm:jenisForm,kode_pasien:kode_pasien,id:id,kategoriCari:kategoriCari,carii:carii};
 	jQuery.get(url, param, function(data) {
 		jQuery("div#tableview").html(data);
-		jQuery("#frmtambahrekampasien").ajaxForm(tambahRekampasien_opt);
-		jQuery("#frmubahrekampasien").ajaxForm(ubahRekampasien_opt);
+		jQuery("#frmtambahrekamkelurahan").ajaxForm(tambahrekamkelurahan_opt);
+		jQuery("#frmubahrekamkelurahan").ajaxForm(ubahrekamkelurahan_opt);
 	});
 }
 
-var tambahRekampasien_opt = {
+var tambahrekamkelurahan_opt = {
 	target : '#tableview',
-	url: '<?php echo $this->basePath; ?>/kelurahan/rekampasien/rekampasien',
+	url: '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahan',
 	beforeSubmit : function() {
 		
 		if (document.getElementById('c_noreg').value == ''){
@@ -132,9 +132,9 @@ var tambahRekampasien_opt = {
 	resetForm: false
 };
 
-var ubahRekampasien_opt = {
+var ubahrekamkelurahan_opt = {
 	target : '#tableview',
-	url: '<?php echo $this->basePath; ?>/kelurahan/rekampasien/rekampasienupdate',
+	url: '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanupdate',
 	beforeSubmit : function() {
 
 		if (document.getElementById('c_noreg').value == ''){
@@ -220,14 +220,14 @@ var ubahRekampasien_opt = {
 	},
 	success: function(){
 	doCount(5);
-	jQuery("#frmubahrekampasien").ajaxForm(ubahRekampasien_opt);
+	jQuery("#frmubahrekamkelurahan").ajaxForm(ubahrekamkelurahan_opt);
 	},
 	type: 'post', 
 	resetForm: false
 };
 
 
-function rekampasienHapus(param1, id, n_nama)
+function rekamkelurahanHapus(param1, id, n_nama)
 { 
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
@@ -235,7 +235,7 @@ function rekampasienHapus(param1, id, n_nama)
 	
 	if(ConfirmDelete(param1,n_nama))
 	{	
-		handler = '<?php echo $this->basePath; ?>/kelurahan/rekampasien/rekampasienhapus';
+		handler = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanhapus';
 		var opt = {id : id,kode_pasien:kode_pasien,id:id,kategoriCari:kategoriCari,carii:carii};
 		jQuery.get(handler,opt,function(data) {
 				$("#tableview").html(data);
@@ -260,7 +260,7 @@ function CariPengadaan()
 	document.getElementById('n_pengadaan').readOnly = true;
 	id_pengadaan = document.getElementById('id_pengadaan').value;
 
-	url = "<?php echo $this->basePath; ?>/adm/rekampasien/n_namapengadaan?id_pengadaan="+id_pengadaan;
+	url = "<?php echo $this->basePath; ?>/adm/rekamkelurahan/n_namapengadaan?id_pengadaan="+id_pengadaan;
 	BukaWindows();
 }
 
@@ -301,7 +301,7 @@ function deleteRow2(param,id_item,no_item)
 { 
 	if(ConfirmDelete(param, no_item))
 	{	
-		handler = '<?php echo $this->basePath; ?>/kelurahan/rekampasien/rekampasienhapus';
+		handler = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanhapus';
 		//var opt = {id_item:id_item,tahun:tahun,cabang:cabang,kategoriCari:kategoriCari,carii:carii};
 		jQuery.get(handler,function(data) {
 				$("#tableview").html(data);
@@ -311,7 +311,7 @@ function deleteRow2(param,id_item,no_item)
 }
 
 function getKab(){
-	var url = '<?php echo $this->basePath; ?>/kelurahan/rekampasien/get-kab';
+	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/get-kab';
 	var propinsi = document.getElementById('c_propinsi').value;
 	var param = {propinsi:propinsi};	
 	$.getJSON(url,param,function(data){
@@ -329,7 +329,7 @@ function getKab(){
 
 
 function dosenlist(jum) {
-  var url        = '<?php echo $this->basePath; ?>/kelurahan/rekampasien/dosenlist';
+  var url        = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/dosenlist';
   var param      = {jum:jum};
   jQuery.get(url,param,function(data) {   
     $("#dialog-browse").html(data);
@@ -343,7 +343,7 @@ function cariDosen(jum)  {
 
 var frmCariDosen_opt = {
     target : '#dialog-browse',
-    url: '<?php echo $this->basePath; ?>/pasien/rekampasien/dosenlist',
+    url: '<?php echo $this->basePath; ?>/pasien/rekamkelurahan/dosenlist',
     type: 'get', 
     resetForm: false
 };
@@ -358,7 +358,7 @@ function closeDialogDosen(id_pegawai,nama,jum) {
 
 
 function pasienlist() {
-    var url        = '<?php echo $this->basePath; ?>/pasien/rekampasien/pasienlist';
+    var url        = '<?php echo $this->basePath; ?>/pasien/rekamkelurahan/pasienlist';
     jQuery.get(url,function(data) {   
     $("#dialog-browse").html(data);
     $("#dialog-browse").dialog("open");
@@ -371,7 +371,7 @@ function cariPasien()  {
 
 var frmCariPasien_opt = {
     target : '#dialog-browse',
-    url: '<?php echo $this->basePath; ?>/pasien/rekampasien/pasienlist',
+    url: '<?php echo $this->basePath; ?>/pasien/rekamkelurahan/pasienlist',
     type: 'get', 
     resetForm: false
 };
@@ -388,11 +388,11 @@ function closeWinCam(n_file) {
 }
 function umumproses()
 {
-	$("#frmubahrekampasien").ajaxForm(frmubahrekampasien_opt);
+	$("#frmubahrekamkelurahan").ajaxForm(frmubahrekamkelurahan_opt);
 }
-var frmubahrekampasien_opt = {
+var frmubahrekamkelurahan_opt = {
 		target : '#tableview',
-		url: '<?php echo $this->basePath; ?>/pasien/rekampasien/rekampasienupdate',
+		url: '<?php echo $this->basePath; ?>/pasien/rekamkelurahan/rekamkelurahanupdate',
 		beforeSubmit : function() {
 
 		if (document.getElementById('n_nik').value == ''){

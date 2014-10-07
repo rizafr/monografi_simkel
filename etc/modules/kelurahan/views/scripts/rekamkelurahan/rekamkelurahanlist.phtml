@@ -18,7 +18,7 @@ $numToDisplay = $this->numToDisplay;
 ?>
 <div class="navlink">
 <a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
->>  Data Rekam Pasien
+>>  Data Rekam Kelurahan
 </div>
 <div class="panel">
 	<div class="inner">
@@ -114,8 +114,8 @@ $pesan->show_message($proses, $k_rekampasien, "$status" );
 			</table>
 
 			<?	
-			$totalData = $this->totRekampasienList;
-			$modul = $this->basePath."/kelurahan/rekampasien/rekampasienlist";
+			$totalData = $this->totRekamkelurahanList;
+			$modul = $this->basePath."/kelurahan/rekamkelurahan/rekamkelurahanlist";
 			$param1 = $this->cabang;$param2 = $this->tahun;$param3 = $this->bulan;$param4 = $this->jenis;$param5 = $this->status;
 			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
 			
