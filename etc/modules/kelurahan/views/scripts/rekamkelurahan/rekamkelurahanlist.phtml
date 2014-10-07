@@ -23,7 +23,7 @@ $numToDisplay = $this->numToDisplay;
 <div class="panel">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
-		<h2 class="title">Data Kelurahan <? echo $this->detailPasien['n_nama'];?> , Kode Kelurahan <? echo $this->kode_pasien;?></h2>
+		<h2 class="title">Data Kelurahan <? echo $this->detailKelurahan['nama_kelurahan'];?> , Kode Kelurahan <? echo $this->kd_kel;?></h2>
 			<form method="post" id="frmcarirekampasien" name="frmcarirekampasien">
 		<input name="kode_pasien" id="kode_pasien" type="hidden" value="<?echo $this->kode_pasien;?>" />
 
@@ -49,14 +49,11 @@ $pesan->show_message($proses, $k_rekampasien, "$status" );
 ?>
 <table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
 				<th >id</th>
-				<th >Noreg</th>
-				<th >tanggal</th> 
-				<th >berat</th> 
-				<th >tinggi</th>
-				<th >tekanan</th>
-				<th >denyut</th> 
-				<th >frequensi</th> 
-				<th >suhu</th> 
+				<th >Bulan</th>
+				<th >Tahun</th> 
+				<th >Nama Lurah</th> 
+				<th >NIP Lurah</th>
+			
 				
 				
 				<th colspan="2" class="nosort">FUNGSI</th>
@@ -64,7 +61,7 @@ $pesan->show_message($proses, $k_rekampasien, "$status" );
 				<?
 				if (count($this->rekampasienList) == 0){ 
 				?>
-					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+					<tr class="event2"><td colspan="6"><font color="red">Data Tidak Ditemukan</font></td></tr>
 				<?} else {
 						
 						
@@ -79,10 +76,6 @@ $pesan->show_message($proses, $k_rekampasien, "$status" );
 						$t_waktu	= $this->escape($val['t_waktu']); 
 						$t_berat	= $this->escape($val['t_berat']);
 						$t_tinggi	= $this->escape($val['t_tinggi']);
-						$t_tekanan	= $this->escape($val['t_tekanan']);
-						$t_denyut	= $this->escape($val['t_denyut']);
-						$t_frequensi	= $this->escape($val['t_frequensi']);
-						$t_suhu	= $this->escape($val['t_suhu']);
 						
 						
 						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
@@ -101,8 +94,8 @@ $pesan->show_message($proses, $k_rekampasien, "$status" );
 						
 
 
-<td><div onClick="rekampasienForm('update','<? echo $c_id;?>');" class="edit" title="Ubah Data"></div></td>
-<td><div onClick="rekampasienHapus('Data','<? echo $c_id;?>');" class="delete" title="Hapus Data"></div>
+<td><div onClick="rekamkelurahanForm('update','<? echo $c_id;?>');" class="edit" title="Ubah Data"></div></td>
+<td><div onClick="rekamkelurahan('Data','<? echo $c_id;?>');" class="delete" title="Hapus Data"></div>
 						</td>
 						
 					
