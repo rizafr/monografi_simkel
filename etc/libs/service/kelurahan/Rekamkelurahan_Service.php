@@ -1,5 +1,5 @@
 <?php
-class RekamKelurahan_Service {
+class Rekamkelurahan_Service {
     private static $instance;
    
     // A private constructor; prevents direct creation of object
@@ -36,7 +36,7 @@ class RekamKelurahan_Service {
 	   }
 	}
 
-	public function cariRekampasienList(array $dataMasukan, $pageNumber, $itemPerPage,$total) {
+	public function cariRekamkelurahanList(array $dataMasukan, $pageNumber, $itemPerPage,$total) {
 
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
@@ -1134,7 +1134,7 @@ class RekamKelurahan_Service {
 	}
 	////////////////////////////////////////////////////////////////////////////////
 
-	public function detailRekampasienById($id) {
+	public function detailRekamKelurahanById($id) {
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
 		try {
@@ -1218,7 +1218,7 @@ class RekamKelurahan_Service {
 	   }
 	}
 
-	public function detailPasienByKode($kode) {
+	public function detailKelurahanByKode($kode) {
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
 		try {
