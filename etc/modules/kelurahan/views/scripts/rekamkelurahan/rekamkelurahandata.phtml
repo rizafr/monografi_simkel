@@ -84,7 +84,7 @@ $(function(){
 			Pilih Bulan dan Tahun
 		</td>
 		<td>
-			<select name="bln">
+			<select name="bulan" class="kecil">
 				<option selected="selected">Bulan</option>
 				<?php
 				echo date('m');
@@ -93,13 +93,13 @@ $(function(){
 				$jlh_bln=count($bulan_ind);
 				for($c=0; $c<$jlh_bln; $c+=1){
 					if(date('mm') == $bulan[$c]){
-						echo"<option value=$bulan[$c] selected> $bulan_ind[$c] </option>";
+						echo"<option value=$bulan[$c] selected='selected'> $bulan_ind[$c] </option>";
 					}else
 					echo"<option value=$bulan[$c]> $bulan_ind[$c] </option>";
 				}
 				?>
 				</select>
-				<select name="thn">
+				<select name="tahun" class="kecil">
 				<option selected="selected">Tahun</option>
 				<?php
 				for($i=date('Y'); $i>=2010; $i-=1){
