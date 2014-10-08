@@ -145,9 +145,7 @@
 	$temp_file = tempnam(sys_get_temp_dir(), 'PHPWord');
 	$document->save($temp_file);
 	
-	// Your browser will name the file "myFile.docx"
-	// regardless of what it's named on the server 
-	
+	//download
 	header('Content-Disposition: attachment; filename="' . $nama_file . '"');
 	header('Content-Transfer-Encoding: binary');
 	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
