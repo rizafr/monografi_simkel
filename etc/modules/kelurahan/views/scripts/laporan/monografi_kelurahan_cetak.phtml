@@ -1,0 +1,142 @@
+<?php
+	
+	//Format Tanggal Berbahasa Indonesia 
+
+	// Array Hari
+	$array_hari = array(1=>'Senin','Selasa','Rabu','Kamis','Jumat', 'Sabtu','Minggu');
+	$hari = $array_hari[date('N')];
+
+	//Format Tanggal 
+	$tanggal = date ('j');
+
+	//Array Bulan 
+	$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
+	$bulan = $array_bulan[date('n')];
+	 
+	//Format Tahun 
+	$tahun = date('Y');
+
+	 
+	// Include the PHPWord.php, all other classes were loaded by an autoloader
+	include '../etc/libs/PHPWord.php';
+
+	// Create a new PHPWord Object
+	$PHPWord = new PHPWord();
+		
+		
+	$document = $PHPWord->loadTemplate('../etc/data/template_laporan/monografiTemplate.docx');
+	
+	//header
+	$document->setValue('bulan', $this->hasil->bulan);
+	$document->setValue('tahun', $this->hasil->tahun);
+	
+	//awal
+	$document->setValue('namaKelurahan', $this->hasil->namaKelurahan);
+	$document->setValue('tahunPembentukan', $this->hasil->tahunPembentukan);
+	$document->setValue('dasarHukumPembentukan', $this->hasil->dasarHukumPembentukan);
+	$document->setValue('nomorKodeWilayah', $this->hasil->nomorKodeWilayah);
+	$document->setValue('nomorKodePos', $this->hasil->nomorKodePos);
+	$document->setValue('kecamatan', $this->hasil->kecamatan);
+	$document->setValue('kabupaten', $this->hasil->kabupaten);
+	$document->setValue('provinsi', $this->hasil->provinsi);
+	
+	//A. Data Umum
+	$document->setValue('tipologi', $this->hasil->tipologi);
+	$document->setValue('jmlJiwa', $this->hasil->jml_jiwa);
+	$document->setValue('jmlKk', $this->hasil->jml_kk);
+	$document->setValue('jmlLaki', $this->hasil->jml_laki);
+	$document->setValue('jmlPerempuan', $this->hasil->jml_perempuan);
+	$document->setValue('jml015', $this->hasil->jml_0_15);
+	$document->setValue('jml1565', $this->hasil->jml_15_65);
+	$document->setValue('jml65Keatas', $this->hasil->jml_65_keatas);
+	$document->setValue('jmlPns', $this->hasil->jml_pns);
+	$document->setValue('jmlAbri', $this->hasil->jml_abri);
+	$document->setValue('jmlSwasta', $this->hasil->jml_swasta);
+	$document->setValue('jmlWiraswasta', $this->hasil->jml_wiraswasta);
+	$document->setValue('jmlTani', $this->hasil->jml_tani);
+	$document->setValue('jmlPertukangan', $this->hasil->jml_pertukangan);
+	$document->setValue('jmlBuruhTani', $this->hasil->jml_buruh_tani);		
+	$document->setValue('jmlPensiunan', $this->hasil->jml_pensiunan);		
+	$document->setValue('jmlNelayan', $this->hasil->jml_nelayan);		
+	$document->setValue('jmlPemulung', $this->hasil->jml_pemulung);		
+	$document->setValue('jmlJasa', $this->hasil->jml_jasa);		
+	$document->setValue('jmlLulusanTk', $this->hasil->jml_lulusan_tk);		
+	$document->setValue('jmlLulusanSd', $this->hasil->jml_lulusan_sd);		
+	$document->setValue('jmlLulusanSmp', $this->hasil->jml_lulusan_smp);		
+	$document->setValue('jmlLulusanSma', $this->hasil->jml_lulusan_sma);		
+	$document->setValue('jmlLulusanDiploma', $this->hasil->jml_lulusan_diploma);		
+	$document->setValue('jmlLulusanSarjana', $this->hasil->jml_lulusan_sarjana);		
+	$document->setValue('jmlLulusanPascasarjana', $this->hasil->jml_lulusan_pascasarjana);		
+	$document->setValue('jmlLulusanPontren', $this->hasil->jml_lulusan_pontren);		
+	$document->setValue('jmlLulusanKeagamaan', $this->hasil->jml_lulusan_keagamaan);		
+	$document->setValue('jmlLulusanSlb', $this->hasil->jml_lulusan_slb);		
+	$document->setValue('jmlLulusanKursus', $this->hasil->jml_lulusan_kursus);		
+	$document->setValue('jmlLulusanMiskin', $this->hasil->jml_lulusan_miskin);		
+	$document->setValue('jmlJiwaKk', $this->hasil->jml_jiwa_kk);		
+	$document->setValue('umr', $this->hasil->umr);		
+	$document->setValue('saranaKantor', $this->hasil->sarana_kantor);		
+	$document->setValue('saranaPuskesmas', $this->hasil->sarana_puskesmas);		
+	$document->setValue('saranaJmlPosyandu', $this->hasil->sarana_jml_posyandu);		
+	$document->setValue('saranaJmlPoliklinik', $this->hasil->sarana_jml_poliklinik);		
+	$document->setValue('saranaJmlPaud', $this->hasil->sarana_jml_paud);		
+	$document->setValue('saranaJmlTk', $this->hasil->sarana_jml_tk);		
+	$document->setValue('saranaJmlSd', $this->hasil->sarana_jml_sd);		
+	$document->setValue('saranaJmlSmp', $this->hasil->sarana_jml_smp);		
+	$document->setValue('saranaJmlSma', $this->hasil->sarana_jml_sma);		
+	$document->setValue('saranaJmlPt', $this->hasil->sarana_jml_pt);		
+	$document->setValue('saranaJmlMasjid', $this->hasil->sarana_jml_masjid);		
+	$document->setValue('saranaJmlMushola', $this->hasil->sarana_jml_mushola);		
+	$document->setValue('saranaJmlGereja', $this->hasil->sarana_jml_gereja);		
+	$document->setValue('saranaJmlPura', $this->hasil->sarana_jml_pura);		
+	$document->setValue('saranaJmlVihara', $this->hasil->sarana_jml_vihara);		
+	$document->setValue('saranaJmlKlenteng', $this->hasil->sarana_jml_klenteng);		
+	$document->setValue('saranaJmlOlahraga', $this->hasil->sarana_jml_olahraga);		
+	$document->setValue('saranaJmlKesenian', $this->hasil->sarana_jml_kesenian);		
+	$document->setValue('saranaJmlBalaiPertemuan', $this->hasil->sarana_jml_balai_pertemuan);		
+	$document->setValue('saranaJmlLainnya', $this->hasil->sarana_jml_lainnya);		
+				
+	//B. Data Personil
+	$document->setValue('namaLurah', $this->hasil->nama_lurah);		
+	$document->setValue('namaSeklur', $this->hasil->nama_seklur);		
+	$document->setValue('jumlahAparatGol1', $this->hasil->jumlah_aparat_gol1);		
+	$document->setValue('jumlahAparatGol2', $this->hasil->jumlah_aparat_gol2);		
+	$document->setValue('jumlahAparatGol3', $this->hasil->jumlah_aparat_gol3);		
+	$document->setValue('jumlahAparatGol4', $this->hasil->jumlah_aparat_gol4);
+	
+	
+	//titimangsa surat
+	$document->setValue('titimangsa',$tanggal ." ". $bulan ." ". $tahun);
+	$document->setValue('namaPejabat', $this->hasil->nama_pejabat);
+	$document->setValue('nipPejabat', $this->hasil->nip_pejabat);
+	
+	$path='E:\\';
+	$nama_file= $namafile = "ANDONNIKAH_".$this->hasil->nama."_"."_".date('Y-m-d').".docx";
+	// $document->save('E:\\andonnikahTemplate.docx');
+	//$document->save('E:\\'.$nama_file);
+	
+	
+	// At least write the document to webspace:
+	$objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
+	
+	// // save as a random file in temp file
+	$temp_file = tempnam(sys_get_temp_dir(), 'PHPWord');
+	$document->save($temp_file);
+	
+	// Your browser will name the file "myFile.docx"
+	// regardless of what it's named on the server 
+	
+	header('Content-Disposition: attachment; filename="' . $nama_file . '"');
+	header('Content-Transfer-Encoding: binary');
+	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+	header('Expires: 0');
+	header('Pragma: public');
+	flush();
+	readfile($temp_file); // or echo file_get_contents($temp_file);
+	unlink($temp_file);  // remove temp file
+
+	
+	
+	exit;
+
+
+?>
