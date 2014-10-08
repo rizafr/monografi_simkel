@@ -103,19 +103,40 @@
 	$document->setValue('jumlahAparatGol3', $this->hasil->jumlah_aparat_gol3);		
 	$document->setValue('jumlahAparatGol4', $this->hasil->jumlah_aparat_gol4);
 	
-	//
+	//C. Data Kewenangan
+	$document->setValue('pemerintahPusat', $this->hasil->jml_pemerintah_pusat);		
+	$document->setValue('provinsi', $this->hasil->jml_provinsi);		
+	$document->setValue('kabupaten', $this->hasil->jml_kabupaten);
 	
+	//D. Data Keuangan
+	$document->setValue('anggaranApbd', $this->hasil->anggaran_apbd);		
+	$document->setValue('isSkpd', $this->hasil->is_skpd);		
+	$document->setValue('bantuanPusat', $this->hasil->bantuan_pusat);
+	$document->setValue('bantuanProv', $this->hasil->bantuan_prov);
+	$document->setValue('bantuanKota', $this->hasil->bantuan_kota);
+	$document->setValue('hibah', $this->hasil->hibah);
+	$document->setValue('sumbangan', $this->hasil->sumbangan);
+	$document->setValue('swadaya', $this->hasil->swadaya);
 	
-	//titimangsa surat
-	$document->setValue('titimangsa',$tanggal ." ". $bulan ." ". $tahun);
-	$document->setValue('namaPejabat', $this->hasil->nama_pejabat);
-	$document->setValue('nipPejabat', $this->hasil->nip_pejabat);
+	//E. Kelembagaan
+	$document->setValue('lpmJmlPengurus', $this->hasil->lpm_jml_pengurus);		
+	$document->setValue('lpmJmlKegPerbulan', $this->hasil->lpm_jml_keg_perbulan);		
+	//$document->setValue('lpmJmlBukuAdministrasi', $this->hasil->lpm_jml_buku_administrasi);
+	$document->setValue('lpmJmlDana', $this->hasil->lpm_jml_dana);
+	//$document->setValue('lembagaAdat', $this->hasil->lembaga_adat);
+	$document->setValue('pkkJmlPengurus', $this->hasil->pkk_jml_pengurus);
+	$document->setValue('pkkJmlKegPerbulan', $this->hasil->pkk_jml_keg_perbulan);
+	$document->setValue('pkkJmlBukuAdministrasi', $this->hasil->pkk_jml_buku_administrasi);
+	//$document->setValue('pkkJmlDana', $this->hasil->pkk_jml_dana);
+	$document->setValue('jmlRw', $this->hasil->jml_rw);
+	$document->setValue('jmlRt', $this->hasil->jml_rt);
+	$document->setValue('rataPenghasilanRw', $this->hasil->rata_penghasilan_rw);
+	$document->setValue('rataPenghasilanRt', $this->hasil->rata_penghasilan_rt);
+	$document->setValue('tarunaJml', $this->hasil->taruna_jml);
+	$document->setValue('tarunaJmlPengurus', $this->hasil->taruna_jml_pengurus);
+	$document->setValue('jmlLembagaLain', $this->hasil->jml_lembaga_lain);	
 	
-	$path='E:\\';
-	$nama_file= $namafile = "ANDONNIKAH_".$this->hasil->nama."_"."_".date('Y-m-d').".docx";
-	// $document->save('E:\\andonnikahTemplate.docx');
-	//$document->save('E:\\'.$nama_file);
-	
+	$nama_file= $namafile = "Monografi Kelurahan ".$this->hasil->kelurahan." ".$this->hasil->bulan." ".$this->hasil->tahun.".rft";
 	
 	// At least write the document to webspace:
 	$objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
@@ -135,10 +156,6 @@
 	flush();
 	readfile($temp_file); // or echo file_get_contents($temp_file);
 	unlink($temp_file);  // remove temp file
-
-	
 	
 	exit;
-
-
 ?>

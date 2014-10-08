@@ -694,17 +694,17 @@ class Rekamkelurahan_Service {
 		$db = $registry->get('db');
 		try {
 		$db->beginTransaction();
-			$paramInput = array("tahun" 					=> $dataMasukan['tahun'],
-								"bulan"						=> $dataMasukan['bulan'],
-								"kd_kel"	           	 	=> $dataMasukan['kd_kel'],
-								"anggaran_apbd"	           	=> $dataMasukan['anggaran_apbd'],
+			$paramInput = array("tahun" 			=> $dataMasukan['tahun'],
+								"bulan"				=> $dataMasukan['bulan'],
+								"kd_kel"	        => $dataMasukan['kd_kel'],
+								"anggaran_apbd"	    => $dataMasukan['anggaran_apbd'],
 								"is_skpd"	        => $dataMasukan['is_skpd'],
 								"bantuan_pusat"	    => $dataMasukan['bantuan_pusat'],
 								"bantuan_prov"	    => $dataMasukan['bantuan_prov'],
 								"bantuan_kota"	    => $dataMasukan['bantuan_kota'],
-								"hibah"         		=> $dataMasukan['hibah'],
+								"hibah"         	=> $dataMasukan['hibah'],
 								"sumbangan"	        => $dataMasukan['sumbangan'],
-								"swadaya"	    => $dataMasukan['swadaya']
+								"swadaya"	    	=> $dataMasukan['swadaya']
 								
 								);
 			//var_dump($paramInput);
