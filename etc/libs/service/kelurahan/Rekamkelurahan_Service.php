@@ -18,7 +18,7 @@ class Rekamkelurahan_Service {
     }
 
 	//======================================================================
-	// List Rekampasien
+	// List Rekamkelurahan
 	//======================================================================
 
 	public function getRekampasienList() {
@@ -144,7 +144,7 @@ class Rekamkelurahan_Service {
 								"jml_lulusan_keagamaan"		=> $dataMasukan['jml_lulusan_keagamaan'],
 								"jml_lulusan_slb"			=> $dataMasukan['jml_lulusan_slb'],
 								"jml_lulusan_kursus"		=> $dataMasukan['jml_lulusan_kursus'],
-								"jml_lulusan_miskin"		=> $dataMasukan['jml_lulusan_miskin'],
+								"jml_jiwa_miskin"			=> $dataMasukan['jml_jiwa_miskin'],
 								"jml_jiwa_kk"				=> $dataMasukan['jml_jiwa_kk'],
 								"umr"						=> $dataMasukan['umr'],
 								"sarana_kantor"				=> $dataMasukan['sarana_kantor'],
