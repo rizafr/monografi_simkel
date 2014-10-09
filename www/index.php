@@ -1,4 +1,6 @@
 <?php
+// echo phpinfo();
+// die();
 set_include_path('.' . PATH_SEPARATOR . '../etc/libs'
                      . PATH_SEPARATOR . '../etc/data'
 					 . PATH_SEPARATOR . 'C:/xampp/php/pear/ZendFramework-1.9.5/library'

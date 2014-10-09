@@ -499,7 +499,7 @@ input[type="button"]:active {
 div#container {
 	padding: 0;
 	margin:0 auto;
-	border:8px solid #2C3E50;
+	border: 4px solid #2C3E50;
 	border-top:none;
 	width:965px;
 		
@@ -510,8 +510,9 @@ div#header {
 	padding:0;
 	margin:0;
 	height:120px;
-	background:#E4E4E4 url('../images/header.png')  no-repeat;            
+	background:#70a5d9 url('../images/header.png')  no-repeat;            
 	width:965px;
+	border-top: 8px solid #2C3E50 ;
 	
 }
 /* Content*/
@@ -725,13 +726,14 @@ div#content .contentdata-modul {
 /*style for accordion*/
 .user {color:#CCCC99;}
 .menuback{
+	border-top: 4px solid #2C3E50 ;
 	max-width: 1200px;
 	min-width: 290px;
 	width: 100%;
 	padding:0;
 	height:45px;
 	line-height:31px;
-	background:#34495E;
+	background:#34495E; 
 	font-size: 12px;
 	margin:0 auto;
 	color:#FFF;
@@ -740,9 +742,10 @@ div#content .contentdata-modul {
 .desc{
 	padding:0;
 	padding-right:10px;
-	height:20px;
-	line-height:20px;
-	background:#B8BFAF;
+	padding-top:10px;
+	height:27px;
+	line-height:27px;
+	background:#4a8cc0;
 	font-size: 14px;
 	margin:0 auto;
 	color:#111111;
@@ -2252,7 +2255,7 @@ button.mouseOut    { background-color: #FFFFFF; border: 1px solid #FFFFFF; paddi
    position:relative;
     width:auto;
     float:right;
-    margin:15px 45px 0 0;
+    margin: 95px 10px 0px 0px;
     background-image: url('../images/bar_mod.gif');
     height:22px;
     color:#666;

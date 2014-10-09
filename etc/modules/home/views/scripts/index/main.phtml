@@ -45,12 +45,12 @@
 						<?
 							$i_nip=$this->user_id;
 							$vFoto1 = "http://".$_SERVER['SERVER_NAME'].$this->basePath.'/util/tampilfoto/tampilfoto?f='.$i_nip;
-							$filename = trim($i_nip).".jpg"; 
+							$filename = trim($i_nip).".png"; 
 							$a = "../etc/data/kp/photo/".$filename;
 							$fullpath= "/util/tampilfoto/tampilfoto?f=$i_nip";
 								
 							if (!file_exists($a)) {
-								$vFoto = $this->basePath."/images/nophoto.jpg";	
+								$vFoto = $this->basePath."/images/user-icon.png";	
 							} 
 							else
 							{
@@ -60,10 +60,10 @@
 						
 					<div class="leftbox"  id="leftbox"><!--start leftmenu-->
 						<div class="ct-menu">
-							<div class="hd">Identitas</div>
+							<div class="hd">Profil Pengguna</div>
 								<div class="bd">
-									<img src="<?=$vFoto?>" class="foto" width=65 height=90>
-									<? echo $this->n_nama;?>
+									<img src="<?=$vFoto?>" class="foto" width="90" height="90">
+									Nama : <?echo $this->nama;?>
 									<div class="clear"></div>
 						</div>
 						<div class="ft"></div>		   
