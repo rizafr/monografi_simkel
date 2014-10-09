@@ -796,6 +796,20 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 	public function getKabAction(){
 		$this->view->list		=  $this->ref_serv->getKabByPropList(trim($_REQUEST["propinsi"]));
 	}
+	
+	public function laporanAction(){
+		$this->view->kd_kel	= $_REQUEST['kd_kel'];
+		$this->view->bulan 	= $_REQUEST['bulan'];
+		$this->view->tahun 	= $_REQUEST['tahun'];
+
+		$this->view->detailUmum	= $this->rekamkelurahan_serv->detailUmum($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailPersonil	= $this->rekamkelurahan_serv->detailPersonil($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKewenangan	= $this->rekamkelurahan_serv->detailKewenangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKeuangan	= $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKelembagaan	= $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailTrantib	= $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->render('laporan/monografi_kelurahan_cetak');
+	}
 
 }
 ?>
