@@ -3,7 +3,7 @@
 // die();
 set_include_path('.' . PATH_SEPARATOR . '../etc/libs'
                      . PATH_SEPARATOR . '../etc/data'
-					 . PATH_SEPARATOR . 'C:/xampp/php/pear/ZendFramework-1.9.5/library'
+					 . PATH_SEPARATOR . 'C:/xampp/php/pear/Zend'
 	                 . PATH_SEPARATOR . get_include_path());
 	 
 require_once 'Zend/Loader.php';

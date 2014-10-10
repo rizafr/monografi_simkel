@@ -23,7 +23,7 @@ class Sso_User_Service {
 	   $db = $registry->get('db');
 	   try {
 		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
-         $rabkaklist = $db->fetchAll("SELECT * FROM tm_pegawai where userid = '$userid' and password=md5('$paswd') and c_status ='A'");	
+         $rabkaklist = $db->fetchAll("SELECT * FROM [SIMKEL].[dbo].[user] where user_id = '$userid' and password=md5('$paswd')");	
 	     return $rabkaklist;
 	   } catch (Exception $e) {
          echo $e->getMessage().'<br>';
@@ -36,7 +36,22 @@ class Sso_User_Service {
 	   try {
 		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 		 $ktsandi = md5($paswd);
-		 $sql = "SELECT * FROM t_user where username ='$username' and pass ='$ktsandi' ";
+		 $sql = "SELECT * FROM [SIMKEL].[dbo].[user] where user_id ='$username' and password ='$ktsandi' ";
+		// echo $sql;
+		 $hasil = $db->fetchRow($sql);
+		 return $hasil;
+	   } catch (Exception $e) {
+         echo $e->getMessage().'<br>';
+	     return 'gagal <br>';
+	   }
+	}
+	public function getDataUser3($username,$paswd,$usergroup) {
+	   $registry = Zend_Registry::getInstance();
+	   $db = $registry->get('db');
+	   try {
+		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
+		 $ktsandi = md5($paswd);
+		 $sql = "SELECT * FROM user where username ='$username' and pass ='$ktsandi' ";
 		// echo $sql;
 		 $hasil = $db->fetchRow($sql);
 		 return $hasil;
@@ -99,7 +114,7 @@ class Sso_User_Service {
 	   $db = $registry->get('db');
 	   try {
 		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
-         $hasil = $db->fetchOne("SELECT * FROM  t_user where userid='$userid' and c_status ='A' ");	
+         $hasil = $db->fetchOne("SELECT * FROM  [SIMKEL].[dbo].[user] where user_id='$userid' ");	
 		 return $hasil;
 		 
 	   } catch (Exception $e) {
@@ -113,7 +128,7 @@ class Sso_User_Service {
 	   $db = $registry->get('db');
 	   try {
 		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
-         $hasil = $db->fetchOne("SELECT userid FROM  t_user  where userid='$userid' and c_status ='A'");	
+         $hasil = $db->fetchOne("SELECT user_id FROM  [SIMKEL].[dbo].[user]  where user_id='$userid'");	
 		 return $hasil;
 		 
 	   } catch (Exception $e) {
@@ -129,7 +144,7 @@ class Sso_User_Service {
 		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 		 $ktsandi = md5($paswd);
 		 
-         $hasil = $db->fetchRow("select c_group from  t_user where c_group in ($usergroup) and 
+         $hasil = $db->fetchRow("select c_group from  [SIMKEL].[dbo].[user] where c_group in ($usergroup) and 
 		 c_status ='A' ");
 		 
 		 return $hasil;

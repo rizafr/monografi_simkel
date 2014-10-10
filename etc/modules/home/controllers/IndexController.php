@@ -58,7 +58,7 @@ class Home_IndexController extends Zend_Controller_Action {
     }
 	
 	public function mainAction() {
-		$username = $_POST['log'];
+		$username = $_POST['user_login'];
 	    $passwd = $_POST['pwd'];
 		$par = $_POST['par'];
 		$usergroup = $_POST['usergroup'];

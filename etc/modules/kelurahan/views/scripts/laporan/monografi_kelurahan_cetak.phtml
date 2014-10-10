@@ -1,7 +1,6 @@
 <?php
 	
 	//Format Tanggal Berbahasa Indonesia 
-
 	// Array Hari
 	$array_hari = array(1=>'Senin','Selasa','Rabu','Kamis','Jumat', 'Sabtu','Minggu');
 	$hari = $array_hari[date('N')];
@@ -21,9 +20,7 @@
 	include '../etc/libs/PHPWord.php';
 
 	// Create a new PHPWord Object
-	$PHPWord = new PHPWord();
-		
-		
+	$PHPWord = new PHPWord();		
 	$document = $PHPWord->loadTemplate('../etc/data/template_laporan/monografiTemplate.docx');
 	
 	//header
