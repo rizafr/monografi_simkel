@@ -149,6 +149,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi" id="tipologi" value="Y"> i. Jasa dan Perdagangan :</td>
 	</tr>
 	
+	<!--KELURAHAN-->
 	<tr>
 		<td align="right" >* 2. Luas Wilayah :</td>
 		<td>	
@@ -244,9 +245,10 @@ $(function(){
 				echo $ctrlFrm->formText("jarak_dari_ibukota_prov", $this->detailKelurahan->jarak_dari_ibukota_prov, $jarak_dari_ibukota_provAttrib);
 			?>  km
 		</td>
-	</tr>
-		
+	</tr>	
+	<!--End KELURAHAN-->
 	
+	<!--UMUM-->
 	<tr>
 		<td align="right" >5. Jumlah Penduduk :</td>
 		<td><? 
@@ -804,9 +806,11 @@ $(function(){
 	
 
 </table>
-</div> <!-- End Tabs 1-->
+</div> 
+<!--End UMUM-->
 
-<div id="tabs-2"> <!-- DATA PERSONIL -->
+<!-- DATA PERSONIL -->
+<div id="tabs-2"> 
 <table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 	<tr>
 		<td colspan="2" align="right" >1. Kepala Kelurahan (Lurah)</td>
@@ -828,7 +832,7 @@ $(function(){
 		<td>	
 			<? 
 				$gol_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("gol_lurah", $this->detailKelurahan->gol_lurah, $gol_lurahAttrib);
+				echo $ctrlFrm->formText("gol_lurah", $this->detailPersonil['gol_lurah'], $gol_lurahAttrib);
 			?>
 		</td>
 	</tr>
@@ -838,7 +842,7 @@ $(function(){
 		<td>	
 			<? 
 				$nip_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("nip_lurah", $this->detailKelurahan->nip_lurah, $nip_lurahAttrib);
+				echo $ctrlFrm->formText("nip_lurah", $this->detailPersonil['nip_lurah'], $nip_lurahAttrib);
 			?>
 		</td>
 	</tr>
@@ -855,7 +859,7 @@ $(function(){
 		<td>	
 			<? 
 				$tmt_jabatan_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("tmt_jabatan_lurah", $this->detailKelurahan->tmt_jabatan_lurah, $tmt_jabatan_lurahAttrib);
+				echo $ctrlFrm->formText("tmt_jabatan_lurah", $this->detailPersonil['tmt_jabatan_lurah'], $tmt_jabatan_lurahAttrib);
 			?>
 		</td>
 	</tr>
@@ -865,7 +869,7 @@ $(function(){
 		<td>	
 			<? 
 				$riwayat_jabatan1Attrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("riwayat_jabatan1", $this->detailKelurahan->riwayat_jabatan1, $riwayat_jabatan1Attrib);
+				echo $ctrlFrm->formText("riwayat_jabatan1", $this->detailPersonil['riwayat_jabatan1'], $riwayat_jabatan1Attrib);
 			?>
 		</td>
 	</tr>
@@ -885,7 +889,7 @@ $(function(){
 		<td>
 			<? 
 				$nama_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("nama_s", $this->detailKelurahan->nama_lurah, $nama_lurahAttrib);
+				echo $ctrlFrm->formText("nama_seklur", $this->detailPersonil['nama_seklur'], $nama_seklurAttrib);
 			?>
 		</td>
 	</tr>
@@ -895,7 +899,7 @@ $(function(){
 		<td>	
 			<? 
 				$gol_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("gol_lurah", $this->detailKelurahan->gol_lurah, $gol_lurahAttrib);
+				echo $ctrlFrm->formText("gol_seklur", $this->detailPersonil['gol_seklur'], $gol_seklurAttrib);
 			?>
 		</td>
 	</tr>
@@ -905,7 +909,7 @@ $(function(){
 		<td>	
 			<? 
 				$nip_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("nip_lurah", $this->detailKelurahan->nip_lurah, $nip_lurahAttrib);
+				echo $ctrlFrm->formText("nip_seklur", $this->detailPersonil['nip_seklur'], $nip_seklurAttrib);
 			?>
 		</td>
 	</tr>
@@ -922,7 +926,7 @@ $(function(){
 		<td>	
 			<? 
 				$tmt_jabatan_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("tmt_jabatan_lurah", $this->detailKelurahan->tmt_jabatan_lurah, $tmt_jabatan_lurahAttrib);
+				echo $ctrlFrm->formText("tmt_jabatan_seklur", $this->detailPersonil['tmt_jabatan_seklur'], $tmt_jabatan_seklurAttrib);
 			?>
 		</td>
 	</tr>
@@ -932,7 +936,7 @@ $(function(){
 		<td>	
 			<? 
 				$riwayat_jabatan1Attrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("riwayat_jabatan1", $this->detailKelurahan->riwayat_jabatan1, $riwayat_jabatan1Attrib);
+				echo $ctrlFrm->formText("riwayat_jabatan1", $this->detailPersonil['riwayat_jabatan1'], $riwayat_jabatan1Attrib);
 			?>
 		</td>
 	</tr>
@@ -954,7 +958,7 @@ $(function(){
 		<td>
 			<? 
 				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
+				echo $ctrlFrm->formText("jumlah_aparat_gol1", $this->detailPersonil['jumlah_aparat_gol1'], $jumlah_aparat_gol1Attrib);
 			?>  orang
 		
 		</td>
@@ -965,7 +969,7 @@ $(function(){
 		<td>	
 			<? 
 				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
+				echo $ctrlFrm->formText("jumlah_aparat_gol2", $this->detailPersonil['jumlah_aparat_gol2'], $jumlah_aparat_gol2Attrib);
 			?>  orang
 		</td>
 	</tr>
@@ -975,7 +979,7 @@ $(function(){
 		<td>	
 			<? 
 				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
+				echo $ctrlFrm->formText("jumlah_aparat_gol3", $this->detailPersonil['jumlah_aparat_gol3'], $jumlah_aparat_gol3Attrib);
 			?>  orang
 		</td>
 	</tr>
@@ -985,18 +989,15 @@ $(function(){
 		<td>	
 			<? 
 				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
+				echo $ctrlFrm->formText("jumlah_aparat_gol4", $this->detailPersonil['jumlah_aparat_gol4'], $jumlah_aparat_gol4Attrib);
 			?>  orang
 		</td>
-	</tr>
-	
-	
-	
-				
+	</tr>		
 </table>
 </div>
+<!--End Personil-->
 
-
+<!--Kewenangan-->
 <div id="tabs-3">
 <table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 	<tr>
@@ -1078,9 +1079,10 @@ $(function(){
 
 </table>
 </div>
+<!--End Kewenangan-->
 
-
-<div id="tabs-4"> <!-- DATA KEUANGAN -->
+<!-- DATA KEUANGAN -->
+<div id="tabs-4">
 <table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 
 	<tr>
@@ -1088,7 +1090,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$anggaran_apbdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("anggaran_apbd", $this->detailKelurahan->anggaran_apbd, $anggaran_apbdAttrib);
+				echo $ctrlFrm->formText("anggaran_apbd", $this->detailKeuangan['anggaran_apbd'], $anggaran_apbdAttrib);
 			?>  </td>
 	</tr>
 	
@@ -1112,7 +1114,7 @@ $(function(){
 		RP &nbsp;
 			<? 
 				$bantuan_pusatAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("bantuan_pusat", $this->detailKelurahan->bantuan_pusat, $bantuan_pusatAttrib);
+				echo $ctrlFrm->formText("bantuan_pusat", $this->detailKeuangan['bantuan_pusat'], $bantuan_pusatAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1122,7 +1124,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$bantuan_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("bantuan_prov", $this->detailKelurahan->bantuan_prov, $bantuan_provAttrib);
+				echo $ctrlFrm->formText("bantuan_prov", $this->detailKeuangan['bantuan_prov'], $bantuan_provAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1132,7 +1134,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$bantuan_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("bantuan_kota", $this->detailKelurahan->bantuan_kota, $bantuan_kotaAttrib);
+				echo $ctrlFrm->formText("bantuan_kota", $this->detailKeuangan['bantuan_kota'], $bantuan_kotaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1142,7 +1144,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$hibahAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("hibah", $this->detailKelurahan->hibah, $hibahAttrib);
+				echo $ctrlFrm->formText("hibah", $this->detailKeuangan['hibah'], $hibahAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1152,7 +1154,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$sumbanganAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sumbangan", $this->detailKelurahan->sumbangan, $sumbanganAttrib);
+				echo $ctrlFrm->formText("sumbangan", $this->detailKeuangan['sumbangan'], $sumbanganAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1162,17 +1164,16 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$swadayaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("swadaya", $this->detailKelurahan->swadaya, $swadayaAttrib);
+				echo $ctrlFrm->formText("swadaya", $this->detailKeuangan['swadaya'], $swadayaAttrib);
 			?> 
 		</td>
 	</tr>
-				
-				
-
 </table>
 </div>
+<!--End Keuangan-->
 
-<div id="tabs-5"> <!-- KELEMBAGAAN -->
+<!-- KELEMBAGAAN -->
+<div id="tabs-5"> 
 <table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 
 	<tr>
@@ -1187,7 +1188,7 @@ $(function(){
 		<td> 
 			<? 
 				$lpmp_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("lpmp_jml_pengurus", $this->detailKelurahan->lpmp_jml_pengurus, $lpmp_jml_pengurusAttrib);
+				echo $ctrlFrm->formText("lpmp_jml_pengurus", $this->detailKelembagaan['lpmp_jml_pengurus'], $lpmp_jml_pengurusAttrib);
 			?> orang 
 		</td>
 	</tr>
@@ -1197,7 +1198,7 @@ $(function(){
 		<td> 
 			<? 
 				$lpmp_jml_anggotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("lpmp_jml_anggota", $this->detailKelurahan->lpmp_jml_anggota, $lpmp_jml_anggotaAttrib);
+				echo $ctrlFrm->formText("lpmp_jml_anggota", $this->detailKelembagaan['lpmp_jml_anggota'], $lpmp_jml_anggotaAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1207,7 +1208,7 @@ $(function(){
 		<td> 
 			<? 
 				$lpmp_jml_keg_perbulanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("lpmp_jml_keg_perbulan", $this->detailKelurahan->lpmp_jml_keg_perbulan, $lpmp_jml_keg_perbulanAttrib);
+				echo $ctrlFrm->formText("lpmp_jml_keg_perbulan", $this->detailKelembagaan['lpmp_jml_keg_perbulan'], $lpmp_jml_keg_perbulanAttrib);
 			?>  kegiatan
 		</td>
 	</tr>
@@ -1217,7 +1218,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$lpmp_jml_danaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("lpmp_jml_dana", $this->detailKelurahan->lpmp_jml_dana, $lpmp_jml_danaAttrib);
+				echo $ctrlFrm->formText("lpmp_jml_dana", $this->detailKelembagaan['lpmp_jml_dana'], $lpmp_jml_danaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1234,7 +1235,7 @@ $(function(){
 		<td> 
 			<? 
 				$pkk_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("pkk_jml_pengurus", $this->detailKelurahan->pkk_jml_pengurus, $pkk_jml_pengurusAttrib);
+				echo $ctrlFrm->formText("pkk_jml_pengurus", $this->detailKelembagaan['pkk_jml_pengurus'], $pkk_jml_pengurusAttrib);
 			?> orang 
 		</td>
 	</tr>
@@ -1244,7 +1245,7 @@ $(function(){
 		<td> 
 			<? 
 				$pkk_jml_anggotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("pkk_jml_anggota", $this->detailKelurahan->pkk_jml_anggota, $pkk_jml_anggotaAttrib);
+				echo $ctrlFrm->formText("pkk_jml_anggota", $this->detailKelembagaan['pkk_jml_anggota'], $pkk_jml_anggotaAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1254,7 +1255,7 @@ $(function(){
 		<td> 
 			<? 
 				$pkk_jml_keg_perbulanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("pkk_jml_keg_perbulan", $this->detailKelurahan->pkk_jml_keg_perbulan, $pkk_jml_keg_perbulanAttrib);
+				echo $ctrlFrm->formText("pkk_jml_keg_perbulan", $this->detailKelembagaan['pkk_jml_keg_perbulan'], $pkk_jml_keg_perbulanAttrib);
 			?>  kegiatan
 		</td>
 	</tr>
@@ -1264,7 +1265,7 @@ $(function(){
 		<td> 
 			<? 
 				$pkk_jml_buku_administrasiAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("pkk_jml_buku_administrasi", $this->detailKelurahan->pkk_jml_buku_administrasi, $pkk_jml_buku_administrasiAttrib);
+				echo $ctrlFrm->formText("pkk_jml_buku_administrasi", $this->detailKelembagaan['pkk_jml_buku_administrasi'], $pkk_jml_buku_administrasiAttrib);
 			?>  kegiatan
 		</td>
 	</tr>
@@ -1274,7 +1275,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$pkk_jml_danaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("pkk_jml_dana", $this->detailKelurahan->pkk_jml_dana, $pkk_jml_danaAttrib);
+				echo $ctrlFrm->formText("pkk_jml_dana", $this->detailKelembagaan['pkk_jml_dana'], $pkk_jml_danaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1291,7 +1292,7 @@ $(function(){
 		<td> 
 			<? 
 				$taruna_jmlAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("taruna_jml", $this->detailKelurahan->taruna_jml, $taruna_jmlAttrib);
+				echo $ctrlFrm->formText("taruna_jml", $this->detailKelembagaan['taruna_jml'], $taruna_jmlAttrib);
 			?> buah 
 		</td>
 	</tr>
@@ -1301,7 +1302,7 @@ $(function(){
 		<td> 
 			<? 
 				$taruna_jenisAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("taruna_jenis", $this->detailKelurahan->taruna_jenis, $taruna_jenisAttrib);
+				echo $ctrlFrm->formText("taruna_jenis", $this->detailKelembagaan['taruna_jenis'], $taruna_jenisAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1311,7 +1312,7 @@ $(function(){
 		<td> 
 			<? 
 				$taruna_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("taruna_jml_pengurus", $this->detailKelurahan->taruna_jml_pengurus, $taruna_jml_pengurusAttrib);
+				echo $ctrlFrm->formText("taruna_jml_pengurus", $this->detailKelembagaan['taruna_jml_pengurus'], $taruna_jml_pengurusAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1328,7 +1329,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_rwAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_rw", $this->detailKelurahan->jml_rw, $jml_rwAttrib);
+				echo $ctrlFrm->formText("jml_rw", $this->detailKelembagaan['jml_rw'], $jml_rwAttrib);
 			?> buah 
 		</td>
 	</tr>
@@ -1338,7 +1339,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_rtAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_rt", $this->detailKelurahan->jml_rt, $jml_rtAttrib);
+				echo $ctrlFrm->formText("jml_rt", $this->detailKelembagaan['jml_rt'], $jml_rtAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -1348,7 +1349,7 @@ $(function(){
 		<td> Rp 
 			<? 
 				$rata_penghasilan_rwAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("rata_penghasilan_rw", $this->detailKelurahan->rata_penghasilan_rw, $rata_penghasilan_rwAttrib);
+				echo $ctrlFrm->formText("rata_penghasilan_rw", $this->detailKelembagaan['rata_penghasilan_rw'], $rata_penghasilan_rwAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1358,7 +1359,7 @@ $(function(){
 		<td> Rp 
 			<? 
 				$rata_penghasilan_rtAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("rata_penghasilan_rt", $this->detailKelurahan->rata_penghasilan_rt, $rata_penghasilan_rtAttrib);
+				echo $ctrlFrm->formText("rata_penghasilan_rt", $this->detailKelembagaan['rata_penghasilan_rt'], $rata_penghasilan_rtAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1375,26 +1376,23 @@ $(function(){
 		<td> 
 			<? 
 				$jml_lembaga_lainAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_lembaga_lain", $this->detailKelurahan->jml_lembaga_lain, $jml_lembaga_lainAttrib);
+				echo $ctrlFrm->formText("jml_lembaga_lain", $this->detailKelembagaan['jml_lembaga_lain'], $jml_lembaga_lainAttrib);
 			?> buah 
 		</td>
 	</tr>
-	
-	
-	
-	
 </table>
 </div>
+<!--End Kelembagaan-->
 
-
-<div id="tabs-6"> <!-- KEAMANAN DAN KETERTIBAN-->
+<!-- KEAMANAN DAN KETERTIBAN-->
+<div id="tabs-6"> 
 <table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 	<tr>
 		<td align="right" >1. Jumlah Anggota Linmas:</td>
 		<td>
 			<? 
 				$jml_anggota_linmasAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_anggota_linmas", $this->detailKelurahan->jml_anggota_linmas, $jml_anggota_linmasAttrib);
+				echo $ctrlFrm->formText("jml_anggota_linmas", $this->detailTrantib['jml_anggota_linmas'], $jml_anggota_linmasAttrib);
 			?> orang
 		</td>
 	</tr>
@@ -1404,7 +1402,7 @@ $(function(){
 		<td>
 			<? 
 				$jml_pos_kamlingAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pos_kamling", $this->detailKelurahan->jml_pos_kamling, $jml_pos_kamlingAttrib);
+				echo $ctrlFrm->formText("jml_pos_kamling", $this->detailTrantib['jml_pos_kamling'], $jml_pos_kamlingAttrib);
 			?> pos
 		</td>
 	</tr>
@@ -1414,7 +1412,7 @@ $(function(){
 		<td>
 			<? 
 				$jml_ops_penertibanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_ops_penertiban", $this->detailKelurahan->jml_ops_penertiban, $jml_ops_penertibanAttrib);
+				echo $ctrlFrm->formText("jml_ops_penertiban", $this->detailTrantib['jml_ops_penertiban'], $jml_ops_penertibanAttrib);
 			?> kali
 		</td>
 	</tr>
@@ -1429,7 +1427,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_pencurianAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pencurian", $this->detailKelurahan->jml_pencurian, $jml_pencurianAttrib);
+				echo $ctrlFrm->formText("jml_pencurian", $this->detailTrantib['jml_pencurian'], $jml_pencurianAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1439,7 +1437,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_perkosaanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_perkosaan", $this->detailKelurahan->jml_perkosaan, $jml_perkosaanAttrib);
+				echo $ctrlFrm->formText("jml_perkosaan", $this->detailTrantib['jml_perkosaan'], $jml_perkosaanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1449,7 +1447,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_kenakalan_remajaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_kenakalan_remaja", $this->detailKelurahan->jml_kenakalan_remaja, $jml_kenakalan_remajaAttrib);
+				echo $ctrlFrm->formText("jml_kenakalan_remaja", $this->detailTrantib['jml_kenakalan_remaja'], $jml_kenakalan_remajaAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1459,7 +1457,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_pembunuhanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pembunuhan", $this->detailKelurahan->jml_pembunuhan, $jml_pembunuhanAttrib);
+				echo $ctrlFrm->formText("jml_pembunuhan", $this->detailTrantib['jml_pembunuhan'], $jml_pembunuhanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1469,7 +1467,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_perampokanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_perampokan", $this->detailKelurahan->jml_perampokan, $jml_perampokanAttrib);
+				echo $ctrlFrm->formText("jml_perampokan", $this->detailTrantib['jml_perampokan'], $jml_perampokanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1479,7 +1477,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_penipuanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_penipuan", $this->detailKelurahan->jml_penipuan, $jml_penipuanAttrib);
+				echo $ctrlFrm->formText("jml_penipuan", $this->detailTrantib['jml_penipuan'], $jml_penipuanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1489,7 +1487,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_bencanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_bencana", $this->detailKelurahan->jml_bencana, $jml_bencanaAttrib);
+				echo $ctrlFrm->formText("jml_bencana", $this->detailTrantib['jml_bencana'], $jml_bencanaAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1499,7 +1497,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_pos_bencanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pos_bencana", $this->detailKelurahan->jml_pos_bencana, $jml_pos_bencanaAttrib);
+				echo $ctrlFrm->formText("jml_pos_bencana", $this->detailTrantib['jml_pos_bencana'], $jml_pos_bencanaAttrib);
 			?> pos 
 		</td>
 	</tr>
@@ -1510,7 +1508,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_pembalakan_liarAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pembalakan_liar", $this->detailKelurahan->jml_pembalakan_liar, $jml_pembalakan_liarAttrib);
+				echo $ctrlFrm->formText("jml_pembalakan_liar", $this->detailTrantib['jml_pembalakan_liar'], $jml_pembalakan_liarAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1521,18 +1519,14 @@ $(function(){
 		<td> 
 			<? 
 				$jml_pos_hutan_lindungAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pos_hutan_lindung", $this->detailKelurahan->jml_pos_hutan_lindung, $jml_pos_hutan_lindungAttrib);
+				echo $ctrlFrm->formText("jml_pos_hutan_lindung", $this->detailTrantib['jml_pos_hutan_lindung'], $jml_pos_hutan_lindungAttrib);
 			?> pos 
 		</td>
 	</tr>
 	
 </table>
 </div>
-
-
-
-
-
+<!--End Ketentraman Ketertiban-->
 </div>
 	<tr>
 		<td></td>
