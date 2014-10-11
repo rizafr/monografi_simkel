@@ -1020,15 +1020,28 @@ $(function(){
 	</tr>
 	
 	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp; a. Golongan I:</td>
-		<td>
-			<? 
-				$n_fesesAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
-			?>  orang
-		
-		
-		</td>
+		<td align="right" >&nbsp;&nbsp;&nbsp; a. Urusan Wajib</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Bidang</td>
+			<td> 
+				<div class="input_fields_wajib_bidang">
+					<button class="add_field_wajib_bidang btn btn-info">Tambahkan kolom</button>
+						<div><input type="text" name="wajib_bidang[]"></div>
+				</div>
+			</td>
+	</tr>
+	
+	<tr>
+		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Urusan</td>
+			<td> 
+				<div class="input_fields_wajib_urusan">
+					<button class="add_field_wajib_urusan btn btn-info">Tambahkan kolom</button>
+						<div><input type="text" name="wajib_urusan[]"></div>
+				</div>
+			</td>
 	</tr>
 	
 	<tr>
@@ -1095,7 +1108,8 @@ $(function(){
 	
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; a. Pemerintah Pusat:</td>
-		<td> RP &nbsp;
+		<td > 
+		RP &nbsp;
 			<? 
 				$bantuan_pusatAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
 				echo $ctrlFrm->formText("bantuan_pusat", $this->detailKelurahan->bantuan_pusat, $bantuan_pusatAttrib);
@@ -1540,6 +1554,83 @@ $(function(){
 
 
 </div>
+
+<style>
+.btn-info {
+	color: #ffffff;
+	background-color: #5bc0de;
+	border-color: #46b8da;
+}
+.btn-info: hover {
+	background-color: #2693FF;
+	border-color: #007FFF;
+}
+
+.btn{
+	padding-right: 40px;
+	float:right;
+	display: inline-block;
+	margin-bottom: 0;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	padding: 5px 15px;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	font-size: 0.80em;
+	text-transform: uppercase;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.22);
+	margin-bottom: 10px;
+}
+</style>
+<script>
+$(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wajib_bidang"); //Fields wrapper
+    var add_button      = $(".add_field_wajib_bidang"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div><input type="text" name="wajib_bidang[]"/></div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wajib_urusan"); //Fields wrapper
+    var add_button      = $(".add_field_wajib_urusan"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div><input type="text" name="wajib_urusan[]"/></div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+</script>
+
 
 <script>
 	$(document).ready(function() {
