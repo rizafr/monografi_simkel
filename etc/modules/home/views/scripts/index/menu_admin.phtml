@@ -1,7 +1,7 @@
 <h2 class="accessibility">Navigation</h2><!--start nav-->
 <div class="menuback">
 <ul id="menu" class="menu">
-	<li>
+	<!--<li>
 		<a title=USER href="#" class=menulink ><span>User</span></a>
 		<ul>
 			<li><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/pasien/pengguna/penggunalist?','<?php echo $this->basePath; ?>/pasien/pengguna/penggunajs');">User Pengguna</a></li>
@@ -11,28 +11,17 @@
 	<li>
 	<a title=group_user href="#" class=menulink onclick="open_url_to_div('<?php echo $this->basePath; ?>/adm/groupuser/groupuserlist?','<?php echo $this->basePath; ?>/adm/groupuser/groupuserjs');"><span>Group User</span></a>
 	</li>
+		-->
 
 	<li>
-	<a title=pendaftaran href="#" class=menulink onclick="open_url_to_div('<?php echo $this->basePath; ?>/pasien/pendaftaran/pendaftaranlist?','<?php echo $this->basePath; ?>/pasien/pendaftaran/pendaftaranjs');"><span>Registrasi Pasien</span></a>
+	<a title=pendaftaran href="#" class=menulink onclick="open_url_to_div('<?php echo $this->basePath; ?>/kelurahan/pendaftaran/pendaftaranlist?','<?php echo $this->basePath; ?>/kelurahan/pendaftaran/pendaftaranjs');"><span>Monografi Kelurahan</span></a>
 	</li>
+
+	<li>
+	<a title=pendaftaran href="#" class=menulink onclick="open_url_to_div('<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasienlist?','<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasienjs');"><span>Laporan Monografi Kelurahan</span></a>
+	</li>
+
 	
-	<li>
-	<a title=pendaftaran href="#" class=menulink onclick="open_url_to_div('<?php echo $this->basePath; ?>/kelurahan/pendaftaran/pendaftaranlist?','<?php echo $this->basePath; ?>/kelurahan/pendaftaran/pendaftaranjs');"><span>Registrasi Kelurahan</span></a>
-	</li>
-
-	<li>
-	<a title=pendaftaran href="#" class=menulink onclick="open_url_to_div('<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasienlist?','<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasienjs');"><span>Laporan Pasien</span></a>
-	</li>
-
-	<li>
-		<a title="DATA MASTER" href="#" class=menulink ><span>Referensi</span></a>
-		<ul>
-			<li><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/adm/klasifikasi/klasifikasilist?','<?php echo $this->basePath; ?>/adm/klasifikasi/klasifikasijs');">Klasifikasi Kedatangan</a></li>
-			<li><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/adm/tindakan/tindakanlist?','<?php echo $this->basePath; ?>/adm/tindakan/tindakanjs');">Jenis Tindakan</a></li>
-			<li><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/adm/statuspasien/statuspasienlist?','<?php echo $this->basePath; ?>/adm/statuspasien/statuspasienjs');">Status Pasien</a></li>
-			<li><a href="#" onclick="open_url_to_div('<?php echo $this->basePath; ?>/adm/goldarah/goldarahlist?','<?php echo $this->basePath; ?>/adm/goldarah/goldarahjs');">Golongan Darah</a></li>
-		</ul>
-	</li>
 
 
 

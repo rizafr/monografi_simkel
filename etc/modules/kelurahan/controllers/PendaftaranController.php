@@ -26,10 +26,12 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 	   
 		$this->pendaftaran_serv = Pendaftaran_Service::getInstance();
 		$this->ref_serv = Referensi_Service::getInstance();
-
+		$ssogroup		= new Zend_Session_Namespace('ssogroup');///berdasarkan user group
+		$this->kd_kel = $ssogroup->kd_kel;
 		$this->sso_serv = Sso_User_Service::getInstance();
 	    $ssopendaftaran = new Zend_Session_Namespace('ssopendaftaran');
-	    $this->iduser =$ssopendaftaran->user_id;
+	    $this->kd_kel =$ssopendaftaran->kd_kel;
+		$this->kd_kel =$ssousergroup->kd_kel;
 	   // $this->view->n_namauser = $this->sso_serv->getDataUserNama($this->iduser);
 		$this->Logfile = new logfile;
 		
@@ -57,7 +59,8 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		} 
 
 		$ssogroup = new Zend_Session_Namespace('ssogroup');	
-		$this->view->c_group =$ssogroup->c_group;
+		$this->view->kelurahan =$ssogroup->kelurahan;
+		$kd_kel =$ssogroup->kd_kel;
 
 		if ( $_REQUEST['param1']){ $this->view->cabang= $_REQUEST['param1'];}
 		else {  $this->view->cabang= $_REQUEST['cabang']; 
@@ -66,18 +69,19 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		if ( $_REQUEST['param2']){ $this->view->korek2= $_REQUEST['param2'];}
 		else {  $this->view->korek2= $_REQUEST['korek2']; 
 		}
-		$this->view->agamaList = $this->ref_serv->getAgamaList();
-		$this->view->statusList = $this->ref_serv->getStatusList();
+		// $this->view->agamaList = $this->ref_serv->getAgamaList();
+		// $this->view->statusList = $this->ref_serv->getStatusList();
 		
 		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
 		$this->view->carii 			= $_REQUEST['carii'];
-
-		$sortBy			= 'n_pendaftaran';
+		
+		
+		$sortBy			= 'kd_kel';
 		$sort			= 'asc';
 		
 		$dataMasukan = array("kategoriCari" => $this->view->kategoriCari,
 							"katakunciCari" => $this->view->carii,
-							"id_pendaftar"	=> trim($ssogroup->id),
+							"kd_kel"	=> 		$kd_kel,
 							"sortBy"		=> $sortBy,
 							"sort"			=> $sort);
 		
@@ -85,7 +89,8 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$this->view->numToDisplay = $numToDisplay;
 		$this->view->currentPage = $currentPage;
 		$this->view->totPendaftaranList = $this->pendaftaran_serv->cariPendaftaranList($dataMasukan,0,0,0);
-		$this->view->pendaftaranList = $this->pendaftaran_serv->cariPendaftaranList($dataMasukan,$currentPage, $numToDisplay,$this->view->totPendaftaranList);		
+		$this->view->pendaftaranList = $this->pendaftaran_serv->cariPendaftaranList($dataMasukan,$currentPage, $numToDisplay,$this->view->totPendaftaranList);
+		//var_dump($this->view->pendaftaranList );		
 	}
 	
 	public function pendaftarandataAction()
@@ -96,18 +101,15 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$this->view->carii 			= $_REQUEST['carii'];
 
 		$this->view->jenisForm		= $_REQUEST['jenisForm'];
-		$this->view->id				= $_REQUEST['id'];
-		$this->view->agamaList		= $this->ref_serv->getAgamaList();
-		$this->view->statusList		= $this->ref_serv->getStatusList();
-		$this->view->propinsiList	= $this->ref_serv->getPropinsiList();
-		$this->view->goldarList		= $this->ref_serv->getGoldarList();
-		$this->view->detailPendaftaran				= $this->pendaftaran_serv->detailPendaftaranById($this->view->id);
+		$this->view->kd_kel				= $_REQUEST['kd_kel'];
+		
+		$this->view->detailPendaftaran				= $this->pendaftaran_serv->detailPendaftaranById($this->view->kd_kel);
 	}
 	
 	public function pendaftaranAction()
 	{
 		$ssogroup = new Zend_Session_Namespace('ssogroup');	
-		$this->view->c_group =$ssogroup->c_group;
+		$this->view->group_id =$ssogroup->group_id;
 		$this->view->user_id =$ssogroup->user_id;
 
 		$kd_kel							= $_POST['kd_kel'];
@@ -168,37 +170,20 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$dasar_pembentukan				= $_POST['dasar_pembentukan'];
 		$kode_wilayah					= $_POST['kode_wilayah'];
 		$kode_pos						= $_POST['kode_pos'];
-		$luas							= $_POST['luas'];
-		$batas_utara					= $_POST['batas_utara'];
-		$batas_selatan					= $_POST['batas_selatan'];
-		$batas_barat					= $_POST['batas_barat'];
-		$batas_timur					= $_POST['batas_timur'];
-		$jarak_dari_kecamatan			= $_POST['jarak_dari_kecamatan'];
-		$jarak_dari_kota				= $_POST['jarak_dari_kota'];
-		$jarak_dari_ibukota_kota		= $_POST['jarak_dari_ibukota_kota'];
-		$jarak_dari_ibukota_prov		= $_POST['jarak_dari_ibukota_prov'];
+		
 
 
 		$dataMasukan	= array("kd_kel"				=> $kd_kel,
 								"tahun_pembentukan"		=> $tahun_pembentukan,
 								"dasar_pembentukan"		=> $dasar_pembentukan,
 								"kode_wilayah"			=> $kode_wilayah,
-								"kode_pos"				=> $kode_pos,
-								"luas"					=> $luas,
-								"batas_utara"			=> $batas_utara,
-								"batas_selatan"			=> $batas_selatan,
-								"batas_barat"			=>$batas_barat,
-								"batas_timur"			=> $batas_timur,
-								"jarak_dari_kecamatan"	=> $jarak_dari_kecamatan,
-								"jarak_dari_kota"		=> $jarak_dari_kota,
-								"jarak_dari_ibukota_kota"	=>$jarak_dari_ibukota_kota,
-								"jarak_dari_ibukota_prov"	=>$jarak_dari_ibukota_prov,
-								
-						
+								"kode_pos"				=> $kode_pos
 								);
+								
 		$this->view->pendaftaranUpdate = $this->pendaftaran_serv->pendaftaranUpdate($dataMasukan);
-
-		$this->Logfile->createLog($this->view->n_namauser, "Ubah data", $n_nama." (".$id.")");
+		// var_dump($dataMasukan);
+		// var_dump($this->view->pendaftaranUpdate);
+		$this->Logfile->createLog($this->view->kelurahan, "Ubah data", $n_nama." (".$id.")");
 		$this->view->proses = "2";	
 		$this->view->keterangan = "Umum Pendaftaran";
 		$this->view->hasil = $this->view->pendaftaranUpdate;

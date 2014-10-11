@@ -46,25 +46,25 @@ Medical Record
 
 
 						<div class="ct-menu">
-							<div class="hd">Login</div>
+							<div class="hd">Silakan Login</div>
 								<div class="bd">
 
 	<?
-	/*$status = $this->hasil;
+	$status = $this->hasil;
 	$proses = $this->proses;
 	$keterangan = $this->keterangan;
 	$pesan->show_message($proses, $keterangan, "$status" ); 
-	*/?>
+	?>
 
 	
 	
-									<?// if ($this->pesanKesalahan) {?> 
-		<!--p class="message"><font color="red"><font size="3"><b><? //echo $this->pesanKesalahan;?><b><br /></font></font></p-->
-	<?//}?>
+									<?if($this->pesanKesalahan) {?> 
+		<p class="message"><font color="red"><font size="3"><b><? echo $this->pesanKesalahan;?><b><br /></font></font></p>
+	<?}?>
 	<form name="loginform" id="loginform" action="<? echo $this->basePath;?>/home/index/main" method="post">
 			<p>
 				<label>Nama Pengguna<br />
-				<input type="text" name="log" id="user_login" class="input" value="" size="40" maxlength="40" tabindex="10" /></label>
+				<input type="text" name="user_login" id="user_login" class="input" value="" size="40" maxlength="40" tabindex="10" /></label>
 			</p>
 			<p>
 				<label>Kata Sandi<br />

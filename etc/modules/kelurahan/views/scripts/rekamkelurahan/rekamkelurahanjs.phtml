@@ -12,26 +12,26 @@ function rekamkelurahanlist()
 {
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
-	kode_pasien = document.getElementById('kode_pasien').value;
-	var param = {kode_pasien:kode_pasien,kategoriCari:kategoriCari,carii:carii};
+	kd_kel = document.getElementById('kd_kel').value;
+	var param = {kd_kel:kd_kel,kategoriCari:kategoriCari,carii:carii};
 	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanlist';
 	jQuery.get(url, param, function(data) {
 		$("div#tableview").html(data);
 	});
 }
 
-function generateKodeKegiatan(tgl){
-	KodeDetailSubKomponen = document.getElementById('KodeDetailSubKomponen').value;
-	document.getElementById('KodeKegiatan').value= KodeDetailSubKomponen + tgl;
-}
 
-function rekamkelurahanForm(jenisForm, id)
+
+function rekamkelurahanForm(jenisForm,kd_kel,bulan,tahun)
 {
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
-	kode_pasien = document.getElementById('kode_pasien').value;
+	kd_kel = document.getElementById('kd_kel').value;
+	alert(id);
+	alert(bulan);
+	alert(tahun);
 	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandata';
-	var param = { jenisForm:jenisForm,kode_pasien:kode_pasien,id:id,kategoriCari:kategoriCari,carii:carii};
+	var param = { jenisForm:jenisForm,kd_kel:kd_kel,id:id,kategoriCari:kategoriCari,carii:carii,bulan:bulan,tahun:tahun};
 	jQuery.get(url, param, function(data) {
 		jQuery("div#tableview").html(data);
 		jQuery("#frmtambahrekamkelurahan").ajaxForm(tambahrekamkelurahan_opt);
@@ -44,74 +44,24 @@ var tambahrekamkelurahan_opt = {
 	url: '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahan',
 	beforeSubmit : function() {
 		
-		if (document.getElementById('c_noreg').value == ''){
+		if (document.getElementById('kd_kel').value == ''){
 			alert('Kode harus Diisi');
 			return false;
 		}
 
 		
 
-		if (document.getElementById('t_berat').value == '-'){
-			alert('berat harus Dipilih');
+		if (document.getElementById('tahun').value == '-'){
+			alert('tahun harus Dipilih');
 			return false;
 		}
 
-		if (document.getElementById('t_tinggi').value == ''){
-			alert('tgl harus Diisi');
+		if (document.getElementById('bulan').value == ''){
+			alert('bulan harus Diisi');
 			return false;
 		}
 
-		if (document.getElementById('t_tekanan').value == ''){
-			alert('tekanan harus Diisi');
-			return false;
-		}
-
-		if (document.getElementById('t_denyut').value == ''){
-			alert('denyut harus Diisi');
-			return false;
-		}
 		
-		if (document.getElementById('t_frequensi').value == ''){
-			alert('frequensi Diisi');
-			return false;
-		}
-		if (document.getElementById('t_suhu').value == ''){
-			alert('suhu Diisi');
-			return false;
-		}
-
-		if (document.getElementById('n_mata').value == ''){
-			alert('mata harus Diisi');
-			return false;
-		}
-		if (document.getElementById('n_tht').value == '-'){
-			alert('tht harus Dipilih');
-			return false;
-		}
-
-		if (document.getElementById('n_gigi').value == ''){
-			alert('gigi harus Diisi');
-			return false;
-		}
-
-		if (document.getElementById('n_leher').value == ''){
-			alert('leher harus Diisi');
-			return false;
-		}
-		
-		if (document.getElementById('n_jantung').value == ''){
-			alert('jantung Diisi');
-			return false;
-		}
-		if (document.getElementById('n_paru').value == ''){
-			alert('paru Diisi');
-			return false;
-		}
-
-		if (document.getElementById('n_perut').value == ''){
-			alert('perut harus Diisi');
-			return false;
-		}
 		
 	answer = confirm('Apakah data anda masukan sudah benar?.\n\'OK\' Jika benar, \'Cancel\' jika tidak.' );
 
@@ -137,78 +87,24 @@ var ubahrekamkelurahan_opt = {
 	url: '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanupdate',
 	beforeSubmit : function() {
 
-		if (document.getElementById('c_noreg').value == ''){
+		if (document.getElementById('kd_kel').value == ''){
 			alert('Kode harus Diisi');
 			return false;
 		}
 
 		
 
-		if (document.getElementById('t_berat').value == '-'){
-			alert('berat harus Dipilih');
+		if (document.getElementById('tahun').value == '-'){
+			alert('tahun harus Dipilih');
 			return false;
 		}
 
-		if (document.getElementById('t_tinggi').value == ''){
-			alert('tgl harus Diisi');
+		if (document.getElementById('bulan').value == ''){
+			alert('bulan harus Diisi');
 			return false;
 		}
 
-		if (document.getElementById('t_tekanan').value == ''){
-			alert('tekanan harus Diisi');
-			return false;
-		}
-
-		if (document.getElementById('t_denyut').value == ''){
-			alert('denyut harus Diisi');
-			return false;
-		}
 		
-		if (document.getElementById('t_frequensi').value == ''){
-			alert('frequensi Diisi');
-			return false;
-		}
-		if (document.getElementById('t_suhu').value == ''){
-			alert('suhu Diisi');
-			return false;
-		}
-
-		if (document.getElementById('n_mata').value == ''){
-			alert('mata harus Diisi');
-			return false;
-		}
-		if (document.getElementById('n_tht').value == '-'){
-			alert('tht harus Dipilih');
-			return false;
-		}
-
-		if (document.getElementById('n_gigi').value == ''){
-			alert('gigi harus Diisi');
-			return false;
-		}
-
-		if (document.getElementById('n_leher').value == ''){
-			alert('leher harus Diisi');
-			return false;
-		}
-		
-		if (document.getElementById('n_jantung').value == ''){
-			alert('jantung Diisi');
-			return false;
-		}
-		if (document.getElementById('n_paru').value == ''){
-			alert('paru Diisi');
-			return false;
-		}
-
-		if (document.getElementById('n_perut').value == ''){
-			alert('perut harus Diisi');
-			return false;
-		}
-		if (document.getElementById('n_gerak').value == ''){
-			alert('gerak harus Diisi');
-			return false;
-		}
 	answer = confirm('Apakah data anda masukan sudah benar?.\n\'OK\' Jika benar, \'Cancel\' jika tidak.' );
 	if(answer !=0) { 
 		return true;
@@ -227,16 +123,16 @@ var ubahrekamkelurahan_opt = {
 };
 
 
-function rekamkelurahanHapus(param1, id, n_nama)
+function rekamkelurahanHapus(kd_kel,kelurahan,tahun,bulan)
 { 
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
-	kode_pasien = document.getElementById('kode_pasien').value;
 	
-	if(ConfirmDelete(param1,n_nama))
+	
+	if(ConfirmDelete(kd_kel,kelurahan))
 	{	
 		handler = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanhapus';
-		var opt = {id : id,kode_pasien:kode_pasien,id:id,kategoriCari:kategoriCari,carii:carii};
+		var opt = {kd_kel:kd_kel,tahun:tahun,bulan:bulan};
 		jQuery.get(handler,opt,function(data) {
 				$("#tableview").html(data);
 				doCount(5);
@@ -376,9 +272,9 @@ var frmCariPasien_opt = {
     resetForm: false
 };
 
-function closeDialogPasien(kode_pasien,n_pasien) {  
+function closeDialogPasien(kd_kel,n_pasien) {  
   $("#dialog-browse").dialog("close");
-  $("#kode_pasien").val(kode_pasien);
+  $("#kd_kel").val(kd_kel);
   $("#n_nama").val(n_pasien);
 }
 

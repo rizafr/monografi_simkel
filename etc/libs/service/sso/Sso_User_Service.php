@@ -30,13 +30,14 @@ class Sso_User_Service {
 	     return 'gagal <br>';
 	   }
 	}		
-	public function getDataUser1($username,$paswd,$usergroup) {
+	public function getDataUser1($username,$paswd) {
 	   $registry = Zend_Registry::getInstance();
 	   $db = $registry->get('db');
 	   try {
 		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 		 $ktsandi = md5($paswd);
-		 $sql = "SELECT * FROM [SIMKEL].[dbo].[user] where user_id ='$username' and password ='$ktsandi' ";
+		 $sql = "SELECT * FROM [SIMKEL].[dbo].[user] U
+					where U.user_id ='$username' and U.password ='$ktsandi'  ";
 		// echo $sql;
 		 $hasil = $db->fetchRow($sql);
 		 return $hasil;

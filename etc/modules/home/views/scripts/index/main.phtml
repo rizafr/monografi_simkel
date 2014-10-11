@@ -4,24 +4,31 @@
 <div id="container"><!--start container-->  
 <?
 
-		if(trim($this->c_group) == "1"){
+		if((trim($this->group_id) == "1")&&($this->kd_kel=='0')){
 		$modul = "Modul Administrator";
 		}
-		if(trim($this->c_group) =="2"){
+		if(trim($this->group_id) =="2"){
 		$modul = "Modul Operator".$level;
 		}
-		if(trim($this->c_group) == "3"){
-		$modul = "Modul Dokter";
+		if(trim($this->group_id) == "3"){
+		$modul = "Modul Kelurahan";
+		}
+		
+		if((trim($this->group_id) == "1")&&($this->kd_kel!='0')){
+		$modul = "Modul Kelurahan";
 		}
 		
 		
-		if(trim($this->c_group) == "1"){
+		if((trim($this->group_id) == "1")&&($this->kd_kel=='0')){
 		require("menu_admin.phtml");
 		}
-		if(trim($this->c_group)=="2"){
+		if((trim($this->group_id) == "1")&&($this->kd_kel!='0')){
 		require("menu_operator.phtml");
 		}
-		if(trim($this->c_group) == "3"){
+		if(trim($this->group_id)=="2"){
+		require("menu_operator.phtml");
+		}
+		if(trim($this->group_id) == "3"){
 		require("menu_dokter.phtml");
 		}
 		
@@ -64,6 +71,7 @@
 								<div class="bd">
 									<img src="<?=$vFoto?>" class="foto" width="90" height="90">
 									Nama : <?echo $this->nama;?>
+									Kode Kelurahan : <?echo $this->kd_kel;?>
 									<div class="clear"></div>
 						</div>
 						<div class="ft"></div>		   

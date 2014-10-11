@@ -25,14 +25,16 @@ $numToDisplay = $this->numToDisplay;
 <div class="panel">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
-		<h2 class="title">FORM DATA KELURAHAN</h2>
-	    <div class="spacer"></div> 
 		
-		<? if(strtolower($this->jenisForm) == 'insert') {$namaForm = 'frmtambahpendaftaran'; }
-			else if (strtolower($this->jenisForm) == 'update') {$namaForm = 'frmubahpendaftaran'; }
-			else {$namaForm = 'frmhapuspendaftaran'; }
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {$namaForm = 'frmtambahpendaftaran'; $nama='tambah';}
+			else if (strtolower($this->jenisForm) == 'update') {$namaForm = 'frmubahpendaftaran'; $nama='ubah'; }
+			else {$namaForm = 'frmhapuspendaftaran';  $nama='hapus';}
 		?>
-
+		
+		<h2 class="title">FORM <?php echo strtoupper($nama)?> DATA KELURAHAN</h2>
+		
+	    <div class="spacer"></div> 
 		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi">
 <?
 	$status = $this->hasil;
@@ -41,11 +43,9 @@ $numToDisplay = $this->numToDisplay;
 	$pesan->show_message($proses, $keterangan, "$status" ); 
 ?>
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
-<input name="id" id="id" type="hidden" value="<?echo $this->id;?>" />
+<input name="kd_kel" id="kd_kel" type="text" value="<?echo $this->detailPendaftaran['kd_kel'];?>" />
 <input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
-<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
-<input name="id_user" id="id_user" type="hidden" value="<?echo $this->detailPendaftaran['id_user'];?>" />
-
+	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
 				
 				
 				<tr>
@@ -64,8 +64,8 @@ $numToDisplay = $this->numToDisplay;
 				    <td align="right" width="180">* Nama Kelurahan :</td>
 					<td>	
 						<? 
-							$n_namaAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
-							echo $ctrlFrm->formText("n_nama", $this->detailPendaftaran['n_nama'], $n_namaAttrib);
+							$n_namaAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried", "readonly"=>"readonly");
+							echo $ctrlFrm->formText("kelurahan", $this->detailPendaftaran['kelurahan'], $n_namaAttrib);
 						?>
 				</td>
 				</tr>
@@ -74,8 +74,8 @@ $numToDisplay = $this->numToDisplay;
 				    <td align="right" width="180">* Tahun Pembentukan :</td>
 					<td>
 						<? 
-							$n_namaAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
-							echo $ctrlFrm->formText("tahun_pembentukan", $this->detailPendaftaran['tahun_pembentukan'], $n_namaAttrib);
+							$tahun_pembentukanAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
+							echo $ctrlFrm->formText("tahun_pembentukan",trim($this->detailPendaftaran['tahun_pembentukan']), $tahun_pembentukanAttrib);
 						?>
 					</td>
 				</tr>
@@ -85,27 +85,19 @@ $numToDisplay = $this->numToDisplay;
 					<td>	
 						<? 
 						$t_waktuAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
-						echo $ctrlFrm->formText("t_waktu", $this->detailPendaftaran['t_waktu'], $t_waktuAttrib);
+						echo $ctrlFrm->formText("dasar_pembentukan", $this->detailPendaftaran['dasar_pembentukan'], $t_waktuAttrib);
 						?>
 				</td>
 				</tr>
 				
-				<tr>
-				    <td align="right" width="180">* Nomor Kode Wilayah :</td>
-					<td>	
-	<? 
-	$n_tempatAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
-	echo $ctrlFrm->formText("n_tempat", $this->detailPendaftaran['n_tempat'], $n_tempatAttrib);
-	?>
-				</td>
-				</tr>
+				
 				
 				<tr>
 				    <td align="right" width="180">* Nomor Kode Pos :</td>
 					<td>	
 	<? 
 	$t_beratAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
-	echo $ctrlFrm->formText("t_berat", $this->detailPendaftaran['t_berat'], $t_beratAttrib);
+	echo $ctrlFrm->formText("kode_pos", $this->detailPendaftaran['kode_pos'], $t_beratAttrib);
 	?>
 				</td>
 				</tr>
@@ -118,8 +110,8 @@ $numToDisplay = $this->numToDisplay;
 				    <td align="right" width="180">* Kecamatan :</td>
 					<td>	
 						<? 
-						$t_tinggiAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
-						echo $ctrlFrm->formText("t_tinggi", $this->detailPendaftaran['t_tinggi'], $t_tinggiAttrib);
+						$t_tinggiAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried","readonly"=>"readonly");
+						echo $ctrlFrm->formText("kecamatan", $this->detailPendaftaran['kecamatan'], $t_tinggiAttrib);
 						?>
 				</td>
 				</tr>
@@ -128,8 +120,8 @@ $numToDisplay = $this->numToDisplay;
 				    <td align="right" width="180">* Kabupaten / Kota :</td>
 					<td>	
 					<? 
-					$t_tekananAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
-					echo $ctrlFrm->formText("t_tekanan", $this->detailPendaftaran['t_tekanan'], $t_tekananAttrib);
+						$kotaAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried","readonly"=>"readonly");
+						echo $ctrlFrm->formText("kota", "Cimahi", $kotaAttrib);
 					?>
 				</td>
 				</tr>
@@ -138,9 +130,9 @@ $numToDisplay = $this->numToDisplay;
 				    <td align="right" width="180">* Provinsi :</td>
 					<td>	
 						<? 
-						$t_denyutAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried");
-						echo $ctrlFrm->formText("t_denyut", $this->detailPendaftaran['t_denyut'], $t_denyutAttrib);
-						?>
+						$provAttrib = array("size" => 50,"maxlength" => 50,"required"=>"requried","readonly"=>"readonly");
+						echo $ctrlFrm->formText("prov", "Jawa Barat", $provAttrib);
+					?>
 				</td>
 				</tr>
 				
@@ -149,16 +141,14 @@ $numToDisplay = $this->numToDisplay;
 				
 				
 					
-				<tr>
-				    <td></td>
+				<tr>  
+					<td>&nbsp;</td>
+					<td width="500px;">&nbsp;</td>
 				    <td>
-						<div class="right">
-<input type="button" value="Batal" onclick="pendaftaranlist()"> 
-<input type="reset" value="Ulangi"> 
-<input   type="submit" value="Simpan">
-
-
-						</div>
+						
+							<input type="button" value="Batal" onclick="pendaftaranlist()"> 
+							<input type="reset" value="Ulangi"> 
+							<input type="submit" value="Simpan">
 					</td>
 				</tr>
 				<tr>

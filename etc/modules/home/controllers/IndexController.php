@@ -21,23 +21,23 @@ class Home_IndexController extends Zend_Controller_Action {
 		$this->pengguna_serv = Pengguna_Service::getInstance();
 	
 		$ssousergroup = new Zend_Session_Namespace('ssousergroup');
-		$ssouserid = new Zend_Session_Namespace('ssouserid');
-		$ssouseridpswd = new Zend_Session_Namespace('ssouseridpswd');
+		$ssouser_id = new Zend_Session_Namespace('ssouser_id');
+		$ssouser_idpswd = new Zend_Session_Namespace('ssouser_idpswd');
 		
 		$ssogroup = new Zend_Session_Namespace('ssogroup');
 		$this->group_user =$ssogroup->n_level;
 		
-		$this->user_paswd =$ssouseridpswd->user_paswd;			
-		$this->userid =$ssouserid->userid;
-		$this->c_group =$ssousergroup->c_group;
+		$this->user_paswd =$ssouser_idpswd->user_paswd;			
+		$this->user_id =$ssouser_id->user_id;
+		$this->group_id =$ssousergroup->group_id;
 
     }
 	
     public function indexAction() {
 		//indexAction default kepunyaan Home_IndexController dalam modul home
 		$this->view->p = $_REQUEST['p'];
-		$this->view->userid = $_REQUEST['u'];
-		$this->view->username = $this->sso_serv->getUsername($this->view->userid);
+		$this->view->user_id = $_REQUEST['u'];
+		$this->view->username = $this->sso_serv->getUsername($this->view->user_id);
 		$request = $this->getRequest();   
 		$ns = new Zend_Session_Namespace('HelloWorld'); 
 	    
@@ -59,62 +59,59 @@ class Home_IndexController extends Zend_Controller_Action {
 	
 	public function mainAction() {
 		$username = $_POST['user_login'];
-	    $passwd = $_POST['pwd'];
+	    $passwd = $_POST['pwd'];		
 		$par = $_POST['par'];
 		$usergroup = $_POST['usergroup'];
 		$this->view->usergroup=$_POST['usergroup'];
 		$this->view->par=$_POST['par']; 
 		$ubahpwd = $_POST['ubahpwd'];
-		$userid = $_POST['userid'];
+		$user_id = $_POST['user_id'];
 		$pwdBaru = $_POST['pwdBaru'];
 		$ulangpwdBaru = $_POST['ulangpwdBaru'];
 		if(!$ubahpwd){	
 			
 			if ($username && $passwd) {				
 				
-					$hasiluser = $this->sso_serv->getDataUser1($username,$passwd,$usergroup);
+					$hasiluser = $this->sso_serv->getDataUser1($username,$passwd);
+					//var_dump($hasiluser);
 					if($hasiluser){//username, iduser, paskey, idlevel, nama
 						$ssousergroup	= new Zend_Session_Namespace('ssousergroup');
-						$ssouserid		= new Zend_Session_Namespace('ssouserid');///berdasarkan user group
+						$ssouser_id		= new Zend_Session_Namespace('ssouser_id');///berdasarkan user group
 						$ssogroup		= new Zend_Session_Namespace('ssogroup');///berdasarkan user group
-						$ssouseridpswd	= new Zend_Session_Namespace('ssouseridpswd');///berdasarkan user group
-						$ssousergroup->setExpirationSeconds(6000);	//uid, id, userid, nama, email, c_group
+						$ssouser_idpswd	= new Zend_Session_Namespace('ssouser_idpswd');///berdasarkan user group
+						$ssousergroup->setExpirationSeconds(6000);	//uid, id, user_id, nama, email, group_id
 						
-						$username		= $hasiluser->username;	
-						$userid			= $hasiluser->userid;	
-						$c_group		= $hasiluser->c_group;	
+						$username		= $hasiluser->user_id;	
+						$user_id			= $hasiluser->user_id;	
+						$group_id		= $hasiluser->group_id;	
 						$nama			= $hasiluser->nama;	
 
-						$ssogroup->username		= $hasiluser->username;	
-						$ssogroup->userid		= $hasiluser->userid;	
-						$ssogroup->c_group		= $hasiluser->c_group;	
+						$ssogroup->username		= $hasiluser->user_id;	
+						$ssogroup->user_id		= $hasiluser->user_id;	
+						$ssogroup->group_id		= $hasiluser->group_id;	
 						$ssogroup->nama			= $hasiluser->nama;	
+						$ssogroup->kd_kel			= $hasiluser->kd_kel;	
 						
-						$this->view->username	= $ssogroup->username;
-						$this->view->userid	= $ssogroup->userid;
-						$this->view->c_group	= $ssogroup->c_group;
+						$this->view->username	= $ssogroup->user_id;
+						$this->view->user_id	= $ssogroup->user_id;
+						$this->view->group_id	= $ssogroup->group_id;
 						$this->view->nama		= $ssogroup->nama;
 
-						if (!$userid){$userid =$this->userid;$c_group =$this->c_group;}
+						if (!$user_id){$user_id =$this->user_id;$group_id =$this->group_id;}
 
-							$ssousergroup->c_group		= $c_group;
-							$ssouserid->userid			= $userid;
-							$ssouseridpswd->user_paswd  = $passwd;
+							$ssousergroup->group_id		= $group_id;
+							$ssouser_id->user_id			= $user_id;
+							$ssouser_idpswd->user_paswd  = $passwd;
 
-							$this->view->c_group =$this->view->c_group;
-							$this->view->userid =$this->view->userid;
-							$this->view->username =$this->view->username;
+							$this->view->group_id =$this->view->group_id;
+							$this->view->user_id =$this->view->user_id;
+							$this->view->username =$this->view->user_id;
 						
 							$this->runningtextAction();
-							$this->view->n_nama = $ssogroup->n_nama;
-							$this->view->NIP = $ssogroup->NIP;
-							//$this->view->n_group = $this->adm_serv->getnamaGroup($c_group);
-						//cari ultah
-							$dultah=date(Y-m);
-							$tgl=date(d);
-							$bln=date(F);						
-							$cari= " and DATENAME(d, d_tglLahir)='$tgl' and DATENAME(m, d_tglLahir)='$bln'  ";
-						//$this->view->ultah = $this->adm_serv->getUltah($cari);
+							$this->view->nama = $ssogroup->nama;
+							$this->view->kd_kel = $ssogroup->kd_kel;
+							//$this->view->n_group = $this->adm_serv->getnamaGroup($group_id);
+						
 					}
 					else
 					{
@@ -139,14 +136,14 @@ class Home_IndexController extends Zend_Controller_Action {
 		  } 
 		}
 		else {
-			$userid = $_POST['userid'];
+			$user_id = $_POST['user_id'];
 			$pwdBaru = $_POST['pwdBaru'];
 			$ulangpwdBaru = $_POST['ulangpwdBaru'];
 			
 			if($pwdBaru == $ulangpwdBaru){
 				$encryptedPasswd = $pwdBaru;
 				$dataMasukan = array("password" => $encryptedPasswd,
-									 "userid" => $userid);
+									 "user_id" => $user_id);
 									 
 				$hasil = $this->adm_serv->ubahPasswd($dataMasukan);
 				$this->indexAction();
@@ -154,7 +151,7 @@ class Home_IndexController extends Zend_Controller_Action {
 				$this->view->par=$_POST['par']; 
 			}
 			else{
-				$_REQUEST['u'] = $userid;
+				$_REQUEST['u'] = $user_id;
 				$_REQUEST['p'] = 'ubahpwd';
 				$this->indexAction();
 				$this->render('index');
@@ -218,24 +215,24 @@ class Home_IndexController extends Zend_Controller_Action {
 	  
     }
 	public function daftarAction() {
-		$userid		= $_POST['userid'];  
+		$user_id		= $_POST['user_id'];  
 		$pertanyaan	 = $_POST['pertanyaan']; 
 		$jawab		 = $_POST['jawab'];
 		$hash_secret = "adlina_azizan_muti";
 		$uid         = md5(uniqid($hash_secret));
 			
-		$dataMasukan = array("userid"		=>$userid,
+		$dataMasukan = array("user_id"		=>$user_id,
 							 "pertanyaan"  	=>$pertanyaan,
 							 "jawab"  		=>$jawab,
 							 "uid"  		=>$uid
 							);
-		$cekdata = $this->pengguna_serv->cekDataUser($userid);
+		$cekdata = $this->pengguna_serv->cekDataUser($user_id);
 
 			$mail = new Zend_Mail();
 
-			$mailto = $userid;
+			$mailto = $user_id;
 			$subjek = "Selamat datang di sistem E-Komite Etik Penelitian Kesehatan Fakultas Kedokteran Universitas Padjadjaran ";
-			$isi    = "Selamat datang di sistem E-Komite Etik Penelitian Kesehatan Fakultas Kedokteran Universitas Padjadjaran ,<br>Pendaftaran anda berhasil.<br>Data login berikut ini dapat digunakan :<br>userid : ".$userid."<br>Password : ".substr($uid,5,6)." (perhatian !! password case sensitive harus sesuai huruf besar dan huruf kecilnya)<br>Setelah memasukan masukan user dan password, anda dapat melakukan proses pengisian data pribadi anda.<br>Setelah masuk ke sistem , anda juga dapat melakukan pengubahan password anda.<br>Terima kasih,<br>Administrator Sekretariat Unit Komite Etik Penelitian Kesehatan FK UNPAD";
+			$isi    = "Selamat datang di sistem E-Komite Etik Penelitian Kesehatan Fakultas Kedokteran Universitas Padjadjaran ,<br>Pendaftaran anda berhasil.<br>Data login berikut ini dapat digunakan :<br>user_id : ".$user_id."<br>Password : ".substr($uid,5,6)." (perhatian !! password case sensitive harus sesuai huruf besar dan huruf kecilnya)<br>Setelah memasukan masukan user dan password, anda dapat melakukan proses pengisian data pribadi anda.<br>Setelah masuk ke sistem , anda juga dapat melakukan pengubahan password anda.<br>Terima kasih,<br>Administrator Sekretariat Unit Komite Etik Penelitian Kesehatan FK UNPAD";
 
 			$mail->setBodyHtml($isi);
 			$mail->setFrom('kepk.fk.unpad@gmail.com', 'Komite Etik Penelitian Kesehatan FK UNPAD');
@@ -252,7 +249,7 @@ class Home_IndexController extends Zend_Controller_Action {
 					}
 					else {
 						$this->view->userInsert = $this->pengguna_serv->penggunaInsert($dataMasukan);
-						if($this->view->userInsert =='sukses'){$angInsert = $this->pengguna_serv->anggotaInsert($userid);}
+						if($this->view->userInsert =='sukses'){$angInsert = $this->pengguna_serv->anggotaInsert($user_id);}
 					}
 				}
 				$this->view->proses = '1';	
@@ -270,22 +267,22 @@ class Home_IndexController extends Zend_Controller_Action {
 	  //var_dump($this->view->pertanyaanList);
     }
 	public function lupaAction() {
-		$userid		 = $_POST['userid']; 
+		$user_id		 = $_POST['user_id']; 
 		$pertanyaan	 = $_POST['pertanyaan']; 
 		$jawab		 = $_POST['jawab'];
 		$hash_secret = "adlina_azizan_muti";
 		$uid         = md5(uniqid($hash_secret));
 			
-		$dataMasukan = array("userid"  	=>$userid,
+		$dataMasukan = array("user_id"  	=>$user_id,
 							 "pertanyaan"  	=>$pertanyaan,
 							 "jawab"  	=>$jawab,
 							 "uid"  	=>$uid
 							);
 			$mail = new Zend_Mail();
 
-			$mailto = $userid;
+			$mailto = $user_id;
 			$subjek = "Selamat datang di sistem E-Komite Etik Fakultas Kedokteran Universitas Padjadjaran ";
-			$isi    = "Selamat datang di sistem E-Komite Etik Fakultas Kedokteran Universitas Padjadjaran ,<br>Permohonan penggantian Anda kami terima.<br>Login dan Password baru Anda adalah sebagai berikut :<br>userid   : ".$userid."<br>Password : ".substr($uid,5,6)."	(perhatian !! password case sensitive harus sesuai huruf besar dan huruf kecilnya)<br>Setelah masuk ke sistem , anda dapat melakukan pengubahan password anda.<br>Terima kasih,<br>Administrator Sekretariat Unit Komite Etik FK UNPAD";
+			$isi    = "Selamat datang di sistem E-Komite Etik Fakultas Kedokteran Universitas Padjadjaran ,<br>Permohonan penggantian Anda kami terima.<br>Login dan Password baru Anda adalah sebagai berikut :<br>user_id   : ".$user_id."<br>Password : ".substr($uid,5,6)."	(perhatian !! password case sensitive harus sesuai huruf besar dan huruf kecilnya)<br>Setelah masuk ke sistem , anda dapat melakukan pengubahan password anda.<br>Terima kasih,<br>Administrator Sekretariat Unit Komite Etik FK UNPAD";
 
 			$mail->setBodyHtml($isi);
 			$mail->setFrom('sitapurnadewi@gmail.com', 'Unit Komite Etik FK UNPAD');
@@ -348,7 +345,7 @@ class Home_IndexController extends Zend_Controller_Action {
 		
 		$this->view->n_nama = $ssogroup->n_nama;
 		$this->view->n_level =$ssogroup->n_level;	
-		$this->view->c_group =$ssogroup->c_group;
+		$this->view->group_id =$ssogroup->group_id;
 										
 	   $this->render('main');
     }

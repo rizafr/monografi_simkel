@@ -25,7 +25,7 @@ $numToDisplay = $this->numToDisplay;
 			<form method="post" id="frmcaripendaftaran" name="frmcaripendaftaran">
 				<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 				</table>
-<div class="add" title="Tambah Data" onClick="pendaftaranForm('insert','');"></div>			
+<!-- <div class="add" title="Tambah Data" onClick="pendaftaranForm('insert','');"></div>-->
 				Filter :
 				<?
 				$kategoriCari = array("nama_kelurahan" => "Nama Kelurahan", "tahun_pembentukan" => "Tahun Pembentukan","kode_pos" => "Kode Pos");
@@ -69,34 +69,35 @@ $pesan->show_message($proses, $k_pendaftaran, "$status" );
 						<? } else if ($key%2==1) { ?>
 							<tr class="event2">
 						<? } 
-						$c_noreg		= $this->escape($val['c_noreg']); 
-						$n_nama	= $this->escape($val['n_nama']); 
-						$c_kelamin	= $this->escape($val['c_kelamin']);
-						$n_tempat	= $this->escape($val['n_tempat']);
-						
-						
-						if($c_kelamin =='L'){$c_kelamin ='Laki-Laki';}
-						if($c_kelamin =='P'){$c_kelamin ='Perumpuan';}
+						$kd_kel		= $this->escape($val['kd_kel']); 
+						$kelurahan	= $this->escape($val['kelurahan']); 
+						$kode_wilayah	= $this->escape($val['kode_wilayah']); 
+						$tahun_pembentukan	= $this->escape($val['tahun_pembentukan']);
+						$dasar_pembentukan	= $this->escape($val['dasar_pembentukan']);
+						$kode_pos	= $this->escape($val['kode_pos']);
+						$kecamatan	= $this->escape($val['kecamatan']);
+						$kota	="Cimahi";
+						$prov	="Jawa Barat";
 					
 						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
-						echo $ctrlFrm->formHidden('c_noreg', $noreg, null);
+						echo $ctrlFrm->formHidden('kd_kel', $noreg, null);
 						
 						?>
-<td align="center"><? echo $noUrut;?></td>
-<td align="center"><a href="#" title= "detail" onclick="open_url_to_div('<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahan?jenisForm=update&kode_pasien=<?echo $c_noreg;?>','<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanjs');"><? echo $c_noreg;?></a></td>
+					<td align="center"><? echo $noUrut;?></td>
+					<td align="center"><a href="#" title= "detail <?php echo $kelurahan?>" onclick="open_url_to_div('<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahan?jenisForm=update&kd_kel=<?echo $kd_kel;?>','<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanjs');"><? echo $kd_kel;?></a></td>
 
-<td class="clleft"><? echo $n_nama;?></td>
-<td align="center"><? echo $c_kelamin;?></td>
-<td align="center"><? echo $n_tempat;?></td>
-<td align="center"><? echo $n_tempat;?></td>
-<td align="center"><? echo $n_tempat;?></td>
-<td align="center"><? echo $n_tempat;?></td>
-<td align="center"><? echo $n_tempat;?></td>
+					<td align="left"><? echo $kelurahan;?></td>
+					<td align="center"><? echo $tahun_pembentukan;?></td>
+					<td align="center"><? echo $dasar_pembentukan;?></td>
+					<td align="center"><? echo $kode_pos;?></td>
+					<td align="center"><? echo $kecamatan;?></td>
+					<td align="center"><? echo $kota;?></td>
+					<td align="center"><? echo $prov;?></td>
 
 
 <td><div onClick="cetak('<? echo $id;?>');" class="pdf" title="Cetak Data"></div></td>
-<td><div onClick="pendaftaranForm('update','<? echo $c_noreg;?>');" class="edit" title="Ubah Data"></div></td>
-<td><div onClick="pendaftaranHapus('Data','<? echo $c_noreg;?>','<? echo $nama;?>');" class="delete" title="Hapus Data"></div></td>
+<td><div onClick="pendaftaranForm('update','<? echo $kd_kel;?>');" class="edit" title="Ubah Data"></div></td>
+<td><div onClick="pendaftaranHapus('Data','<? echo $kd_kel;?>','<? echo $nama;?>');" class="delete" title="Hapus Data"></div></td>
 
 
 						

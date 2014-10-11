@@ -74,26 +74,28 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->bulan = $_REQUEST['bulan'];
 		$this->view->tahun = $_REQUEST['tahun'];
 
-		$detailKelurahan = $this->rekamkelurahan_serv->detailKelurahanByKode($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$detailKelurahan = $this->rekamkelurahan_serv->detailKelurahanByKode($this->view->kd_kel);
 		$this->view->detailKelurahan = $detailKelurahan;
+		$this->view->lastPeriode	= $this->rekamkelurahan_serv->detailKelurahanByPeriode($this->view->kd_kel);
 		
 		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
 		$this->view->carii 			= $_REQUEST['carii'];
 
-		$sortBy			= 'n_rekamkelurahan';
+		$sortBy			= 'bulan';
 		$sort			= 'asc';
 		
 		$dataMasukan = array("kategoriCari" => $this->view->kategoriCari,
 							"katakunciCari" => $this->view->carii,
-							"kd_kel"	=> $_REQUEST['kd_kel'],
+							"kd_kel"	=> $this->view->kd_kel,
 							"sortBy"		=> $sortBy,
 							"sort"			=> $sort);
 		
-		$numToDisplay = 20;
+		$numToDisplay = 10;
 		$this->view->numToDisplay = $numToDisplay;
 		$this->view->currentPage = $currentPage;
 		$this->view->totrekamkelurahanlist = $this->rekamkelurahan_serv->carirekamkelurahanlist($dataMasukan,0,0,0);
-		$this->view->rekamkelurahanlist = $this->rekamkelurahan_serv->carirekamkelurahanlist($dataMasukan,$currentPage, $numToDisplay,$this->view->totrekamkelurahanlist);		
+		$this->view->rekamkelurahanlist = $this->rekamkelurahan_serv->carirekamkelurahanlist($dataMasukan,$currentPage, $numToDisplay,$this->view->totrekamkelurahanlist);
+	
 		//var_dump($this->view->rekamkelurahanlist);
 		//exit();
 	}
@@ -106,22 +108,26 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->carii 			= $_REQUEST['carii'];
 
 		$this->view->jenisForm		= $_REQUEST['jenisForm'];
-		$this->view->id				= $_REQUEST['id'];
-		$this->view->kd_kel			= $_REQUEST['kd_kel'];
+		//$this->view->id				= $_REQUEST['id'];
 		
 		$this->view->kd_kel	 = $_REQUEST['kd_kel'];
 		$this->view->bulan 	 = $_REQUEST['bulan'];
 		$this->view->tahun 	 = $_REQUEST['tahun'];
-
-		$this->view->detailKelurahan	= $this->rekamkelurahan_serv->detailKelurahanByKode($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		var_dump($this->view->kd_kel);
+		// var_dump($this->view->tahun);
+		$this->view->detailKelurahan	= $this->rekamkelurahan_serv->detailKelurahanByKode($this->view->kd_kel);
+		
+		$this->view->detailUmum = $this->rekamkelurahan_serv->detailUmum($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailPersonil = $this->rekamkelurahan_serv->detailPersonil($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKewenangan = $this->rekamkelurahan_serv->detailKewenangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKeuangan = $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKelembagaan = $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailTrantib = $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		var_dump($this->view->detailKelurahan);
+		// var_dump($this->view->bulan);
+		// var_dump($this->view->tahun);
 	
-		$this->view->agamaList			= $this->ref_serv->getAgamaList();
-		$this->view->statusList			= $this->ref_serv->getStatusList();
-		$this->view->propinsiList		= $this->ref_serv->getPropinsiList();
-		$this->view->goldarList			= $this->ref_serv->getGoldarList();
-		$this->view->klasifikasiList	= $this->ref_serv->getKlasifikasiList();
-		$this->view->tindakanList		= $this->ref_serv->getTindakanList();
-		$this->view->detailRekamkelurahan	= $this->rekamkelurahan_serv->detailRekamkelurahanById($this->view->id, $this->view->bulan, $this->view->tahun);
+	
 	}
 	
 	//insert data
@@ -135,8 +141,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->bulan 	 = $_REQUEST['bulan'];
 		$this->view->tahun 	 = $_REQUEST['tahun'];
 
-		$this->view->detailKelurahan	= $this->rekamkelurahan_serv->detailKelurahanByKode($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-	
+		
 		//umum
 		$tahun						= $_POST['tahun'];
 		$bulan						= $_POST['bulan'];
@@ -753,17 +758,16 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->bulan 	= $_REQUEST['bulan'];
 		$this->view->tahun 	= $_REQUEST['tahun'];
 
-		$this->view->detailKelurahan	= $this->rekamkelurahan_serv->detailKelurahanByKode($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-	
+		
 		$dataMasukan = array("id" => $id,
 							"kd_kel" => $kd_kel,
 							"bulan" => $bulan,
 							"tahun" => $tahun);
-		$this->view->rekamkelurahanUpdate = $this->rekamkelurahan_serv->rekamkelurahanHapus($dataMasukan);
+		$this->view->rekamkelurahanHapus = $this->rekamkelurahan_serv->rekamkelurahanHapus($dataMasukan);
 		
 		$this->view->proses = "3";	
 		$this->view->keterangan = "Judul";
-		$this->view->hasil = $this->view->rekamkelurahanUpdate;
+		$this->view->hasil = $this->view->rekamkelurahanHapus;
 		
 		$this->rekamkelurahanlistAction();
 		$this->render('rekamkelurahanlist');

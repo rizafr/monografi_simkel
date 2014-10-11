@@ -25,13 +25,18 @@ $numToDisplay = $this->numToDisplay;
 <div class="panel">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
-		<h2 class="title">FORM DATA KELURAHAN</h2>
+		
+		
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {$namaForm = 'frmtambahrekamkelurahan'; $nama='tambah';}
+			else if (strtolower($this->jenisForm) == 'update') {$namaForm = 'frmubahrekamkelurahan'; $nama='ubah'; }
+			else {$namaForm = 'frmhapusrekamkelurahan';  $nama='hapus';}
+		?>
+		
+		<h2 class="title">FORM <?php echo strtoupper($nama) ?> DATA KELURAHAN <strong><?php echo strtoupper($this->detailKelurahan->kelurahan) ?></strong></h2>
 	    <div class="spacer"></div> 
 		
-		<? if(strtolower($this->jenisForm) == 'insert') {$namaForm = 'frmtambahrekamkelurahan'; }
-			else if (strtolower($this->jenisForm) == 'update') {$namaForm = 'frmubahrekamkelurahan'; }
-			else {$namaForm = 'frmhapusrekamkelurahan'; }
-		?>
+		
 
 <form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi">
 <table width="100%" border="0" cellpadding="0" cellspacing="2" class="std">
@@ -39,10 +44,10 @@ $numToDisplay = $this->numToDisplay;
 
 	<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
 	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
-	<input name="id_user" id="id_user" type="hidden" value="<?echo $this->detailRekampasien['id_user'];?>" />
+	<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->detailKelurahan->kd_kel;?>" />
+	<input name="bulan" id="bulan" type="hidden" value="<?echo $this->bulan;?>" />
+	<input name="tahun" id="tahun" type="hidden" value="<?echo $this->tahun;?>" />
 	
-	<input name="kategoriCari" id="kategoriCari" type="hidden" value="<? echo $this->kategoriCari; ?>" /> 
-	<input name="carii" id="carii" type="hidden" value="<? echo $this->carii; ?>" /> 
 <? 
 $status = $this->hasil;
 $proses = $this->proses;
@@ -69,12 +74,11 @@ $(function(){
 	</ul>
 <div id="tabs-1"> <!-- DATA UMUM -->
 <table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
-	<input type hidden="tahun" name="tahun" value="<?echo $this->kode_pasien;?>">
-	<input type hidden="bulan" name="bulan" value="<?echo $this->kode_pasien;?>">
+	
 	<tr>
 		<td align="right" >* Kode Kelurahan :</td>
 		<td>	
-		<input name="kd_kel" id="kd_kel" type="text" value="<?echo $this->kode_pasien;?>" readonly />
+		<input name="kd_kel" id="kd_kel" type="text" value="<?echo $this->kd_kel;?>" readonly />
 		
 		<!--input type="button" value="Cari" onClick="showDialog('pasien');"-->
 			</td>
@@ -150,7 +154,7 @@ $(function(){
 		<td>	
 				<? 
 				$luasAttrib = array("size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("luas", $this->detailRekampasien['luas'], $luasAttrib);
+				echo $ctrlFrm->formText("luas", $this->detailKelurahan->luas, $luasAttrib);
 				?> km
 		</td>
 	</tr>
@@ -164,7 +168,7 @@ $(function(){
 				<td align="center">
 					<? 
 						$batas_utaraAttrib = array("size" => 50,"maxlength" => 50, "required"=>"requried");
-						echo $ctrlFrm->formText("batas_utara", $this->detailRekampasien['batas_utara'], $batas_utaraAttrib);
+						echo $ctrlFrm->formText("batas_utara", $this->detailKelurahan->batas_utara, $batas_utaraAttrib);
 					?>
 				</td>
 			</tr>
@@ -173,7 +177,7 @@ $(function(){
 				<td align="center">
 					<? 
 						$batas_selatanAttrib = array("size" => 50,"maxlength" => 50, "required"=>"requried");
-						echo $ctrlFrm->formText("batas_selatan", $this->detailRekampasien['batas_selatan'], $batas_selatanAttrib);
+						echo $ctrlFrm->formText("batas_selatan", $this->detailKelurahan->batas_selatan, $batas_selatanAttrib);
 					?>
 				</td>
 			</tr>
@@ -182,7 +186,7 @@ $(function(){
 				<td align="center">
 					<? 
 						$batas_baratAttrib = array("size" => 50,"maxlength" => 50, "required"=>"requried");
-						echo $ctrlFrm->formText("batas_barat", $this->detailRekampasien['batas_barat'], $batas_baratAttrib);
+						echo $ctrlFrm->formText("batas_barat", $this->detailKelurahan->batas_barat, $batas_baratAttrib);
 					?>
 				</td>
 			</tr>
@@ -191,7 +195,7 @@ $(function(){
 				<td align="center">
 					<? 
 						$batas_timurAttrib = array("size" => 50,"maxlength" => 50, "required"=>"requried");
-						echo $ctrlFrm->formText("batas_timur", $this->detailRekampasien['batas_timur'], $batas_timurAttrib);
+						echo $ctrlFrm->formText("batas_timur", $this->detailKelurahan->batas_timur, $batas_timurAttrib);
 					?>
 				</td>
 			</tr>
@@ -209,7 +213,7 @@ $(function(){
 		<td align="center">
 			<? 
 				$jarak_dari_kecamatanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_kecamatan", $this->detailRekampasien['jarak_dari_kecamatan'], $jarak_dari_kecamatanAttrib);
+				echo $ctrlFrm->formText("jarak_dari_kecamatan", $this->detailKelurahan->jarak_dari_kecamatan, $jarak_dari_kecamatanAttrib);
 			?> km
 		</td>
 	</tr>
@@ -219,7 +223,7 @@ $(function(){
 		<td align="center">
 			<? 
 				$jarak_dari_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_kota", $this->detailRekampasien['jarak_dari_kota'], $jarak_dari_kotaAttrib);
+				echo $ctrlFrm->formText("jarak_dari_kota", $this->detailKelurahan->jarak_dari_kota, $jarak_dari_kotaAttrib);
 			?>  km
 		</td>
 	</tr>
@@ -228,7 +232,7 @@ $(function(){
 		<td align="center">
 			<? 
 				$jarak_dari_ibukota_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_ibukota_kota", $this->detailRekampasien['jarak_dari_ibukota_kota'], $jarak_dari_ibukota_kotaAttrib);
+				echo $ctrlFrm->formText("jarak_dari_ibukota_kota", $this->detailKelurahan->jarak_dari_ibukota_kota, $jarak_dari_ibukota_kotaAttrib);
 			?>  km
 		</td>
 	</tr>
@@ -237,7 +241,7 @@ $(function(){
 		<td align="center">
 			<? 
 				$jarak_dari_ibukota_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_ibukota_prov", $this->detailRekampasien['jarak_dari_ibukota_prov'], $jarak_dari_ibukota_provAttrib);
+				echo $ctrlFrm->formText("jarak_dari_ibukota_prov", $this->detailKelurahan->jarak_dari_ibukota_prov, $jarak_dari_ibukota_provAttrib);
 			?>  km
 		</td>
 	</tr>
@@ -247,11 +251,11 @@ $(function(){
 		<td align="right" >5. Jumlah Penduduk :</td>
 		<td><? 
 				$jml_jiwaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "class"=>"kecil","digits"=>"true");
-				echo $ctrlFrm->formText("jml_jiwa", $this->detailRekampasien['jml_jiwa'], $jml_jiwaAttrib);
+				echo $ctrlFrm->formText("jml_jiwa", $this->detailUmum['jml_jiwa'], $jml_jiwaAttrib);
 			?>   jiwa 
 			<? 
 				$jml_kkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true" ,"class"=>"kecil");
-				echo $ctrlFrm->formText("jml_kk", $this->detailRekampasien['jml_kk'], $jml_kkAttrib);
+				echo $ctrlFrm->formText("jml_kk", $this->detailUmum['jml_kk'], $jml_kkAttrib);
 			?>  kk
 		</td>
 	
@@ -262,7 +266,7 @@ $(function(){
 		<td align="center">
 			<? 
 				$jml_lakiAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_laki", $this->detailRekampasien['jml_laki'], $jml_lakiAttrib);
+				echo $ctrlFrm->formText("jml_laki", $this->detailUmum['jml_laki'], $jml_lakiAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -272,7 +276,7 @@ $(function(){
 		<td align="center">
 			<? 
 				$jml_perempuanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_perempuan", $this->detailRekampasien['jml_perempuan'], $jml_perempuanAttrib);
+				echo $ctrlFrm->formText("jml_perempuan", $this->detailUmum['jml_perempuan'], $jml_perempuanAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -281,7 +285,7 @@ $(function(){
 		<td align="center">
 			<? 
 				$jml_0_15Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_0_15", $this->detailRekampasien['jml_0_15'], $jml_0_15Attrib);
+				echo $ctrlFrm->formText("jml_0_15", $this->detailUmum['jml_0_15'], $jml_0_15Attrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -290,7 +294,7 @@ $(function(){
 		<td align="center">
 			<? 
 				$jml_15_65Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_15_65", $this->detailRekampasien['jml_15_65'], $jml_15_65Attrib);
+				echo $ctrlFrm->formText("jml_15_65", $this->detailUmum['jml_15_65'], $jml_15_65Attrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -299,7 +303,7 @@ $(function(){
 		<td align="center">
 			<? 
 				$jml_65_keatasAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_65_keatas", $this->detailRekampasien['jml_65_keatas'], $jml_65_keatasAttrib);
+				echo $ctrlFrm->formText("jml_65_keatas", $this->detailUmum['jml_65_keatas'], $jml_65_keatasAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -316,7 +320,7 @@ $(function(){
 		<td>
 			<? 
 				$jml_pnsAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_pns", $this->detailRekampasien['jml_pns'], $jml_pnsAttrib);
+				echo $ctrlFrm->formText("jml_pns", $this->detailUmum['jml_pns'], $jml_pnsAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -326,7 +330,7 @@ $(function(){
 		<td>
 			<? 
 				$jml_abriAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_abri", $this->detailRekampasien['jml_abri'], $jml_abriAttrib);
+				echo $ctrlFrm->formText("jml_abri", $this->detailUmum['jml_abri'], $jml_abriAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -335,7 +339,7 @@ $(function(){
 		<td>
 			<? 
 				$jml_swastaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_swasta", $this->detailRekampasien['jml_swasta'], $jml_swastaAttrib);
+				echo $ctrlFrm->formText("jml_swasta", $this->detailUmum['jml_swasta'], $jml_swastaAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -345,7 +349,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_wiraswastaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_wiraswasta", $this->detailRekampasien['jml_wiraswasta'], $jml_wiraswastaAttrib);
+				echo $ctrlFrm->formText("jml_wiraswasta", $this->detailUmum['jml_wiraswasta'], $jml_wiraswastaAttrib);
 			?>  Jiwa
 	</td>
 	</tr>
@@ -355,7 +359,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_taniAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_tani", $this->detailRekampasien['jml_tani'], $jml_taniAttrib);
+				echo $ctrlFrm->formText("jml_tani", $this->detailUmum['jml_tani'], $jml_taniAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -365,7 +369,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_pertukanganAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_pertukangan", $this->detailRekampasien['jml_pertukangan'], $jml_pertukanganAttrib);
+				echo $ctrlFrm->formText("jml_pertukangan", $this->detailUmum['jml_pertukangan'], $jml_pertukanganAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -375,7 +379,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_buruh_taniAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_buruh_tani", $this->detailRekampasien['jml_buruh_tani'], $jml_buruh_taniAttrib);
+				echo $ctrlFrm->formText("jml_buruh_tani", $this->detailUmum['jml_buruh_tani'], $jml_buruh_taniAttrib);
 			?>  Jiwa
 		</td>
 	</td>
@@ -386,7 +390,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_pensiunanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_pensiunan", $this->detailRekampasien['jml_pensiunan'], $jml_pensiunanAttrib);
+				echo $ctrlFrm->formText("jml_pensiunan", $this->detailUmum['jml_pensiunan'], $jml_pensiunanAttrib);
 			?>  Jiwa
 	</td>
 	</tr>
@@ -396,7 +400,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_nelayanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jml_nelayan", $this->detailRekampasien['jml_nelayan'], $jml_nelayanAttrib);
+				echo $ctrlFrm->formText("jml_nelayan", $this->detailUmum['jml_nelayan'], $jml_nelayanAttrib);
 			?>  Jiwa
 	</td>
 	</tr>
@@ -406,7 +410,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_pemulungAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"number");
-				echo $ctrlFrm->formText("jml_pemulung", $this->detailRekampasien['jml_pemulung'], $jml_pemulungAttrib);
+				echo $ctrlFrm->formText("jml_pemulung", $this->detailUmum['jml_pemulung'], $jml_pemulungAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -416,7 +420,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_jasaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_jasa", $this->detailRekampasien['jml_jasa'], $jml_jasaAttrib);
+				echo $ctrlFrm->formText("jml_jasa", $this->detailUmum['jml_jasa'], $jml_jasaAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -437,7 +441,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_lulusan_tkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_lulusan_tk", $this->detailRekampasien['jml_lulusan_tk'], $jml_lulusan_tkAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_tk", $this->detailUmum['jml_lulusan_tk'], $jml_lulusan_tkAttrib);
 			?> jiwa
 	</td>
 	</tr>		
@@ -448,7 +452,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_lulusan_sdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_lulusan_sd", $this->detailRekampasien['jml_lulusan_sd'], $jml_lulusan_sdAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_sd", $this->detailUmum['jml_lulusan_sd'], $jml_lulusan_sdAttrib);
 			?> jiwa
 	</td>
 	</tr>
@@ -458,7 +462,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_lulusan_smpAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_lulusan_smp", $this->detailRekampasien['jml_lulusan_smp'], $jml_lulusan_smpAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_smp", $this->detailUmum['jml_lulusan_smp'], $jml_lulusan_smpAttrib);
 			?> jiwa
 	</td>
 	</tr>
@@ -468,7 +472,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_lulusan_smaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_lulusan_sma", $this->detailRekampasien['jml_lulusan_sma'], $jml_lulusan_smaAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_sma", $this->detailUmum['jml_lulusan_sma'], $jml_lulusan_smaAttrib);
 			?> jiwa
 	</td>
 	</tr>
@@ -478,7 +482,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_lulusan_diplomaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_lulusan_diploma", $this->detailRekampasien['jml_lulusan_diploma'], $jml_lulusan_diplomaAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_diploma", $this->detailUmum['jml_lulusan_diploma'], $jml_lulusan_diplomaAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -488,7 +492,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_lulusan_sarjanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_lulusan_sarjana", $this->detailRekampasien['jml_lulusan_sarjana'], $jml_lulusan_sarjanaAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_sarjana", $this->detailUmum['jml_lulusan_sarjana'], $jml_lulusan_sarjanaAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -499,7 +503,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_lulusan_pascasarjanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_lulusan_pascasarjana", $this->detailRekampasien['jml_lulusan_pascasarjana'], $jml_lulusan_pascasarjanaAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_pascasarjana", $this->detailUmum['jml_lulusan_pascasarjana'], $jml_lulusan_pascasarjanaAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -514,7 +518,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_lulusan_pontrenAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_lulusan_pontren", $this->detailRekampasien['jml_lulusan_pontren'], $jml_lulusan_pontrenAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_pontren", $this->detailUmum['jml_lulusan_pontren'], $jml_lulusan_pontrenAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -524,7 +528,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_lulusan_keagamaanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_lulusan_keagamaan", $this->detailRekampasien['jml_lulusan_keagamaan'], $jml_lulusan_keagamaanAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_keagamaan", $this->detailUmum['jml_lulusan_keagamaan'], $jml_lulusan_keagamaanAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -534,7 +538,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_lulusan_slbAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_lulusan_slb", $this->detailRekampasien['jml_lulusan_slb'], $jml_lulusan_slbAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_slb", $this->detailUmum['jml_lulusan_slb'], $jml_lulusan_slbAttrib);
 			?>	jiwa
 		</td>
 	</tr>
@@ -544,7 +548,7 @@ $(function(){
 		<td>	
 			<? 
 				$jml_lulusan_kursusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("jml_lulusan_kursus", $this->detailRekampasien['jml_lulusan_kursus'], $jml_lulusan_kursusAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_kursus", $this->detailUmum['jml_lulusan_kursus'], $jml_lulusan_kursusAttrib);
 			?>	jiwa
 		</td>
 	</tr>
@@ -553,12 +557,12 @@ $(function(){
 		<td align="right" >8. Jumlah Penduduk Miskin:</td>
 		<td>	
 			<? 
-				$jml_lulusan_miskinAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","class"=>"kecil");
-				echo $ctrlFrm->formText("jml_lulusan_miskin", $this->detailRekampasien['jml_lulusan_miskin'], $jml_lulusan_miskinAttrib);
+				$jml_jiwa_miskinAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","class"=>"kecil");
+				echo $ctrlFrm->formText("jml_jiwa_miskin", $this->detailUmum['jml_jiwa_miskin'], $jml_jiwa_miskinAttrib);
 			?> jiwa
 			<? 
 				$jml_jiwa_kkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","class"=>"kecil");
-				echo $ctrlFrm->formText("jml_jiwa_kk", $this->detailRekampasien['jml_jiwa_kk'], $jml_jiwa_kkAttrib);
+				echo $ctrlFrm->formText("jml_jiwa_kk", $this->detailUmum['jml_jiwa_kk'], $jml_jiwa_kkAttrib);
 			?>  KK
 		</td>
 	</tr>
@@ -573,7 +577,7 @@ $(function(){
 			Rp &nbsp;
 			<? 
 				$umrAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("umr", $this->detailRekampasien['umr'], $umrAttrib);
+				echo $ctrlFrm->formText("umr", $this->detailUmum['umr'], $umrAttrib);
 			?> 
 		</td>
 	</tr>
@@ -610,7 +614,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_posyanduAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("sarana_jml_posyandu", $this->detailRekampasien['sarana_jml_posyandu'], $sarana_jml_posyanduAttrib);
+				echo $ctrlFrm->formText("sarana_jml_posyandu", $this->detailUmum['sarana_jml_posyandu'], $sarana_jml_posyanduAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -620,7 +624,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_poliklinikAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("sarana_jml_poliklinik", $this->detailRekampasien['sarana_jml_poliklinik'], $sarana_jml_poliklinikAttrib);
+				echo $ctrlFrm->formText("sarana_jml_poliklinik", $this->detailUmum['sarana_jml_poliklinik'], $sarana_jml_poliklinikAttrib);
 			?> buah
 		</td>
 	</tr>
@@ -643,7 +647,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_tkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_tk", $this->detailRekampasien['sarana_jml_tk'], $sarana_jml_tkAttrib);
+				echo $ctrlFrm->formText("sarana_jml_tk", $this->detailUmum['sarana_jml_tk'], $sarana_jml_tkAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -653,7 +657,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_sdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_sd", $this->detailRekampasien['sarana_jml_sd'], $sarana_jml_sdAttrib);
+				echo $ctrlFrm->formText("sarana_jml_sd", $this->detailUmum['sarana_jml_sd'], $sarana_jml_sdAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -663,7 +667,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_smpAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_smp", $this->detailRekampasien['sarana_jml_smp'], $sarana_jml_smpAttrib);
+				echo $ctrlFrm->formText("sarana_jml_smp", $this->detailUmum['sarana_jml_smp'], $sarana_jml_smpAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -673,7 +677,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_smaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_sma", $this->detailRekampasien['sarana_jml_sma'], $sarana_jml_smaAttrib);
+				echo $ctrlFrm->formText("sarana_jml_sma", $this->detailUmum['sarana_jml_sma'], $sarana_jml_smaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -683,7 +687,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_ptAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_pt", $this->detailRekampasien['sarana_jml_pt'], $sarana_jml_ptAttrib);
+				echo $ctrlFrm->formText("sarana_jml_pt", $this->detailUmum['sarana_jml_pt'], $sarana_jml_ptAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -698,7 +702,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_masjidAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_masjid", $this->detailRekampasien['sarana_jml_masjid'], $sarana_jml_masjidAttrib);
+				echo $ctrlFrm->formText("sarana_jml_masjid", $this->detailUmum['sarana_jml_masjid'], $sarana_jml_masjidAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -708,7 +712,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_musholaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_mushola", $this->detailRekampasien['sarana_jml_mushola'], $sarana_jml_musholaAttrib);
+				echo $ctrlFrm->formText("sarana_jml_mushola", $this->detailUmum['sarana_jml_mushola'], $sarana_jml_musholaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -718,7 +722,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_gerejaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_gereja", $this->detailRekampasien['sarana_jml_gereja'], $sarana_jml_gerejaAttrib);
+				echo $ctrlFrm->formText("sarana_jml_gereja", $this->detailUmum['sarana_jml_gereja'], $sarana_jml_gerejaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -728,7 +732,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_puraAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_pura", $this->detailRekampasien['sarana_jml_pura'], $sarana_jml_puraAttrib);
+				echo $ctrlFrm->formText("sarana_jml_pura", $this->detailUmum['sarana_jml_pura'], $sarana_jml_puraAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -738,7 +742,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_viharaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_vihara", $this->detailRekampasien['sarana_jml_vihara'], $sarana_jml_viharaAttrib);
+				echo $ctrlFrm->formText("sarana_jml_vihara", $this->detailUmum['sarana_jml_vihara'], $sarana_jml_viharaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -748,7 +752,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_klentengAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_klenteng", $this->detailRekampasien['sarana_jml_klenteng'], $sarana_jml_klentengAttrib);
+				echo $ctrlFrm->formText("sarana_jml_klenteng", $this->detailUmum['sarana_jml_klenteng'], $sarana_jml_klentengAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -763,7 +767,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_olahragaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_olahraga", $this->detailRekampasien['sarana_jml_olahraga'], $sarana_jml_olahragaAttrib);
+				echo $ctrlFrm->formText("sarana_jml_olahraga", $this->detailUmum['sarana_jml_olahraga'], $sarana_jml_olahragaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -773,7 +777,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_kesenianAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_kesenian", $this->detailRekampasien['sarana_jml_kesenian'], $sarana_jml_kesenianAttrib);
+				echo $ctrlFrm->formText("sarana_jml_kesenian", $this->detailUmum['sarana_jml_kesenian'], $sarana_jml_kesenianAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -783,7 +787,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_balai_pertemuanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_balai_pertemuan", $this->detailRekampasien['sarana_jml_balai_pertemuan'], $sarana_jml_balai_pertemuanAttrib);
+				echo $ctrlFrm->formText("sarana_jml_balai_pertemuan", $this->detailUmum['sarana_jml_balai_pertemuan'], $sarana_jml_balai_pertemuanAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -793,7 +797,7 @@ $(function(){
 		<td>	
 			<? 
 				$sarana_jml_balai_lainnyaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_balai_lainnya", $this->detailRekampasien['sarana_jml_balai_lainnya'], $sarana_jml_balai_lainnyaAttrib);
+				echo $ctrlFrm->formText("sarana_jml_balai_lainnya", $this->detailUmum['sarana_jml_balai_lainnya'], $sarana_jml_balai_lainnyaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -814,7 +818,7 @@ $(function(){
 		<td>
 			<? 
 				$nama_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("nama_lurah", $this->detailRekampasien['nama_lurah'], $nama_lurahAttrib);
+				echo $ctrlFrm->formText("nama_lurah", $this->detailKelurahan->nama_lurah, $nama_lurahAttrib);
 			?>
 		</td>
 	</tr>
@@ -824,7 +828,7 @@ $(function(){
 		<td>	
 			<? 
 				$gol_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("gol_lurah", $this->detailRekampasien['gol_lurah'], $gol_lurahAttrib);
+				echo $ctrlFrm->formText("gol_lurah", $this->detailKelurahan->gol_lurah, $gol_lurahAttrib);
 			?>
 		</td>
 	</tr>
@@ -834,7 +838,7 @@ $(function(){
 		<td>	
 			<? 
 				$nip_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("nip_lurah", $this->detailRekampasien['nip_lurah'], $nip_lurahAttrib);
+				echo $ctrlFrm->formText("nip_lurah", $this->detailKelurahan->nip_lurah, $nip_lurahAttrib);
 			?>
 		</td>
 	</tr>
@@ -842,18 +846,7 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; d. Pendidikan:</td>
 		<td>	
-			<?
-				$jmlPendidikanList = count($this->pendidikanList);
-				$pendidikanList['-'] = '--Pilih--';
-				for ($i = 0; $i < $jmlPendidikanList; $i++) {
-					$pendidikanList[$this->pendidikanList[$i]->id_pendidikan] = (string)$this->pendidikanList[$i]->pendidikanList;			 
-				}
-				if($jenisAksi == "Ubah"){
-					$pendidikanAtrib = array("id"=>"id_pendidikan", "tabindex"=>"17");
-					
-				}
-				echo $ctrlFrm->formSelect('id_pendidikan', $this->kegiatanMenu['pendidikan'], $pendidikanAtrib, $pendidikanList);
-			?>
+			
 		</td>
 	</tr>
 	
@@ -862,7 +855,7 @@ $(function(){
 		<td>	
 			<? 
 				$tmt_jabatan_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("tmt_jabatan_lurah", $this->detailRekampasien['tmt_jabatan_lurah'], $tmt_jabatan_lurahAttrib);
+				echo $ctrlFrm->formText("tmt_jabatan_lurah", $this->detailKelurahan->tmt_jabatan_lurah, $tmt_jabatan_lurahAttrib);
 			?>
 		</td>
 	</tr>
@@ -872,27 +865,14 @@ $(function(){
 		<td>	
 			<? 
 				$riwayat_jabatan1Attrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("riwayat_jabatan1", $this->detailRekampasien['riwayat_jabatan1'], $riwayat_jabatan1Attrib);
+				echo $ctrlFrm->formText("riwayat_jabatan1", $this->detailKelurahan->riwayat_jabatan1, $riwayat_jabatan1Attrib);
 			?>
 		</td>
 	</tr>
 	
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; g. Jenis Kelamin:</td>
-		<td>	
-			<?
-				$jmlJeniskelaminList = count($this->jeniskelaminList);
-				$jeniskelaminList['-'] = '--Pilih--';
-				for ($i = 0; $i < $jmlPendidikanList; $i++) {
-					$jeniskelaminList[$this->jeniskelaminList[$i]->jeniskelamin] = (string)$this->jeniskelaminList[$i]->jeniskelaminList;			 
-				}
-				if($jenisAksi == "Ubah"){
-					$jeniskelaminAtrib = array("id"=>"id_jenis_kelamin", "tabindex"=>"17");
-					
-				}
-				echo $ctrlFrm->formSelect('jenis_kelamin', $this->kegiatanMenu['jenis_kelamin'], $jeniskelaminAtrib, $jeniskelaminList);
-			?>
-		</td>
+		
 	</tr>
 				
 	<tr>
@@ -905,7 +885,7 @@ $(function(){
 		<td>
 			<? 
 				$nama_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("nama_s", $this->detailRekampasien['nama_lurah'], $nama_lurahAttrib);
+				echo $ctrlFrm->formText("nama_s", $this->detailKelurahan->nama_lurah, $nama_lurahAttrib);
 			?>
 		</td>
 	</tr>
@@ -915,7 +895,7 @@ $(function(){
 		<td>	
 			<? 
 				$gol_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("gol_lurah", $this->detailRekampasien['gol_lurah'], $gol_lurahAttrib);
+				echo $ctrlFrm->formText("gol_lurah", $this->detailKelurahan->gol_lurah, $gol_lurahAttrib);
 			?>
 		</td>
 	</tr>
@@ -925,7 +905,7 @@ $(function(){
 		<td>	
 			<? 
 				$nip_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("nip_lurah", $this->detailRekampasien['nip_lurah'], $nip_lurahAttrib);
+				echo $ctrlFrm->formText("nip_lurah", $this->detailKelurahan->nip_lurah, $nip_lurahAttrib);
 			?>
 		</td>
 	</tr>
@@ -933,18 +913,7 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; d. Pendidikan:</td>
 		<td>	
-			<?
-				$jmlPendidikanList = count($this->pendidikanList);
-				$pendidikanList['-'] = '--Pilih--';
-				for ($i = 0; $i < $jmlPendidikanList; $i++) {
-					$pendidikanList[$this->pendidikanList[$i]->id_pendidikan] = (string)$this->pendidikanList[$i]->pendidikanList;			 
-				}
-				if($jenisAksi == "Ubah"){
-					$pendidikanAtrib = array("id"=>"id_pendidikan", "tabindex"=>"17");
-					
-				}
-				echo $ctrlFrm->formSelect('id_pendidikan', $this->kegiatanMenu['pendidikan'], $pendidikanAtrib, $pendidikanList);
-			?>
+			
 		</td>
 	</tr>
 	
@@ -953,7 +922,7 @@ $(function(){
 		<td>	
 			<? 
 				$tmt_jabatan_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("tmt_jabatan_lurah", $this->detailRekampasien['tmt_jabatan_lurah'], $tmt_jabatan_lurahAttrib);
+				echo $ctrlFrm->formText("tmt_jabatan_lurah", $this->detailKelurahan->tmt_jabatan_lurah, $tmt_jabatan_lurahAttrib);
 			?>
 		</td>
 	</tr>
@@ -963,7 +932,7 @@ $(function(){
 		<td>	
 			<? 
 				$riwayat_jabatan1Attrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("riwayat_jabatan1", $this->detailRekampasien['riwayat_jabatan1'], $riwayat_jabatan1Attrib);
+				echo $ctrlFrm->formText("riwayat_jabatan1", $this->detailKelurahan->riwayat_jabatan1, $riwayat_jabatan1Attrib);
 			?>
 		</td>
 	</tr>
@@ -971,18 +940,7 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; g. Jenis Kelamin:</td>
 		<td>	
-			<?
-				$jmlJeniskelaminList = count($this->jeniskelaminList);
-				$jeniskelaminList['-'] = '--Pilih--';
-				for ($i = 0; $i < $jmlPendidikanList; $i++) {
-					$jeniskelaminList[$this->jeniskelaminList[$i]->jeniskelamin] = (string)$this->jeniskelaminList[$i]->jeniskelaminList;			 
-				}
-				if($jenisAksi == "Ubah"){
-					$jeniskelaminAtrib = array("id"=>"id_jenis_kelamin", "tabindex"=>"17");
-					
-				}
-				echo $ctrlFrm->formSelect('jenis_kelamin', $this->kegiatanMenu['jenis_kelamin'], $jeniskelaminAtrib, $jeniskelaminList);
-			?>
+			
 		</td>
 	</tr>
 	
@@ -996,7 +954,7 @@ $(function(){
 		<td>
 			<? 
 				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailRekampasien['n_feses'], $n_fesesAttrib);
+				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
 			?>  orang
 		
 		</td>
@@ -1007,7 +965,7 @@ $(function(){
 		<td>	
 			<? 
 				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailRekampasien['n_feses'], $n_fesesAttrib);
+				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1017,7 +975,7 @@ $(function(){
 		<td>	
 			<? 
 				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailRekampasien['n_feses'], $n_fesesAttrib);
+				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1027,7 +985,7 @@ $(function(){
 		<td>	
 			<? 
 				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailRekampasien['n_feses'], $n_fesesAttrib);
+				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1047,7 +1005,7 @@ $(function(){
 		<td>
 			<? 
 				$n_fesesAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailRekampasien['n_feses'], $n_fesesAttrib);
+				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
 			?>  buah</td>
 	</tr>
 	
@@ -1057,7 +1015,7 @@ $(function(){
 		<td>
 			<? 
 				$n_fesesAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailRekampasien['n_feses'], $n_fesesAttrib);
+				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
 			?>  buah</td>
 	</tr>
 	
@@ -1066,7 +1024,7 @@ $(function(){
 		<td>
 			<? 
 				$n_fesesAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailRekampasien['n_feses'], $n_fesesAttrib);
+				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
 			?>  orang
 		
 		
@@ -1078,7 +1036,7 @@ $(function(){
 		<td>	
 			<? 
 				$n_fesesAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailRekampasien['n_feses'], $n_fesesAttrib);
+				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1088,7 +1046,7 @@ $(function(){
 		<td>	
 			<? 
 				$n_fesesAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailRekampasien['n_feses'], $n_fesesAttrib);
+				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1098,7 +1056,7 @@ $(function(){
 		<td>	
 			<? 
 				$n_fesesAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("n_feses", $this->detailRekampasien['n_feses'], $n_fesesAttrib);
+				echo $ctrlFrm->formText("n_feses", $this->detailKelurahan->n_feses, $n_fesesAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1117,7 +1075,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$anggaran_apbdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("anggaran_apbd", $this->detailRekampasien['anggaran_apbd'], $anggaran_apbdAttrib);
+				echo $ctrlFrm->formText("anggaran_apbd", $this->detailKelurahan->anggaran_apbd, $anggaran_apbdAttrib);
 			?>  </td>
 	</tr>
 	
@@ -1140,7 +1098,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$bantuan_pusatAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("bantuan_pusat", $this->detailRekampasien['bantuan_pusat'], $bantuan_pusatAttrib);
+				echo $ctrlFrm->formText("bantuan_pusat", $this->detailKelurahan->bantuan_pusat, $bantuan_pusatAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1150,7 +1108,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$bantuan_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("bantuan_prov", $this->detailRekampasien['bantuan_prov'], $bantuan_provAttrib);
+				echo $ctrlFrm->formText("bantuan_prov", $this->detailKelurahan->bantuan_prov, $bantuan_provAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1160,7 +1118,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$bantuan_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("bantuan_kota", $this->detailRekampasien['bantuan_kota'], $bantuan_kotaAttrib);
+				echo $ctrlFrm->formText("bantuan_kota", $this->detailKelurahan->bantuan_kota, $bantuan_kotaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1170,7 +1128,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$hibahAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("hibah", $this->detailRekampasien['hibah'], $hibahAttrib);
+				echo $ctrlFrm->formText("hibah", $this->detailKelurahan->hibah, $hibahAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1180,7 +1138,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$sumbanganAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sumbangan", $this->detailRekampasien['sumbangan'], $sumbanganAttrib);
+				echo $ctrlFrm->formText("sumbangan", $this->detailKelurahan->sumbangan, $sumbanganAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1190,7 +1148,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$swadayaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("swadaya", $this->detailRekampasien['swadaya'], $swadayaAttrib);
+				echo $ctrlFrm->formText("swadaya", $this->detailKelurahan->swadaya, $swadayaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1215,7 +1173,7 @@ $(function(){
 		<td> 
 			<? 
 				$lpmp_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("lpmp_jml_pengurus", $this->detailRekampasien['lpmp_jml_pengurus'], $lpmp_jml_pengurusAttrib);
+				echo $ctrlFrm->formText("lpmp_jml_pengurus", $this->detailKelurahan->lpmp_jml_pengurus, $lpmp_jml_pengurusAttrib);
 			?> orang 
 		</td>
 	</tr>
@@ -1225,7 +1183,7 @@ $(function(){
 		<td> 
 			<? 
 				$lpmp_jml_anggotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("lpmp_jml_anggota", $this->detailRekampasien['lpmp_jml_anggota'], $lpmp_jml_anggotaAttrib);
+				echo $ctrlFrm->formText("lpmp_jml_anggota", $this->detailKelurahan->lpmp_jml_anggota, $lpmp_jml_anggotaAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1235,7 +1193,7 @@ $(function(){
 		<td> 
 			<? 
 				$lpmp_jml_keg_perbulanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("lpmp_jml_keg_perbulan", $this->detailRekampasien['lpmp_jml_keg_perbulan'], $lpmp_jml_keg_perbulanAttrib);
+				echo $ctrlFrm->formText("lpmp_jml_keg_perbulan", $this->detailKelurahan->lpmp_jml_keg_perbulan, $lpmp_jml_keg_perbulanAttrib);
 			?>  kegiatan
 		</td>
 	</tr>
@@ -1245,7 +1203,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$lpmp_jml_danaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("lpmp_jml_dana", $this->detailRekampasien['lpmp_jml_dana'], $lpmp_jml_danaAttrib);
+				echo $ctrlFrm->formText("lpmp_jml_dana", $this->detailKelurahan->lpmp_jml_dana, $lpmp_jml_danaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1262,7 +1220,7 @@ $(function(){
 		<td> 
 			<? 
 				$pkk_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("pkk_jml_pengurus", $this->detailRekampasien['pkk_jml_pengurus'], $pkk_jml_pengurusAttrib);
+				echo $ctrlFrm->formText("pkk_jml_pengurus", $this->detailKelurahan->pkk_jml_pengurus, $pkk_jml_pengurusAttrib);
 			?> orang 
 		</td>
 	</tr>
@@ -1272,7 +1230,7 @@ $(function(){
 		<td> 
 			<? 
 				$pkk_jml_anggotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("pkk_jml_anggota", $this->detailRekampasien['pkk_jml_anggota'], $pkk_jml_anggotaAttrib);
+				echo $ctrlFrm->formText("pkk_jml_anggota", $this->detailKelurahan->pkk_jml_anggota, $pkk_jml_anggotaAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1282,7 +1240,7 @@ $(function(){
 		<td> 
 			<? 
 				$pkk_jml_keg_perbulanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("pkk_jml_keg_perbulan", $this->detailRekampasien['pkk_jml_keg_perbulan'], $pkk_jml_keg_perbulanAttrib);
+				echo $ctrlFrm->formText("pkk_jml_keg_perbulan", $this->detailKelurahan->pkk_jml_keg_perbulan, $pkk_jml_keg_perbulanAttrib);
 			?>  kegiatan
 		</td>
 	</tr>
@@ -1292,7 +1250,7 @@ $(function(){
 		<td> 
 			<? 
 				$pkk_jml_buku_administrasiAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("pkk_jml_buku_administrasi", $this->detailRekampasien['pkk_jml_buku_administrasi'], $pkk_jml_buku_administrasiAttrib);
+				echo $ctrlFrm->formText("pkk_jml_buku_administrasi", $this->detailKelurahan->pkk_jml_buku_administrasi, $pkk_jml_buku_administrasiAttrib);
 			?>  kegiatan
 		</td>
 	</tr>
@@ -1302,7 +1260,7 @@ $(function(){
 		<td> RP &nbsp;
 			<? 
 				$pkk_jml_danaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("pkk_jml_dana", $this->detailRekampasien['pkk_jml_dana'], $pkk_jml_danaAttrib);
+				echo $ctrlFrm->formText("pkk_jml_dana", $this->detailKelurahan->pkk_jml_dana, $pkk_jml_danaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1319,7 +1277,7 @@ $(function(){
 		<td> 
 			<? 
 				$taruna_jmlAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("taruna_jml", $this->detailRekampasien['taruna_jml'], $taruna_jmlAttrib);
+				echo $ctrlFrm->formText("taruna_jml", $this->detailKelurahan->taruna_jml, $taruna_jmlAttrib);
 			?> buah 
 		</td>
 	</tr>
@@ -1329,7 +1287,7 @@ $(function(){
 		<td> 
 			<? 
 				$taruna_jenisAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("taruna_jenis", $this->detailRekampasien['taruna_jenis'], $taruna_jenisAttrib);
+				echo $ctrlFrm->formText("taruna_jenis", $this->detailKelurahan->taruna_jenis, $taruna_jenisAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1339,7 +1297,7 @@ $(function(){
 		<td> 
 			<? 
 				$taruna_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("taruna_jml_pengurus", $this->detailRekampasien['taruna_jml_pengurus'], $taruna_jml_pengurusAttrib);
+				echo $ctrlFrm->formText("taruna_jml_pengurus", $this->detailKelurahan->taruna_jml_pengurus, $taruna_jml_pengurusAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1356,7 +1314,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_rwAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_rw", $this->detailRekampasien['jml_rw'], $jml_rwAttrib);
+				echo $ctrlFrm->formText("jml_rw", $this->detailKelurahan->jml_rw, $jml_rwAttrib);
 			?> buah 
 		</td>
 	</tr>
@@ -1366,7 +1324,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_rtAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_rt", $this->detailRekampasien['jml_rt'], $jml_rtAttrib);
+				echo $ctrlFrm->formText("jml_rt", $this->detailKelurahan->jml_rt, $jml_rtAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -1376,7 +1334,7 @@ $(function(){
 		<td> Rp 
 			<? 
 				$rata_penghasilan_rwAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("rata_penghasilan_rw", $this->detailRekampasien['rata_penghasilan_rw'], $rata_penghasilan_rwAttrib);
+				echo $ctrlFrm->formText("rata_penghasilan_rw", $this->detailKelurahan->rata_penghasilan_rw, $rata_penghasilan_rwAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1386,7 +1344,7 @@ $(function(){
 		<td> Rp 
 			<? 
 				$rata_penghasilan_rtAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("rata_penghasilan_rt", $this->detailRekampasien['rata_penghasilan_rt'], $rata_penghasilan_rtAttrib);
+				echo $ctrlFrm->formText("rata_penghasilan_rt", $this->detailKelurahan->rata_penghasilan_rt, $rata_penghasilan_rtAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1403,7 +1361,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_lembaga_lainAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_lembaga_lain", $this->detailRekampasien['jml_lembaga_lain'], $jml_lembaga_lainAttrib);
+				echo $ctrlFrm->formText("jml_lembaga_lain", $this->detailKelurahan->jml_lembaga_lain, $jml_lembaga_lainAttrib);
 			?> buah 
 		</td>
 	</tr>
@@ -1422,7 +1380,7 @@ $(function(){
 		<td>
 			<? 
 				$jml_anggota_linmasAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_anggota_linmas", $this->detailRekampasien['jml_anggota_linmas'], $jml_anggota_linmasAttrib);
+				echo $ctrlFrm->formText("jml_anggota_linmas", $this->detailKelurahan->jml_anggota_linmas, $jml_anggota_linmasAttrib);
 			?> orang
 		</td>
 	</tr>
@@ -1432,7 +1390,7 @@ $(function(){
 		<td>
 			<? 
 				$jml_pos_kamlingAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pos_kamling", $this->detailRekampasien['jml_pos_kamling'], $jml_pos_kamlingAttrib);
+				echo $ctrlFrm->formText("jml_pos_kamling", $this->detailKelurahan->jml_pos_kamling, $jml_pos_kamlingAttrib);
 			?> pos
 		</td>
 	</tr>
@@ -1442,7 +1400,7 @@ $(function(){
 		<td>
 			<? 
 				$jml_ops_penertibanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_ops_penertiban", $this->detailRekampasien['jml_ops_penertiban'], $jml_ops_penertibanAttrib);
+				echo $ctrlFrm->formText("jml_ops_penertiban", $this->detailKelurahan->jml_ops_penertiban, $jml_ops_penertibanAttrib);
 			?> kali
 		</td>
 	</tr>
@@ -1457,7 +1415,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_pencurianAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pencurian", $this->detailRekampasien['jml_pencurian'], $jml_pencurianAttrib);
+				echo $ctrlFrm->formText("jml_pencurian", $this->detailKelurahan->jml_pencurian, $jml_pencurianAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1467,7 +1425,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_perkosaanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_perkosaan", $this->detailRekampasien['jml_perkosaan'], $jml_perkosaanAttrib);
+				echo $ctrlFrm->formText("jml_perkosaan", $this->detailKelurahan->jml_perkosaan, $jml_perkosaanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1477,7 +1435,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_kenakalan_remajaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_kenakalan_remaja", $this->detailRekampasien['jml_kenakalan_remaja'], $jml_kenakalan_remajaAttrib);
+				echo $ctrlFrm->formText("jml_kenakalan_remaja", $this->detailKelurahan->jml_kenakalan_remaja, $jml_kenakalan_remajaAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1487,7 +1445,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_pembunuhanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pembunuhan", $this->detailRekampasien['jml_pembunuhan'], $jml_pembunuhanAttrib);
+				echo $ctrlFrm->formText("jml_pembunuhan", $this->detailKelurahan->jml_pembunuhan, $jml_pembunuhanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1497,7 +1455,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_perampokanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_perampokan", $this->detailRekampasien['jml_perampokan'], $jml_perampokanAttrib);
+				echo $ctrlFrm->formText("jml_perampokan", $this->detailKelurahan->jml_perampokan, $jml_perampokanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1507,7 +1465,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_penipuanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_penipuan", $this->detailRekampasien['jml_penipuan'], $jml_penipuanAttrib);
+				echo $ctrlFrm->formText("jml_penipuan", $this->detailKelurahan->jml_penipuan, $jml_penipuanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1517,7 +1475,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_bencanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_bencana", $this->detailRekampasien['jml_bencana'], $jml_bencanaAttrib);
+				echo $ctrlFrm->formText("jml_bencana", $this->detailKelurahan->jml_bencana, $jml_bencanaAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1527,7 +1485,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_pos_bencanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pos_bencana", $this->detailRekampasien['jml_pos_bencana'], $jml_pos_bencanaAttrib);
+				echo $ctrlFrm->formText("jml_pos_bencana", $this->detailKelurahan->jml_pos_bencana, $jml_pos_bencanaAttrib);
 			?> pos 
 		</td>
 	</tr>
@@ -1538,7 +1496,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_pembalakan_liarAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pembalakan_liar", $this->detailRekampasien['jml_pembalakan_liar'], $jml_pembalakan_liarAttrib);
+				echo $ctrlFrm->formText("jml_pembalakan_liar", $this->detailKelurahan->jml_pembalakan_liar, $jml_pembalakan_liarAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1549,7 +1507,7 @@ $(function(){
 		<td> 
 			<? 
 				$jml_pos_hutan_lindungAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("jml_pos_hutan_lindung", $this->detailRekampasien['jml_pos_hutan_lindung'], $jml_pos_hutan_lindungAttrib);
+				echo $ctrlFrm->formText("jml_pos_hutan_lindung", $this->detailKelurahan->jml_pos_hutan_lindung, $jml_pos_hutan_lindungAttrib);
 			?> pos 
 		</td>
 	</tr>
@@ -1566,7 +1524,7 @@ $(function(){
 		<td></td>
 		<td>
 		<div class="right">
-		<input type="button" value="Kembali" onclick="rekampasienlist();"> 
+		<input type="button" value="Kembali" onclick="rekamkelurahanlist();"> 
 		<input type="reset" value="Ulangi"> 
 		<input   type="submit" value="Simpan">
 		</div>

@@ -27,7 +27,8 @@ class Pendaftaran_Service {
 	   $db = $registry->get('db');
 	   try {
 		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->fetchAll(" SELECT id, n_nama FROM tr_otoritas_user order by n_nama ");
+		$result = $db->fetchAll("SELECT * FROM [SIMKEL].[dbo].[m_kelurahan] K,[SIMKEL].[dbo].[mon_kelurahan] MK 
+					WHERE K.kd_kel = MK.kd_kel ");
 		$jmlResult = count($result);
 		 return $result;
 	    } catch (Exception $e) {
@@ -35,8 +36,64 @@ class Pendaftaran_Service {
 	     return 'gagal';
 	   }
 	}
-
+	
 	public function cariPendaftaranList(array $dataMasukan, $pageNumber, $itemPerPage,$total) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		
+		$kategoriCari 	= $dataMasukan['kategoriCari'];
+		$katakunciCari 	= $dataMasukan['katakunciCari'];
+		$sortBy			= $dataMasukan['sortBy'];
+		$sort			= $dataMasukan['sort'];
+		$kd_kel			= $dataMasukan['kd_kel'];
+		
+		
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 		 
+			$xLimit=$itemPerPage;
+			$xOffset=($pageNumber-1)*$itemPerPage;
+			
+			if($kd_kel!='00'){ $hak = " AND K.kd_kel='$kd_kel'";}
+			
+			$whereOpt = " AND ($kategoriCari like '%$katakunciCari%')";
+			if($katakunciCari != "") { $where = $whereOpt;} 
+			$group = "";
+			$order = "";
+			
+			
+			$sqlProses = "SELECT K.kelurahan, MK.kd_kel,KEC.kecamatan,  MK.tahun_pembentukan, MK.dasar_pembentukan, MK.kode_pos FROM [SIMKEL].[dbo].[m_kelurahan] K ,[SIMKEL].[dbo].[mon_kelurahan] MK, [SIMKEL].[dbo].[m_kecamatan] KEC WHERE K.kd_kel= MK.kd_kel AND K.kd_kec= KEC.kd_kec".$hak.$where;	
+			$sqlProses1 = $sqlProses.$group.$order;
+			//var_dump($sqlProses);
+			if(($pageNumber==0) && ($itemPerPage==0)){	
+				$sqlTotal = "select count(*) from ($sqlProses) a";
+				$hasilAkhir = $db->fetchOne($sqlTotal);
+			}else{
+				$sqlData = $sqlProses.$order ;//." limit $xLimit offset $xOffset";
+				$result = $db->fetchAll($sqlData);				
+			}
+			
+			$jmlResult = count($result);		
+			for ($j = 0; $j < $jmlResult; $j++) {
+				$hasilAkhir[$j] = array("kd_kel"					=> (string)$result[$j]->kd_kel,
+										"kelurahan"					=> (string)$result[$j]->kelurahan,
+										"tahun_pembentukan"				=> (string)$result[$j]->tahun_pembentukan,
+										"dasar_pembentukan"				=> (string)$result[$j]->dasar_pembentukan,
+										"kode_pos"				=> (string)$result[$j]->kode_pos,
+										"kecamatan"				=> (string)$result[$j]->kecamatan,
+										"kota"				=> "cimahi",
+										"prov"				=> "Jawa Barat"
+										
+										);
+			}
+			return $hasilAkhir; 
+			
+		} catch (Exception $e) {
+			echo $e->getMessage().'<br>';
+			return 'gagal <br>';
+		}
+	}
+
+	public function cariPendaftaranList1(array $dataMasukan, $pageNumber, $itemPerPage,$total) {
 
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
@@ -45,16 +102,16 @@ class Pendaftaran_Service {
 		$katakunciCari 	= strToLower($dataMasukan['katakunciCari']);
 		$sortBy			= $dataMasukan['sortBy'];
 		$sort			= $dataMasukan['sort'];
-		$id_pendaftar	= $dataMasukan['id_pendaftar'];
+		$kelurahan	=     $dataMasukan['kelurahan'];
 
-		if($kategoriCari == "") { $kategoriCari ="n_nama";}		
+		if($kategoriCari == "") { $kategoriCari ="kelurahan";}		
 
 			try {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
 		 
 			$xLimit=$itemPerPage;
 			$xOffset=($pageNumber-1)*$itemPerPage;
-			$whereBase = " where c_status <> '' and c_status <> 'D' ";
+			$whereBase = " AND K.kelurahan <> '' ";
 			
 			if($katakunciCari){
 			$whereOptCar = " and lower($kategoriCari) like '%$katakunciCari%' ";
@@ -63,12 +120,12 @@ class Pendaftaran_Service {
 			$where = $whereOptCar;
 			//$order = " order by noreg ";
 
-			$sqlProses = "SELECT * FROM t_siswa ";	
+			$sqlProses = "SELECT * FROM [SIMKEL].[dbo].[m_kelurahan] K ,[SIMKEL].[dbo].[mon_kelurahan] MK WHERE K.kd_kel = MK.kd_kel ";	
 			$sqlProses1 = $sqlProses.$order;
 		//	echo $where;
 			if(($pageNumber==0) && ($itemPerPage==0))
 			{	
-				$sqlTotal = "select count(*) from ($sqlProses"." "."$where) a";
+				$sqlTotal = "select count(*) from ($sqlProses"." "."$where)";
 				$hasilAkhir = $db->fetchOne($sqlTotal);	
 			}
 			else
@@ -78,10 +135,14 @@ class Pendaftaran_Service {
 			}
 			$jmlResult = count($result);
 			for ($j = 0; $j < $jmlResult; $j++) {
-				$hasilAkhir[$j] = array("c_noreg"					=> (string)$result[$j]->c_noreg,
-										"n_nama"					=> (string)$result[$j]->n_nama,
-										"c_kelamin"				=> (string)$result[$j]->c_kelamin,
-										"n_tempat"				=> (string)$result[$j]->n_tempat
+				$hasilAkhir[$j] = array("kd_kel"					=> (string)$result[$j]->kd_kel,
+										"kelurahan"					=> (string)$result[$j]->kelurahan,
+										"tahun_pembentukan"				=> (string)$result[$j]->tahun_pembentukan,
+										"dasar_hukum_pembentukan"				=> (string)$result[$j]->dasar_hukum_pembentukan,
+										"no_kode_pos"				=> (string)$result[$j]->dasar_hukum_pembentukan,
+										"kecamatan"				=> (string)$result[$j]->kecamatan,
+										"kota"				=> "cimahi",
+										"prov"				=> "Jawa Barat"
 										
 										);
 			}	
@@ -141,8 +202,9 @@ class Pendaftaran_Service {
 		$db = $registry->get('db');
 		try {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
-			$where = " where kd_kel = '$kd_kel' ";
-			$sqlProses = "SELECT * FROM SIMKEL.dbo.mon_kelurahan ";	
+			$where = " where MK.kd_kel = '$kd_kel' AND K.kd_kel=MK.kd_kel AND K.kd_kec=KEC.kd_kec  ";
+			$sqlProses = "SELECT * 
+							FROM SIMKEL.dbo.mon_kelurahan MK,SIMKEL.dbo.m_kelurahan K ,SIMKEL.dbo.m_kecamatan KEC ";	
 			$sqlData = $sqlProses.$where;
 			$result = $db->fetchRow($sqlData);
 			//echo $sqlData;
@@ -159,7 +221,9 @@ class Pendaftaran_Service {
 								"jarak_dari_kecamatan"		=> (string)$result->jarak_dari_kecamatan,
 								"jarak_dari_kota"			=> (string)$result->jarak_dari_kota,
 								"jarak_dari_ibukota_kota"	=> (string)$result->jarak_dari_ibukota_kota,
-								"jarak_dari_ibukota_prov"	=> (string)$result->jarak_dari_ibukota_prov
+								"jarak_dari_ibukota_prov"	=> (string)$result->jarak_dari_ibukota_prov,
+								"kelurahan"	=> (string)$result->kelurahan,
+								"kecamatan"	=> (string)$result->kecamatan
 							);
 						
 			
@@ -172,25 +236,18 @@ class Pendaftaran_Service {
 	   }
 	}
 
+	
 	public function pendaftaranUpdate(array $dataMasukan) { 
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
 		try {
 			$db->beginTransaction();
-			$paramInput	= array("kd_kel"					=> (string)$result->kd_kel,
-								"tahun_pembentukan"			=> (string)$result->tahun_pembentukan,
-								"dasar_pembentukan"			=> (string)$result->dasar_pembentukan,
-								"kode_wilayah"				=> (string)$result->kode_wilayah,
-								"kode_pos"					=> (string)$result->kode_pos,
-								"luas"						=> (string)$result->luas,
-								"batas_utara"				=> (string)$result->batas_utara,
-								"batas_selatan"				=> (string)$result->batas_selatan,
-								"batas_barat"				=> (string)$result->batas_barat,
-								"batas_timur"				=> (string)$result->batas_timur,
-								"jarak_dari_kecamatan"		=> (string)$result->jarak_dari_kecamatan,
-								"jarak_dari_kota"			=> (string)$result->jarak_dari_kota,
-								"jarak_dari_ibukota_kota"	=> (string)$result->jarak_dari_ibukota_kota,
-								"jarak_dari_ibukota_prov"	=> (string)$result->jarak_dari_ibukota_prov
+			$paramInput	= array(
+								"tahun_pembentukan"			=> $dataMasukan['tahun_pembentukan'],
+								"dasar_pembentukan"			=> $dataMasukan['dasar_pembentukan'],
+								"kode_wilayah"				=> $dataMasukan['kode_wilayah'],
+								"kode_pos"					=> $dataMasukan['kode_pos']
+								
 							);
 						
 			
