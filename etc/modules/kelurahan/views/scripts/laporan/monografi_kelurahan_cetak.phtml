@@ -103,45 +103,45 @@
 	$document->setValue('saranaJmlLainnya', $this->detailUmum['sarana_jml_lainnya']);		
 				
 	//B. Data Personil
-	$document->setValue('namaLurah', $this->hasil->nama_lurah);		
-	$document->setValue('namaSeklur', $this->hasil->nama_seklur);		
-	$document->setValue('jumlahAparatGol1', $this->hasil->jumlah_aparat_gol1);		
-	$document->setValue('jumlahAparatGol2', $this->hasil->jumlah_aparat_gol2);		
-	$document->setValue('jumlahAparatGol3', $this->hasil->jumlah_aparat_gol3);		
-	$document->setValue('jumlahAparatGol4', $this->hasil->jumlah_aparat_gol4);
+	$document->setValue('namaLurah', $this->detailPersonil['nama_lurah']);		
+	$document->setValue('namaSeklur', $this->detailPersonil['nama_seklur']);		
+	$document->setValue('jumlahAparatGol1', $this->detailPersonil['jumlah_aparat_gol1']);		
+	$document->setValue('jumlahAparatGol2', $this->detailPersonil['jumlah_aparat_gol2']);		
+	$document->setValue('jumlahAparatGol3', $this->detailPersonil['jumlah_aparat_gol3']);		
+	$document->setValue('jumlahAparatGol4', $this->detailPersonil['jumlah_aparat_gol4']);
 	
 	//C. Data Kewenangan
-	$document->setValue('pemerintahPusat', $this->hasil->jml_pemerintah_pusat);		
-	$document->setValue('provinsi', $this->hasil->jml_provinsi);		
-	$document->setValue('kabupaten', $this->hasil->jml_kabupaten);
+	$document->setValue('pemerintahPusat', $this->detailKewenangan['jml_pemerintah_pusat']);		
+	$document->setValue('provinsi', $this->detailKewenangan['jml_provinsi']);		
+	$document->setValue('kabupaten', $this->detailKewenangan['jml_kabupaten']);
 	
 	//D. Data Keuangan
-	$document->setValue('anggaranApbd', $this->hasil->anggaran_apbd);		
-	$document->setValue('isSkpd', $this->hasil->is_skpd);		
-	$document->setValue('bantuanPusat', $this->hasil->bantuan_pusat);
-	$document->setValue('bantuanProv', $this->hasil->bantuan_prov);
-	$document->setValue('bantuanKota', $this->hasil->bantuan_kota);
-	$document->setValue('hibah', $this->hasil->hibah);
-	$document->setValue('sumbangan', $this->hasil->sumbangan);
-	$document->setValue('swadaya', $this->hasil->swadaya);
+	$document->setValue('anggaranApbd', $this->detailKeuangan['anggaran_apbd']);		
+	$document->setValue('isSkpd', $this->detailKeuangan['is_skpd']);		
+	$document->setValue('bantuanPusat', $this->detailKeuangan['bantuan_pusat']);
+	$document->setValue('bantuanProv', $this->detailKeuangan['bantuan_prov']);
+	$document->setValue('bantuanKota', $this->detailKeuangan['bantuan_kota']);
+	$document->setValue('hibah', $this->detailKeuangan['hibah']);
+	$document->setValue('sumbangan', $this->detailKeuangan['sumbangan']);
+	$document->setValue('swadaya', $this->detailKeuangan['swadaya']);
 	
 	//E. Kelembagaan
-	$document->setValue('lpmJmlPengurus', $this->hasil->lpm_jml_pengurus);		
-	$document->setValue('lpmJmlKegPerbulan', $this->hasil->lpm_jml_keg_perbulan);		
-	//$document->setValue('lpmJmlBukuAdministrasi', $this->hasil->lpm_jml_buku_administrasi);
-	$document->setValue('lpmJmlDana', $this->hasil->lpm_jml_dana);
-	//$document->setValue('lembagaAdat', $this->hasil->lembaga_adat);
-	$document->setValue('pkkJmlPengurus', $this->hasil->pkk_jml_pengurus);
-	$document->setValue('pkkJmlKegPerbulan', $this->hasil->pkk_jml_keg_perbulan);
-	$document->setValue('pkkJmlBukuAdministrasi', $this->hasil->pkk_jml_buku_administrasi);
-	//$document->setValue('pkkJmlDana', $this->hasil->pkk_jml_dana);
-	$document->setValue('jmlRw', $this->hasil->jml_rw);
-	$document->setValue('jmlRt', $this->hasil->jml_rt);
-	$document->setValue('rataPenghasilanRw', $this->hasil->rata_penghasilan_rw);
-	$document->setValue('rataPenghasilanRt', $this->hasil->rata_penghasilan_rt);
-	$document->setValue('tarunaJml', $this->hasil->taruna_jml);
-	$document->setValue('tarunaJmlPengurus', $this->hasil->taruna_jml_pengurus);
-	$document->setValue('jmlLembagaLain', $this->hasil->jml_lembaga_lain);	
+	$document->setValue('lpmJmlPengurus', $this->detailKelembagaan['lpm_jml_pengurus']);		
+	$document->setValue('lpmJmlKegPerbulan', $this->detailKelembagaan['lpm_jml_keg_perbulan']);		
+	//$document->setValue('lpmJmlBukuAdministrasi', $this->detailKelembagaan['lpm_jml_buku_administrasi']);
+	$document->setValue('lpmJmlDana', $this->detailKelembagaan['lpm_jml_dana']);
+	//$document->setValue('lembagaAdat', $this->detailKelembagaan['lembaga_adat']);
+	$document->setValue('pkkJmlPengurus', $this->detailKelembagaan['pkk_jml_pengurus']);
+	$document->setValue('pkkJmlKegPerbulan', $this->detailKelembagaan['pkk_jml_keg_perbulan']);
+	$document->setValue('pkkJmlBukuAdministrasi', $this->detailKelembagaan['pkk_jml_buku_administrasi']);
+	//$document->setValue('pkkJmlDana', $this->detailKelembagaan['pkk_jml_dana']);
+	$document->setValue('jmlRw', $this->detailKelembagaan['jml_rw']);
+	$document->setValue('jmlRt', $this->detailKelembagaan['jml_rt']);
+	$document->setValue('rataPenghasilanRw', $this->detailKelembagaan['rata_penghasilan_rw']);
+	$document->setValue('rataPenghasilanRt', $this->detailKelembagaan['rata_penghasilan_rt']);
+	$document->setValue('tarunaJml', $this->detailKelembagaan['taruna_jml']);
+	$document->setValue('tarunaJmlPengurus', $this->detailKelembagaan['taruna_jml_pengurus']);
+	$document->setValue('jmlLembagaLain', $this->detailKelembagaan['jml_lembaga_lain']);	
 	
 	$nama_file= $namafile = "Monografi Kelurahan ".$this->hasil->kelurahan." ".$this->hasil->bulan." ".$this->hasil->tahun.".rft";
 	
