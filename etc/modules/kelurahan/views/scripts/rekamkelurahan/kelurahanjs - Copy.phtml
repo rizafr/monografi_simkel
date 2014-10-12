@@ -1,3 +1,4 @@
+<script>
 function carirekamkelurahan()
 {
 	$("#frmcarirekamkelurahan").ajaxForm(frmcarirekamkelurahan_opt);
@@ -8,6 +9,7 @@ var frmcarirekamkelurahan_opt = {
 		type: 'post', 
 		resetForm: false
 };
+
 function rekamkelurahanlist()
 {
 	kategoriCari = document.getElementById('kategoriCari').value;
@@ -20,26 +22,28 @@ function rekamkelurahanlist()
 	});
 }
 
+
+
 function rekamkelurahanForm(jenisForm,kd_kel,bulan,tahun)
 {
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
 	kd_kel = document.getElementById('kd_kel').value;
+	
 	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandata';
 	var param = { jenisForm:jenisForm,kd_kel:kd_kel,id:id,kategoriCari:kategoriCari,carii:carii,bulan:bulan,tahun:tahun};
 	jQuery.get(url, param, function(data) {
 		jQuery("div#tableview").html(data);
-		jQuery("#frmtambahrekamkelurahan").ajaxForm(tambahRekamkelurahan_opt);
-		jQuery("#frmubahrekamkelurahan").ajaxForm(ubahRekamkelurahan_opt);
+		jQuery("#frmtambahrekamkelurahan").ajaxForm(tambahrekamkelurahan_opt);
+		jQuery("#frmubahrekamkelurahan").ajaxForm(ubahrekamkelurahan_opt);
 	});
 }
 
-var tambahRekamkelurahan_opt = {
+var tambahrekamkelurahan_opt = {
 	target : '#tableview',
 	url: '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahan',
 	beforeSubmit : function() {
 		
-		alert(hallo);
 		if (document.getElementById('kd_kel').value == ''){
 			alert('Kode harus Diisi');
 			return false;
@@ -56,6 +60,8 @@ var tambahRekamkelurahan_opt = {
 			alert('bulan harus Diisi');
 			return false;
 		}
+
+		
 		
 	answer = confirm('Apakah data anda masukan sudah benar?.\n\'OK\' Jika benar, \'Cancel\' jika tidak.' );
 
@@ -76,12 +82,12 @@ var tambahRekamkelurahan_opt = {
 	resetForm: false
 };
 
-var ubahRekamkelurahan_opt = {
+var ubahrekamkelurahan_opt = {
 	target : '#tableview',
 	url: '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanupdate',
 	beforeSubmit : function() {
 
-	if (document.getElementById('kd_kel').value == ''){
+		if (document.getElementById('kd_kel').value == ''){
 			alert('Kode harus Diisi');
 			return false;
 		}
@@ -97,6 +103,8 @@ var ubahRekamkelurahan_opt = {
 			alert('bulan harus Diisi');
 			return false;
 		}
+
+		
 	answer = confirm('Apakah data anda masukan sudah benar?.\n\'OK\' Jika benar, \'Cancel\' jika tidak.' );
 	if(answer !=0) { 
 		return true;
@@ -108,7 +116,7 @@ var ubahRekamkelurahan_opt = {
 	},
 	success: function(){
 	doCount(5);
-	jQuery("#frmubahrekamkelurahan").ajaxForm(ubahRekamkelurahan_opt);
+	jQuery("#frmubahrekamkelurahan").ajaxForm(ubahrekamkelurahan_opt);
 	},
 	type: 'post', 
 	resetForm: false
@@ -119,7 +127,7 @@ function rekamkelurahanHapus(kd_kel,kelurahan,tahun,bulan)
 { 
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
-	kd_kel = document.getElementById('kd_kel').value;
+	
 	
 	if(ConfirmDelete(kd_kel,kelurahan))
 	{	
@@ -131,6 +139,8 @@ function rekamkelurahanHapus(kd_kel,kelurahan,tahun,bulan)
 			 });
 	}
 }
+
+
 
 function BukaWindows(){
 	var w = 0; 
@@ -153,26 +163,12 @@ function CariPengadaan()
 }
 
 
-function tambahKepada()
+function tambahKepada(kd_kel,bulan,tahun)
 {
-	var table = document.getElementById('kepada'); 
-	var rowCount = (table.rows.length);  
-	var idRow = (rowCount)*1;
-	var row = table.insertRow(rowCount);
-	row.className = "event";	
-	
-	var cell0 = row.insertCell(0);  
-	var num = (rowCount)*1+1;
-	cell0.innerHTML = num+".";
-	
-	var cell1 = row.insertCell(1);  
-	cell1.innerHTML = "<input type=\"text\" size = \"120\" maxlength = \"150\" name=\"n_nama_"+idRow+"\" id=\"n_nama_"+idRow+"\" value=\"\" > <input type=\"button\" value=\"Cari\" onclick=\"showDialog('dosen','"+idRow+"');\" >";
-	
-	var cell2 = row.insertCell(2);  
-	var rowDelete = (idRow*1)+1;
-	cell2.innerHTML = "<input type=\"hidden\" name=\"id_pegawai_"+idRow+"\" id=\"id_pegawai_"+idRow+"\" value=\"\" ><input type=\"hidden\" name=\"id_pembimbing_"+idRow+"\" id=\"id_pembimbing_"+idRow+"\" value=\"\"><img src=\"/images/cross.png\" title=\"Hapus Data\" onclick=\"deleteRow('kepada', this);getjumlahx();\"><a name=\"baris_"+idRow+"\"/>";
-	
-	document.getElementById('jumlahItem').value = (rowCount*1)+1;
+	alert(kd_kel);
+	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?&kd_kel='+kd_kel'&bulan='+bulan'&tahun='+$tahun;
+	swin = window.open(url,'win','scrollbars,width=600,height=400,top=80,left=140,status=yes,toolbar=no,menubar=yes,location=no');
+	swin.focus();
 
 }
 
@@ -231,7 +227,7 @@ function cariDosen(jum)  {
 
 var frmCariDosen_opt = {
     target : '#dialog-browse',
-    url: '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/dosenlist',
+    url: '<?php echo $this->basePath; ?>/pasien/rekamkelurahan/dosenlist',
     type: 'get', 
     resetForm: false
 };
@@ -245,82 +241,34 @@ function closeDialogDosen(id_pegawai,nama,jum) {
 
 
 
-function kelurahanlist() {
-    var url        = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/kelurahanlist';
+function pasienlist() {
+    var url        = '<?php echo $this->basePath; ?>/pasien/rekamkelurahan/pasienlist';
     jQuery.get(url,function(data) {   
     $("#dialog-browse").html(data);
     $("#dialog-browse").dialog("open");
   }); 
 }
 
-function carikelurahan()  {
-  $("#frmCarikelurahan").ajaxForm(frmCarikelurahan_opt);
+function cariPasien()  {
+  $("#frmCariPasien").ajaxForm(frmCariPasien_opt);
 }
 
-var frmCarikelurahan_opt = {
+var frmCariPasien_opt = {
     target : '#dialog-browse',
-    url: '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/kelurahanlist',
+    url: '<?php echo $this->basePath; ?>/pasien/rekamkelurahan/pasienlist',
     type: 'get', 
     resetForm: false
 };
 
-function closeDialogkelurahan(kd_kel,n_kelurahan) {  
+function closeDialogPasien(kd_kel,n_pasien) {  
   $("#dialog-browse").dialog("close");
   $("#kd_kel").val(kd_kel);
-  $("#n_nama").val(n_kelurahan);
+  $("#n_nama").val(n_pasien);
 }
 
 function closeWinCam(n_file) {  
   window.close();
-  $("#poto").val("/kelurahan/"+n_file);
+  $("#poto").val("/pasien/"+n_file);
 }
-function umumproses()
-{
-	$("#frmubahrekamkelurahan").ajaxForm(frmubahrekamkelurahan_opt);
-}
-var frmubahrekamkelurahan_opt = {
-		target : '#tableview',
-		url: '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanupdate',
-		beforeSubmit : function() {
 
-		if (document.getElementById('n_nik').value == ''){
-			alert('NIK harus Diisi');
-			return false;
-		}
-		if (document.getElementById('n_nama').value == ''){
-			alert('Nama harus Diisi');
-			return false;
-		}
-		if (document.getElementById('n_nip').value == ''){
-			alert('NPM/NIP harus Diisi');
-			return false;
-		}
-		if (document.getElementById('n_cp').value == ''){
-			alert('Kontak Person harus Diisi');
-			return false;
-		}
-
-		if (document.getElementById('n_tensi').value == ''){
-			alert('HP harus Diisi');
-			return false;
-		}
-
-		if (document.getElementById('n_diagnosis').value == ''){
-			alert('Email harus Diisi');
-			return false;
-		}
-	answer = confirm('\n\   Saya menyetujui dan mematuhi peraturan yang dikeluarkan oleh Komite Etik Fakultas Kedokteran UNPAD. \n\n\   Dan saya menyatakan bahwa data yang saya masukan adalah benar, \n\n\   jika terbukti bahwa data yang saya masukan tidak benar maka saya bersedia ditutut\n\n\   secara hukum berdasarkan peraturan perundangan yang berlaku.\n\n   \'OK\' Jika setuju, \'Cancel\' Jika tidak setuju.');
-		if(answer !=0) { 
-			return true;
-		}
-		else{
-			return false;
-		}
-		},
-		type: 'post', 
-		success: function(){doCount(5);},
-		resetForm: false
-};
-
-
-
+</script>

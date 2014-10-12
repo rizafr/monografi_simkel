@@ -14,7 +14,6 @@ $format_date = new format_date();
 
 $currentPage = $this->currentPage;
 $numToDisplay = $this->numToDisplay;
-
 ?>
 <div class="navlink">
 <a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
@@ -64,7 +63,7 @@ $pesan->show_message($proses, $kd_kel, "$status" );
 				<?
 				if (count($this->rekamkelurahanlist) == 0){ 
 				?>
-					<tr class="event2"><td colspan="6"  style="color:#8C0000; font-weight:bold; background-color: #FF9999">Data Tidak Ditemukan</td></tr>
+					<tr class="event2"><td colspan="7"  style="color:#8C0000; font-weight:bold; background-color: #FF9999">Data Tidak Ditemukan</td></tr>
 				<?} else {
 						
 						
@@ -92,9 +91,8 @@ $pesan->show_message($proses, $kd_kel, "$status" );
 						<td class="clleft"><? echo $nama_lurah;?></td>
 						<td class="clleft"><? echo $nip_lurah;?></td>
 						
-<td><a href="<?php echo $this->basePath;?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?php echo $kd_kel;?>&bulan=<?php  echo $bulan;?>&tahun=<?php  echo $tahun;?>"><button class="cetak" name="cetak" align="center">cetak laporan</button></a>
 
-<td><div onClick="cetakKelurahan('<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="view" title="Cetak Data"></div></td>
+<td><div onClick="rekamkelurahanForm('print','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="filedoc" title="cetak Data"></div></td>
 
 <td><div onClick="rekamkelurahanForm('update','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="view" title="Lihat Data"></div></td>
 <td><div onClick="rekamkelurahanForm('update','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="edit" title="Ubah Data"></div></td>
@@ -126,13 +124,3 @@ var sorter=new table.sorter("sorter");
 sorter.init("sorter",0);
 </script>
 
-<script>
-	function cetakKelurahan(kd_kel,bulan,tahun)
-{
-	alert(kd_kel);
-	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?&kd_kel='+kd_kel'&bulan='+bulan'&tahun='+$tahun;
-	swin = window.open(url,'win','scrollbars,width=600,height=400,top=80,left=140,status=yes,toolbar=no,menubar=yes,location=no');
-	swin.focus();
-}
-
-</script>

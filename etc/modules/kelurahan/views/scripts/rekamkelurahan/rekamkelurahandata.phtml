@@ -37,7 +37,7 @@ $numToDisplay = $this->numToDisplay;
 	    <div class="spacer"></div> 
 		
 		
-
+<? echo $namaForm;?>
 <form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi">
 <table width="100%" border="0" cellpadding="0" cellspacing="2" class="std">
 	<input name="id" id="id" type="hidden" value="<?echo $this->id;?>" />
@@ -997,7 +997,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; a. Golongan I:</td>
 		<td>
 			<? 
-				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
+				$jumlah_aparat_gol1Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
 				echo $ctrlFrm->formText("jumlah_aparat_gol1", $this->detailPersonil['jumlah_aparat_gol1'], $jumlah_aparat_gol1Attrib);
 			?>  orang
 		
@@ -1008,7 +1008,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; b.  Golongan II:</td>
 		<td>	
 			<? 
-				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
+				$jumlah_aparat_gol2Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
 				echo $ctrlFrm->formText("jumlah_aparat_gol2", $this->detailPersonil['jumlah_aparat_gol2'], $jumlah_aparat_gol2Attrib);
 			?>  orang
 		</td>
@@ -1018,7 +1018,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; c.  Golongan III:</td>
 		<td>	
 			<? 
-				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
+				$jumlah_aparat_gol3Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
 				echo $ctrlFrm->formText("jumlah_aparat_gol3", $this->detailPersonil['jumlah_aparat_gol3'], $jumlah_aparat_gol3Attrib);
 			?>  orang
 		</td>
@@ -1028,7 +1028,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; d.  Golongan IV:</td>
 		<td>	
 			<? 
-				$n_fesesAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
+				$jumlah_aparat_gol4Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
 				echo $ctrlFrm->formText("jumlah_aparat_gol4", $this->detailPersonil['jumlah_aparat_gol4'], $jumlah_aparat_gol4Attrib);
 			?>  orang
 		</td>

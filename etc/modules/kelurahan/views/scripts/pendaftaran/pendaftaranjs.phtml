@@ -11,29 +11,30 @@ var frmcaripendaftaran_opt = {
 function pendaftaranlist()
 {
 	kategoriCari = document.getElementById('kategoriCari').value;
-	kd_kel = document.getElementById('kd_kel').value;
 	carii = document.getElementById('carii').value;
-	var param = {kategoriCari:kategoriCari,carii:carii,kd_kel:kd_kel};
+	kd_kel = document.getElementById('kd_kel').value;
+	var param = {kd_kel:kd_kel,kategoriCari:kategoriCari,carii:carii};
 	var url = '<?php echo $this->basePath; ?>/kelurahan/pendaftaran/pendaftaranlist';
 	jQuery.get(url, param, function(data) {
 		$("div#tableview").html(data);
 	});
 }
 
-function pendaftaranForm(jenisForm, kd_kel)
+function pendaftaranForm(jenisForm,kd_kel)
 {
+	//alert(kd_kel);
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
 	var url = '<?php echo $this->basePath; ?>/kelurahan/pendaftaran/pendaftarandata';
-	var param = { jenisForm:jenisForm, kd_kel:kd_kel,kategoriCari:kategoriCari,carii:carii};
+	var param = { jenisForm:jenisForm,kd_kel:kd_kel,id:id,kategoriCari:kategoriCari,carii:carii};
 	jQuery.get(url, param, function(data) {
 		jQuery("div#tableview").html(data);
-		jQuery("#frmtambahpendaftaran").ajaxForm(tambahPendaftaran_opt);
-		jQuery("#frmubahpendaftaran").ajaxForm(ubahPendaftaran_opt);
+		jQuery("#frmtambahpendaftaran").ajaxForm(tambahpendaftaran_opt);
+		jQuery("#frmubahpendaftaran").ajaxForm(ubahpendaftaran_opt);
 	});
 }
 
-var tambahPendaftaran_opt = {
+var tambahpendaftaran_opt = {
 	target : '#tableview',
 	url: '<?php echo $this->basePath; ?>/kelurahan/pendaftaran/pendaftaran',
 	beforeSubmit : function() {
@@ -48,8 +49,7 @@ var tambahPendaftaran_opt = {
 			return false;
 		}
 
-		
-		
+	
 		
 	answer = confirm('Apakah data anda masukan sudah benar?.\n\'OK\' Jika benar, \'Cancel\' jika tidak.' );
 
@@ -70,11 +70,12 @@ var tambahPendaftaran_opt = {
 	resetForm: false
 };
 
-var ubahPendaftaran_opt = {
+var ubahpendaftaran_opt = {
 	target : '#tableview',
 	url: '<?php echo $this->basePath; ?>/kelurahan/pendaftaran/pendaftaranupdate',
 	beforeSubmit : function() {
-		if (document.getElementById('kode_wilayah').value == ''){
+
+	if (document.getElementById('kode_wilayah').value == ''){
 			alert('Kode Wilayah harus Diisi');
 			return false;
 		}
@@ -83,7 +84,8 @@ var ubahPendaftaran_opt = {
 			alert('Tahun Pembentukan harus Dipilih');
 			return false;
 		}
-		answer = confirm('Apakah data anda masukan sudah benar?.\n\'OK\' Jika benar, \'Cancel\' jika tidak.' );
+
+	answer = confirm('Apakah data anda masukan sudah benar?.\n\'OK\' Jika benar, \'Cancel\' jika tidak.' );
 	if(answer !=0) { 
 		return true;
 	}
@@ -94,19 +96,23 @@ var ubahPendaftaran_opt = {
 	},
 	success: function(){
 	doCount(5);
-	jQuery("#frmubahpendaftaran").ajaxForm(ubahPendaftaran_opt);
+	jQuery("#frmubahpendaftaran").ajaxForm(ubahpendaftaran_opt);
 	},
 	type: 'post', 
 	resetForm: false
 };
 
 
-function pendaftaranHapus(param1, param2, n_nama)
+function pendaftaranHapus(kd_kel,kelurahan)
 { 
-	if(ConfirmDelete(param1,n_nama))
+	kategoriCari = document.getElementById('kategoriCari').value;
+	carii = document.getElementById('carii').value;
+	kd_kel = document.getElementById('kd_kel').value;
+	
+	if(ConfirmDelete(kd_kel,kelurahan))
 	{	
 		handler = '<?php echo $this->basePath; ?>/kelurahan/pendaftaran/pendaftaranhapus';
-		var opt = {id : param2};
+		var opt = {kd_kel:kd_kel};
 		jQuery.get(handler,opt,function(data) {
 				$("#tableview").html(data);
 				doCount(5);
@@ -134,21 +140,27 @@ function CariPengadaan()
 	BukaWindows();
 }
 
-function cetak(id)
-{
-	var url = '<?php echo $this->basePath; ?>/kelurahan/pendaftaran/cetakkartupdf?&id='+id;
-	swin = window.open(url,'win','scrollbars,width=600,height=400,top=80,left=140,status=yes,toolbar=no,menubar=yes,location=no');
-	swin.focus();
-}
-
-
 
 function tambahKepada()
 {
-	alert(kd_kel);
-	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?&kd_kel='+kd_kel'&bulan='+bulan'&tahun='+$tahun;
-	swin = window.open(url,'win','scrollbars,width=600,height=400,top=80,left=140,status=yes,toolbar=no,menubar=yes,location=no');
-	swin.focus();
+	var table = document.getElementById('kepada'); 
+	var rowCount = (table.rows.length);  
+	var idRow = (rowCount)*1;
+	var row = table.insertRow(rowCount);
+	row.className = "event";	
+	
+	var cell0 = row.insertCell(0);  
+	var num = (rowCount)*1+1;
+	cell0.innerHTML = num+".";
+	
+	var cell1 = row.insertCell(1);  
+	cell1.innerHTML = "<input type=\"text\" size = \"120\" maxlength = \"150\" name=\"n_nama_"+idRow+"\" id=\"n_nama_"+idRow+"\" value=\"\" > <input type=\"button\" value=\"Cari\" onclick=\"showDialog('dosen','"+idRow+"');\" >";
+	
+	var cell2 = row.insertCell(2);  
+	var rowDelete = (idRow*1)+1;
+	cell2.innerHTML = "<input type=\"hidden\" name=\"id_pegawai_"+idRow+"\" id=\"id_pegawai_"+idRow+"\" value=\"\" ><input type=\"hidden\" name=\"id_pembimbing_"+idRow+"\" id=\"id_pembimbing_"+idRow+"\" value=\"\"><img src=\"/images/cross.png\" title=\"Hapus Data\" onclick=\"deleteRow('kepada', this);getjumlahx();\"><a name=\"baris_"+idRow+"\"/>";
+	
+	document.getElementById('jumlahItem').value = (rowCount*1)+1;
 
 }
 
@@ -221,32 +233,35 @@ function closeDialogDosen(id_pegawai,nama,jum) {
 
 
 
-function prodilist() {
-    var url        = '<?php echo $this->basePath; ?>/kelurahan/pendaftaran/prodilist';
+function kelurahanlist() {
+    var url        = '<?php echo $this->basePath; ?>/kelurahan/pendaftaran/kelurahanlist';
     jQuery.get(url,function(data) {   
     $("#dialog-browse").html(data);
     $("#dialog-browse").dialog("open");
   }); 
 }
 
-function cariProdi()  {
-  $("#frmCariProdi").ajaxForm(frmCariProdi_opt);
+function carikelurahan()  {
+  $("#frmCarikelurahan").ajaxForm(frmCarikelurahan_opt);
 }
 
-var frmCariProdi_opt = {
+var frmCarikelurahan_opt = {
     target : '#dialog-browse',
-    url: '<?php echo $this->basePath; ?>/kelurahan/pendaftaran/prodilist',
+    url: '<?php echo $this->basePath; ?>/kelurahan/pendaftaran/kelurahanlist',
     type: 'get', 
     resetForm: false
 };
 
-function closeDialogProdi(c_prodi,n_prodi) {  
+function closeDialogkelurahan(kd_kel,n_kelurahan) {  
   $("#dialog-browse").dialog("close");
-  $("#c_prodi").val(c_prodi);
-  $("#n_prodi").val(n_prodi);
+  $("#kd_kel").val(kd_kel);
+  $("#n_nama").val(n_kelurahan);
 }
 
-
+function closeWinCam(n_file) {  
+  window.close();
+  $("#poto").val("/kelurahan/"+n_file);
+}
 function umumproses()
 {
 	$("#frmubahpendaftaran").ajaxForm(frmubahpendaftaran_opt);
@@ -273,12 +288,12 @@ var frmubahpendaftaran_opt = {
 			return false;
 		}
 
-		if (document.getElementById('n_hp').value == ''){
+		if (document.getElementById('n_tensi').value == ''){
 			alert('HP harus Diisi');
 			return false;
 		}
 
-		if (document.getElementById('n_email').value == ''){
+		if (document.getElementById('n_diagnosis').value == ''){
 			alert('Email harus Diisi');
 			return false;
 		}

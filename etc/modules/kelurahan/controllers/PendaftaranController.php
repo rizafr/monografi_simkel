@@ -104,6 +104,7 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$this->view->kd_kel				= $_REQUEST['kd_kel'];
 		
 		$this->view->detailPendaftaran				= $this->pendaftaran_serv->detailPendaftaranById($this->view->kd_kel);
+		//var_dump($this->view->detailPendaftaran);
 	}
 	
 	public function pendaftaranAction()
