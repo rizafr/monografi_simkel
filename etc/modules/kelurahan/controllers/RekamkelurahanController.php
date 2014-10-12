@@ -49,6 +49,26 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 	 $this->render('rekamkelurahanjs');
     }
 	
+	public function rekamkelurahancetakAction(){
+	
+		
+		$this->view->kd_kel =  $this->_getParam("kd_kel");
+		$this->view->bulan = $this->_getParam("bulan");
+		$this->view->tahun = $this->_getParam("tahun");
+		
+		$this->view->detailKelurahan	= $this->rekamkelurahan_serv->detailKelurahanByKode($this->view->kd_kel);
+		
+		$this->view->detailUmum = $this->rekamkelurahan_serv->detailUmum($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->tipologi = $this->rekamkelurahan_serv->getTipologi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		//var_dump($this->view->tipologi );
+		$this->view->detailPersonil = $this->rekamkelurahan_serv->detailPersonil($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKewenangan = $this->rekamkelurahan_serv->detailKewenangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKeuangan = $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKelembagaan = $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailTrantib = $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		
+	}
+	
 	//menampilkan data kelurahan
 	public function rekamkelurahanlistAction()
 	{

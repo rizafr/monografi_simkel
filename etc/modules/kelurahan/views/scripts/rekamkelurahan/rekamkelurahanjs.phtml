@@ -1,3 +1,5 @@
+<script>
+
 function carirekamkelurahan()
 {
 	$("#frmcarirekamkelurahan").ajaxForm(frmcarirekamkelurahan_opt);
@@ -139,6 +141,8 @@ function rekamkelurahanHapus(kd_kel,kelurahan,tahun,bulan)
 	}
 }
 
+
+
 function BukaWindows(){
 	var w = 0; 
 	var h = 0;
@@ -160,26 +164,12 @@ function CariPengadaan()
 }
 
 
-function tambahKepada()
+function tambahKepada(kd_kel,bulan,tahun)
 {
-	var table = document.getElementById('kepada'); 
-	var rowCount = (table.rows.length);  
-	var idRow = (rowCount)*1;
-	var row = table.insertRow(rowCount);
-	row.className = "event";	
-	
-	var cell0 = row.insertCell(0);  
-	var num = (rowCount)*1+1;
-	cell0.innerHTML = num+".";
-	
-	var cell1 = row.insertCell(1);  
-	cell1.innerHTML = "<input type=\"text\" size = \"120\" maxlength = \"150\" name=\"n_nama_"+idRow+"\" id=\"n_nama_"+idRow+"\" value=\"\" > <input type=\"button\" value=\"Cari\" onclick=\"showDialog('dosen','"+idRow+"');\" >";
-	
-	var cell2 = row.insertCell(2);  
-	var rowDelete = (idRow*1)+1;
-	cell2.innerHTML = "<input type=\"hidden\" name=\"id_pegawai_"+idRow+"\" id=\"id_pegawai_"+idRow+"\" value=\"\" ><input type=\"hidden\" name=\"id_pembimbing_"+idRow+"\" id=\"id_pembimbing_"+idRow+"\" value=\"\"><img src=\"/images/cross.png\" title=\"Hapus Data\" onclick=\"deleteRow('kepada', this);getjumlahx();\"><a name=\"baris_"+idRow+"\"/>";
-	
-	document.getElementById('jumlahItem').value = (rowCount*1)+1;
+	alert(kd_kel);
+	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?&kd_kel='+kd_kel'&bulan='+bulan'&tahun='+$tahun;
+	swin = window.open(url,'win','scrollbars,width=600,height=400,top=80,left=140,status=yes,toolbar=no,menubar=yes,location=no');
+	swin.focus();
 
 }
 
@@ -330,4 +320,4 @@ var frmubahrekamkelurahan_opt = {
 };
 
 
-
+</script>
