@@ -22,7 +22,7 @@ class Referensi_Service {
 	   $db = $registry->get('db');
 	   try {
 		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->fetchAll(" SELECT * FROM tr_agama order by id_agama ");
+		$result = $db->fetchAll(" SELECT * FROM SIMKEL.dbo.m_agama order by id_agama ");
 		$jmlResult = count($result);
 		 return $result;
 	    } catch (Exception $e) {
@@ -37,7 +37,37 @@ class Referensi_Service {
 	   $db = $registry->get('db');
 	   try {
 		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->fetchAll(" SELECT * FROM tr_group order by id ");
+		$result = $db->fetchAll(" SELECT * FROM simkel.dbo.user_group order by group_id ");
+		$jmlResult = count($result);
+		 return $result;
+	    } catch (Exception $e) {
+         echo $e->getMessage().'<br>';
+	     return 'gagal';
+	   }
+	}
+	
+	public function getJenkelList() {
+	
+	   $registry = Zend_Registry::getInstance();
+	   $db = $registry->get('db');
+	   try {
+		$db->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $db->fetchAll(" SELECT * FROM simkel.dbo.m_jenkel order by id_jenkel ");
+		$jmlResult = count($result);
+		 return $result;
+	    } catch (Exception $e) {
+         echo $e->getMessage().'<br>';
+	     return 'gagal';
+	   }
+	}
+	
+	public function getPendidikanList() {
+	
+	   $registry = Zend_Registry::getInstance();
+	   $db = $registry->get('db');
+	   try {
+		$db->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $db->fetchAll(" SELECT * FROM simkel.dbo.m_pendidikan order by id_pendidikan ");
 		$jmlResult = count($result);
 		 return $result;
 	    } catch (Exception $e) {
@@ -46,96 +76,6 @@ class Referensi_Service {
 	   }
 	}
 
-	public function getStatusList() {
-	
-	   $registry = Zend_Registry::getInstance();
-	   $db = $registry->get('db');
-	   try {
-		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->fetchAll("SELECT * FROM tr_status order by id_status ");
-		$jmlResult = count($result);
-		 return $result;
-	    } catch (Exception $e) {
-         echo $e->getMessage().'<br>';
-	     return 'gagal';
-	   }
-	}
-
-	public function getPropinsiList() {
-	
-	   $registry = Zend_Registry::getInstance();
-	   $db = $registry->get('db');
-	   try {
-		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->fetchAll(" SELECT * FROM tr_propinsi order by n_prop ");
-		$jmlResult = count($result);
-		 return $result;
-	    } catch (Exception $e) {
-         echo $e->getMessage().'<br>';
-	     return 'gagal';
-	   }
-	}
-
-	public function getKabByPropList($prop) {
-	
-	   $registry = Zend_Registry::getInstance();
-	   $db = $registry->get('db');
-	   try {
-		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->fetchAll("SELECT * FROM tr_kabupaten where id_prop = '$prop' order by n_kab ");
-		echo "SELECT * FROM tr_kabupaten where id_prop = '$prop' order by n_kab ";
-		$jmlResult = count($result);
-		 return $result;
-	    } catch (Exception $e) {
-         echo $e->getMessage().'<br>';
-	     return 'gagal';
-	   }
-	}
-
-	public function getGoldarList() {
-	
-	   $registry = Zend_Registry::getInstance();
-	   $db = $registry->get('db');
-	   try {
-		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->fetchAll(" SELECT * FROM tr_goldar order by id_goldar ");
-		$jmlResult = count($result);
-		 return $result;
-	    } catch (Exception $e) {
-         echo $e->getMessage().'<br>';
-	     return 'gagal';
-	   }
-	}
-
-	public function getKlasifikasiList() {
-	
-	   $registry = Zend_Registry::getInstance();
-	   $db = $registry->get('db');
-	   try {
-		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->fetchAll(" SELECT * FROM tr_klasifikasi_med order by id_klasifikasi ");
-		$jmlResult = count($result);
-		 return $result;
-	    } catch (Exception $e) {
-         echo $e->getMessage().'<br>';
-	     return 'gagal';
-	   }
-	}
-
-	public function getTindakanList() {
-	
-	   $registry = Zend_Registry::getInstance();
-	   $db = $registry->get('db');
-	   try {
-		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->fetchAll("SELECT * FROM tr_tindakan order by id_tindakan ");
-		$jmlResult = count($result);
-		 return $result;
-	    } catch (Exception $e) {
-         echo $e->getMessage().'<br>';
-	     return 'gagal';
-	   }
-	}
 
 
 }

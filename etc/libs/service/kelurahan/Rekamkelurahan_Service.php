@@ -59,13 +59,14 @@ class Rekamkelurahan_Service {
 			
 			
 			$sqlProses = "SELECT K.kelurahan, P.[tahun] ,P.[bulan],P.[kd_kel]  ,P.[nip_lurah] ,P.[gol_lurah] ,P.[nama_lurah] ,P.[nama_seklur] FROM [SIMKEL].[dbo].[mon_personil] P, [SIMKEL].[dbo].[m_kelurahan] K WHERE P.kd_kel = K.kd_kel AND P.kd_Kel= $kd_kel";//".$where;	
-			$sqlProses1 = $sqlProses.$group.$order;
+			$sqlProses1 = $sqlProses.$where.$group.$order;
+			//var_dump($sqlProses1);
 			//var_dump($sqlProses);
 			if(($pageNumber==0) && ($itemPerPage==0)){	
-				$sqlTotal = "select count(*) from ($sqlProses) a";
+				$sqlTotal = "select count(*) from ($sqlProses1) a";
 				$hasilAkhir = $db->fetchOne($sqlTotal);
 			}else{
-				$sqlData = $sqlProses.$order;//." limit $xLimit offset $xOffset";
+				$sqlData = $sqlProses1.$order;//." limit $xLimit offset $xOffset";
 				$result = $db->fetchAll($sqlData);				
 			}
 			
@@ -116,6 +117,21 @@ class Rekamkelurahan_Service {
 		
 
 	///////////////////////////////////////////////////////////////////////
+	public function getTipologi($kd_kel,$bulan,$tahun){
+			$registry = Zend_Registry::getInstance();
+			$db = $registry->get('db');
+			try {
+				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchRow("SELECT tipologi,sarana_kantor,sarana_puskesmas FROM SIMKEL.dbo.mon_umum where kd_kel = '$kd_kel' AND bulan = '$bulan' AND tahun = '$tahun'  ");
+				
+				return $result;
+				} catch (Exception $e) {
+				echo $e->getMessage().'<br>';
+				return 'Data tidak ada <br>';
+			}
+		}
+	
+	
 	//insert ke tabel dbo.mon_umum
 	public function umumInsert(array $dataMasukan) {
 		$registry = Zend_Registry::getInstance();

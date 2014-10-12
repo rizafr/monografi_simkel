@@ -89,7 +89,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 							"kd_kel"	=> $this->view->kd_kel,
 							"sortBy"		=> $sortBy,
 							"sort"			=> $sort);
-		
+		//var_dump($dataMasukan);
 		$numToDisplay = 10;
 		$this->view->numToDisplay = $numToDisplay;
 		$this->view->currentPage = $currentPage;
@@ -110,20 +110,27 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->jenisForm		= $_REQUEST['jenisForm'];
 		//$this->view->id				= $_REQUEST['id'];
 		
+		$this->view->jenkel= $this->ref_serv->getJenkelList();
+		$this->view->agama= $this->ref_serv->getAgamaList();
+		$this->view->pendidikan= $this->ref_serv->getPendidikanList();
+		
+		
 		$this->view->kd_kel	 = $_REQUEST['kd_kel'];
 		$this->view->bulan 	 = $_REQUEST['bulan'];
 		$this->view->tahun 	 = $_REQUEST['tahun'];
-		var_dump($this->view->kd_kel);
+		//var_dump($this->view->kd_kel);
 		// var_dump($this->view->tahun);
 		$this->view->detailKelurahan	= $this->rekamkelurahan_serv->detailKelurahanByKode($this->view->kd_kel);
 		
 		$this->view->detailUmum = $this->rekamkelurahan_serv->detailUmum($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->tipologi = $this->rekamkelurahan_serv->getTipologi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		var_dump($this->view->tipologi );
 		$this->view->detailPersonil = $this->rekamkelurahan_serv->detailPersonil($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKewenangan = $this->rekamkelurahan_serv->detailKewenangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKeuangan = $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKelembagaan = $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailTrantib = $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		var_dump($this->view->detailKelurahan);
+		//var_dump($this->view->detailKelurahan);
 		// var_dump($this->view->bulan);
 		// var_dump($this->view->tahun);
 	

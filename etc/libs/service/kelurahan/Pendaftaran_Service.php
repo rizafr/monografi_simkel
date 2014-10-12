@@ -62,13 +62,13 @@ class Pendaftaran_Service {
 			
 			
 			$sqlProses = "SELECT K.kelurahan, MK.kd_kel,KEC.kecamatan,  MK.tahun_pembentukan, MK.dasar_pembentukan, MK.kode_pos FROM [SIMKEL].[dbo].[m_kelurahan] K ,[SIMKEL].[dbo].[mon_kelurahan] MK, [SIMKEL].[dbo].[m_kecamatan] KEC WHERE K.kd_kel= MK.kd_kel AND K.kd_kec= KEC.kd_kec".$hak.$where;	
-			$sqlProses1 = $sqlProses.$group.$order;
+			$sqlProses1 = $sqlProses.$group;
 			//var_dump($sqlProses);
 			if(($pageNumber==0) && ($itemPerPage==0)){	
-				$sqlTotal = "select count(*) from ($sqlProses) a";
+				$sqlTotal = "select count(*) from ($sqlProses1) a";
 				$hasilAkhir = $db->fetchOne($sqlTotal);
 			}else{
-				$sqlData = $sqlProses.$order ;//." limit $xLimit offset $xOffset";
+				$sqlData = $sqlProses1.$order ;//." limit $xLimit offset $xOffset";
 				$result = $db->fetchAll($sqlData);				
 			}
 			

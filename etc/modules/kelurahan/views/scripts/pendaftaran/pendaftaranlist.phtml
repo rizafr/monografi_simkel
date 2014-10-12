@@ -22,27 +22,29 @@ $numToDisplay = $this->numToDisplay;
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
 		<h2 class="title">DATA KELURAHAN</h2>
-			<form method="post" id="frmcaripendaftaran" name="frmcaripendaftaran">
-				<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
-				</table>
-<!-- <div class="add" title="Tambah Data" onClick="pendaftaranForm('insert','');"></div>-->
+			<form method="post" id="frmcaripendaftaran" name="frmcaripendaftaran">				
 				Filter :
 				<?
-				$kategoriCari = array("nama_kelurahan" => "Nama Kelurahan", "tahun_pembentukan" => "Tahun Pembentukan","kode_pos" => "Kode Pos");
-	echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
+					$kategoriCari = array("K.kelurahan" => "Nama Kelurahan", "KEC.kecamatan" => "Kecamatan","tahun_pembentukan" => "Tahun Pembentukan");
+					echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
 				?>
-<input type="text" name="carii" id="carii" align="center" value ="<? echo $this->carii;?>">
+				
+				<input type="text" name="carii" id="carii" align="center" value ="<? echo $this->carii;?>">
 				<?
-			         $atribSubmit = array("onclick"=>"javascript:caripendaftaran();");
-			         echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+					$atribSubmit = array("onclick"=>"javascript:caripendaftaran();");
+					echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
 				?>
-	</form>
+		</form>
+	
 <fieldset class="fields"> 
 <? 
 $status = $this->hasil;
 $proses = $this->proses;
 $pesan->show_message($proses, $k_pendaftaran, "$status" ); 
 ?>
+
+<!-- <div class="add" title="Tambah Data" onClick="pendaftaranForm('insert','');"></div>-->
+
 <table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
 				<th >NoUrut</th>
 				<th >Kode Kelurahan</th>
@@ -59,7 +61,7 @@ $pesan->show_message($proses, $k_pendaftaran, "$status" );
 				<?
 				if (count($this->pendaftaranList) == 0){ 
 				?>
-					<tr class="event2"><td colspan="5"><font color="red">Data Tidak Ditemukan</font></td></tr>
+					<tr class="event2"><td colspan="11" style="color:#8C0000; font-weight:bold; background-color: #FF9999">Data Tidak Ditemukan</td></tr>
 				<?} else {
 						
 						

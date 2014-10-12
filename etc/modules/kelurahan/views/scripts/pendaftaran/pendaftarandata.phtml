@@ -32,7 +32,7 @@ $numToDisplay = $this->numToDisplay;
 			else {$namaForm = 'frmhapuspendaftaran';  $nama='hapus';}
 		?>
 		
-		<h2 class="title">FORM <?php echo strtoupper($nama)?> DATA KELURAHAN</h2>
+		<h2 class="title">FORM <?php echo strtoupper($nama)?> DATA KELURAHAN <strong><?php echo  strtoupper($this->detailPendaftaran['kelurahan']); ?></strong> </h2>
 		
 	    <div class="spacer"></div> 
 		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi">
@@ -43,7 +43,7 @@ $numToDisplay = $this->numToDisplay;
 	$pesan->show_message($proses, $keterangan, "$status" ); 
 ?>
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
-<input name="kd_kel" id="kd_kel" type="text" value="<?echo $this->detailPendaftaran['kd_kel'];?>" />
+<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->detailPendaftaran['kd_kel'];?>" />
 <input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
 	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
 				

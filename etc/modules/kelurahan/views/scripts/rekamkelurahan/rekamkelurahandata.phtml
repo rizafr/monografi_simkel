@@ -120,35 +120,39 @@ $(function(){
 		<td width="20px" ></td>
 	</tr>
 	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi" id="tipologi" value="Y"> a. Persawahan :</td>		
+		
+		<?php 
+		$tipologi=explode(",",$this->tipologi->tipologi);
+		?>
+					 
+		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi[]" id="tipologi" value="Persawahan" <?php if(in_array("Persawahan",$tipologi)) { ?> checked="checked" <?php } ?>> a. Persawahan</td>		
 	</tr>
 	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi" id="tipologi" value="Y"> b. Perladangan :</td>		
+		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi[]" id="tipologi" value="Perladangan"<?php if(in_array("Perladangan",$tipologi)) { ?> checked="checked" <?php } ?>> b. Perladangan</td>		
 	</tr>
 	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi" id="tipologi" value="Y"> c. Perkebunan :</td>
+		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi[]" id="tipologi" value="Perkebunan"<?php if(in_array("Perkebunan",$tipologi)) { ?> checked="checked" <?php } ?>> c. Perkebunan</td>
 	</tr>
 	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi" id="tipologi" value="Y"> d. Peternakan :</td>
-	</tr>
-	
-	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi" id="tipologi" value="Y"> e. Nelayan :</td>
-	</tr>
-	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi" id="tipologi" value="Y"> f. </tr>
-	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi" id="tipologi" value="Y"> g. Kerajinan dan industri kecil :</td>
+		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi[]" id="tipologi" value="Peternakan"<?php if(in_array("Peternakan",$tipologi)) { ?> checked="checked" <?php } ?>> d. Peternakan</td>
 	</tr>
 	
 	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi" id="tipologi" value="Y"> h. Industri sedang dan besar :</td>
+		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi[]" id="tipologi" value="Nelayan"<?php if(in_array("Nelayan",$tipologi)) { ?> checked="checked" <?php } ?>> e. Nelayan</td>
+	</tr>
+	<tr>
+		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi[]" id="tipologi" value="Pertambangan"<?php if(in_array("Pertambangan",$tipologi)) { ?> checked="checked" <?php } ?>> f. Pertambangan / Galian </tr>
+	<tr>
+		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi[]" id="tipologi" value="Kerajinan"<?php if(in_array("Kerajinan",$tipologi)) { ?> checked="checked" <?php } ?>> g. Kerajinan dan industri kecil</td>
 	</tr>
 	
 	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi" id="tipologi" value="Y"> i. Jasa dan Perdagangan :</td>
+		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi[]" id="tipologi" value="Industri"<?php if(in_array("Industri",$tipologi)) { ?> checked="checked" <?php } ?>> h. Industri sedang dan besar :</td>
 	</tr>
 	
+	<tr>
+		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi[]" id="tipologi" value="Jasa"<?php if(in_array("Jasa",$tipologi)) { ?> checked="checked" <?php } ?>> i. Jasa dan Perdagangan :</td>
+	</tr>
 	<!--KELURAHAN-->
 	<tr>
 		<td align="right" >* 2. Luas Wilayah :</td>
@@ -593,8 +597,8 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; a. Kantor Kelurahan:</td>
 		<td>	
-				<input type="radio" name="sarana_kantor" id="sarana_kantor"> Semi Permanen /
-				<input type="radio" name="sarana_kantor" id="sarana_kantor"> Permanen
+				<input type="radio" name="sarana_kantor" id="sarana_kantor" value="semi" <?php if($this->tipologi->sarana_kantor=="semi") { ?> checked="checked" <?php } ?>> Semi Permanen /
+				<input type="radio" name="sarana_kantor" id="sarana_kantor" value="permanen" <?php if($this->tipologi->sarana_kantor=="permanen") { ?> checked="checked" <?php } ?>> Permanen
 		</td>
 	</tr>
 	
@@ -606,8 +610,8 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Puskesmas:</td>
 		<td>	
-				<input type="radio" name="sarana_puskesmas" id="sarana_puskesmas"> ada /
-				<input type="radio" name="sarana_puskesmas" id="sarana_puskesmas"> tidak
+				<input type="radio" name="sarana_puskesmas" id="sarana_puskesmas" value="ada" <?php if($this->tipologi->sarana_puskesmas=="ada") { ?> checked="checked" <?php } ?>> ada /
+				<input type="radio" name="sarana_puskesmas" id="sarana_puskesmas" value="tidak" <?php if($this->tipologi->sarana_puskesmas=="tidak") { ?> checked="checked" <?php } ?>> tidak
 		</td>
 	</tr>
 	
@@ -639,8 +643,10 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Gedung Sekolah PAUD:</td>
 		<td>	
-				<input type="radio" name="sarana_paud" id="sarana_paud"> ada /
-				<input type="radio" name="sarana_paud" id="sarana_paud"> tidak
+					<? 
+				$sarana_jml_paudAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
+				echo $ctrlFrm->formText("sarana_jml_paud", $this->detailUmum['sarana_jml_paud'], $sarana_jml_paudAttrib);
+			?>  buah
 		</td>
 	</tr>
 	
@@ -798,8 +804,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. Lainnya:</td>
 		<td>	
 			<? 
-				$sarana_jml_balai_lainnyaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("sarana_jml_balai_lainnya", $this->detailUmum['sarana_jml_balai_lainnya'], $sarana_jml_balai_lainnyaAttrib);
+				$sarana_jml_lainnyaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required");
+				echo $ctrlFrm->formText("sarana_jml_lainnya", $this->detailUmum['sarana_jml_lainnya'], $sarana_jml_lainnyaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -850,7 +856,15 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; d. Pendidikan:</td>
 		<td>	
-			
+			<select name="id_pendidikan_lurah">
+				<?php foreach($this->pendidikan as $data): ?>
+					<?php if(($this->detailPersonil['id_pendidikan_lurah'])== $this->escape($data->id_pendidikan)){ ?> 
+						<option value="<?php echo $this->escape($data->id_pendidikan); ?>" selected><?php echo $this->escape($data->pendidikan); ?> </option>
+				<?php }else{?>
+				<option value="<?php echo $this->escape($data->id_pendidikan); ?>"><?php echo $this->escape($data->pendidikan); ?> </option>
+				 <?php }
+				 endforeach; ?>
+			</select>
 		</td>
 	</tr>
 	
@@ -876,7 +890,17 @@ $(function(){
 	
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; g. Jenis Kelamin:</td>
-		
+			<td>	
+				<select name="id_jenkel_lurah">
+					<?php foreach($this->jenkel as $data): ?>
+						<?php if(($this->detailPersonil['id_jenkel_lurah'])== $this->escape($data->id_jenkel)){ ?> 
+							<option value="<?php echo $this->escape($data->id_jenkel); ?>" selected><?php echo $this->escape($data->jenkel); ?> </option>
+					<?php }else{?>
+					<option value="<?php echo $this->escape($data->id_jenkel); ?>"><?php echo $this->escape($data->jenkel); ?> </option>
+					 <?php }
+					 endforeach; ?>
+				</select>
+			</td>	
 	</tr>
 				
 	<tr>
@@ -917,7 +941,15 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; d. Pendidikan:</td>
 		<td>	
-			
+			<select name="id_pendidikan_seklur">
+				<?php foreach($this->pendidikan as $data): ?>
+					<?php if(($this->detailPersonil['id_pendidikan_seklur'])== $this->escape($data->id_pendidikan)){ ?> 
+						<option value="<?php echo $this->escape($data->id_pendidikan); ?>" selected><?php echo $this->escape($data->pendidikan); ?> </option>
+				<?php }else{?>
+				<option value="<?php echo $this->escape($data->id_pendidikan); ?>"><?php echo $this->escape($data->pendidikan); ?> </option>
+				 <?php }
+				 endforeach; ?>
+			</select>
 		</td>
 	</tr>
 	
@@ -944,7 +976,15 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; g. Jenis Kelamin:</td>
 		<td>	
-			
+			<select name="id_jenkel_seklur">
+				<?php foreach($this->jenkel as $data): ?>
+					<?php if(($this->detailPersonil['id_jenkel_seklur'])== $this->escape($data->id_jenkel)){ ?> 
+						<option value="<?php echo $this->escape($data->id_jenkel); ?>" selected><?php echo $this->escape($data->jenkel); ?> </option>
+				<?php }else{?>
+				<option value="<?php echo $this->escape($data->id_jenkel); ?>"><?php echo $this->escape($data->jenkel); ?> </option>
+				 <?php }
+				 endforeach; ?>
+			</select>
 		</td>
 	</tr>
 	

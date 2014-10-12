@@ -8,6 +8,7 @@ var frmcarirekamkelurahan_opt = {
 		type: 'post', 
 		resetForm: false
 };
+
 function rekamkelurahanlist()
 {
 	kategoriCari = document.getElementById('kategoriCari').value;
@@ -27,9 +28,7 @@ function rekamkelurahanForm(jenisForm,kd_kel,bulan,tahun)
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
 	kd_kel = document.getElementById('kd_kel').value;
-	alert(id);
-	alert(bulan);
-	alert(tahun);
+	
 	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandata';
 	var param = { jenisForm:jenisForm,kd_kel:kd_kel,id:id,kategoriCari:kategoriCari,carii:carii,bulan:bulan,tahun:tahun};
 	jQuery.get(url, param, function(data) {
