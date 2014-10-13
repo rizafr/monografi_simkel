@@ -37,6 +37,13 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		
     }
 	
+	function anti_injection($data){
+		$filter = trim(stripslashes(strip_tags(htmlspecialchars($data,ENT_QUOTES))));
+
+		return $filter;
+
+	}
+	
     public function indexAction() {
 	   
     }
@@ -73,7 +80,7 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		// $this->view->statusList = $this->ref_serv->getStatusList();
 		
 		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
-		$this->view->carii 			= $_REQUEST['carii'];
+		$this->view->carii 			= trim(stripslashes(strip_tags(htmlspecialchars($_REQUEST['carii']))));
 		
 		
 		$sortBy			= 'kd_kel';

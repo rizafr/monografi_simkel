@@ -39,6 +39,13 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		
     }
 	
+	function anti_injection($data){
+		$filter = trim(stripslashes(strip_tags(htmlspecialchars($data,ENT_QUOTES))));
+
+		return $filter;
+
+	}
+	
     public function indexAction() {
 	   
     }
@@ -99,7 +106,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->lastPeriode	= $this->rekamkelurahan_serv->detailKelurahanByPeriode($this->view->kd_kel);
 		
 		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
-		$this->view->carii 			= $_REQUEST['carii'];
+		$this->view->carii 			=  trim(stripslashes(strip_tags(htmlspecialchars($_REQUEST['carii']))));
 
 		$sortBy			= 'bulan';
 		$sort			= 'asc';
@@ -125,7 +132,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$ssogroup = new Zend_Session_Namespace('ssogroup');	
 
 		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
-		$this->view->carii 			= $_REQUEST['carii'];
+		$this->view->carii 			= trim(stripslashes(strip_tags(htmlspecialchars($_REQUEST['carii']))));
 
 		$this->view->jenisForm		= $_REQUEST['jenisForm'];
 		//$this->view->id				= $_REQUEST['id'];
