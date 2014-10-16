@@ -56,7 +56,7 @@ $pesan->show_message($proses, $k_pendaftaran, "$status" );
 				<th >Kabupaten/Kota</th> 
 				<th >Provinsi</th> 
 				
-				<th colspan="3" class="nosort">FUNGSI</th>
+				<th colspan="2" class="nosort">FUNGSI</th>
 				
 				<?
 				if (count($this->pendaftaranList) == 0){ 
@@ -97,7 +97,6 @@ $pesan->show_message($proses, $k_pendaftaran, "$status" );
 					<td align="center"><? echo $prov;?></td>
 
 
-<td><div onClick="cetak('<? echo $id;?>');" class="pdf" title="Cetak Data"></div></td>
 <td><div onClick="pendaftaranForm('update','<? echo $kd_kel;?>');" class="edit" title="Ubah Data"></div></td>
 <td><div onClick="pendaftaranHapus('Data','<? echo $kd_kel;?>','<? echo $kelurahan;?>');" class="delete" title="Hapus Data"></div></td>
 

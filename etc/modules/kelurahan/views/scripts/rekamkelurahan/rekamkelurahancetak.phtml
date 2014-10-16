@@ -24,8 +24,9 @@
 	$document = $PHPWord->loadTemplate('../etc/data/monografiTemplate.docx');
 	
 	// $document = file_get_contents("../etc/data/monografiTemplate.doc");
- 
-	$document->setValue('bulan', $this->bulan);
+	
+	$bulan = strtoupper($array_bulan[$this->bulan]);
+	$document->setValue('bulan', $bulan);
 	$document->setValue('tahun', $this->tahun);
 	
 	//awal
@@ -39,7 +40,7 @@
 	$document->setValue('provinsi', $this->detailKelurahan->provinsi);
 	
 	//A. Data Umum
-	//$document->setValue('tipologi', $this->detailUmum['tipologi']);
+	$document->setValue('tipologi', $this->detailUmum['tipologi']);
 	$document->setValue('luasWilayah', $this->detailKelurahan->luas_wilayah);
 	$document->setValue('batasUtara', $this->detailKelurahan->batas_utara);
 	$document->setValue('batasSelatan', $this->detailKelurahan->batas_selatan);
@@ -144,20 +145,26 @@
 	$document->setValue('tarunaJmlPengurus', $this->detailKelembagaan['taruna_jml_pengurus']);
 	$document->setValue('jmlLembagaLain', $this->detailKelembagaan['jml_lembaga_lain']);	
 	
-	$document->save('E:\\Monografi.docx');
-	//$document->save('E:\\'.$nama_file);
+	
+	//nama file dokumen
+	$namafile = "Laporan Monografi Kelurahan ". $this->detailKelurahan->kelurahan. " ".$this->bulan." ". $this->tahun ." .doc";
+	
+	// $document->save('E:\\'.$namafile);
 	
 	// At least write the document to webspace:
 	$objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
+	
+	
+	
+
 	
 	// // save as a random file in temp file
 	$temp_file = tempnam(sys_get_temp_dir(), 'PHPWord');
 	$document->save($temp_file);
 	
-	//download
-	
-	$namafile = "LaporanMonografiKelurahan.doc";
-	
+	// Your browser will name the file "myFile.docx"
+	// regardless of what it's named on the server 
+	header('Content-Type: application/octet-stream');
 	header('Content-Disposition: attachment; filename="' . $namafile . '"');
 	header('Content-Transfer-Encoding: binary');
 	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -167,7 +174,4 @@
 	readfile($temp_file); // or echo file_get_contents($temp_file);
 	unlink($temp_file);  // remove temp file
 	
-	exit; 
 ?>
-
-

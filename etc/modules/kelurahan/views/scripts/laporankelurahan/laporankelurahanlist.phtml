@@ -1,0 +1,153 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+$format_date = new format_date();
+
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>>  Laporan Kelurahan
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">LAPORAN KELURAHAN</h2>
+			<form method="post" id="frmcarilaporankelurahan" name="frmcarilaporankelurahan">
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+		<tr>
+			<td align="left" width="180"> Periode :</td>
+			<td>
+			<select name="bulan" id="bulan" > 
+				<?php
+				$bulan_ind=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+				$bulan=array("1","2","3","4","5","6","7","8","9","10","11","12");
+				$jlh_bln=count($bulan_ind);
+				for($c=0; $c<$jlh_bln; $c+=1){
+					if(date('m') == $bulan[$c]){
+						echo"<option value=$bulan[$c] selected='selected'> $bulan_ind[$c] </option>";
+					}else
+					echo"<option value=$bulan[$c]> $bulan_ind[$c] </option>";
+				}
+				?>
+				</select>
+				<select name="tahun" id="tahun">
+				<?php
+				for($i=date('Y'); $i>=2010; $i-=1){
+				if(date('Y') == $i){
+						echo"<option value=$i selected='selected'> $i </option>";
+					}else
+				echo"<option value=$i> $i </option>";
+				}
+				?>
+				</select>
+			<select name="kd_kel" id="kd_kel">
+				<?php foreach($this->kelurahanList as $data): ?>
+					<?php if($this->kode_kel== $this->escape($data->kd_kel)){ ?> 
+						<option value="<?php echo $this->escape($data->kd_kel); ?>" selected><?php echo $this->escape($data->kelurahan); ?> </option>
+				<?php }else{?>
+				<option value="<?php echo $this->escape($data->kd_kel); ?>"> <?php echo $this->escape($data->kelurahan); ?> </option>
+				 <?php }
+				 endforeach; ?>
+			</select>
+			<?
+				$atribSubmit = array("onclick"=>"javascript:carilaporankelurahan();");
+				echo $ctrlFrm->formSubmit('cari', 'Cari', $atribSubmit)."&nbsp;";
+			?>
+			</td>
+			
+			
+		</tr>
+	</table>
+				
+	</form>
+			<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th >No</th>
+				<th >Kelurahan</th>
+				<th >Bulan</th>
+				<th >Tahun</th> 
+			
+				
+				
+				<th colspan="4" class="nosort">FUNGSI</th>
+				
+				<?
+				if (count($this->laporankelurahanlist) == 0){ 
+				?>
+					<tr class="event2"><td colspan="7"  style="color:#8C0000; font-weight:bold; background-color: #FF9999">Data Tidak Ditemukan</td></tr>
+				<?} else {
+						
+						
+						foreach($this->laporankelurahanlist as $data) : 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? }
+						$kd_kel	= $this->escape($data->kd_kel);						
+						$tahun	= $this->escape($data->tahun); 
+						$bulan	= $this->escape($data->bulan); 
+						$kelurahan	= $this->escape($data->kelurahan);
+						
+						
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
+						
+						?>
+							
+						<td align="center"><? echo $noUrut;?></td>
+						<td align="center"><? echo $kelurahan;?></td>
+						<td align="center"><? echo $bulan;?></td>
+						<td align="center"><? echo $tahun;?></td>
+						
+
+<td class="clcenter"><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="filedoc" align="center" title= "cetak data <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
+
+					
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+
+<style>
+.ui-datepicker-calendar {
+    display: none;
+    }
+</style>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+
+$(function() {
+		 $('#periode').datepicker( {
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'MM yy',
+        onClose: function(dateText, inst) { 
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, month, 1));
+        }
+		});
+	});
+
+</script>
+

@@ -92,7 +92,7 @@ $pesan->show_message($proses, $kd_kel, "$status" );
 						<td class="clleft"><? echo $nip_lurah;?></td>
 						
 
-<td><div onClick="rekamkelurahanForm('print','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="filedoc" title="cetak Data"></div></td>
+<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="filedoc" title= "cetak data <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
 
 <td><div onClick="rekamkelurahanForm('update','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="view" title="Lihat Data"></div></td>
 <td><div onClick="rekamkelurahanForm('update','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="edit" title="Ubah Data"></div></td>

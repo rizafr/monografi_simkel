@@ -1042,8 +1042,7 @@ $(function(){
 <table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 	<tr>
 		<td colspan="2" align="right" >1. Jumlah urusan yang dilimpahkan kabupaten/kota</td>
-		<td></td>
-		<td>
+			<td>
 			<? 
 				$jml_urusan_kotaAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
 				echo $ctrlFrm->formText("jml_urusan_kota", $this->detailPersonil['jml_urusan_kota'], $jml_urusan_kotaAttrib);
@@ -1052,7 +1051,6 @@ $(function(){
 	
 	<tr>
 		<td colspan="2" align="right" >2. Urusan yang dilimpahkan oleh kabupaten/kota</td>
-		<td></td>
 		<td>
 			<? 
 				$urusan_kotaAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
@@ -1070,7 +1068,7 @@ $(function(){
 			<td> 
 				<div class="input_fields_wajib_bidang">
 					<button class="add_field_wajib_bidang btn btn-info">Tambahkan kolom</button>
-						<div><input type="text" name="bidang_urusan_wajib[]"></div>
+						<div>1. <input type="text" name="bidang_urusan_wajib[]"></div>
 				</div>
 			</td>
 	</tr>
@@ -1080,7 +1078,7 @@ $(function(){
 			<td> 
 				<div class="input_fields_wajib_urusan">
 					<button class="add_field_wajib_urusan btn btn-info">Tambahkan kolom</button>
-						<div><input type="text" name="urusan_wajib[]"></div>
+						<div>1. <input type="text" name="urusan_wajib[]"></div>
 				</div>
 			</td>
 	</tr>
@@ -1102,7 +1100,7 @@ $(function(){
 			<td> 
 				<div class="input_fields_pilihan_bidang">
 					<button class="add_field_pilihan_bidang btn btn-info">Tambahkan kolom</button>
-						<div><input type="text" name="bidang_urusan_pilihan[]"></div>
+						<div>1. <input type="text" name="bidang_urusan_pilihan[]"></div>
 				</div>
 			</td>
 	</tr>
@@ -1112,7 +1110,7 @@ $(function(){
 			<td> 
 				<div class="input_fields_pilihan_urusan">
 					<button class="add_field_pilihan_urusan btn btn-info">Tambahkan kolom</button>
-						<div><input type="text" name="urusan_pilihan[]"></div>
+						<div>1. <input type="text" name="urusan_pilihan[]"></div>
 				</div>
 			</td>
 	</tr>
@@ -1123,7 +1121,39 @@ $(function(){
 				<input type="text" id="jml_urusan_pilihan" name="jml_urusan_pilihan" />
 			</td>
 	</tr>
-
+	
+		<tr>
+		<td colspan="2" align="right" >3. Jumlah Program yang diterima Kelurahan</td>
+		<td>
+			<? 
+				$jml_programAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
+				echo $ctrlFrm->formText("jml_program", $this->detailKewenangan['jml_program'], $jml_programAttrib);
+			?>  buah</td>
+	</tr>
+	
+	<tr>
+		<td align="right"  >&nbsp;&nbsp;&nbsp; a. Pemerintah Pusat</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td align="right" colspan="3" >&nbsp;&nbsp;&nbsp; 
+			
+			<a class="tampilkan" onclick="tampilTabelPusat();" style="cursor:pointer; padding:6px; border:1px solid #000; background-color:#FF9900; color:#000000;">Tampilkan</a>
+			<a class="tambahPusat" style="cursor:pointer; padding:6px; border:1px solid #000; background-color:#FF9900; color:#000000;">Tambah Data</a>
+			<br><br>
+			<div id="tabelPusat" style="display:none;">
+			<table border="0" width="100%" cellpadding="0" cellspacing="0">
+			<tr>
+			<td>No</td><td>Nama Program</td><td>Harga Barang</td><td>Hapus</td>
+			</tr>
+			<tbody id="kontenPusat"></tbody>
+			</table>
+			</div>
+	
+		</td>
+		
+	</tr>
 
 
 </table>
@@ -1632,6 +1662,45 @@ $(function(){
 	margin-bottom: 10px;
 }
 </style>
+<script type="text/javascript">
+	$(document).ready(function() {
+            var nomor = 0;
+			var status="";
+            $(".tambahPusat").click(function(){
+            nomor ++;
+                $('#kontenPusat').append(
+                             '<tr class="barisPusat">'
+                         + '<input name="nomor[]" value="'+ nomor +'" type="hidden">'
+                         + '<td>'+ nomor +'</td>'
+                         + '<td><input name="nama_barang_'+ nomor +'" type="text"></td>'
+                         + '<td><input name="harga_barang_'+ nomor +'" type="text"></td>'
+                         + '<td><input type="button" id="hapusPusat" value="Hapus"></td></tr>'
+                    );
+                });
+				
+                $("#hapusPusat").live('click', function () {
+					$(this).parents(".barisPusat").remove();
+            	});
+				
+				
+        });
+		
+	function tampilTabelPusat()
+	{
+		if(status=="")
+		{
+			$('#tabelPusat').slideDown();
+			status="1";
+		}
+		else
+		{
+			$('#tabelPusat').slideUp();
+			status="";
+		}
+	}
+
+</script>
+
 <script>
 //urusan wajib
 $(document).ready(function() {
@@ -1644,13 +1713,11 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="text" id="bidang_urusan_wajib" name="bidang_urusan_wajib[]"/></div>'); //add input box
+            $(wrapper).append('<div>'+ x +'<input type="text" id="bidang_urusan_wajib" name="bidang_urusan_wajib[]"/></div>'); //add input box
         }
     });
     
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
+   
 });
 </script>
 
@@ -1665,13 +1732,11 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="text" id="urusan_wajib" name="urusan_wajib[]"/></div>'); //add input box
+            $(wrapper).append('<div>'+ x +'<input type="text" id="urusan_wajib" name="urusan_wajib[]"/></div>'); //add input box
         }
     });
     
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
+   
 });
 </script>
 
@@ -1687,7 +1752,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="text" id="bidang_urusan_pilihan" name="bidang_urusan_pilihan[]"/></div>'); //add input box
+            $(wrapper).append('<div>'+ x +'<input type="text" id="bidang_urusan_pilihan" name="bidang_urusan_pilihan[]"/></div>'); //add input box
         }
     });
     
@@ -1708,7 +1773,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="text" id="urusan_pilihan" name="urusan_pilihan[]"/></div>'); //add input box
+            $(wrapper).append('<div>'+ x +'<input type="text" id="urusan_pilihan" name="urusan_pilihan[]"/></div>'); //add input box
         }
     });
     

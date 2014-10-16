@@ -1,49 +1,49 @@
-function carianalisispasien()
+function carilaporankelurahan()
 {
-	$("#frmcarianalisispasien").ajaxForm(frmcarianalisispasien_opt);
+	$("#frmcarilaporankelurahan").ajaxForm(frmcarilaporankelurahan_opt);
 }
-var frmcarianalisispasien_opt = {
+var frmcarilaporankelurahan_opt = {
 		target : '#tableview',
-		url: '<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasienlist',
+		url: '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankelurahanlist',
 		type: 'post', 
 		resetForm: false
 };
-function analisispasienlist()
+function laporankelurahanlist()
 {
-	t_awal = document.getElementById('t_awal').value;
-	t_akhir = document.getElementById('t_akhir').value;
-	var param = {t_awal:t_awal,t_akhir:t_akhir};
-	var url = '<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasienlist';
+	periode = document.getElementById('periode').value;
+	kd_kel = document.getElementById('kd_kel').value;
+	var param = {periode:periode,kd_kel:kd_kel};
+	var url = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankelurahanlist';
 	jQuery.get(url, param, function(data) {
 		$("div#tableview").html(data);
 	});
 }
 
-function analisispasienForm(jenisForm, id)
+function laporankelurahanForm(jenisForm, id)
 {
-	t_awal = document.getElementById('t_awal').value;
-	t_akhir = document.getElementById('t_akhir').value;
-	var url = '<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasiendata';
-	var param = { jenisForm:jenisForm,id:id,t_awal:t_awal,t_akhir:t_akhir};
+	periode = document.getElementById('periode').value;
+	kd_kel = document.getElementById('kd_kel').value;
+	var url = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankelurahandata';
+	var param = { jenisForm:jenisForm,id:id,periode:periode,kd_kel:kd_kel};
 	jQuery.get(url, param, function(data) {
 		jQuery("div#tableview").html(data);
-		jQuery("#frmtambahanalisispasien").ajaxForm(tambahAnalisispasien_opt);
-		jQuery("#frmubahanalisispasien").ajaxForm(ubahAnalisispasien_opt);
+		jQuery("#frmtambahlaporankelurahan").ajaxForm(tambahlaporankelurahan_opt);
+		jQuery("#frmubahlaporankelurahan").ajaxForm(ubahlaporankelurahan_opt);
 	});
 }
 
-var tambahAnalisispasien_opt = {
+var tambahlaporankelurahan_opt = {
 	target : '#tableview',
-	url: '<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasien',
+	url: '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankelurahan',
 	beforeSubmit : function() {
 		
-		if (document.getElementById('kode_pasien').value == ''){
-			alert('Kode/Nama Pasien harus Diisi');
+		if (document.getElementById('kode_kelurahan').value == ''){
+			alert('Kode/Nama kelurahan harus Diisi');
 			return false;
 		}
 
 		if (document.getElementById('n_nama').value == ''){
-			alert('Kode/Nama Pasien harus Diisi');
+			alert('Kode/Nama kelurahan harus Diisi');
 			return false;
 		}
 
@@ -100,9 +100,9 @@ var tambahAnalisispasien_opt = {
 	resetForm: false
 };
 
-var ubahAnalisispasien_opt = {
+var ubahlaporankelurahan_opt = {
 	target : '#tableview',
-	url: '<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasienupdate',
+	url: '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankelurahanupdate',
 	beforeSubmit : function() {
 
 		/*if (document.getElementById('gender').value == '-'){
@@ -149,22 +149,22 @@ var ubahAnalisispasien_opt = {
 	},
 	success: function(){
 	doCount(5);
-	jQuery("#frmubahanalisispasien").ajaxForm(ubahAnalisispasien_opt);
+	jQuery("#frmubahlaporankelurahan").ajaxForm(ubahlaporankelurahan_opt);
 	},
 	type: 'post', 
 	resetForm: false
 };
 
 
-function analisispasienHapus(param1, param2, n_nama)
+function laporankelurahanHapus(param1, param2, n_nama)
 { 
-	t_awal = document.getElementById('t_awal').value;
-	t_akhir = document.getElementById('t_akhir').value;
+	periode = document.getElementById('periode').value;
+	kd_kel = document.getElementById('kd_kel').value;
 	
 	if(ConfirmDelete(param1,n_nama))
 	{	
-		handler = '<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasienhapus';
-		var opt = {id : param2,t_awal:t_awal,t_akhir:t_akhir};
+		handler = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankelurahanhapus';
+		var opt = {id : param2,periode:periode,kd_kel:kd_kel};
 		jQuery.get(handler,opt,function(data) {
 				$("#tableview").html(data);
 				doCount(5);
@@ -176,19 +176,23 @@ function cetak(d_medrec)
 {
 	if(d_medrec == '' || d_medrec == '-' || d_medrec == '--'){alert('Tanngal harus Ada');return false;}
 
-	var url = '<?php echo $this->basePath; ?>/pasien/analisispasien/cetakrekappdf?&d_medrec='+d_medrec;
+	var url = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/cetakrekappdf?&d_medrec='+d_medrec;
 	swin = window.open(url,'win','scrollbars,width=600,height=400,top=80,left=140,status=yes,toolbar=no,menubar=yes,location=no');
 	swin.focus();
 }
 
-function cetakrekap(t_awal,t_akhir)
+function cetakrekap()
 {
-	if(t_awal == '' || t_awal == '-' || t_awal == '--'){alert('Periode Tanggal harus diisi');return false;}
-	if(t_akhir == '' || t_akhir == '-' || t_akhir == '--'){alert('Periode Tanggal harus diisi');return false;}
+	bulan = document.getElementById('bulan').value;
+	tahun = document.getElementById('tahun').value;
+	kd_kel = document.getElementById('kd_kel').value;
+	
+	if(bulan == 'bulan' || bulan == '-' || bulan == '--'){alert('bulan harus diisi');return false;}
+	if(tahun == 'tahun' || tahun == '-' || tahun == '--'){alert('tahun harus diisi');return false;}
+	if(kd_kel == '' || kd_kel == '-' || kd_kel == '--'){alert('Kode Kelurahan harus diisi');return false;}
 
-	var url = '<?php echo $this->basePath; ?>/pasien/analisispasien/rekappdf?&t_awal='+t_awal+'&t_akhir='+t_akhir;
-	swin = window.open(url,'win','scrollbars,width=600,height=400,top=80,left=140,status=yes,toolbar=no,menubar=yes,location=no');
-	swin.focus();
+	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?&bulan='+bulan+'&tahun='+tahun+'&kd_kel='+kd_kel;
+	
 }
 
 
@@ -209,7 +213,7 @@ function CariPengadaan()
 	document.getElementById('n_pengadaan').readOnly = true;
 	id_pengadaan = document.getElementById('id_pengadaan').value;
 
-	url = "<?php echo $this->basePath; ?>/adm/analisispasien/n_namapengadaan?id_pengadaan="+id_pengadaan;
+	url = "<?php echo $this->basePath; ?>/adm/laporankelurahan/n_namapengadaan?id_pengadaan="+id_pengadaan;
 	BukaWindows();
 }
 
@@ -250,7 +254,7 @@ function deleteRow2(param,id_item,no_item)
 { 
 	if(ConfirmDelete(param, no_item))
 	{	
-		handler = '<?php echo $this->basePath; ?>/pasien/analisispasien/analisispasienhapus';
+		handler = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankelurahanhapus';
 		//var opt = {id_item:id_item,tahun:tahun,cabang:cabang,kategoriCari:kategoriCari,carii:carii};
 		jQuery.get(handler,function(data) {
 				$("#tableview").html(data);
@@ -260,7 +264,7 @@ function deleteRow2(param,id_item,no_item)
 }
 
 function getKab(){
-	var url = '<?php echo $this->basePath; ?>/pasien/analisispasien/get-kab';
+	var url = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/get-kab';
 	var propinsi = document.getElementById('c_propinsi').value;
 	var param = {propinsi:propinsi};	
 	$.getJSON(url,param,function(data){
@@ -278,7 +282,7 @@ function getKab(){
 
 
 function dosenlist(jum) {
-  var url        = '<?php echo $this->basePath; ?>/pasien/analisispasien/dosenlist';
+  var url        = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/dosenlist';
   var param      = {jum:jum};
   jQuery.get(url,param,function(data) {   
     $("#dialog-browse").html(data);
@@ -292,7 +296,7 @@ function cariDosen(jum)  {
 
 var frmCariDosen_opt = {
     target : '#dialog-browse',
-    url: '<?php echo $this->basePath; ?>/pasien/analisispasien/dosenlist',
+    url: '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/dosenlist',
     type: 'get', 
     resetForm: false
 };
@@ -306,29 +310,29 @@ function closeDialogDosen(id_pegawai,nama,jum) {
 
 
 
-function pasienlist() {
-    var url        = '<?php echo $this->basePath; ?>/pasien/analisispasien/pasienlist';
+function kelurahanlist() {
+    var url        = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/kelurahanlist';
     jQuery.get(url,function(data) {   
     $("#dialog-browse").html(data);
     $("#dialog-browse").dialog("open");
   }); 
 }
 
-function cariPasien()  {
-  $("#frmCariPasien").ajaxForm(frmCariPasien_opt);
+function carikelurahan()  {
+  $("#frmCarikelurahan").ajaxForm(frmCarikelurahan_opt);
 }
 
-var frmCariPasien_opt = {
+var frmCarikelurahan_opt = {
     target : '#dialog-browse',
-    url: '<?php echo $this->basePath; ?>/pasien/analisispasien/pasienlist',
+    url: '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/kelurahanlist',
     type: 'get', 
     resetForm: false
 };
 
-function closeDialogPasien(kode_pasien,n_pasien) {  
+function closeDialogkelurahan(kode_kelurahan,n_kelurahan) {  
   $("#dialog-browse").dialog("close");
-  $("#kode_pasien").val(kode_pasien);
-  $("#n_nama").val(n_pasien);
+  $("#kode_kelurahan").val(kode_kelurahan);
+  $("#n_nama").val(n_kelurahan);
 }
 
 

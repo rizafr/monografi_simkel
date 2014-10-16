@@ -1,0 +1,539 @@
+<?php
+	
+	//Format Tanggal Berbahasa Indonesia 
+	// Array Hari
+	$array_hari = array(1=>'Senin','Selasa','Rabu','Kamis','Jumat', 'Sabtu','Minggu');
+	$hari = $array_hari[date('N')];
+
+	//Format Tanggal 
+	$tanggal = date ('j');
+
+	//Array Bulan 
+	$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
+	$bulan = $array_bulan[date('n')];
+	 
+	//Format Tahun 
+	$tahun = date('Y');
+
+	$namafile = "LaporanMonografiKelurahan.doc";
+	 header('Content-Type: application/octet-stream');
+	header('Content-Disposition: attachment; filename="' . $namafile . '"');
+	header('Content-Transfer-Encoding: binary');
+	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+	header('Expires: 0');
+	header('Pragma: public');
+	flush();
+	// readfile($temp_file); // or echo file_get_contents($temp_file);
+	// unlink($temp_file);  // remove temp file
+	
+?>
+	 
+	<div>
+	<p align="center">
+		<strong> </strong>
+		<strong> <em>Form 4</em></strong>
+	</p>
+	<p align="center">
+		<strong></strong>
+	</p>
+	<p align="center">
+		<strong>PAPAN MONOGRAFI KELURAHAN</strong>		
+	</p>
+	<p align="center">
+		<strong>KEADAAN PADA BULAN</strong>
+		<strong><?echo $this->bulan;?></strong>
+	</p>
+	<p align="center">
+		<strong>TAHUN </strong>
+		<strong><?echo $this->tahun;?></strong>
+	</p>
+	
+	<p>
+		1. Nama Kelurahan : <strong><?php echo strtoupper($this->detailKelurahan->kelurahan) ?></strong>
+	</p>
+	<p>
+		2. Tahun Pembentukan : <strong><?php echo strtoupper($this->detailKelurahan->tahun_pembentukan) ?></strong>
+	</p>
+	<p>
+		3. Dasar Hukum Pembentukan : <strong><?php echo strtoupper($this->detailKelurahan->dasar_pembentukan) ?></strong>
+	</p>
+	<p>
+		4. Nomor Kode Wilayah : <strong><?php echo strtoupper($this->detailKelurahan->kode_wilayah) ?></strong>
+	</p>
+	<p>
+		5. Nomor Kode Pos : <strong><?php echo strtoupper($this->detailKelurahan->kode_pos) ?></strong>
+	</p>
+	<p>
+		6. Kecamatan : ${kecamatan} <strong><?php echo strtoupper($this->detailKelurahan->kecamatan) ?></strong>
+	</p>
+	<p>
+		7. Kabupaten/Kota : Cimahi
+	</p>
+	<div>
+		<p>
+			8. Provinsi : Jawa Barat
+		</p>
+	</div>
+	<p>
+		<strong> </strong>
+	</p>
+	<p>
+		<strong>A. </strong>
+		<strong>DATA UMUM</strong>
+		<strong></strong>
+	</p>
+	<p>
+		1. Tipologi Kelurahan : <?php echo $this->tipologi->tipologi ?>
+	</p>
+	<p>
+		2. Luas Wilayah : <strong><?php echo strtoupper($this->detailKelurahan->luas_wilayah) ?></strong> km<sup>2</sup>
+	</p>
+	<p>	3. Batas Wilayah 
+	</p>
+	<p>
+		a. Sebelah Utara : <strong><?php echo strtoupper($this->detailKelurahan->batasUtara) ?></strong>
+	</p>
+	<p>
+		b. Sebelah Selatan : <strong><?php echo strtoupper($this->detailKelurahan->batas_selatan) ?></strong>
+	</p>
+	<p>
+		c. Sebelah Barat :<strong><?php echo strtoupper($this->detailKelurahan->batas_barat) ?></strong>
+	</p>
+	<p>
+		d. Sebelah Timur : <strong><?php echo strtoupper($this->detailKelurahan->batas_timur) ?></strong>
+	</p>
+	<p>
+		4. Orbitrasi (Jarak dari Pusat Pemerintahan)
+	</p>
+	<p>
+		a. Jarak dari Pusat Pemerintahan Kecamatan : <?php echo $this->detailKelurahan->jarakDariKecamatan ?>{jarakDariKecamatan} km
+	</p>
+	<p>
+		b. Jarak dari Pusat Pemerintahan Kota : <?php echo $this->detailKelurahan->jarakDariKota ?>{jarakDariKota} km
+	</p>
+	<p>
+		c. Jarak dari Ibukota Kabupaten : <?php echo $this->detailKelurahan->jarakDariIbukotaKota ?>{jarakDariIbukotaKota} km
+	</p>
+	<p>
+		d. Jarak dari Ibukota Provinsi : <?php echo $this->detailKelurahan->jarakDariIbuKotaProv ?>{jarakDariIbuKotaProv} km
+	</p>
+	<p>
+		5. Jumlah Penduduk : ${jmlJiwa} Jiwa, ${jmlKK} KK
+	</p>
+	<p>
+		a. Laki-laki : ${jmlLaki} Jiwa
+	</p>
+	<p>
+		b. Perempuan : ${jmlPerempuan} Jiwa
+	</p>
+	<p>
+		c. Usia 0 – 15 : ${jml015} Jiwa
+	</p>
+	<p>
+		d. Usia 15 – 65 : ${jml1565} Jiwa
+	</p>
+	<p>
+		e. Usia 65 ke atas : ${jml65Keatas} Jiwa
+	</p>
+	<p>
+		6. Mayoritas Pekerjaan : ${mayoritasPekerjaan}
+	</p>
+	<p>
+		7. Tingkat Pendidikan Masyarakat
+	</p>
+	<p>
+		a. Lulusan pendidikan umum
+	</p>
+	<p>
+		1) Taman Kanak-kanak : ${jmlLulusanTk} orang
+	</p>
+	<p>
+		2) Sekolah Dasar : ${jmlLulusanSd} orang
+	</p>
+	<p>
+		3) SMP : ${jmlLulusanSmp} orang
+	</p>
+	<p>
+		4) SMA/SMU : ${jmlLulusanSma} orang
+	</p>
+	<p>
+		5) Akademi/D1-D3 : ${jmlLulusanDiploma} orang
+	</p>
+	<p>
+		6) Sarjana : ${jmlLulusanSarjana} orang
+	</p>
+	<p>
+		7) Pascasarjana : ${jmlLulusanPascasarjana} orang
+	</p>
+	<p>
+		b. Lulusan pendidikan khusus
+	</p>
+	<p>
+		1) Pondok Pesantren : ${jmlLulusanPontren} orang
+	</p>
+	<p>
+		2) Pendidikan Keagamaan : ${jmlLulusanKeagamaan} orang
+	</p>
+	<p>
+		3) Sekolah Luar Biasa : ${jmlLulusanSlb} orang
+	</p>
+	<p>
+		4) Kursus Keterampilan : ${jmlLulusanKursus} orang
+	</p>
+	<p>
+		8. Jumlah Penduduk Miskin : ${jmlJiwaMiskin} jiwa, ${jmlJiwaKk} KK
+	</p>
+	<p>
+		9. U M R Kabupaten/Kota : Rp. ${umr}
+	</p>
+	<p>
+		10. Sarana Prasarana
+	</p>
+	<p>
+		a. Kantor Kelurahan : ${saranaKantor}
+	</p>
+	<p>
+		b. Prasarana Kesehatan
+	</p>
+	<p>
+		1) Puskesmas : ${saranaPuskesmas}
+	</p>
+	<p>
+		2) UKBM (Posyandu) : ${saranaJmlPosyandu} buah
+	</p>
+	<p>
+		3) Poliklinik : ${saranaJmlPoliklinik} buah
+	</p>
+	<p>
+		c. Prasarana Pendidikan
+	</p>
+	<table border="0" cellspacing="0" cellpadding="0" width="619">
+		<tbody>
+			<tr>
+				<td width="319" valign="top">
+					<p>
+						1) PAUD : ${saranaJmlPaud} buah
+					</p>
+				</td>
+				<td width="300" valign="top">
+					<p>
+						4) SMP : ${saranaJmlSmp} buah
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="319" valign="top">
+					<p>
+						2) TK : ${saranaJmlTk} buah
+					</p>
+				</td>
+				<td width="300" valign="top">
+					<p>
+						5) SMA : ${saranaJmlSma} buah
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="319" valign="top">
+					<p>
+						3) SD : ${saranaJmlSd} buah
+					</p>
+				</td>
+				<td width="300" valign="top">
+					<p>
+						6) PT : ${saranaJmlPt} buah
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		d. Prasarana Ibadah
+	</p>
+	<table border="0" cellspacing="0" cellpadding="0" width="631">
+		<tbody>
+			<tr>
+				<td width="331" valign="top">
+					<p>
+						1) Mesjid : ${saranaJmlMasjid} buah
+					</p>
+				</td>
+				<td width="300" valign="top">
+					<p>
+						4) Pura : ${saranaJmlPura} buah
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="331" valign="top">
+					<p>
+						2) Mushola : ${saranaJmlMushola} buah
+					</p>
+				</td>
+				<td width="300" valign="top">
+					<p>
+						5) Vihara : ${saranaJmlVihara} buah
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="331" valign="top">
+					<p>
+						3) Gereja : ${saranaJmlGereja} buah
+					</p>
+				</td>
+				<td width="300" valign="top">
+					<p>
+						6) Klenteng : ${saranaJmlKlenteng} buah
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		e. Prasarana Umum
+	</p>
+	<p>
+		1) Olahraga : ${saranaJmlOlahraga} buah
+	</p>
+	<p>
+		2) Kesenian/budaya : ${saranaJmlKesenian} buah
+	</p>
+	<p>
+		3) Balai pertemuan : ${saranaJmlBalaiPertemuan} buah
+	</p>
+	<p>
+		4) Lainnya ............... : ${saranaJmlLainnya} buah
+	</p>
+	<p>
+		<strong>B. DATA </strong>
+		<strong> PERSONIL</strong>
+	</p>
+	<p>
+		1. Nama Lurah : ${namaLurah}
+	</p>
+	<p>
+		2. Nama Sekretaris Kelurahan : ${namaSeklur}
+	</p>
+	<p>
+		3. Jumlah Aparat Kantor Kelurahan
+	</p>
+	<p>
+		a. Golongan I : ${jumlahAparatGol1} Orang
+	</p>
+	<p>
+		b. Golongan II : ${jumlahAparatGol2} Orang
+	</p>
+	<p>
+		c. Golongan III : ${jumlahAparatGol3} Orang
+	</p>
+	<p>
+		d. Golongan IV : ${jumlahAparatGol4} Orang
+	</p>
+	<p>
+		<strong>C. </strong>
+		<strong> </strong>
+		<strong>DATA </strong>
+		<strong>KEWENANGAN</strong>
+	</p>
+	<p>
+		Program yang diterima Kelurahan :
+	</p>
+	<p>
+		1. Pemerintah Pusat : ${pemerintahPusat}
+	</p>
+	<p>
+		2. Provinsi : ${provinsi}
+	</p>
+	<p>
+		3. Kabupaten/Kota : ${kabupaten}
+	</p>
+	<p>
+		<strong>D. </strong>
+		<strong>DATA </strong>
+		<strong> KEUANGAN</strong>
+	</p>
+	<p>
+		1. APBD Kabupaten/Kota : Rp ${anggaranApbd}
+	</p>
+	<p>
+		2. SKPD : ${isSkpd}
+	</p>
+	<p>
+		3. Bantuan yang diterima Kelurahan
+	</p>
+	<p>
+		a. Pemerintah Pusat : Rp ${bantuanPusat}
+	</p>
+	<p>
+		b. Pemerintah Provinsi : Rp ${bantuanProv}
+	</p>
+	<p>
+		c. Pemerintah Kabupaten/Kota : Rp ${bantuanKota}
+	</p>
+	<p>
+		d. Hibah/Bantuan Luar Negeri : Rp ${hibah}
+	</p>
+	<p>
+		e. Swadaya/gotong royong : Rp ${sumbangan}
+	</p>
+	<p>
+		f. Sumber lain : Rp ${swadaya}
+	</p>
+	<p>
+		<strong>E. </strong>
+		<strong>KELEMBAGAAN</strong>
+	</p>
+	<p>
+		1. LPM atau sebutan lain
+	</p>
+	<p>
+		- Jumlah pengurus : ${lpmJmlPengurus} orang
+	</p>
+	<p>
+		- Jumlah kegiatan per bulan : ${lpmJmlKegPerbulan} kegiatan
+	</p>
+	<p>
+		- Jumlah buku administrasi : ${lpmJmlBukuAdministrasi} buku
+	</p>
+	<p>
+		- Jumlah dana yang dikelola : Rp ${lpmJmlDana}
+	</p>
+	<p>
+		2. Lembaga Adat : ${lembagaAdat} lembaga
+	</p>
+	<p>
+		3. TP PKK
+	</p>
+	<p>
+		- Jumlah pengurus : ${pkkJmlPengurus} orang
+	</p>
+	<p>
+		- Jumlah kegiatan per bulan : ${pkkJmlKegPerbulan} kegiatan
+	</p>
+	<p>
+		- Jumlah buku administrasi : ${pkkJmlBukuAdministrasi} buku
+	</p>
+	<p>
+		- Jumlah dana yang dikelola : Rp ${pkkJmlDana}
+	</p>
+	<p>
+		4. RT/RW
+	</p>
+	<p>
+		a. Jumlah RW : ${jmlRw} RW
+	</p>
+	<p>
+		b. Jumlah RT : ${jmlRt} RT
+	</p>
+	<p>
+		c. Rata-rata penghasilan Ketua RW : Rp ${rataPenghasilanRw}
+	</p>
+	<p>
+		d. Rata-rata penghasilan Ketua RT : Rp ${rataPenghasilanRt}
+	</p>
+	<p>
+		5. Karang Taruna
+	</p>
+	<p>
+		- Jumlah Karang Taruna : ${tarunaJml} buah
+	</p>
+	<p>
+		- Jumlah Pengurus (rata-rata) : ${tarunaJmlPengurus} orang
+	</p>
+	<p>
+		6. Lembaga Kemasyarakatan Lainnya : ${jmlLembagaLain} lembaga
+	</p>
+	<table cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td width="347" height="200">
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<tbody>
+							<tr>
+								<td>
+									<div>
+										<p align="center">
+											Salinan sesuai dengan aslinya,
+										</p>
+										<p align="center">
+											KEPALA BIRO HUKUM
+										</p>
+										<p align="center">
+											<u>ZUDAN ARIF FAKRULLOH</u>
+										</p>
+										<p align="center">
+											Pembina Tk.I (IV/b)
+										</p>
+										<p align="center">
+											NIP. 19690824 199903 1 001
+										</p>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	MENTERI DALAM NEGERI
+	<p align="center">
+		REPUBLIK INDONESIA,
+	</p>
+	<p align="center">
+		ttd
+	</p>
+	<p align="center">
+		GAMAWAN FAUZI
+	</p>
+</div>
+<br clear="all"/>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+<p align="center">
+	<strong> </strong>
+</p>
+
+
+

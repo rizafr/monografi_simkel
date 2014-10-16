@@ -1,15 +1,16 @@
 <?php
 require_once 'Zend/Controller/Action.php';
 require_once 'Zend/Auth.php';
-require_once "service/pasien/Analisispasien_Service.php";
-require_once "service/pasien/Pendaftaran_Service.php";
+require_once "service/kelurahan/Rekamkelurahan_Service.php";
+require_once "service/kelurahan/Laporankelurahan_Service.php";
+require_once "service/kelurahan/Pendaftaran_Service.php";
 require_once "service/adm/Referensi_Service.php";
 
 require_once "service/adm/logfile.php";
 require_once "service/sso/Sso_User_Service.php";
 require_once "share/oa_dec_cur_conv.php";
 
-class Kelurahan_AnalisispasienController extends Zend_Controller_Action {
+class Kelurahan_LaporankelurahanController extends Zend_Controller_Action {
 	private $auditor_serv;
 	private $id;
 	private $kdorg;
@@ -20,20 +21,21 @@ class Kelurahan_AnalisispasienController extends Zend_Controller_Action {
 		$registry = Zend_Registry::getInstance();
 		$this->view->report_server = $registry->get('report_server'); 
 		$this->view->basePath = $registry->get('basepath'); 
-		$this->view->baseData = "../etc/data/pasien/";	
+		$this->view->baseData = "../etc/data/kelurahan/";	
 
 		$this->basePath = $registry->get('basepath'); 
         $this->view->pathUPLD = $registry->get('pathUPLD');
         $this->view->procPath = $registry->get('procpath');
-	    $this->analisispasien  = 'cdr';
+	    $this->rekamkelurahan  = 'cdr';
 	   
-		$this->analisispasien_serv = Analisispasien_Service::getInstance();
+		$this->rekamkelurahan_serv = Rekamkelurahan_Service::getInstance();
+		$this->laporankelurahan_serv = Laporankelurahan_Service::getInstance();
 		$this->pendaftaran_serv = Pendaftaran_Service::getInstance();
 		$this->ref_serv = Referensi_Service::getInstance();
 
 		$this->sso_serv = Sso_User_Service::getInstance();
-	    $ssoanalisispasien = new Zend_Session_Namespace('ssoanalisispasien');
-	    $this->iduser =$ssoanalisispasien->user_id;
+	    $ssorekamkelurahan = new Zend_Session_Namespace('ssorekamkelurahan');
+	    $this->iduser =$ssorekamkelurahan->user_id;
 	   // $this->view->t_tensiuser = $this->sso_serv->getDataUserNama($this->iduser);
 		$this->Logfile = new logfile;
 		
@@ -43,15 +45,15 @@ class Kelurahan_AnalisispasienController extends Zend_Controller_Action {
 	   
     }
 	
-	public function analisispasienjsAction() 
+	public function laporankelurahanjsAction() 
     {
 	 header('content-type : text/javascript');
-	 $this->render('analisispasienjs');
+	 $this->render('laporankelurahanjs');
     }
 	
 	//test OPen report
 	//----------------------
-	public function analisispasienlistAction()
+	public function laporankelurahanlistAction()
 	{
 		$currentPage = $_REQUEST['currentPage']; 
  			
@@ -71,27 +73,35 @@ class Kelurahan_AnalisispasienController extends Zend_Controller_Action {
 		else {  $this->view->t_akhir= $_REQUEST['t_akhir']; 
 		}
 		
-		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
-		$this->view->carii 			= $_REQUEST['carii'];
+	
+	
 
-		$sortBy			= 'n_analisispasien';
+		$detailKelurahan = $this->rekamkelurahan_serv->detailKelurahanByKode($this->view->kd_kel);
+		$this->view->detailKelurahan = $detailKelurahan;
+		
+		$sortBy			= 'bulan';
 		$sort			= 'asc';
 		
-		$dataMasukan = array("kategoriCari" => $this->view->kategoriCari,
-							"katakunciCari" => $this->view->carii,
-							"t_awal"		=> $this->view->t_awal,
-							"t_akhir"		=> $this->view->t_akhir,
-							"sortBy"		=> $sortBy,
-							"sort"			=> $sort);
 		
 		$numToDisplay = 20;
 		$this->view->numToDisplay = $numToDisplay;
 		$this->view->currentPage = $currentPage;
-		$this->view->totAnalisispasienList = $this->analisispasien_serv->cariAnalisispasienList($dataMasukan,0,0,0);
-		$this->view->analisispasienList = $this->analisispasien_serv->cariAnalisispasienList($dataMasukan,$currentPage, $numToDisplay,$this->view->totAnalisispasienList);		
+	
+		$ssogroup		= new Zend_Session_Namespace('ssogroup');///berdasarkan user group
+		
+		$this->view->kode_kel = $ssogroup->kd_kel;
+		
+		$this->view->kd_kel = $_REQUEST['kd_kel'];
+		$this->view->bulan = $_REQUEST['bulan'];
+		$this->view->tahun = $_REQUEST['tahun'];
+		$this->view->kelurahanList	= $this->rekamkelurahan_serv->getKelurahanList();
+		
+		$this->view->laporankelurahanlist = $this->laporankelurahan_serv->getCariLaporanList($this->view->kd_kel,$this->view->bulan,$this->view->tahun);
+		
+	
 	}
 	
-	public function analisispasiendataAction()
+	public function laporankelurahandataAction()
 	{
 		$ssogroup = new Zend_Session_Namespace('ssogroup');	
 
@@ -103,11 +113,11 @@ class Kelurahan_AnalisispasienController extends Zend_Controller_Action {
 		$this->view->jenisForm		= $_REQUEST['jenisForm'];
 		$this->view->id				= $_REQUEST['id'];
 		
-		$this->view->detailAnalisispasien				= $this->analisispasien_serv->detailAnalisispasienById($this->view->id);
-		$this->view->detailAnalisispasienList			= $this->analisispasien_serv->AnalisispasienList($this->view->id);
+		$this->view->detaillaporankelurahan				= $this->laporankelurahan_serv->detaillaporankelurahanById($this->view->id);
+		$this->view->detaillaporankelurahanList			= $this->laporankelurahan_serv->laporankelurahanList($this->view->id);
 	}
 	
-	public function analisispasienAction()
+	public function laporankelurahanAction()
 	{
 		$ssogroup = new Zend_Session_Namespace('ssogroup');	
 		$this->view->c_group =$ssogroup->c_group;
@@ -198,18 +208,18 @@ class Kelurahan_AnalisispasienController extends Zend_Controller_Action {
 								"cuid"					=> $ssogroup->user_id
 								);
 
-		$this->view->analisispasienInsert = $this->analisispasien_serv->analisispasienInsert($dataMasukan);
+		$this->view->laporankelurahanInsert = $this->laporankelurahan_serv->laporankelurahanInsert($dataMasukan);
 
 		$this->view->proses = "1";	
 		$this->view->keterangan = "Judul";
-		$this->view->hasil = $this->view->analisispasienInsert;
+		$this->view->hasil = $this->view->laporankelurahanInsert;
 		
-		$this->analisispasienlistAction();
-		$this->render('analisispasienlist');
+		$this->laporankelurahanlistAction();
+		$this->render('laporankelurahanlist');
 
 	}
 	
-	public function analisispasienupdateAction()
+	public function laporankelurahanupdateAction()
 	{
 		$ssogroup = new Zend_Session_Namespace('ssogroup');	
 		$user_id =$ssogroup->user_id;
@@ -300,7 +310,7 @@ class Kelurahan_AnalisispasienController extends Zend_Controller_Action {
 								"v_imunka"	            => $v_imunka,
 								"muid"					=> $ssogroup->user_id
 								);
-		$this->view->analisispasienUpdate = $this->analisispasien_serv->analisispasienUpdate($dataMasukanUpd);
+		$this->view->laporankelurahanUpdate = $this->laporankelurahan_serv->laporankelurahanUpdate($dataMasukanUpd);
 
 if((isset($_FILES['a_file']['error']) && $_FILES['a_file'] == 0) || (!empty($_FILES['a_file']['tmp_name']) && $_FILES['a_file']['tmp_name'] != 'none'))
 {
@@ -312,8 +322,8 @@ $destDirtersimpan	= "../etc/data/pasien/$Filetersimpan";
 if($_POST['a_file']){unlink($destDirtersimpan);}
 
 
-$this->view->analisispasienUpdate = $this->analisispasien_serv->analisispasienFotoUpdate($id,$n_file);
-if ($this->view->analisispasienUpdate=="sukses" && $n_file){
+$this->view->laporankelurahanUpdate = $this->laporankelurahan_serv->laporankelurahanFotoUpdate($id,$n_file);
+if ($this->view->laporankelurahanUpdate=="sukses" && $n_file){
 				if (!empty($_FILES['a_file'])){$FileName = $n_file;}
 				$FileName = $n_file;				
 				if (!empty($_FILES['a_file'])){$destDir = "../etc/data/pasien/$FileName";	
@@ -328,15 +338,15 @@ if ($this->view->analisispasienUpdate=="sukses" && $n_file){
 
 		$this->Logfile->createLog($this->view->t_tensiuser, "Ubah data", $t_tensi." (".$id.")");
 		$this->view->proses = "2";	
-		$this->view->keterangan = "Umum Analisispasien";
-		$this->view->hasil = $this->view->analisispasienUpdate;
+		$this->view->keterangan = "Umum laporankelurahan";
+		$this->view->hasil = $this->view->laporankelurahanUpdate;
 		
-		$this->analisispasienlistAction();
-		$this->render('analisispasienlist');
+		$this->laporankelurahanlistAction();
+		$this->render('laporankelurahanlist');
 	}
 
 
-	public function analisispasienhapusAction()
+	public function laporankelurahanhapusAction()
 	{
 		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
 		$this->view->carii 			= $_REQUEST['carii'];
@@ -348,14 +358,14 @@ if ($this->view->analisispasienUpdate=="sukses" && $n_file){
 
 		$dataMasukan = array("id" => $id);
 
-		$this->view->analisispasienUpdate = $this->analisispasien_serv->analisispasienHapus($dataMasukan);
-		$this->Logfile->createLog($this->view->t_tensiuser, "Hapus data analisispasien user", $n_analisispasien." (".$id.")");
+		$this->view->laporankelurahanUpdate = $this->laporankelurahan_serv->laporankelurahanHapus($dataMasukan);
+		$this->Logfile->createLog($this->view->t_tensiuser, "Hapus data laporankelurahan user", $n_laporankelurahan." (".$id.")");
 		$this->view->proses = "3";	
 		$this->view->keterangan = "USER";
-		$this->view->hasil = $this->view->analisispasienUpdate;
+		$this->view->hasil = $this->view->laporankelurahanUpdate;
 		
-		$this->analisispasienlistAction();
-		$this->render('analisispasienlist');
+		$this->laporankelurahanlistAction();
+		$this->render('laporankelurahanlist');
 	}
 
 	public function cetakrekappdfAction()
@@ -368,7 +378,7 @@ if ($this->view->analisispasienUpdate=="sukses" && $n_file){
 		$this->view->jenisForm		= $_REQUEST['jenisForm'];
 		$this->view->d_medrec		= $_REQUEST['d_medrec'];
 
-		$this->view->detailAnalisispasienList	= $this->analisispasien_serv->AnalisispasienList($this->view->d_medrec);
+		$this->view->detaillaporankelurahanList	= $this->laporankelurahan_serv->laporankelurahanList($this->view->d_medrec);
 	}
 
 	public function rekappdfAction()
@@ -382,7 +392,7 @@ if ($this->view->analisispasienUpdate=="sukses" && $n_file){
 		$this->view->t_awal			= $_REQUEST['t_awal'];
 		$this->view->t_akhir		= $_REQUEST['t_akhir'];
 
-		$this->view->detailAnalisispasienList	= $this->analisispasien_serv->rekapanList($this->view->t_awal,$this->view->t_akhir);
+		$this->view->detaillaporankelurahanList	= $this->laporankelurahan_serv->rekapanList($this->view->t_awal,$this->view->t_akhir);
 	}
 
 	public function pasienlistAction() {

@@ -21,13 +21,13 @@ class Rekamkelurahan_Service {
 	// List Rekamkelurahan
 	//======================================================================
 
-	public function getRekampasienList() {
+	public function getKelurahanList() {
 	
 	   $registry = Zend_Registry::getInstance();
 	   $db = $registry->get('db');
 	   try {
 		$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->fetchAll(" SELECT id, n_nama FROM tr_otoritas_user order by n_nama ");
+		$result = $db->fetchAll(" SELECT * FROM [SIMKEL].[dbo].[m_kelurahan]");
 		$jmlResult = count($result);
 		 return $result;
 	    } catch (Exception $e) {

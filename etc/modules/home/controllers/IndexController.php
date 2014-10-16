@@ -343,9 +343,8 @@ class Home_IndexController extends Zend_Controller_Action {
 		$ssogroup		= new Zend_Session_Namespace('ssogroup');///berdasarkan user group
 		$this->runningtextAction();
 		
-		$this->view->n_nama = $ssogroup->n_nama;
-		$this->view->n_level =$ssogroup->n_level;	
-		$this->view->group_id =$ssogroup->group_id;
+		$this->view->nama = $ssogroup->nama;
+		$this->view->kd_kel = $ssogroup->kd_kel;
 										
 	   $this->render('main');
     }
