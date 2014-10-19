@@ -1,7 +1,23 @@
- jQuery(document).ready(function () {
+/*  jQuery(document).ready(function () {
 	var loaderParm = document.getElementById('loading');
 	if (loaderParm == null) {
 	  var loader = jQuery('<div id="loading"><div class="image"><img alt="" src="../images/globe32.gif"/></div><div class="load">Loading .....</div></div>')
+		 // .css({position: "relative", top: "1em", left: "1em"})
+		  .hide()
+		  .appendTo("body");
+
+		$().ajaxStart(function() {
+			loader.show();
+		}).ajaxStop(function() {
+			loader.hide();
+		});		  
+	}
+ });  */
+ 
+ jQuery(document).ready(function () {
+	var loaderParm = document.getElementById('loading');
+	if (loaderParm == null) {
+	  var loader = jQuery('<div id="loading"><div class="image"><img alt="" src="../images/spiffygif_120x120.gif"/></div><div class="load">Loading .....</div></div>')
 		 // .css({position: "relative", top: "1em", left: "1em"})
 		  .hide()
 		  .appendTo("body");

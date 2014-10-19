@@ -149,9 +149,7 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 								"jarak_dari_kecamatan"	=> $jarak_dari_kecamatan,
 								"jarak_dari_kota"		=> $jarak_dari_kota,
 								"jarak_dari_ibukota_kota"	=>$jarak_dari_ibukota_kota,
-								"jarak_dari_ibukota_prov"	=>$jarak_dari_ibukota_prov,
-								
-						
+								"jarak_dari_ibukota_prov"	=>$jarak_dari_ibukota_prov
 								);
 
 		$this->view->pendaftaranInsert = $this->pendaftaran_serv->pendaftaranInsert($dataMasukan);
@@ -178,6 +176,15 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$dasar_pembentukan				= $_POST['dasar_pembentukan'];
 		$kode_wilayah					= $_POST['kode_wilayah'];
 		$kode_pos						= $_POST['kode_pos'];
+		$luas							= $_POST['luas'];
+		$batas_utara					= $_POST['batas_utara'];
+		$batas_selatan					= $_POST['batas_selatan'];
+		$batas_barat					= $_POST['batas_barat'];
+		$batas_timur					= $_POST['batas_timur'];
+		$jarak_dari_kecamatan			= $_POST['jarak_dari_kecamatan'];
+		$jarak_dari_kota				= $_POST['jarak_dari_kota'];
+		$jarak_dari_ibukota_kota		= $_POST['jarak_dari_ibukota_kota'];
+		$jarak_dari_ibukota_prov		= $_POST['jarak_dari_ibukota_prov'];
 		
 
 
@@ -185,7 +192,16 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 								"tahun_pembentukan"		=> $tahun_pembentukan,
 								"dasar_pembentukan"		=> $dasar_pembentukan,
 								"kode_wilayah"			=> $kode_wilayah,
-								"kode_pos"				=> $kode_pos
+								"kode_pos"				=> $kode_pos,
+								"luas"					=> $luas,
+								"batas_utara"			=> $batas_utara,
+								"batas_selatan"			=> $batas_selatan,
+								"batas_barat"			=>$batas_barat,
+								"batas_timur"			=> $batas_timur,
+								"jarak_dari_kecamatan"	=> $jarak_dari_kecamatan,
+								"jarak_dari_kota"		=> $jarak_dari_kota,
+								"jarak_dari_ibukota_kota"	=>$jarak_dari_ibukota_kota,
+								"jarak_dari_ibukota_prov"	=>$jarak_dari_ibukota_prov
 								);
 								
 		$this->view->pendaftaranUpdate = $this->pendaftaran_serv->pendaftaranUpdate($dataMasukan);

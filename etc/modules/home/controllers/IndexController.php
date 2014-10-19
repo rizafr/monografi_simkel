@@ -346,7 +346,7 @@ class Home_IndexController extends Zend_Controller_Action {
 		$this->view->nama = $ssogroup->nama;
 		$this->view->kd_kel = $ssogroup->kd_kel;
 										
-	   $this->render('main');
+	   $this->render('home');
     }
 	public function loginAction(){
 		// $this->view->login=$_GET['login'];

@@ -2321,3 +2321,137 @@ ul.menu .menulink:hover, ul.menu .menuhover {border-botttom:2px solid #FF5C26;ba
 ul.menu .sub {background:#d1d1d1 url(../images/arrow.gif) 136px 8px no-repeat}
 ul.menu .topline {border-top:0px solid #aaa}
 /*END OF DROPDOWN MENU */
+
+
+table .table{ 
+	margin: 10px 0 30px 0;
+	width : 100% !important;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+	
+}
+
+table .table tr:hover{ 	
+	background: #424251 !important;
+}
+
+table .table tr, table .table tr td { 	
+	padding: 10px 5px;
+	text-align: left;
+	
+}
+
+
+table .table tr th{ 
+	background: #00698C;
+	color: #FFF;
+	padding: 12px 4px;
+	text-align: center;
+}
+
+table .table tr td { 
+	background: #DDDDDD;
+	color: #444;  
+	border-bottom : 1px solid #CCCCCC;
+}
+
+td a:hover{background: #FFEFBF;}
+
+/* TOOLTIP */
+
+    a.tooltip {outline:none;text-decoration:none;}
+    a.tooltip strong {line-height:30px;}
+    a.tooltip > span 
+    {
+	    width:70px;
+	    padding: 10px 20px;
+	    /* margin-top: 20px; */
+	    margin-top: 10px;
+	    margin-left: -85px;
+	    opacity: 0;
+	    visibility: hidden;
+	    z-index: 10;	   
+	    position: absolute;
+
+	    font-size: 12px;  
+		color:#fff;
+	    -webkit-border-radius: 3px;
+	    -moz-border-radius: 3px;
+	    -o-border-radius: 3px;
+	    border-radius: 3px;
+	    
+	    
+        -webkit-box-shadow: 2px 2px 2px #999;
+	    -moz-box-shadow: 2px 2px 2px #999;		
+	    box-shadow: 2px 2px 2px #999;	    
+	    
+	    -webkit-transition-property:opacity, margin-top, visibility, margin-left;
+	    -webkit-transition-duration:0.4s, 0.3s, 0.4s, 0.3s;  
+	    -webkit-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+	
+	    -moz-transition-property:opacity, margin-top, visibility, margin-left;
+	    -moz-transition-duration:0.4s, 0.3s, 0.4s, 0.3s;  
+	    -moz-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+	
+	    -o-transition-property:opacity, margin-top, visibility, margin-left;
+	    -o-transition-duration:0.4s, 0.3s, 0.4s, 0.3s;  
+	    -o-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+	
+	    transition-property:opacity, margin-top, visibility, margin-left;
+	    transition-duration:0.4s, 0.3s, 0.4s, 0.3s;  
+	    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+    }
+    
+    /*a.tooltip > span:hover,*/
+	a.tooltip:hover > span
+	{
+		opacity: 1;
+		text-decoration:none;
+		visibility: visible;
+		overflow: visible;
+		/* margin-top:50px; */
+		margin-top:25px;
+		display: inline;
+		margin-left: -60px;		
+	}
+
+	a.tooltip span b {
+    
+		width: 15px;
+		height: 15px;
+		margin-left: 20px;
+		margin-top: -19px;
+			
+		display: block;
+		position: absolute;
+
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+			
+		-webkit-box-shadow: inset -1px 1px 0 #fff;
+		-moz-box-shadow: inset 0 1px 0 #fff;
+		-o-box-shadow: inset 0 1px 0 #fff;
+		box-shadow: inset 0 1px 0 #fff;
+			
+		display: none\0/;
+		*display: none;
+	}
+    
+a.tooltip > span {
+	color: #FDFDFF; 
+	background: #4C5365;
+	/*background: -moz-linear-gradient(top, #22A7F0 0%, #22A7F0 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#22A7F0), color-stop(100%,#22A7F0));
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#22A7F0', endColorstr='#22A7F0',GradientType=0 );
+	   */ 
+	border: 1px solid #4C5365;	     
+}    
+	  
+a.tooltip span b {
+	background: #4C5365;
+	border-top: 1px solid #4C5365;
+	border-right: 1px solid #4C5365;
+}

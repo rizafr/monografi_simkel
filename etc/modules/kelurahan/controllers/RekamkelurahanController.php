@@ -154,10 +154,11 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		//var_dump($this->view->tipologi );
 		$this->view->detailPersonil = $this->rekamkelurahan_serv->detailPersonil($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKewenangan = $this->rekamkelurahan_serv->detailKewenangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgram = $this->rekamkelurahan_serv->detailProgram($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKeuangan = $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKelembagaan = $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailTrantib = $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		//var_dump($this->view->detailKelurahan);
+		//var_dump($this->view->detailProgram);
 		// var_dump($this->view->bulan);
 		// var_dump($this->view->tahun);
 	
@@ -167,6 +168,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 	//insert data
 	public function rekamkelurahanAction()
 	{
+	
 		$ssogroup = new Zend_Session_Namespace('ssogroup');	
 		$this->view->c_group =$ssogroup->c_group;
 		$this->view->user_id =$ssogroup->user_id;
@@ -181,6 +183,12 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$bulan						= $_POST['bulan'];
 		$kd_kel						= $_POST['kd_kel'];
 		$tipologi					= $_POST['tipologi'];
+
+		if(isset($_POST['simpan'])){
+			$tipologi =  implode(",",$tipologi);
+		//echo $tipologi;
+		}
+		
 		$jml_jiwa					= $_POST['jml_jiwa'];
 		$jml_kk						= $_POST['jml_kk'];
 		$jml_laki					= $_POST['jml_laki'];
@@ -210,7 +218,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$jml_lulusan_keagamaan		= $_POST['jml_lulusan_keagamaan'];
 		$jml_lulusan_slb			= $_POST['jml_lulusan_slb'];
 		$jml_lulusan_kursus			= $_POST['jml_lulusan_kursus'];
-		$jml_lulusan_miskin			= $_POST['jml_lulusan_miskin'];
+		$jml_jiwa_miskin			= $_POST['jml_jiwa_miskin'];
 		$jml_jiwa_kk				= $_POST['jml_jiwa_kk'];
 		$umr						= $_POST['umr'];
 		$sarana_kantor				= $_POST['sarana_kantor'];
@@ -241,7 +249,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$id_pendidikan_lurah		= $_POST['id_pendidikan_lurah'];
 		$tmt_jabatan_lurah			= $_POST['tmt_jabatan_lurah'];
 		$riwayat_jabatan1			= $_POST['riwayat_jabatan1'];
-		$id_jenkel					= $_POST['id_jenkel'];
+		$id_jenkel_lurah			= $_POST['id_jenkel_lurah'];
 		$nama_seklur				= $_POST['nama_seklur'];
 		$nip_seklur					= $_POST['nip_seklur'];
 		$gol_seklur					= $_POST['gol_seklur'];
@@ -255,14 +263,110 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$jumlah_aparat_gol4			= $_POST['jumlah_aparat_gol4'];
 		
 		//kewenangan
-		$jml_urusan					= $_POST['jml_urusan'];
-		$jml_urusan_wajib			= $_POST['jml_urusan_wajib'];
-		$jml_urusan_pilihan			= $_POST['jml_urusan_pilihan'];
-		$bidang_urusan_wajib		= $_POST['bidang_urusan_wajib'];
-		$bidang_urusan_pilihan		= $_POST['bidang_urusan_pilihan'];
-		$urusan_wajib				= $_POST['urusan_wajib'];
-		$urusan_pilihan				= $_POST['urusan_pilihan'];
+		$jml_urusan_kota			= $_POST['jml_urusan_kota'];
+		$jml_limpah_urusan_kota		= $_POST['jml_limpah_urusan_kota'];		
+		if(isset($_POST['simpan'])){
+			$bidang_urusan_wajib		= $_POST['bidang_urusan_wajib'];
+			$bidang_urusan_wajib =  implode(",",$bidang_urusan_wajib);
+			
+			$bidang_urusan_pilihan		= $_POST['bidang_urusan_pilihan'];
+			$bidang_urusan_pilihan =  implode(",",$bidang_urusan_pilihan);
+		
+			$urusan_wajib				= $_POST['urusan_wajib'];
+			$urusan_wajib =  implode(",",$urusan_wajib);
+			
+			$urusan_pilihan				= $_POST['urusan_pilihan'];
+			$urusan_pilihan =  implode(",",$urusan_pilihan);
+			
+			// PROGRAM KELURAHAN PUSAT
+			if($_POST['nomorPusat']!="")
+			{
+				foreach($_POST['nomorPusat'] as $i)
+				{
+					/*query insert ke database taruh disini
+					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
+					*/
+					$nama_program = $_POST['nama_program_pusat_'.$i];
+					$anggaran = $_POST['anggaran_pusat_'.$i];
+					$kode = $_POST['kode_pusat_'.$i];
+					
+					
+					$datamasukanprogramkelurahan = array(
+						"tahun" 			=> $tahun,
+						"bulan"				=> $bulan,
+						"kd_kel"	       	=> $kd_kel,
+						"kode"	       		=> $kode,
+						"nama_program"	    => $nama_program,
+						"anggaran"			=> $anggaran
+					);
+					
+				var_dump($datamasukanprogramkelurahan);
+				$this->view->programkelurahanInsert = $this->rekamkelurahan_serv->programkelurahanInsert($datamasukanprogramkelurahan);
+				var_dump($this->view->programkelurahanInsert);
+				}
+				
+			}// END PROGRAM KELURAHAN PUSAT
+			
+			//PROGRAM KELURAHAN PROVINSI
+			if($_POST['nomorProvinsi']!="")
+			{
+				foreach($_POST['nomorProvinsi'] as $i)
+				{
+					/*query insert ke database taruh disini
+					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
+					*/
+					$nama_program = $_POST['nama_program_provinsi_'.$i];
+					$anggaran = $_POST['anggaran_provinsi_'.$i];
+					$kode = $_POST['kode_provinsi_'.$i];
+					
+					$datamasukanprogramkelurahan = array(
+						"tahun" 			=> $tahun,
+						"bulan"				=> $bulan,
+						"kd_kel"	       	=> $kd_kel,
+						"kode"	       		=> $kode,
+						"nama_program"	    => $nama_program,
+						"anggaran"			=> $anggaran
+					);
+				// var_dump($datamasukanprogramkelurahan);
+				$this->view->programkelurahanInsert = $this->rekamkelurahan_serv->programkelurahanInsert($datamasukanprogramkelurahan);
+				// var_dump($this->view->programkelurahanInsert);
+				}
+				
+			} // END PROGRAM KELURAHAN PROVINSI
+			
+			//PROGRAM KELURAHAN KOTA
+			if($_POST['nomorKota']!="")
+			{
+				foreach($_POST['nomorKota'] as $i)
+				{
+					/*query insert ke database taruh disini
+					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
+					*/
+					$nama_program = $_POST['nama_program_kota_'.$i];
+					$anggaran = $_POST['anggaran_kota_'.$i];
+					$kode = $_POST['kode_kota_'.$i];
+					
+					$datamasukanprogramkelurahan = array(
+						"tahun" 			=> $tahun,
+						"bulan"				=> $bulan,
+						"kd_kel"	       	=> $kd_kel,
+						"kode"	       		=> $kode,
+						"nama_program"	    => $nama_program,
+						"anggaran"			=> $anggaran
+					);
+				// var_dump($datamasukanprogramkelurahan);
+				$this->view->programkelurahanInsert = $this->rekamkelurahan_serv->programkelurahanInsert($datamasukanprogramkelurahan);
+				// var_dump($this->view->programkelurahanInsert);
+				}
+				
+			} // END PROGRAM KELURAHAN KOTA
+		}
+		
 		$jml_program_kelurahan		= $_POST['jml_program_kelurahan'];
+		
+		$jml_urusan_wajib			= count($urusan_wajib)+count($bidang_urusan_wajib);
+		$jml_urusan_pilihan			= count($urusan_pilihan)+count($bidang_urusan_pilihan);
+		
 		
 		//keuangan
 		$anggaran_apbd				= $_POST['anggaran_apbd'];
@@ -306,11 +410,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$jml_pos_bencana			= $_POST['jml_pos_bencana'];
 		$jml_pembalakan_liar		= $_POST['jml_pembalakan_liar'];
 		$jml_pos_hutan_lindung		= $_POST['jml_pos_hutan_lindung'];
-		$n_hemoglobin				= $_POST['n_hemoglobin'];
-		$n_urin						= $_POST['n_urin'];
-		$n_faeces					= $_POST['n_faeces'];
-		$n_thalassimia				= $_POST['n_thalassimia'];
-		$n_diagnosa					= $_POST['n_diagnosa'];
+	
 		
 		$datamasukanumum = array("tahun" 	=> $tahun,
 				"bulan"						=> $bulan,
@@ -345,7 +445,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 				"jml_lulusan_keagamaan"		=> $jml_lulusan_keagamaan,
 				"jml_lulusan_slb"			=> $jml_lulusan_slb,
 				"jml_lulusan_kursus"		=> $jml_lulusan_kursus,
-				"jml_lulusan_miskin"		=> $jml_lulusan_miskin,
+				"jml_jiwa_miskin"			=> $jml_jiwa_miskin,
 				"jml_jiwa_kk"				=> $jml_jiwa_kk,
 				"umr"						=> $umr,
 				"sarana_kantor"				=> $sarana_kantor,
@@ -378,15 +478,14 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 				"id_pendidikan_lurah"	    => $id_pendidikan_lurah,
 				"tmt_jabatan_lurah"	        => $tmt_jabatan_lurah,
 				"riwayat_jabatan1"         	=> $riwayat_jabatan1,
-				"id_jenkel"	            	=> $id_jenkel,
-				
-				"nama_lurah"	           	=> $nama_seklur,
-				"nip_lurah"	            	=> $nip_seklur,
-				"gol_lurah"	            	=> $gol_seklur,
-				"id_pendidikan_lurah"	    => $id_pendidikan_seklur,
-				"tmt_jabatan_lurah"	        => $tmt_jabatan_seklur,
-				"riwayat_jabatan1"         	=> $riwayat_jabatan1_seklur,
-				"id_jenkel"	            	=> $id_jenkel_seklur,
+				"id_jenkel_lurah"	         => $id_jenkel_lurah,
+				"nama_seklur"	           	=> $nama_seklur,
+				"nip_seklur"	            	=> $nip_seklur,
+				"gol_seklur"	            	=> $gol_seklur,
+				"id_pendidikan_seklur"	    => $id_pendidikan_seklur,
+				"tmt_jabatan_seklur"	        => $tmt_jabatan_seklur,
+				"riwayat_jabatan1_seklur"         	=> $riwayat_jabatan1_seklur,
+				"id_jenkel_seklur"	            	=> $id_jenkel_seklur,
 				
 				"jumlah_aparat_gol1"	    => $jumlah_aparat_gol1,
 				"jumlah_aparat_gol2"	    => $jumlah_aparat_gol2,
@@ -396,7 +495,8 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$datamasukankewenangan = array("tahun" 	=> $tahun,
 				"bulan"						=> $bulan,
 				"kd_kel"	           	 	=> $kd_kel,
-				"jml_urusan"	           	=> $jml_urusan,
+				"jml_urusan_kota"	        => $jml_urusan_kota,
+				"jml_limpah_urusan_kota"	=> $jml_limpah_urusan_kota,
 				"jml_urusan_wajib"	        => $jml_urusan_wajib,
 				"jml_urusan_pilihan"	    => $jml_urusan_pilihan,
 				"bidang_urusan_wajib"	    => $bidang_urusan_wajib,
@@ -461,7 +561,14 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->keuanganInsert = $this->rekamkelurahan_serv->keuanganInsert($datamasukankeuangan);
 		$this->view->kelembagaanInsert = $this->rekamkelurahan_serv->kelembagaanInsert($datamasukankelembagaan);
 		$this->view->trantibInsert = $this->rekamkelurahan_serv->trantibInsert($datamasukantrantib);
-
+		
+		// var_dump($this->view->umumInsert); //sukses
+		// var_dump($this->view->personilInsert); //sukses
+		// var_dump($this->view->kewenanganInsert); //gagal
+		// var_dump($this->view->keuanganInsert); //sukses
+		// var_dump($this->view->kelembagaanInsert); //sukses
+		// var_dump($this->view->trantibInsert); //sukses
+		 
 		$this->view->proses = "1";	
 		$this->view->keterangan = "Judul";
 		$this->view->hasil = $this->view->umumInsert ." ". $this->view->personilInsert ." ". $this->view->kewenanganInsert ." ". 
@@ -469,7 +576,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		
 		$this->rekamkelurahanlistAction();
 		$this->render('rekamkelurahanlist');
-
+		
 	}
 	
 	public function rekamkelurahanupdateAction()
@@ -490,6 +597,12 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$bulan						= $_POST['bulan'];
 		$kd_kel						= $_POST['kd_kel'];
 		$tipologi					= $_POST['tipologi'];
+		
+		if(isset($_POST['simpan'])){
+		$tipologi =  implode(",",$tipologi);
+		//echo $tipologi;
+		}
+		
 		$jml_jiwa					= $_POST['jml_jiwa'];
 		$jml_kk						= $_POST['jml_kk'];
 		$jml_laki					= $_POST['jml_laki'];
@@ -519,7 +632,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$jml_lulusan_keagamaan		= $_POST['jml_lulusan_keagamaan'];
 		$jml_lulusan_slb			= $_POST['jml_lulusan_slb'];
 		$jml_lulusan_kursus			= $_POST['jml_lulusan_kursus'];
-		$jml_lulusan_miskin			= $_POST['jml_lulusan_miskin'];
+		$jml_jiwa_miskin			= $_POST['jml_jiwa_miskin'];
 		$jml_jiwa_kk				= $_POST['jml_jiwa_kk'];
 		$umr						= $_POST['umr'];
 		$sarana_kantor				= $_POST['sarana_kantor'];
@@ -550,7 +663,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$id_pendidikan_lurah		= $_POST['id_pendidikan_lurah'];
 		$tmt_jabatan_lurah			= $_POST['tmt_jabatan_lurah'];
 		$riwayat_jabatan1			= $_POST['riwayat_jabatan1'];
-		$id_jenkel					= $_POST['id_jenkel'];
+		$id_jenkel_lurah			= $_POST['id_jenkel_lurah'];
 		$nama_seklur				= $_POST['nama_seklur'];
 		$nip_seklur					= $_POST['nip_seklur'];
 		$gol_seklur					= $_POST['gol_seklur'];
@@ -564,14 +677,109 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$jumlah_aparat_gol4			= $_POST['jumlah_aparat_gol4'];
 		
 		//kewenangan
-		$jml_urusan					= $_POST['jml_urusan'];
-		$jml_urusan_wajib			= $_POST['jml_urusan_wajib'];
-		$jml_urusan_pilihan			= $_POST['jml_urusan_pilihan'];
-		$bidang_urusan_wajib		= $_POST['bidang_urusan_wajib'];
-		$bidang_urusan_pilihan		= $_POST['bidang_urusan_pilihan'];
-		$urusan_wajib				= $_POST['urusan_wajib'];
-		$urusan_pilihan				= $_POST['urusan_pilihan'];
+		$jml_urusan_kota			= $_POST['jml_urusan_kota'];
+		$jml_limpah_urusan_kota		= $_POST['jml_limpah_urusan_kota'];		
+		if(isset($_POST['simpan'])){
+			$bidang_urusan_wajib		= $_POST['bidang_urusan_wajib'];
+			$bidang_urusan_wajib =  implode(",",$bidang_urusan_wajib);
+			
+			$bidang_urusan_pilihan		= $_POST['bidang_urusan_pilihan'];
+			$bidang_urusan_pilihan =  implode(",",$bidang_urusan_pilihan);
+		
+			$urusan_wajib				= $_POST['urusan_wajib'];
+			$urusan_wajib =  implode(",",$urusan_wajib);
+			
+			$urusan_pilihan				= $_POST['urusan_pilihan'];
+			$urusan_pilihan =  implode(",",$urusan_pilihan);
+			
+			// PROGRAM KELURAHAN PUSAT
+			if($_POST['nomorPusat']!="")
+			{
+				foreach($_POST['nomorPusat'] as $i)
+				{
+					/*query insert ke database taruh disini
+					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
+					*/
+					$nama_program = $_POST['nama_program_pusat_'.$i];
+					$anggaran = $_POST['anggaran_pusat_'.$i];
+					$kode = $_POST['kode_pusat_'.$i];
+					
+					$datamasukanprogramkelurahan = array(
+						"tahun" 			=> $tahun,
+						"bulan"				=> $bulan,
+						"kd_kel"	       	=> $kd_kel,
+						"kode"	       		=> $kode,
+						"nama_program"	    => $nama_program,
+						"anggaran"			=> $anggaran
+					);
+					
+				// var_dump($datamasukanprogramkelurahan);
+				$this->view->programkelurahanUpdate = $this->rekamkelurahan_serv->programkelurahanUpdate($datamasukanprogramkelurahan);
+				// var_dump($this->view->programkelurahanInsert);
+				}
+				
+			}// END PROGRAM KELURAHAN PUSAT
+			
+			//PROGRAM KELURAHAN PROVINSI
+			if($_POST['nomorProvinsi']!="")
+			{
+				foreach($_POST['nomorProvinsi'] as $i)
+				{
+					/*query insert ke database taruh disini
+					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
+					*/
+					$nama_program = $_POST['nama_program_provinsi_'.$i];
+					$anggaran = $_POST['anggaran_provinsi_'.$i];
+					$kode = $_POST['kode_provinsi_'.$i];
+					
+					$datamasukanprogramkelurahan = array(
+						"tahun" 			=> $tahun,
+						"bulan"				=> $bulan,
+						"kd_kel"	       	=> $kd_kel,
+						"kode"	       		=> $kode,
+						"nama_program"	    => $nama_program,
+						"anggaran"			=> $anggaran
+					);
+				// var_dump($datamasukanprogramkelurahan);
+				$this->view->programkelurahanUpdate = $this->rekamkelurahan_serv->programkelurahanUpdate($datamasukanprogramkelurahan);
+				// var_dump($this->view->programkelurahanInsert);
+				}
+				
+			} // END PROGRAM KELURAHAN PROVINSI
+			
+			//PROGRAM KELURAHAN KOTA
+			if($_POST['nomorKota']!="")
+			{
+				foreach($_POST['nomorKota'] as $i)
+				{
+					/*query insert ke database taruh disini
+					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
+					*/
+					$nama_program = $_POST['nama_program_kota_'.$i];
+					$anggaran = $_POST['anggaran_kota_'.$i];
+					$kode = $_POST['kode_kota_'.$i];
+					
+					$datamasukanprogramkelurahan = array(
+						"tahun" 			=> $tahun,
+						"bulan"				=> $bulan,
+						"kd_kel"	       	=> $kd_kel,
+						"kode"	       		=> $kode,
+						"nama_program"	    => $nama_program,
+						"anggaran"			=> $anggaran
+					);
+				// var_dump($datamasukanprogramkelurahan);
+				$this->view->programkelurahanUpdate = $this->rekamkelurahan_serv->programkelurahanUpdate($datamasukanprogramkelurahan);
+				// var_dump($this->view->programkelurahanInsert);
+				}
+				
+			} // END PROGRAM KELURAHAN KOTA
+		}
+		
 		$jml_program_kelurahan		= $_POST['jml_program_kelurahan'];
+		
+		$jml_urusan_wajib			= count($urusan_wajib)+count($bidang_urusan_wajib);
+		$jml_urusan_pilihan			= count($urusan_pilihan)+count($bidang_urusan_pilihan);
+		
 		
 		//keuangan
 		$anggaran_apbd				= $_POST['anggaran_apbd'];
@@ -615,14 +823,11 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$jml_pos_bencana			= $_POST['jml_pos_bencana'];
 		$jml_pembalakan_liar		= $_POST['jml_pembalakan_liar'];
 		$jml_pos_hutan_lindung		= $_POST['jml_pos_hutan_lindung'];
-		$n_hemoglobin				= $_POST['n_hemoglobin'];
-		$n_urin						= $_POST['n_urin'];
-		$n_faeces					= $_POST['n_faeces'];
-		$n_thalassimia				= $_POST['n_thalassimia'];
-		$n_diagnosa					= $_POST['n_diagnosa'];
 		
 		
-		$datamasukanumum = array("tahun" 	=> $tahun,
+		
+		$datamasukanumum = array(
+				"tahun" 					=> $tahun,
 				"bulan"						=> $bulan,
 				"kd_kel"	           	 	=> $kd_kel,
 				"tipologi"	           	 	=> $tipologi,
@@ -655,7 +860,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 				"jml_lulusan_keagamaan"		=> $jml_lulusan_keagamaan,
 				"jml_lulusan_slb"			=> $jml_lulusan_slb,
 				"jml_lulusan_kursus"		=> $jml_lulusan_kursus,
-				"jml_lulusan_miskin"		=> $jml_lulusan_miskin,
+				"jml_jiwa_miskin"			=> $jml_jiwa_miskin,
 				"jml_jiwa_kk"				=> $jml_jiwa_kk,
 				"umr"						=> $umr,
 				"sarana_kantor"				=> $sarana_kantor,
@@ -688,15 +893,15 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 				"id_pendidikan_lurah"	    => $id_pendidikan_lurah,
 				"tmt_jabatan_lurah"	        => $tmt_jabatan_lurah,
 				"riwayat_jabatan1"         	=> $riwayat_jabatan1,
-				"id_jenkel"	            	=> $id_jenkel,
+				"id_jenkel_lurah"	         => $id_jenkel_lurah,
 				
-				"nama_lurah"	           	=> $nama_seklur,
-				"nip_lurah"	            	=> $nip_seklur,
-				"gol_lurah"	            	=> $gol_seklur,
-				"id_pendidikan_lurah"	    => $id_pendidikan_seklur,
-				"tmt_jabatan_lurah"	        => $tmt_jabatan_seklur,
-				"riwayat_jabatan1"         	=> $riwayat_jabatan1_seklur,
-				"id_jenkel"	            	=> $id_jenkel_seklur,
+				"nama_seklur"	           	=> $nama_seklur,
+				"nip_seklur"	            => $nip_seklur,
+				"gol_seklur"	            => $gol_seklur,
+				"id_pendidikan_seklur"	    => $id_pendidikan_seklur,
+				"tmt_jabatan_seklur"	    => $tmt_jabatan_seklur,
+				"riwayat_jabatan1_seklur"   => $riwayat_jabatan1_seklur,
+				"id_jenkel_seklur"	        => $id_jenkel_seklur,
 				
 				"jumlah_aparat_gol1"	    => $jumlah_aparat_gol1,
 				"jumlah_aparat_gol2"	    => $jumlah_aparat_gol2,
@@ -706,7 +911,8 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$datamasukankewenangan = array("tahun" 	=> $tahun,
 				"bulan"						=> $bulan,
 				"kd_kel"	           	 	=> $kd_kel,
-				"jml_urusan"	           	=> $jml_urusan,
+				"jml_urusan_kota"	        => $jml_urusan_kota,
+				"jml_limpah_urusan_kota"	=> $jml_limpah_urusan_kota,
 				"jml_urusan_wajib"	        => $jml_urusan_wajib,
 				"jml_urusan_pilihan"	    => $jml_urusan_pilihan,
 				"bidang_urusan_wajib"	    => $bidang_urusan_wajib,
@@ -846,7 +1052,14 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->detailKeuangan	= $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKelembagaan	= $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailTrantib	= $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		$this->render('laporan/monografi_kelurahan_cetak');
+		
+		$this->view->getJumlahPusat	= $this->rekamkelurahan_serv->getJumlahPusat($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->getJumlahProvinsi	= $this->rekamkelurahan_serv->getJumlahProvinsi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->getJumlahKota	= $this->rekamkelurahan_serv->getJumlahKota($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		
+	
+		
+		$this->render('rekamkelurahancetak');
 	}
 
 }

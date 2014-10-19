@@ -74,14 +74,23 @@ class Pendaftaran_Service {
 			
 			$jmlResult = count($result);		
 			for ($j = 0; $j < $jmlResult; $j++) {
-				$hasilAkhir[$j] = array("kd_kel"					=> (string)$result[$j]->kd_kel,
-										"kelurahan"					=> (string)$result[$j]->kelurahan,
-										"tahun_pembentukan"				=> (string)$result[$j]->tahun_pembentukan,
-										"dasar_pembentukan"				=> (string)$result[$j]->dasar_pembentukan,
+				$hasilAkhir[$j] = array("kd_kel"				=> (string)$result[$j]->kd_kel,
+										"kelurahan"				=> (string)$result[$j]->kelurahan,
+										"tahun_pembentukan"		=> (string)$result[$j]->tahun_pembentukan,
+										"dasar_pembentukan"		=> (string)$result[$j]->dasar_pembentukan,
 										"kode_pos"				=> (string)$result[$j]->kode_pos,
 										"kecamatan"				=> (string)$result[$j]->kecamatan,
-										"kota"				=> "cimahi",
-										"prov"				=> "Jawa Barat"
+										"kota"					=> "cimahi",
+										"prov"					=> "Jawa Barat",
+										"luas"					=> (string)$result[$j]->luas,
+										"batas_utara"				=> (string)$result[$j]->batas_utara,
+										"batas_selatan"				=> (string)$result[$j]->batas_selatan,
+										"batas_barat"				=> (string)$result[$j]->batas_barat,
+										"batas_timur"				=> (string)$result[$j]->batas_timur,
+										"jarak_dari_kecamatan"		=> (string)$result[$j]->jarak_dari_kecamatan,
+										"jarak_dari_kota"			=> (string)$result[$j]->jarak_dari_kota,
+										"jarak_dari_ibukota_kota"	=> (string)$result[$j]->jarak_dari_ibukota_kota,
+										"jarak_dari_ibukota_prov"	=> (string)$result[$j]->jarak_dari_ibukota_prov
 										
 										);
 			}
@@ -178,7 +187,7 @@ class Pendaftaran_Service {
 							);
 						
 			
-			//var_dump($paramInput);
+			// var_dump($paramInput);
 			$db->insert('SIMKEL.dbo.mon_kelurahan',$paramInput);
 			$db->commit();
 			return 'sukses';
@@ -246,12 +255,21 @@ class Pendaftaran_Service {
 								"tahun_pembentukan"			=> $dataMasukan['tahun_pembentukan'],
 								"dasar_pembentukan"			=> $dataMasukan['dasar_pembentukan'],
 								"kode_wilayah"				=> $dataMasukan['kode_wilayah'],
-								"kode_pos"					=> $dataMasukan['kode_pos']
+								"kode_pos"					=> $dataMasukan['kode_pos'],
+								"luas"						=> $dataMasukan['luas'],
+								"batas_utara"				=> $dataMasukan['batas_utara'],
+								"batas_selatan"				=> $dataMasukan['batas_selatan'],
+								"batas_barat"				=> $dataMasukan['batas_barat'],
+								"batas_timur"				=> $dataMasukan['batas_timur'],
+								"jarak_dari_kecamatan"		=> $dataMasukan['jarak_dari_kecamatan'],
+								"jarak_dari_kota"			=> $dataMasukan['jarak_dari_kota'],
+								"jarak_dari_ibukota_kota"	=> $dataMasukan['jarak_dari_ibukota_kota'],
+								"jarak_dari_ibukota_prov"	=> $dataMasukan['jarak_dari_ibukota_prov']
 								
 							);
 						
 			
-			//var_dump($dataMasukan['id']);
+			var_dump($paramInput);
 			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."'";
 			$db->update('SIMKEL.dbo.mon_kelurahan',$paramInput, $where);
 			$db->commit();

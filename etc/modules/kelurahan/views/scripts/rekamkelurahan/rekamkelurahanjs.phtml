@@ -26,6 +26,8 @@ function rekamkelurahanForm(jenisForm,kd_kel,bulan,tahun)
 	carii = document.getElementById('carii').value;
 	kd_kel = document.getElementById('kd_kel').value;
 	var url = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandata';
+	
+	
 	var param = { jenisForm:jenisForm,kd_kel:kd_kel,id:id,kategoriCari:kategoriCari,carii:carii,bulan:bulan,tahun:tahun};
 	jQuery.get(url, param, function(data) {
 		jQuery("div#tableview").html(data);
@@ -39,7 +41,7 @@ var tambahRekamkelurahan_opt = {
 	url: '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahan',
 	beforeSubmit : function() {
 		
-		alert(hallo);
+		
 		if (document.getElementById('kd_kel').value == ''){
 			alert('Kode harus Diisi');
 			return false;

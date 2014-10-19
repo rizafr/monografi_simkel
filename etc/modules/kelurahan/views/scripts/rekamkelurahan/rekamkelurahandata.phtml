@@ -31,22 +31,23 @@ $numToDisplay = $this->numToDisplay;
 		<? if(strtolower($this->jenisForm) == 'insert') {$namaForm = 'frmtambahrekamkelurahan'; $nama='tambah';}
 			else if (strtolower($this->jenisForm) == 'update') {$namaForm = 'frmubahrekamkelurahan'; $nama='ubah'; }
 			else {$namaForm = 'frmhapusrekamkelurahan';  $nama='hapus';}
+	
+		echo $ctrlFrm->formHidden('jenisForm', $this->jenisForm, null);
 		?>
+		
 		
 		<h2 class="title">FORM <?php echo strtoupper($nama) ?> DATA KELURAHAN <strong><?php echo strtoupper($this->detailKelurahan->kelurahan) ?></strong></h2>
 	    <div class="spacer"></div> 
 		
-		
-<? echo $namaForm;?>
-<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi">
+
+<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi" accept-charset="utf-8">
 <table width="100%" border="0" cellpadding="0" cellspacing="2" class="std">
-	<input name="id" id="id" type="hidden" value="<?echo $this->id;?>" />
+	
 
 	<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
 	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
 	<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->detailKelurahan->kd_kel;?>" />
-	<input name="bulan" id="bulan" type="hidden" value="<?echo $this->bulan;?>" />
-	<input name="tahun" id="tahun" type="hidden" value="<?echo $this->tahun;?>" />
+	
 	
 <? 
 $status = $this->hasil;
@@ -88,7 +89,7 @@ $(function(){
 			Pilih Bulan dan Tahun
 		</td>
 		<td>
-			<select name="bulan" class="kecil">
+			<select name="bulan" id="bulan" class="kecil">
 				<option selected="selected">Bulan</option>
 				<?php
 				echo date('m');
@@ -103,7 +104,7 @@ $(function(){
 				}
 				?>
 				</select>
-				<select name="tahun" class="kecil">
+				<select name="tahun" id="tahun"  class="kecil">
 				<option selected="selected">Tahun</option>
 				<?php
 				for($i=date('Y'); $i>=2010; $i-=1){
@@ -153,104 +154,7 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="tipologi[]" id="tipologi" value="Jasa"<?php if(in_array("Jasa",$tipologi)) { ?> checked="checked" <?php } ?>> i. Jasa dan Perdagangan :</td>
 	</tr>
-	<!--KELURAHAN-->
-	<tr>
-		<td align="right" >* 2. Luas Wilayah :</td>
-		<td>	
-				<? 
-				$luasAttrib = array("size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("luas", $this->detailKelurahan->luas, $luasAttrib);
-				?> km
-		</td>
-	</tr>
 	
-	
-	<tr>
-		<td align="right" >3. Batas Wilayah :</td>
-		<td>	
-		<tr>
-				<td align="right" >&nbsp;&nbsp;&nbsp; 1. Sebelah Utara :</td>
-				<td align="center">
-					<? 
-						$batas_utaraAttrib = array("size" => 50,"maxlength" => 50, "required"=>"requried");
-						echo $ctrlFrm->formText("batas_utara", $this->detailKelurahan->batas_utara, $batas_utaraAttrib);
-					?>
-				</td>
-			</tr>
-			<tr>
-				<td align="right" >&nbsp;&nbsp;&nbsp; 2. Sebelah Selatan :</td>
-				<td align="center">
-					<? 
-						$batas_selatanAttrib = array("size" => 50,"maxlength" => 50, "required"=>"requried");
-						echo $ctrlFrm->formText("batas_selatan", $this->detailKelurahan->batas_selatan, $batas_selatanAttrib);
-					?>
-				</td>
-			</tr>
-			<tr>
-				<td align="right" >&nbsp;&nbsp;&nbsp;3. Sebelah Barat :</td>
-				<td align="center">
-					<? 
-						$batas_baratAttrib = array("size" => 50,"maxlength" => 50, "required"=>"requried");
-						echo $ctrlFrm->formText("batas_barat", $this->detailKelurahan->batas_barat, $batas_baratAttrib);
-					?>
-				</td>
-			</tr>
-			<tr>
-				<td align="right" >&nbsp;&nbsp;&nbsp;4. Sebelah Timur :</td>
-				<td align="center">
-					<? 
-						$batas_timurAttrib = array("size" => 50,"maxlength" => 50, "required"=>"requried");
-						echo $ctrlFrm->formText("batas_timur", $this->detailKelurahan->batas_timur, $batas_timurAttrib);
-					?>
-				</td>
-			</tr>
-			
-		</td>
-	</tr>
-	
-	<tr>
-		<td colspan="2" align="right" >4. Orbitrasi (Jarak dari Pusat Pemerintahan) :</td>
-		<td></td>
-	</tr>		
-		
-	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Pusat Pemerintahan Kecamatan :</td>
-		<td align="center">
-			<? 
-				$jarak_dari_kecamatanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_kecamatan", $this->detailKelurahan->jarak_dari_kecamatan, $jarak_dari_kecamatanAttrib);
-			?> km
-		</td>
-	</tr>
-	
-	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Pusat Pemerintahan Kota :</td>
-		<td align="center">
-			<? 
-				$jarak_dari_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_kota", $this->detailKelurahan->jarak_dari_kota, $jarak_dari_kotaAttrib);
-			?>  km
-		</td>
-	</tr>
-	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Kota/Ibukota Kabupaten:</td>
-		<td align="center">
-			<? 
-				$jarak_dari_ibukota_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_ibukota_kota", $this->detailKelurahan->jarak_dari_ibukota_kota, $jarak_dari_ibukota_kotaAttrib);
-			?>  km
-		</td>
-	</tr>
-	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Ibukota Provinsi :</td>
-		<td align="center">
-			<? 
-				$jarak_dari_ibukota_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_ibukota_prov", $this->detailKelurahan->jarak_dari_ibukota_prov, $jarak_dari_ibukota_provAttrib);
-			?>  km
-		</td>
-	</tr>	
-	<!--End KELURAHAN-->
 	
 	<!--UMUM-->
 	<tr>
@@ -870,11 +774,8 @@ $(function(){
 	
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; e. TMT Masa Jabatan:</td>
-		<td>	
-			<? 
-				$tmt_jabatan_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("tmt_jabatan_lurah", $this->detailPersonil['tmt_jabatan_lurah'], $tmt_jabatan_lurahAttrib);
-			?>
+		<td>	<input type="date" name="tmt_jabatan_lurah" id="tmt_jabatan_lurah" value="<?php echo $this->detailPersonil['tmt_jabatan_seklur']?>">
+			
 		</td>
 	</tr>
 	
@@ -891,15 +792,15 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; g. Jenis Kelamin:</td>
 			<td>	
-				<select name="id_jenkel_lurah">
-					<?php foreach($this->jenkel as $data): ?>
-						<?php if(($this->detailPersonil['id_jenkel_lurah'])== $this->escape($data->id_jenkel)){ ?> 
-							<option value="<?php echo $this->escape($data->id_jenkel); ?>" selected><?php echo $this->escape($data->jenkel); ?> </option>
-					<?php }else{?>
-					<option value="<?php echo $this->escape($data->id_jenkel); ?>"><?php echo $this->escape($data->jenkel); ?> </option>
-					 <?php }
-					 endforeach; ?>
-				</select>
+				<select name="id_jenkel_lurah" id="id_jenkel_lurah">
+				<?php foreach($this->jenkel as $data): ?>
+					<?php if(($this->detailPersonil['id_jenkel_lurah'])== $this->escape($data->id_jenkel)){ ?> 
+						<option value="<?php echo $this->escape($data->id_jenkel); ?>" selected><?php echo $this->escape($data->jenkel); ?> </option>
+				<?php }else{?>
+				<option value="<?php echo $this->escape($data->id_jenkel); ?>"><?php echo $this->escape($data->jenkel); ?> </option>
+				 <?php }
+				 endforeach; ?>
+			</select>
 			</td>	
 	</tr>
 				
@@ -912,7 +813,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; a. Nama:</td>
 		<td>
 			<? 
-				$nama_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+				$nama_seklurAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
 				echo $ctrlFrm->formText("nama_seklur", $this->detailPersonil['nama_seklur'], $nama_seklurAttrib);
 			?>
 		</td>
@@ -922,7 +823,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; b. Pangkat / Golongan:</td>
 		<td>	
 			<? 
-				$gol_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+				$gol_seklurAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
 				echo $ctrlFrm->formText("gol_seklur", $this->detailPersonil['gol_seklur'], $gol_seklurAttrib);
 			?>
 		</td>
@@ -932,7 +833,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; c. NIP:</td>
 		<td>	
 			<? 
-				$nip_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+				$nip_seklurAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
 				echo $ctrlFrm->formText("nip_seklur", $this->detailPersonil['nip_seklur'], $nip_seklurAttrib);
 			?>
 		</td>
@@ -941,7 +842,7 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; d. Pendidikan:</td>
 		<td>	
-			<select name="id_pendidikan_seklur">
+			<select name="id_pendidikan_seklur" id="id_pendidikan_seklur">
 				<?php foreach($this->pendidikan as $data): ?>
 					<?php if(($this->detailPersonil['id_pendidikan_seklur'])== $this->escape($data->id_pendidikan)){ ?> 
 						<option value="<?php echo $this->escape($data->id_pendidikan); ?>" selected><?php echo $this->escape($data->pendidikan); ?> </option>
@@ -955,11 +856,8 @@ $(function(){
 	
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; e. TMT Masa Jabatan:</td>
-		<td>	
-			<? 
-				$tmt_jabatan_lurahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("tmt_jabatan_seklur", $this->detailPersonil['tmt_jabatan_seklur'], $tmt_jabatan_seklurAttrib);
-			?>
+		<td>	<input type="date" name="tmt_jabatan_seklur" id="tmt_jabatan_seklur" value="<?php echo $this->detailPersonil['tmt_jabatan_seklur']?>">
+			
 		</td>
 	</tr>
 	
@@ -967,8 +865,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; f. Riwayat Jabatan:</td>
 		<td>	
 			<? 
-				$riwayat_jabatan1Attrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-				echo $ctrlFrm->formText("riwayat_jabatan1", $this->detailPersonil['riwayat_jabatan1'], $riwayat_jabatan1Attrib);
+				$riwayat_jabatan1_seklurAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+				echo $ctrlFrm->formText("riwayat_jabatan1_seklur", $this->detailPersonil['riwayat_jabatan1_seklur'], $riwayat_jabatan1_seklurAttrib);
 			?>
 		</td>
 	</tr>
@@ -976,7 +874,7 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; g. Jenis Kelamin:</td>
 		<td>	
-			<select name="id_jenkel_seklur">
+			<select name="id_jenkel_seklur" id="id_jenkel_seklur">
 				<?php foreach($this->jenkel as $data): ?>
 					<?php if(($this->detailPersonil['id_jenkel_seklur'])== $this->escape($data->id_jenkel)){ ?> 
 						<option value="<?php echo $this->escape($data->id_jenkel); ?>" selected><?php echo $this->escape($data->jenkel); ?> </option>
@@ -1045,7 +943,7 @@ $(function(){
 			<td>
 			<? 
 				$jml_urusan_kotaAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("jml_urusan_kota", $this->detailPersonil['jml_urusan_kota'], $jml_urusan_kotaAttrib);
+				echo $ctrlFrm->formText("jml_urusan_kota", $this->detailKewenangan['jml_urusan_kota'], $jml_urusan_kotaAttrib);
 			?>  buah</td>
 	</tr>
 	
@@ -1053,8 +951,8 @@ $(function(){
 		<td colspan="2" align="right" >2. Urusan yang dilimpahkan oleh kabupaten/kota</td>
 		<td>
 			<? 
-				$urusan_kotaAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("urusan_kota", $this->detailPersonil['urusan_kota'], $urusan_kotaAttrib);
+				$jml_limpah_urusan_kotaAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
+				echo $ctrlFrm->formText("jml_limpah_urusan_kota", $this->detailKewenangan['jml_limpah_urusan_kota'], $jml_limpah_urusan_kotaAttrib);
 			?>  buah</td>
 	</tr>
 	
@@ -1067,8 +965,16 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Bidang</td>
 			<td> 
 				<div class="input_fields_wajib_bidang">
-					<button class="add_field_wajib_bidang btn btn-info">Tambahkan kolom</button>
-						<div>1. <input type="text" name="bidang_urusan_wajib[]"></div>
+					<button class="add_field_wajib_bidang btn btn-info">Tambahkan kolom</button> 
+						<?php 
+						$bidang_urusan_wajib= explode(',',$this->detailKewenangan['bidang_urusan_wajib']);
+						
+						for($i=0;$i<count($bidang_urusan_wajib);$i++){?>
+						<div class="bidang">
+							<input type="text" name="bidang_urusan_wajib[]" id="bidang_urusan_wajib" value="<?php echo $bidang_urusan_wajib[$i] ?>">
+						</div>
+						
+						<?php } ?>
 				</div>
 			</td>
 	</tr>
@@ -1078,15 +984,13 @@ $(function(){
 			<td> 
 				<div class="input_fields_wajib_urusan">
 					<button class="add_field_wajib_urusan btn btn-info">Tambahkan kolom</button>
-						<div>1. <input type="text" name="urusan_wajib[]"></div>
+						<?php 
+							$urusan_wajib= explode(',',$this->detailKewenangan['urusan_wajib']);
+						
+							for($i=0;$i<count($urusan_wajib);$i++){?>
+						<div><input type="text" name="urusan_wajib[]" id="urusan_wajib" value="<?php echo $urusan_wajib[$i] ?>"></div>
+							<?php } ?>
 				</div>
-			</td>
-	</tr>
-	
-	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Jumlah</td>
-			<td> 
-				<input type="text" id="jml_urusan_wajib" name="jml_urusan_wajib" />
 			</td>
 	</tr>
 	
@@ -1100,7 +1004,12 @@ $(function(){
 			<td> 
 				<div class="input_fields_pilihan_bidang">
 					<button class="add_field_pilihan_bidang btn btn-info">Tambahkan kolom</button>
-						<div>1. <input type="text" name="bidang_urusan_pilihan[]"></div>
+						<?php 
+							$bidang_urusan_pilihan= explode(',',$this->detailKewenangan['bidang_urusan_pilihan']);
+						
+							for($i=0;$i<count($bidang_urusan_pilihan);$i++){?>
+						<div><input type="text" name="bidang_urusan_pilihan[]" id="bidang_urusan_pilihan" value="<?php echo $bidang_urusan_pilihan[$i] ?>"></div>
+							<?php } ?>
 				</div>
 			</td>
 	</tr>
@@ -1110,25 +1019,18 @@ $(function(){
 			<td> 
 				<div class="input_fields_pilihan_urusan">
 					<button class="add_field_pilihan_urusan btn btn-info">Tambahkan kolom</button>
-						<div>1. <input type="text" name="urusan_pilihan[]"></div>
+						<?php 
+							$urusan_pilihan= explode(',',$this->detailKewenangan['urusan_pilihan']);
+						
+							for($i=0;$i<count($urusan_pilihan);$i++){?>
+						<div><input type="text" name="urusan_pilihan[]" id="urusan_pilihan" value="<?php echo $urusan_pilihan[$i] ?>"></div>
+							<?php } ?>
 				</div>
 			</td>
 	</tr>
 	
-	<tr>
-		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Jumlah</td>
-			<td> 
-				<input type="text" id="jml_urusan_pilihan" name="jml_urusan_pilihan" />
-			</td>
-	</tr>
-	
 		<tr>
-		<td colspan="2" align="right" >3. Jumlah Program yang diterima Kelurahan</td>
-		<td>
-			<? 
-				$jml_programAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("jml_program", $this->detailKewenangan['jml_program'], $jml_programAttrib);
-			?>  buah</td>
+		<td colspan="2" align="right" >3. Program yang diterima Kelurahan</td>
 	</tr>
 	
 	<tr>
@@ -1142,12 +1044,70 @@ $(function(){
 			<a class="tampilkan" onclick="tampilTabelPusat();" style="cursor:pointer; padding:6px; border:1px solid #000; background-color:#FF9900; color:#000000;">Tampilkan</a>
 			<a class="tambahPusat" style="cursor:pointer; padding:6px; border:1px solid #000; background-color:#FF9900; color:#000000;">Tambah Data</a>
 			<br><br>
-			<div id="tabelPusat" style="display:none;">
+			<div id="tabelPusat">
 			<table border="0" width="100%" cellpadding="0" cellspacing="0">
-			<tr>
-			<td>No</td><td>Nama Program</td><td>Harga Barang</td><td>Hapus</td>
+			<tr style="background: #00698C;color: #FFF;padding: 12px 4px;text-align: center;">
+				<td>Nama Program</td>
+				<td>Besaran Anggaran</td>
+				<td>Aksi</td>
 			</tr>
 			<tbody id="kontenPusat"></tbody>
+			
+			</table>
+			</div>
+	
+		</td>
+		
+	</tr>
+	
+	<tr>
+		<td align="right"  >&nbsp;&nbsp;&nbsp; b. Provinsi</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td align="right" colspan="3" >&nbsp;&nbsp;&nbsp; 
+			
+			<a class="tampilkan" onclick="tampilTabelProvinsi();" style="cursor:pointer; padding:6px; border:1px solid #000; background-color:#FF9900; color:#000000;">Tampilkan</a>
+			<a class="tambahProvinsi" style="cursor:pointer; padding:6px; border:1px solid #000; background-color:#FF9900; color:#000000;">Tambah Data</a>
+			<br><br>
+			<div id="tabelProvinsi" style="display:true;">
+			<table width="100%" cellpadding="0" cellspacing="0">
+			<tr style="background: #00698C;color: #FFF;padding: 12px 4px;text-align: center;">
+				<td>Nama Program</td>
+				<td>Besaran Anggaran</td>
+				<td>Aksi</td>
+			</tr>
+			<tbody id="kontenProvinsi"></tbody>
+			
+			</table>
+			</div>
+	
+		</td>
+		
+	</tr>
+	
+	<tr>
+		<td align="right"  >&nbsp;&nbsp;&nbsp; c. Kabupaten / Kota</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td align="right" colspan="3" >&nbsp;&nbsp;&nbsp; 
+			
+			<a class="tampilkan" onclick="tampilTabelKota();" style="cursor:pointer; padding:6px; border:1px solid #000; background-color:#FF9900; color:#000000;">Tampilkan</a>
+			<a class="tambahKota" style="cursor:pointer; padding:6px; border:1px solid #000; background-color:#FF9900; color:#000000;">Tambah Data</a>
+			<br><br>
+			<div id="tabelKota" style="display:true;">
+			<table border="0" width="100%" cellpadding="0" cellspacing="0">
+			<tr style="background: #00698C;color: #FFF;padding: 12px 4px;text-align: center;">
+				<td>Nama Program</td>
+				<td>Besaran Anggaran</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tbody id="kontenKota"></tbody>
+			
+			
 			</table>
 			</div>
 	
@@ -1176,8 +1136,10 @@ $(function(){
 	<tr>
 		<td align="right" > 2. SKPD</td>
 		<td> 
-			<input type="radio" name="is_skpd" id="is_skpd" value="sudah"> Sudah /
-			<input type="radio" name="is_skpd" id="is_skpd" value="belum"> Belum
+			<input type="radio" name="is_skpd" id="is_skpd" value="True" <?php if( $this->detailKeuangan['is_skpd']=="1") { ?> checked="checked" <?php } ?>> Sudah /
+			
+			<input type="radio" name="is_skpd" id="is_skpd" value="False" <?php if($this->detailKeuangan['is_skpd']=="0") { ?> checked="checked" <?php } ?>> Belum
+				
 		</td>
 	</tr>
 	
@@ -1266,8 +1228,8 @@ $(function(){
 		<td align="right" width="200px;">&nbsp;&nbsp;&nbsp; a. Jumlah Pengurus:</td>
 		<td colspan="2"> 
 			<? 
-				$lpmp_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("lpmp_jml_pengurus", $this->detailKelembagaan['lpmp_jml_pengurus'], $lpmp_jml_pengurusAttrib);
+				$lpm_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
+				echo $ctrlFrm->formText("lpm_jml_pengurus", $this->detailKelembagaan['lpm_jml_pengurus'], $lpm_jml_pengurusAttrib);
 			?> orang 
 		</td>
 	</tr>
@@ -1276,8 +1238,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; b. Jumlah Anggota:</td>
 		<td colspan="2"> 
 			<? 
-				$lpmp_jml_anggotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("lpmp_jml_anggota", $this->detailKelembagaan['lpmp_jml_anggota'], $lpmp_jml_anggotaAttrib);
+				$lpm_jml_anggotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
+				echo $ctrlFrm->formText("lpm_jml_anggota", $this->detailKelembagaan['lpm_jml_anggota'], $lpm_jml_anggotaAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1286,8 +1248,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; c.  Jumlah Kegiatan perbulan:</td>
 		<td colspan="2"> 
 			<? 
-				$lpmp_jml_keg_perbulanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("lpmp_jml_keg_perbulan", $this->detailKelembagaan['lpmp_jml_keg_perbulan'], $lpmp_jml_keg_perbulanAttrib);
+				$lpm_jml_keg_perbulanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
+				echo $ctrlFrm->formText("lpm_jml_keg_perbulan", $this->detailKelembagaan['lpm_jml_keg_perbulan'], $lpm_jml_keg_perbulanAttrib);
 			?>  kegiatan
 		</td>
 	</tr>
@@ -1296,8 +1258,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; d. Jumlah dana yang dikelola:</td>
 		<td> RP &nbsp;
 			<? 
-				$lpmp_jml_danaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("lpmp_jml_dana", $this->detailKelembagaan['lpmp_jml_dana'], $lpmp_jml_danaAttrib);
+				$lpm_jml_danaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
+				echo $ctrlFrm->formText("lpm_jml_dana", $this->detailKelembagaan['lpm_jml_dana'], $lpm_jml_danaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1613,7 +1575,7 @@ $(function(){
 		<div class="right">
 		<input type="button" value="Kembali" onclick="rekamkelurahanlist();"> 
 		<input type="reset" value="Ulangi"> 
-		<input   type="submit" value="Simpan">
+		<input type="submit" name="simpan" value="Simpan">
 		</div>
 		</td>
 	</tr>
@@ -1669,11 +1631,11 @@ $(function(){
             $(".tambahPusat").click(function(){
             nomor ++;
                 $('#kontenPusat').append(
-                             '<tr class="barisPusat">'
-                         + '<input name="nomor[]" value="'+ nomor +'" type="hidden">'
-                         + '<td>'+ nomor +'</td>'
-                         + '<td><input name="nama_barang_'+ nomor +'" type="text"></td>'
-                         + '<td><input name="harga_barang_'+ nomor +'" type="text"></td>'
+                         '<tr class="barisPusat">'
+                         + '<input name="nomorPusat[]" value="'+ nomor +'" type="hidden">'
+                         + '<input name="kode_pusat_'+ nomor +'" value="1" id="kode_pusat" type="hidden">'
+                         + '<td><input name="nama_program_pusat_'+ nomor +'" id="nama_program_pusat" type="text"></td>'
+                         + '<td><input name="anggaran_pusat_'+ nomor +'" id="anggaran_pusat" type="text"></td>'
                          + '<td><input type="button" id="hapusPusat" value="Hapus"></td></tr>'
                     );
                 });
@@ -1698,6 +1660,80 @@ $(function(){
 			status="";
 		}
 	}
+	
+	//Provinsi
+	$(document).ready(function() {
+            var nomor = 0;
+			var status="";
+            $(".tambahProvinsi").click(function(){
+            nomor ++;
+                $('#kontenProvinsi').append(
+                          '<tr class="barisProvinsi">'
+                         + '<input name="nomorProvinsi[]" value="'+ nomor +'" type="hidden">'
+                         + '<input name="kode_provinsi_'+ nomor +'" value="2" id="kode_provinsi" type="hidden">'
+                         + '<td><input name="nama_program_provinsi_'+ nomor +'" id="nama_program_provinsi" type="text"></td>'
+                         + '<td><input name="anggaran_provinsi_'+ nomor +'" id="anggaran_provinsi" type="text"></td>'
+                         + '<td><input type="button" id="hapusProvinsi" value="Hapus"></td></tr>'
+                    );
+                });
+				
+                $("#hapusProvinsi").live('click', function () {
+					$(this).parents(".barisProvinsi").remove();
+            	});
+				
+				
+        });
+		
+	function tampilTabelProvinsi()
+	{
+		if(status=="")
+		{
+			$('#tabelProvinsi').slideDown();
+			status="1";
+		}
+		else
+		{
+			$('#tabelProvinsi').slideUp();
+			status="";
+		}
+	}
+
+	//Kota
+	$(document).ready(function() {
+            var nomor = 0;
+			var status="";
+            $(".tambahKota").click(function(){
+            nomor ++;
+                $('#kontenKota').append(
+                          '<tr class="barisKota">'
+                         + '<input name="nomorKota[]" value="'+ nomor +'" type="hidden">'
+                         + '<input name="kode_kota_'+ nomor +'" value="3" id="kode_kota_" type="hidden">'
+                         + '<td><input name="nama_program_kota_'+ nomor +'" id="nama_program_kota" type="text"></td>'
+                         + '<td><input name="anggaran_kota_'+ nomor +'" id="anggaranKota" type="text"></td>'
+                         + '<td><input type="button" id="hapusKota" value="Hapus"></td></tr>'
+                    );
+                });
+				
+                $("#hapusKota").live('click', function () {
+					$(this).parents(".barisKota").remove();
+            	});
+				
+				
+        });
+		
+	function tampilTabelKota()
+	{
+		if(status=="")
+		{
+			$('#tabelKota').slideDown();
+			status="1";
+		}
+		else
+		{
+			$('#tabelKota').slideUp();
+			status="";
+		}
+	}
 
 </script>
 
@@ -1713,7 +1749,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div>'+ x +'<input type="text" id="bidang_urusan_wajib" name="bidang_urusan_wajib[]"/></div>'); //add input box
+            $(wrapper).append('<div><input type="text" id="bidang_urusan_wajib" name="bidang_urusan_wajib[]"/></div>'); //add input box
         }
     });
     
@@ -1732,7 +1768,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div>'+ x +'<input type="text" id="urusan_wajib" name="urusan_wajib[]"/></div>'); //add input box
+            $(wrapper).append('<div><input type="text" id="urusan_wajib" name="urusan_wajib[]"/></div>'); //add input box
         }
     });
     
@@ -1752,7 +1788,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div>'+ x +'<input type="text" id="bidang_urusan_pilihan" name="bidang_urusan_pilihan[]"/></div>'); //add input box
+            $(wrapper).append('<div><input type="text" id="bidang_urusan_pilihan" name="bidang_urusan_pilihan[]"/></div>'); //add input box
         }
     });
     
@@ -1773,7 +1809,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div>'+ x +'<input type="text" id="urusan_pilihan" name="urusan_pilihan[]"/></div>'); //add input box
+            $(wrapper).append('<div><input type="text" id="urusan_pilihan" name="urusan_pilihan[]"/></div>'); //add input box
         }
     });
     

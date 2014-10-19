@@ -107,7 +107,46 @@ class Rekamkelurahan_Service {
 			$db = $registry->get('db');
 			try {
 				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
-				$result = $db->fetchRow("SELECT K.kd_kel, K.kelurahan, MK.* FROM [SIMKEL].[dbo].[mon_kelurahan] MK,[SIMKEL].[dbo].[m_kelurahan] K where MK.kd_kel=K.kd_kel AND K.kd_kel = '$kd_kel'");
+				$result = $db->fetchRow("SELECT K.kd_kel, KEC.kecamatan, K.kelurahan, MK.* FROM [SIMKEL].[dbo].[mon_kelurahan] MK,[SIMKEL].[dbo].[m_kelurahan] K,[SIMKEL].[dbo].[m_kecamatan] KEC where MK.kd_kel=K.kd_kel AND K.kd_kec=KEC.kd_kec AND K.kd_kel = '$kd_kel'");
+				return $result;
+				} catch (Exception $e) {
+				echo $e->getMessage().'<br>';
+				return 'Data tidak ada <br>';
+			}
+		}
+		
+		public function getJumlahPusat($kd_kel,$bulan,$tahun){
+			$registry = Zend_Registry::getInstance();
+			$db = $registry->get('db');
+			try {
+				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchRow("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='1' ");
+				return $result;
+				} catch (Exception $e) {
+				echo $e->getMessage().'<br>';
+				return 'Data tidak ada <br>';
+			}
+		}
+		
+		public function getJumlahProvinsi($kd_kel,$bulan,$tahun){
+			$registry = Zend_Registry::getInstance();
+			$db = $registry->get('db');
+			try {
+				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchRow("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='2'");
+				return $result;
+				} catch (Exception $e) {
+				echo $e->getMessage().'<br>';
+				return 'Data tidak ada <br>';
+			}
+		}
+		
+		public function getJumlahKota($kd_kel,$bulan,$tahun){
+			$registry = Zend_Registry::getInstance();
+			$db = $registry->get('db');
+			try {
+				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchRow("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='3'");
 				return $result;
 				} catch (Exception $e) {
 				echo $e->getMessage().'<br>';
@@ -197,12 +236,13 @@ class Rekamkelurahan_Service {
 								
 								);
 			//var_dump($paramInput);
-			$db->insert('SIMKEL.dbon.mon_umum',$paramInput);
+			$db->insert('SIMKEL.dbo.mon_umum',$paramInput);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
 			$db->rollBack();
 			$errmsgArr = explode(":",$e->getMessage());
+			// var_dump($errmsgArr);
 			$errMsg = $errmsgArr[0];
 			if($errMsg == "SQLSTATE[23000]")
 			{
@@ -417,7 +457,7 @@ class Rekamkelurahan_Service {
 								"id_pendidikan_lurah"	    => $dataMasukan['id_pendidikan_lurah'],
 								"tmt_jabatan_lurah"	        => $dataMasukan['tmt_jabatan_lurah'],
 								"riwayat_jabatan1"         	=> $dataMasukan['riwayat_jabatan1'],
-								"id_jenkel"	            	=> $dataMasukan['id_jenkel'],
+								"id_jenkel_lurah"	        => $dataMasukan['id_jenkel_lurah'],
 								
 								"nama_seklur"	           	=> $dataMasukan['nama_seklur'],
 								"nip_seklur"	            => $dataMasukan['nip_seklur'],
@@ -434,13 +474,14 @@ class Rekamkelurahan_Service {
 									
 								
 								);
-			//var_dump($paramInput);
-			$db->insert('SIMKEL.dbon.mon_personil',$paramInput);
+			
+			$db->insert('SIMKEL.dbo.mon_personil',$paramInput);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
 			$db->rollBack();
 			$errmsgArr = explode(":",$e->getMessage());
+			
 			$errMsg = $errmsgArr[0];
 			if($errMsg == "SQLSTATE[23000]")
 			{
@@ -466,7 +507,7 @@ class Rekamkelurahan_Service {
 								"id_pendidikan_lurah"	    => $dataMasukan['id_pendidikan_lurah'],
 								"tmt_jabatan_lurah"	        => $dataMasukan['tmt_jabatan_lurah'],
 								"riwayat_jabatan1"         	=> $dataMasukan['riwayat_jabatan1'],
-								"id_jenkel"	            	=> $dataMasukan['id_jenkel'],
+								"id_jenkel_lurah"	            	=> $dataMasukan['id_jenkel_lurah'],
 								
 								"nama_seklur"	           	=> $dataMasukan['nama_seklur'],
 								"nip_seklur"	            => $dataMasukan['nip_seklur'],
@@ -548,15 +589,15 @@ class Rekamkelurahan_Service {
 								"nip_lurah"	            	=> (string)$result->nip_lurah,
 								"gol_lurah"	            	=> (string)$result->gol_lurah,
 								"id_pendidikan_lurah"	    => (string)$result->id_pendidikan_lurah,
-								"tmt_jabatan_lurah"	        => (string)$result->tmt_jabatan_lurah,
+								"tmt_jabatan_lurah"	        => $result->tmt_jabatan_lurah,
 								"riwayat_jabatan1"         	=> (string)$result->riwayat_jabatan1,
-								"id_jenkel"	            	=> (string)$result->id_jenkel,
+								"id_jenkel_lurah"	            	=> (string)$result->id_jenkel_lurah,
 								
 								"nama_seklur"	           	=> (string)$result->nama_seklur,
 								"nip_seklur"	            => (string)$result->nip_seklur,
 								"gol_seklur"	            => (string)$result->gol_seklur,
 								"id_pendidikan_seklur"	    => (string)$result->id_pendidikan_seklur,
-								"tmt_jabatan_seklur"	    => (string)$result->tmt_jabatan_seklur,
+								"tmt_jabatan_seklur"	    => $result->tmt_jabatan_seklur,
 								"riwayat_jabatan1_seklur"   => (string)$result->riwayat_jabatan1_seklur,
 								"id_jenkel_seklur"	        => (string)$result->id_jenkel_seklur,
 								
@@ -585,7 +626,8 @@ class Rekamkelurahan_Service {
 			$paramInput = array("tahun" 					=> $dataMasukan['tahun'],
 								"bulan"						=> $dataMasukan['bulan'],
 								"kd_kel"	           	 	=> $dataMasukan['kd_kel'],
-								"jml_urusan"	           	=> $dataMasukan['jml_urusan'],
+								"jml_urusan_kota"	        => $dataMasukan['jml_urusan_kota'],
+								"jml_limpah_urusan_kota"	=> $dataMasukan['jml_limpah_urusan_kota'],
 								"jml_urusan_wajib"	        => $dataMasukan['jml_urusan_wajib'],
 								"jml_urusan_pilihan"	    => $dataMasukan['jml_urusan_pilihan'],
 								"bidang_urusan_wajib"	    => $dataMasukan['bidang_urusan_wajib'],
@@ -595,13 +637,15 @@ class Rekamkelurahan_Service {
 								"jml_program_kelurahan"	    => $dataMasukan['jml_program_kelurahan']
 								
 								);
-			//var_dump($paramInput);
-			$db->insert('SIMKEL.dbon.mon_kewenangan',$paramInput);
+				
+			// var_dump($paramInput);
+			$db->insert('SIMKEL.dbo.mon_kewenangan',$paramInput);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
 			$db->rollBack();
 			$errmsgArr = explode(":",$e->getMessage());
+			// var_dump($errmsgArr);
 			$errMsg = $errmsgArr[0];
 			if($errMsg == "SQLSTATE[23000]")
 			{
@@ -620,8 +664,8 @@ class Rekamkelurahan_Service {
 		$db = $registry->get('db');
 		try {
 		$db->beginTransaction();
-			$paramInput = array(
-								"jml_urusan"	           	=> $dataMasukan['jml_urusan'],
+			$paramInput = array("jml_urusan_kota"	        => $dataMasukan['jml_urusan_kota'],
+								"jml_limpah_urusan_kota"	=> $dataMasukan['jml_limpah_urusan_kota'],
 								"jml_urusan_wajib"	        => $dataMasukan['jml_urusan_wajib'],
 								"jml_urusan_pilihan"	    => $dataMasukan['jml_urusan_pilihan'],
 								"bidang_urusan_wajib"	    => $dataMasukan['bidang_urusan_wajib'],
@@ -693,7 +737,8 @@ class Rekamkelurahan_Service {
 			//echo $sqlData;
 			
 			$hasilAkhir = array(
-								"jml_urusan"	           	=> (string)$result->jml_urusan,
+								"jml_urusan_kota"	        => (string)$result->jml_urusan_kota,
+								"jml_limpah_urusan_kota"	=> (string)$result->jml_limpah_urusan_kota,
 								"jml_urusan_wajib"	        => (string)$result->jml_urusan_wajib,
 								"jml_urusan_pilihan"	    => (string)$result->jml_urusan_pilihan,
 								"bidang_urusan_wajib"	    => (string)$result->bidang_urusan_wajib,
@@ -703,8 +748,7 @@ class Rekamkelurahan_Service {
 								"jml_program_kelurahan"	    => (string)$result->jml_program_kelurahan
 			
 							);
-				
-			
+							
 			return $hasilAkhir;						  
 			
 	   } catch (Exception $e) {
@@ -712,6 +756,119 @@ class Rekamkelurahan_Service {
 	     return 'gagal <br>';
 	   }
 	}
+	
+	///////////////// program kelurahan
+	//insert ke tabel program kelurahan 
+	public function programkelurahanInsert(array $dataMasukan) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+		$db->beginTransaction();
+			$paramInput = array("tahun" 				=> $dataMasukan['tahun'],
+								"bulan"					=> $dataMasukan['bulan'],
+								"kd_kel"	           	=> $dataMasukan['kd_kel'],
+								"kode"	        		=> $dataMasukan['kode'],
+								"nama_program"			=> $dataMasukan['nama_program'],
+								"anggaran"	     		=> $dataMasukan['anggaran']
+								
+								);
+				
+			// var_dump($paramInput);
+			$db->insert('SIMKEL.dbo.mon_program_kelurahan',$paramInput);
+			$db->commit();
+			return 'sukses';
+		} catch (Exception $e) {
+			$db->rollBack();
+			$errmsgArr = explode(":",$e->getMessage());
+			// var_dump($errmsgArr);
+			$errMsg = $errmsgArr[0];
+			if($errMsg == "SQLSTATE[23000]")
+			{
+				return "gagal.Data Sudah Ada.";
+			}
+			else
+			{
+				return "gagal.";
+			}
+	   }
+	}
+	
+	//update tabel program
+	public function programkelurahanUpdate(array $dataMasukan) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+		$db->beginTransaction();
+			$paramInput = array(
+								"nama_program"	    => $dataMasukan['nama_program'],
+								"anggaran"	      	=> $dataMasukan['anggaran'],
+								"kode"	   			=> $dataMasukan['kode']
+								);
+		//var_dump($paramInput);
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			$db->update('[SIMKEL].[dbo].[mon_program_kelurahan]',$paramInput, $where);
+			$db->commit();
+			return 'sukses';
+		} catch (Exception $e) {
+			$db->rollBack();
+			$errmsgArr = explode(":",$e->getMessage());
+			$errMsg = $errmsgArr[0];
+			if($errMsg == "SQLSTATE[23000]")
+			{
+				return "gagal.Data Sudah Ada.";
+			}
+			else
+			{
+				return "gagal.";
+			}
+	   }
+	}
+	
+	
+	
+	public function detailProgram($kd_kel,$bulan,$tahun) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchAll("SELECT  * from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel = '$kd_kel' AND bulan='$bulan' AND tahun='$tahun' ");
+				return $result;
+				} catch (Exception $e) {
+				echo $e->getMessage().'<br>';
+				return 'Data tidak ada <br>';
+			}
+	}
+	
+	//hapus kewenangan
+	public function programHapus(array $dataMasukan) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->beginTransaction();
+			$paramInput = array("kd_kel" =>'kd_kel');	
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			$db->delete('[SIMKEL].[dbo].[mon_program_kelurahan]', $where);
+			
+			$db->commit();
+			return 'sukses';
+		} catch (Exception $e) {
+			$db->rollBack();
+			$errmsgArr = explode(":",$e->getMessage());
+			
+			$errMsg = $errmsgArr[0];
+
+			if($errMsg == "SQLSTATE[23000]")
+			{
+				return "gagal.Data Sudah Ada.";
+			}
+			else
+			{
+				return "gagal.";
+			}
+	   }
+	}
+	
+	
 	
 	
 	////////////////////////////////////////////////////////////////////////////////
@@ -735,7 +892,7 @@ class Rekamkelurahan_Service {
 								
 								);
 			//var_dump($paramInput);
-			$db->insert('SIMKEL.dbon.mon_keuangan',$paramInput);
+			$db->insert('SIMKEL.dbo.mon_keuangan',$paramInput);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
@@ -866,6 +1023,7 @@ class Rekamkelurahan_Service {
 								"pkk_jml_anggota"         	=> $dataMasukan['pkk_jml_anggota'],
 								"pkk_jml_keg_perbulan"	    => $dataMasukan['pkk_jml_keg_perbulan'],
 								"pkk_jml_buku_administrasi"	=> $dataMasukan['pkk_jml_buku_administrasi'],
+								"pkk_jml_dana"				=> $dataMasukan['pkk_jml_dana'],
 								"taruna_jml"	    		=> $dataMasukan['taruna_jml'],
 								"taruna_jenis"	    		=> $dataMasukan['taruna_jenis'],
 								"taruna_jml_pengurus"	    => $dataMasukan['taruna_jml_pengurus'],
@@ -877,7 +1035,7 @@ class Rekamkelurahan_Service {
 								
 								);
 			//var_dump($paramInput);
-			$db->insert('SIMKEL.dbon.mon_kelembagaan',$paramInput);
+			$db->insert('SIMKEL.dbo.mon_kelembagaan',$paramInput);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
@@ -910,6 +1068,7 @@ class Rekamkelurahan_Service {
 								"pkk_jml_anggota"         	=> $dataMasukan['pkk_jml_anggota'],
 								"pkk_jml_keg_perbulan"	    => $dataMasukan['pkk_jml_keg_perbulan'],
 								"pkk_jml_buku_administrasi"	=> $dataMasukan['pkk_jml_buku_administrasi'],
+								"pkk_jml_dana"				=> $dataMasukan['pkk_jml_dana'],
 								"taruna_jml"	    		=> $dataMasukan['taruna_jml'],
 								"taruna_jenis"	    		=> $dataMasukan['taruna_jenis'],
 								"taruna_jml_pengurus"	    => $dataMasukan['taruna_jml_pengurus'],
@@ -989,6 +1148,7 @@ class Rekamkelurahan_Service {
 								"pkk_jml_anggota"         	=> (string)$result->pkk_jml_anggota,
 								"pkk_jml_keg_perbulan"	    => (string)$result->pkk_jml_keg_perbulan,
 								"pkk_jml_buku_administrasi"	=> (string)$result->pkk_jml_buku_administrasi,
+								"pkk_jml_dana"				=> (string)$result->pkk_jml_dana,
 								"taruna_jml"	    		=> (string)$result->taruna_jml,
 								"taruna_jenis"	    		=> (string)$result->taruna_jenis,
 								"taruna_jml_pengurus"	    => (string)$result->taruna_jml_pengurus,
@@ -1035,7 +1195,7 @@ class Rekamkelurahan_Service {
 								
 								);
 			//var_dump($paramInput);
-			$db->insert('SIMKEL.dbon.mon_trantib',$paramInput);
+			$db->insert('SIMKEL.dbo.mon_trantib',$paramInput);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {

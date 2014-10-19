@@ -32,16 +32,16 @@
 	//awal
 	$document->setValue('namaKelurahan', $this->detailKelurahan->kelurahan);
 	$document->setValue('tahunPembentukan', $this->detailKelurahan->tahun_pembentukan);
-	$document->setValue('dasarHukumPembentukan', $this->detailKelurahan->dasar_hukum_pembentukan);
-	$document->setValue('KodeWilayah', $this->detailKelurahan->kode_wilayah);
-	$document->setValue('KodePos', $this->detailKelurahan->kode_pos);
+	$document->setValue('dasarHukumPembentukan', $this->detailKelurahan->dasar_pembentukan);
+	$document->setValue('kodeWilayah', $this->detailKelurahan->kode_wilayah);
+	$document->setValue('kodePos', $this->detailKelurahan->kode_pos);
 	$document->setValue('kecamatan', $this->detailKelurahan->kecamatan);
 	$document->setValue('kabupaten', $this->detailKelurahan->kabupaten);
 	$document->setValue('provinsi', $this->detailKelurahan->provinsi);
 	
 	//A. Data Umum
 	$document->setValue('tipologi', $this->detailUmum['tipologi']);
-	$document->setValue('luasWilayah', $this->detailKelurahan->luas_wilayah);
+	$document->setValue('luasWilayah', $this->detailKelurahan->luas);
 	$document->setValue('batasUtara', $this->detailKelurahan->batas_utara);
 	$document->setValue('batasSelatan', $this->detailKelurahan->batas_selatan);
 	$document->setValue('batasBarat', $this->detailKelurahan->batas_barat);
@@ -113,13 +113,20 @@
 	$document->setValue('jumlahAparatGol4', $this->detailPersonil['jumlah_aparat_gol4']);
 	
 	//C. Data Kewenangan
-	$document->setValue('pemerintahPusat', $this->detailKewenangan['jml_pemerintah_pusat']);		
-	$document->setValue('provinsi', $this->detailKewenangan['jml_provinsi']);		
-	$document->setValue('kabupaten', $this->detailKewenangan['jml_kabupaten']);
+	$document->setValue('pemerintahPusat',$this->getJumlahProvinsi->jumlah);		
+	$document->setValue('provinsi', $this->getJumlahProvinsi->jumlah);		
+	$document->setValue('kabupaten', $this->getJumlahKota->jumlah);
 	
 	//D. Data Keuangan
-	$document->setValue('anggaranApbd', $this->detailKeuangan['anggaran_apbd']);		
-	$document->setValue('isSkpd', $this->detailKeuangan['is_skpd']);		
+	$document->setValue('anggaranApbd', $this->detailKeuangan['anggaran_apbd']);	
+	
+	if($this->detailKeuangan['is_skpd']=='1'){
+		$isSKpd = "Sudah";
+	} else{
+		$isSKpd = "Belum";
+	}
+	
+	$document->setValue('isSkpd', $isSKpd);		
 	$document->setValue('bantuanPusat', $this->detailKeuangan['bantuan_pusat']);
 	$document->setValue('bantuanProv', $this->detailKeuangan['bantuan_prov']);
 	$document->setValue('bantuanKota', $this->detailKeuangan['bantuan_kota']);
