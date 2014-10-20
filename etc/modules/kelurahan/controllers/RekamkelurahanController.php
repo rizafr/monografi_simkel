@@ -383,6 +383,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$lpm_jml_anggota			= $_POST['lpm_jml_anggota'];
 		$lpm_jml_keg_perbulan		= $_POST['lpm_jml_keg_perbulan'];
 		$lpm_jml_dana				= $_POST['lpm_jml_dana'];
+		$lpm_jml_buku_administrasi	= $_POST['lpm_jml_buku_administrasi'];
 		$pkk_jml_pengurus			= $_POST['pkk_jml_pengurus'];
 		$pkk_jml_anggota			= $_POST['pkk_jml_anggota'];
 		$pkk_jml_keg_perbulan		= $_POST['pkk_jml_keg_perbulan'];
@@ -524,6 +525,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 				"lpm_jml_anggota"	        => $lpm_jml_anggota,
 				"lpm_jml_keg_perbulan"	    => $lpm_jml_keg_perbulan,
 				"lpm_jml_dana"	    		=> $lpm_jml_dana,
+				"lpm_jml_buku_administrasi"	=> $lpm_jml_buku_administrasi,
 				"pkk_jml_pengurus"	   		=> $pkk_jml_pengurus,
 				"pkk_jml_anggota"         	=> $pkk_jml_anggota,
 				"pkk_jml_keg_perbulan"	    => $pkk_jml_keg_perbulan,
@@ -796,6 +798,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$lpm_jml_anggota			= $_POST['lpm_jml_anggota'];
 		$lpm_jml_keg_perbulan		= $_POST['lpm_jml_keg_perbulan'];
 		$lpm_jml_dana				= $_POST['lpm_jml_dana'];
+		$lpm_jml_buku_administrasi	= $_POST['lpm_jml_buku_administrasi'];
 		$pkk_jml_pengurus			= $_POST['pkk_jml_pengurus'];
 		$pkk_jml_anggota			= $_POST['pkk_jml_anggota'];
 		$pkk_jml_keg_perbulan		= $_POST['pkk_jml_keg_perbulan'];
@@ -940,6 +943,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 				"lpm_jml_anggota"	        => $lpm_jml_anggota,
 				"lpm_jml_keg_perbulan"	    => $lpm_jml_keg_perbulan,
 				"lpm_jml_dana"	    		=> $lpm_jml_dana,
+				"lpm_jml_buku_administrasi"	=> $lpm_jml_buku_administrasi,
 				"pkk_jml_pengurus"	   		=> $pkk_jml_pengurus,
 				"pkk_jml_anggota"         	=> $pkk_jml_anggota,
 				"pkk_jml_keg_perbulan"	    => $pkk_jml_keg_perbulan,

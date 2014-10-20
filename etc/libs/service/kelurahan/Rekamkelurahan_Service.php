@@ -120,7 +120,7 @@ class Rekamkelurahan_Service {
 			$db = $registry->get('db');
 			try {
 				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
-				$result = $db->fetchRow("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='1' ");
+				$result = $db->fetchOne("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='1' ");
 				return $result;
 				} catch (Exception $e) {
 				echo $e->getMessage().'<br>';
@@ -133,7 +133,7 @@ class Rekamkelurahan_Service {
 			$db = $registry->get('db');
 			try {
 				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
-				$result = $db->fetchRow("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='2'");
+				$result = $db->fetchOne("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='2'");
 				return $result;
 				} catch (Exception $e) {
 				echo $e->getMessage().'<br>';
@@ -146,7 +146,7 @@ class Rekamkelurahan_Service {
 			$db = $registry->get('db');
 			try {
 				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
-				$result = $db->fetchRow("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='3'");
+				$result = $db->fetchOne("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='3'");
 				return $result;
 				} catch (Exception $e) {
 				echo $e->getMessage().'<br>';
@@ -1019,6 +1019,7 @@ class Rekamkelurahan_Service {
 								"lpm_jml_anggota"	        => $dataMasukan['lpm_jml_anggota'],
 								"lpm_jml_keg_perbulan"	    => $dataMasukan['lpm_jml_keg_perbulan'],
 								"lpm_jml_dana"	    		=> $dataMasukan['lpm_jml_dana'],
+								"lpm_jml_buku_administrasi"	=> $dataMasukan['lpm_jml_buku_administrasi'],
 								"pkk_jml_pengurus"	   		=> $dataMasukan['pkk_jml_pengurus'],
 								"pkk_jml_anggota"         	=> $dataMasukan['pkk_jml_anggota'],
 								"pkk_jml_keg_perbulan"	    => $dataMasukan['pkk_jml_keg_perbulan'],
@@ -1064,6 +1065,7 @@ class Rekamkelurahan_Service {
 								"lpm_jml_anggota"	        => $dataMasukan['lpm_jml_anggota'],
 								"lpm_jml_keg_perbulan"	    => $dataMasukan['lpm_jml_keg_perbulan'],
 								"lpm_jml_dana"	    		=> $dataMasukan['lpm_jml_dana'],
+								"lpm_jml_buku_administrasi"	=> $dataMasukan['lpm_jml_buku_administrasi'],
 								"pkk_jml_pengurus"	   		=> $dataMasukan['pkk_jml_pengurus'],
 								"pkk_jml_anggota"         	=> $dataMasukan['pkk_jml_anggota'],
 								"pkk_jml_keg_perbulan"	    => $dataMasukan['pkk_jml_keg_perbulan'],
@@ -1144,6 +1146,7 @@ class Rekamkelurahan_Service {
 								"lpm_jml_anggota"	        => (string)$result->lpm_jml_anggota,
 								"lpm_jml_keg_perbulan"	    => (string)$result->lpm_jml_keg_perbulan,
 								"lpm_jml_dana"	    		=> (string)$result->lpm_jml_dana,
+								"lpm_jml_buku_administrasi"	=> (string)$result->lpm_jml_buku_administrasi,
 								"pkk_jml_pengurus"	   		=> (string)$result->pkk_jml_pengurus,
 								"pkk_jml_anggota"         	=> (string)$result->pkk_jml_anggota,
 								"pkk_jml_keg_perbulan"	    => (string)$result->pkk_jml_keg_perbulan,
