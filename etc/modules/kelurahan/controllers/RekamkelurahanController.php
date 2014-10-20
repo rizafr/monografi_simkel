@@ -1057,10 +1057,13 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->detailKelembagaan	= $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailTrantib	= $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		
-		$this->view->getJumlahPusat	= $this->rekamkelurahan_serv->getJumlahPusat($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		$this->view->getJumlahProvinsi	= $this->rekamkelurahan_serv->getJumlahProvinsi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		$this->view->getJumlahKota	= $this->rekamkelurahan_serv->getJumlahKota($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->jumPusat	= $this->rekamkelurahan_serv->getJumlahPusat($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->jumProvinsi	= $this->rekamkelurahan_serv->getJumlahProvinsi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->jumKota	= $this->rekamkelurahan_serv->getJumlahKota($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		
+		var_dump($this->view->jumPusat);
+		var_dump($this->view->jumProvinsi);
+		var_dump($this->view->jumKota);
 	
 		
 		$this->render('rekamkelurahancetak');

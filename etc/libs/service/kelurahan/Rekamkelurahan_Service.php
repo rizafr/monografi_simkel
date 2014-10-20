@@ -120,7 +120,7 @@ class Rekamkelurahan_Service {
 			$db = $registry->get('db');
 			try {
 				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
-				$result = $db->fetchOne("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='1' ");
+				$result = $db->fetchOne("SELECT  COUNT(*) AS jumPusat from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='1' ");
 				return $result;
 				} catch (Exception $e) {
 				echo $e->getMessage().'<br>';
@@ -133,7 +133,7 @@ class Rekamkelurahan_Service {
 			$db = $registry->get('db');
 			try {
 				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
-				$result = $db->fetchOne("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='2'");
+				$result = $db->fetchOne("SELECT  COUNT(*) AS jumProvinsi from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='2'");
 				return $result;
 				} catch (Exception $e) {
 				echo $e->getMessage().'<br>';
@@ -146,7 +146,7 @@ class Rekamkelurahan_Service {
 			$db = $registry->get('db');
 			try {
 				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
-				$result = $db->fetchOne("SELECT  COUNT(*) AS jumlah from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='3'");
+				$result = $db->fetchOne("SELECT  COUNT(*) AS jumKota from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='3'");
 				return $result;
 				} catch (Exception $e) {
 				echo $e->getMessage().'<br>';
