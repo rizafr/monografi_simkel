@@ -107,15 +107,15 @@
 	//B. Data Personil
 	$document->setValue('namaLurah', $this->detailPersonil['nama_lurah']);		
 	$document->setValue('namaSeklur', $this->detailPersonil['nama_seklur']);		
-	$document->setValue('jumlahAparatGol1', $this->detailPersonil['jumlah_aparat_gol1']);		
-	$document->setValue('jumlahAparatGol2', $this->detailPersonil['jumlah_aparat_gol2']);		
-	$document->setValue('jumlahAparatGol3', $this->detailPersonil['jumlah_aparat_gol3']);		
-	$document->setValue('jumlahAparatGol4', $this->detailPersonil['jumlah_aparat_gol4']);
+	$document->setValue('jumlahAparatGol1', number_format($this->detailPersonil['jumlah_aparat_gol1'], 0, ',', '.'));		
+	$document->setValue('jumlahAparatGol2', number_format($this->detailPersonil['jumlah_aparat_gol2'], 0, ',', '.'));		
+	$document->setValue('jumlahAparatGol3', number_format($this->detailPersonil['jumlah_aparat_gol3'], 0, ',', '.'));		
+	$document->setValue('jumlahAparatGol4', number_format($this->detailPersonil['jumlah_aparat_gol4'], 0, ',', '.'));
 	
 	//C. Data Kewenangan
-	$document->setValue('pemerintahPusat',$this->getJumlahProvinsi);		
-	$document->setValue('provinsi', $this->getJumlahProvinsi);		
-	$document->setValue('kabupaten', $this->getJumlahKota);
+	$document->setValue('pemerintahPusat',number_format($this->getJumlahPusat, 0, ',', '.'));		
+	$document->setValue('provinsi', number_format($this->getJumlahProvinsi, 0, ',', '.'));		
+	$document->setValue('kabupaten', number_format($this->getJumlahKota, 0, ',', '.'));
 	
 	//D. Data Keuangan
 	$document->setValue('anggaranApbd',number_format($this->detailKeuangan['anggaran_apbd'], 0, ',', '.'));	
@@ -135,16 +135,16 @@
 	$document->setValue('swadaya',number_format($this->detailKeuangan['swadaya'], 0, ',', '.'));
 	
 	//E. Kelembagaan
-	$document->setValue('lpmJmlPengurus', $this->detailKelembagaan['lpm_jml_pengurus']);		
-	$document->setValue('lpmJmlKegPerbulan', $this->detailKelembagaan['lpm_jml_keg_perbulan']);	$document->setValue('lpmJmlBukuAdministrasi', $this->detailKelembagaan['lpm_jml_buku_administrasi']);
+	$document->setValue('lpmJmlPengurus', number_format($this->detailKelembagaan['lpm_jml_pengurus'], 0, ',', '.'));		
+	$document->setValue('lpmJmlKegPerbulan', number_format($this->detailKelembagaan['lpm_jml_keg_perbulan'], 0, ',', '.'));	$document->setValue('lpmJmlBukuAdministrasi', $this->detailKelembagaan['lpm_jml_buku_administrasi']);
 	$document->setValue('lpmJmlDana',number_format($this->detailKelembagaan['lpm_jml_dana'], 0, ',', '.'));
 	//$document->setValue('lembagaAdat', $this->detailKelembagaan['lembaga_adat']);
-	$document->setValue('pkkJmlPengurus', $this->detailKelembagaan['pkk_jml_pengurus']);
-	$document->setValue('pkkJmlKegPerbulan', $this->detailKelembagaan['pkk_jml_keg_perbulan']);
-	$document->setValue('pkkJmlBukuAdministrasi', $this->detailKelembagaan['pkk_jml_buku_administrasi']);
+	$document->setValue('pkkJmlPengurus', number_format($this->detailKelembagaan['pkk_jml_pengurus'], 0, ',', '.'));
+	$document->setValue('pkkJmlKegPerbulan', number_format($this->detailKelembagaan['pkk_jml_keg_perbulan'], 0, ',', '.'));
+	$document->setValue('pkkJmlBukuAdministrasi', number_format($this->detailKelembagaan['pkk_jml_buku_administrasi'], 0, ',', '.'));
 	$document->setValue('pkkJmlDana',number_format($this->detailKelembagaan['pkk_jml_dana'], 0, ',', '.'));
-	$document->setValue('jmlRw', $this->detailKelembagaan['jml_rw']);
-	$document->setValue('jmlRt', $this->detailKelembagaan['jml_rt']);
+	$document->setValue('jmlRw', number_format($this->detailKelembagaan['jml_rw'], 0, ',', '.'));
+	$document->setValue('jmlRt', number_format($this->detailKelembagaan['jml_rt'], 0, ',', '.'));
 	$document->setValue('rataPenghasilanRw',number_format($this->detailKelembagaan['rata_penghasilan_rw'], 0, ',', '.'));
 	$document->setValue('rataPenghasilanRt',number_format($this->detailKelembagaan['rata_penghasilan_rt'], 0, ',', '.'));
 	$document->setValue('tarunaJml',number_format($this->detailKelembagaan['taruna_jml'], 0, ',', '.'));
