@@ -488,9 +488,9 @@ $(function(){
 		<td align="right" >9. UMR Kabupaten / Kota:</td>
 		<td>	
 			Rp &nbsp;
-			<? 
+			<?  $umr= explode('.', $this->detailUmum['umr']);
 				$umrAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
-				echo $ctrlFrm->formText("umr", $this->detailUmum['umr'], $umrAttrib);
+				echo $ctrlFrm->formText("umr", $umr[0], $umrAttrib);
 			?> 
 		</td>
 	</tr>
@@ -777,7 +777,7 @@ $(function(){
 	
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; e. TMT Masa Jabatan:</td>
-		<td>	<input type="date" name="tmt_jabatan_lurah" id="tmt_jabatan_lurah" value="<?php echo $this->detailPersonil['tmt_jabatan_seklur']?>">
+		<td>	<input type="text" name="tmt_jabatan_lurah" id="tmt_jabatan_lurah" value="<?php echo $this->detailPersonil['tmt_jabatan_seklur']?>">
 			
 		</td>
 	</tr>
@@ -859,7 +859,7 @@ $(function(){
 	
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; e. TMT Masa Jabatan:</td>
-		<td>	<input type="date" name="tmt_jabatan_seklur" id="tmt_jabatan_seklur" value="<?php echo $this->detailPersonil['tmt_jabatan_seklur']?>">
+		<td>	<input type="text" name="tmt_jabatan_seklur" id="tmt_jabatan_seklur" value="<?php echo $this->detailPersonil['tmt_jabatan_seklur']?>">
 			
 		</td>
 	</tr>
@@ -973,7 +973,7 @@ $(function(){
 						$bidang_urusan_wajib= explode(',',$this->detailKewenangan['bidang_urusan_wajib']);
 						
 						for($i=0;$i<count($bidang_urusan_wajib);$i++){?>
-						<div class="bidang">
+						<div class="BidangUrusanWajib">
 							<input type="text" name="bidang_urusan_wajib[]" id="bidang_urusan_wajib" value="<?php echo $bidang_urusan_wajib[$i] ?>">
 						</div>
 						
@@ -991,7 +991,9 @@ $(function(){
 							$urusan_wajib= explode(',',$this->detailKewenangan['urusan_wajib']);
 						
 							for($i=0;$i<count($urusan_wajib);$i++){?>
-						<div><input type="text" name="urusan_wajib[]" id="urusan_wajib" value="<?php echo $urusan_wajib[$i] ?>"></div>
+						<div class="UrusanWajib">
+							<input type="text" name="urusan_wajib[]" id="urusan_wajib" value="<?php echo $urusan_wajib[$i] ?>">
+						</div>
 							<?php } ?>
 				</div>
 			</td>
@@ -1011,7 +1013,7 @@ $(function(){
 							$bidang_urusan_pilihan= explode(',',$this->detailKewenangan['bidang_urusan_pilihan']);
 						
 							for($i=0;$i<count($bidang_urusan_pilihan);$i++){?>
-						<div><input type="text" name="bidang_urusan_pilihan[]" id="bidang_urusan_pilihan" value="<?php echo $bidang_urusan_pilihan[$i] ?>"></div>
+						<div class="BidangUrusanPilihan"><input type="text" name="bidang_urusan_pilihan[]" id="bidang_urusan_pilihan" value="<?php echo $bidang_urusan_pilihan[$i] ?>"></div>
 							<?php } ?>
 				</div>
 			</td>
@@ -1026,7 +1028,7 @@ $(function(){
 							$urusan_pilihan= explode(',',$this->detailKewenangan['urusan_pilihan']);
 						
 							for($i=0;$i<count($urusan_pilihan);$i++){?>
-						<div><input type="text" name="urusan_pilihan[]" id="urusan_pilihan" value="<?php echo $urusan_pilihan[$i] ?>"></div>
+						<div class="UrusanPilihan"><input type="text" name="urusan_pilihan[]" id="urusan_pilihan" value="<?php echo $urusan_pilihan[$i] ?>"></div>
 							<?php } ?>
 				</div>
 			</td>
@@ -1130,9 +1132,9 @@ $(function(){
 	<tr>
 		<td align="right"> 1. Anggaran Kelurahan dari APBD kabupaten/kota</td>
 		<td> RP &nbsp;
-			<? 
+			<? $anggaran_apbd= explode('.',$this->detailKeuangan['anggaran_apbd']);
 				$anggaran_apbdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
-				echo $ctrlFrm->formText("anggaran_apbd", $this->detailKeuangan['anggaran_apbd'], $anggaran_apbdAttrib);
+				echo $ctrlFrm->formText("anggaran_apbd", $anggaran_apbd[0], $anggaran_apbdAttrib);
 			?>  </td>
 	</tr>
 	
@@ -1156,9 +1158,9 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; a. Pemerintah Pusat:</td>
 		<td > 
 		RP &nbsp;
-			<? 
+			<? $bantuan_pusat= explode('.',$this->detailKeuangan['bantuan_pusat']);
 				$bantuan_pusatAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("bantuan_pusat", $this->detailKeuangan['bantuan_pusat'], $bantuan_pusatAttrib);
+				echo $ctrlFrm->formText("bantuan_pusat", $bantuan_pusat[0], $bantuan_pusatAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1166,9 +1168,9 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; b.  Pemerintah Provinsi:</td>
 		<td> RP &nbsp;
-			<? 
+			<? $bantuan_prov= explode('.',$this->detailKeuangan['bantuan_prov']);
 				$bantuan_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("bantuan_prov", $this->detailKeuangan['bantuan_prov'], $bantuan_provAttrib);
+				echo $ctrlFrm->formText("bantuan_prov",$bantuan_prov[0], $bantuan_provAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1176,9 +1178,9 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; c.  Pemerintah Kabupaten / Kota:</td>
 		<td> RP &nbsp;
-			<? 
+			<? $bantuan_kota= explode('.',$this->detailKeuangan['bantuan_kota']);
 				$bantuan_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("bantuan_kota", $this->detailKeuangan['bantuan_kota'], $bantuan_kotaAttrib);
+				echo $ctrlFrm->formText("bantuan_kota", $bantuan_kota[0], $bantuan_kotaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1186,9 +1188,9 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; d. Hibah / Bantuan Luar Negeri:</td>
 		<td> RP &nbsp;
-			<? 
+			<? $hibah= explode('.',$this->detailKeuangan['hibah']);
 				$hibahAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("hibah", $this->detailKeuangan['hibah'], $hibahAttrib);
+				echo $ctrlFrm->formText("hibah", $hibah[0], $hibahAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1196,9 +1198,9 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; e.  Sumbangan / Bantuan Lain tidak mengikat:</td>
 		<td> RP &nbsp;
-			<? 
+			<?  $sumbangan= explode('.',$this->detailKeuangan['sumbangan']);
 				$sumbanganAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("sumbangan", $this->detailKeuangan['sumbangan'], $sumbanganAttrib);
+				echo $ctrlFrm->formText("sumbangan", $sumbangan[0], $sumbanganAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1206,9 +1208,9 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; f. Swadaya / Gotong Royong:</td>
 		<td> RP &nbsp;
-			<? 
+			<?  $swadaya= explode('.',$this->detailKeuangan['swadaya']);
 				$swadayaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("swadaya", $this->detailKeuangan['swadaya'], $swadayaAttrib);
+				echo $ctrlFrm->formText("swadaya", $swadaya[0], $swadayaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1327,9 +1329,9 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; e. Jumlah dana yang dikelola:</td>
 		<td > RP &nbsp;
-			<? 
+			<? $pkk_jml_dana= explode('.',$this->detailKelembagaan['pkk_jml_dana']);
 				$pkk_jml_danaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("pkk_jml_dana", $this->detailKelembagaan['pkk_jml_dana'], $pkk_jml_danaAttrib);
+				echo $ctrlFrm->formText("pkk_jml_dana", $pkk_jml_dana[0], $pkk_jml_danaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1401,9 +1403,9 @@ $(function(){
 	<tr>
 		<td colspan="2" align="right" >&nbsp;&nbsp;&nbsp; c.  Rata-rata penghasilan Ketua RW dalam Sebulan:</td>
 		<td colspan="2"> Rp 
-			<? 
+			<?  $rata_penghasilan_rw= explode('.', $this->detailKelembagaan['rata_penghasilan_rw']);
 				$rata_penghasilan_rwAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("rata_penghasilan_rw", $this->detailKelembagaan['rata_penghasilan_rw'], $rata_penghasilan_rwAttrib);
+				echo $ctrlFrm->formText("rata_penghasilan_rw",$rata_penghasilan_rw[0], $rata_penghasilan_rwAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1411,9 +1413,9 @@ $(function(){
 	<tr>
 		<td colspan="2" align="right" >&nbsp;&nbsp;&nbsp; d.  Rata-rata penghasilan Ketua RT dalam Sebulan:</td>
 		<td colspan="2"> Rp 
-			<? 
+			<? $rata_penghasilan_rt= explode('.', $this->detailKelembagaan['rata_penghasilan_rt']);
 				$rata_penghasilan_rtAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("rata_penghasilan_rt", $this->detailKelembagaan['rata_penghasilan_rt'], $rata_penghasilan_rtAttrib);
+				echo $ctrlFrm->formText("rata_penghasilan_rt",$rata_penghasilan_rt[0], $rata_penghasilan_rtAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1751,6 +1753,8 @@ $(function(){
 </script>
 
 <script>
+
+	
 //urusan wajib
 $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed
@@ -1762,11 +1766,14 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="text" id="bidang_urusan_wajib" name="bidang_urusan_wajib[]"/></div>'); //add input box
+            $(wrapper).append('<div class="BidangUrusanWajib"><input type="text" id="bidang_urusan_wajib" name="bidang_urusan_wajib[]"/></div>'); //add input box
         }
     });
-    
-   
+	
+	$(wrapper).on("click","#hapusBidangUrusanWajib", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('.BidangUrusanWajib').remove(); x--;
+    })
+	
 });
 </script>
 
@@ -1781,7 +1788,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="text" id="urusan_wajib" name="urusan_wajib[]"/></div>'); //add input box
+            $(wrapper).append('<div class="UrusanWajib"><input type="text" id="urusan_wajib" name="urusan_wajib[]"/></div>'); //add input box
         }
     });
     
@@ -1801,7 +1808,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="text" id="bidang_urusan_pilihan" name="bidang_urusan_pilihan[]"/></div>'); //add input box
+            $(wrapper).append('<div class="BidangUrusanPilihan"><input type="text" id="bidang_urusan_pilihan" name="bidang_urusan_pilihan[]"/></div>'); //add input box
         }
     });
     
@@ -1822,7 +1829,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="text" id="urusan_pilihan" name="urusan_pilihan[]"/></div>'); //add input box
+            $(wrapper).append('<div class="UrusanPilihan"><input type="text" id="urusan_pilihan" name="urusan_pilihan[]"/></div>'); //add input box
         }
     });
     
@@ -1841,7 +1848,19 @@ $(document).ready(function() {
 <script>
 
  	$(function() {
-		$("#d_medrec").datepicker();
+		$("#tmt_jabatan_lurah").datepicker({
+			dateFormat: 'yy-mm-dd',
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+	
+	$(function() {
+		$("#tmt_jabatan_seklur").datepicker({
+			dateFormat: 'yy-mm-dd',
+			changeMonth: true,
+			changeYear: true
+		});
 	});
 
 

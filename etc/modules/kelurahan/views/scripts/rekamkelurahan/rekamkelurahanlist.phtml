@@ -42,7 +42,7 @@ $numToDisplay = $this->numToDisplay;
 <? 
 $status = $this->hasil;
 $proses = $this->proses;
-$pesan->show_message($proses, $kd_kel, "$status" ); 
+$pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this->bulan ." tahun ".$this->tahun, "$status" ); 
 ?>
 
 <table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
@@ -96,7 +96,7 @@ $pesan->show_message($proses, $kd_kel, "$status" );
 
 <td><div onClick="rekamkelurahanForm('update','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="view" title="Lihat Data"></div></td>
 <td><div onClick="rekamkelurahanForm('update','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="edit" title="Ubah Data"></div></td>
-<td><div onClick="rekamkelurahanHapus('delete','<? echo $kd_kel;?>','<? echo $this->detailKelurahan->kelurahan ;?>','<? echo $tahun;?>','<? echo $bulan;?>');" class="delete" title="Hapus Data"></div>
+<td><div onClick="rekamkelurahanHapus('<? echo $kd_kel;?>','<? echo $this->detailKelurahan->kelurahan ;?>','<? echo $tahun;?>','<? echo $bulan;?>');" class="delete" title="Hapus Data"></div>
 						</td>
 						
 					
@@ -120,6 +120,10 @@ $pesan->show_message($proses, $kd_kel, "$status" );
 	</div>
 </div>
 <script type="text/javascript">
+$(function() {
+    $( document ).tooltip();
+  });
+  
 var sorter=new table.sorter("sorter");
 sorter.init("sorter",0);
 </script>

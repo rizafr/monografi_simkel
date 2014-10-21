@@ -87,7 +87,6 @@ var ubahRekamkelurahan_opt = {
 			alert('Kode harus Diisi');
 			return false;
 		}
-
 		
 
 		if (document.getElementById('tahun').value == '-'){
@@ -121,9 +120,9 @@ function rekamkelurahanHapus(kd_kel,kelurahan,tahun,bulan)
 { 
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
-	kd_kel = document.getElementById('kd_kel').value;
 	
-	if(ConfirmDelete(kd_kel,kelurahan))
+	
+	if(ConfirmDelete(kd_kel,kelurahan,tahun,bulan))
 	{	
 		handler = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanhapus';
 		var opt = {kd_kel:kd_kel,tahun:tahun,bulan:bulan};

@@ -158,7 +158,8 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->detailKeuangan = $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKelembagaan = $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailTrantib = $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		//var_dump($this->view->detailProgram);
+		// var_dump($this->view->detailKewenangan);
+		// var_dump($this->view->kd_kel);
 		// var_dump($this->view->bulan);
 		// var_dump($this->view->tahun);
 	
@@ -573,8 +574,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		 
 		$this->view->proses = "1";	
 		$this->view->keterangan = "Judul";
-		$this->view->hasil = $this->view->umumInsert ." ". $this->view->personilInsert ." ". $this->view->kewenanganInsert ." ". 
-							$this->view->keuanganInsert ." ". $this->view->kelembagaanInsert ." ". $this->view->trantibInsert;
+		$this->view->hasil = $this->view->umumInsert;
 		
 		$this->rekamkelurahanlistAction();
 		$this->render('rekamkelurahanlist');
@@ -803,6 +803,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$pkk_jml_anggota			= $_POST['pkk_jml_anggota'];
 		$pkk_jml_keg_perbulan		= $_POST['pkk_jml_keg_perbulan'];
 		$pkk_jml_buku_administrasi	= $_POST['pkk_jml_buku_administrasi'];
+		$pkk_jml_dana				= $_POST['pkk_jml_dana'];
 		$taruna_jml					= $_POST['taruna_jml'];
 		$taruna_jenis				= $_POST['taruna_jenis'];
 		$taruna_jml_pengurus		= $_POST['taruna_jml_pengurus'];
@@ -948,6 +949,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 				"pkk_jml_anggota"         	=> $pkk_jml_anggota,
 				"pkk_jml_keg_perbulan"	    => $pkk_jml_keg_perbulan,
 				"pkk_jml_buku_administrasi"	=> $pkk_jml_buku_administrasi,
+				"pkk_jml_dana"				=> $pkk_jml_dana,
 				"taruna_jml"	    		=> $taruna_jml,
 				"taruna_jenis"	    		=> $taruna_jenis,
 				"taruna_jml_pengurus"	    => $taruna_jml_pengurus,
@@ -983,8 +985,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 
 		$this->view->proses = "2";	
 		$this->view->keterangan = "Judul";
-		$this->view->hasil = $this->view->umumUpdate ." ". $this->view->personilUpdate ." ". $this->view->kewenanganUpdate ." ". 
-						$this->view->keuanganUpdate ." ". $this->view->kelembagaanUpdate ." ". $this->view->trantibUpdate;
+		$this->view->hasil = $this->view->umumUpdate;
 		
 		$this->rekamkelurahanlistAction();
 		$this->render('rekamkelurahanlist');
@@ -996,22 +997,28 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->carii 			= $_REQUEST['carii'];
 
 		$this->view->jenisForm		= $_REQUEST['jenisForm'];
-		$id							= $_REQUEST['id'];
+		// $id							= $_REQUEST['id'];
 		
 		$this->view->kd_kel	= $_REQUEST['kd_kel'];
 		$this->view->bulan 	= $_REQUEST['bulan'];
 		$this->view->tahun 	= $_REQUEST['tahun'];
 
 		
-		$dataMasukan = array("id" => $id,
+		$dataMasukan = array(
 							"kd_kel" => $kd_kel,
 							"bulan" => $bulan,
 							"tahun" => $tahun);
-		$this->view->rekamkelurahanHapus = $this->rekamkelurahan_serv->rekamkelurahanHapus($dataMasukan);
+		// $this->view->rekamkelurahanHapus = $this->rekamkelurahan_serv->rekamkelurahanHapus($dataMasukan);
+		$this->view->umumHapus = $this->rekamkelurahan_serv->umumHapus($dataMasukan);
+		$this->view->personilHapus = $this->rekamkelurahan_serv->personilHapus($dataMasukan);
+		$this->view->kewenanganHapus = $this->rekamkelurahan_serv->kewenanganHapus($dataMasukan);
+		$this->view->keuanganHapus = $this->rekamkelurahan_serv->keuanganHapus($dataMasukan);
+		$this->view->kelembagaanHapus = $this->rekamkelurahan_serv->kelembagaanHapus($dataMasukan);
+		$this->view->trantibHapus = $this->rekamkelurahan_serv->trantibHapus($dataMasukan);
 		
 		$this->view->proses = "3";	
 		$this->view->keterangan = "Judul";
-		$this->view->hasil = $this->view->rekamkelurahanHapus;
+		$this->view->hasil = $this->view->umumHapus;
 		
 		$this->rekamkelurahanlistAction();
 		$this->render('rekamkelurahanlist');
@@ -1061,9 +1068,9 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->jumProvinsi	= $this->rekamkelurahan_serv->getJumlahProvinsi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->jumKota	= $this->rekamkelurahan_serv->getJumlahKota($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		
-		var_dump($this->view->jumPusat);
-		var_dump($this->view->jumProvinsi);
-		var_dump($this->view->jumKota);
+		// var_dump($this->view->jumPusat);
+		// var_dump($this->view->jumProvinsi);
+		// var_dump($this->view->jumKota);
 	
 		
 		$this->render('rekamkelurahancetak');

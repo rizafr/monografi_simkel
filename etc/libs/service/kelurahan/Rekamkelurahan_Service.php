@@ -317,14 +317,15 @@ class Rekamkelurahan_Service {
 								"sarana_jml_lainnya"		=> $dataMasukan['sarana_jml_lainnya']			
 								
 								);
-			//var_dump($paramInput);
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			// var_dump($paramInput);
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan = '".$dataMasukan['bulan']."' AND tahun  = '".$dataMasukan['tahun']."' ";
 			$db->update('SIMKEL.dbo.mon_umum',$paramInput, $where);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
 			$db->rollBack();
 			$errmsgArr = explode(":",$e->getMessage());
+			// var_dump($errmsgArr);
 			$errMsg = $errmsgArr[0];
 			if($errMsg == "SQLSTATE[23000]")
 			{
@@ -344,7 +345,7 @@ class Rekamkelurahan_Service {
 		try {
 			$db->beginTransaction();
 			$paramInput = array("kd_kel" =>'kd_kel');	
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan  = '".$dataMasukan['bulan']."' AND tahun = '".$dataMasukan['tahun']."' ";
 			$db->delete('SIMKEL.dbo.mon_umum', $where);
 			
 			$db->commit();
@@ -524,14 +525,15 @@ class Rekamkelurahan_Service {
 									
 								
 								);
-			//var_dump($paramInput);
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			// var_dump($paramInput);
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->update('SIMKEL.dbo.mon_personil',$paramInput, $where);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
 			$db->rollBack();
 			$errmsgArr = explode(":",$e->getMessage());
+			// var_dump($errmsgArr);
 			$errMsg = $errmsgArr[0];
 			if($errMsg == "SQLSTATE[23000]")
 			{
@@ -551,7 +553,7 @@ class Rekamkelurahan_Service {
 		try {
 			$db->beginTransaction();
 			$paramInput = array("kd_kel" =>'kd_kel');	
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->delete('SIMKEL.dbo.mon_personil', $where);
 			
 			$db->commit();
@@ -675,14 +677,15 @@ class Rekamkelurahan_Service {
 								"jml_program_kelurahan"	    => $dataMasukan['jml_program_kelurahan']
 								
 								);
-		//var_dump($paramInput);
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			// var_dump($paramInput);
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->update('SIMKEL.dbo.mon_kewenangan',$paramInput, $where);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
 			$db->rollBack();
 			$errmsgArr = explode(":",$e->getMessage());
+			// var_dump($errmsgArr);
 			$errMsg = $errmsgArr[0];
 			if($errMsg == "SQLSTATE[23000]")
 			{
@@ -702,7 +705,7 @@ class Rekamkelurahan_Service {
 		try {
 			$db->beginTransaction();
 			$paramInput = array("kd_kel" =>'kd_kel');	
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->delete('SIMKEL.dbo.mon_kewenangan', $where);
 			
 			$db->commit();
@@ -734,7 +737,8 @@ class Rekamkelurahan_Service {
 			$sqlProses = "SELECT * FROM SIMKEL.dbo.mon_kewenangan ";	
 			$sqlData = $sqlProses.$where;
 			$result = $db->fetchRow($sqlData);
-			//echo $sqlData;
+			
+			// var_dump($result);
 			
 			$hasilAkhir = array(
 								"jml_urusan_kota"	        => (string)$result->jml_urusan_kota,
@@ -805,7 +809,7 @@ class Rekamkelurahan_Service {
 								"kode"	   			=> $dataMasukan['kode']
 								);
 		//var_dump($paramInput);
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->update('[SIMKEL].[dbo].[mon_program_kelurahan]',$paramInput, $where);
 			$db->commit();
 			return 'sukses';
@@ -846,7 +850,7 @@ class Rekamkelurahan_Service {
 		try {
 			$db->beginTransaction();
 			$paramInput = array("kd_kel" =>'kd_kel');	
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->delete('[SIMKEL].[dbo].[mon_program_kelurahan]', $where);
 			
 			$db->commit();
@@ -927,14 +931,15 @@ class Rekamkelurahan_Service {
 								"swadaya"	    	=> $dataMasukan['swadaya']
 								
 								);
-			//var_dump($paramInput);
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			// var_dump($paramInput);
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->update('SIMKEL.dbo.mon_keuangan',$paramInput, $where);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
 			$db->rollBack();
 			$errmsgArr = explode(":",$e->getMessage());
+			// var_dump($errmsgArr);
 			$errMsg = $errmsgArr[0];
 			if($errMsg == "SQLSTATE[23000]")
 			{
@@ -954,7 +959,7 @@ class Rekamkelurahan_Service {
 		try {
 			$db->beginTransaction();
 			$paramInput = array("kd_kel" =>'kd_kel');	
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->delete('SIMKEL.dbo.mon_keuangan', $where);
 			
 			$db->commit();
@@ -1081,14 +1086,15 @@ class Rekamkelurahan_Service {
 								"jml_lembaga_lain"	    	=> $dataMasukan['jml_lembaga_lain']
 								
 								);
-				//var_dump($paramInput);
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			// var_dump($paramInput);
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->update('SIMKEL.dbo.mon_kelembagaan',$paramInput, $where);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
 			$db->rollBack();
 			$errmsgArr = explode(":",$e->getMessage());
+			// var_dump($errmsgArr);
 			$errMsg = $errmsgArr[0];
 			if($errMsg == "SQLSTATE[23000]")
 			{
@@ -1108,7 +1114,7 @@ class Rekamkelurahan_Service {
 		try {
 			$db->beginTransaction();
 			$paramInput = array("kd_kel" =>'kd_kel');	
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->delete('SIMKEL.dbo.mon_kelembagaan', $where);
 			
 			$db->commit();
@@ -1239,14 +1245,15 @@ class Rekamkelurahan_Service {
 								"jml_pos_hutan_lindung"	    => $dataMasukan['jml_pos_hutan_lindung']
 								
 								);
-				//var_dump($paramInput);
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			// var_dump($paramInput);
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->update('SIMKEL.dbo.mon_trantib',$paramInput, $where);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
 			$db->rollBack();
 			$errmsgArr = explode(":",$e->getMessage());
+			// var_dump($errmsgArr);
 			$errMsg = $errmsgArr[0];
 			if($errMsg == "SQLSTATE[23000]")
 			{
@@ -1266,7 +1273,7 @@ class Rekamkelurahan_Service {
 		try {
 			$db->beginTransaction();
 			$paramInput = array("kd_kel" =>'kd_kel');	
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan =  = '".$dataMasukan['bulan']."' AND tahun =  = '".$dataMasukan['tahun']."' ";
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
 			$db->delete('SIMKEL.dbo.mon_trantib', $where);
 			
 			$db->commit();
