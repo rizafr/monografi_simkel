@@ -145,6 +145,9 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->kd_kel	 = $_REQUEST['kd_kel'];
 		$this->view->bulan 	 = $_REQUEST['bulan'];
 		$this->view->tahun 	 = $_REQUEST['tahun'];
+		
+		
+		
 		//var_dump($this->view->kd_kel);
 		// var_dump($this->view->tahun);
 		$this->view->detailKelurahan	= $this->rekamkelurahan_serv->detailKelurahanByKode($this->view->kd_kel);
@@ -1005,9 +1008,10 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 
 		
 		$dataMasukan = array(
-							"kd_kel" => $kd_kel,
-							"bulan" => $bulan,
-							"tahun" => $tahun);
+							"kd_kel" => $this->view->$kd_kel,
+							"bulan" => $this->view->$bulan,
+							"tahun" => $this->view->$tahun);
+		var_dump($dataMasukan);
 		// $this->view->rekamkelurahanHapus = $this->rekamkelurahan_serv->rekamkelurahanHapus($dataMasukan);
 		$this->view->umumHapus = $this->rekamkelurahan_serv->umumHapus($dataMasukan);
 		$this->view->personilHapus = $this->rekamkelurahan_serv->personilHapus($dataMasukan);
@@ -1022,6 +1026,13 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		
 		$this->rekamkelurahanlistAction();
 		$this->render('rekamkelurahanlist');
+		
+		var_dump($this->view->umumHapus);
+		var_dump($this->view->personilHapus);
+		var_dump($this->view->kewenanganHapus);
+		var_dump($this->view->keuanganHapus);
+		var_dump($this->view->kelembagaanHapus);
+		var_dump($this->view->trantibHapus);
 	}
 
 	public function kelurahanlistAction() {
@@ -1063,10 +1074,11 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->detailKeuangan	= $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKelembagaan	= $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailTrantib	= $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->getJumlahPusat	= $this->rekamkelurahan_serv->getJumlahPusat($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->getJumlahProvinsi	= $this->rekamkelurahan_serv->getJumlahProvinsi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->getJumlahKota	= $this->rekamkelurahan_serv->getJumlahKota($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		
-		$this->view->jumPusat	= $this->rekamkelurahan_serv->getJumlahPusat($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		$this->view->jumProvinsi	= $this->rekamkelurahan_serv->getJumlahProvinsi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		$this->view->jumKota	= $this->rekamkelurahan_serv->getJumlahKota($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		
 		
 		// var_dump($this->view->jumPusat);
 		// var_dump($this->view->jumProvinsi);

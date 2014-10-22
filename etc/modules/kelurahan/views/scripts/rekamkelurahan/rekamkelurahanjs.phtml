@@ -124,6 +124,10 @@ function rekamkelurahanHapus(kd_kel,kelurahan,tahun,bulan)
 	
 	if(ConfirmDelete(kd_kel,kelurahan,tahun,bulan))
 	{	
+		alert(kd_kel);
+		alert(kelurahan);
+		alert(tahun);
+		alert(bulan);
 		handler = '<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanhapus';
 		var opt = {kd_kel:kd_kel,tahun:tahun,bulan:bulan};
 		jQuery.get(handler,opt,function(data) {
