@@ -304,9 +304,9 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 						"anggaran"			=> $anggaran
 					);
 					
-				var_dump($datamasukanprogramkelurahan);
+				// var_dump($datamasukanprogramkelurahan);
 				$this->view->programkelurahanInsert = $this->rekamkelurahan_serv->programkelurahanInsert($datamasukanprogramkelurahan);
-				var_dump($this->view->programkelurahanInsert);
+				// var_dump($this->view->programkelurahanInsert);
 				}
 				
 			}// END PROGRAM KELURAHAN PUSAT
@@ -1008,10 +1008,10 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 
 		
 		$dataMasukan = array(
-							"kd_kel" => $this->view->$kd_kel,
-							"bulan" => $this->view->$bulan,
-							"tahun" => $this->view->$tahun);
-		var_dump($dataMasukan);
+							"kd_kel" => $this->view->kd_kel,
+							"bulan" => $this->view->bulan,
+							"tahun" => $this->view->tahun);
+		// var_dump($dataMasukan);
 		// $this->view->rekamkelurahanHapus = $this->rekamkelurahan_serv->rekamkelurahanHapus($dataMasukan);
 		$this->view->umumHapus = $this->rekamkelurahan_serv->umumHapus($dataMasukan);
 		$this->view->personilHapus = $this->rekamkelurahan_serv->personilHapus($dataMasukan);
@@ -1027,12 +1027,12 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->rekamkelurahanlistAction();
 		$this->render('rekamkelurahanlist');
 		
-		var_dump($this->view->umumHapus);
-		var_dump($this->view->personilHapus);
-		var_dump($this->view->kewenanganHapus);
-		var_dump($this->view->keuanganHapus);
-		var_dump($this->view->kelembagaanHapus);
-		var_dump($this->view->trantibHapus);
+		// var_dump($this->view->umumHapus);
+		// var_dump($this->view->personilHapus);
+		// var_dump($this->view->kewenanganHapus);
+		// var_dump($this->view->keuanganHapus);
+		// var_dump($this->view->kelembagaanHapus);
+		// var_dump($this->view->trantibHapus);
 	}
 
 	public function kelurahanlistAction() {

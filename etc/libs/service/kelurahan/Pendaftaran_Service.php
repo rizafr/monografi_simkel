@@ -269,7 +269,7 @@ class Pendaftaran_Service {
 							);
 						
 			
-			var_dump($paramInput);
+			// var_dump($paramInput);
 			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."'";
 			$db->update('SIMKEL.dbo.mon_kelurahan',$paramInput, $where);
 			$db->commit();

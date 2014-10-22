@@ -172,6 +172,7 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$jenisForm						= $_POST['jenisForm'];
 
 		$kd_kel							= $_POST['kd_kel'];
+		$kelurahan						= $_POST['kelurahan'];
 		$tahun_pembentukan				= $_POST['tahun_pembentukan'];
 		$dasar_pembentukan				= $_POST['dasar_pembentukan'];
 		$kode_wilayah					= $_POST['kode_wilayah'];
@@ -185,6 +186,7 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$jarak_dari_kota				= $_POST['jarak_dari_kota'];
 		$jarak_dari_ibukota_kota		= $_POST['jarak_dari_ibukota_kota'];
 		$jarak_dari_ibukota_prov		= $_POST['jarak_dari_ibukota_prov'];
+		
 		
 
 
@@ -205,9 +207,12 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 								);
 								
 		$this->view->pendaftaranUpdate = $this->pendaftaran_serv->pendaftaranUpdate($dataMasukan);
+		
+		$this->view->kelurahan = $kelurahan	;
+		// var_dump($this->view->kelurahan);
 		// var_dump($dataMasukan);
 		// var_dump($this->view->pendaftaranUpdate);
-		$this->Logfile->createLog($this->view->kelurahan, "Ubah data", $n_nama." (".$id.")");
+		$this->Logfile->createLog($this->view->kelurahan, "Ubah data", $kd_kel." (".$id.")");
 		$this->view->proses = "2";	
 		$this->view->keterangan = "Umum Pendaftaran";
 		$this->view->hasil = $this->view->pendaftaranUpdate;

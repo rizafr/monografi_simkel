@@ -40,7 +40,7 @@ $numToDisplay = $this->numToDisplay;
 	$status = $this->hasil;
 	$proses = $this->proses;
 	$keterangan = $this->keterangan;
-	$pesan->show_message($proses, $keterangan, "$status" ); 
+	$pesan->show_message($proses, $this->kd_kel, "$status" ); 
 ?>
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 <input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->detailPendaftaran['kd_kel'];?>" />
@@ -52,8 +52,8 @@ $numToDisplay = $this->numToDisplay;
 				    <td align="right" width="180">* Kode Wilayah :</td>
 					<td>	
 						<? 
-							$c_noregAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-							echo $ctrlFrm->formText("kode_wilayah", $this->detailPendaftaran['kode_wilayah'], $c_noregAttrib);
+							$kode_wilayahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+							echo $ctrlFrm->formText("kode_wilayah", $this->detailPendaftaran['kode_wilayah'], $kode_wilayahAttrib);
 						?>
 				</td>
 				</tr>
@@ -64,8 +64,8 @@ $numToDisplay = $this->numToDisplay;
 				    <td align="right" width="180">* Nama Kelurahan :</td>
 					<td>	
 						<? 
-							$n_namaAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-							echo $ctrlFrm->formText("kelurahan", $this->detailPendaftaran['kelurahan'], $n_namaAttrib);
+							$kelurahanAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+							echo $ctrlFrm->formText("kelurahan", $this->detailPendaftaran['kelurahan'], $kelurahanAttrib);
 						?>
 				</td>
 				</tr>
@@ -141,8 +141,9 @@ $numToDisplay = $this->numToDisplay;
 		<td align="right" >* 2. Luas Wilayah :</td>
 		<td>	
 				<? 
+				$luas =  explode('.',$this->detailPendaftaran['luas']);
 				$luasAttrib = array("size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("luas", $this->detailPendaftaran['luas'], $luasAttrib);
+				echo $ctrlFrm->formText("luas", $luas[0], $luasAttrib);
 				?> km
 		</td>
 	</tr>
@@ -200,8 +201,9 @@ $numToDisplay = $this->numToDisplay;
 		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Pusat Pemerintahan Kecamatan :</td>
 		<td align="center">
 			<? 
+				$jarak_dari_kecamatan =  explode('.',$this->detailPendaftaran['jarak_dari_kecamatan']);
 				$jarak_dari_kecamatanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_kecamatan", $this->detailPendaftaran['jarak_dari_kecamatan'], $jarak_dari_kecamatanAttrib);
+				echo $ctrlFrm->formText("jarak_dari_kecamatan", $jarak_dari_kecamatan[0], $jarak_dari_kecamatanAttrib);
 			?> km
 		</td>
 	</tr>
@@ -210,8 +212,9 @@ $numToDisplay = $this->numToDisplay;
 		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Pusat Pemerintahan Kota :</td>
 		<td align="center">
 			<? 
+				$jarak_dari_kota =  explode('.',$this->detailPendaftaran['jarak_dari_kota']);
 				$jarak_dari_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_kota", $this->detailPendaftaran['jarak_dari_kota'], $jarak_dari_kotaAttrib);
+				echo $ctrlFrm->formText("jarak_dari_kota", $jarak_dari_kota[0], $jarak_dari_kotaAttrib);
 			?>  km
 		</td>
 	</tr>
@@ -219,8 +222,9 @@ $numToDisplay = $this->numToDisplay;
 		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Kota/Ibukota Kabupaten:</td>
 		<td align="center">
 			<? 
+				$jarak_dari_ibukota_kota =  explode('.',$this->detailPendaftaran['jarak_dari_ibukota_kota']);
 				$jarak_dari_ibukota_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_ibukota_kota", $this->detailPendaftaran['jarak_dari_ibukota_kota'], $jarak_dari_ibukota_kotaAttrib);
+				echo $ctrlFrm->formText("jarak_dari_ibukota_kota", $jarak_dari_ibukota_kota[0], $jarak_dari_ibukota_kotaAttrib);
 			?>  km
 		</td>
 	</tr>
@@ -228,8 +232,9 @@ $numToDisplay = $this->numToDisplay;
 		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Ibukota Provinsi :</td>
 		<td align="center">
 			<? 
+				$jarak_dari_ibukota_prov =  explode('.',$this->detailPendaftaran['jarak_dari_ibukota_prov']);
 				$jarak_dari_ibukota_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
-				echo $ctrlFrm->formText("jarak_dari_ibukota_prov", $this->detailPendaftaran['jarak_dari_ibukota_prov'], $jarak_dari_ibukota_provAttrib);
+				echo $ctrlFrm->formText("jarak_dari_ibukota_prov", $jarak_dari_ibukota_prov[0], $jarak_dari_ibukota_provAttrib);
 			?>  km
 		</td>
 	</tr>	
@@ -261,9 +266,6 @@ $numToDisplay = $this->numToDisplay;
 
 <script>
 
- 	$(function() {
-		$("#tahun_pembentukan").datepicker();
-	});
 
 
 function showDialog(val,jum) {      
