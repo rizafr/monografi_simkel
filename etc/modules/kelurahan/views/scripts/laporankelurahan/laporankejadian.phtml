@@ -89,55 +89,57 @@ $numToDisplay = $this->numToDisplay;
 	</table>
 				
 	</form>
-			<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
-				<th >No</th>
-				<th >Kelurahan</th>
-				<th >Bulan</th>
-				<th >Tahun</th> 
+		<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+			<th >No</th>
+			<th >Kelurahan</th>
+			<th >Tanggal</th>
+			<th >Bulan</th>
+			<th >Tahun</th> 
+		
 			
-				
-				
-				<th colspan="4" class="nosort">FUNGSI</th>
-				
-				<?
-				if (count($this->laporankelurahanlist) == 0){ 
-				?>
-					<tr class="event2"><td colspan="7"  style="color:#8C0000; font-weight:bold; background-color: #FF9999">Data Tidak Ditemukan</td></tr>
-				<?} else {
-						
-						
-						foreach($this->laporankelurahanlist as $data) : 
-						if ($key%2==0) { ?>
-							<tr class="event">
-						<? } else if ($key%2==1) { ?>
-							<tr class="event2">
-						<? }
-						$kd_kel	= $this->escape($data->kd_kel);						
-						$tahun	= $this->escape($data->tahun); 
-						$bulan	= $this->escape($data->bulan); 
-						$kelurahan	= $this->escape($data->kelurahan);
-						
-						
-						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
-						echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
-						
-						?>
-							
-						<td align="center"><? echo $noUrut;?></td>
-						<td align="center"><? echo $kelurahan;?></td>
-						<td align="center"><? echo $bulan;?></td>
-						<td align="center"><? echo $tahun;?></td>
-						
-
-						<td class="clcenter"><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="filedoc" align="center" title= "cetak data <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
-
+			
+			<th colspan="4" class="nosort">FUNGSI</th>
+			
+			<?
+			if (count($this->laporankejadianlist) == 0){ 
+			?>
+				<tr class="event2"><td colspan="7"  style="color:#8C0000; font-weight:bold; background-color: #FF9999">Data Tidak Ditemukan</td></tr>
+			<?} else {
 					
-						</tr>
-					<?
-					endforeach;
-				}
-				?>
-			</table>
+					
+					foreach($this->laporankejadianlist as $data) : 
+					if ($key%2==0) { ?>
+						<tr class="event">
+					<? } else if ($key%2==1) { ?>
+						<tr class="event2">
+					<? }
+					$kd_kel	= $this->escape($data->kd_kel);						
+					$tahun	= $this->escape($data->tanggal); 
+					$tahun	= $this->escape($data->tahun); 
+					$bulan	= $this->escape($data->bulan); 
+					$kelurahan	= $this->escape($data->kelurahan);
+					
+					
+					$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+					echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
+					
+					?>
+						
+					<td align="center"><? echo $noUrut;?></td>
+					<td align="center"><? echo $kelurahan;?></td>
+					<td align="center"><? echo $tanggal;?></td>
+					<td align="center"><? echo $bulan;?></td>
+					<td align="center"><? echo $tahun;?></td>
+					
+
+					<td class="clcenter"><a  href="<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadianperhari?kd_kel=<?echo $kd_kel;?>&tanggal=<?echo $tanggal;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="filedoc" align="center" title= "Cetak Laporan Kejadian"></div></a> </td>
+
+				</tr>
+				<?
+				endforeach;
+			}
+			?>
+		</table>
 		<span class="corners-bottom"><span></span></span>
 	</div>
 </div>
