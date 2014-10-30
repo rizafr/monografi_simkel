@@ -1,0 +1,286 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+$format_date = new format_date();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>> Data Kelurahan
+</div>
+
+<div id="dialog-browse">  
+</div>
+
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		
+		
+		<? if(strtolower($this->jenisForm) == 'insert') {$namaForm = 'frmtambahkejadian'; $nama='tambah';}
+			else if (strtolower($this->jenisForm) == 'update') {$namaForm = 'frmubahkejadian'; $nama='ubah'; }
+			else {$namaForm = 'frmhapusKejadian';  $nama='hapus';}
+		?>
+		
+		<h2 class="title">FORM <?php echo strtoupper($nama)?> DATA KELURAHAN <strong><?php echo  strtoupper($this->detailkejadian['kelurahan']); ?></strong> </h2>
+		
+	    <div class="spacer"></div> 
+		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi">
+<?
+	$status = $this->hasil;
+	$proses = $this->proses;
+	$keterangan = $this->keterangan;
+	$pesan->show_message($proses, $this->kd_kel, "$status" ); 
+?>
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
+<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->detailkejadian['kd_kel'];?>" />
+<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
+	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
+				
+				
+				<tr>
+				    <td align="right" width="180">* Kode Wilayah :</td>
+					<td>	
+						<? 
+							$kode_wilayahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+							echo $ctrlFrm->formText("kode_wilayah", $this->detailkejadian['kode_wilayah'], $kode_wilayahAttrib);
+						?>
+				</td>
+				</tr>
+
+				
+				
+				<tr>
+				    <td align="right" width="180">* Nama Kelurahan :</td>
+					<td>	
+						<? 
+							$kelurahanAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+							echo $ctrlFrm->formText("kelurahan", $this->detailkejadian['kelurahan'], $kelurahanAttrib);
+						?>
+				</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Tahun Pembentukan :</td>
+					<td>
+						<? 
+							$tahun_pembentukanAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+							echo $ctrlFrm->formText("tahun_pembentukan",trim($this->detailkejadian['tahun_pembentukan']), $tahun_pembentukanAttrib);
+						?>
+					</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Dasar Hukum Pembentukan :</td>
+					<td>	
+						<? 
+						$t_waktuAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+						echo $ctrlFrm->formText("dasar_pembentukan", $this->detailkejadian['dasar_pembentukan'], $t_waktuAttrib);
+						?>
+				</td>
+				</tr>
+				
+				
+				
+				<tr>
+				    <td align="right" width="180">* Nomor Kode Pos :</td>
+					<td>	
+	<? 
+	$t_beratAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+	echo $ctrlFrm->formText("kode_pos", $this->detailkejadian['kode_pos'], $t_beratAttrib);
+	?>
+				</td>
+				</tr>
+				
+				
+				</td>
+				</tr>
+
+				<tr>
+				    <td align="right" width="180">* Kecamatan :</td>
+					<td>	
+						<? 
+						$t_tinggiAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","readonly"=>"readonly");
+						echo $ctrlFrm->formText("kecamatan", $this->detailkejadian['kecamatan'], $t_tinggiAttrib);
+						?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Kabupaten / Kota :</td>
+					<td>	
+					<? 
+						$kotaAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","readonly"=>"readonly");
+						echo $ctrlFrm->formText("kota", "Cimahi", $kotaAttrib);
+					?>
+				</td>
+				</tr>
+				
+				<tr>
+				    <td align="right" width="180">* Provinsi :</td>
+					<td>	
+						<? 
+						$provAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","readonly"=>"readonly");
+						echo $ctrlFrm->formText("prov", "Jawa Barat", $provAttrib);
+					?>
+				</td>
+				</tr>
+				
+				<!--KELURAHAN-->
+	<tr>
+		<td align="right" >* 2. Luas Wilayah :</td>
+		<td>	
+				<? 
+				$luas =  explode('.',$this->detailkejadian['luas']);
+				$luasAttrib = array("size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
+				echo $ctrlFrm->formText("luas", $luas[0], $luasAttrib);
+				?> km
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td align="right" >3. Batas Wilayah :</td>
+		<td>	
+		<tr>
+				<td align="right" >&nbsp;&nbsp;&nbsp; 1. Sebelah Utara :</td>
+				<td align="center">
+					<? 
+						$batas_utaraAttrib = array("size" => 50,"maxlength" => 50, "required"=>"required");
+						echo $ctrlFrm->formText("batas_utara", $this->detailkejadian['batas_utara'], $batas_utaraAttrib);
+					?>
+				</td>
+			</tr>
+			<tr>
+				<td align="right" >&nbsp;&nbsp;&nbsp; 2. Sebelah Selatan :</td>
+				<td align="center">
+					<? 
+						$batas_selatanAttrib = array("size" => 50,"maxlength" => 50, "required"=>"required");
+						echo $ctrlFrm->formText("batas_selatan", $this->detailkejadian['batas_selatan'], $batas_selatanAttrib);
+					?>
+				</td>
+			</tr>
+			<tr>
+				<td align="right" >&nbsp;&nbsp;&nbsp;3. Sebelah Barat :</td>
+				<td align="center">
+					<? 
+						$batas_baratAttrib = array("size" => 50,"maxlength" => 50, "required"=>"required");
+						echo $ctrlFrm->formText("batas_barat", $this->detailkejadian['batas_barat'], $batas_baratAttrib);
+					?>
+				</td>
+			</tr>
+			<tr>
+				<td align="right" >&nbsp;&nbsp;&nbsp;4. Sebelah Timur :</td>
+				<td align="center">
+					<? 
+						$batas_timurAttrib = array("size" => 50,"maxlength" => 50, "required"=>"required");
+						echo $ctrlFrm->formText("batas_timur", $this->detailkejadian['batas_timur'], $batas_timurAttrib);
+					?>
+				</td>
+			</tr>
+			
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="2" align="right" >4. Orbitrasi (Jarak dari Pusat Pemerintahan) :</td>
+		<td></td>
+	</tr>		
+		
+	<tr>
+		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Pusat Pemerintahan Kecamatan :</td>
+		<td align="center">
+			<? 
+				$jarak_dari_kecamatan =  explode('.',$this->detailkejadian['jarak_dari_kecamatan']);
+				$jarak_dari_kecamatanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
+				echo $ctrlFrm->formText("jarak_dari_kecamatan", $jarak_dari_kecamatan[0], $jarak_dari_kecamatanAttrib);
+			?> km
+		</td>
+	</tr>
+	
+	<tr>
+		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Pusat Pemerintahan Kota :</td>
+		<td align="center">
+			<? 
+				$jarak_dari_kota =  explode('.',$this->detailkejadian['jarak_dari_kota']);
+				$jarak_dari_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
+				echo $ctrlFrm->formText("jarak_dari_kota", $jarak_dari_kota[0], $jarak_dari_kotaAttrib);
+			?>  km
+		</td>
+	</tr>
+	<tr>
+		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Kota/Ibukota Kabupaten:</td>
+		<td align="center">
+			<? 
+				$jarak_dari_ibukota_kota =  explode('.',$this->detailkejadian['jarak_dari_ibukota_kota']);
+				$jarak_dari_ibukota_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
+				echo $ctrlFrm->formText("jarak_dari_ibukota_kota", $jarak_dari_ibukota_kota[0], $jarak_dari_ibukota_kotaAttrib);
+			?>  km
+		</td>
+	</tr>
+	<tr>
+		<td align="right" >&nbsp;&nbsp;&nbsp; Jarak dari Ibukota Provinsi :</td>
+		<td align="center">
+			<? 
+				$jarak_dari_ibukota_prov =  explode('.',$this->detailkejadian['jarak_dari_ibukota_prov']);
+				$jarak_dari_ibukota_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
+				echo $ctrlFrm->formText("jarak_dari_ibukota_prov", $jarak_dari_ibukota_prov[0], $jarak_dari_ibukota_provAttrib);
+			?>  km
+		</td>
+	</tr>	
+	<!--End KELURAHAN-->
+	<tr>  
+		<td>&nbsp;</td>
+		<td width="500px;">&nbsp;</td>
+		<td>
+			
+				<input type="button" value="Batal" onclick="kejadianlist()"> 
+				<input type="reset" value="Ulangi"> 
+				<input type="submit" value="Simpan">
+		</td>
+	</tr>
+	<tr>
+		<td>* Harus Diisi</td>
+		<td></td>
+	</tr>
+</table>
+</form>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+	$(".validasi").validate();
+});
+</script>
+
+<script>
+
+
+
+function showDialog(val,jum) {      
+    $( "#dialog-browse" ).dialog({
+      autoOpen: false,
+      height: 380,
+      width: 640,
+      modal: true,
+      resizable:false,
+      title: "Data"
+    });
+    if(val =='dosen'){dosenlist(jum);}  
+    if(val =='prodi'){prodilist();}  
+    return false;
+  }
+
+</script>
+

@@ -1,0 +1,131 @@
+<?
+require_once 'Zend/View.php';
+require_once 'share/format_date.php'; 
+require_once 'share/format_page.php';
+require_once "share/share_message.php";
+require_once "share/oa_dec_cur_conv.php";
+
+$ctrlFrm = new Zend_View();
+$pesan = new share_message();
+$halaman = new format_page();
+$dec_cur = new oa_dec_cur_conv();
+
+$currentPage = $this->currentPage;
+$numToDisplay = $this->numToDisplay;
+
+?>
+<div class="navlink">
+<a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
+>>  Data Kelurahan
+</div>
+<div class="panel">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<h2 class="title">DATA KELURAHAN</h2>
+			<form method="post" id="frmcarikejadian" name="frmcarikejadian">				
+				Filter :
+				<?
+					$kategoriCari = array("K.kelurahan" => "Nama Kelurahan", "KEC.kecamatan" => "Kecamatan","tahun_pembentukan" => "Tahun Pembentukan");
+					echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
+				?>
+				
+				<input type="text" name="carii" id="carii" align="center" value ="<? echo $this->carii;?>">
+				<?
+					$atribSubmit = array("onclick"=>"javascript:carikejadian();");
+					echo $ctrlFrm->formSubmit('cari', 'Search', $atribSubmit)."&nbsp;";
+				?>
+		</form>
+	
+<fieldset class="fields"> 
+<? 
+$status = $this->hasil;
+$proses = $this->proses;
+$pesan->show_message($proses, $this->kd_kel , "$status" ); 
+?>
+
+<!-- <div class="add" title="Tambah Data" onClick="kejadianForm('insert','');"></div>-->
+
+<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+				<th >NoUrut</th>
+				<th >Hari / Tanggal</th>
+				<th >Uraian</th> 
+				<th >Waktu</th> 
+				<th >Lokasi</th> 
+				<th >Kerugian</th> 
+				<th> Nominal</th> 
+				<th >Pelapor</th> 
+				<th >Keterangan</th> 
+				<th >Lampiran</th> 
+				
+				<th colspan="1" class="nosort">FUNGSI</th>
+				
+				<?
+				if (count($this->kejadianList) == 0){ 
+				?>
+					<tr class="event2"><td colspan="11" style="color:#8C0000; font-weight:bold; background-color: #FF9999">Data Tidak Ditemukan</td></tr>
+				<?} else {
+						
+						
+						foreach ($this->kejadianList as $key => $val): 
+						if ($key%2==0) { ?>
+							<tr class="event">
+						<? } else if ($key%2==1) { ?>
+							<tr class="event2">
+						<? } 
+
+
+						$kd_kel		= $this->escape($val['kd_kel']); 
+						$kelurahan		= $this->escape($val['kelurahan']); 
+						$hari	= $this->escape($val['hari']); 
+						$tanggal	= $this->escape($val['tanggal']); 
+						$uraian	= $this->escape($val['uraian']);
+						$waktu	= $this->escape($val['waktu']);
+						$lokasi	= $this->escape($val['lokasi']);
+						$kerugian	= $this->escape($val['kerugian']);
+						$nominal	= $this->escape($val['nominal']);
+						$pelapor	= $this->escape($val['pelapor']);
+						$keterangan	= $this->escape($val['keterangan']);
+						$lampiran	= $this->escape($val['lampiran']);
+					
+						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+						echo $ctrlFrm->formHidden('kd_kel', $noreg, null);
+						
+						?>
+					<td align="center"><? echo $noUrut;?></td>					
+					<td align="center"><? echo $hari ." / ".$tanggal;?></td>
+					<td align="center"><? echo $uraian?></td>
+					<td align="center"><? echo $waktu;?></td>
+					<td align="center"><? echo $lokasi;?></td>
+					<td align="center"><? echo $kerugian;?></td>
+					<td align="center"><? echo $nominal;?></td>
+					<td align="center"><? echo $pelapor;?></td>
+					<td align="center"><? echo $keterangan;?></td>
+					<td align="center"><? echo $lampiran;?></td>
+
+
+<td><div onClick="kejadianForm('update','<? echo $kd_kel;?>');" class="edit" title="Ubah Data"></div></td>
+		
+					
+						</tr>
+					<?
+					endforeach;
+				}
+				?>
+			</table>
+
+			<?	
+			$totalData = $this->totkejadianList;
+			$modul = $this->basePath."/pasien/kejadian/kejadianlist";
+			$param1 = $this->cabang;$param2 = $this->tahun;$param3 = $this->bulan;$param4 = $this->jenis;$param5 = $this->status;
+			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
+			
+			?>
+		</fieldset>		 
+		
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<script type="text/javascript">
+var sorter=new table.sorter("sorter");
+sorter.init("sorter",0);
+</script>
