@@ -51,7 +51,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 	public function kejadianjsAction() 
     {
 	 header('content-type : text/javascript');
-	 $this->render('pendaftaranjs');
+	 $this->render('kejadianjs');
     }
 	
 	//test OPen report
@@ -68,6 +68,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$ssogroup = new Zend_Session_Namespace('ssogroup');	
 		$this->view->kelurahan =$ssogroup->kelurahan;
 		$kd_kel =$ssogroup->kd_kel;
+		$this->view->kd_kel =$ssogroup->kd_kel;
 
 		if ( $_REQUEST['param1']){ $this->view->cabang= $_REQUEST['param1'];}
 		else {  $this->view->cabang= $_REQUEST['cabang']; 
@@ -76,8 +77,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		if ( $_REQUEST['param2']){ $this->view->korek2= $_REQUEST['param2'];}
 		else {  $this->view->korek2= $_REQUEST['korek2']; 
 		}
-		// $this->view->agamaList = $this->ref_serv->getAgamaList();
-		// $this->view->statusList = $this->ref_serv->getStatusList();
+		
 		
 		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
 		$this->view->carii 			= trim(stripslashes(strip_tags(htmlspecialchars($_REQUEST['carii']))));
@@ -96,8 +96,8 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$this->view->numToDisplay = $numToDisplay;
 		$this->view->currentPage = $currentPage;
 		$this->view->totKejadianList = $this->kejadian_serv->cariKejadianList($dataMasukan,0,0,0);
-		$this->view->kejadianList = $this->kejadian_serv->cariKejadianList($dataMasukan,$currentPage, $numToDisplay,$this->view->totPendaftaranList);
-		//var_dump($this->view->pendaftaranList );		
+		$this->view->kejadianList = $this->kejadian_serv->cariKejadianList($dataMasukan,$currentPage, $numToDisplay,$this->view->totkejadianList);
+		//var_dump($this->view->kejadianList );		
 	}
 	
 	public function kejadiandataAction()
@@ -108,10 +108,13 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$this->view->carii 			= $_REQUEST['carii'];
 
 		$this->view->jenisForm		= $_REQUEST['jenisForm'];
-		$this->view->kd_kel				= $_REQUEST['kd_kel'];
+		$this->view->kd_kel			= $_REQUEST['kd_kel'];
+		$this->view->idx_kejadian	= $_REQUEST['idx_kejadian'];
 		
-		$this->view->detailKejadian				= $this->kejadian_serv->detaiKejadianById($this->view->kd_kel);
-		//var_dump($this->view->detailPendaftaran);
+		$this->view->detailKejadian				= $this->kejadian_serv->detailKejadianById($this->view->kd_kel,$this->view->idx_kejadian);
+		// var_dump($this->view->kd_kel);
+		// var_dump($this->view->idx_kejadian);
+		// var_dump($this->view->detailKejadian);
 	}
 	
 	public function kejadianAction()
@@ -123,13 +126,13 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$kd_kel				= $_POST['kd_kel'];
 		$hari				= $_POST['hari'];
 		$tanggal			= $_POST['tanggal'];
-		$uraian				= $_POST['uraian'];
-		$waktu				= $_POST['lokasi'];
-		$lokasi				= $_POST['luas'];
+		$uraian				= trim($_POST['uraian']);
+		$waktu				= $_POST['waktu'];
+		$lokasi				= trim($_POST['lokasi']);
 		$kerugian			= $_POST['kerugian'];
 		$nominal			= $_POST['nominal'];
 		$pelapor			= $_POST['pelapor'];
-		$keterangan			= $_POST['keterangan'];
+		$keterangan			= trim($_POST['keterangan']);
 		$lampiran			= $_POST['lampiran'];
 	
 
@@ -163,25 +166,27 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$ssogroup = new Zend_Session_Namespace('ssogroup');	
 		$user_id =$ssogroup->user_id;
 
-		$id								= $_POST['id'];
-		$jenisForm						= $_POST['jenisForm'];
+		$idx_kejadian		= $_POST['idx_kejadian'];
+		$jenisForm			= $_POST['jenisForm'];
 
-		$kd_kel				= $_POST['kd_kel'];
+		$kd_kel			= $_POST['kd_kel'];
 		$hari				= $_POST['hari'];
 		$tanggal			= $_POST['tanggal'];
-		$uraian				= $_POST['uraian'];
-		$waktu				= $_POST['lokasi'];
-		$lokasi				= $_POST['luas'];
+		$uraian				= trim($_POST['uraian']);
+		$waktu				= $_POST['waktu'];
+		$lokasi				= trim($_POST['lokasi']);
 		$kerugian			= $_POST['kerugian'];
 		$nominal			= $_POST['nominal'];
 		$pelapor			= $_POST['pelapor'];
-		$keterangan			= $_POST['keterangan'];
+		$keterangan			= trim($_POST['keterangan']);
 		$lampiran			= $_POST['lampiran'];
 		
 		
 
 
-		$dataMasukan	= array("kd_kel"		=> $kd_kel,
+		$dataMasukan	= array(
+								"idx_kejadian"	=> $idx_kejadian,
+								"kd_kel"		=> $kd_kel,
 								"hari"			=> $hari,
 								"tanggal"		=> $tanggal,
 								"uraian"		=> $uraian,
@@ -195,12 +200,12 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 
 								);
 								
-		$this->view->kejadianUpdate = $this->pendaftaran_serv->kejadianUpdate($dataMasukan);
+		$this->view->kejadianUpdate = $this->kejadian_serv->kejadianUpdate($dataMasukan);
 		
-		$this->view->kelurahan = $kelurahan	;
+		$this->view->kd_kel = $kd_kel	;
 		// var_dump($this->view->kelurahan);
 		// var_dump($dataMasukan);
-		// var_dump($this->view->pendaftaranUpdate);
+		// var_dump($this->view->kejadianUpdate);
 		$this->Logfile->createLog($this->view->kelurahan," Ubah data ", $kd_kel." (".$user_id.")");
 		$this->view->proses = "2";	
 		$this->view->keterangan = "Umum kejadian";
@@ -213,29 +218,28 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 
 
 	
-	public function pendaftaranhapusAction()
+	public function kejadianhapusAction()
 	{
 		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
 		$this->view->carii 			= $_REQUEST['carii'];
 
 		$this->view->jenisForm		= $_REQUEST['jenisForm'];
-		$id							= $_REQUEST['id'];
+		$idx_kejadian				= $_REQUEST['idx_kejadian'];
+		$kd_kel						= $_REQUEST['kd_kel'];
 
 		$dataMasukan = array(
-							"id" => $id,
 							"kd_kel"=> $kd_kel,
-							"bulan"=> $bulan,
-							"tahun"=> $tahun,
+							"idx_kejadian"=> $idx_kejadian
 							);
 
-		$this->view->pendaftaranUpdate = $this->pendaftaran_serv->pendaftaranHapus($dataMasukan);
-		$this->Logfile->createLog($this->view->n_namauser, "Hapus data kejadian user", $n_pendaftaran." (".$id.")");
+		$this->view->kejadianUpdate = $this->kejadian_serv->kejadianHapus($dataMasukan);
+		$this->Logfile->createLog($this->view->n_namauser, "Hapus data kejadian user", $n_kejadian." (".$idx_kejadian.")");
 		$this->view->proses = "3";	
 		$this->view->keterangan = "USER";
-		$this->view->hasil = $this->view->pendaftaranUpdate;
+		$this->view->hasil = $this->view->kejadianUpdate;
 		
-		$this->pendaftaranlistAction();
-		$this->render('pendaftaranlist');
+		$this->kejadianlistAction();
+		$this->render('kejadianlist');
 	}
 
 	public function cetakkartupdfAction()
@@ -248,8 +252,8 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$this->view->jenisForm		= $_REQUEST['jenisForm'];
 		$this->view->id				= $_REQUEST['id'];
 
-		$this->view->detailPasien	= $this->pendaftaran_serv->detailPendaftaranById($this->view->id);
-		$this->view->medrecList		= $this->pendaftaran_serv->medrecList($this->view->detailPasien['kode_pasien']);
+		$this->view->detailPasien	= $this->kejadian_serv->detailkejadianById($this->view->id);
+		$this->view->medrecList		= $this->kejadian_serv->medrecList($this->view->detailPasien['kode_pasien']);
 	}
 
 

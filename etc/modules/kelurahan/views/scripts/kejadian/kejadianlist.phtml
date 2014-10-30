@@ -21,7 +21,7 @@ $numToDisplay = $this->numToDisplay;
 <div class="panel">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
-		<h2 class="title">DATA KELURAHAN</h2>
+		<h2 class="title">LAPORAN KEJADIAN KELURAHAN</h2>
 			<form method="post" id="frmcarikejadian" name="frmcarikejadian">				
 				Filter :
 				<?
@@ -43,7 +43,7 @@ $proses = $this->proses;
 $pesan->show_message($proses, $this->kd_kel , "$status" ); 
 ?>
 
-<!-- <div class="add" title="Tambah Data" onClick="kejadianForm('insert','');"></div>-->
+<div class="add" title="Tambah Data" onClick="kejadianForm('insert','<?php echo $this->kd_kel ?>','');"></div>
 
 <table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
 				<th >NoUrut</th>
@@ -52,12 +52,9 @@ $pesan->show_message($proses, $this->kd_kel , "$status" );
 				<th >Waktu</th> 
 				<th >Lokasi</th> 
 				<th >Kerugian</th> 
-				<th> Nominal</th> 
-				<th >Pelapor</th> 
-				<th >Keterangan</th> 
-				<th >Lampiran</th> 
+				<th> Kelurahan</th>
 				
-				<th colspan="1" class="nosort">FUNGSI</th>
+				<th colspan="2" class="nosort">FUNGSI</th>
 				
 				<?
 				if (count($this->kejadianList) == 0){ 
@@ -74,21 +71,29 @@ $pesan->show_message($proses, $this->kd_kel , "$status" );
 						<? } 
 
 
+						$idx_kejadian		= $this->escape($val['idx_kejadian']); 
 						$kd_kel		= $this->escape($val['kd_kel']); 
 						$kelurahan		= $this->escape($val['kelurahan']); 
-						$hari	= $this->escape($val['hari']); 
+						$hari	= strtoupper($this->escape($val['hari'])); 
 						$tanggal	= $this->escape($val['tanggal']); 
+
+						$tanggal= date('d-m-Y', strtotime($tanggal));
+
 						$uraian	= $this->escape($val['uraian']);
 						$waktu	= $this->escape($val['waktu']);
 						$lokasi	= $this->escape($val['lokasi']);
 						$kerugian	= $this->escape($val['kerugian']);
+
 						$nominal	= $this->escape($val['nominal']);
+						$nominal = explode('.',$nominal);
+						// $nominal = number_format($nominal[0], 0, ',', '.');
+
 						$pelapor	= $this->escape($val['pelapor']);
 						$keterangan	= $this->escape($val['keterangan']);
 						$lampiran	= $this->escape($val['lampiran']);
 					
 						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
-						echo $ctrlFrm->formHidden('kd_kel', $noreg, null);
+						echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
 						
 						?>
 					<td align="center"><? echo $noUrut;?></td>					
@@ -97,13 +102,11 @@ $pesan->show_message($proses, $this->kd_kel , "$status" );
 					<td align="center"><? echo $waktu;?></td>
 					<td align="center"><? echo $lokasi;?></td>
 					<td align="center"><? echo $kerugian;?></td>
-					<td align="center"><? echo $nominal;?></td>
-					<td align="center"><? echo $pelapor;?></td>
-					<td align="center"><? echo $keterangan;?></td>
-					<td align="center"><? echo $lampiran;?></td>
+					<td align="center"><? echo $kelurahan;?></td>
 
 
-<td><div onClick="kejadianForm('update','<? echo $kd_kel;?>');" class="edit" title="Ubah Data"></div></td>
+<td><div onClick="kejadianForm('update','<? echo $kd_kel;?>','<? echo $idx_kejadian;?>');" class="edit" title="Ubah Data"></div></td>
+<td><div onClick="kejadianHapus('<? echo $kd_kel;?>','<? echo $kelurahan ;?>','<? echo $idx_kejadian;?>');" class="delete" title="Hapus Data"></div>
 		
 					
 						</tr>
@@ -115,7 +118,7 @@ $pesan->show_message($proses, $this->kd_kel , "$status" );
 
 			<?	
 			$totalData = $this->totkejadianList;
-			$modul = $this->basePath."/pasien/kejadian/kejadianlist";
+			$modul = $this->basePath."/kelurahan/kejadian/kejadianlist";
 			$param1 = $this->cabang;$param2 = $this->tahun;$param3 = $this->bulan;$param4 = $this->jenis;$param5 = $this->status;
 			echo $halaman->showPage($totalData, $numToDisplay, $currentPage, 'tableview', $modul, $param1, $param2, $param3, $param4);		
 			

@@ -20,13 +20,13 @@ function kejadianlist()
 	});
 }
 
-function kejadianForm(jenisForm,kd_kel)
+function kejadianForm(jenisForm,kd_kel,idx_kejadian)
 {
-	//alert(kd_kel);
+	alert(kd_kel);
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
 	var url = '<?php echo $this->basePath; ?>/kelurahan/kejadian/kejadiandata';
-	var param = { jenisForm:jenisForm,kd_kel:kd_kel,id:id,kategoriCari:kategoriCari,carii:carii};
+	var param = { jenisForm:jenisForm,kd_kel:kd_kel,idx_kejadian:idx_kejadian,kategoriCari:kategoriCari,carii:carii};
 	jQuery.get(url, param, function(data) {
 		jQuery("div#tableview").html(data);
 		jQuery("#frmtambahkejadian").ajaxForm(tambahkejadian_opt);
@@ -39,13 +39,13 @@ var tambahkejadian_opt = {
 	url: '<?php echo $this->basePath; ?>/kelurahan/kejadian/kejadian',
 	beforeSubmit : function() {
 		
-		if (document.getElementById('kode_wilayah').value == ''){
-			alert('Kode Wilayah harus Diisi');
+		if (document.getElementById('hari').value == ''){
+			alert('Hari harus Diisi');
 			return false;
 		}
 
-		if (document.getElementById('tahun_pembentukan').value == '-'){
-			alert('Tahun Pembentukan harus Dipilih');
+		if (document.getElementById('tanggal').value == ''){
+			alert('Tanggal harus diisi');
 			return false;
 		}
 
@@ -74,16 +74,16 @@ var ubahkejadian_opt = {
 	target : '#tableview',
 	url: '<?php echo $this->basePath; ?>/kelurahan/kejadian/kejadianupdate',
 	beforeSubmit : function() {
-
-	if (document.getElementById('kode_wilayah').value == ''){
-			alert('Kode Wilayah harus Diisi');
+		if (document.getElementById('hari').value == ''){
+			alert('Hari harus Diisi');
 			return false;
 		}
 
-		if (document.getElementById('tahun_pembentukan').value == '-'){
-			alert('Tahun Pembentukan harus Dipilih');
+		if (document.getElementById('tanggal').value == ''){
+			alert('Tanggal harus diisi');
 			return false;
 		}
+
 
 	answer = confirm('Apakah data anda masukan sudah benar?.\n\'OK\' Jika benar, \'Cancel\' jika tidak.' );
 	if(answer !=0) { 
@@ -103,16 +103,16 @@ var ubahkejadian_opt = {
 };
 
 
-function kejadianHapus(kd_kel,kelurahan)
+function kejadianHapus(kd_kel,kelurahan,idx_kejadian)
 { 
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
 	kd_kel = document.getElementById('kd_kel').value;
 	
-	if(ConfirmDelete(kd_kel,kelurahan))
+	if(ConfirmDelete(kd_kel,kelurahan,idx_kejadian))
 	{	
 		handler = '<?php echo $this->basePath; ?>/kelurahan/kejadian/kejadianhapus';
-		var opt = {kd_kel:kd_kel};
+		var opt = {kd_kel:kd_kel,idx_kejadian:idx_kejadian};
 		jQuery.get(handler,opt,function(data) {
 				$("#tableview").html(data);
 				doCount(5);
@@ -309,6 +309,3 @@ var frmubahkejadian_opt = {
 		success: function(){doCount(5);},
 		resetForm: false
 };
-
-
-
