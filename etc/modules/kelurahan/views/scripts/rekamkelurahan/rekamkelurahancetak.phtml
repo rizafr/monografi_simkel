@@ -113,19 +113,10 @@
 	$document->setValue('jumlahAparatGol4',  $this->detailPersonil['jumlah_aparat_gol4'] );
 	
 	//C. Data Kewenangan
-	if($this->getJumlahPusat['kode']=="1"){
-		$jumlahPusat = $this->getJumlahPusat['jumlah'];
-	}
-	if($this->getJumlahPusat['kode']=="2"){
-		$jumlahProvinsi = $this->getJumlahPusat['jumlah'];
-	}
-	if($this->getJumlahPusat['kode']=="3"){
-		$jumlahKota = $this->getJumlahPusat['jumlah'];
-	}
-	
-	$document->setValue('getJumlahPusat',$jumlahPusat);		
-	$document->setValue('getJumlahProvinsi',$jumlahProvinsi);		
-	$document->setValue('getJumlahKota',$jumlahKota);
+		
+	$document->setValue('getJumlahPusat',$this->getJumlahPusat->jumlah);		
+	$document->setValue('getJumlahProvinsi',$this->getJumlahProvinsi->jumlah);		
+	$document->setValue('getJumlahKota',$this->getJumlahKota->jumlah);
 	
 	//D. Data Keuangan
 	$document->setValue('anggaranApbd',number_format($this->detailKeuangan['anggaran_apbd'], 0, ',', '.'));	

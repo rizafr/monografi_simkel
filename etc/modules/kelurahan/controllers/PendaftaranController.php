@@ -212,7 +212,7 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		// var_dump($this->view->kelurahan);
 		// var_dump($dataMasukan);
 		// var_dump($this->view->pendaftaranUpdate);
-		$this->Logfile->createLog($this->view->kelurahan, "Ubah data", $kd_kel." (".$id.")");
+		$this->Logfile->createLog($this->view->kelurahan," Ubah data ", $kd_kel." (".$user_id.")");
 		$this->view->proses = "2";	
 		$this->view->keterangan = "Umum Pendaftaran";
 		$this->view->hasil = $this->view->pendaftaranUpdate;

@@ -115,52 +115,40 @@ class Rekamkelurahan_Service {
 			}
 		}
 		
-		// public function getJumlahPusat($kd_kel,$bulan,$tahun){
-			// $registry = Zend_Registry::getInstance();
-			// $db = $registry->get('db');
-			// try {
-				// $db->setFetchMode(Zend_Db::FETCH_OBJ); 		
-				// $result = $db->fetchRow("SELECT kode, COUNT(*) AS jumlah 
-											// from SIMKEL.dbo.mon_program_kelurahan 
-											// where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' group by kode");
-				// return $result;
-				// } catch (Exception $e) {
-				// echo $e->getMessage().'<br>';
-				// return 'Data tidak ada <br>';
-			// }
-		// }
+		public function getJumlahPusat($kd_kel,$bulan,$tahun){
+			$registry = Zend_Registry::getInstance();
+			$db = $registry->get('db');
+			try {
+				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchRow("SELECT kode, COUNT(*) AS jumlah 
+											from SIMKEL.dbo.mon_program_kelurahan 
+											where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='1' group by kode");
+				return $result;
+				} catch (Exception $e) {
+				echo $e->getMessage().'<br>';
+				return 'Data tidak ada <br>';
+			}
+		}
 		
-		public function getJumlahPusat($kd_kel,$bulan,$tahun) {
-		$registry = Zend_Registry::getInstance();
-		$db = $registry->get('db');
-		try {
-			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
-			$where = " where kd_kel='01' AND bulan='8' AND tahun='2014' group by kode ";
-			$sqlProses = "SELECT kode, COUNT(*) AS jumlah 
-								from SIMKEL.dbo.mon_program_kelurahan 
-						";	
-			$sqlData = $sqlProses.$where;
-			$result = $db->fetchRow($sqlData);
-			//echo $sqlData;
-			$hasilAkhir = array(
-								"kode"	           	 	=> (string)$result->kode,
-								"jumlah"	            => (string)$result->jumlah
-							);
-			return $hasilAkhir;						  
-			
-	   } catch (Exception $e) {
-         echo $e->getMessage().'<br>';
-	     return 'gagal <br>';
-	   }
-	}
-	
+		public function getJumlahProvinsi($kd_kel,$bulan,$tahun){
+			$registry = Zend_Registry::getInstance();
+			$db = $registry->get('db');
+			try {
+				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
+				$result = $db->fetchRow("SELECT  kode, COUNT(*) AS jumlah from SIMKEL.dbo.mon_program_kelurahan where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='2' group by kode");
+				return $result;
+				} catch (Exception $e) {
+				echo $e->getMessage().'<br>';
+				return 'Data tidak ada <br>';
+			}
+		}
 		
 		public function getJumlahKota($kd_kel,$bulan,$tahun){
 			$registry = Zend_Registry::getInstance();
 			$db = $registry->get('db');
 			try {
 				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
-				$result = $db->fetchRow("SELECT  COUNT(*) AS jumlah from SIMKEL.dbo.mon_program_kelurahan where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='3' group by kode");
+				$result = $db->fetchRow("SELECT kode, COUNT(*) AS jumlah from SIMKEL.dbo.mon_program_kelurahan where kd_kel='$kd_kel' AND bulan='$bulan' AND tahun='$tahun' AND kode='3' group by kode");
 				return $result;
 				} catch (Exception $e) {
 				echo $e->getMessage().'<br>';

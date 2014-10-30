@@ -53,7 +53,17 @@ $numToDisplay = $this->numToDisplay;
 $status = $this->hasil;
 $proses = $this->proses;
 $keterangan = $this->keterangan;
-$pesan->show_message($proses, $keterangan, "$status" ); ?>
+$pesan->show_message($proses, $keterangan, "$status" ); 
+
+		
+		echo	$this->getJumlahPusat->jumlah;
+		
+		echo	$this->getJumlahProvinsi->jumlah;
+		
+		echo	$this->getJumlahKota->jumlah;
+		
+
+?>
 
 <script type="text/javascript">
 $(function(){
