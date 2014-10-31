@@ -24,13 +24,13 @@ $numToDisplay = $this->numToDisplay;
 <div class="panel">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
-		<h2 class="title">LAPORAN KELURAHAN</h2>
-			<form method="post" id="frmcarilaporankelurahan" name="frmcarilaporankelurahan">
+		<h2 class="title">LAPORAN KEJADIAN KELURAHAN</h2>
+		<form method="post" id="frmcarilaporankejadiankelurahan" name="frmcarilaporankejadiankelurahan">		
 	<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 		<tr>
 			<td align="left" width="180"> Periode :</td>
 			<td>
-			<select name="bulan" id="bulan" class="autowidth" > 
+			<select name="bulan" id="bulan" class="autowidth"> 
 				<?php
 				$bulan_ind=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
 				$bulan=array("1","2","3","4","5","6","7","8","9","10","11","12");
@@ -53,7 +53,7 @@ $numToDisplay = $this->numToDisplay;
 				}
 				?>
 				</select>
-			<select name="kd_kel" id="kd_kel" class="autowidth">
+			<select name="kd_kel"  id="kd_kel" class="autowidth">
 				<?php foreach($this->kelurahanList as $data): ?>
 					<?php if($this->kode_kel== $this->escape($data->kd_kel)){ ?> 
 						<option value="<?php echo $this->escape($data->kd_kel); ?>" selected><?php echo $this->escape($data->kelurahan); ?> </option>
@@ -62,8 +62,9 @@ $numToDisplay = $this->numToDisplay;
 				 <?php }
 				 endforeach; ?>
 			</select>
-			<?
-				$atribSubmit = array("onclick"=>"javascript:carilaporankelurahan();");
+			
+				<?
+				$atribSubmit = array("onclick"=>"javascript:carilaporankejadiankelurahan();");
 				echo $ctrlFrm->formSubmit('cari', 'Cari', $atribSubmit)."&nbsp;";
 			?>
 			</td>
@@ -74,54 +75,75 @@ $numToDisplay = $this->numToDisplay;
 				
 	</form>
 			<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
-				<th >No</th>
-				<th >Kelurahan</th>
-				<th >Bulan</th>
-				<th >Tahun</th> 
+				<th >NoUrut</th>
+				<th >Hari / Tanggal</th>
+				<th >Uraian</th> 
+				<th >Waktu</th> 
+				<th >Lokasi</th> 
+				<th >Kerugian</th> 
+				<th> Kelurahan</th>
+				
 			
 				
-				
-				<th colspan="4" class="nosort">FUNGSI</th>
-				
 				<?
-				if (count($this->laporankelurahanlist) == 0){ 
+				if (count($this->laporankejadiankelurahanlist) == 0){ 
 				?>
 					<tr class="event2"><td colspan="7"  style="color:#8C0000; font-weight:bold; background-color: #FF9999">Data Tidak Ditemukan</td></tr>
 				<?} else {
 						
-						
-						foreach($this->laporankelurahanlist as $data) : 
+						$noUrut = 1;
+						foreach($this->laporankejadiankelurahanlist as $data) : 
 						if ($key%2==0) { ?>
 							<tr class="event">
 						<? } else if ($key%2==1) { ?>
 							<tr class="event2">
 						<? }
-						$kd_kel	= $this->escape($data->kd_kel);						
-						$tahun	= $this->escape($data->tahun); 
-						$bulan	= $this->escape($data->bulan); 
-						$kelurahan	= $this->escape($data->kelurahan);
+						$kd_kel	= $this->escape($data->kd_kel);			
+						$idx_kejadian		= $this->escape($data->idx_kejadian); 
+						$kd_kel		=  $this->escape($data->kd_kel); 
+						$kelurahan		=  $this->escape($data->kelurahan); 
+						$hari	= strtoupper( $this->escape($data->hari)); 
+						$tanggal	=  $this->escape($data->tanggal); 
+
+						$tanggal= date('d-m-Y', strtotime($tanggal));
+
+						$uraian	=  $this->escape($data->uraian);
+						$waktu	= $this->escape($data->waktu);
+						$lokasi	=  $this->escape($data->lokasi);
+						$kerugian	=  $this->escape($data->kerugian);
+
+						$nominal	=  $this->escape($data->nominal);
+						$nominal = explode('.',$nominal);
+						// $nominal = number_format($nominal[0], 0, ',', '.');
+
+						$pelapor	=  $this->escape($data->pelapor);
+						$keterangan	=  $this->escape($data->keterangan);
+						$lampiran	=  $this->escape($data->lampiran);
 						
-						
-						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
 						echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
 						
 						?>
 							
-						<td align="center"><? echo $noUrut;?></td>
-						<td align="center"><? echo $kelurahan;?></td>
-						<td align="center"><? echo $bulan;?></td>
-						<td align="center"><? echo $tahun;?></td>
-						
-
-<td class="clcenter"><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="filedoc" align="center" title= "cetak data <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
-
-					
-						</tr>
+					<td align="center"><? echo $noUrut;?></td>					
+					<td align="center"><? echo $hari ." / ".$tanggal;?></td>
+					<td align="center"><? echo $uraian?></td>
+					<td align="center"><? echo $waktu;?></td>
+					<td align="center"><? echo $lokasi;?></td>
+					<td align="center"><? echo $kerugian;?></td>
+					<td align="center"><? echo $kelurahan;?></td>
+				</tr>
 					<?
-					endforeach;
+					$noUrut++; endforeach;
 				}
 				?>
+				<tr>
+				<td>
+				 </td>
+				</tr>
 			</table>
+			<?php if (count($this->laporankejadiankelurahanlist) != 0){ ?>
+			<a  href="<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/cetaklaporankejadiankelurahan?kd_kel=<?echo $this->kd_kel;?>&bulan=<?echo $this->bulan;?>&tahun=<?echo $this->tahun;?>"><div class="download" title="cetak Data"></div> </a>
+			<?php } ?>
 		<span class="corners-bottom"><span></span></span>
 	</div>
 </div>

@@ -87,19 +87,19 @@ $(function(){
 <table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 	
 	<tr>
-		<td align="right" >* Kode Kelurahan :</td>
+		<td align="right" ></td>
 		<td>	
-		<input name="kd_kel" id="kd_kel" type="text" value="<?echo $this->kd_kel;?>" readonly />
+		<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->kd_kel;?>" readonly />
 		
 		<!--input type="button" value="Cari" onClick="showDialog('pasien');"-->
 			</td>
 	</tr>
 	<tr>
 		<td>
-			Pilih Bulan dan Tahun
+			* Pilih Periode Bulan dan Tahun
 		</td>
 		<td>
-			<select name="bulan" id="bulan" class="kecil">
+			<select name="bulan" id="bulan" class="autowidth">
 				<option selected="selected">Bulan</option>
 				<?php
 				
@@ -114,7 +114,7 @@ $(function(){
 				}
 				?>
 				</select>
-				<select name="tahun" id="tahun"  class="kecil">
+				<select name="tahun" id="tahun"  class="autowidth">
 				<option selected="selected">Tahun</option>
 				<?php
 				for($i=date('Y'); $i>=2010; $i-=1){

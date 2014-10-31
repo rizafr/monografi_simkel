@@ -18,7 +18,7 @@ class Laporankelurahan_Service {
     }
 
 	//======================================================================
-	// List Analisispasien
+	// List Monografi
 	//======================================================================
 
 	public function getCariLaporanList($kd_kel,$bulan,$tahun) {
@@ -35,6 +35,27 @@ class Laporankelurahan_Service {
 	     return 'gagal';
 	   }
 	}
+
+
+    //======================================================================
+    // List Kejadian
+    //======================================================================
+
+    public function getCariLaporanKejadianList($kd_kel,$bulan,$tahun) {
+    
+       $registry = Zend_Registry::getInstance();
+       $db = $registry->get('db');
+       try {
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $result = $db->fetchAll("SELECT K.kelurahan, KEJ.*  FROM [SIMKEL].[dbo].[mon_kejadian] KEJ, [SIMKEL].[dbo].[m_kelurahan] K WHERE KEJ.kd_kel = K.kd_kel  AND KEJ.kd_kel='$kd_kel' AND KEJ.bulan='$bulan' AND KEJ.tahun='$tahun'"); 
+		
+        $jmlResult = count($result);
+         return $result;
+        } catch (Exception $e) {
+         echo $e->getMessage().'<br>';
+         return 'gagal';
+       }
+    }
 
 	
 public function limit2($sql, $count, $offset = 0,$total)

@@ -1,40 +1,40 @@
-function carilaporankejadian()
+function carilaporankejadiankelurahan()
 {
-	$("#frmcarilaporankejadian").ajaxForm(frmcarilaporankejadian_opt);
+	$("#frmcarilaporankejadiankelurahan").ajaxForm(frmcarilaporankejadiankelurahan_opt);
 }
-var frmcarilaporankejadian_opt = {
+var frmcarilaporankejadiankelurahan_opt = {
 		target : '#tableview',
-		url: '<?php echo $this->basePath; ?>/kejadian/laporankelurahan/laporankejadianlist',
+		url: '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadiankelurahanlist',
 		type: 'post', 
 		resetForm: false
 };
-function laporankejadianlist()
+function laporankejadiankelurahanlist()
 {
 	periode = document.getElementById('periode').value;
 	kd_kel = document.getElementById('kd_kel').value;
 	var param = {periode:periode,kd_kel:kd_kel};
-	var url = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadianlist';
+	var url = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankelurahanlist';
 	jQuery.get(url, param, function(data) {
 		$("div#tableview").html(data);
 	});
 }
 
-function laporankejadianForm(jenisForm, id)
+function laporankejadiankelurahanForm(jenisForm, id)
 {
 	periode = document.getElementById('periode').value;
 	kd_kel = document.getElementById('kd_kel').value;
-	var url = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadiandata';
+	var url = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadiankelurahandata';
 	var param = { jenisForm:jenisForm,id:id,periode:periode,kd_kel:kd_kel};
 	jQuery.get(url, param, function(data) {
 		jQuery("div#tableview").html(data);
-		jQuery("#frmtambahlaporankejadian").ajaxForm(tambahlaporankejadian_opt);
-		jQuery("#frmubahlaporankejadian").ajaxForm(ubahlaporankejadian_opt);
+		jQuery("#frmtambahlaporankejadiankelurahan").ajaxForm(tambahlaporankejadiankelurahan_opt);
+		jQuery("#frmubahlaporankejadiankelurahan").ajaxForm(ubahlaporankejadiankelurahan_opt);
 	});
 }
 
-var tambahlaporankejadian_opt = {
+var tambahlaporankejadiankelurahan_opt = {
 	target : '#tableview',
-	url: '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadian',
+	url: '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadiankelurahan',
 	beforeSubmit : function() {
 		
 		if (document.getElementById('kode_kejadian').value == ''){
@@ -100,9 +100,9 @@ var tambahlaporankejadian_opt = {
 	resetForm: false
 };
 
-var ubahlaporankejadian_opt = {
+var ubahlaporankejadiankelurahan_opt = {
 	target : '#tableview',
-	url: '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadianupdate',
+	url: '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadiankelurahanupdate',
 	beforeSubmit : function() {
 
 		/*if (document.getElementById('gender').value == '-'){
@@ -149,21 +149,21 @@ var ubahlaporankejadian_opt = {
 	},
 	success: function(){
 	doCount(5);
-	jQuery("#frmubahlaporankejadian").ajaxForm(ubahlaporankejadian_opt);
+	jQuery("#frmubahlaporankejadiankelurahan").ajaxForm(ubahlaporankejadiankelurahan_opt);
 	},
 	type: 'post', 
 	resetForm: false
 };
 
 
-function laporankejadianHapus(param1, param2, n_nama)
+function laporankejadiankelurahanHapus(param1, param2, n_nama)
 { 
 	periode = document.getElementById('periode').value;
 	kd_kel = document.getElementById('kd_kel').value;
 	
 	if(ConfirmDelete(param1,n_nama))
 	{	
-		handler = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadianhapus';
+		handler = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadiankelurahanhapus';
 		var opt = {id : param2,periode:periode,kd_kel:kd_kel};
 		jQuery.get(handler,opt,function(data) {
 				$("#tableview").html(data);
@@ -254,7 +254,7 @@ function deleteRow2(param,id_item,no_item)
 { 
 	if(ConfirmDelete(param, no_item))
 	{	
-		handler = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadianhapus';
+		handler = '<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/laporankejadiankelurahanhapus';
 		//var opt = {id_item:id_item,tahun:tahun,cabang:cabang,kategoriCari:kategoriCari,carii:carii};
 		jQuery.get(handler,function(data) {
 				$("#tableview").html(data);

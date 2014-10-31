@@ -22,7 +22,7 @@ function kejadianlist()
 
 function kejadianForm(jenisForm,kd_kel,idx_kejadian)
 {
-	alert(kd_kel);
+	<!-- alert(kd_kel); -->
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
 	var url = '<?php echo $this->basePath; ?>/kelurahan/kejadian/kejadiandata';
@@ -46,6 +46,34 @@ var tambahkejadian_opt = {
 
 		if (document.getElementById('tanggal').value == ''){
 			alert('Tanggal harus diisi');
+			return false;
+		}
+
+		if (document.getElementById('uraian').value == ''){
+			alert('Uraian harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('waktu').value == ''){
+			alert('Waktu harus diisi');
+			return false;
+		}
+		if (document.getElementById('lokasi').value == ''){
+			alert('Lokasi harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('kerugian').value == ''){
+			alert('Kerugian harus diisi');
+			return false;
+		}
+		if (document.getElementById('nominal').value == ''){
+			alert('Nominal harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('pelapor').value == ''){
+			alert('Pelapor harus diisi');
 			return false;
 		}
 
@@ -74,13 +102,41 @@ var ubahkejadian_opt = {
 	target : '#tableview',
 	url: '<?php echo $this->basePath; ?>/kelurahan/kejadian/kejadianupdate',
 	beforeSubmit : function() {
-		if (document.getElementById('hari').value == ''){
+			if (document.getElementById('hari').value == ''){
 			alert('Hari harus Diisi');
 			return false;
 		}
 
 		if (document.getElementById('tanggal').value == ''){
 			alert('Tanggal harus diisi');
+			return false;
+		}
+
+		if (document.getElementById('uraian').value == ''){
+			alert('Uraian harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('waktu').value == ''){
+			alert('Waktu harus diisi');
+			return false;
+		}
+		if (document.getElementById('lokasi').value == ''){
+			alert('Lokasi harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('kerugian').value == ''){
+			alert('Kerugian harus diisi');
+			return false;
+		}
+		if (document.getElementById('nominal').value == ''){
+			alert('Nominal harus Diisi');
+			return false;
+		}
+
+		if (document.getElementById('pelapor').value == ''){
+			alert('Pelapor harus diisi');
 			return false;
 		}
 

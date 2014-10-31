@@ -3,7 +3,7 @@ require_once 'Zend/Controller/Action.php';
 require_once 'Zend/Auth.php';
 require_once "service/kelurahan/Kejadian_Service.php";
 require_once "service/adm/Referensi_Service.php";
-
+require_once "service/kelurahan/Rekamkelurahan_Service.php";
 require_once "service/adm/logfile.php";
 require_once "service/sso/Sso_User_Service.php";
 require_once "share/oa_dec_cur_conv.php";
@@ -24,6 +24,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
         $this->view->procPath = $registry->get('procpath');
 	    $this->kejadian  = 'cdr';
 	   
+		$this->rekamkelurahan_serv = Rekamkelurahan_Service::getInstance();
 		$this->kejadian_serv = Kejadian_Service::getInstance();
 		$this->ref_serv = Referensi_Service::getInstance();
 		$ssogroup		= new Zend_Session_Namespace('ssogroup');///berdasarkan user group
@@ -112,6 +113,9 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$this->view->idx_kejadian	= $_REQUEST['idx_kejadian'];
 		
 		$this->view->detailKejadian				= $this->kejadian_serv->detailKejadianById($this->view->kd_kel,$this->view->idx_kejadian);
+		
+		$this->view->kelurahanList	= $this->rekamkelurahan_serv->getKelurahanList();
+		$this->view->nama		= $ssogroup->nama;
 		// var_dump($this->view->kd_kel);
 		// var_dump($this->view->idx_kejadian);
 		// var_dump($this->view->detailKejadian);

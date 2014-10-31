@@ -1,0 +1,97 @@
+<?php
+//ambil tgl hari ini
+//$tanggal = date("Y-m-d");
+// Array Hari
+$array_hari = array(1=>'Senin','Selasa','Rabu','Kamis','Jumat', 'Sabtu','Minggu');
+$hari = $array_hari[date('N')];
+
+//Format Tanggal 
+$tanggal = date ('j');
+
+//Array Bulan 
+$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
+$bulan = $array_bulan[date('n')];
+ 
+//Format Tahun 
+$tahun = date('Y');
+
+//echo "<h4>Cimahi, $tanggal</h4>";
+$bulan=$array_bulan[$this->bulan];
+?>
+
+
+<?php
+	$namafile="Data Laporan Kejadian Kelurahan Per Bulan " .$bulan. " ". $this->tahun ." .xls";
+	header("Content-type: application/octet-stream");
+	header('Content-Disposition: attachment; filename="' . $namafile . '"');	
+	header("Pragma: no-cache");
+	header("Expires: 0");
+?>
+<h3 align ="center">Laporan Kejadian Kelurahan</h3>
+<h3 align ="center">Bulan <?php echo $bulan?> Tahun <?php echo $this->tahun?></h3>
+<h3 align ="center">Kelurahan <?php echo $this->kelurahan?></h3>
+
+<table border="1" width="100%">
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3" >NoUrut</th>
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3">Hari / Tanggal</th>
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3">Uraian</th> 
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3">Waktu</th> 
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3">Lokasi</th> 
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3">Kerugian</th> 
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3"> Nominal</th>
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3"> Pelapor</th>
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3"> Keterangan</th>
+				
+	<?
+		if (count($this->laporankejadiankelurahanlist) == 0){ 
+		?>
+			<tr class="event2"><td colspan="7"  style="color:#8C0000; font-weight:bold; background-color: #FF9999">Data Tidak Ditemukan</td></tr>
+		<?} else {
+				
+				$noUrut = 1;
+				foreach($this->laporankejadiankelurahanlist as $data) : 
+				if ($key%2==0) { ?>
+					<tr class="event">
+				<? } else if ($key%2==1) { ?>
+					<tr class="event2">
+				<? }
+				$kd_kel	= $this->escape($data->kd_kel);			
+				$idx_kejadian		= $this->escape($data->idx_kejadian); 
+				$kd_kel		=  $this->escape($data->kd_kel); 
+				$kelurahan		=  $this->escape($data->kelurahan); 
+				$hari	= strtoupper( $this->escape($data->hari)); 
+				$tanggal	=  $this->escape($data->tanggal); 
+
+				$tanggal= date('d-m-Y', strtotime($tanggal));
+
+				$uraian	=  $this->escape($data->uraian);
+				$waktu	= $this->escape($data->waktu);
+				$lokasi	=  $this->escape($data->lokasi);
+				$kerugian	=  $this->escape($data->kerugian);
+
+				$nominal	=  $this->escape($data->nominal);
+				$nominal = explode('.',$nominal);
+				// $nominal = number_format($nominal[0], 0, ',', '.');
+
+				$pelapor	=  $this->escape($data->pelapor);
+				$keterangan	=  $this->escape($data->keterangan);
+				$lampiran	=  $this->escape($data->lampiran);
+				
+				?>
+					
+			<td align="center"><? echo $noUrut;?></td>					
+			<td align="center"><? echo $hari ." / ".$tanggal;?></td>
+			<td align="left"><? echo $uraian?></td>
+			<td align="center"><? echo $waktu;?></td>
+			<td align="left"><? echo $lokasi;?></td>
+			<td align="left"><? echo $kerugian;?></td>
+			<td align="center"><? echo $nominal[0];?></td>
+			<td align="center"><? echo $pelapor;?></td>
+			<td align="center"><? echo $keterangan;?></td>
+		</tr>
+			<?
+			$noUrut++; endforeach;
+		}
+		?>
+		
+	</table>

@@ -43,12 +43,32 @@ $numToDisplay = $this->numToDisplay;
 	$pesan->show_message($proses, $this->kd_kel, "$status" ); 
 ?>
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
-<input name="kd_kel" id="kd_kel" type="hidden" value="<?php echo $this->kd_kel;?>" />
 <input name="idx_kejadian" id="idx_kejadian" type="hidden" value="<?echo $this->detailKejadian['idx_kejadian'];?>" />
 <input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
 	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
-				
-				
+	
+				<tr>
+				    <td align="right" width="100">* Kelurahan :</td>
+					<td>	
+				<?php if($this->kd_kel !=00) {?>			
+				<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->kd_kel?>" />
+				<input name="kelurahan" id="kelurahan" type="text" value="<?echo $this->nama ;?>" readonly />
+				<?php }else {?>
+				<select name="kd_kel" id="kd_kel">
+				<?php 
+				foreach($this->kelurahanList as $data): ?>
+					<?php if($this->kd_kel== $this->escape($data->kd_kel)){ ?> 
+						<option value="<?php echo $this->escape($data->kd_kel); ?>" selected><?php echo $this->escape($data->kelurahan); ?> </option>
+				<?php }else{?>
+				<option value="<?php echo $this->escape($data->kd_kel); ?>"> <?php echo $this->escape($data->kelurahan); ?> </option>
+				 <?php }
+
+				 endforeach; 
+				}?>
+			</select>
+				</td>
+			</tr>
+
 				<tr>
 				    <td align="right" width="100">* Hari :</td>
 					<td>	
@@ -83,10 +103,7 @@ $numToDisplay = $this->numToDisplay;
 				<tr>
 				    <td align="right" width="100">* Waktu :</td>
 					<td>	
-						<? 
-						$waktuAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-						echo $ctrlFrm->formText("waktu", $this->detailKejadian['waktu'], $waktuAttrib);
-						?>
+						<input name="waktu" id="waktu" type="text" value="<?echo $this->detailKejadian['waktu'] ;?>"  placeholder="masukan jam kejadian. ex: 12:30" />
 				</td>
 				</tr>
 				
@@ -173,18 +190,24 @@ $numToDisplay = $this->numToDisplay;
 <script>
 	$(document).ready(function() {
 	$(".validasi").validate();
+
 });
 
  	$(function() {
 		$("#tanggal").datepicker({
-			dateFormat: 'dd-mm-yy',
+			dateFormat: 'yy-mm-dd',
 			changeMonth: true,
 			changeYear: true
 		});
+		 
 	});
 </script>
 
 <script>
+$(function() {
+		$('#waktu').timepicker();
+		 
+	});
 
 
 

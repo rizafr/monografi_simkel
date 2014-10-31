@@ -61,11 +61,11 @@ class Kejadian_Service {
 			$order = "";
 			
 			
-			$sqlProses = "SELECT kej.hari,kej.tanggal, kej.uraian,kej.waktu,kej.lokasi, kej.kerugian,kej.nominal,kej.pelapor,kej.keterangan,kej.lampiran, K.kelurahan
+			$sqlProses = "SELECT kej.idx_kejadian,kej.kd_kel, kej.hari,kej.tanggal, kej.uraian,kej.waktu,kej.lokasi, kej.kerugian,kej.nominal,kej.pelapor,kej.keterangan,kej.lampiran, K.kelurahan
 								 FROM [SIMKEL].[dbo].[m_kelurahan] K ,[SIMKEL].[dbo].[mon_kelurahan] MK,[SIMKEL].[dbo].[mon_kejadian] KEJ 
-								 WHERE K.kd_kel= MK.kd_kel AND kej.kd_kel=MK.kd_kel".$hak.$where;	
+								 WHERE K.kd_kel= MK.kd_kel AND kej.kd_kel=MK.kd_kel".$hak.$where."";	
 			$sqlProses1 = $sqlProses.$group;
-			//var_dump($sqlProses);
+			// var_dump($sqlProses);
 			if(($pageNumber==0) && ($itemPerPage==0)){	
 				$sqlTotal = "select count(*) from ($sqlProses1) a";
 				$hasilAkhir = $db->fetchOne($sqlTotal);
@@ -76,7 +76,9 @@ class Kejadian_Service {
 			
 			$jmlResult = count($result);		
 			for ($j = 0; $j < $jmlResult; $j++) {
-				$hasilAkhir[$j] = array("kd_kel"				=> (string)$result[$j]->kd_kel,
+				$hasilAkhir[$j] = array(
+										"idx_kejadian"				=> (string)$result[$j]->idx_kejadian,
+										"kd_kel"				=> (string)$result[$j]->kd_kel,
 										"kelurahan"				=> (string)$result[$j]->kelurahan,
 										"hari"		=> (string)$result[$j]->hari,
 										"tanggal"		=> (string)$result[$j]->tanggal,
@@ -142,7 +144,9 @@ class Kejadian_Service {
 			}
 			$jmlResult = count($result);
 			for ($j = 0; $j < $jmlResult; $j++) {
-				$hasilAkhir[$j] = array("kd_kel"				=> (string)$result[$j]->kd_kel,
+				$hasilAkhir[$j] = array(
+										"idx_kejadian"				=> (string)$result[$j]->idx_kejadian,
+										"kd_kel"				=> (string)$result[$j]->kd_kel,
 										"kelurahan"				=> (string)$result[$j]->kelurahan,
 										"hari"		=> (string)$result[$j]->hari,
 										"tanggal"		=> (string)$result[$j]->tanggal,
@@ -166,22 +170,23 @@ class Kejadian_Service {
 
 	
 
-	public function KejadianInsert(array $dataMasukan) {
+	public function kejadianInsert(array $dataMasukan) {
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
 		try {
 		$db->beginTransaction();
 
-		$paramInput	= array(	"kd_kel"					=> $dataMasukan['kd_kel'],
+		$paramInput	= array(	"kd_kel"		=> $dataMasukan['kd_kel'],
 								"hari"			=> $dataMasukan['hari'],
-								"tanggal"			=> $dataMasukan['tanggal'],
-								"waktu"				=> $dataMasukan['waktu'],
-								"uraian"				=> $dataMasukan['uraian'],
-								"lokasi"					=> $dataMasukan['lokasi'],
-								"nominal"						=> $dataMasukan['nominal'],
-								"pelapor"				=> $dataMasukan['pelapor'],
-								"keterangan"				=> $dataMasukan['keterangan'],
-								"lampiran"				=> $dataMasukan['lampiran']
+								"tanggal"		=> $dataMasukan['tanggal'],
+								"waktu"			=> $dataMasukan['waktu'],
+								"uraian"		=> $dataMasukan['uraian'],
+								"lokasi"		=> $dataMasukan['lokasi'],
+								"kerugian"		=> $dataMasukan['kerugian'],
+								"nominal"		=> $dataMasukan['nominal'],
+								"pelapor"		=> $dataMasukan['pelapor'],
+								"keterangan"	=> $dataMasukan['keterangan'],
+								"lampiran"		=> $dataMasukan['lampiran']
 							);
 						
 			
@@ -204,35 +209,35 @@ class Kejadian_Service {
 	   }
 	}
 
-	public function detailKejadianById($kd_kel) {
+
+	public function detailKejadianById($kd_kel,$idx_kejadian) {
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
 		try {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
-			$where = " where MK.kd_kel = '$kd_kel' AND KEJ.kd_kel=MK.kd_kel AND K.kd_kel=MK.kd_kel AND K.kd_kec=KEC.kd_kec  ";
-			$sqlProses = "SELECT * 
-							FROM SIMKEL.dbo.mon_kejadian KEJ ,SIMKEL.dbo.mon_kelurahan MK,SIMKEL.dbo.m_kelurahan K ,SIMKEL.dbo.m_kecamatan KEC ";	
+			$where = "  where KEJ.kd_kel = '$kd_kel' AND KEJ.idx_kejadian='$idx_kejadian' AND KEJ.kd_kel=MK.kd_kel AND K.kd_kel=Mk.kd_kel ";
+			$sqlProses = "SELECT  KEJ.*, K.kelurahan 
+							FROM SIMKEL.dbo.mon_kejadian KEJ ,SIMKEL.dbo.mon_kelurahan MK,SIMKEL.dbo.m_kelurahan K  ";	
 			$sqlData = $sqlProses.$where;
 			$result = $db->fetchRow($sqlData);
 			//echo $sqlData;
-			$hasilAkhir[$j] = array("kd_kel"				=> (string)$result[$j]->kd_kel,
-										"kelurahan"				=> (string)$result[$j]->kelurahan,
-										"hari"		=> (string)$result[$j]->hari,
-										"tanggal"		=> (string)$result[$j]->tanggal,
-										"uraian"				=> (string)$result[$j]->uraian,
-										"waktu"				=> (string)$result[$j]->waktu,
-										"lokasi"				=> (string)$result[$j]->lokasi,										
-										"kerugian"				=> (string)$result[$j]->kerugian,
-										"nominal"				=> (string)$result[$j]->nominal,
-										"pelapor"		=> (string)$result[$j]->pelapor,
-										"keterangan"			=> (string)$result[$j]->keterangan,
-										"lampiran"	=> (string)$result[$j]->lampiran	
-										);
-						
-			
-			
-			return $hasilAkhir;						  
-			
+			$hasilAkhir	= array(		
+										"idx_kejadian"			=> (string)$result->idx_kejadian,
+										"kd_kel"				=> (string)$result->kd_kel,
+										"kelurahan"				=> (string)$result->kelurahan,
+										"hari"					=> (string)$result->hari,
+										"tanggal"				=> (string)$result->tanggal,
+										"uraian"				=> (string)$result->uraian,
+										"waktu"					=> (string)$result->waktu,
+										"lokasi"				=> (string)$result->lokasi,										
+										"kerugian"				=> (string)$result->kerugian,
+										"nominal"				=> (string)$result->nominal,
+										"pelapor"				=> (string)$result->pelapor,
+										"keterangan"			=> (string)$result->keterangan,
+										"lampiran"				=> (string)$result->lampiran
+							);						
+					
+			return $hasilAkhir;		
 	   } catch (Exception $e) {
          echo $e->getMessage().'<br>';
 	     return 'gagal <br>';
@@ -240,25 +245,28 @@ class Kejadian_Service {
 	}
 
 	
-	public function KejadianUpdate(array $dataMasukan) { 
+
+	
+	public function kejadianUpdate(array $dataMasukan) { 
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
 		try {
 			$db->beginTransaction();
 			$paramInput	= array(
 								"hari"			=> $dataMasukan['hari'],
-								"tanggal"			=> $dataMasukan['tanggal'],
-								"waktu"				=> $dataMasukan['waktu'],
-								"lokasi"					=> $dataMasukan['lokasi'],
-								"nominal"						=> $dataMasukan['nominal'],
-								"pelapor"				=> $dataMasukan['pelapor'],
-								"keterangan"				=> $dataMasukan['keterangan'],
-								"lampiran"				=> $dataMasukan['lampiran']
+								"tanggal"		=> $dataMasukan['tanggal'],
+								"waktu"			=> $dataMasukan['waktu'],
+								"lokasi"		=> $dataMasukan['lokasi'],
+								"kerugian"		=> $dataMasukan['kerugian'],
+								"nominal"		=> $dataMasukan['nominal'],
+								"pelapor"		=> $dataMasukan['pelapor'],
+								"keterangan"	=> $dataMasukan['keterangan'],
+								"lampiran"		=> $dataMasukan['lampiran']
 							);
 						
 			
-			// var_dump($paramInput);
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."'";
+			 // var_dump($paramInput);
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND idx_kejadian = '".$dataMasukan['idx_kejadian']."' ";
 			$db->update('SIMKEL.dbo.mon_kejadian',$paramInput, $where);
 			$db->commit();
 			return 'sukses';
@@ -278,12 +286,12 @@ class Kejadian_Service {
 	}
 
 
-	public function KejadianHapus(array $dataMasukan) {
+	public function kejadianHapus(array $dataMasukan) {
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
 		try {
 			$db->beginTransaction();
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."'";
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND idx_kejadian = '".$dataMasukan['idx_kejadian']."' ";
 			$db->delete('SIMKEL.dbo.mon_kejadian', $where);
 			
 			$db->commit();
@@ -320,11 +328,11 @@ public function medrecList($kode_pasien) {
 			for ($j = 0; $j < $jmlResult; $j++) { 
 
 			$c_klasifikasi = (string)$result[$j]->c_klasifikasi;
-			$n_klasifikasi = $db->fetchOne("Select n_klasifikasi from tr_klasifikasi_med where id_klasifikasi ='$c_klasifikasi'");
+			$n_klasifikasi = $db->fetchOne("Select n_klasifikasi from tr_klasifikasi_med where idx_kejadian_klasifikasi ='$c_klasifikasi'");
 			$c_tindakan = (string)$result[$j]->c_tindakan;
-			$n_tindakan = $db->fetchOne("Select n_tindakan from tr_tindakan where id_tindakan ='$c_tindakan' ");
+			$n_tindakan = $db->fetchOne("Select n_tindakan from tr_tindakan where idx_kejadian_tindakan ='$c_tindakan' ");
 				
-			$hasilAkhir[$j] = array("id"					=> (string)$result[$j]->id,
+			$hasilAkhir[$j] = array("idx_kejadian"					=> (string)$result[$j]->idx_kejadian,
 									"kode_pasien"           => (string)$result[$j]->kode_pasien,
 									"n_nama"				=> (string)$result[$j]->n_nama,
 									"d_medrec"	            => (string)$result[$j]->d_medrec,
