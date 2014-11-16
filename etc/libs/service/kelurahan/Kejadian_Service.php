@@ -61,9 +61,9 @@ class Kejadian_Service {
 			$order = "";
 			
 			
-			$sqlProses = "SELECT kej.idx_kejadian,kej.kd_kel, kej.hari,kej.tanggal, kej.uraian,kej.waktu,kej.lokasi, kej.kerugian,kej.nominal,kej.pelapor,kej.keterangan,kej.lampiran, K.kelurahan
+			$sqlProses = "SELECT TOP 1000 kej.idx_kejadian,kej.kd_kel, kej.hari,kej.tanggal, kej.uraian,kej.waktu,kej.lokasi, kej.file_lampiran, kej.bulan,kej.tahun, kej.kerugian,kej.nominal,kej.pelapor,kej.keterangan,kej.lampiran, K.kelurahan
 								 FROM [SIMKEL].[dbo].[m_kelurahan] K ,[SIMKEL].[dbo].[mon_kelurahan] MK,[SIMKEL].[dbo].[mon_kejadian] KEJ 
-								 WHERE K.kd_kel= MK.kd_kel AND kej.kd_kel=MK.kd_kel".$hak.$where."";	
+								 WHERE K.kd_kel= MK.kd_kel AND kej.kd_kel=MK.kd_kel".$hak.$where." order by kej.tanggal desc";	
 			$sqlProses1 = $sqlProses.$group;
 			// var_dump($sqlProses);
 			if(($pageNumber==0) && ($itemPerPage==0)){	
@@ -89,7 +89,10 @@ class Kejadian_Service {
 										"nominal"				=> (string)$result[$j]->nominal,
 										"pelapor"		=> (string)$result[$j]->pelapor,
 										"keterangan"			=> (string)$result[$j]->keterangan,
-										"lampiran"	=> (string)$result[$j]->lampiran	
+										"lampiran"	=> (string)$result[$j]->lampiran,	
+										"file_lampiran"	=> (string)$result[$j]->file_lampiran,	
+										"bulan"	=> (string)$result[$j]->bulan,	
+										"tahun"	=> (string)$result[$j]->tahun	
 										);
 			}
 			return $hasilAkhir; 
@@ -157,7 +160,10 @@ class Kejadian_Service {
 										"nominal"				=> (string)$result[$j]->nominal,
 										"pelapor"		=> (string)$result[$j]->pelapor,
 										"keterangan"			=> (string)$result[$j]->keterangan,
-										"lampiran"	=> (string)$result[$j]->lampiran	
+										"lampiran"	=> (string)$result[$j]->lampiran	,
+										"file_lampiran"	=> (string)$result[$j]->file_lampiran	,
+										"bulan"	=> (string)$result[$j]->bulan,
+										"tahun"	=> (string)$result[$j]->tahun
 										);
 			}	
 			return $hasilAkhir;						  
@@ -186,7 +192,10 @@ class Kejadian_Service {
 								"nominal"		=> $dataMasukan['nominal'],
 								"pelapor"		=> $dataMasukan['pelapor'],
 								"keterangan"	=> $dataMasukan['keterangan'],
-								"lampiran"		=> $dataMasukan['lampiran']
+								"lampiran"		=> $dataMasukan['lampiran'],
+								"file_lampiran"		=> $dataMasukan['file_lampiran'],
+								"bulan"		=> $dataMasukan['bulan'],
+								"tahun"		=> $dataMasukan['tahun']
 							);
 						
 			
@@ -234,7 +243,8 @@ class Kejadian_Service {
 										"nominal"				=> (string)$result->nominal,
 										"pelapor"				=> (string)$result->pelapor,
 										"keterangan"			=> (string)$result->keterangan,
-										"lampiran"				=> (string)$result->lampiran
+										"lampiran"				=> (string)$result->lampiran,
+										"file_lampiran"				=> (string)$result->file_lampiran
 							);						
 					
 			return $hasilAkhir;		
@@ -252,7 +262,7 @@ class Kejadian_Service {
 		$db = $registry->get('db');
 		try {
 			$db->beginTransaction();
-			$paramInput	= array(
+			$paramInput	= array("uraian"      => $dataMasukan['uraian'],
 								"hari"			=> $dataMasukan['hari'],
 								"tanggal"		=> $dataMasukan['tanggal'],
 								"waktu"			=> $dataMasukan['waktu'],
@@ -261,10 +271,9 @@ class Kejadian_Service {
 								"nominal"		=> $dataMasukan['nominal'],
 								"pelapor"		=> $dataMasukan['pelapor'],
 								"keterangan"	=> $dataMasukan['keterangan'],
-								"lampiran"		=> $dataMasukan['lampiran']
+								"bulan"		=> $dataMasukan['bulan'],
+								"tahun"		=> $dataMasukan['tahun']
 							);
-						
-			
 			 // var_dump($paramInput);
 			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND idx_kejadian = '".$dataMasukan['idx_kejadian']."' ";
 			$db->update('SIMKEL.dbo.mon_kejadian',$paramInput, $where);
@@ -314,42 +323,6 @@ class Kejadian_Service {
 	}
 
 
-public function medrecList($kode_pasien) {
-		$registry = Zend_Registry::getInstance();
-		$db = $registry->get('db');
-		try {
-			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
-			$where = " where kode_pasien = '$kode_pasien' ";
-			$sqlProses = "SELECT * FROM t_medrec ";	
-			$sqlData = $sqlProses.$where;
-			//echo $sqlData;
-			$result = $db->fetchAll($sqlData);	
-			$jmlResult = count($result);
-			for ($j = 0; $j < $jmlResult; $j++) { 
-
-			$c_klasifikasi = (string)$result[$j]->c_klasifikasi;
-			$n_klasifikasi = $db->fetchOne("Select n_klasifikasi from tr_klasifikasi_med where idx_kejadian_klasifikasi ='$c_klasifikasi'");
-			$c_tindakan = (string)$result[$j]->c_tindakan;
-			$n_tindakan = $db->fetchOne("Select n_tindakan from tr_tindakan where idx_kejadian_tindakan ='$c_tindakan' ");
-				
-			$hasilAkhir[$j] = array("idx_kejadian"					=> (string)$result[$j]->idx_kejadian,
-									"kode_pasien"           => (string)$result[$j]->kode_pasien,
-									"n_nama"				=> (string)$result[$j]->n_nama,
-									"d_medrec"	            => (string)$result[$j]->d_medrec,
-									"c_klasifikasi"	        => (string)$result[$j]->c_klasifikasi,
-									"c_tindakan"	        => (string)$result[$j]->c_tindakan,
-									"n_klasifikasi"         => $n_klasifikasi,
-									"n_tindakan"	        => $n_tindakan,
-									"c_alergi"				=> (string)$result[$j]->c_alergi,
-									"c_rematik"				=> (string)$result[$j]->c_rematik
-								);
-		}
-			return $hasilAkhir;						  
-	   } catch (Exception $e) {
-         echo $e->getMessage().'<br>';
-	     return 'gagal <br>';
-	   }
-	}
 
 
 public function limit2($sql, $count, $offset = 0,$total)

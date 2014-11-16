@@ -155,16 +155,13 @@
 	
 	
 	//nama file dokumen
-	$namafile = "Laporan Monografi Kelurahan ". $this->detailKelurahan->kelurahan. " ".$this->bulan." ". $this->tahun ." .doc";
+	$namafile = "Laporan Monografi Kelurahan ". $this->detailKelurahan->kelurahan. " ".$bulan." ". $this->tahun ." .rtf";
 	
 	// $document->save('E:\\'.$namafile);
 	
+	
 	// At least write the document to webspace:
 	$objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
-	
-	
-	
-
 	
 	// // save as a random file in temp file
 	$temp_file = tempnam(sys_get_temp_dir(), 'PHPWord');
@@ -172,7 +169,7 @@
 	
 	// Your browser will name the file "myFile.docx"
 	// regardless of what it's named on the server 
-	header('Content-Type: application/octet-stream');
+	
 	header('Content-Disposition: attachment; filename="' . $namafile . '"');
 	header('Content-Transfer-Encoding: binary');
 	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -181,5 +178,7 @@
 	flush();
 	readfile($temp_file); // or echo file_get_contents($temp_file);
 	unlink($temp_file);  // remove temp file
-	
+	exit;
+
+
 ?>

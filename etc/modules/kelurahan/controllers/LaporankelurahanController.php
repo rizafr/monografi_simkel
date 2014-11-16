@@ -193,9 +193,11 @@ class Kelurahan_LaporankelurahanController extends Zend_Controller_Action {
 			$kd_kel = $this->_getParam("kd_kel");
 			$bulan = $this->_getParam("bulan");
 			$tahun = $this->_getParam("tahun");	
+			$kelurahan = $this->_getParam("kelurahan");	
 			$this->view->kd_kel = $kd_kel;
 			$this->view->bulan = $bulan;
 			$this->view->tahun = $tahun;
+			$this->view->kelurahan = $kelurahan;
 			
 			$this->view->laporankejadiankelurahanlist = $this->laporankelurahan_serv->getCariLaporanKejadianList($this->view->kd_kel,$this->view->bulan,$this->view->tahun);
 			// var_dump($this->view->laporankejadiankelurahanlist);

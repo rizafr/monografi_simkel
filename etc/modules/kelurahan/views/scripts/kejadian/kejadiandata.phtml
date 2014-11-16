@@ -32,10 +32,10 @@ $numToDisplay = $this->numToDisplay;
 			else {$namaForm = 'frmhapuskejadian';  $nama='hapus';}
 		?>
 		
-		<h2 class="title">FORM <?php echo strtoupper($nama)?> DATA KELURAHAN <strong><?php echo  strtoupper($this->detailKejadian['kelurahan']); ?></strong> </h2>
+		<h2 class="title">FORM <?php echo strtoupper($nama)?> KEJADIAN, <strong><?php echo  strtoupper($this->nama); ?></strong> </h2>
 		
 	    <div class="spacer"></div> 
-		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi">
+		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi" enctype="multipart/form-data">
 <?
 	$status = $this->hasil;
 	$proses = $this->proses;
@@ -94,8 +94,7 @@ $numToDisplay = $this->numToDisplay;
 				<tr>
 				    <td align="right" width="100">* Uraian :</td>
 					<td>
-						<textarea name="uraian"><?php echo $this->detailKejadian['uraian']; ?>
-						</textarea>
+						<textarea id="uraian" name="uraian" required><?php echo $this->detailKejadian['uraian']; ?></textarea>
 						
 					</td>
 				</tr>
@@ -103,7 +102,7 @@ $numToDisplay = $this->numToDisplay;
 				<tr>
 				    <td align="right" width="100">* Waktu :</td>
 					<td>	
-						<input name="waktu" id="waktu" type="text" value="<?echo $this->detailKejadian['waktu'] ;?>"  placeholder="masukan jam kejadian. ex: 12:30" />
+						<input name="waktu" id="waktu" type="text" value="<?echo $this->detailKejadian['waktu'] ;?>"  placeholder="masukan jam kejadian. ex: 12:30" required />
 				</td>
 				</tr>
 				
@@ -114,11 +113,9 @@ $numToDisplay = $this->numToDisplay;
 							$lokasiAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
 							echo $ctrlFrm->formText("lokasi", $this->detailKejadian['lokasi'], $lokasiAttrib);
 							?>
-				</td>
-				</tr>
+					</td>
+				</tr>				
 				
-				
-				</td>
 				</tr>
 
 				<tr>
@@ -154,19 +151,22 @@ $numToDisplay = $this->numToDisplay;
 				<tr>
 				    <td align="right" width="100">* Keterangan :</td>
 					<td>	
-						<textarea name="keterangan"><?php echo $this->detailKejadian['keterangan']; ?>
-						</textarea>
+						<textarea id="keterangan" name="keterangan"><?php echo $this->detailKejadian['keterangan']; ?></textarea>
 				</td>
 				</tr>
 
 				<tr>
-				    <td align="right" width="100">* Lampiran :</td>
-					<td>	
-						<? 
-							$lampiranAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-							echo $ctrlFrm->formText("lampiran", $this->detailKejadian['lampiran'], $lampiranAttrib);
-						?>
-				</td>
+				    <td align="right" width="100">* Lampiran :</td>					
+					</td>	
+					<?php if (strtolower($this->jenisForm) == 'update') { ?>
+							<td> <img src="<?php echo $this->detailKejadian['file_lampiran']; ?>" width="50%" height="50%"/>	
+						</td>
+					<?php } ?>
+					<?php if (strtolower($this->jenisForm) == 'insert') { ?>
+					 <td>
+						<input type="file" name="lampiran" id="lampiran"/>
+					 </td>
+					 	<?php } ?>
 				</tr>
 	<tr>  
 		<td>&nbsp;</td>
@@ -204,10 +204,6 @@ $numToDisplay = $this->numToDisplay;
 </script>
 
 <script>
-$(function() {
-		$('#waktu').timepicker();
-		 
-	});
 
 
 

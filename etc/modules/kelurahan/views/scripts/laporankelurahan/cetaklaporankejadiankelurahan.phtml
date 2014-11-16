@@ -21,26 +21,26 @@ $bulan=$array_bulan[$this->bulan];
 
 
 <?php
-	$namafile="Data Laporan Kejadian Kelurahan Per Bulan " .$bulan. " ". $this->tahun ." .xls";
+	$namafile="Data Laporan Kejadian Kelurahan " .$this->kelurahan. " Per Bulan " .$bulan. " ". $this->tahun ." .xls";
 	header("Content-type: application/octet-stream");
 	header('Content-Disposition: attachment; filename="' . $namafile . '"');	
 	header("Pragma: no-cache");
 	header("Expires: 0");
 ?>
-<h3 align ="center">Laporan Kejadian Kelurahan</h3>
+<h3 align ="center">Laporan Kejadian</h3>
 <h3 align ="center">Bulan <?php echo $bulan?> Tahun <?php echo $this->tahun?></h3>
 <h3 align ="center">Kelurahan <?php echo $this->kelurahan?></h3>
 
 <table border="1" width="100%">
-	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3" >NoUrut</th>
-	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3">Hari / Tanggal</th>
-	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3">Uraian</th> 
-	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3">Waktu</th> 
-	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3">Lokasi</th> 
-	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3">Kerugian</th> 
-	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3"> Nominal</th>
-	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3"> Pelapor</th>
-	<th style="color:#FDFDFF; font-weight:bold; background-color: #0059B3"> Keterangan</th>
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #00698C" >NoUrut</th>
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #00698C">Hari / Tanggal</th>
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #00698C">Uraian</th> 
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #00698C">Waktu</th> 
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #00698C">Lokasi</th> 
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #00698C">Kerugian</th> 
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #00698C"> Nominal</th>
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #00698C"> Pelapor</th>
+	<th style="color:#FDFDFF; font-weight:bold; background-color: #00698C"> Keterangan</th>
 				
 	<?
 		if (count($this->laporankejadiankelurahanlist) == 0){ 

@@ -112,7 +112,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$this->view->kd_kel			= $_REQUEST['kd_kel'];
 		$this->view->idx_kejadian	= $_REQUEST['idx_kejadian'];
 		
-		$this->view->detailKejadian				= $this->kejadian_serv->detailKejadianById($this->view->kd_kel,$this->view->idx_kejadian);
+		$this->view->detailKejadian	= $this->kejadian_serv->detailKejadianById($this->view->kd_kel,$this->view->idx_kejadian);
 		
 		$this->view->kelurahanList	= $this->rekamkelurahan_serv->getKelurahanList();
 		$this->view->nama		= $ssogroup->nama;
@@ -129,7 +129,13 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 
 		$kd_kel				= $_POST['kd_kel'];
 		$hari				= $_POST['hari'];
+		
 		$tanggal			= $_POST['tanggal'];
+		$pecah_tanggal      = explode('-', $tanggal);	
+		
+		$tahun        =  $pecah_tanggal[0];
+		$bulan        =  $pecah_tanggal[1];
+		
 		$uraian				= trim($_POST['uraian']);
 		$waktu				= $_POST['waktu'];
 		$lokasi				= trim($_POST['lokasi']);
@@ -137,32 +143,67 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$nominal			= $_POST['nominal'];
 		$pelapor			= $_POST['pelapor'];
 		$keterangan			= trim($_POST['keterangan']);
-		$lampiran			= $_POST['lampiran'];
-	
+		// $lampiran			= $_POST['lampiran'];
+		
+		$allowed_ext    = array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'rar', 'zip','png','jpg','jpeg');
+		$file_name        = $_FILES['lampiran']['name'];
+		
+		$value = explode(".", $file_name);
+		$file_ext = strtolower(array_pop($value));
+		
+		$pecah        	=  explode('.', $file_name);
+		$nama_file        =  $pecah[0];
+		$file_size        = $_FILES['lampiran']['size'];
+		$file_tmp        = $_FILES['lampiran']['tmp_name'];
 
-		$dataMasukan	= array("kd_kel"		=> $kd_kel,
-								"hari"			=> $hari,
-								"tanggal"		=> $tanggal,
-								"uraian"		=> $uraian,
-								"waktu"			=> $waktu,
-								"lokasi"		=> $lokasi,
-								"kerugian"		=> $kerugian,
-								"nominal"		=> $nominal,
-								"pelapor"		=> $pelapor,
-								"keterangan"	=> $keterangan,
-								"lampiran"		=> $lampiran
-
+		if(in_array($file_ext, $allowed_ext) === true){
+            if($file_size < 2044070){
+				$path = '../www/upload/'.$nama_file.'.'.$file_ext;
+				move_uploaded_file($file_tmp, $path);
+				$lokasi2='/upload/'.$nama_file.'.'.$file_ext;		
+				
+			
+				$dataMasukan	= array("kd_kel"		=> $kd_kel,
+										"hari"			=> $hari,
+										"tanggal"		=> $tanggal,
+										"uraian"		=> $uraian,
+										"waktu"			=> $waktu,
+										"lokasi"		=> $lokasi,
+										"kerugian"		=> $kerugian,
+										"nominal"		=> $nominal,
+										"pelapor"		=> $pelapor,
+										"keterangan"	=> $keterangan,
+										"lampiran"		=> $file_name,
+										"bulan"			=> $bulan,
+										"tahun"			=> $tahun,
+										"file_lampiran"	=> $lokasi2
 								);
 
-		$this->view->kejadianInsert = $this->kejadian_serv->kejadianInsert($dataMasukan);
+				$this->view->kejadianInsert = $this->kejadian_serv->kejadianInsert($dataMasukan);
 
-		$this->view->proses = "1";	
-		$this->view->keterangan = "Judul";
-		$this->view->hasil = $this->view->kejadianInsert;
+				$this->view->proses = "1";	
+				$this->view->keterangan = "Judul";
+				$this->view->hasil = $this->view->kejadianInsert;
+				
+				$this->kejadianlistAction();
+				$this->render('kejadianlist');
+
 		
-		$this->kejadianlistAction();
-		$this->render('kejadianlist');
-
+			}else{            
+				$this->view->proses = "1";	
+				$this->view->keterangan = "Judul";
+				$this->view->hasil = "<div class='gagal'> ERROR: Besar ukuran file (file size) maksimal 2 Mb! </div>";
+				$this->kejadianlistAction();
+				$this->render('kejadianlist');
+             }
+        }else{
+           	$this->view->proses = "1";	
+			$this->view->keterangan = "Judul";
+			$this->view->hasil = "<div class='gagal'> ERROR: Ekstensi file tidak di izinkan! </div>";	
+			$this->kejadianlistAction();
+			$this->render('kejadianlist');
+        }
+		
 	}
 	
 	public function kejadianupdateAction()
@@ -176,6 +217,11 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$kd_kel			= $_POST['kd_kel'];
 		$hari				= $_POST['hari'];
 		$tanggal			= $_POST['tanggal'];
+		$pecah_tanggal      = explode('-', $tanggal);	
+		
+		$tahun        =  $pecah_tanggal[0];
+		$bulan        =  $pecah_tanggal[1];
+		
 		$uraian				= trim($_POST['uraian']);
 		$waktu				= $_POST['waktu'];
 		$lokasi				= trim($_POST['lokasi']);
@@ -183,32 +229,31 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$nominal			= $_POST['nominal'];
 		$pelapor			= $_POST['pelapor'];
 		$keterangan			= trim($_POST['keterangan']);
-		$lampiran			= $_POST['lampiran'];
-		
-		
-
+	
+	
 
 		$dataMasukan	= array(
-								"idx_kejadian"	=> $idx_kejadian,
-								"kd_kel"		=> $kd_kel,
-								"hari"			=> $hari,
-								"tanggal"		=> $tanggal,
-								"uraian"		=> $uraian,
-								"waktu"			=> $waktu,
-								"lokasi"		=> $lokasi,
-								"kerugian"		=> $kerugian,
-								"nominal"		=> $nominal,
-								"pelapor"		=> $pelapor,
-								"keterangan"	=> $keterangan,
-								"lampiran"		=> $lampiran
+						"idx_kejadian"	=> $idx_kejadian,
+						"kd_kel"		=> $kd_kel,
+						"hari"			=> $hari,
+						"tanggal"		=> $tanggal,
+						"uraian"		=> $uraian,
+						"waktu"			=> $waktu,
+						"lokasi"		=> $lokasi,
+						"kerugian"		=> $kerugian,
+						"nominal"		=> $nominal,
+						"pelapor"		=> $pelapor,
+						"keterangan"	=> $keterangan,
+						"bulan"			=> $bulan,
+						"tahun"			=> $tahun
 
-								);
+				);
 								
 		$this->view->kejadianUpdate = $this->kejadian_serv->kejadianUpdate($dataMasukan);
 		
 		$this->view->kd_kel = $kd_kel	;
 		// var_dump($this->view->kelurahan);
-		// var_dump($dataMasukan);
+		//var_dump($dataMasukan);
 		// var_dump($this->view->kejadianUpdate);
 		$this->Logfile->createLog($this->view->kelurahan," Ubah data ", $kd_kel." (".$user_id.")");
 		$this->view->proses = "2";	
@@ -217,6 +262,8 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		
 		$this->kejadianlistAction();
 		$this->render('kejadianlist');
+		
+		
 	}
 
 

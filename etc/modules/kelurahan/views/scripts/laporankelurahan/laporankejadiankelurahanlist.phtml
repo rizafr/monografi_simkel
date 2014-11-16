@@ -142,7 +142,7 @@ $numToDisplay = $this->numToDisplay;
 				</tr>
 			</table>
 			<?php if (count($this->laporankejadiankelurahanlist) != 0){ ?>
-			<a  href="<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/cetaklaporankejadiankelurahan?kd_kel=<?echo $this->kd_kel;?>&bulan=<?echo $this->bulan;?>&tahun=<?echo $this->tahun;?>"><div class="download" title="cetak Data"></div> </a>
+			<a  href="<?php echo $this->basePath; ?>/kelurahan/laporankelurahan/cetaklaporankejadiankelurahan?kd_kel=<?echo $this->kd_kel;?>&bulan=<?echo $this->bulan;?>&tahun=<?echo $this->tahun;?>&kelurahan=<?php echo $this->escape($data->kelurahan)?>"><div class="download" title="cetak Data"></div> </a>
 			<?php } ?>
 		<span class="corners-bottom"><span></span></span>
 	</div>

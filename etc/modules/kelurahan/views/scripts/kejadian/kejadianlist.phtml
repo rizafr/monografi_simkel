@@ -25,7 +25,7 @@ $numToDisplay = $this->numToDisplay;
 			<form method="post" id="frmcarikejadian" name="frmcarikejadian">				
 				Filter :
 				<?
-					$kategoriCari = array("K.kelurahan" => "Nama Kelurahan", "KEC.kecamatan" => "Kecamatan","tahun_pembentukan" => "Tahun Pembentukan");
+					$kategoriCari = array("K.kelurahan" => "Nama Kelurahan", "KEC.kecamatan" => "Kecamatan");
 					echo $ctrlFrm->formSelect('kategoriCari', $this->kategoriCari, null, $kategoriCari);						
 				?>
 				
@@ -40,7 +40,7 @@ $numToDisplay = $this->numToDisplay;
 <? 
 $status = $this->hasil;
 $proses = $this->proses;
-$pesan->show_message($proses, $this->kd_kel , "$status" ); 
+$pesan->show_message($proses, $this->kelurahan , "$status" ); 
 ?>
 
 <div class="add" title="Tambah Data" onClick="kejadianForm('insert','<?php echo $this->kd_kel ?>','');"></div>
@@ -74,14 +74,14 @@ $pesan->show_message($proses, $this->kd_kel , "$status" );
 						$idx_kejadian		= $this->escape($val['idx_kejadian']); 
 						$kd_kel		= $this->escape($val['kd_kel']); 
 						$kelurahan		= $this->escape($val['kelurahan']); 
-						$hari	= strtoupper($this->escape($val['hari'])); 
+						$hari	= ucwords($this->escape($val['hari'])); 
 						$tanggal	= $this->escape($val['tanggal']); 
 
-						$tanggal= date('d-m-Y', strtotime($tanggal));
+						$tanggal= date('d M Y', strtotime($tanggal));
 
 						$uraian	= $this->escape($val['uraian']);
 						$waktu	= $this->escape($val['waktu']);
-						$lokasi	= $this->escape($val['lokasi']);
+						$lokasi	= ucwords($this->escape($val['lokasi']));
 						$kerugian	= $this->escape($val['kerugian']);
 
 						$nominal	= $this->escape($val['nominal']);
