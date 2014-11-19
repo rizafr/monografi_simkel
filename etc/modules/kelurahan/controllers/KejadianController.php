@@ -193,6 +193,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 				$this->view->proses = "1";	
 				$this->view->keterangan = "Judul";
 				$this->view->hasil = "<div class='gagal'> ERROR: Besar ukuran file (file size) maksimal 2 Mb! </div>";
+				
 				$this->kejadianlistAction();
 				$this->render('kejadianlist');
              }
@@ -200,6 +201,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
            	$this->view->proses = "1";	
 			$this->view->keterangan = "Judul";
 			$this->view->hasil = "<div class='gagal'> ERROR: Ekstensi file tidak di izinkan! </div>";	
+			
 			$this->kejadianlistAction();
 			$this->render('kejadianlist');
         }

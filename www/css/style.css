@@ -1425,12 +1425,13 @@ P.text {
 	border:0px solid;
 	cursor:pointer;
 	}	
-.edit {	background: transparent url(../images/page_edit.png) no-repeat;}
-.edit1 {	background: transparent url(../images/icon_compose.gif) no-repeat;}
+.edit {	background: transparent url(../images/edit.gif) no-repeat;}
+.edit1 {	background: transparent url(../images/edit.gif) no-repeat;}
 .delete{ background: transparent url(../images/cross.png) no-repeat;}
 .persetujuan { background: transparent url(../images/check.gif) no-repeat;}
 .reply { background: transparent url(../images/page_reply.png) no-repeat;}
 .filedoc { background: transparent url(../images/icon_word.gif) no-repeat;}
+.buku { background: transparent url(../images/buku.png) no-repeat;}
 .prt { background: transparent url(../images/printer.png) no-repeat;}
 .pdf { background: transparent url(../images/page_acrobat.png) no-repeat;}
 .unit, .konsep { background: transparent url(../images/unit.gif) no-repeat;}

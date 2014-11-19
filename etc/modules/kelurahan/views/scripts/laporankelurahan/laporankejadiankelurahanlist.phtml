@@ -33,7 +33,7 @@ $numToDisplay = $this->numToDisplay;
 			<select name="bulan" id="bulan" class="autowidth"> 
 				<?php
 				$bulan_ind=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
-				$bulan=array("1","2","3","4","5","6","7","8","9","10","11","12");
+				$bulan=array("01","02","03","04","05","06","07","08","09","10","11","12");
 				$jlh_bln=count($bulan_ind);
 				for($c=0; $c<$jlh_bln; $c+=1){
 					if(date('m') == $bulan[$c]){

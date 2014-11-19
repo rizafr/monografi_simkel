@@ -1,0 +1,734 @@
+<p align="center">
+		<strong> </strong>
+		<strong> <em>Form 2</em></strong>
+	</p>
+	<p align="center">
+		<strong></strong>
+	</p>
+	<p align="center">
+		<strong>BUKU MONOGRAFI KELURAHAN</strong>		
+	</p>
+	<p align="center">
+		<strong>KEADAAN PADA BULAN</strong>
+		<strong><?echo $this->bulan;?></strong>
+	</p>
+	<p align="center">
+		<strong>TAHUN </strong>
+		<strong><?echo $this->tahun;?></strong>
+	</p>
+	
+	<p>
+		1. Nama Kelurahan : <strong><?php echo strtoupper($this->detailKelurahan->kelurahan) ?></strong>
+	</p>
+	<p>
+		2. Tahun Pembentukan : <strong><?php echo strtoupper($this->detailKelurahan->tahun_pembentukan) ?></strong>
+	</p>
+	<p>
+		3. Dasar Hukum Pembentukan : <strong><?php echo strtoupper($this->detailKelurahan->dasar_pembentukan) ?></strong>
+	</p>
+	<p>
+		4. Nomor Kode Wilayah : <strong><?php echo strtoupper($this->detailKelurahan->kode_wilayah) ?></strong>
+	</p>
+	<p>
+		5. Nomor Kode Pos : <strong><?php echo strtoupper($this->detailKelurahan->kode_pos) ?></strong>
+	</p>
+	<p>
+		6. Kecamatan : <strong><?php echo strtoupper($this->detailKelurahan->kecamatan) ?></strong>
+	</p>
+	<p>
+		7. Kabupaten/Kota : Cimahi
+	</p>
+	<p>
+		8. Provinsi : Jawa Barat
+	</p>
+	
+
+	<p>
+		<strong>A. </strong>
+		<strong>DATA UMUM</strong>
+		<strong></strong>
+	</p>
+	<p>
+		1. Tipologi Kelurahan : <?php echo $this->tipologi->tipologi ?>
+	</p>
+	<p>
+		2. Luas Wilayah : <strong><?php echo strtoupper($this->detailKelurahan->luas_wilayah) ?></strong> km<sup>2</sup>
+	</p>
+	<p>	3. Batas Wilayah 
+	</p>
+	<p>
+		a. Sebelah Utara : <strong><?php echo strtoupper($this->detailKelurahan->batasUtara) ?></strong>
+	</p>
+	<p>
+		b. Sebelah Selatan : <strong><?php echo strtoupper($this->detailKelurahan->batas_selatan) ?></strong>
+	</p>
+	<p>
+		c. Sebelah Barat :<strong><?php echo strtoupper($this->detailKelurahan->batas_barat) ?></strong>
+	</p>
+	<p>
+		d. Sebelah Timur : <strong><?php echo strtoupper($this->detailKelurahan->batas_timur) ?></strong>
+	</p>
+	<p>
+		4. Orbitrasi (Jarak dari Pusat Pemerintahan)
+	</p>
+	<p>
+		a. Jarak dari Pusat Pemerintahan Kecamatan : <?php echo $this->detailKelurahan->jarakDariKecamatan ?>{jarakDariKecamatan} km
+	</p>
+	<p>
+		b. Jarak dari Pusat Pemerintahan Kota : <?php echo $this->detailKelurahan->jarakDariKota ?>{jarakDariKota} km
+	</p>
+	<p>
+		c. Jarak dari Ibukota Kabupaten : <?php echo $this->detailKelurahan->jarakDariIbukotaKota ?>{jarakDariIbukotaKota} km
+	</p>
+	<p>
+		d. Jarak dari Ibukota Provinsi : <?php echo $this->detailKelurahan->jarakDariIbuKotaProv ?>{jarakDariIbuKotaProv} km
+	</p>
+	<p>
+		5. Jumlah Penduduk : <?php echo $this->detailUmum['jml_jiwa']?> Jiwa, <?php echo $this->detailUmum['jml_kk']?>  KK
+	</p>
+	<p>
+		a. Laki-laki : <?php echo $this->detailUmum['jml_laki']?> Jiwa
+	</p>
+	<p>
+		b. Perempuan : <?php echo $this->detailUmum['jml_perempuan']?> Jiwa
+	</p>
+	<p>
+		c. Usia 0 – 15 : <?php echo $this->detailUmum['jml_0_15']?> Jiwa
+	</p>
+	<p>
+		d. Usia 15 – 65 : <?php echo $this->detailUmum['jml_15_65']?> Jiwa
+	</p>
+	<p>
+		e. Usia 65 ke atas : <?php echo $this->detailUmum['jml_65_keatas']?> Jiwa
+	</p>
+	
+	
+	<p> 6. Pekerjaan / Mata Pencaharian :</p>
+	<p>&nbsp;&nbsp;&nbsp; a. Karyawan :</p>
+	
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Pegawai Negeri Asli :
+			<? 
+				echo $this->detailUmum['jml_pns'];
+			?>  Jiwa
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2. ABRI :
+			<? 
+				echo  $this->detailUmum['jml_abri'];
+			?>  Jiwa
+		</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Swasta
+			<? 
+				echo $this->detailUmum['jml_swasta'];
+			?>  Jiwa
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; b. Wiraswasta / Pedagang
+			<? 
+				echo  $this->detailUmum['jml_wiraswasta'];
+			?>  Jiwa
+	</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; c. Tani
+			<? 
+				echo  $this->detailUmum['jml_tani'];
+			?>  Jiwa
+		</p>
+				
+	<p>&nbsp;&nbsp;&nbsp; d. Pertukangan
+			<? 
+				echo $this->detailUmum['jml_pertukangan'];
+			?>  Jiwa
+		</p>
+				
+	<p>&nbsp;&nbsp;&nbsp; e. Buruh Tani:
+			<? 
+				echo $this->detailUmum['jml_buruh_tani'];
+			?>  Jiwa
+	</p>
+
+	<p>&nbsp;&nbsp;&nbsp; f.Pensiunan :
+			<? 
+				echo  $this->detailUmum['jml_pensiunan'];
+			?>  Jiwa
+	</p>
+
+	<p>&nbsp;&nbsp;&nbsp; g. Nelayan :
+			<? 
+				echo $this->detailUmum['jml_nelayan'];
+			?>  Jiwa
+	</p>
+
+	<p>&nbsp;&nbsp;&nbsp; h. Pemulung :
+			<? 
+				echo $jml_pemulungAttrib;
+			?> jiwa
+		</p>
+
+	<p>&nbsp;&nbsp;&nbsp; i. Jasa :
+			<? 
+				echo  $this->detailUmum['jml_jasa'];
+			?> jiwa
+		</p>
+	<p>
+		7. Tingkat Pendidikan Masyarakat
+	</p>
+	<p>
+		a. Lulusan pendidikan umum
+	</p>
+	<p>
+		1) Taman Kanak-kanak : 
+			<? echo  $this->detailUmum['jml_lulusan_tk']; ?> orang
+	</p>
+	<p>
+		2) Sekolah Dasar : <? echo  $this->detailUmum['jml_lulusan_sd']; ?> orang
+	</p>
+	<p>
+		3) SMP : <? echo  $this->detailUmum['jml_lulusan_smp']; ?> orang
+	</p>
+	<p>
+		4) SMA/SMU : <? echo  $this->detailUmum['jml_lulusan_sma']; ?> orang
+	</p>
+	<p>
+		5) Akademi/D1-D3 : <? echo  $this->detailUmum['jml_lulusan_diploma']; ?> orang
+	</p>
+	<p>
+		6) Sarjana : <? echo  $this->detailUmum['jml_lulusan_sarjana']; ?> orang
+	</p>
+	<p>
+		7) Pascasarjana : <? echo  $this->detailUmum['jml_lulusan_pascasarjana']; ?> orang
+	</p>
+	<p>
+		b. Lulusan pendidikan khusus
+	</p>
+	<p>
+		1) Pondok Pesantren : <? echo  $this->detailUmum['jml_lulusan_pontren']; ?> orang
+	</p>
+	<p>
+		2) Pendidikan Keagamaan : <? echo  $this->detailUmum['jml_lulusan_keagamaan']; ?> orang
+	</p>
+	<p>
+		3) Sekolah Luar Biasa : <? echo  $this->detailUmum['jml_lulusan_slb']; ?> orang
+	</p>
+	<p>
+		4) Kursus Keterampilan : <? echo  $this->detailUmum['jml_lulusan_kursus']; ?> orang
+	</p>
+	<p>
+		8. Jumlah Penduduk Miskin : <? echo  $this->detailUmum['jml_jiwa_miskin']; ?> jiwa, <? echo  $this->detailUmum['jml_jiwa_kk']; ?> KK
+	</p>
+	<p>
+		9. U M R Kabupaten/Kota : Rp. 
+			<?  $umr= explode('.', $this->detailUmum['umr']);
+				echo $umr[0];
+			?> 
+	</p>
+	<p>
+		10. Sarana Prasarana
+	</p>
+	<p>
+		a. Kantor Kelurahan : <? echo  $this->tipologi->sarana_kantor; ?>
+	</p>
+	<p>
+		b. Prasarana Kesehatan
+	</p>
+	<p>
+		1) Puskesmas : <? echo  $this->tipologi->sarana_puskesmas; ?>
+	</p>
+	<p>
+		2) UKBM (Posyandu) : <? echo  $this->detailUmum['sarana_jml_posyandu'] ?>buah
+	</p>
+	<p>
+		3) Poliklinik : <? echo  $this->detailUmum['sarana_jml_poliklinik'] ?> buah
+	</p>
+	<p>
+		c. Prasarana Pendidikan
+	</p>
+	
+	<p>
+		1) PAUD : <? echo  $this->detailUmum['sarana_jml_paud'] ?> buah
+	</p>
+		
+	<p>
+		4) SMP : <? echo  $this->detailUmum['sarana_jml_smp'] ?> buah
+	</p>
+		
+	<p>
+		2) TK : <? echo  $this->detailUmum['sarana_jml_tk'] ?> buah
+	</p>
+	
+	<p>
+		5) SMA :  <? echo  $this->detailUmum['sarana_jml_sma'] ?> buah
+	</p>
+		
+	<p>
+		3) SD : <? echo  $this->detailUmum['sarana_jml_sd'] ?> buah
+	</p>
+		
+	<p>
+		6) PT : <? echo  $this->detailUmum['sarana_jml_pt'] ?> buah
+	</p>
+	
+	<p>
+		d. Prasarana Ibadah
+	</p>
+	
+	<p>
+		1) Mesjid : <? echo  $this->detailUmum['sarana_jml_masjid'] ?> buah
+	</p>
+
+	<p>
+		4) Pura : <? echo  $this->detailUmum['sarana_jml_pura'] ?> buah
+	</p>
+				
+	<p>
+		2) Mushola : <? echo  $this->detailUmum['sarana_jml_mushola'] ?> buah
+	</p>
+
+	<p>
+		5) Vihara : <? echo  $this->detailUmum['sarana_jml_vihara'] ?> buah
+	</p>
+
+	<p>
+		3) Gereja : <? echo  $this->detailUmum['sarana_jml_gereja'] ?> buah
+	</p>
+
+	<p>
+		6) Klenteng : <? echo  $this->detailUmum['sarana_jml_klenteng'] ?> buah
+	</p>
+	<p>
+		e. Prasarana Umum
+	</p>
+	<p>
+		1) Olahraga : <? echo  $this->detailUmum['sarana_jml_olahraga'] ?> buah
+	</p>
+	<p>
+		2) Kesenian/budaya : <? echo  $this->detailUmum['sarana_jml_kesenian'] ?> buah
+	</p>
+	<p>
+		3) Balai pertemuan : <? echo  $this->detailUmum['sarana_jml_balai_pertemuan'] ?> buah
+	</p>
+	<p>
+		4) Lainnya : <? echo  $this->detailUmum['sarana_jml_lainnya'] ?> buah
+	</p>
+	<p>
+		<strong>B. DATA </strong>
+		<strong> PERSONIL</strong>
+	</p>
+	<p> 1. Kepala Kelurahan (Lurah)</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; a. Nama:
+			<? 
+				echo $this->detailPersonil['nama_lurah'];
+			?>
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; b. Pangkat / Golongan:
+			<? 
+				echo $this->detailPersonil['gol_lurah'];
+			?>
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; c. NIP:
+			<? 
+				echo $this->detailPersonil['nip_lurah'];
+			?>
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; d. Pendidikan:		
+			<?php foreach($this->pendidikan as $data): ?>
+					<?php if(($this->detailPersonil['id_pendidikan_lurah'])== $this->escape($data->id_pendidikan)){ ?> 
+						<?php echo $this->escape($data->pendidikan); ?> 
+				<?php }?>
+				 <?php endforeach; ?>
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; e. TMT Masa Jabatan:<?php echo $this->detailPersonil['tmt_jabatan_seklur']?>
+			
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; f. Riwayat Jabatan:
+			<? 				
+				echo $this->detailPersonil['riwayat_jabatan1'];
+			?>
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; g. Jenis Kelamin:
+				
+				<?php foreach($this->jenkel as $data): ?>
+					<?php if(($this->detailPersonil['id_jenkel_lurah'])== $this->escape($data->id_jenkel)){ ?> 
+						<?php echo $this->escape($data->jenkel); ?> 
+				<?php }?>
+				<?php endforeach; ?>
+			</p>
+				
+	<p>2. Sekretaris Kelurahan</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; a. Nama:
+			<? 
+				echo $this->detailPersonil['nama_seklur'];
+			?>
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; b. Pangkat / Golongan:
+			<? 
+				echo  $this->detailPersonil['gol_seklur'];
+			?>
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; c. NIP:
+			<? 				
+				echo  $this->detailPersonil['nip_seklur'];
+			?>
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; d. Pendidikan:			
+				<?php foreach($this->pendidikan as $data): ?>
+					<?php if(($this->detailPersonil['id_pendidikan_seklur'])== $this->escape($data->id_pendidikan)){ ?> 
+					<?php echo $this->escape($data->pendidikan); ?> 
+				<?php }?>				
+				 <?php  endforeach; ?>
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; e. TMT Masa Jabatan:<?php echo $this->detailPersonil['tmt_jabatan_seklur']?>
+			
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; f. Riwayat Jabatan:
+			<? 				
+				echo  $this->detailPersonil['riwayat_jabatan1_seklur'];
+			?>
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; g. Jenis Kelamin:
+			<?php foreach($this->jenkel as $data): ?>
+				<?php if(($this->detailPersonil['id_jenkel_seklur'])== $this->escape($data->id_jenkel)){ ?> 
+						<?php echo $this->escape($data->jenkel); ?>
+				<?php }?>				
+				 <?php  endforeach; ?>
+		</p>
+	<p>3. Jumlah Aparat Kantor Kelurahan</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; a. Golongan I:
+			<? 
+				echo $this->detailPersonil['jumlah_aparat_gol1'];
+			?>  orang
+		
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; b.  Golongan II:
+			<? 				
+				echo $this->detailPersonil['jumlah_aparat_gol2'];
+			?>  orang
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; c.  Golongan III:
+			<? 				
+				echo  $this->detailPersonil['jumlah_aparat_gol3'];
+			?>  orang
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; d.  Golongan IV:
+			<? 
+				echo  $this->detailPersonil['jumlah_aparat_gol4'];
+			?>  orang
+		</p>	
+		
+	<p>
+		<strong>C. </strong>
+		<strong>DATA </strong>
+		<strong>KEWENANGAN</strong>
+	</p>
+	<p>
+		Program yang diterima Kelurahan :
+	</p>
+	<p>
+		1. Jumlah urusan yang dilimpahkan kabupaten/kota : 
+			<? 				
+				echo $this->detailKewenangan['jml_urusan_kota'];
+			?>  buah
+	</p>
+	<p>
+		2. Urusan yang dilimpahkan oleh kabupaten/kota : 
+		<? 				
+				echo $this->detailKewenangan['jml_limpah_urusan_kota'];
+			?>  buah
+	</p>
+		&nbsp;&nbsp;&nbsp; a. Urusan Wajib
+	<p>
+	
+	</p>
+	<p>&nbsp;&nbsp;&nbsp; a. Urusan Wajib</p>
+	
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Bidang
+				
+				<?php 
+				$bidang_urusan_wajib= explode(',',$this->detailKewenangan['bidang_urusan_wajib']);						
+				for($i=0;$i<count($bidang_urusan_wajib);$i++){?>						
+					<?php echo $bidang_urusan_wajib[$i] ?>					
+				<?php } ?>
+			</p>
+	
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Urusan
+				
+						<?php 
+							$urusan_wajib= explode(',',$this->detailKewenangan['urusan_wajib']);
+						
+							for($i=0;$i<count($urusan_wajib);$i++){?>
+							<?php echo $urusan_wajib[$i] ?>
+							<?php } ?>
+				
+			</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; a. Urusan Pilihan</p>
+	
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Bidang
+				
+						<?php 
+							$bidang_urusan_pilihan= explode(',',$this->detailKewenangan['bidang_urusan_pilihan']);
+						
+							for($i=0;$i<count($bidang_urusan_pilihan);$i++){?>
+							<?php echo $bidang_urusan_pilihan[$i] ?>
+							<?php } ?>
+				
+	</p>
+	
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Urusan
+				
+				<?php 
+					$urusan_pilihan= explode(',',$this->detailKewenangan['urusan_pilihan']);			
+					for($i=0;$i<count($urusan_pilihan);$i++){?>
+					<?php echo $urusan_pilihan[$i] ?>
+					<?php } ?>
+			</p>
+	
+		
+	<p>
+		<strong>D. </strong>
+		<strong>DATA </strong>
+		<strong> KEUANGAN</strong>
+	</p>
+	<p>
+		1. APBD Kabupaten/Kota : Rp <? $anggaran_apbd= explode('.',$this->detailKeuangan['anggaran_apbd']);
+				echo $anggaran_apbd[0];
+			?> 
+	</p>
+	<p>
+		2. SKPD : <?php if( $this->detailKeuangan['is_skpd']=="1") { ?> Sudah <?php } else {?> Belum <?}?>
+	</p>
+	<p>
+		3. Bantuan yang diterima Kelurahan
+	</p>
+	<p>
+		a. Pemerintah Pusat : Rp <? $bantuan_pusat= explode('.',$this->detailKeuangan['bantuan_pusat']);
+				echo  $bantuan_pusat[0];
+			?>  
+	</p>
+	<p>
+		b. Pemerintah Provinsi : Rp <? $bantuan_prov= explode('.',$this->detailKeuangan['bantuan_prov']);
+				echo $bantuan_prov[0];
+			?>  
+	</p>
+	<p>
+		c. Pemerintah Kabupaten/Kota : Rp <? $bantuan_kota= explode('.',$this->detailKeuangan['bantuan_kota']);
+				echo $bantuan_kota[0];
+			?> 
+	</p>
+	<p>
+		d. Hibah/Bantuan Luar Negeri : Rp <? $hibah= explode('.',$this->detailKeuangan['hibah']);
+				echo $hibah[0];
+			?> 
+	</p>
+	<p>
+		e. Swadaya/gotong royong : Rp <?  $sumbangan= explode('.',$this->detailKeuangan['sumbangan']);
+				echo $sumbangan[0];
+			?> 
+	</p>
+	<p>
+		f. Sumber lain : Rp <?  $swadaya= explode('.',$this->detailKeuangan['swadaya']);
+				echo  $swadaya[0];
+			?> 
+	</p>
+	<p>
+		<strong>E. </strong>
+		<strong>KELEMBAGAAN</strong>
+	</p>
+	<p>
+		1. LPM atau sebutan lain
+	</p>
+	<p>
+		- Jumlah pengurus : <? 
+				echo $this->detailKelembagaan['lpm_jml_pengurus'];
+			?> orang
+	</p>
+	<p>
+		- Jumlah kegiatan per bulan : <? 
+				echo $this->detailKelembagaan['lpm_jml_keg_perbulan'];
+			?> kegiatan
+	</p>
+	<p>
+		- Jumlah buku administrasi : <? 
+				echo $this->detailKelembagaan['lpm_jml_buku_administrasi'];
+			?>  buku
+	</p>
+	<p>
+		- Jumlah dana yang dikelola : Rp <? 
+				echo $this->detailKelembagaan['lpm_jml_dana'];
+			?>
+	</p>
+	
+	<p>
+		3. PKK
+	</p>
+	<p>
+		- Jumlah pengurus : <? 
+				echo  $this->detailKelembagaan['pkk_jml_pengurus'];
+			?> orang
+	</p>
+	<p>
+		- Jumlah kegiatan per bulan : <? 
+				echo $this->detailKelembagaan['pkk_jml_keg_perbulan'];
+			?> kegiatan
+	</p>
+	<p>
+		- Jumlah buku administrasi : <? 
+				echo $this->detailKelembagaan['pkk_jml_buku_administrasi'];
+			?>  buku
+	</p>
+	<p>
+		- Jumlah dana yang dikelola : Rp <? $pkk_jml_dana= explode('.',$this->detailKelembagaan['pkk_jml_dana']);
+				echo $pkk_jml_dana[0];
+			?> 
+	</p>
+	<p>
+		4. RT/RW
+	</p>
+	<p>
+		a. Jumlah RW : <? 
+				echo $this->detailKelembagaan['jml_rw'];
+			?>  buah
+	</p>
+	<p>
+		b. Jumlah RT : <? 
+				echo $this->detailKelembagaan['jml_rw'];
+			?>  buah
+	</p>
+	<p>
+		c. Rata-rata penghasilan Ketua RW : Rp <?  $rata_penghasilan_rw= explode('.', $this->detailKelembagaan['rata_penghasilan_rw']);
+				echo $rata_penghasilan_rw[0];
+			?>  
+	</p>
+	<p>
+		d. Rata-rata penghasilan Ketua RT : Rp <? $rata_penghasilan_rt= explode('.', $this->detailKelembagaan['rata_penghasilan_rt']);
+				echo $rata_penghasilan_rt[0];
+			?>  
+	</p>
+	<p>
+		5. Karang Taruna
+	</p>
+	<p>
+		- Jumlah Karang Taruna : <? 
+				echo  $this->detailKelembagaan['taruna_jml'];
+			?> buah
+	</p>
+	<p>
+		- Jumlah Pengurus (rata-rata) : <? 
+				echo  $this->detailKelembagaan['taruna_jml_pengurus'];
+			?>  orang
+	</p>
+	
+	<p>
+		<strong>F. </strong>
+		<strong>KETENTRAMAN DAN KETERTIBAN</strong>
+	</p>
+	<p>1. Jumlah Anggota Linmas:
+			<? 
+				echo  $this->detailTrantib['jml_anggota_linmas'];
+			?> orang </p>
+	<p>2. Jumlah Pos kamling: <? echo $this->detailTrantib['jml_pos_kamling'];?> pos </p>
+	
+	<p>3. Jumlah Operasi Penertiban:
+			<? 
+				echo $this->detailTrantib['jml_ops_penertiban'];
+			?> kali </p>
+	
+	<p>4. Jumlah Kejadian Kriminal: </p>
+	
+	<p>&nbsp;&nbsp;&nbsp; a. Pencurian:
+			<? 
+				
+				echo $this->detailTrantib['jml_pencurian'];
+			?> kali 
+	</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; b. Perkosaan:
+			<? 
+				echo $this->detailTrantib['jml_perkosaan'];
+			?> kali </p>
+	
+	<p> &nbsp;&nbsp;&nbsp; c. Kenakalan Remaja:
+			<? 
+				echo $this->detailTrantib['jml_kenakalan_remaja'];
+			?> kali </p>
+	
+	<p>&nbsp;&nbsp;&nbsp; d. Pembunuhan:
+			<? 
+				echo   $this->detailTrantib['jml_pembunuhan'];
+			?> kali 
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; e. Perampokan:
+			<? 
+				echo  $this->detailTrantib['jml_perampokan'];
+			?> kali 
+		</p>
+	
+	<p>&nbsp;&nbsp;&nbsp; f. Penipuan:
+			<? 
+				echo  $this->detailTrantib['jml_penipuan'];
+			?> kali 
+		</p>
+	
+	<p>5. Jumlah Kejadian Alam:
+			<? 
+				echo $this->detailTrantib['jml_bencana'];
+			?> kali 
+		</p>
+	
+	<p>6. Jumlah Pos Bencana Alam:
+			<? 
+				echo  $this->detailTrantib['jml_pos_bencana'];
+			?> pos 
+		</p>
+
+	
+	<p>7. Jumlah Pembalakan Liar:
+			<? 
+				echo  $this->detailTrantib['jml_pembalakan_liar'];
+			?> kali 
+		</p>
+
+	
+	<p>8. Jumlah Pos Hutan Lindung:
+			<? 
+				echo $this->detailTrantib['jml_pos_hutan_lindung'];
+			?> pos 
+		</p>
+
+<?php
+	
+	//nama file dokumen
+	$namafile = "Laporan Papan Monografi Kelurahan ". $this->detailKelurahan->kelurahan. " ".$this->bulan." ". $this->tahun ." .doc";
+	
+	header('Content-Description: File Transfer');
+	header('Content-Type: application/octet-stream');
+	header('Content-Disposition: attachment; filename='.basename($namafile));
+	header('Content-Transfer-Encoding: binary');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+   header('Pragma: public');
+	flush();
+
+	exit;
+
+
+?>

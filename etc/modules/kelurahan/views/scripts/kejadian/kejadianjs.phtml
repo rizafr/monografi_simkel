@@ -76,6 +76,10 @@ var tambahkejadian_opt = {
 			alert('Pelapor harus diisi');
 			return false;
 		}
+		if (document.getElementById('keterangan').value == ''){
+			alert('keterangan harus diisi');
+			return false;
+		}
 		
 		if (document.getElementById('lampiran').value == ''){
 			alert('Lampiran harus diisi');

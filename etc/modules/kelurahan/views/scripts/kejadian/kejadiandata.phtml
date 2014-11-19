@@ -32,7 +32,7 @@ $numToDisplay = $this->numToDisplay;
 			else {$namaForm = 'frmhapuskejadian';  $nama='hapus';}
 		?>
 		
-		<h2 class="title">FORM <?php echo strtoupper($nama)?> KEJADIAN, <strong><?php echo  strtoupper($this->nama); ?></strong> </h2>
+		<h2 class="title">FORM <?php echo strtoupper($nama)?> KEJADIAN, <strong><?php echo  strtoupper($this->detailKejadian['kelurahan']); ?></strong> </h2>
 		
 	    <div class="spacer"></div> 
 		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi" enctype="multipart/form-data">
@@ -52,7 +52,7 @@ $numToDisplay = $this->numToDisplay;
 					<td>	
 				<?php if($this->kd_kel !=00) {?>			
 				<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->kd_kel?>" />
-				<input name="kelurahan" id="kelurahan" type="text" value="<?echo $this->nama ;?>" readonly />
+				<input name="kelurahan" id="kelurahan" type="text" value="<?echo $this->detailKejadian['kelurahan'] ;?>" readonly />
 				<?php }else {?>
 				<select name="kd_kel" id="kd_kel">
 				<?php 
@@ -159,12 +159,12 @@ $numToDisplay = $this->numToDisplay;
 				    <td align="right" width="100">* Lampiran :</td>					
 					</td>	
 					<?php if (strtolower($this->jenisForm) == 'update') { ?>
-							<td> <img src="<?php echo $this->detailKejadian['file_lampiran']; ?>" width="50%" height="50%"/>	
+							<td> <img src="<?php echo $this->detailKejadian['file_lampiran']; ?>" width="150px" height="150px"/>	
 						</td>
 					<?php } ?>
 					<?php if (strtolower($this->jenisForm) == 'insert') { ?>
 					 <td>
-						<input type="file" name="lampiran" id="lampiran"/>
+						<input type="file" name="lampiran" id="lampiran" required />
 					 </td>
 					 	<?php } ?>
 				</tr>

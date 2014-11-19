@@ -76,6 +76,48 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->render('rekamkelurahancetak');
 	}
 	
+	public function rekamkelurahandatacetakAction(){
+	$ssogroup = new Zend_Session_Namespace('ssogroup');	
+
+		$this->view->kategoriCari 	= $_REQUEST['kategoriCari']; 
+		$this->view->carii 			= trim(stripslashes(strip_tags(htmlspecialchars($_REQUEST['carii']))));
+
+		$this->view->jenisForm		= $_REQUEST['jenisForm'];
+		//$this->view->id				= $_REQUEST['id'];
+		
+		$this->view->jenkel= $this->ref_serv->getJenkelList();
+		$this->view->agama= $this->ref_serv->getAgamaList();
+		$this->view->pendidikan= $this->ref_serv->getPendidikanList();
+		
+		
+		$this->view->kd_kel	 = $_REQUEST['kd_kel'];
+		$this->view->bulan 	 = $_REQUEST['bulan'];
+		$this->view->tahun 	 = $_REQUEST['tahun'];
+		
+		
+		$this->view->getJumlahPusat	= $this->rekamkelurahan_serv->getJumlahPusat($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->getJumlahProvinsi	= $this->rekamkelurahan_serv->getJumlahProvinsi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->getJumlahKota	= $this->rekamkelurahan_serv->getJumlahKota($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		
+		//var_dump($this->view->kd_kel);
+		// var_dump($this->view->tahun);
+		$this->view->detailKelurahan	= $this->rekamkelurahan_serv->detailKelurahanByKode($this->view->kd_kel);
+		
+		$this->view->detailUmum = $this->rekamkelurahan_serv->detailUmum($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->tipologi = $this->rekamkelurahan_serv->getTipologi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		//var_dump($this->view->tipologi );
+		$this->view->detailPersonil = $this->rekamkelurahan_serv->detailPersonil($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKewenangan = $this->rekamkelurahan_serv->detailKewenangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgram = $this->rekamkelurahan_serv->detailProgram($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKeuangan = $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailKelembagaan = $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailTrantib = $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		// var_dump($this->view->detailKewenangan);
+		// var_dump($this->view->kd_kel);
+		// var_dump($this->view->bulan);
+		// var_dump($this->view->tahun);
+	}
+	
 	//menampilkan data kelurahan
 	public function rekamkelurahanlistAction()
 	{
