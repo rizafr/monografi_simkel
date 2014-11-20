@@ -66,7 +66,7 @@
 		5. Nomor Kode Pos : <strong><?php echo strtoupper($this->detailKelurahan->kode_pos) ?></strong>
 	</p>
 	<p>
-		6. Kecamatan : ${kecamatan} <strong><?php echo strtoupper($this->detailKelurahan->kecamatan) ?></strong>
+		6. Kecamatan : <strong><?php echo strtoupper($this->detailKelurahan->kecamatan) ?></strong>
 	</p>
 	<p>
 		7. Kabupaten/Kota : Cimahi
@@ -111,16 +111,16 @@
 		4. Orbitrasi (Jarak dari Pusat Pemerintahan)
 	</p>
 	<p>
-		a. Jarak dari Pusat Pemerintahan Kecamatan : <?php echo $this->detailKelurahan->jarakDariKecamatan ?>{jarakDariKecamatan} km
+		a. Jarak dari Pusat Pemerintahan Kecamatan : <?php echo $this->detailKelurahan->jarakDariKecamatan ?> km
 	</p>
 	<p>
-		b. Jarak dari Pusat Pemerintahan Kota : <?php echo $this->detailKelurahan->jarakDariKota ?>{jarakDariKota} km
+		b. Jarak dari Pusat Pemerintahan Kota : <?php echo $this->detailKelurahan->jarakDariKota ?> km
 	</p>
 	<p>
-		c. Jarak dari Ibukota Kabupaten : <?php echo $this->detailKelurahan->jarakDariIbukotaKota ?>{jarakDariIbukotaKota} km
+		c. Jarak dari Ibukota Kabupaten : <?php echo $this->detailKelurahan->jarakDariIbukotaKota ?> km
 	</p>
 	<p>
-		d. Jarak dari Ibukota Provinsi : <?php echo $this->detailKelurahan->jarakDariIbuKotaProv ?>{jarakDariIbuKotaProv} km
+		d. Jarak dari Ibukota Provinsi : <?php echo $this->detailKelurahan->jarakDariIbuKotaProv ?> km
 	</p>
 	
 	<p>
@@ -189,64 +189,67 @@
 		a. Lulusan pendidikan umum
 	</p>
 	<p>
-		1) Taman Kanak-kanak : ${jmlLulusanTk} orang
+		1) Taman Kanak-kanak : <? echo  $this->detailUmum['jml_lulusan_tk']; ?> orang
 	</p>
 	<p>
-		2) Sekolah Dasar : ${jmlLulusanSd} orang
+		2) Sekolah Dasar : <? echo  $this->detailUmum['jml_lulusan_sd']; ?> orang
 	</p>
 	<p>
-		3) SMP : ${jmlLulusanSmp} orang
+		3) SMP : <? echo  $this->detailUmum['jml_lulusan_smp']; ?> orang
 	</p>
 	<p>
-		4) SMA/SMU : ${jmlLulusanSma} orang
+		4) SMA/SMU : <? echo  $this->detailUmum['jml_lulusan_sma']; ?> orang
 	</p>
 	<p>
-		5) Akademi/D1-D3 : ${jmlLulusanDiploma} orang
+		5) Akademi/D1-D3 : <? echo  $this->detailUmum['jml_lulusan_diploma']; ?> orang
 	</p>
 	<p>
-		6) Sarjana : ${jmlLulusanSarjana} orang
+		6) Sarjana : <? echo  $this->detailUmum['jml_lulusan_sarjana']; ?> orang
 	</p>
 	<p>
-		7) Pascasarjana : ${jmlLulusanPascasarjana} orang
+		7) Pascasarjana : <? echo  $this->detailUmum['jml_lulusan_pascasarjana']; ?> orang
 	</p>
 	<p>
 		b. Lulusan pendidikan khusus
 	</p>
 	<p>
-		1) Pondok Pesantren : ${jmlLulusanPontren} orang
+		1) Pondok Pesantren : <? echo  $this->detailUmum['jml_lulusan_pontren']; ?> orang
 	</p>
 	<p>
-		2) Pendidikan Keagamaan : ${jmlLulusanKeagamaan} orang
+		2) Pendidikan Keagamaan : <? echo  $this->detailUmum['jml_lulusan_keagamaan']; ?> orang
 	</p>
 	<p>
-		3) Sekolah Luar Biasa : ${jmlLulusanSlb} orang
+		3) Sekolah Luar Biasa : <? echo  $this->detailUmum['jml_lulusan_slb']; ?> orang
 	</p>
 	<p>
-		4) Kursus Keterampilan : ${jmlLulusanKursus} orang
+		4) Kursus Keterampilan : <? echo  $this->detailUmum['jml_lulusan_kursus']; ?>  orang
 	</p>
 	<p>
-		8. Jumlah Penduduk Miskin : ${jmlJiwaMiskin} jiwa, ${jmlJiwaKk} KK
+		8. Jumlah Penduduk Miskin : <? echo  $this->detailUmum['jml_jiwa_miskin']; ?> jiwa, <? echo  $this->detailUmum['jml_jiwa_kk']; ?> KK
 	</p>
 	<p>
-		9. U M R Kabupaten/Kota : Rp. ${umr}
+		9. U M R Kabupaten/Kota : Rp. 
+		<?  $umr= explode('.', $this->detailUmum['umr']);
+			echo $umr[0];
+		?> 
 	</p>
 	<p>
 		10. Sarana Prasarana
 	</p>
 	<p>
-		a. Kantor Kelurahan : ${saranaKantor}
+		a. Kantor Kelurahan : <? echo  $this->tipologi->sarana_kantor; ?>
 	</p>
 	<p>
 		b. Prasarana Kesehatan
 	</p>
 	<p>
-		1) Puskesmas : ${saranaPuskesmas}
+		1) Puskesmas : <? echo  $this->tipologi->sarana_puskesmas; ?>
 	</p>
 	<p>
-		2) UKBM (Posyandu) : ${saranaJmlPosyandu} buah
+		2) UKBM (Posyandu) : <? echo  $this->detailUmum['sarana_jml_posyandu'] ?> buah
 	</p>
 	<p>
-		3) Poliklinik : ${saranaJmlPoliklinik} buah
+		3) Poliklinik : <? echo  $this->detailUmum['sarana_jml_poliklinik'] ?> buah
 	</p>
 	<p>
 		c. Prasarana Pendidikan
@@ -256,36 +259,36 @@
 			<tr>
 				<td width="319" valign="top">
 					<p>
-						1) PAUD : ${saranaJmlPaud} buah
+						1) PAUD : <? echo  $this->detailUmum['sarana_jml_paud'] ?> buah
 					</p>
 				</td>
 				<td width="300" valign="top">
 					<p>
-						4) SMP : ${saranaJmlSmp} buah
+						4) SMP : <? echo  $this->detailUmum['sarana_jml_smp'] ?> buah
 					</p>
 				</td>
 			</tr>
 			<tr>
 				<td width="319" valign="top">
 					<p>
-						2) TK : ${saranaJmlTk} buah
+						2) TK : <? echo  $this->detailUmum['sarana_jml_tk'] ?> buah
 					</p>
 				</td>
 				<td width="300" valign="top">
 					<p>
-						5) SMA : ${saranaJmlSma} buah
+						5) SMA : <? echo  $this->detailUmum['sarana_jml_sma'] ?> buah
 					</p>
 				</td>
 			</tr>
 			<tr>
 				<td width="319" valign="top">
 					<p>
-						3) SD : ${saranaJmlSd} buah
+						3) SD : <? echo  $this->detailUmum['sarana_jml_sd'] ?> buah
 					</p>
 				</td>
 				<td width="300" valign="top">
 					<p>
-						6) PT : ${saranaJmlPt} buah
+						6) PT : <? echo  $this->detailUmum['sarana_jml_pt'] ?> buah
 					</p>
 				</td>
 			</tr>
@@ -299,36 +302,36 @@
 			<tr>
 				<td width="331" valign="top">
 					<p>
-						1) Mesjid : ${saranaJmlMasjid} buah
+						1) Mesjid : <? echo  $this->detailUmum['sarana_jml_masjid'] ?> buah
 					</p>
 				</td>
 				<td width="300" valign="top">
 					<p>
-						4) Pura : ${saranaJmlPura} buah
+						4) Pura : <? echo  $this->detailUmum['sarana_jml_pura'] ?> buah
 					</p>
 				</td>
 			</tr>
 			<tr>
 				<td width="331" valign="top">
 					<p>
-						2) Mushola : ${saranaJmlMushola} buah
+						2) Mushola : <? echo  $this->detailUmum['sarana_jml_mushola'] ?> buah
 					</p>
 				</td>
 				<td width="300" valign="top">
 					<p>
-						5) Vihara : ${saranaJmlVihara} buah
+						5) Vihara : <? echo  $this->detailUmum['sarana_jml_vihara'] ?> buah
 					</p>
 				</td>
 			</tr>
 			<tr>
 				<td width="331" valign="top">
 					<p>
-						3) Gereja : ${saranaJmlGereja} buah
+						3) Gereja : <? echo  $this->detailUmum['sarana_jml_gereja'] ?> buah
 					</p>
 				</td>
 				<td width="300" valign="top">
 					<p>
-						6) Klenteng : ${saranaJmlKlenteng} buah
+						6) Klenteng : <? echo  $this->detailUmum['sarana_jml_klenteng'] ?> buah
 					</p>
 				</td>
 			</tr>
@@ -338,41 +341,102 @@
 		e. Prasarana Umum
 	</p>
 	<p>
-		1) Olahraga : ${saranaJmlOlahraga} buah
+		1) Olahraga : <? echo  $this->detailUmum['sarana_jml_olahraga'] ?> buah
 	</p>
 	<p>
-		2) Kesenian/budaya : ${saranaJmlKesenian} buah
+		2) Kesenian/budaya : <? echo  $this->detailUmum['sarana_jml_kesenian'] ?> buah
 	</p>
 	<p>
-		3) Balai pertemuan : ${saranaJmlBalaiPertemuan} buah
+		3) Balai pertemuan : <? echo  $this->detailUmum['sarana_jml_balai_pertemuan'] ?> buah
 	</p>
 	<p>
-		4) Lainnya ............... : ${saranaJmlLainnya} buah
+		4) Lainnya : <? echo  $this->detailUmum['sarana_jml_lainnya'] ?> buah
 	</p>
 	<p>
 		<strong>B. DATA </strong>
 		<strong> PERSONIL</strong>
 	</p>
 	<p>
-		1. Nama Lurah : ${namaLurah}
+		1. Kepala Kelurahan
 	</p>
+	<p>
+		a. Nama : <? echo $this->detailPersonil['nama_lurah']; ?>
+	</p>
+	<p>
+		b. Pangkat / Golongan : <? echo $this->detailPersonil['gol_lurah']; ?>
+	</p>
+	<p>
+		c. NIP : <? echo $this->detailPersonil['nip_lurah']; ?>
+	</p>
+	<p>
+		d. Pendidikan :		
+			<?php foreach($this->pendidikan as $data): ?>
+				<?php if(($this->detailPersonil['id_pendidikan_lurah'])== $this->escape($data->id_pendidikan)){ ?> 
+					<?php echo $this->escape($data->pendidikan); ?> 
+				<?php }?>
+			<?php endforeach; ?>
+	</p>
+	<p>
+		e. TMT Masa Jabatan : <?php echo $this->detailPersonil['tmt_jabatan_seklur']?>			
+	</p>
+	<p>
+		f. Riwayat Jabatan : <? echo $this->detailPersonil['riwayat_jabatan1']; ?>
+	</p>
+	<p>g. Jenis Kelamin :				
+		<?php foreach($this->jenkel as $data): ?>
+			<?php if(($this->detailPersonil['id_jenkel_lurah'])== $this->escape($data->id_jenkel)){ ?> 
+				<?php echo $this->escape($data->jenkel); ?> 
+			<?php }?>
+		<?php endforeach; ?>
+	</p>
+	
 	<p>
 		2. Nama Sekretaris Kelurahan : ${namaSeklur}
 	</p>
 	<p>
+		a. Nama : <?  echo $this->detailPersonil['nama_seklur']; ?>
+	</p>
+	<p>
+		b. Pangkat / Golongan : <? echo  $this->detailPersonil['gol_seklur']; ?>
+	</p>
+	<p>
+		c. NIP : <? 	 echo  $this->detailPersonil['nip_seklur']; ?>
+	</p>
+	<p> d. Pendidikan :			
+		<?php foreach($this->pendidikan as $data): ?>
+			<?php if(($this->detailPersonil['id_pendidikan_seklur'])== $this->escape($data->id_pendidikan)){ ?> 
+			<?php echo $this->escape($data->pendidikan); ?> 
+		<?php }?>				
+		<?php  endforeach; ?>
+	</p>
+	<p>
+		e. TMT Masa Jabatan : <?php echo $this->detailPersonil['tmt_jabatan_seklur']?>
+	</p>	
+	<p>
+		f. Riwayat Jabatan : <? 	echo  $this->detailPersonil['riwayat_jabatan1_seklur']; ?>
+	</p>
+	<p> g. Jenis Kelamin :
+		<?php foreach($this->jenkel as $data): ?>
+		<?php if(($this->detailPersonil['id_jenkel_seklur'])== $this->escape($data->id_jenkel)){ ?> 
+				<?php echo $this->escape($data->jenkel); ?>
+		<?php }?>				
+		<?php  endforeach; ?>
+	</p>
+	
+	<p>
 		3. Jumlah Aparat Kantor Kelurahan
 	</p>
 	<p>
-		a. Golongan I : ${jumlahAparatGol1} Orang
+		a. Golongan I : <? echo $this->detailPersonil['jumlah_aparat_gol1']; ?> Orang
 	</p>
 	<p>
-		b. Golongan II : ${jumlahAparatGol2} Orang
+		b. Golongan II : <? echo $this->detailPersonil['jumlah_aparat_gol2']; ?> Orang
 	</p>
 	<p>
-		c. Golongan III : ${jumlahAparatGol3} Orang
+		c. Golongan III : <? echo  $this->detailPersonil['jumlah_aparat_gol3']; ?> Orang
 	</p>
 	<p>
-		d. Golongan IV : ${jumlahAparatGol4} Orang
+		d. Golongan IV : <? echo  $this->detailPersonil['jumlah_aparat_gol4']; ?> Orang
 	</p>
 	<p>
 		<strong>C. </strong>
@@ -384,11 +448,13 @@
 		Program yang diterima Kelurahan :
 	</p>
 	<p>
-		1. Pemerintah Pusat : ${pemerintahPusat}
+		1. Jumlah urusan yang dilimpahkan kabupaten/kota : <? 	echo $this->detailKewenangan['jml_urusan_kota']; ?>  buah
 	</p>
 	<p>
-		2. Provinsi : ${provinsi}
+		2. Urusan yang dilimpahkan oleh kabupaten/kota : <? 	echo $this->detailKewenangan['jml_limpah_urusan_kota']; ?>  buah
 	</p>
+	
+	<!---------------------------------------------->
 	<p>
 		3. Kabupaten/Kota : ${kabupaten}
 	</p>
