@@ -87,9 +87,11 @@
 	<p>
 		1. Tipologi Kelurahan : <?php echo $this->tipologi->tipologi ?>
 	</p>
+	
 	<p>
 		2. Luas Wilayah : <strong><?php echo strtoupper($this->detailKelurahan->luas_wilayah) ?></strong> km<sup>2</sup>
 	</p>
+	
 	<p>	3. Batas Wilayah 
 	</p>
 	<p>
@@ -104,6 +106,7 @@
 	<p>
 		d. Sebelah Timur : <strong><?php echo strtoupper($this->detailKelurahan->batas_timur) ?></strong>
 	</p>
+	
 	<p>
 		4. Orbitrasi (Jarak dari Pusat Pemerintahan)
 	</p>
@@ -119,27 +122,66 @@
 	<p>
 		d. Jarak dari Ibukota Provinsi : <?php echo $this->detailKelurahan->jarakDariIbuKotaProv ?>{jarakDariIbuKotaProv} km
 	</p>
+	
 	<p>
-		5. Jumlah Penduduk : ${jmlJiwa} Jiwa, ${jmlKK} KK
+		5. Jumlah Penduduk : <?php echo $this->detailUmum['jml_jiwa']?> Jiwa, <?php echo $this->detailUmum['jml_kk']?> KK
 	</p>
 	<p>
-		a. Laki-laki : ${jmlLaki} Jiwa
+		a. Laki-laki : <?php echo $this->detailUmum['jml_laki']?> Jiwa
 	</p>
 	<p>
-		b. Perempuan : ${jmlPerempuan} Jiwa
+		b. Perempuan : <?php echo $this->detailUmum['jml_perempuan']?> Jiwa
 	</p>
 	<p>
-		c. Usia 0 – 15 : ${jml015} Jiwa
+		c. Usia 0 – 15 : <?php echo $this->detailUmum['jml_0_15']?> Jiwa
 	</p>
 	<p>
-		d. Usia 15 – 65 : ${jml1565} Jiwa
+		d. Usia 15 – 65 : <?php echo $this->detailUmum['jml_15_65']?> Jiwa
 	</p>
 	<p>
-		e. Usia 65 ke atas : ${jml65Keatas} Jiwa
+		e. Usia 65 ke atas : <?php echo $this->detailUmum['jml_65_keatas']?> Jiwa
+	</p>
+	
+	<p>
+		6. Pekerjaan / Mata Pencaharian : 
 	</p>
 	<p>
-		6. Mayoritas Pekerjaan : ${mayoritasPekerjaan}
+		a. Karyawan : 
 	</p>
+	<p>
+		1. Pegawai Negeri Asli : <? echo $this->detailUmum['jml_pns']; ?>  Jiwa
+	</p>
+	<p>
+		2. ABRI : <? echo  $this->detailUmum['jml_abri']; ?>  Jiwa
+	</p>
+	<p>
+		3. Swasta : <?  echo $this->detailUmum['jml_swasta']; ?>  Jiwa
+	</p>
+	<p>
+		b. Wiraswasta / Pedagang <? echo  $this->detailUmum['jml_wiraswasta']; ?> Jiwa
+	</p>
+	<p>
+		c. Tani <? echo  $this->detailUmum['jml_tani']; ?>  Jiwa
+	</p>
+	<p>
+		d. Pertukangan  <? echo $this->detailUmum['jml_pertukangan']; ?>  Jiwa
+	</p>
+	<p>
+		e. Buruh Tani <? echo $this->detailUmum['jml_buruh_tani']; ?>  Jiwa
+	</p>
+	<p>
+		f.Pensiunan <? echo  $this->detailUmum['jml_pensiunan']; ?>  Jiwa
+	</p>
+	<p>
+		g. Nelayan <? echo $this->detailUmum['jml_nelayan']; ?>  Jiwa
+	</p>
+	<p>
+		h. Pemulung <? echo $jml_pemulungAttrib; ?> jiwa
+	</p>
+	<p>
+		i. Jasa <? echo  $this->detailUmum['jml_jasa']; ?> jiwa
+	</p>
+	
 	<p>
 		7. Tingkat Pendidikan Masyarakat
 	</p>
