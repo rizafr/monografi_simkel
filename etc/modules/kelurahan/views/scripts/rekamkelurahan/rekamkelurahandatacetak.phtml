@@ -453,42 +453,92 @@
 	<p>
 		2. Urusan yang dilimpahkan oleh kabupaten/kota : <? 	echo $this->detailKewenangan['jml_limpah_urusan_kota']; ?>  buah
 	</p>
-	
-	<!---------------------------------------------->
-	<p>
-		3. Kabupaten/Kota : ${kabupaten}
+	<p>a. Urusan Wajib</p>
+	<p>- Bidang				
+		<?php 
+		$bidang_urusan_wajib= explode(',',$this->detailKewenangan['bidang_urusan_wajib']);						
+		for($i=0;$i<count($bidang_urusan_wajib);$i++){?>						
+			<?php echo $bidang_urusan_wajib[$i] ?>					
+		<?php } ?>
 	</p>
+	<p>- Urusan				
+		<?php 
+		$urusan_wajib= explode(',',$this->detailKewenangan['urusan_wajib']);	
+		for($i=0;$i<count($urusan_wajib);$i++){?>
+			<?php echo $urusan_wajib[$i] ?>
+		<?php } ?>				
+	</p>
+	<p>b. Urusan Pilihan</p>
+	
+	<p>- Bidang				
+		<?php 
+		$bidang_urusan_pilihan= explode(',',$this->detailKewenangan['bidang_urusan_pilihan']);	
+		for($i=0;$i<count($bidang_urusan_pilihan);$i++){?>
+			<?php echo $bidang_urusan_pilihan[$i] ?>
+		<?php } ?>
+				
+	</p>
+	
+	<p>- Urusan				
+		<?php 
+		$urusan_pilihan= explode(',',$this->detailKewenangan['urusan_pilihan']);			
+		for($i=0;$i<count($urusan_pilihan);$i++){?>
+			<?php echo $urusan_pilihan[$i] ?>
+		<?php } ?>
+	</p>
+	
 	<p>
 		<strong>D. </strong>
 		<strong>DATA </strong>
 		<strong> KEUANGAN</strong>
 	</p>
 	<p>
-		1. APBD Kabupaten/Kota : Rp ${anggaranApbd}
+		1. APBD Kabupaten/Kota : Rp 
+		<? $anggaran_apbd= explode('.',$this->detailKeuangan['anggaran_apbd']);
+			echo $anggaran_apbd[0];
+		?>
 	</p>
 	<p>
-		2. SKPD : ${isSkpd}
-	</p>
+		2. SKPD : <?php if( $this->detailKeuangan['is_skpd']=="1") { ?> Sudah <?php } else {?> Belum <?}?>
+	
 	<p>
 		3. Bantuan yang diterima Kelurahan
 	</p>
 	<p>
-		a. Pemerintah Pusat : Rp ${bantuanPusat}
+		a. Pemerintah Pusat : Rp 
+		<? $bantuan_pusat= explode('.',$this->detailKeuangan['bantuan_pusat']);
+			echo  $bantuan_pusat[0]; 
+		?>
 	</p>
 	<p>
-		b. Pemerintah Provinsi : Rp ${bantuanProv}
+		b. Pemerintah Provinsi : Rp 
+		<? $bantuan_prov= explode('.',$this->detailKeuangan['bantuan_prov']);
+			echo $bantuan_prov[0];
+		?>
 	</p>
 	<p>
-		c. Pemerintah Kabupaten/Kota : Rp ${bantuanKota}
+		c. Pemerintah Kabupaten/Kota : Rp 
+		<? $bantuan_kota= explode('.',$this->detailKeuangan['bantuan_kota']);
+			echo $bantuan_kota[0];
+		?>
 	</p>
 	<p>
-		d. Hibah/Bantuan Luar Negeri : Rp ${hibah}
+		d. Hibah/Bantuan Luar Negeri : Rp 
+		<? $hibah= explode('.',$this->detailKeuangan['hibah']);
+			echo $hibah[0]; 
+		?>
 	</p>
 	<p>
-		e. Swadaya/gotong royong : Rp ${sumbangan}
+		e. Swadaya/gotong royong : Rp 
+		<?  $sumbangan= explode('.',$this->detailKeuangan['sumbangan']);
+			echo $sumbangan[0]; 
+		?>
 	</p>
 	<p>
-		f. Sumber lain : Rp ${swadaya}
+		f. Sumber lain : Rp 
+		<?  $swadaya= explode('.',$this->detailKeuangan['swadaya']);
+			echo  $swadaya[0]; 
+		?> 
 	</p>
 	<p>
 		<strong>E. </strong>
@@ -498,62 +548,127 @@
 		1. LPM atau sebutan lain
 	</p>
 	<p>
-		- Jumlah pengurus : ${lpmJmlPengurus} orang
+		- Jumlah pengurus : $<? echo $this->detailKelembagaan['lpm_jml_pengurus']; ?> orang
 	</p>
 	<p>
-		- Jumlah kegiatan per bulan : ${lpmJmlKegPerbulan} kegiatan
+		- Jumlah kegiatan per bulan : <? echo $this->detailKelembagaan['lpm_jml_keg_perbulan']; ?> kegiatan
 	</p>
 	<p>
-		- Jumlah buku administrasi : ${lpmJmlBukuAdministrasi} buku
+		- Jumlah buku administrasi : <? echo $this->detailKelembagaan['lpm_jml_buku_administrasi']; ?> buku
 	</p>
 	<p>
-		- Jumlah dana yang dikelola : Rp ${lpmJmlDana}
+		- Jumlah dana yang dikelola : Rp <? echo $this->detailKelembagaan['lpm_jml_dana']; ?>
 	</p>
-	<p>
-		2. Lembaga Adat : ${lembagaAdat} lembaga
-	</p>
+	
 	<p>
 		3. TP PKK
 	</p>
 	<p>
-		- Jumlah pengurus : ${pkkJmlPengurus} orang
+		- Jumlah pengurus : <? echo  $this->detailKelembagaan['pkk_jml_pengurus']; ?> orang
 	</p>
 	<p>
-		- Jumlah kegiatan per bulan : ${pkkJmlKegPerbulan} kegiatan
+		- Jumlah kegiatan per bulan : <? echo $this->detailKelembagaan['pkk_jml_keg_perbulan']; ?> kegiatan
 	</p>
 	<p>
-		- Jumlah buku administrasi : ${pkkJmlBukuAdministrasi} buku
+		- Jumlah buku administrasi : <? 	echo $this->detailKelembagaan['pkk_jml_buku_administrasi']; ?> buku
 	</p>
 	<p>
-		- Jumlah dana yang dikelola : Rp ${pkkJmlDana}
+		- Jumlah dana yang dikelola : Rp 
+			<? $pkk_jml_dana= explode('.',$this->detailKelembagaan['pkk_jml_dana']);
+				echo $pkk_jml_dana[0];
+			?>
 	</p>
 	<p>
 		4. RT/RW
 	</p>
 	<p>
-		a. Jumlah RW : ${jmlRw} RW
+		a. Jumlah RW : <?  echo $this->detailKelembagaan['jml_rw']; ?>  buah
 	</p>
 	<p>
-		b. Jumlah RT : ${jmlRt} RT
+		b. Jumlah RT : <? echo $this->detailKelembagaan['jml_rw']; ?>  buah
 	</p>
 	<p>
-		c. Rata-rata penghasilan Ketua RW : Rp ${rataPenghasilanRw}
+		c. Rata-rata penghasilan Ketua RW : Rp 
+		<?  $rata_penghasilan_rw= explode('.', $this->detailKelembagaan['rata_penghasilan_rw']);
+			echo $rata_penghasilan_rw[0];
+		?> 
 	</p>
 	<p>
-		d. Rata-rata penghasilan Ketua RT : Rp ${rataPenghasilanRt}
+		d. Rata-rata penghasilan Ketua RT : Rp 
+		<? $rata_penghasilan_rt= explode('.', $this->detailKelembagaan['rata_penghasilan_rt']);
+			echo $rata_penghasilan_rt[0];
+		?> 
 	</p>
 	<p>
 		5. Karang Taruna
 	</p>
 	<p>
-		- Jumlah Karang Taruna : ${tarunaJml} buah
+		- Jumlah Karang Taruna : <? echo  $this->detailKelembagaan['taruna_jml']; ?> buah
 	</p>
 	<p>
-		- Jumlah Pengurus (rata-rata) : ${tarunaJmlPengurus} orang
+		- Jumlah Pengurus (rata-rata) : <? echo  $this->detailKelembagaan['taruna_jml_pengurus']; ?>  orang
+	</p>
+	
+	<p>
+		<strong>F. </strong>
+		<strong>KETENTRAMAN DAN KETERTIBAN</strong>
 	</p>
 	<p>
-		6. Lembaga Kemasyarakatan Lainnya : ${jmlLembagaLain} lembaga
+		1. Jumlah Anggota Linmas : <? echo  $this->detailTrantib['jml_anggota_linmas']; ?> orang 
 	</p>
+	
+	<p>
+		2. Jumlah Pos kamling : <? echo $this->detailTrantib['jml_pos_kamling'];?> pos 
+	</p>
+	
+	<p>
+		3. Jumlah Operasi Penertiban : <? echo $this->detailTrantib['jml_ops_penertiban']; ?> kali 
+	</p>
+	
+	<p>
+		4. Jumlah Kejadian Kriminal: </p>
+	
+	<p>
+		a. Pencurian : <? 	echo $this->detailTrantib['jml_pencurian']; ?> kali 
+	</p>
+	
+	<p>
+		b. Perkosaan : <? echo $this->detailTrantib['jml_perkosaan'];?> kali 
+	</p>
+	
+	<p> 
+		c. Kenakalan Remaja : <? echo $this->detailTrantib['jml_kenakalan_remaja']; ?> kali 
+	</p>
+	
+	<p>
+		d. Pembunuhan : <? echo   $this->detailTrantib['jml_pembunuhan']; ?> kali 
+	</p>
+	
+	<p>
+		e. Perampokan : <?  echo  $this->detailTrantib['jml_perampokan']; ?> kali 
+	</p>
+	
+	<p>
+		f. Penipuan : <? echo  $this->detailTrantib['jml_penipuan']; ?> kali 
+	</p>
+	
+	<p>
+		5. Jumlah Kejadian Alam : <? echo $this->detailTrantib['jml_bencana']; ?> kali 
+	</p>
+	
+	<p>
+		6. Jumlah Pos Bencana Alam : <? echo  $this->detailTrantib['jml_pos_bencana']; ?> pos 
+	</p>
+	
+	<p>
+		7. Jumlah Pembalakan Liar : <? echo  $this->detailTrantib['jml_pembalakan_liar']; ?> kali 
+	</p>
+
+	
+	<p>
+		8. Jumlah Pos Hutan Lindung : <? echo $this->detailTrantib['jml_pos_hutan_lindung'];?> pos 
+	</p>
+	
 	<table cellpadding="0" cellspacing="0">
 		<tbody>
 			<tr>
@@ -599,51 +714,7 @@
 	</p>
 </div>
 <br clear="all"/>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
-<p align="center">
-	<strong> </strong>
-</p>
+
 
 
 
