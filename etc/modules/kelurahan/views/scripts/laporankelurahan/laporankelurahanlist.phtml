@@ -42,7 +42,7 @@ $numToDisplay = $this->numToDisplay;
 				$bulan=array("1","2","3","4","5","6","7","8","9","10","11","12");
 				$jlh_bln=count($bulan_ind);
 				for($c=0; $c<$jlh_bln; $c+=1){
-					if(date('m') == $bulan[$c]){
+					if($this->bulan == $bulan[$c]){
 						echo"<option value=$bulan[$c] selected='selected'> $bulan_ind[$c] </option>";
 					}else
 					echo"<option value=$bulan[$c]> $bulan_ind[$c] </option>";
@@ -52,7 +52,7 @@ $numToDisplay = $this->numToDisplay;
 				<select name="tahun" id="tahun" class="autowidth">
 				<?php
 				for($i=date('Y'); $i>=2010; $i-=1){
-				if(date('Y') == $i){
+				if($this->tahun == $i){
 						echo"<option value=$i selected='selected'> $i </option>";
 					}else
 				echo"<option value=$i> $i </option>";
@@ -90,15 +90,12 @@ $numToDisplay = $this->numToDisplay;
 	</table>
 				
 	</form>
-			<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+			<table id="sorter" class="sortable" cellspacing="0" cellpadding="2" border="0" align="center">
 				<th >No</th>
 				<th >Kelurahan</th>
 				<th >Bulan</th>
 				<th >Tahun</th> 
-			
-				
-				
-				<th colspan="4" class="nosort">FUNGSI</th>
+				<th colspan="2" class="nosort">Cetak</th>
 				
 				<?
 				if (count($this->laporankelurahanlist) == 0){ 
@@ -131,9 +128,9 @@ $numToDisplay = $this->numToDisplay;
 						<td align="center"><? echo $kelurahan;?></td>
 						<td align="center"><? echo $bulan;?></td>
 						<td align="center"><? echo $tahun;?></td>
-						
 
-<td class="clcenter"><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="filedoc" align="center" title= "cetak data <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
+			<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandatacetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="papan" title= "cetak papan <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
+			<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="buku" title= "cetak buku <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
 
 					
 						</tr>

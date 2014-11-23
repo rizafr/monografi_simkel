@@ -42,7 +42,7 @@ $numToDisplay = $this->numToDisplay;
 				$bulan=array("01","02","03","04","05","06","07","08","09","10","11","12");
 				$jlh_bln=count($bulan_ind);
 				for($c=0; $c<$jlh_bln; $c+=1){
-					if(date('m') == $bulan[$c]){
+					if($this->bulan == $bulan[$c]){
 						echo"<option value=$bulan[$c] selected='selected'> $bulan_ind[$c] </option>";
 					}else
 					echo"<option value=$bulan[$c]> $bulan_ind[$c] </option>";
@@ -52,7 +52,7 @@ $numToDisplay = $this->numToDisplay;
 				<select name="tahun" id="tahun" class="autowidth">
 				<?php
 				for($i=date('Y'); $i>=2010; $i-=1){
-				if(date('Y') == $i){
+				if($this->tahun  == $i){
 						echo"<option value=$i selected='selected'> $i </option>";
 					}else
 				echo"<option value=$i> $i </option>";
@@ -86,7 +86,7 @@ $numToDisplay = $this->numToDisplay;
 	</table>
 				
 	</form>
-			<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+			<table id="sorter" class="sortable" cellspacing="0" cellpadding="2" border="0" align="center">
 				<th >NoUrut</th>
 				<th >Hari / Tanggal</th>
 				<th >Uraian</th> 
@@ -94,8 +94,6 @@ $numToDisplay = $this->numToDisplay;
 				<th >Lokasi</th> 
 				<th >Kerugian</th> 
 				<th> Kelurahan</th>
-				
-			
 				
 				<?
 				if (count($this->laporankejadiankelurahanlist) == 0){ 

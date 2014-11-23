@@ -1171,7 +1171,7 @@ div.ref {
 table.tbl2{    background-color: #f5f5f5}
 
 table.tbl th {background:#C1CEE2;}
-table.tbl2 th {background:#d3d3d3; border:1px solid #999}
+table.tbl2 th {background:#d3d3d3; border-bottom:solid 2px #DDEEEE}
 table.tbl3 th {background:#C1CEE2}
 
 table.tbl td a:hover,table.tbl2 td a:hover {
@@ -1180,7 +1180,12 @@ table.tbl td a:hover,table.tbl2 td a:hover {
 }
 table.tbl tr:hover,table.sortable tr:hover  {
 	text-decoration: none;
-	background:#D3D3D3;
+	background:#FFEFBF;
+	color: #333;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
 }
 table.tbl th.sorted {
     background-color: #DDD;   /*707634    4AA5FF #666699;*/
@@ -1191,6 +1196,7 @@ table.tbl th.sorted {
 }
 .event, .bg1 {
 	background-color: #E5E5E5;
+	padding-top:4px;
 }
 .event3 {
 	background-color: #F2F9B8;
@@ -1242,13 +1248,13 @@ table.tbl th,table.tbl3 th, td {
 /*style for  sort table*/
 * {margin:0; padding:0}
 #wrapper {width:100%; margin:0px auto}
-.sortable {width:100%; border:1px solid #999;}
-.sortable th {padding:4px 6px 6px; background:#C1CEE2 url(../images/bg_head_login.gif) repeat-x scroll center top; color:#28313F; text-align:center;}
+.sortable {width:100%;/*  border:1px solid #B2DFDB; */}
+.sortable th {padding:4px 6px 6px; background:#00468C /* url(../images/bg_head_login.gif) repeat-x scroll center top */; color:#FFFFF2; text-align:center;}
 .sortable td {padding:2px 4px 4px; border-bottom:0px solid #ccc}
-.sortable .head {background:#C1CEE2 url(../images/bg_head_login.gif) repeat-x scroll center top; cursor:pointer; padding-left:18px}
+.sortable .head {background:#00468C /* url(../images/bg_head_login.gif) repeat-x scroll center top */; cursor:pointer; padding-left:18px}
 .sortable .desc {background:#AAA url(../images/arrow_down.png) 6px center no-repeat; cursor:pointer; padding-left:18px}
 .sortable .asc {background:#AAA url(../images/arrow_up.png) 6px  center no-repeat; cursor:pointer; padding-left:18px}
-.sortable .head:hover, .sortable .desc:hover, .sortable .asc:hover {color:#444}
+.sortable .head:hover, .sortable .desc:hover, .sortable .asc:hover {color:#FFFF00}
 
 table.tbl th.sorted a,table.tbl3 th.sorted a, th.sortable a, th.order1 a, th.order2 a {
 	background-position: right;
@@ -1399,6 +1405,27 @@ P.text {
 	cursor:pointer;
 	}
 
+.buku {
+	background: transparent url(../images/buku.png) no-repeat;
+	width:24px;
+	margin:30;
+	margin:5px 0;
+	height:24px;
+	padding:0 1px;
+	border:0px solid;
+	cursor:pointer;
+	}
+.papan {
+	background: transparent url(../images/papan.png) no-repeat;
+	width:24px;
+	margin:30;
+	margin:5px 0;
+	height:24px;
+	padding:0 1px;
+	border:0px solid;
+	cursor:pointer;
+	}
+
 .edit, .edit1,.delete, .unread, .read, .reply, .unit, .konsep, .chgpasswd, .respasswd, .view, .filedoc, .prt, .pdf, .upload, .proses {
 	float:right;
 	display:inline;
@@ -1441,6 +1468,7 @@ P.text {
 .reply { background: transparent url(../images/page_reply.png) no-repeat;}
 .filedoc { background: transparent url(../images/icon_word.gif) no-repeat;}
 .buku { background: transparent url(../images/buku.png) no-repeat;}
+.papan { background: transparent url(../images/papan.png) no-repeat;}
 .prt { background: transparent url(../images/printer.png) no-repeat;}
 .pdf { background: transparent url(../images/page_acrobat.png) no-repeat;}
 .unit, .konsep { background: transparent url(../images/unit.gif) no-repeat;}

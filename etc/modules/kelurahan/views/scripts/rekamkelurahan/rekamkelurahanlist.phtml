@@ -49,7 +49,7 @@ $pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this-
 				</table>
 <div class="add" title="Tambah Data" onClick="rekamkelurahanForm('insert','<? echo $this->kd_kel;?>','<? echo $this->lastPeriode->bulan;?>','<? echo $this->lastPeriode->tahun;?>');"></div>	
 
-<table id="sorter" class="sortable" cellspacing="1" cellpadding="2" border="0" align="center">
+<table id="sorter" class="sortable" cellspacing="0" cellpadding="2" border="0" align="center">
 				<th >No</th>
 				<th >Bulan</th>
 				<th >Tahun</th> 
@@ -93,8 +93,8 @@ $pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this-
 						<td class="clleft"><? echo $nip_lurah;?></td>
 						
 
-<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandatacetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="prt" title= "cetak papan <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
-<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="filedoc" title= "cetak buku <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
+<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandatacetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="papan" title= "cetak papan <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
+<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="buku" title= "cetak buku <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
 <td><div onClick="rekamkelurahanForm('update','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="edit1" title="Ubah Data"></div></td>
 <td><div onClick="rekamkelurahanHapus('<? echo $kd_kel;?>','<? echo $this->detailKelurahan->kelurahan ;?>','<? echo $tahun;?>','<? echo $bulan;?>');" class="delete" title="Hapus Data"></div>
 						</td>

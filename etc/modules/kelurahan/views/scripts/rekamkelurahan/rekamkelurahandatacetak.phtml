@@ -10,7 +10,7 @@
 
 	//Array Bulan 
 	$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
-	$bulan = $array_bulan[date('n')];
+	$bulan = $array_bulan[$this->bulan];
 	 
 	//Format Tahun 
 	$tahun = date('Y');
@@ -33,7 +33,7 @@
 	<div>
 	<p align="center">
 		<strong> </strong>
-		<strong> <em>Form 4</em></strong>
+		<strong> <em>Form 2</em></strong>
 	</p>
 	<p align="center">
 		<strong></strong>
@@ -43,7 +43,7 @@
 	</p>
 	<p align="center">
 		<strong>KEADAAN PADA BULAN</strong>
-		<strong><?echo $this->bulan;?></strong>
+		<strong><?echo $bulan;?></strong>
 	</p>
 	<p align="center">
 		<strong>TAHUN </strong>
