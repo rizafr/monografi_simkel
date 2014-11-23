@@ -132,7 +132,7 @@ $numToDisplay = $this->numToDisplay;
 				    <td align="right" width="100">* Nominal :</td>
 					<td>	
 						<? $nominal = explode('.',$this->detailKejadian['nominal']);
-							$nominalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true");
+							$nominalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 							echo $ctrlFrm->formText("nominal", $nominal[0], $nominalAttrib);
 						?>
 				</td>
@@ -164,8 +164,11 @@ $numToDisplay = $this->numToDisplay;
 					<?php } ?>
 					<?php if (strtolower($this->jenisForm) == 'insert') { ?>
 					 <td>
-						<input type="file" name="lampiran" id="lampiran" required />
+						<input type="file" name="lampiran" id="lampiran" onChange="setvalueuplfile(this.value,'lampiran','doc')" required />
 					 </td>
+					 <div class="fakefile">
+						<input type="hidden" size="41" name="a_file" id="a_file" value="<? $this->detailKejadian['file_lampiran']?>"/>
+					</div>
 					 	<?php } ?>
 				</tr>
 	<tr>  

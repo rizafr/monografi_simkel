@@ -2,6 +2,7 @@
 require_once 'Zend/Controller/Action.php';
 require_once 'Zend/Session.php';
 require_once "service/sso/Sso_User_Service.php";
+require_once "service/sso/enkripsi.php";
 require_once 'Zend/Session/Namespace.php';
 
 require_once "service/adm/Pengguna_Service.php";
@@ -35,8 +36,9 @@ class Home_IndexController extends Zend_Controller_Action {
 	
     public function indexAction() {
 		//indexAction default kepunyaan Home_IndexController dalam modul home
+		
 		$this->view->p = $_REQUEST['p'];
-		$this->view->user_id = $_REQUEST['u'];
+		$this->view->user_id = $_REQUEST['user_id'];
 		$this->view->username = $this->sso_serv->getUsername($this->view->user_id);
 		$request = $this->getRequest();   
 		$ns = new Zend_Session_Namespace('HelloWorld'); 
@@ -55,11 +57,20 @@ class Home_IndexController extends Zend_Controller_Action {
 		//$this->view->penelitianList = $this->penelitian_serv->penelitianList();
 
 		$this->view->checksess = $ns->yourLoginRequest;
+						
     }
 	
+
+	
 	public function mainAction() {
-		$username = $_POST['user_login'];
-	    $passwd = $_POST['pwd'];		
+	
+		
+		$key = "ini key rahasia loh";
+		$username = base64_decrypt($_REQUEST['token1'],$key);
+	    $passwd = base64_decrypt($_REQUEST['token2'],$key);		
+		$this->view->username = $username  ;
+		$this->view->passwd = $passwd  ;
+		
 		$par = $_POST['par'];
 		$usergroup = $_POST['usergroup'];
 		$this->view->usergroup=$_POST['usergroup'];

@@ -35,6 +35,7 @@ class Sso_User_Service {
 	   $db = $registry->get('db');
 	   try {
 		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
+		// $username = md5($username);
 		 $ktsandi = md5($paswd);
 		 $sql = "SELECT * FROM [SIMKEL].[dbo].[user] U
 					where U.user_id ='$username' and U.password ='$ktsandi'  ";
@@ -155,6 +156,5 @@ class Sso_User_Service {
 	     return 'gagal <br>';
 	   }
 	}	
-
 }
 ?>

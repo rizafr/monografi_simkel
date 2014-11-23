@@ -1,0 +1,13 @@
+; Ubah data ;23/11/2014 15:46:05;03 (admin);
+; Ubah data ;23/11/2014 15:46:31;03 (admin);
+;Hapus data kejadian user;23/11/2014 15:46:48; (7);
+;Hapus data kejadian user;23/11/2014 16:00:47; (macet gitu loh);
+;Hapus data kejadian user;23/11/2014 16:01:03; (macet);
+;Hapus data kejadian user;23/11/2014 16:01:07; (macet);
+;Hapus data kejadian user;23/11/2014 16:04:37; (1);
+;Hapus data kejadian user;23/11/2014 16:07:13; (21);
+;Hapus data kejadian user;23/11/2014 16:07:40; (9);
+;Hapus data kejadian user;23/11/2014 16:07:58; (14);
+; Ubah data ;23/11/2014 17:52:29;03 (admin);
+; Ubah data ;23/11/2014 17:52:48;02 (admin);
+;Hapus data kejadian user;23/11/2014 17:55:54; (2);

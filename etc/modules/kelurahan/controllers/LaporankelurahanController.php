@@ -157,7 +157,7 @@ class Kelurahan_LaporankelurahanController extends Zend_Controller_Action {
 		$this->view->numToDisplay = $numToDisplay;
 		$this->view->currentPage = $currentPage;
 	
-		$ssogroup		= new Zend_Session_Namespace('ssogroup');///berdasarkan user group
+		$ssogroup = new Zend_Session_Namespace('ssogroup');///berdasarkan user group
 		
 		$this->view->kode_kel = $ssogroup->kd_kel;
 		
@@ -167,10 +167,6 @@ class Kelurahan_LaporankelurahanController extends Zend_Controller_Action {
 		 $this->view->kelurahanList	= $this->rekamkelurahan_serv->getKelurahanList();
 		
 		$this->view->laporankejadiankelurahanlist = $this->laporankelurahan_serv->getCariLaporanKejadianList($this->view->kd_kel,$this->view->bulan,$this->view->tahun);
-		
-		
-		
-		
 	}
 	
 	public function laporankejadiankelurahandataAction()
@@ -202,13 +198,6 @@ class Kelurahan_LaporankelurahanController extends Zend_Controller_Action {
 			$this->view->laporankejadiankelurahanlist = $this->laporankelurahan_serv->getCariLaporanKejadianList($this->view->kd_kel,$this->view->bulan,$this->view->tahun);
 			// var_dump($this->view->laporankejadiankelurahanlist);
 	}
-	
-	
-	
-
-	
-
-	
 
 }
 ?>

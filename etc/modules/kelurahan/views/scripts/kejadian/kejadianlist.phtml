@@ -21,7 +21,8 @@ $numToDisplay = $this->numToDisplay;
 <div class="panel">
 	<div class="inner">
 		<span class="corners-top"><span></span></span>
-		<h2 class="title">LAPORAN KEJADIAN KELURAHAN</h2>
+		<h2 class="title">LAPORAN KEJADIAN KELURAHAN 
+		</h2>
 			<form method="post" id="frmcarikejadian" name="frmcarikejadian">				
 				Filter :
 				<?
@@ -106,7 +107,7 @@ $pesan->show_message($proses, $this->kelurahan , "$status" );
 
 
 <td><div onClick="kejadianForm('update','<? echo $kd_kel;?>','<? echo $idx_kejadian;?>');" class="edit" title="Ubah Data"></div></td>
-<td><div onClick="kejadianHapus('<? echo $kd_kel;?>','<? echo $kelurahan ;?>','<? echo $idx_kejadian;?>');" class="delete" title="Hapus Data"></div>
+<td><div onClick="kejadianHapus('<? echo $kd_kel;?>','<? echo $uraian ;?>','<? echo $idx_kejadian;?>');" class="delete" title="Hapus Data"></div>
 		
 					
 						</tr>

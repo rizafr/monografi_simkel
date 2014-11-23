@@ -168,13 +168,13 @@ var ubahkejadian_opt = {
 };
 
 
-function kejadianHapus(kd_kel,kelurahan,idx_kejadian)
+function kejadianHapus(kd_kel,uraian,idx_kejadian)
 { 
 	kategoriCari = document.getElementById('kategoriCari').value;
 	carii = document.getElementById('carii').value;
 	kd_kel = document.getElementById('kd_kel').value;
 	
-	if(ConfirmDelete(kd_kel,kelurahan,idx_kejadian))
+	if(ConfirmDelete(kd_kel,uraian,idx_kejadian))
 	{	
 		handler = '<?php echo $this->basePath; ?>/kelurahan/kejadian/kejadianhapus';
 		var opt = {kd_kel:kd_kel,idx_kejadian:idx_kejadian};
@@ -183,6 +183,24 @@ function kejadianHapus(kd_kel,kelurahan,idx_kejadian)
 				doCount(5);
 			 });
 	}
+}
+
+function setvalueuplfile(v,n,f) { 
+	  if (f!="") {
+	    var pass=false;
+	    var af=f.split("/");
+        var nval=eval("document.forms[0]."+n);
+		var ext=v.substring(v.lastIndexOf(".")+1,v.length);
+		if ((ext==f)||(ext=='pdf')||(ext=='docx')||(ext=='xls')||(ext=='xlsx')||(ext=='jpg')||(ext=='jpeg')||(ext=='gif')||(ext=='png')){ 
+		document.forms[0].a_file.value=v; 
+		}
+		else{
+		  alert ("Hanya untuk file berekstensi '"+f+"',docx,pdf,xls,xlsx,jpg,jpeg,gif,png ");
+		  nval.value="";
+		  document.forms[0].a_file.value=""; 
+		  return;	  
+		}
+	  }
 }
 
 function BukaWindows(){
@@ -268,32 +286,6 @@ function getKab(){
 }
 
 
-
-function dosenlist(jum) {
-  var url        = '<?php echo $this->basePath; ?>/kelurahan/kejadian/dosenlist';
-  var param      = {jum:jum};
-  jQuery.get(url,param,function(data) {   
-    $("#dialog-browse").html(data);
-    $("#dialog-browse").dialog("open");
-  }); 
-}
-
-function cariDosen(jum)  {
-  $("#frmCariDosen").ajaxForm(frmCariDosen_opt);
-}
-
-var frmCariDosen_opt = {
-    target : '#dialog-browse',
-    url: '<?php echo $this->basePath; ?>/kelurahan/kejadian/dosenlist',
-    type: 'get', 
-    resetForm: false
-};
-
-function closeDialogDosen(id_pegawai,nama,jum) {  
-  $("#dialog-browse").dialog("close");
-  $("#id_pegawai_"+jum).val(id_pegawai);
-  $("#n_nama_"+jum).val(nama);
-}
 
 
 

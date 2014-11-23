@@ -472,6 +472,15 @@ input[type="button"]:active {
 	box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.075) inset; 
 }
 
+input[readonly], textarea[readonly]
+{
+  border: 1px solid #9E9E9E;
+  background-color: #BDBDBD;
+  color: #546E7A;
+  cursor: not-allowed;  
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
 
 
 .autowidth {

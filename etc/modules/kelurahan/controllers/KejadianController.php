@@ -29,6 +29,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$this->ref_serv = Referensi_Service::getInstance();
 		$ssogroup		= new Zend_Session_Namespace('ssogroup');///berdasarkan user group
 		$this->kd_kel = $ssogroup->kd_kel;
+		$this->kelurahan = $ssogroup->kelurahan;
 		$this->sso_serv = Sso_User_Service::getInstance();
 	    $ssokejadian = new Zend_Session_Namespace('ssokejadian');
 	    $this->kd_kel =$ssokejadian->kd_kel;

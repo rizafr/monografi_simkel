@@ -61,7 +61,7 @@ $pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this-
 				<?
 				if (count($this->rekamkelurahanlist) == 0){ 
 				?>
-					<tr class="event2"><td colspan="7"  style="color:#8C0000; font-weight:bold; background-color: #FF9999">Data Tidak Ditemukan</td></tr>
+					<tr class="event2"><td colspan="8"  style="color:#8C0000; font-weight:bold; background-color: #FF9999">Data Tidak Ditemukan</td></tr>
 				<?} else {
 						
 						
@@ -80,9 +80,6 @@ $pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this-
 						$bulan1 = $array_bulan[$this->escape($val['bulan'])];
 						$nama_lurah	= $this->escape($val['nama_lurah']);
 						$nip_lurah	= $this->escape($val['nip_lurah']);
-						
-						
-						
 						
 						$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
 						echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
