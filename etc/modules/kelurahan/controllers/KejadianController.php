@@ -119,7 +119,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$this->view->nama		= $ssogroup->nama;
 		// var_dump($this->view->kd_kel);
 		// var_dump($this->view->idx_kejadian);
-		// var_dump($this->view->detailKejadian);
+		var_dump($this->view->detailKejadian);
 	}
 	
 	public function kejadianAction()

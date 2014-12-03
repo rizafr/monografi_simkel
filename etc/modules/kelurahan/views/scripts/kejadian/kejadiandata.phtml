@@ -32,7 +32,7 @@ $numToDisplay = $this->numToDisplay;
 			else {$namaForm = 'frmhapuskejadian';  $nama='hapus';}
 		?>
 		
-		<h2 class="title">FORM <?php echo strtoupper($nama)?> KEJADIAN, <strong><?php echo  strtoupper($this->detailKejadian['kelurahan']); ?></strong> </h2>
+		<h2 class="title">FORM <?php echo strtoupper($nama)?> KEJADIAN <strong><?php echo  strtoupper($this->detailKejadian['kelurahan']); ?></strong> </h2>
 		
 	    <div class="spacer"></div> 
 		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi" enctype="multipart/form-data">
@@ -46,131 +46,130 @@ $numToDisplay = $this->numToDisplay;
 <input name="idx_kejadian" id="idx_kejadian" type="hidden" value="<?echo $this->detailKejadian['idx_kejadian'];?>" />
 <input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
 	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
+	<?php if($this->kd_kel !=00) {?>			
+	<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->kd_kel?>" />
+	<?echo $this->detailKejadian['kelurahan'] ;?>
+	<?php }else {?>
+	<tr>
+		<td align="right" width="100">* Kelurahan :</td>
+		<td>
+	<select name="kd_kel" id="kd_kel">
+	<?php 
+	foreach($this->kelurahanList as $data): ?>
+		<?php if($this->kd_kel== $this->escape($data->kd_kel)){ ?> 
+			<option value="<?php echo $this->escape($data->kd_kel); ?>" selected><?php echo $this->escape($data->kelurahan); ?> </option>
+	<?php }else{?>
+	<option value="<?php echo $this->escape($data->kd_kel); ?>"> <?php echo $this->escape($data->kelurahan); ?> </option>
+	 <?php }
+
+	 endforeach; 
+	}?>
+</select>
+	</td>
+</tr>
+
+	<tr>
+		<td align="right" width="100">* Hari :</td>
+		<td>	
+			<? 
+				$hariAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+				echo $ctrlFrm->formText("hari", $this->detailKejadian['hari'], $hariAttrib);
+			?>
+	</td>
+	</tr>
+
 	
-				<tr>
-				    <td align="right" width="100">* Kelurahan :</td>
-					<td>	
-				<?php if($this->kd_kel !=00) {?>			
-				<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->kd_kel?>" />
-				<input name="kelurahan" id="kelurahan" type="text" value="<?echo $this->detailKejadian['kelurahan'] ;?>" readonly />
-				<?php }else {?>
-				<select name="kd_kel" id="kd_kel">
-				<?php 
-				foreach($this->kelurahanList as $data): ?>
-					<?php if($this->kd_kel== $this->escape($data->kd_kel)){ ?> 
-						<option value="<?php echo $this->escape($data->kd_kel); ?>" selected><?php echo $this->escape($data->kelurahan); ?> </option>
-				<?php }else{?>
-				<option value="<?php echo $this->escape($data->kd_kel); ?>"> <?php echo $this->escape($data->kelurahan); ?> </option>
-				 <?php }
+	
+	<tr>
+		<td align="right" width="100">* Tanggal :</td>
+		<td>	
+			<? 
+				$tanggalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+				echo $ctrlFrm->formText("tanggal", $this->detailKejadian['tanggal'], $tanggalAttrib);
+			?>
+	</td>
+	</tr>
 
-				 endforeach; 
-				}?>
-			</select>
-				</td>
-			</tr>
+	<tr>
+		<td align="right" width="100">* Uraian :</td>
+		<td>
+			<textarea id="uraian" name="uraian" required><?php echo $this->detailKejadian['uraian']; ?></textarea>
+			
+		</td>
+	</tr>
+	
+	<tr>
+		<td align="right" width="100">* Waktu :</td>
+		<td>	
+			<input name="waktu" id="waktu" type="text" value="<?echo $this->detailKejadian['waktu'] ;?>"  placeholder="masukan jam kejadian. ex: 12:30" required />
+	</td>
+	</tr>
+	
+	<tr>
+		<td align="right" width="100">* Lokasi :</td>
+		<td>	
+				<? 
+				$lokasiAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+				echo $ctrlFrm->formText("lokasi", $this->detailKejadian['lokasi'], $lokasiAttrib);
+				?>
+		</td>
+	</tr>				
+	
+	</tr>
 
-				<tr>
-				    <td align="right" width="100">* Hari :</td>
-					<td>	
-						<? 
-							$hariAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-							echo $ctrlFrm->formText("hari", $this->detailKejadian['hari'], $hariAttrib);
-						?>
-				</td>
-				</tr>
+	<tr>
+		<td align="right" width="100">* Kerugian :</td>
+		<td>	
+			<? 
+			$kerugianAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+			echo $ctrlFrm->formText("kerugian", $this->detailKejadian['kerugian'], $kerugianAttrib);
+			?>
+	</td>
+	</tr>
+	
+	<tr>
+		<td align="right" width="100">* Nominal :</td>
+		<td>	
+			<? $nominal = explode('.',$this->detailKejadian['nominal']);
+				$nominalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("nominal", $nominal[0], $nominalAttrib);
+			?>
+	</td>
+	</tr>
+	
+	<tr>
+		<td align="right" width="100">* Pelapor :</td>
+		<td>	
+			<? 
+				$pelaporAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+				echo $ctrlFrm->formText("pelapor", $this->detailKejadian['pelapor'], $pelaporAttrib);
+			?>
+	</td>
+	</tr>
 
-				
-				
-				<tr>
-				    <td align="right" width="100">* Tanggal :</td>
-					<td>	
-						<? 
-							$tanggalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-							echo $ctrlFrm->formText("tanggal", $this->detailKejadian['tanggal'], $tanggalAttrib);
-						?>
-				</td>
-				</tr>
+	<tr>
+		<td align="right" width="100">* Keterangan :</td>
+		<td>	
+			<textarea id="keterangan" name="keterangan"><?php echo $this->detailKejadian['keterangan']; ?></textarea>
+	</td>
+	</tr>
 
-				<tr>
-				    <td align="right" width="100">* Uraian :</td>
-					<td>
-						<textarea id="uraian" name="uraian" required><?php echo $this->detailKejadian['uraian']; ?></textarea>
-						
-					</td>
-				</tr>
-				
-				<tr>
-				    <td align="right" width="100">* Waktu :</td>
-					<td>	
-						<input name="waktu" id="waktu" type="text" value="<?echo $this->detailKejadian['waktu'] ;?>"  placeholder="masukan jam kejadian. ex: 12:30" required />
-				</td>
-				</tr>
-				
-				<tr>
-				    <td align="right" width="100">* Lokasi :</td>
-					<td>	
-							<? 
-							$lokasiAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-							echo $ctrlFrm->formText("lokasi", $this->detailKejadian['lokasi'], $lokasiAttrib);
-							?>
-					</td>
-				</tr>				
-				
-				</tr>
-
-				<tr>
-				    <td align="right" width="100">* Kerugian :</td>
-					<td>	
-						<? 
-						$kerugianAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-						echo $ctrlFrm->formText("kerugian", $this->detailKejadian['kerugian'], $kerugianAttrib);
-						?>
-				</td>
-				</tr>
-				
-				<tr>
-				    <td align="right" width="100">* Nominal :</td>
-					<td>	
-						<? $nominal = explode('.',$this->detailKejadian['nominal']);
-							$nominalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
-							echo $ctrlFrm->formText("nominal", $nominal[0], $nominalAttrib);
-						?>
-				</td>
-				</tr>
-				
-				<tr>
-				    <td align="right" width="100">* Pelapor :</td>
-					<td>	
-						<? 
-							$pelaporAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-							echo $ctrlFrm->formText("pelapor", $this->detailKejadian['pelapor'], $pelaporAttrib);
-						?>
-				</td>
-				</tr>
-
-				<tr>
-				    <td align="right" width="100">* Keterangan :</td>
-					<td>	
-						<textarea id="keterangan" name="keterangan"><?php echo $this->detailKejadian['keterangan']; ?></textarea>
-				</td>
-				</tr>
-
-				<tr>
-				    <td align="right" width="100">* Lampiran :</td>					
-					</td>	
-					<?php if (strtolower($this->jenisForm) == 'update') { ?>
-							<td> <img src="<?php echo $this->detailKejadian['file_lampiran']; ?>" width="150px" height="150px"/>	
-						</td>
-					<?php } ?>
-					<?php if (strtolower($this->jenisForm) == 'insert') { ?>
-					 <td>
-						<input type="file" name="lampiran" id="lampiran" onChange="setvalueuplfile(this.value,'lampiran','doc')" required />
-					 </td>
-					 <div class="fakefile">
-						<input type="hidden" size="41" name="a_file" id="a_file" value="<? $this->detailKejadian['file_lampiran']?>"/>
-					</div>
-					 	<?php } ?>
-				</tr>
+	<tr>
+		<td align="right" width="100">* Lampiran :</td>					
+		</td>	
+		<?php if (strtolower($this->jenisForm) == 'update') { ?>
+				<td> <img src="<?php echo $this->detailKejadian['file_lampiran']; ?>" width="150px" height="150px"/>	
+			</td>
+		<?php } ?>
+		<?php if (strtolower($this->jenisForm) == 'insert') { ?>
+		 <td>
+			<input type="file" name="lampiran" id="lampiran" onChange="setvalueuplfile(this.value,'lampiran','doc')" required />
+		 </td>
+		 <div class="fakefile">
+			<input type="hidden" size="41" name="a_file" id="a_file" value="<? $this->detailKejadian['file_lampiran']?>"/>
+		</div>
+			<?php } ?>
+	</tr>
 	<tr>  
 		<td>&nbsp;</td>
 		<td width="500px;">&nbsp;</td>
