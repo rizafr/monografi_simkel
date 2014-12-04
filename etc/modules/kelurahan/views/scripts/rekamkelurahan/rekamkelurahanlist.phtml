@@ -47,8 +47,7 @@ $pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this-
 
 <table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 				</table>
-<!--<div class="add" title="Tambah Data" onClick="rekamkelurahanForm('insert','<? echo $this->kd_kel;?>','<? echo $this->lastPeriode->bulan;?>','<? echo $this->lastPeriode->tahun;?>');"></div> -->
-<div class="add" title="Tambah Data" href="#" ></div>	
+<div class="add" title="Tambah Data" onClick="rekamkelurahanForm('insert','<? echo $this->kd_kel;?>','<? echo $this->lastPeriode->bulan;?>','<? echo $this->lastPeriode->tahun;?>');"></div>	
 
 <table id="sorter" class="sortable" cellspacing="0" cellpadding="2" border="0" align="center">
 				<th >No</th>
@@ -56,7 +55,7 @@ $pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this-
 				<th >Tahun</th> 
 				<th >Nama Lurah</th> 
 				<th >NIP Lurah</th>
-				<th colspan="1" class="nosort">Cetak</th>
+				<th colspan="2" class="nosort">Cetak</th>
 				<th colspan="2" class="nosort">FUNGSI</th>
 				
 				<?
@@ -94,8 +93,8 @@ $pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this-
 						<td class="clleft"><? echo $nip_lurah;?></td>
 						
 
-
-<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="buku" title= "Cetak Papan <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
+<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandatacetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="papan" title= "cetak papan <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
+<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="buku" title= "cetak buku <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
 <td><div onClick="rekamkelurahanForm('update','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="edit1" title="Ubah Data"></div></td>
 <td><div onClick="rekamkelurahanHapus('<? echo $kd_kel;?>','<? echo $this->detailKelurahan->kelurahan ;?>','<? echo $tahun;?>','<? echo $bulan;?>');" class="delete" title="Hapus Data"></div>
 						</td>
@@ -129,108 +128,3 @@ var sorter=new table.sorter("sorter");
 sorter.init("sorter",0);
 </script>
 
-
- <style>
-    	.box {
-			  width: 600px;
-			  height: 200px;
-			  background-color: #2c3e50;
-			  border-radius: 5px;
-			  position: absolute;
-			  left: 50%;
-			  margin-top: -150px;
-			  margin-left: -300px;
-			  top: -9999px;
-			  z-index: 1000;
-			  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4) inset, 0 1px 0 rgba(255, 255, 255, 0.2);
-		}
-		.box .pesan {
-			  position: absolute;
-			  top: 30px;
-			  right: 10px;
-			  bottom: 10px;
-			  left: 10px;
-			  padding: 5px 10px;
-			  overflow: auto;
-			  background-color: #1abc9c;
-			  color: #fff;
-			  text-align: left;
-			  line-height: 1.5em;
-			  font-size: 14px;
-			  border-radius: 0 0 5px 5px;
-			}
-		.pesan .ttd:after {
-			  content: "";
-			  position: relative;
-			  float: right;
-			}
-		.close:after {
-		  content: url('<? echo $this->basePath;?>/icon/delete4.png');
-		  position: absolute;
-		  top: -10px;
-		  right: -10px;
-		  background: #ecf0f1;
-		  border-radius: 100%;
-		  padding: 10px;
-		  z-index: 1000;
-		  cursor: pointer;
-		}
-
-    </style>
-
-
-<div class='box'>
-  <div class='pesan'>
-		<h2>
-			* Pilih Periode Bulan dan Tahun untuk diSalin
-		</h2>
-		<br />
-			
-				<select name="bulan" id="bulan" class="autowidth" >
-					<option selected="selected">Bulan</option>
-					<?php
-					
-					$bulan_ind=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
-					$bulan=array("1","2","3","4","5","6","7","8","9","10","11","12");
-					$jlh_bln=count($bulan_ind);
-					for($c=0; $c<$jlh_bln; $c+=1){
-						echo"<option value=$bulan[$c]> $bulan_ind[$c] </option>";
-					}
-					?>
-					</select>
-					<select name="tahun" id="tahun"  class="autowidth">
-					<option selected="selected">Tahun</option>
-					<?php
-					for($i=date('Y'); $i>=2010; $i-=1){
-						echo"<option value=$i> $i </option>";
-					}
-					?>
-					</select>
-			<script>
-				bulan = document.getElementById('bulan').value;
-				tahun = document.getElementById('tahun').value;
-			</script>
-		<input type="submit" value="Pilih" name="pilih" onClick="rekamkelurahanFormCopy('insert','<? echo $this->kd_kel;?>')"
- <span class='ttd'></span>
-  </div>
-<div class='close'></div>
-</div>
-
-
-
-<script type='text/javascript'>
-//<![CDATA[
-$(document).ready(function () {
-//tampilkan kotak dialog saat muncul dengan class info
-    $('.add').click(function () {
-        $('.box').fadeIn(9000).css({top: '50%',position: 'fixed'})
-        // $('body').css({background: '#123',transition: 'all 5s'}) //efect body berubah warna
-    });
-//sembunyikan kotak dialog dengan class close
-    $('.close').click(function () {
-		$('.box').fadeOut().delay(9000);
-        // $('body').css({background: '#ecf0f1',transition: 'all 5s'}) //efect body berubah warna
-    })
-});
-//]]>
-</script>

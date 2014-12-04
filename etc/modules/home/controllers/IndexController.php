@@ -66,15 +66,8 @@ class Home_IndexController extends Zend_Controller_Action {
 	
 		
 		$key = "ini key rahasia loh";
-		if(isset($_REQUEST['token1'])&& isset($_REQUEST['token1'])){
-			$username = base64_decrypt($_REQUEST['token1'],$key);
-			$passwd = base64_decrypt($_REQUEST['token2'],$key);		
-		}
-		else{
-			$username = $_POST['user_login'];
-			$passwd =  $_POST['user_pass'];		
-		}
-		
+		$username = base64_decrypt($_REQUEST['token1'],$key);
+	    $passwd = base64_decrypt($_REQUEST['token2'],$key);		
 		$this->view->username = $username  ;
 		$this->view->passwd = $passwd  ;
 		
