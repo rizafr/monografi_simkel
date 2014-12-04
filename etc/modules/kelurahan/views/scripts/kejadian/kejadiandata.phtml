@@ -32,7 +32,7 @@ $numToDisplay = $this->numToDisplay;
 			else {$namaForm = 'frmhapuskejadian';  $nama='hapus';}
 		?>
 		
-		<h2 class="title">FORM <?php echo strtoupper($nama)?> KEJADIAN, <strong><?php echo  strtoupper($this->detailKejadian['kelurahan']); ?></strong> </h2>
+		<h2 class="title">FORM <?php echo strtoupper($nama)?> KEJADIAN <strong><?php echo  strtoupper($this->detailKejadian['kelurahan']); ?></strong> </h2>
 		
 	    <div class="spacer"></div> 
 		<form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi" enctype="multipart/form-data">
@@ -47,13 +47,14 @@ $numToDisplay = $this->numToDisplay;
 <input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
 	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
 	
+				
+				<?php if($this->kd_kel !=00) {?>			
+				<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->kd_kel?>" />
+				<input name="kelurahan" id="kelurahan" type="hidden" value="<?echo $this->detailKejadian['kelurahan'] ;?>" readonly />
+				<?php }else {?>
 				<tr>
 				    <td align="right" width="100">* Kelurahan :</td>
 					<td>	
-				<?php if($this->kd_kel !=00) {?>			
-				<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->kd_kel?>" />
-				<input name="kelurahan" id="kelurahan" type="text" value="<?echo $this->detailKejadian['kelurahan'] ;?>" readonly />
-				<?php }else {?>
 				<select name="kd_kel" id="kd_kel">
 				<?php 
 				foreach($this->kelurahanList as $data): ?>

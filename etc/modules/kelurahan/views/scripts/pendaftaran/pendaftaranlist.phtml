@@ -47,7 +47,6 @@ $pesan->show_message($proses, $this->kd_kel , "$status" );
 
 <table id="sorter" class="sortable" cellspacing="0" cellpadding="2" border="0" align="center">
 				<th >NoUrut</th>
-				<th >Kode Kelurahan</th>
 				<th >Nama Kelurahan</th> 
 				<th >Tahun Pembentukan</th> 
 				<th >Dasar Hukum Pembentukan</th> 
@@ -86,9 +85,9 @@ $pesan->show_message($proses, $this->kd_kel , "$status" );
 						
 						?>
 					<td align="center"><? echo $noUrut;?></td>
-					<td align="center"><a href="#" title= "detail <?php echo $kelurahan?>" onclick="open_url_to_div('<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahan?jenisForm=update&kd_kel=<?echo $kd_kel;?>','<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanjs');"><? echo $kd_kel;?></a></td>
+					
 
-					<td align="left"><? echo $kelurahan;?></td>
+					<td align="left"><a href="#" title= "detail <?php echo $kelurahan?>" onclick="open_url_to_div('<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahan?jenisForm=update&kd_kel=<?echo $kd_kel;?>','<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahanjs');"><? echo $kelurahan;?></a></td>
 					<td align="center"><? echo $tahun_pembentukan;?></td>
 					<td align="center"><? echo $dasar_pembentukan;?></td>
 					<td align="center"><? echo $kode_pos;?></td>
