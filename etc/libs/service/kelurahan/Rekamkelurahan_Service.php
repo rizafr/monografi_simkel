@@ -830,15 +830,38 @@ class Rekamkelurahan_Service {
 	   }
 	}
 	
-	
-	
+		
 	public function detailProgram($kd_kel,$bulan,$tahun) {
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
 		try {
-				$db->setFetchMode(Zend_Db::FETCH_OBJ); 		
-				$result = $db->fetchAll("SELECT  * from [SIMKEL].[dbo].[mon_program_kelurahan] where kd_kel = '$kd_kel' AND bulan='$bulan' AND tahun='$tahun' ");
-				return $result;
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+			$where = " where kd_kel = '$kd_kel' AND bulan = '$bulan' AND tahun = '$tahun' ";
+			$sqlProses = "SELECT TOP 1000 [tahun]
+							  ,[bulan]
+							  ,[kd_kel]
+							  ,[idx_program]
+							  ,[nama_program]
+							  ,[anggaran]
+							  ,[kode]
+						  FROM [SIMKEL].[dbo].[mon_program_kelurahan]";	
+			$sqlData = $sqlProses.$where;
+			$result = $db->fetchAll($sqlData);
+			//echo $sqlData;
+					
+			$jmlResult = count($result);		
+			for ($j = 0; $j < $jmlResult; $j++) {
+				$hasilAkhir[$j] = array(
+								"tahun"	    => (string)$result[$j]->tahun,
+								"bulan"	        => (string)$result[$j]->bulan,
+								"kd_kel"	    => (string)$result[$j]->kd_kel,
+								"kode"	    => (string)$result[$j]->kode,
+								"nama_program"	    => (string)$result[$j]->nama_program,
+								"anggaran"         	=> (string)$result[$j]->anggaran
+								);
+			}
+			return $hasilAkhir;		
+		
 				} catch (Exception $e) {
 				echo $e->getMessage().'<br>';
 				return 'Data tidak ada <br>';

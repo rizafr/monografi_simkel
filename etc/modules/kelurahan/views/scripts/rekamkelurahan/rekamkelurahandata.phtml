@@ -1066,6 +1066,28 @@ $(function(){
 			</tr>
 			<tbody id="kontenPusat"></tbody>
 			
+			<?php foreach ($this->detailProgram as $key => $val): 
+							
+							
+			$kd_kel	= $this->escape($val['kd_kel']);						
+			$tahun	= $this->escape($val['tahun']); 
+			$bulan	= $this->escape($val['bulan']); 
+			
+			//Array Bulan 
+			$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
+			$bulan1 = $array_bulan[$this->escape($val['bulan'])];
+			$nama_program	= $this->escape($val['nama_program']);
+			$anggaran	= $this->escape($val['anggaran']);
+			
+			$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+			echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
+						
+						?>
+			<tr class="barisPusat">
+				<td class="clleft"><? echo $nama_program;?></td>
+				<td class="clleft"><? echo $anggaran;?></td>
+			<?php endforeach ?>
+			</tr>
 			</table>
 			</div>
 	

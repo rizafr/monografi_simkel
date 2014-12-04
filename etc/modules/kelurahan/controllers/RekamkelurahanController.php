@@ -72,6 +72,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->detailKewenangan = $this->rekamkelurahan_serv->detailKewenangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKeuangan = $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKelembagaan = $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgram = $this->rekamkelurahan_serv->detailProgram($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailTrantib = $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->render('rekamkelurahancetak');
 	}
@@ -205,7 +206,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->detailKeuangan = $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKelembagaan = $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailTrantib = $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		// var_dump($this->view->detailKewenangan);
+		// var_dump($this->view->detailProgram);
 		// var_dump($this->view->kd_kel);
 		// var_dump($this->view->bulan);
 		// var_dump($this->view->tahun);
