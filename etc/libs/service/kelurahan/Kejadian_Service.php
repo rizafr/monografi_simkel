@@ -61,7 +61,7 @@ class Kejadian_Service {
 			$order = "";
 			
 			
-			$sqlProses = "SELECT TOP 1000 kej.idx_kejadian,kej.kd_kel, kej.hari,kej.tanggal, kej.uraian,kej.waktu,kej.lokasi, kej.file_lampiran, kej.bulan,kej.tahun, kej.kerugian,kej.nominal,kej.pelapor,kej.keterangan,kej.lampiran, K.kelurahan
+			$sqlProses = "SELECT TOP 1000 kej.idx_kejadian,kej.kd_kel, kej.hari,kej.tanggal, kej.uraian,kej.waktu,kej.lokasi, kej.file_lampiran, kej.bulan,kej.tahun, kej.kerugian,kej.nominal,kej.tanggal_laporan, kej.pelapor,kej.keterangan,kej.lampiran, K.kelurahan
 								 FROM [SIMKEL].[dbo].[m_kelurahan] K ,[SIMKEL].[dbo].[mon_kelurahan] MK,[SIMKEL].[dbo].[mon_kejadian] KEJ 
 								 WHERE K.kd_kel= MK.kd_kel AND kej.kd_kel=MK.kd_kel".$hak.$where." order by kej.tanggal desc";	
 			$sqlProses1 = $sqlProses.$group;
@@ -86,6 +86,7 @@ class Kejadian_Service {
 										"waktu"				=> (string)$result[$j]->waktu,
 										"lokasi"				=> (string)$result[$j]->lokasi,										
 										"kerugian"				=> (string)$result[$j]->kerugian,
+										"tanggal_laporan"				=> (string)$result[$j]->tanggal_laporan,
 										"nominal"				=> (string)$result[$j]->nominal,
 										"pelapor"		=> (string)$result[$j]->pelapor,
 										"keterangan"			=> (string)$result[$j]->keterangan,
@@ -158,6 +159,7 @@ class Kejadian_Service {
 										"lokasi"				=> (string)$result[$j]->lokasi,										
 										"kerugian"				=> (string)$result[$j]->kerugian,
 										"nominal"				=> (string)$result[$j]->nominal,
+										"tanggal_laporan"		=> (string)$result[$j]->tanggal_laporan,
 										"pelapor"		=> (string)$result[$j]->pelapor,
 										"keterangan"			=> (string)$result[$j]->keterangan,
 										"lampiran"	=> (string)$result[$j]->lampiran	,
@@ -190,6 +192,7 @@ class Kejadian_Service {
 								"lokasi"		=> $dataMasukan['lokasi'],
 								"kerugian"		=> $dataMasukan['kerugian'],
 								"nominal"		=> $dataMasukan['nominal'],
+								"tanggal_laporan"		=> $dataMasukan['tanggal_laporan'],
 								"pelapor"		=> $dataMasukan['pelapor'],
 								"keterangan"	=> $dataMasukan['keterangan'],
 								"lampiran"		=> $dataMasukan['lampiran'],
@@ -241,6 +244,7 @@ class Kejadian_Service {
 										"lokasi"				=> (string)$result->lokasi,										
 										"kerugian"				=> (string)$result->kerugian,
 										"nominal"				=> (string)$result->nominal,
+										"tanggal_laporan"		=> (string)$result->tanggal_laporan,
 										"pelapor"				=> (string)$result->pelapor,
 										"keterangan"			=> (string)$result->keterangan,
 										"lampiran"				=> (string)$result->lampiran,
@@ -262,19 +266,38 @@ class Kejadian_Service {
 		$db = $registry->get('db');
 		try {
 			$db->beginTransaction();
-			$paramInput	= array("uraian"      => $dataMasukan['uraian'],
+			
+			if($dataMasukan['file_lampiran']!= NULL){ 
+					$paramInput	= array(	
+								"uraian"		=> $dataMasukan['uraian'],
+								"lokasi"		=> $dataMasukan['lokasi'],
+								"kerugian"		=> $dataMasukan['kerugian'],
+								"nominal"		=> $dataMasukan['nominal'],
+								"tanggal_laporan"		=> $dataMasukan['tanggal_laporan'],
+								"pelapor"		=> $dataMasukan['pelapor'],
+								"keterangan"	=> $dataMasukan['keterangan'],
+								"lampiran"		=> $dataMasukan['lampiran'],
+								"file_lampiran"		=> $dataMasukan['file_lampiran'],
+								"bulan"		=> $dataMasukan['bulan'],
+								"tahun"		=> $dataMasukan['tahun']
+							);
+				} 
+			else{
+				$paramInput	= array("uraian"      => $dataMasukan['uraian'],
 								"hari"			=> $dataMasukan['hari'],
 								"tanggal"		=> $dataMasukan['tanggal'],
 								"waktu"			=> $dataMasukan['waktu'],
 								"lokasi"		=> $dataMasukan['lokasi'],
 								"kerugian"		=> $dataMasukan['kerugian'],
 								"nominal"		=> $dataMasukan['nominal'],
+								"tanggal_laporan"		=> $dataMasukan['tanggal_laporan'],
 								"pelapor"		=> $dataMasukan['pelapor'],
 								"keterangan"	=> $dataMasukan['keterangan'],
 								"bulan"		=> $dataMasukan['bulan'],
 								"tahun"		=> $dataMasukan['tahun']
 							);
-			 // var_dump($paramInput);
+			}
+			 //var_dump($paramInput);
 			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND idx_kejadian = '".$dataMasukan['idx_kejadian']."' ";
 			$db->update('SIMKEL.dbo.mon_kejadian',$paramInput, $where);
 			$db->commit();

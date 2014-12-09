@@ -807,18 +807,19 @@ class Rekamkelurahan_Service {
 		$db->beginTransaction();
 			$paramInput = array(
 								"nama_program"	    => $dataMasukan['nama_program'],
-								"anggaran"	      	=> $dataMasukan['anggaran'],
-								"kode"	   			=> $dataMasukan['kode']
+								"anggaran"	      	=> $dataMasukan['anggaran']
 								);
-		//var_dump($paramInput);
-			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' ";
-			$db->update('[SIMKEL].[dbo].[mon_program_kelurahan]',$paramInput, $where);
+		
+			$where[] = " kd_kel = '".$dataMasukan['kd_kel']."' AND bulan   = '".$dataMasukan['bulan']."' AND tahun =  '".$dataMasukan['tahun']."' AND kode =  '".$dataMasukan['kode']."' AND idx_program =  '".$dataMasukan['idx_program']."' ";
+			$db->update('SIMKEL.dbo.mon_program_kelurahan',$paramInput, $where);
+			//var_dump($where);
 			$db->commit();
 			return 'sukses';
 		} catch (Exception $e) {
 			$db->rollBack();
 			$errmsgArr = explode(":",$e->getMessage());
 			$errMsg = $errmsgArr[0];
+			var_dump($errMsg);
 			if($errMsg == "SQLSTATE[23000]")
 			{
 				return "gagal.Data Sudah Ada.";
@@ -831,12 +832,50 @@ class Rekamkelurahan_Service {
 	}
 	
 		
-	public function detailProgram($kd_kel,$bulan,$tahun) {
+	public function detailProgramPusat($kd_kel,$bulan,$tahun) {
 		$registry = Zend_Registry::getInstance();
 		$db = $registry->get('db');
 		try {
 			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
-			$where = " where kd_kel = '$kd_kel' AND bulan = '$bulan' AND tahun = '$tahun' ";
+			$where = " where kd_kel = '$kd_kel' AND bulan = '$bulan' AND tahun = '$tahun' and kode=1 ";
+			$sqlProses = "SELECT TOP 1000 [tahun]
+							  ,[bulan]
+							  ,[kd_kel]
+							  ,[idx_program]
+							  ,[nama_program]
+							  ,[anggaran]
+							  ,[kode]
+						  FROM [SIMKEL].[dbo].[mon_program_kelurahan] ";	
+			$sqlData = $sqlProses.$where;
+			$result = $db->fetchAll($sqlData);
+			//echo $sqlData;
+					
+			$jmlResult = count($result);		
+			for ($j = 0; $j < $jmlResult; $j++) {
+				$hasilAkhir[$j] = array(
+								"idx_program"	    => (string)$result[$j]->idx_program,
+								"tahun"	    => (string)$result[$j]->tahun,
+								"bulan"	        => (string)$result[$j]->bulan,
+								"kd_kel"	    => (string)$result[$j]->kd_kel,
+								"kode"	    => (string)$result[$j]->kode,
+								"nama_program"	    => (string)$result[$j]->nama_program,
+								"anggaran"         	=> (string)$result[$j]->anggaran
+								);
+			}
+			return $hasilAkhir;		
+		
+				} catch (Exception $e) {
+				echo $e->getMessage().'<br>';
+				return 'Data tidak ada <br>';
+			}
+	}
+	
+	public function detailProgramProvinsi($kd_kel,$bulan,$tahun) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+			$where = " where kd_kel = '$kd_kel' AND bulan = '$bulan' AND tahun = '$tahun' and kode=2 ";
 			$sqlProses = "SELECT TOP 1000 [tahun]
 							  ,[bulan]
 							  ,[kd_kel]
@@ -852,6 +891,7 @@ class Rekamkelurahan_Service {
 			$jmlResult = count($result);		
 			for ($j = 0; $j < $jmlResult; $j++) {
 				$hasilAkhir[$j] = array(
+								"idx_program"	    => (string)$result[$j]->idx_program,
 								"tahun"	    => (string)$result[$j]->tahun,
 								"bulan"	        => (string)$result[$j]->bulan,
 								"kd_kel"	    => (string)$result[$j]->kd_kel,
@@ -863,6 +903,45 @@ class Rekamkelurahan_Service {
 			return $hasilAkhir;		
 		
 				} catch (Exception $e) {
+				echo $e->getMessage().'<br>';
+				return 'Data tidak ada <br>';
+			}
+	}
+	
+	public function detailProgramKota($kd_kel,$bulan,$tahun) {
+		$registry = Zend_Registry::getInstance();
+		$db = $registry->get('db');
+		try {
+			$db->setFetchMode(Zend_Db::FETCH_OBJ); 
+			$where = " where kd_kel = '$kd_kel' AND bulan = '$bulan' AND tahun = '$tahun' and kode=3 ";
+			$sqlProses = "SELECT TOP 1000 [tahun]
+							  ,[bulan]
+							  ,[kd_kel]
+							  ,[idx_program]
+							  ,[nama_program]
+							  ,[anggaran]
+							  ,[kode]
+						  FROM [SIMKEL].[dbo].[mon_program_kelurahan]";	
+			$sqlData = $sqlProses.$where;
+			$result = $db->fetchAll($sqlData);
+			//echo $sqlData;
+					
+			$jmlResult = count($result);		
+				for ($j = 0; $j < $jmlResult; $j++) {
+					$hasilAkhir[$j] = array(
+									"idx_program"	    => (string)$result[$j]->idx_program,
+									"tahun"	    => (string)$result[$j]->tahun,
+									"bulan"	        => (string)$result[$j]->bulan,
+									"kd_kel"	    => (string)$result[$j]->kd_kel,
+									"kode"	    => (string)$result[$j]->kode,
+									"nama_program"	    => (string)$result[$j]->nama_program,
+									"anggaran"         	=> (string)$result[$j]->anggaran
+									);
+				}
+			
+			return $hasilAkhir;		
+		
+			} catch (Exception $e) {
 				echo $e->getMessage().'<br>';
 				return 'Data tidak ada <br>';
 			}

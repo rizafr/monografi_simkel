@@ -330,7 +330,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; h. Pemulung :</td>
 		<td>	
 			<? 
-				$jml_pemulungAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"number");
+				$jml_pemulungAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"number","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_pemulung", $this->detailUmum['jml_pemulung'], $jml_pemulungAttrib);
 			?> jiwa
 		</td>
@@ -340,7 +340,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; i. Jasa :</td>
 		<td>	
 			<? 
-				$jml_jasaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_jasaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_jasa", $this->detailUmum['jml_jasa'], $jml_jasaAttrib);
 			?> jiwa
 		</td>
@@ -361,7 +361,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  1. Taman Kanak-kanak :</td>
 		<td>	
 			<? 
-				$jml_lulusan_tkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_lulusan_tkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_lulusan_tk", $this->detailUmum['jml_lulusan_tk'], $jml_lulusan_tkAttrib);
 			?> jiwa
 	</td>
@@ -372,7 +372,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Sekolah Dasar :</td>
 		<td>	
 			<? 
-				$jml_lulusan_sdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_lulusan_sdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_lulusan_sd", $this->detailUmum['jml_lulusan_sd'], $jml_lulusan_sdAttrib);
 			?> jiwa
 	</td>
@@ -382,7 +382,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. SMP :</td>
 		<td>	
 			<? 
-				$jml_lulusan_smpAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_lulusan_smpAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_lulusan_smp", $this->detailUmum['jml_lulusan_smp'], $jml_lulusan_smpAttrib);
 			?> jiwa
 	</td>
@@ -392,7 +392,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. SMA/SMU :</td>
 		<td>	
 			<? 
-				$jml_lulusan_smaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_lulusan_smaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_lulusan_sma", $this->detailUmum['jml_lulusan_sma'], $jml_lulusan_smaAttrib);
 			?> jiwa
 	</td>
@@ -402,7 +402,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. Akademi /D1-D3 :</td>
 		<td>	
 			<? 
-				$jml_lulusan_diplomaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_lulusan_diplomaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_lulusan_diploma", $this->detailUmum['jml_lulusan_diploma'], $jml_lulusan_diplomaAttrib);
 			?> jiwa
 		</td>
@@ -412,7 +412,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6. Sarjana :</td>
 		<td>	
 			<? 
-				$jml_lulusan_sarjanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_lulusan_sarjanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_lulusan_sarjana", $this->detailUmum['jml_lulusan_sarjana'], $jml_lulusan_sarjanaAttrib);
 			?> jiwa
 		</td>
@@ -423,7 +423,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7. Pascasarjana :</td>
 		<td>	
 			<? 
-				$jml_lulusan_pascasarjanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_lulusan_pascasarjanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_lulusan_pascasarjana", $this->detailUmum['jml_lulusan_pascasarjana'], $jml_lulusan_pascasarjanaAttrib);
 			?> jiwa
 		</td>
@@ -438,7 +438,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Pondok Pesantren :</td>
 		<td>	
 			<? 
-				$jml_lulusan_pontrenAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_lulusan_pontrenAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_lulusan_pontren", $this->detailUmum['jml_lulusan_pontren'], $jml_lulusan_pontrenAttrib);
 			?> jiwa
 		</td>
@@ -448,7 +448,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Pendidikan Keagamaan :</td>
 		<td>	
 			<? 
-				$jml_lulusan_keagamaanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_lulusan_keagamaanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_lulusan_keagamaan", $this->detailUmum['jml_lulusan_keagamaan'], $jml_lulusan_keagamaanAttrib);
 			?> jiwa
 		</td>
@@ -458,7 +458,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Sekolah Luar Biasa:</td>
 		<td>	
 			<? 
-				$jml_lulusan_slbAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_lulusan_slbAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_lulusan_slb", $this->detailUmum['jml_lulusan_slb'], $jml_lulusan_slbAttrib);
 			?>	jiwa
 		</td>
@@ -468,7 +468,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Kursus Keterampilan:</td>
 		<td>	
 			<? 
-				$jml_lulusan_kursusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
+				$jml_lulusan_kursusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_lulusan_kursus", $this->detailUmum['jml_lulusan_kursus'], $jml_lulusan_kursusAttrib);
 			?>	jiwa
 		</td>
@@ -478,11 +478,11 @@ $(function(){
 		<td align="right" >8. Jumlah Penduduk Miskin:</td>
 		<td>	
 			<? 
-				$jml_jiwa_miskinAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","class"=>"kecil");
+				$jml_jiwa_miskinAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","class"=>"kecil","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_jiwa_miskin", $this->detailUmum['jml_jiwa_miskin'], $jml_jiwa_miskinAttrib);
 			?> jiwa
 			<? 
-				$jml_jiwa_kkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","class"=>"kecil");
+				$jml_jiwa_kkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","class"=>"kecil","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jml_jiwa_kk", $this->detailUmum['jml_jiwa_kk'], $jml_jiwa_kkAttrib);
 			?>  KK
 		</td>
@@ -497,7 +497,7 @@ $(function(){
 		<td>	
 			Rp &nbsp;
 			<?  $umr= explode('.', $this->detailUmum['umr']);
-				$umrAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried");
+				$umrAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("umr", $umr[0], $umrAttrib);
 			?> 
 		</td>
@@ -569,7 +569,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Gedung Sekolah TK:</td>
 		<td>	
 			<? 
-				$sarana_jml_tkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				$sarana_jml_tkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("sarana_jml_tk", $this->detailUmum['sarana_jml_tk'], $sarana_jml_tkAttrib);
 			?>  buah
 		</td>
@@ -579,7 +579,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Gedung Sekolah SD:</td>
 		<td>	
 			<? 
-				$sarana_jml_sdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				$sarana_jml_sdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("sarana_jml_sd", $this->detailUmum['sarana_jml_sd'], $sarana_jml_sdAttrib);
 			?>  buah
 		</td>
@@ -589,7 +589,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. Gedung Sekolah SMP:</td>
 		<td>	
 			<? 
-				$sarana_jml_smpAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				$sarana_jml_smpAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true",  "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("sarana_jml_smp", $this->detailUmum['sarana_jml_smp'], $sarana_jml_smpAttrib);
 			?>  buah
 		</td>
@@ -599,7 +599,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. Gedung Sekolah SMA:</td>
 		<td>	
 			<? 
-				$sarana_jml_smaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				$sarana_jml_smaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true",  "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("sarana_jml_sma", $this->detailUmum['sarana_jml_sma'], $sarana_jml_smaAttrib);
 			?>  buah
 		</td>
@@ -609,7 +609,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6. Gedung Perguruan Tinggi:</td>
 		<td>	
 			<? 
-				$sarana_jml_ptAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				$sarana_jml_ptAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("sarana_jml_pt", $this->detailUmum['sarana_jml_pt'], $sarana_jml_ptAttrib);
 			?>  buah
 		</td>
@@ -624,7 +624,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Mesjid:</td>
 		<td>	
 			<? 
-				$sarana_jml_masjidAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				$sarana_jml_masjidAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true",  "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("sarana_jml_masjid", $this->detailUmum['sarana_jml_masjid'], $sarana_jml_masjidAttrib);
 			?>  buah
 		</td>
@@ -634,7 +634,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Mushola:</td>
 		<td>	
 			<? 
-				$sarana_jml_musholaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				$sarana_jml_musholaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true",  "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("sarana_jml_mushola", $this->detailUmum['sarana_jml_mushola'], $sarana_jml_musholaAttrib);
 			?>  buah
 		</td>
@@ -975,14 +975,15 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Bidang</td>
 			<td> 
-				<div class="input_fields_wajib_bidang">
-					<button class="add_field_wajib_bidang btn btn-info">Tambahkan kolom</button> 
+				<div class="input_fields_bidang_urusan_wajib">
+					<button class="add_field_bidang_urusan_wajib btn btn-info">Tambahkan kolom</button> 
 						<?php 
 						$bidang_urusan_wajib= explode(',',$this->detailKewenangan['bidang_urusan_wajib']);
 						
 						for($i=0;$i<count($bidang_urusan_wajib);$i++){?>
 						<div class="BidangUrusanWajib">
 							<input type="text" name="bidang_urusan_wajib[]" id="bidang_urusan_wajib" value="<?php echo $bidang_urusan_wajib[$i] ?>">
+							<input type="button" id="hapusBidangUrusanWajib" value="Hapus">
 						</div>
 						
 						<?php } ?>
@@ -993,14 +994,15 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Urusan</td>
 			<td> 
-				<div class="input_fields_wajib_urusan">
-					<button class="add_field_wajib_urusan btn btn-info">Tambahkan kolom</button>
+				<div class="input_fields_urusan_wajib">
+					<button class="add_field_urusan_wajib btn btn-info">Tambahkan kolom</button>
 						<?php 
 							$urusan_wajib= explode(',',$this->detailKewenangan['urusan_wajib']);
 						
 							for($i=0;$i<count($urusan_wajib);$i++){?>
 						<div class="UrusanWajib">
 							<input type="text" name="urusan_wajib[]" id="urusan_wajib" value="<?php echo $urusan_wajib[$i] ?>">
+							<input type="button" id="hapusUrusanWajib" value="Hapus">
 						</div>
 							<?php } ?>
 				</div>
@@ -1015,13 +1017,16 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Bidang</td>
 			<td> 
-				<div class="input_fields_pilihan_bidang">
-					<button class="add_field_pilihan_bidang btn btn-info">Tambahkan kolom</button>
+				<div class="input_fields_bidang_urusan_pilihan">
+					<button class="add_field_bidang_urusan_pilihan btn btn-info">Tambahkan kolom</button>
 						<?php 
 							$bidang_urusan_pilihan= explode(',',$this->detailKewenangan['bidang_urusan_pilihan']);
 						
 							for($i=0;$i<count($bidang_urusan_pilihan);$i++){?>
-						<div class="BidangUrusanPilihan"><input type="text" name="bidang_urusan_pilihan[]" id="bidang_urusan_pilihan" value="<?php echo $bidang_urusan_pilihan[$i] ?>"></div>
+						<div class="BidangUrusanPilihan">
+							<input type="text" name="bidang_urusan_pilihan[]" id="bidang_urusan_pilihan" value="<?php echo $bidang_urusan_pilihan[$i] ?>">
+							<input type="button" id="hapusBidangUrusanPilihan" value="Hapus">
+						</div>
 							<?php } ?>
 				</div>
 			</td>
@@ -1030,13 +1035,16 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Urusan</td>
 			<td> 
-				<div class="input_fields_pilihan_urusan">
-					<button class="add_field_pilihan_urusan btn btn-info">Tambahkan kolom</button>
+				<div class="input_fields_urusan_pilihan">
+					<button class="add_field_urusan_pilihan btn btn-info">Tambahkan kolom</button>
 						<?php 
 							$urusan_pilihan= explode(',',$this->detailKewenangan['urusan_pilihan']);
 						
 							for($i=0;$i<count($urusan_pilihan);$i++){?>
-						<div class="UrusanPilihan"><input type="text" name="urusan_pilihan[]" id="urusan_pilihan" value="<?php echo $urusan_pilihan[$i] ?>"></div>
+						<div class="UrusanPilihan">
+							<input type="text" name="urusan_pilihan[]" id="urusan_pilihan" value="<?php echo $urusan_pilihan[$i] ?>">
+							<input type="button" id="hapusUrusanPilihan" value="Hapus">
+						</div>
 							<?php } ?>
 				</div>
 			</td>
@@ -1066,9 +1074,15 @@ $(function(){
 			</tr>
 			<tbody id="kontenPusat"></tbody>
 			
-			<?php foreach ($this->detailProgram as $key => $val): 
+			<?php 
+			
+			$jumPusat=count($this->detailProgramPusat );
+			if($jumPusat>0){
+			$i=$key+1;	
+			foreach ($this->detailProgramPusat as $key => $val): 
+						
 							
-							
+			$idx_program	= $this->escape($val['idx_program']);						
 			$kd_kel	= $this->escape($val['kd_kel']);						
 			$tahun	= $this->escape($val['tahun']); 
 			$bulan	= $this->escape($val['bulan']); 
@@ -1078,15 +1092,25 @@ $(function(){
 			$bulan1 = $array_bulan[$this->escape($val['bulan'])];
 			$nama_program	= $this->escape($val['nama_program']);
 			$anggaran	= $this->escape($val['anggaran']);
+			$anggaran= explode('.', $anggaran);
 			
 			$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
 			echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
 						
-						?>
+			?>
 			<tr class="barisPusat">
-				<td class="clleft"><? echo $nama_program;?></td>
-				<td class="clleft"><? echo $anggaran;?></td>
-			<?php endforeach ?>
+				<input name="inputPusat[]" value="<? echo $i?>" type="hidden">
+				<input name="idx_program_<? echo $i?>" value="<? echo $idx_program?>" type="hidden">
+				<input name="kode_pusat_<? echo $i?>" value="3" id="kode_pusat" type="hidden">
+				
+				<td class="clleft"><input name="nama_program_pusat_<? echo $i?>" id="nama_program_pusat" type="text" value="<? echo $nama_program;?>"></td></td>
+				<td class="clleft"><input name="anggaran_pusat_<? echo $i?>" id="anggaran_pusat" value="<? echo $anggaran[0];?>" type="text"onkeypress="javascript:return isNumber(event)"></td>
+				<td><input type="button" id="hapusPusat" value="Hapus"></td>
+			<?php $i++;
+			endforeach ; 
+			}else{
+				echo "<td colspan='3' style='text-align:center; background-color: red; color: white;'>Belum ada data</td>";
+			};?>
 			</tr>
 			</table>
 			</div>
@@ -1114,7 +1138,46 @@ $(function(){
 				<td>Aksi</td>
 			</tr>
 			<tbody id="kontenProvinsi"></tbody>
+			<?php 
+				$i=$key+1;	
+			$jumPusat=count($this->detailProgramProvinsi );
 			
+			if($jumPusat>0){
+			
+			foreach ($this->detailProgramProvinsi as $key => $val): 
+							
+							
+			$idx_program	= $this->escape($val['idx_program']);						
+			$kd_kel	= $this->escape($val['kd_kel']);						
+			$tahun	= $this->escape($val['tahun']); 
+			$bulan	= $this->escape($val['bulan']); 
+			
+			//Array Bulan 
+			$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
+			$bulan1 = $array_bulan[$this->escape($val['bulan'])];
+			$nama_program	= $this->escape($val['nama_program']);
+			$anggaran	= $this->escape($val['anggaran']);
+			$anggaran= explode('.', $anggaran);
+			
+			$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+			echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
+						
+						?>
+			<tr class="barisProvinsi">
+				<input name="inputProvinsi[]" value="<? echo $i?>" type="hidden">
+				<input name="idx_program_<? echo $i?>" value="<? echo $idx_program?>" type="hidden">
+				<input name="kode_provinsi_<? echo $i?>" value="3" id="kode_provinsi_" type="hidden">
+				
+				<td class="clleft"><input name="nama_program_provinsi_<? echo $i?>" id="nama_program_provinsi" type="text" value="<? echo $nama_program;?>"></td></td>
+				<td class="clleft"><input name="anggaran_provinsi_<? echo $i?>" id="anggaran_provinsi" value="<? echo $anggaran[0];?>" type="text" onkeypress="javascript:return isNumber(event)"></td>
+				<td><input type="button" id="hapusProvinsi" value="Hapus"></td>
+			<?php 
+			$i++;
+			endforeach ;
+			}else{
+				echo "<td colspan='3' style='text-align:center; background-color: red; color: white;'>Belum ada data</td>";
+			};?>
+			</tr>
 			</table>
 			</div>
 	
@@ -1141,7 +1204,44 @@ $(function(){
 				<td>&nbsp;</td>
 			</tr>
 			<tbody id="kontenKota"></tbody>
+			<?php 
+			$i=$key+1;	
+			$jumPusat=count($this->detailProgramKota );
+			if($jumPusat>0){
+			foreach ($this->detailProgramKota as $key => $val): 
+							
+							
+			$idx_program	= $this->escape($val['idx_program']);						
+			$kd_kel	= $this->escape($val['kd_kel']);						
+			$tahun	= $this->escape($val['tahun']); 
+			$bulan	= $this->escape($val['bulan']); 
 			
+			//Array Bulan 
+			$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
+			$bulan1 = $array_bulan[$this->escape($val['bulan'])];
+			$nama_program	= $this->escape($val['nama_program']);
+			$anggaran	= $this->escape($val['anggaran']);
+			$anggaran= explode('.', $anggaran);
+			
+			$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
+			echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
+						
+						?>
+			<tr class="barisKota">
+				<input name="inputKota[]" value="<? echo $i?>" type="hidden">
+				<input name="idx_program_<? echo $i?>" value="<? echo $idx_program?>" type="hidden">
+				<input name="kode_kota_<? echo $i?>" value="3" id="kode_kota_" type="hidden">
+				
+				<td class="clleft"><input name="nama_program_kota_<? echo $i?>" id="nama_program_kota" type="text" value="<? echo $nama_program;?>"></td></td>
+				<td class="clleft"><input name="anggaran_kota_<? echo $i?>" id="anggaran_kota" value="<? echo $anggaran[0];?>" type="text"onkeypress="javascript:return isNumber(event)"></td>
+				<td><input type="button" id="hapusKota" value="Hapus"></td>
+			<?php 
+			$i++;
+			endforeach ;
+			}else{
+				echo "<td colspan='3' style='text-align:center; background-color: red; color: white;'>Belum ada data</td>";
+			};?>
+			</tr>
 			
 			</table>
 			</div>
@@ -1680,7 +1780,7 @@ $(function(){
                          + '<input name="nomorPusat[]" value="'+ nomor +'" type="hidden">'
                          + '<input name="kode_pusat_'+ nomor +'" value="1" id="kode_pusat" type="hidden">'
                          + '<td><input name="nama_program_pusat_'+ nomor +'" id="nama_program_pusat" type="text"></td>'
-                         + '<td><input name="anggaran_pusat_'+ nomor +'" id="anggaran_pusat" type="text"></td>'
+                         + '<td><input name="anggaran_pusat_'+ nomor +'" id="anggaran_pusat" type="text" onkeypress="isNumber(event)"></td>'
                          + '<td><input type="button" id="hapusPusat" value="Hapus"></td></tr>'
                     );
                 });
@@ -1717,7 +1817,7 @@ $(function(){
                          + '<input name="nomorProvinsi[]" value="'+ nomor +'" type="hidden">'
                          + '<input name="kode_provinsi_'+ nomor +'" value="2" id="kode_provinsi" type="hidden">'
                          + '<td><input name="nama_program_provinsi_'+ nomor +'" id="nama_program_provinsi" type="text"></td>'
-                         + '<td><input name="anggaran_provinsi_'+ nomor +'" id="anggaran_provinsi" type="text"></td>'
+                         + '<td><input name="anggaran_provinsi_'+ nomor +'" id="anggaran_provinsi" type="text" onkeypress="isNumber(event)"></td>'
                          + '<td><input type="button" id="hapusProvinsi" value="Hapus"></td></tr>'
                     );
                 });
@@ -1754,7 +1854,7 @@ $(function(){
                          + '<input name="nomorKota[]" value="'+ nomor +'" type="hidden">'
                          + '<input name="kode_kota_'+ nomor +'" value="3" id="kode_kota_" type="hidden">'
                          + '<td><input name="nama_program_kota_'+ nomor +'" id="nama_program_kota" type="text"></td>'
-                         + '<td><input name="anggaran_kota_'+ nomor +'" id="anggaranKota" type="text"></td>'
+                         + '<td><input name="anggaran_kota_'+ nomor +'" id="anggaranKota" type="text" onkeypress="isNumber(event)"></td>'
                          + '<td><input type="button" id="hapusKota" value="Hapus"></td></tr>'
                     );
                 });
@@ -1788,21 +1888,21 @@ $(function(){
 //urusan wajib
 $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wajib_bidang"); //Fields wrapper
-    var add_button      = $(".add_field_wajib_bidang"); //Add button ID
+    var wrapper         = $(".input_fields_bidang_urusan_wajib"); //Fields wrapper
+    var add_button      = $(".add_field_bidang_urusan_wajib"); //Add button ID
     
     var x = 1; //initlal text box count
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div class="BidangUrusanWajib"><input type="text" id="bidang_urusan_wajib" name="bidang_urusan_wajib[]"/></div>'); //add input box
+            $(wrapper).append('<div class="BidangUrusanWajib"><input type="text" id="bidang_urusan_wajib" name="bidang_urusan_wajib[]"/><input type="button" id="hapusBidangUrusanWajib" value="Hapus"></div>'); //add input box
         }
     });
 	
-	$(wrapper).on("click","#hapusBidangUrusanWajib", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('.BidangUrusanWajib').remove(); x--;
-    })
+	 $("#hapusBidangUrusanWajib").live('click', function () {
+		$(this).parents(".BidangUrusanWajib").remove();
+     });
 	
 });
 </script>
@@ -1810,17 +1910,21 @@ $(document).ready(function() {
 <script>
 $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wajib_urusan"); //Fields wrapper
-    var add_button      = $(".add_field_wajib_urusan"); //Add button ID
+    var wrapper         = $(".input_fields_urusan_wajib"); //Fields wrapper
+    var add_button      = $(".add_field_urusan_wajib"); //Add button ID
     
     var x = 1; //initlal text box count
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div class="UrusanWajib"><input type="text" id="urusan_wajib" name="urusan_wajib[]"/></div>'); //add input box
+            $(wrapper).append('<div class="UrusanWajib"> <input type="text" id="urusan_wajib" name="urusan_wajib[]"/> <input type="button" id="hapusUrusanWajib" value="Hapus"></div>'); //add input box
         }
     });
+	
+	$("#hapusUrusanWajib").live('click', function () {
+		$(this).parents(".UrusanWajib").remove();
+     });
     
    
 });
@@ -1830,42 +1934,46 @@ $(document).ready(function() {
 //urusan pilihan
 $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_pilihan_bidang"); //Fields wrapper
-    var add_button      = $(".add_field_pilihan_bidang"); //Add button ID
+    var wrapper         = $(".input_fields_bidang_urusan_pilihan"); //Fields wrapper
+    var add_button      = $(".add_field_bidang_urusan_pilihan"); //Add button ID
     
     var x = 1; //initlal text box count
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div class="BidangUrusanPilihan"><input type="text" id="bidang_urusan_pilihan" name="bidang_urusan_pilihan[]"/></div>'); //add input box
+            $(wrapper).append('<div class="BidangUrusanPilihan"> <input type="text" id="bidang_urusan_pilihan" name="bidang_urusan_pilihan[]"/> <input type="button" id="hapusBidangUrusanPilihan" value="Hapus"></div>'); //add input box
         }
     });
+	
+	$("#hapusBidangUrusanPilihan").live('click', function () {
+		$(this).parents(".BidangUrusanPilihan").remove();
+     });
     
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
+   
 });
 </script>
 
 <script>
 $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_pilihan_urusan"); //Fields wrapper
-    var add_button      = $(".add_field_pilihan_urusan"); //Add button ID
+    var wrapper         = $(".input_fields_urusan_pilihan"); //Fields wrapper
+    var add_button      = $(".add_field_urusan_pilihan"); //Add button ID
     
     var x = 1; //initlal text box count
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div class="UrusanPilihan"><input type="text" id="urusan_pilihan" name="urusan_pilihan[]"/></div>'); //add input box
+            $(wrapper).append('<div class="UrusanPilihan"><input type="text" id="urusan_pilihan" name="urusan_pilihan[]"/> <input type="button" id="hapusUrusanPilihan" value="Hapus"></div>'); //add input box
         }
     });
+	
+	$("#hapusUrusanPilihan").live('click', function () {
+		$(this).parents(".UrusanPilihan").remove();
+     });
     
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
+   
 });
 </script>
 

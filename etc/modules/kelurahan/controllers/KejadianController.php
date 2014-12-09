@@ -142,6 +142,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$lokasi				= trim($_POST['lokasi']);
 		$kerugian			= $_POST['kerugian'];
 		$nominal			= $_POST['nominal'];
+		$tanggal_laporan	= $_POST['tanggal_laporan'];
 		$pelapor			= $_POST['pelapor'];
 		$keterangan			= trim($_POST['keterangan']);
 		// $lampiran			= $_POST['lampiran'];
@@ -172,6 +173,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 										"lokasi"		=> $lokasi,
 										"kerugian"		=> $kerugian,
 										"nominal"		=> $nominal,
+										"tanggal_laporan"	=> $tanggal_laporan,
 										"pelapor"		=> $pelapor,
 										"keterangan"	=> $keterangan,
 										"lampiran"		=> $file_name,
@@ -230,28 +232,68 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$lokasi				= trim($_POST['lokasi']);
 		$kerugian			= $_POST['kerugian'];
 		$nominal			= $_POST['nominal'];
+		$tanggal_laporan	= $_POST['tanggal_laporan'];
 		$pelapor			= $_POST['pelapor'];
 		$keterangan			= trim($_POST['keterangan']);
-	
-	
+		
+		
+		$allowed_ext    = array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'rar', 'zip','png','jpg','jpeg');
+		$file_name        = $_FILES['lampiran']['name'];
+		
+		$value = explode(".", $file_name);
+		$file_ext = strtolower(array_pop($value));
+		
+		$pecah        	=  explode('.', $file_name);
+		$nama_file        =  $pecah[0];
+		$file_size        = $_FILES['lampiran']['size'];
+		$file_tmp        = $_FILES['lampiran']['tmp_name'];
+		
+		if($_FILES['lampiran']['name']=='')
+		{
+			//No file selected
+			$dataMasukan	= array(
+								"idx_kejadian"	=> $idx_kejadian,
+								"kd_kel"		=> $kd_kel,
+								"hari"			=> $hari,
+								"tanggal"		=> $tanggal,
+								"uraian"		=> $uraian,
+								"waktu"			=> $waktu,
+								"lokasi"		=> $lokasi,
+								"kerugian"		=> $kerugian,
+								"nominal"		=> $nominal,
+								"tanggal_laporan"		=> $tanggal_laporan,
+								"pelapor"		=> $pelapor,
+								"keterangan"	=> $keterangan,
+								"bulan"			=> $bulan,
+								"tahun"			=> $tahun
 
-		$dataMasukan	= array(
-						"idx_kejadian"	=> $idx_kejadian,
-						"kd_kel"		=> $kd_kel,
-						"hari"			=> $hari,
-						"tanggal"		=> $tanggal,
-						"uraian"		=> $uraian,
-						"waktu"			=> $waktu,
-						"lokasi"		=> $lokasi,
-						"kerugian"		=> $kerugian,
-						"nominal"		=> $nominal,
-						"pelapor"		=> $pelapor,
-						"keterangan"	=> $keterangan,
-						"bulan"			=> $bulan,
-						"tahun"			=> $tahun
+							);
+		}else{
 
-				);
-								
+			$path = '../www/upload/'.$nama_file.'.'.$file_ext;
+				move_uploaded_file($file_tmp, $path);
+				$lokasi2='/upload/'.$nama_file.'.'.$file_ext;		
+				
+			
+				$dataMasukan	= array(
+										"idx_kejadian"	=> $idx_kejadian,
+										"kd_kel"		=> $kd_kel,
+										"hari"			=> $hari,
+										"tanggal"		=> $tanggal,
+										"uraian"		=> $uraian,
+										"waktu"			=> $waktu,
+										"lokasi"		=> $lokasi,
+										"kerugian"		=> $kerugian,
+										"nominal"		=> $nominal,
+										"tanggal_laporan"		=> $tanggal_laporan,
+										"pelapor"		=> $pelapor,
+										"keterangan"	=> $keterangan,
+										"lampiran"		=> $file_name,
+										"bulan"			=> $bulan,
+										"tahun"			=> $tahun,
+										"file_lampiran"	=> $lokasi2
+								);
+			}					
 		$this->view->kejadianUpdate = $this->kejadian_serv->kejadianUpdate($dataMasukan);
 		
 		$this->view->kd_kel = $kd_kel	;

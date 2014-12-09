@@ -1,0 +1,13 @@
+;Hapus data kejadian user;04/12/2014 09:44:30; (23);
+;Hapus data kejadian user;04/12/2014 09:47:16; (24);
+; Ubah data ;04/12/2014 14:15:28;01 (melong_);
+Melong; Ubah data ;04/12/2014 14:21:14;01 (melong_);
+; Ubah data ;04/12/2014 15:23:10;01 (melong_);
+; Ubah data ;04/12/2014 15:53:43;01 (melong_);
+; Ubah data ;04/12/2014 15:54:02;01 (melong_);
+; Ubah data ;04/12/2014 15:54:19;01 (melong_);
+; Ubah data ;04/12/2014 15:54:46;01 (melong_);
+; Ubah data ;04/12/2014 15:56:30;01 (melong_);
+; Ubah data ;04/12/2014 15:56:58;01 (melong_);
+; Ubah data ;04/12/2014 15:59:22;01 (melong_);
+; Ubah data ;04/12/2014 15:59:46;01 (melong_);

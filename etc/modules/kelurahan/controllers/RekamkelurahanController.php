@@ -202,11 +202,13 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		//var_dump($this->view->tipologi );
 		$this->view->detailPersonil = $this->rekamkelurahan_serv->detailPersonil($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKewenangan = $this->rekamkelurahan_serv->detailKewenangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		$this->view->detailProgram = $this->rekamkelurahan_serv->detailProgram($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgramPusat = $this->rekamkelurahan_serv->detailProgramPusat($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgramProvinsi = $this->rekamkelurahan_serv->detailProgramProvinsi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgramKota = $this->rekamkelurahan_serv->detailProgramKota($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKeuangan = $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKelembagaan = $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailTrantib = $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		// var_dump($this->view->detailProgram);
+		//var_dump($this->view->detailProgramPusat);
 		// var_dump($this->view->kd_kel);
 		// var_dump($this->view->bulan);
 		// var_dump($this->view->tahun);
@@ -753,8 +755,10 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					$nama_program = $_POST['nama_program_pusat_'.$i];
 					$anggaran = $_POST['anggaran_pusat_'.$i];
 					$kode = $_POST['kode_pusat_'.$i];
+					$idx_program = $_POST['idx_program_'.$i];
 					
 					$datamasukanprogramkelurahan = array(
+						"idx_program" 			=> $idx_program,
 						"tahun" 			=> $tahun,
 						"bulan"				=> $bulan,
 						"kd_kel"	       	=> $kd_kel,
@@ -763,7 +767,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 						"anggaran"			=> $anggaran
 					);
 					
-				// var_dump($datamasukanprogramkelurahan);
+				//var_dump($datamasukanprogramkelurahan);
 				$this->view->programkelurahanUpdate = $this->rekamkelurahan_serv->programkelurahanUpdate($datamasukanprogramkelurahan);
 				// var_dump($this->view->programkelurahanInsert);
 				}
@@ -781,8 +785,10 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					$nama_program = $_POST['nama_program_provinsi_'.$i];
 					$anggaran = $_POST['anggaran_provinsi_'.$i];
 					$kode = $_POST['kode_provinsi_'.$i];
+					$idx_program = $_POST['idx_program_'.$i];
 					
 					$datamasukanprogramkelurahan = array(
+						"idx_program" 			=> $idx_program,
 						"tahun" 			=> $tahun,
 						"bulan"				=> $bulan,
 						"kd_kel"	       	=> $kd_kel,
@@ -808,8 +814,98 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					$nama_program = $_POST['nama_program_kota_'.$i];
 					$anggaran = $_POST['anggaran_kota_'.$i];
 					$kode = $_POST['kode_kota_'.$i];
+					$idx_program = $_POST['idx_program_'.$i];
 					
 					$datamasukanprogramkelurahan = array(
+						"idx_program" 			=> $idx_program,
+						"tahun" 			=> $tahun,
+						"bulan"				=> $bulan,
+						"kd_kel"	       	=> $kd_kel,
+						"kode"	       		=> $kode,
+						"nama_program"	    => $nama_program,
+						"anggaran"			=> $anggaran
+					);
+				// var_dump($datamasukanprogramkelurahan);
+				$this->view->programkelurahanUpdate = $this->rekamkelurahan_serv->programkelurahanUpdate($datamasukanprogramkelurahan);
+				// var_dump($this->view->programkelurahanInsert);
+				}
+				
+			} 
+			
+			// PROGRAM KELURAHAN PUSAT
+			if($_POST['inputPusat']!="")
+			{
+				foreach($_POST['inputPusat'] as $i)
+				{
+					/*query insert ke database taruh disini
+					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
+					*/
+					$nama_program = $_POST['nama_program_pusat_'.$i];
+					$anggaran = $_POST['anggaran_pusat_'.$i];
+					$kode = $_POST['kode_pusat_'.$i];
+					$idx_program = $_POST['idx_program_'.$i];
+					
+					$datamasukanprogramkelurahan = array(
+						"idx_program" 			=> $idx_program,
+						"tahun" 			=> $tahun,
+						"bulan"				=> $bulan,
+						"kd_kel"	       	=> $kd_kel,
+						"kode"	       		=> $kode,
+						"nama_program"	    => $nama_program,
+						"anggaran"			=> $anggaran
+					);
+					
+				//var_dump($datamasukanprogramkelurahan);
+				$this->view->programkelurahanUpdate = $this->rekamkelurahan_serv->programkelurahanUpdate($datamasukanprogramkelurahan);
+				// var_dump($this->view->programkelurahanInsert);
+				}
+				
+			}// END PROGRAM KELURAHAN PUSAT
+			
+			//PROGRAM KELURAHAN PROVINSI
+			if($_POST['inputProvinsi']!="")
+			{
+				foreach($_POST['inputProvinsi'] as $i)
+				{
+					/*query insert ke database taruh disini
+					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
+					*/
+					$nama_program = $_POST['nama_program_provinsi_'.$i];
+					$anggaran = $_POST['anggaran_provinsi_'.$i];
+					$kode = $_POST['kode_provinsi_'.$i];
+					$idx_program = $_POST['idx_program_'.$i];
+					
+					$datamasukanprogramkelurahan = array(
+						"idx_program" 			=> $idx_program,
+						"tahun" 			=> $tahun,
+						"bulan"				=> $bulan,
+						"kd_kel"	       	=> $kd_kel,
+						"kode"	       		=> $kode,
+						"nama_program"	    => $nama_program,
+						"anggaran"			=> $anggaran
+					);
+				// var_dump($datamasukanprogramkelurahan);
+				$this->view->programkelurahanUpdate = $this->rekamkelurahan_serv->programkelurahanUpdate($datamasukanprogramkelurahan);
+				// var_dump($this->view->programkelurahanInsert);
+				}
+				
+			} // END PROGRAM KELURAHAN PROVINSI
+			
+			//PROGRAM KELURAHAN KOTA
+			if($_POST['inputKota']!="")
+			{
+				foreach($_POST['inputKota'] as $i)
+				{
+					/*query insert ke database taruh disini
+					mysql_query = "insert into tbl_barang (kd_brng,nm_brng,hrga) values('$_POST['kode_barang_'.$i]','$_POST['nama_barang_'.$i]','$_POST['harga_barang_'.$i]')";
+					*/
+					$nama_program = $_POST['nama_program_kota_'.$i];
+					$anggaran = $_POST['anggaran_kota_'.$i];
+					$kode = $_POST['kode_kota_'.$i];
+					$idx_program = $_POST['idx_program_'.$i];
+					
+					$datamasukanprogramkelurahan = array(
+						"idx_program" 			=> $idx_program,
 						"tahun" 			=> $tahun,
 						"bulan"				=> $bulan,
 						"kd_kel"	       	=> $kd_kel,

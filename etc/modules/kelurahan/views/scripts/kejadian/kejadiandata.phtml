@@ -14,6 +14,7 @@ $format_date = new format_date();
 $currentPage = $this->currentPage;
 $numToDisplay = $this->numToDisplay;
 ?>
+
 <div class="navlink">
 <a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
 >> Data Kelurahan
@@ -42,17 +43,17 @@ $numToDisplay = $this->numToDisplay;
 	$keterangan = $this->keterangan;
 	$pesan->show_message($proses, $this->kd_kel, "$status" ); 
 ?>
-			<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
-<input name="idx_kejadian" id="idx_kejadian" type="hidden" value="<?echo $this->detailKejadian['idx_kejadian'];?>" />
-<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
-	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
+	<table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
 	
+	<input name="idx_kejadian" id="idx_kejadian" type="hidden" value="<?echo $this->detailKejadian['idx_kejadian'];?>" />
+	<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
+	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
 				
-				<?php if($this->kd_kel !=00) {?>			
-				<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->kd_kel?>" />
-				<input name="kelurahan" id="kelurahan" type="hidden" value="<?echo $this->detailKejadian['kelurahan'] ;?>" readonly />
-				<?php }else {?>
-				<tr>
+		<?php if($this->kd_kel !=00) {?>			
+		<input name="kd_kel" id="kd_kel" type="hidden" value="<?echo $this->kd_kel?>" />
+		<input name="kelurahan" id="kelurahan" type="hidden" value="<?echo $this->detailKejadian['kelurahan'] ;?>" readonly />
+		<?php }else {?>
+			<tr>
 				    <td align="right" width="100">* Kelurahan :</td>
 					<td>	
 				<select name="kd_kel" id="kd_kel">
@@ -70,123 +71,146 @@ $numToDisplay = $this->numToDisplay;
 				</td>
 			</tr>
 
-				<tr>
-				    <td align="right" width="100">* Hari :</td>
-					<td>	
+			<tr>
+				<td align="right" width="100">* Hari :</td>
+				<td>	
+					<? 
+						$hariAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+						echo $ctrlFrm->formText("hari", $this->detailKejadian['hari'], $hariAttrib);
+					?>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right" width="100">* Tanggal :</td>
+				<td>	
+					<? 
+						$tanggalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+						echo $ctrlFrm->formText("tanggal", $this->detailKejadian['tanggal'], $tanggalAttrib);
+					?>
+			</td>
+			</tr>
+
+			<tr>
+				<td align="right" width="100">* Uraian :</td>
+				<td>
+					<textarea id="uraian" name="uraian" required><?php echo $this->detailKejadian['uraian']; ?></textarea>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right" width="100">* Waktu :</td>
+				<td>	
+					<input name="waktu" id="waktu" type="text" value="<?echo $this->detailKejadian['waktu'] ;?>"  placeholder="masukan jam kejadian. ex: 12:30" required />
+			</td>
+			</tr>
+			
+			<tr>
+				<td align="right" width="100">* Lokasi :</td>
+				<td>	
 						<? 
-							$hariAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-							echo $ctrlFrm->formText("hari", $this->detailKejadian['hari'], $hariAttrib);
+						$lokasiAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+						echo $ctrlFrm->formText("lokasi", $this->detailKejadian['lokasi'], $lokasiAttrib);
 						?>
 				</td>
-				</tr>
+			</tr>				
+			
+			</tr>
 
-				
-				
-				<tr>
-				    <td align="right" width="100">* Tanggal :</td>
-					<td>	
-						<? 
-							$tanggalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-							echo $ctrlFrm->formText("tanggal", $this->detailKejadian['tanggal'], $tanggalAttrib);
-						?>
-				</td>
-				</tr>
-
-				<tr>
-				    <td align="right" width="100">* Uraian :</td>
-					<td>
-						<textarea id="uraian" name="uraian" required><?php echo $this->detailKejadian['uraian']; ?></textarea>
+			<tr>
+				<td align="right" width="100">* Kerugian :</td>
+				<td>	
+					<? 
+					$kerugianAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+					echo $ctrlFrm->formText("kerugian", $this->detailKejadian['kerugian'], $kerugianAttrib);
+					?>
+			</td>
+			</tr>
+			
+			<tr>
+				<td align="right" width="100">* Nominal :</td>
+				<td>	
+					<? $nominal = explode('.',$this->detailKejadian['nominal']);
+						$nominalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+						echo $ctrlFrm->formText("nominal", $nominal[0], $nominalAttrib);
+					?>
+			</td>
+			</tr>
+			<tr>
+				<td align="right" width="100">* Tanggal Laporan :</td>
+				<td>	
+					<? 
+						$tanggal_laporanAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+						if(strtolower($this->jenisForm) == 'insert'){
+							echo $ctrlFrm->formText("tanggal_laporan", date('Y-m-d'), $tanggal_laporanAttrib);
+						}else{
+							echo $ctrlFrm->formText("tanggal_laporan", $this->detailKejadian['tanggal_laporan'], $tanggal_laporanAttrib);
 						
-					</td>
-				</tr>
-				
-				<tr>
-				    <td align="right" width="100">* Waktu :</td>
-					<td>	
-						<input name="waktu" id="waktu" type="text" value="<?echo $this->detailKejadian['waktu'] ;?>"  placeholder="masukan jam kejadian. ex: 12:30" required />
-				</td>
-				</tr>
-				
-				<tr>
-				    <td align="right" width="100">* Lokasi :</td>
-					<td>	
-							<? 
-							$lokasiAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-							echo $ctrlFrm->formText("lokasi", $this->detailKejadian['lokasi'], $lokasiAttrib);
-							?>
-					</td>
-				</tr>				
-				
-				</tr>
+						}
+					?>
+			</td>
+			<tr>
+				<td align="right" width="100">* Pelapor :</td>
+				<td>	
+					<? 
+						$pelaporAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+						echo $ctrlFrm->formText("pelapor", $this->detailKejadian['pelapor'], $pelaporAttrib);
+					?>
+			</td>
+			</tr>
 
-				<tr>
-				    <td align="right" width="100">* Kerugian :</td>
-					<td>	
-						<? 
-						$kerugianAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-						echo $ctrlFrm->formText("kerugian", $this->detailKejadian['kerugian'], $kerugianAttrib);
-						?>
-				</td>
-				</tr>
-				
-				<tr>
-				    <td align="right" width="100">* Nominal :</td>
-					<td>	
-						<? $nominal = explode('.',$this->detailKejadian['nominal']);
-							$nominalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
-							echo $ctrlFrm->formText("nominal", $nominal[0], $nominalAttrib);
-						?>
-				</td>
-				</tr>
-				
-				<tr>
-				    <td align="right" width="100">* Pelapor :</td>
-					<td>	
-						<? 
-							$pelaporAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-							echo $ctrlFrm->formText("pelapor", $this->detailKejadian['pelapor'], $pelaporAttrib);
-						?>
-				</td>
-				</tr>
+			<tr>
+				<td align="right" width="100">* Keterangan :</td>
+				<td>	
+					<textarea id="keterangan" name="keterangan"><?php echo $this->detailKejadian['keterangan']; ?></textarea>
+			</td>
+			</tr>
 
-				<tr>
-				    <td align="right" width="100">* Keterangan :</td>
-					<td>	
-						<textarea id="keterangan" name="keterangan"><?php echo $this->detailKejadian['keterangan']; ?></textarea>
-				</td>
-				</tr>
-
-				<tr>
-				    <td align="right" width="100">* Lampiran :</td>					
-					</td>	
-					<?php if (strtolower($this->jenisForm) == 'update') { ?>
-							<td> <img src="<?php echo $this->detailKejadian['file_lampiran']; ?>" width="150px" height="150px"/>	
-						</td>
-					<?php } ?>
-					<?php if (strtolower($this->jenisForm) == 'insert') { ?>
-					 <td>
-						<input type="file" name="lampiran" id="lampiran" onChange="setvalueuplfile(this.value,'lampiran','doc')" required />
-					 </td>
+			<tr>
+				<td align="right" width="100">* Lampiran :</td>					
+				</td>	
+				<?php if (strtolower($this->jenisForm) == 'update') { ?>
+					<td> 
+					<input type="file" name="lampiran" id="lampiran" onChange="setvalueuplfile(this.value,'lampiran','doc')" required /> 
 					 <div class="fakefile">
 						<input type="hidden" size="41" name="a_file" id="a_file" value="<? $this->detailKejadian['file_lampiran']?>"/>
 					</div>
-					 	<?php } ?>
-				</tr>
-	<tr>  
-		<td>&nbsp;</td>
-		<td width="500px;">&nbsp;</td>
-		<td>
-			
-				<input type="button" value="Batal" onclick="kejadianlist()"> 
-				<input type="reset" value="Ulangi"> 
-				<input type="submit" value="Simpan">
-		</td>
-	</tr>
-	<tr>
-		<td>* Harus Diisi</td>
-		<td></td>
-	</tr>
-</table>
+					
+						<div id='wrap-1'>
+							<input type="button" class='buttontest' value="delete">
+						<a href="<?php echo $this->detailKejadian['file_lampiran']; ?>">
+						 <img src="<?php echo $this->detailKejadian['file_lampiran']; ?>" border="0" width="900" height="300" alt="image1" target="nowa_strona" class="logotest">
+						</a>
+
+						</div>	
+					</td>
+					
+				<?php } ?>
+				<?php if (strtolower($this->jenisForm) == 'insert') { ?>
+				 <td>
+					<input type="file" name="lampiran" id="lampiran" onChange="setvalueuplfile(this.value,'lampiran','doc')" required />
+				 </td>
+				 <div class="fakefile">
+					<input type="hidden" size="41" name="a_file" id="a_file" value="<? $this->detailKejadian['file_lampiran']?>"/>
+				</div>
+					<?php } ?>
+			</tr>
+			<tr>  
+				<td>&nbsp;</td>
+				<td width="500px;">&nbsp;</td>
+				<td>
+					
+						<input type="button" value="Batal" onclick="kejadianlist()"> 
+						<input type="reset" value="Ulangi"> 
+						<input type="submit" value="Simpan">
+				</td>
+			</tr>
+			<tr>
+				<td>* Harus Diisi</td>
+				<td></td>
+			</tr>
+	</table>
 </form>
 	</div>
 </div>
@@ -203,27 +227,32 @@ $numToDisplay = $this->numToDisplay;
 			changeMonth: true,
 			changeYear: true
 		});
+		
+		$("#tanggal_laporan").datepicker({
+			dateFormat: 'yy-mm-dd',
+			changeMonth: true,
+			changeYear: true
+		});
 		 
 	});
-</script>
-
-<script>
-
-
-
-function showDialog(val,jum) {      
-    $( "#dialog-browse" ).dialog({
-      autoOpen: false,
-      height: 380,
-      width: 640,
-      modal: true,
-      resizable:false,
-      title: "Data"
+	
+	
+	$(document).ready(function () {
+    $('.buttontest').click(function () {
+        $(this).parent().find('img.logotest').hide('slow');
     });
-    if(val =='dosen'){dosenlist(jum);}  
-    if(val =='prodi'){prodilist();}  
-    return false;
-  }
-
+});
 </script>
+
+<style>
+	img.logotest {
+    width: 75%;
+    height: 75%;
+    display: block;
+}
+.buttontest {
+}
+</style>
+
+
 

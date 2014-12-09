@@ -49,7 +49,7 @@ $numToDisplay = $this->numToDisplay;
 				
 				
 				<tr>
-				    <td align="right" width="180">* Kode Wilayah :</td>
+				    <td align="right" width="275">* Kode Wilayah :</td>
 					<td>	
 						<? 
 							$kode_wilayahAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
@@ -95,10 +95,10 @@ $numToDisplay = $this->numToDisplay;
 				<tr>
 				    <td align="right" width="180">* Nomor Kode Pos :</td>
 					<td>	
-	<? 
-	$t_beratAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
-	echo $ctrlFrm->formText("kode_pos", $this->detailPendaftaran['kode_pos'], $t_beratAttrib);
-	?>
+							<? 
+							$kode_posAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
+							echo $ctrlFrm->formText("kode_pos", $this->detailPendaftaran['kode_pos'], $kode_posAttrib);
+							?>
 				</td>
 				</tr>
 				
@@ -110,8 +110,8 @@ $numToDisplay = $this->numToDisplay;
 				    <td align="right" width="180">* Kecamatan :</td>
 					<td>	
 						<? 
-						$t_tinggiAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","readonly"=>"readonly");
-						echo $ctrlFrm->formText("kecamatan", $this->detailPendaftaran['kecamatan'], $t_tinggiAttrib);
+						$kecamatanAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","readonly"=>"readonly");
+						echo $ctrlFrm->formText("kecamatan", $this->detailPendaftaran['kecamatan'], $kecamatanAttrib);
 						?>
 				</td>
 				</tr>
@@ -202,7 +202,7 @@ $numToDisplay = $this->numToDisplay;
 		<td align="center">
 			<? 
 				$jarak_dari_kecamatan =  explode('.',$this->detailPendaftaran['jarak_dari_kecamatan']);
-				$jarak_dari_kecamatanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
+				$jarak_dari_kecamatanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jarak_dari_kecamatan", $jarak_dari_kecamatan[0], $jarak_dari_kecamatanAttrib);
 			?> km
 		</td>
@@ -213,7 +213,7 @@ $numToDisplay = $this->numToDisplay;
 		<td align="center">
 			<? 
 				$jarak_dari_kota =  explode('.',$this->detailPendaftaran['jarak_dari_kota']);
-				$jarak_dari_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
+				$jarak_dari_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jarak_dari_kota", $jarak_dari_kota[0], $jarak_dari_kotaAttrib);
 			?>  km
 		</td>
@@ -223,7 +223,7 @@ $numToDisplay = $this->numToDisplay;
 		<td align="center">
 			<? 
 				$jarak_dari_ibukota_kota =  explode('.',$this->detailPendaftaran['jarak_dari_ibukota_kota']);
-				$jarak_dari_ibukota_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
+				$jarak_dari_ibukota_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jarak_dari_ibukota_kota", $jarak_dari_ibukota_kota[0], $jarak_dari_ibukota_kotaAttrib);
 			?>  km
 		</td>
@@ -233,7 +233,7 @@ $numToDisplay = $this->numToDisplay;
 		<td align="center">
 			<? 
 				$jarak_dari_ibukota_prov =  explode('.',$this->detailPendaftaran['jarak_dari_ibukota_prov']);
-				$jarak_dari_ibukota_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
+				$jarak_dari_ibukota_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("jarak_dari_ibukota_prov", $jarak_dari_ibukota_prov[0], $jarak_dari_ibukota_provAttrib);
 			?>  km
 		</td>
@@ -241,8 +241,8 @@ $numToDisplay = $this->numToDisplay;
 	<!--End KELURAHAN-->
 	<tr>  
 		<td>&nbsp;</td>
-		<td width="500px;">&nbsp;</td>
-		<td>
+		<td width="400px;">&nbsp;</td>
+		<td colspan="2">
 			
 				<input type="button" value="Batal" onclick="pendaftaranlist()"> 
 				<input type="reset" value="Ulangi"> 

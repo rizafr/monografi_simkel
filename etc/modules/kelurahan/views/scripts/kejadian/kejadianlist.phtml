@@ -53,6 +53,8 @@ $pesan->show_message($proses, $this->kelurahan , "$status" );
 				<th >Waktu</th> 
 				<th >Lokasi</th> 
 				<th >Kerugian</th> 
+				<th >Pelapor</th> 
+				<th >Tanggal Laporan</th> 
 				<th> Kelurahan</th>
 				
 				<th colspan="2" class="nosort">FUNGSI</th>
@@ -90,6 +92,8 @@ $pesan->show_message($proses, $this->kelurahan , "$status" );
 						// $nominal = number_format($nominal[0], 0, ',', '.');
 
 						$pelapor	= $this->escape($val['pelapor']);
+						$tanggal_laporan	= $this->escape($val['tanggal_laporan']);
+						$tanggal_laporan= date('d M Y', strtotime($tanggal_laporan));
 						$keterangan	= $this->escape($val['keterangan']);
 						$lampiran	= $this->escape($val['lampiran']);
 					
@@ -103,6 +107,8 @@ $pesan->show_message($proses, $this->kelurahan , "$status" );
 					<td align="center"><? echo $waktu;?></td>
 					<td align="center"><? echo $lokasi;?></td>
 					<td align="center"><? echo $kerugian;?></td>
+					<td align="center"><? echo $pelapor;?></td>
+					<td align="center"><? echo $tanggal_laporan;?></td>
 					<td align="center"><? echo $kelurahan;?></td>
 
 
