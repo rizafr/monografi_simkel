@@ -14,6 +14,9 @@ $format_date = new format_date();
 
 $currentPage = $this->currentPage;
 $numToDisplay = $this->numToDisplay;
+
+//konvert ke bulan indonesia
+	$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
 ?>
 <div class="navlink">
 <a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
@@ -42,7 +45,7 @@ $numToDisplay = $this->numToDisplay;
 <? 
 $status = $this->hasil;
 $proses = $this->proses;
-$pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this->bulan ." tahun ".$this->tahun, "$status" ); 
+$pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$array_bulan[$this->bulan]." tahun ".$this->tahun, "$status" ); 
 ?>
 
 <table width="100%" border="0" cellpadding="0" cellspacing="1" class="std">
@@ -55,7 +58,7 @@ $pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this-
 				<th >Tahun</th> 
 				<th >Nama Lurah</th> 
 				<th >NIP Lurah</th>
-				<th colspan="2" class="nosort">Cetak</th>
+				<th  class="nosort">Cetak</th>
 				<th colspan="2" class="nosort">FUNGSI</th>
 				
 				<?
@@ -76,7 +79,7 @@ $pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this-
 						$bulan	= $this->escape($val['bulan']); 
 						
 						//Array Bulan 
-						$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
+					
 						$bulan1 = $array_bulan[$this->escape($val['bulan'])];
 						$nama_lurah	= $this->escape($val['nama_lurah']);
 						$nip_lurah	= $this->escape($val['nip_lurah']);
@@ -94,9 +97,9 @@ $pesan->show_message($proses, $this->detailKelurahan->kelurahan." bulan ".$this-
 						
 
 
-<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="buku" title= "cetak buku <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
-<td><div onClick="rekamkelurahanForm('update','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="edit1" title="Ubah Data"></div></td>
-<td><div onClick="rekamkelurahanHapus('<? echo $kd_kel;?>','<? echo $this->detailKelurahan->kelurahan ;?>','<? echo $tahun;?>','<? echo $bulan;?>');" class="delete" title="Hapus Data"></div>
+<td align="center" width="10px"><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandatacetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="buku" title= "cetak buku <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
+<td align="center" width="10px"><div onClick="rekamkelurahanForm('update','<? echo $kd_kel;?>','<? echo $bulan;?>','<? echo $tahun;?>');" class="edit1" title="Ubah Data"></div></td>
+<td align="center" width="10px"><div onClick="rekamkelurahanHapus('<? echo $kd_kel;?>','<? echo $this->detailKelurahan->kelurahan ;?>','<? echo $tahun;?>','<? echo $bulan;?>');" class="delete" title="Hapus Data"></div>
 						</td>
 						
 					
@@ -182,7 +185,7 @@ sorter.init("sorter",0);
 		</h2>
 			<br />
 				<select name="bulan" id="bulan" class="autowidth">
-					<option selected="selected">Bulan</option>
+					<option selected="selected" value="0">Bulan</option>
 					<?php
 					
 					$bulan_ind=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
@@ -195,7 +198,7 @@ sorter.init("sorter",0);
 					?>
 					</select>
 					<select name="tahun" id="tahun"  class="autowidth">
-					<option selected="selected">Tahun</option>
+					<option selected="selected" value="0">Tahun</option>
 					<?php
 					for($i=date('Y'); $i>=2010; $i-=1){
 						

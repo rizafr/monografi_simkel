@@ -23,7 +23,7 @@ class Sso_User_Service {
 	   $db = $registry->get('db');
 	   try {
 		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
-         $rabkaklist = $db->fetchAll("SELECT * FROM [SIMKEL].[dbo].[user] where user_id = '$userid' and password=md5('$paswd')");	
+         $rabkaklist = $db->fetchAll("SELECT u.*,k.* FROM [SIMKEL].[dbo].[user] u, [SIMKEL].[dbo].[m_kelurahan] k where u.kd_kel=k.kd_kel and u.user_id = '$userid' and u.password=md5('$paswd')");	
 	     return $rabkaklist;
 	   } catch (Exception $e) {
          echo $e->getMessage().'<br>';
@@ -37,8 +37,8 @@ class Sso_User_Service {
 		 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 		// $username = md5($username);
 		 $ktsandi = md5($paswd);
-		 $sql = "SELECT * FROM [SIMKEL].[dbo].[user] U
-					where U.user_id ='$username' and U.password ='$ktsandi'  ";
+		 $sql = "SELECT u.*,k.* FROM [SIMKEL].[dbo].[user] u, [SIMKEL].[dbo].[m_kelurahan] k where u.kd_kel=k.kd_kel 
+					and u.user_id ='$username' and u.password ='$ktsandi'  ";
 		// echo $sql;
 		 $hasil = $db->fetchRow($sql);
 		 return $hasil;

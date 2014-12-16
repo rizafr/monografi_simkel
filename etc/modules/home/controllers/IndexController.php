@@ -96,17 +96,20 @@ class Home_IndexController extends Zend_Controller_Action {
 						$user_id			= $hasiluser->user_id;	
 						$group_id		= $hasiluser->group_id;	
 						$nama			= $hasiluser->nama;	
+						$kelurahan			= $hasiluser->kelurahan;	
 
 						$ssogroup->username		= $hasiluser->user_id;	
 						$ssogroup->user_id		= $hasiluser->user_id;	
 						$ssogroup->group_id		= $hasiluser->group_id;	
 						$ssogroup->nama			= $hasiluser->nama;	
 						$ssogroup->kd_kel			= $hasiluser->kd_kel;	
+						$ssogroup->kelurahan			= $hasiluser->kelurahan;	
 						
 						$this->view->username	= $ssogroup->user_id;
 						$this->view->user_id	= $ssogroup->user_id;
 						$this->view->group_id	= $ssogroup->group_id;
 						$this->view->nama		= $ssogroup->nama;
+						$this->view->kelurahan		= $ssogroup->kelurahan;
 
 						if (!$user_id){$user_id =$this->user_id;$group_id =$this->group_id;}
 
@@ -121,6 +124,7 @@ class Home_IndexController extends Zend_Controller_Action {
 							$this->runningtextAction();
 							$this->view->nama = $ssogroup->nama;
 							$this->view->kd_kel = $ssogroup->kd_kel;
+							$this->view->kelurahan = $ssogroup->kelurahan;
 							//$this->view->n_group = $this->adm_serv->getnamaGroup($group_id);
 						
 					}

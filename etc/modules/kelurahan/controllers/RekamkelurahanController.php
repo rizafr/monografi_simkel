@@ -72,7 +72,9 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$this->view->detailKewenangan = $this->rekamkelurahan_serv->detailKewenangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKeuangan = $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKelembagaan = $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		$this->view->detailProgram = $this->rekamkelurahan_serv->detailProgram($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgramPusat = $this->rekamkelurahan_serv->detailProgramPusat($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgramProvinsi = $this->rekamkelurahan_serv->detailProgramProvinsi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgramKota = $this->rekamkelurahan_serv->detailProgramKota($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailTrantib = $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->render('rekamkelurahancetak');
 	}
@@ -109,7 +111,9 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		//var_dump($this->view->tipologi );
 		$this->view->detailPersonil = $this->rekamkelurahan_serv->detailPersonil($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKewenangan = $this->rekamkelurahan_serv->detailKewenangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
-		$this->view->detailProgram = $this->rekamkelurahan_serv->detailProgram($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgramPusat = $this->rekamkelurahan_serv->detailProgramPusat($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgramProvinsi = $this->rekamkelurahan_serv->detailProgramProvinsi($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
+		$this->view->detailProgramKota = $this->rekamkelurahan_serv->detailProgramKota($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKeuangan = $this->rekamkelurahan_serv->detailKeuangan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailKelembagaan = $this->rekamkelurahan_serv->detailKelembagaan($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
 		$this->view->detailTrantib = $this->rekamkelurahan_serv->detailTrantib($this->view->kd_kel, $this->view->bulan, $this->view->tahun);
@@ -236,8 +240,9 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$tipologi					= $_POST['tipologi'];
 
 		if(isset($_POST['simpan'])){
+			if(isset($_POST['tipologi'])&&!empty($_POST['tipologi'])){
 			$tipologi =  implode(",",$tipologi);
-		//echo $tipologi;
+			}
 		}
 		
 		$jml_jiwa					= $_POST['jml_jiwa'];
@@ -651,8 +656,9 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$tipologi					= $_POST['tipologi'];
 		
 		if(isset($_POST['simpan'])){
-		$tipologi =  implode(",",$tipologi);
-		//echo $tipologi;
+			if(isset($_POST['tipologi'])&&!empty($_POST['tipologi'])){
+				$tipologi =  implode(",",$tipologi);
+				}
 		}
 		
 		$jml_jiwa					= $_POST['jml_jiwa'];

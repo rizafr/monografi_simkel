@@ -112,10 +112,11 @@ $numToDisplay = $this->numToDisplay;
 						<? }
 						$kd_kel	= $this->escape($data->kd_kel);						
 						$tahun	= $this->escape($data->tahun); 
+						$bulan	= $this->escape($data->bulan); 
 						
 						//Array Bulan 
 						$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
-						$bulan = $array_bulan[$this->escape($data->bulan)];
+						//$bulan = $array_bulan[$this->escape($data->bulan)];
 						$kelurahan	= $this->escape($data->kelurahan);
 						
 						
@@ -129,8 +130,8 @@ $numToDisplay = $this->numToDisplay;
 						<td align="center"><? echo $bulan;?></td>
 						<td align="center"><? echo $tahun;?></td>
 
-			<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandatacetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="papan" title= "cetak papan <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
-			<td><a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahancetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="buku" title= "cetak buku <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
+			<td align="center" width="10px"> <a  href="<?php echo $this->basePath; ?>/kelurahan/rekamkelurahan/rekamkelurahandatacetak?kd_kel=<?echo $kd_kel;?>&bulan=<?echo $bulan;?>&tahun=<?echo $tahun;?>"><div class="buku" title= "cetak buku <?php echo $this->detailKelurahan->kelurahan?>"></div></a> </td>
+			
 
 					
 						</tr>

@@ -142,9 +142,9 @@ $numToDisplay = $this->numToDisplay;
 		<td>	
 				<? 
 				$luas =  explode('.',$this->detailPendaftaran['luas']);
-				$luasAttrib = array("size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true");
+				$luasAttrib = array("size" => 50,"maxlength" => 50, "required"=>"required","placeholder"=>"contoh : 127,045 ","onkeydown"=>"formatAngka(this, '.')");
 				echo $ctrlFrm->formText("luas", $luas[0], $luasAttrib);
-				?> km
+				?> km&sup2;
 		</td>
 	</tr>
 	
@@ -213,7 +213,7 @@ $numToDisplay = $this->numToDisplay;
 		<td align="center">
 			<? 
 				$jarak_dari_kota =  explode('.',$this->detailPendaftaran['jarak_dari_kota']);
-				$jarak_dari_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
+				$jarak_dari_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required");
 				echo $ctrlFrm->formText("jarak_dari_kota", $jarak_dari_kota[0], $jarak_dari_kotaAttrib);
 			?>  km
 		</td>
@@ -223,7 +223,7 @@ $numToDisplay = $this->numToDisplay;
 		<td align="center">
 			<? 
 				$jarak_dari_ibukota_kota =  explode('.',$this->detailPendaftaran['jarak_dari_ibukota_kota']);
-				$jarak_dari_ibukota_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
+				$jarak_dari_ibukota_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required");
 				echo $ctrlFrm->formText("jarak_dari_ibukota_kota", $jarak_dari_ibukota_kota[0], $jarak_dari_ibukota_kotaAttrib);
 			?>  km
 		</td>
@@ -233,7 +233,7 @@ $numToDisplay = $this->numToDisplay;
 		<td align="center">
 			<? 
 				$jarak_dari_ibukota_prov =  explode('.',$this->detailPendaftaran['jarak_dari_ibukota_prov']);
-				$jarak_dari_ibukota_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
+				$jarak_dari_ibukota_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required");
 				echo $ctrlFrm->formText("jarak_dari_ibukota_prov", $jarak_dari_ibukota_prov[0], $jarak_dari_ibukota_provAttrib);
 			?>  km
 		</td>
@@ -264,7 +264,23 @@ $numToDisplay = $this->numToDisplay;
 });
 </script>
 
-<script>
+<script language="JavaScript">
+function formatAngka(objek, separator) {
+  a = objek.value;
+  b = a.replace(/[^\d]/g,"");
+  c = "";
+  panjang = b.length;
+  j = 1;
+  for (i = panjang; i > 0; i--) {
+    j = j + 1;
+    if (((j % 3) == 1) && (j != 1)) {
+      c = b.substr(i-1,1) + separator + c;
+    } else {
+      c = b.substr(i-1,1) + c;
+    }
+  }
+  objek.value = c;
+}
 
 
 

@@ -125,7 +125,10 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$dasar_pembentukan				= $_POST['dasar_pembentukan'];
 		$kode_wilayah					= $_POST['kode_wilayah'];
 		$kode_pos						= $_POST['kode_pos'];
+			
 		$luas							= $_POST['luas'];
+		$luas = str_replace('.', '', $luas); 
+		
 		$batas_utara					= $_POST['batas_utara'];
 		$batas_selatan					= $_POST['batas_selatan'];
 		$batas_barat					= $_POST['batas_barat'];
@@ -178,6 +181,7 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$kode_wilayah					= $_POST['kode_wilayah'];
 		$kode_pos						= $_POST['kode_pos'];
 		$luas							= $_POST['luas'];
+		$luas = str_replace('.', '', $luas); 
 		$batas_utara					= $_POST['batas_utara'];
 		$batas_selatan					= $_POST['batas_selatan'];
 		$batas_barat					= $_POST['batas_barat'];

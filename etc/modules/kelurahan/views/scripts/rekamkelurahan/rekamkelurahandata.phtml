@@ -13,6 +13,8 @@ $format_date = new format_date();
 
 $currentPage = $this->currentPage;
 $numToDisplay = $this->numToDisplay;
+//konvert ke bulan indonesia
+	$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
 ?>
 <div class="navlink">
 <a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
@@ -36,13 +38,26 @@ $numToDisplay = $this->numToDisplay;
 		?>
 		
 		
-		<h2 class="title">FORM <?php echo strtoupper($nama) ?> DATA KELURAHAN <strong><?php echo strtoupper($this->detailKelurahan->kelurahan) ?></strong></h2>
+		<h2 class="title">FORM <?php echo strtoupper($nama) ?> DATA KELURAHAN <strong><?php echo strtoupper($this->detailKelurahan->kelurahan) ?></strong> <?php if (strtolower($this->jenisForm) == 'update'){ echo " Bulan "; echo $array_bulan[$this->bulan]; echo " Tahun " ; echo $this->tahun ;}?></h2>
 	    <div class="spacer"></div> 
 		
 
 <form method="post" name="<? echo $namaForm;?>" id="<? echo $namaForm;?>" class="validasi" accept-charset="utf-8">
 <table width="100%" border="0" cellpadding="0" cellspacing="2" class="std">
-	
+	<tr>
+		<td></td>
+		<td>
+		<div class="right">
+		<input type="button" value="Kembali" onclick="rekamkelurahanlist();"> 
+		<input type="reset" value="Ulangi"> 
+		<input type="submit" name="simpan" value="Simpan">
+		</div>
+		</td>
+	</tr>
+				<tr>
+				    <td>* Harus Diisi</td>
+				    <td></td>
+				</tr>
 
 	<input name="kategoriCari" id="kategoriCari" type="hidden" value="<?echo $this->kategoriCari;?>" />
 	<input name="carii" id="carii" type="hidden" value="<?echo $this->carii;?>" />
@@ -97,12 +112,12 @@ $(function(){
 			
 			<?php }else{?>
 				<select name="bulan" id="bulan" class="autowidth">
-					<option selected="selected">Bulan</option>
 					<?php
 					
 					$bulan_ind=array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
 					$bulan=array("1","2","3","4","5","6","7","8","9","10","11","12");
-					$jlh_bln=count($bulan_ind);
+					$jlh_bln=count($bulan_ind);?>
+					<?php
 					for($c=0; $c<$jlh_bln; $c+=1){
 						if($this->bulan == $bulan[$c]){
 							echo"<option value=$bulan[$c] selected='selected'> $bulan_ind[$c] </option>";
@@ -112,12 +127,15 @@ $(function(){
 					?>
 					</select>
 					<select name="tahun" id="tahun"  class="autowidth">
-					<option selected="selected">Tahun</option>
 					<?php
-					for($i=date('Y'); $i>=2010; $i-=1){
+					for($i=date('Y')+1; $i>=2010; $i-=1){
 						if($this->tahun == $i){
 							echo"<option value=$i selected='selected'> $i </option>";
-						}else
+						}
+						if(date('Y')==$i){
+							echo "<option value=$i selected='selected'> $i </option>";
+						}
+						else
 					echo"<option value=$i> $i </option>";
 					}
 					?>
@@ -1104,7 +1122,7 @@ $(function(){
 				<input name="kode_pusat_<? echo $i?>" value="3" id="kode_pusat" type="hidden">
 				
 				<td class="clleft"><input name="nama_program_pusat_<? echo $i?>" id="nama_program_pusat" type="text" value="<? echo $nama_program;?>"></td></td>
-				<td class="clleft"><input name="anggaran_pusat_<? echo $i?>" id="anggaran_pusat" value="<? echo $anggaran[0];?>" type="text"onkeypress="javascript:return isNumber(event)"></td>
+				<td class="clleft"><input name="anggaran_pusat_<? echo $i?>" id="anggaran_pusat" value="<? echo $anggaran[0];?>" type="text" onkeypress="javascript:return isNumber(event)"></td>
 				<td><input type="button" id="hapusPusat" value="Hapus"></td>
 			<?php $i++;
 			endforeach ; 
@@ -1714,20 +1732,7 @@ $(function(){
 </div>
 <!--End Ketentraman Ketertiban-->
 </div>
-	<tr>
-		<td></td>
-		<td>
-		<div class="right">
-		<input type="button" value="Kembali" onclick="rekamkelurahanlist();"> 
-		<input type="reset" value="Ulangi"> 
-		<input type="submit" name="simpan" value="Simpan">
-		</div>
-		</td>
-	</tr>
-				<tr>
-				    <td>* Harus Diisi</td>
-				    <td></td>
-				</tr>
+	
 			</table>
 
 </form>
@@ -1854,7 +1859,7 @@ $(function(){
                          + '<input name="nomorKota[]" value="'+ nomor +'" type="hidden">'
                          + '<input name="kode_kota_'+ nomor +'" value="3" id="kode_kota_" type="hidden">'
                          + '<td><input name="nama_program_kota_'+ nomor +'" id="nama_program_kota" type="text"></td>'
-                         + '<td><input name="anggaran_kota_'+ nomor +'" id="anggaranKota" type="text" onkeypress="isNumber(event)"></td>'
+                         + '<td><input name="anggaran_kota_'+ nomor +'" id="anggaranKota" type="text" onkeypress="javascript:return isNumber(event)"></td>'
                          + '<td><input type="button" id="hapusKota" value="Hapus"></td></tr>'
                     );
                 });

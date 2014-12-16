@@ -16,7 +16,7 @@
 	$tahun = date('Y');
 
 	//nama file dokumen
-	$namafile = "Laporan Papan Monografi Kelurahan ". $this->detailKelurahan->kelurahan. " ".$this->bulan." ". $this->tahun ." .doc";
+	$namafile = "Laporan Buku Monografi Kelurahan ". $this->detailKelurahan->kelurahan. " - ".$bulan." ". $this->tahun ." .doc";
 	
 	 header('Content-Type: application/octet-stream');
 	header("Content-Disposition: attachment; filename=\"" . basename($namafile) . "\"");
@@ -31,15 +31,9 @@
 ?>
 	 
 	<div>
+	
 	<p align="center">
-		<strong> </strong>
-		<strong> <em>Form 2</em></strong>
-	</p>
-	<p align="center">
-		<strong></strong>
-	</p>
-	<p align="center">
-		<strong>PAPAN MONOGRAFI KELURAHAN</strong>		
+		<strong>BUKU MONOGRAFI KELURAHAN</strong>		
 	</p>
 	<p align="center">
 		<strong>KEADAAN PADA BULAN</strong>
@@ -49,7 +43,7 @@
 		<strong>TAHUN </strong>
 		<strong><?echo $this->tahun;?></strong>
 	</p>
-	
+	<hr />
 	<p>
 		1. Nama Kelurahan : <strong><?php echo strtoupper($this->detailKelurahan->kelurahan) ?></strong>
 	</p>
@@ -77,7 +71,7 @@
 		</p>
 	</div>
 	<p>
-		<strong> </strong>
+		<strong><hr /> </strong>
 	</p>
 	<p>
 		<strong>A. </strong>
@@ -89,13 +83,13 @@
 	</p>
 	
 	<p>
-		2. Luas Wilayah : <strong><?php echo strtoupper($this->detailKelurahan->luas_wilayah) ?></strong> km<sup>2</sup>
+		2. Luas Wilayah : <strong><?php echo strtoupper($this->detailKelurahan->luas) ?></strong> km<sup>2</sup>
 	</p>
 	
 	<p>	3. Batas Wilayah 
 	</p>
 	<p>
-		a. Sebelah Utara : <strong><?php echo strtoupper($this->detailKelurahan->batasUtara) ?></strong>
+		a. Sebelah Utara : <strong><?php echo strtoupper($this->detailKelurahan->batas_utara) ?></strong>
 	</p>
 	<p>
 		b. Sebelah Selatan : <strong><?php echo strtoupper($this->detailKelurahan->batas_selatan) ?></strong>
@@ -111,16 +105,16 @@
 		4. Orbitrasi (Jarak dari Pusat Pemerintahan)
 	</p>
 	<p>
-		a. Jarak dari Pusat Pemerintahan Kecamatan : <?php echo $this->detailKelurahan->jarakDariKecamatan ?> km
+		a. Jarak dari Pusat Pemerintahan Kecamatan : <?php echo $this->detailKelurahan->jarak_dari_kecamatan ?> km
 	</p>
 	<p>
-		b. Jarak dari Pusat Pemerintahan Kota : <?php echo $this->detailKelurahan->jarakDariKota ?> km
+		b. Jarak dari Pusat Pemerintahan Kota : <?php echo $this->detailKelurahan->jarak_dari_kota ?> km
 	</p>
 	<p>
-		c. Jarak dari Ibukota Kabupaten : <?php echo $this->detailKelurahan->jarakDariIbukotaKota ?> km
+		c. Jarak dari Ibukota Kabupaten : <?php echo $this->detailKelurahan->jarak_dari_ibukota_kota ?> km
 	</p>
 	<p>
-		d. Jarak dari Ibukota Provinsi : <?php echo $this->detailKelurahan->jarakDariIbuKotaProv ?> km
+		d. Jarak dari Ibukota Provinsi : <?php echo $this->detailKelurahan->jarak_dari_ibukota_prov ?> km
 	</p>
 	
 	<p>
@@ -352,6 +346,7 @@
 	<p>
 		4) Lainnya : <? echo  $this->detailUmum['sarana_jml_lainnya'] ?> buah
 	</p>
+	<hr />
 	<p>
 		<strong>B. DATA </strong>
 		<strong> PERSONIL</strong>
@@ -377,7 +372,10 @@
 			<?php endforeach; ?>
 	</p>
 	<p>
-		e. TMT Masa Jabatan : <?php echo $this->detailPersonil['tmt_jabatan_seklur']?>			
+		<?php 
+			$tmt_jabatan_lurah= date('d M Y', strtotime($this->detailPersonil['tmt_jabatan_lurah']));
+		?>
+		e. TMT Masa Jabatan : <?php echo $tmt_jabatan_lurah ?>			
 	</p>
 	<p>
 		f. Riwayat Jabatan : <? echo $this->detailPersonil['riwayat_jabatan1']; ?>
@@ -410,7 +408,10 @@
 		<?php  endforeach; ?>
 	</p>
 	<p>
-		e. TMT Masa Jabatan : <?php echo $this->detailPersonil['tmt_jabatan_seklur']?>
+		<?php 
+			$tmt_jabatan_seklur= date('d M Y', strtotime($this->detailPersonil['tmt_jabatan_seklur']));
+		?>
+		e. TMT Masa Jabatan : <?php echo $tmt_jabatan_seklur ?>
 	</p>	
 	<p>
 		f. Riwayat Jabatan : <? 	echo  $this->detailPersonil['riwayat_jabatan1_seklur']; ?>
@@ -438,6 +439,7 @@
 	<p>
 		d. Golongan IV : <? echo  $this->detailPersonil['jumlah_aparat_gol4']; ?> Orang
 	</p>
+	<hr />
 	<p>
 		<strong>C. </strong>
 		<strong> </strong>
@@ -486,7 +488,7 @@
 			<?php echo $urusan_pilihan[$i] ?>
 		<?php } ?>
 	</p>
-	
+	<hr />
 	<p>
 		<strong>D. </strong>
 		<strong>DATA </strong>
@@ -540,6 +542,7 @@
 			echo  $swadaya[0]; 
 		?> 
 	</p>
+	<hr />
 	<p>
 		<strong>E. </strong>
 		<strong>KELEMBAGAAN</strong>
@@ -548,7 +551,7 @@
 		1. LPM atau sebutan lain
 	</p>
 	<p>
-		- Jumlah pengurus : $<? echo $this->detailKelembagaan['lpm_jml_pengurus']; ?> orang
+		- Jumlah pengurus : <? echo $this->detailKelembagaan['lpm_jml_pengurus']; ?> orang
 	</p>
 	<p>
 		- Jumlah kegiatan per bulan : <? echo $this->detailKelembagaan['lpm_jml_keg_perbulan']; ?> kegiatan
