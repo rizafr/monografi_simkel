@@ -352,8 +352,6 @@ class Home_IndexController extends Zend_Controller_Action {
     }
 
 	public function depanAction() {
-						
-		
 		
 		$ssogroup		= new Zend_Session_Namespace('ssogroup');///berdasarkan user group
 		$this->runningtextAction();

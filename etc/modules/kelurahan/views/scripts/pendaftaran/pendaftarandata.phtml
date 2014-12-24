@@ -13,6 +13,13 @@ $format_date = new format_date();
 
 $currentPage = $this->currentPage;
 $numToDisplay = $this->numToDisplay;
+
+function ribuan($angka)
+{
+	$hasil =  number_format($angka,0,',','.');
+	return $hasil;
+}
+
 ?>
 <div class="navlink">
 <a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
@@ -141,9 +148,12 @@ $numToDisplay = $this->numToDisplay;
 		<td align="right" >* 2. Luas Wilayah :</td>
 		<td>	
 				<? 
+				
 				$luas =  explode('.',$this->detailPendaftaran['luas']);
-				$luasAttrib = array("size" => 50,"maxlength" => 50, "required"=>"required","placeholder"=>"contoh : 127,045 ","onkeydown"=>"formatAngka(this, '.')");
-				echo $ctrlFrm->formText("luas", $luas[0], $luasAttrib);
+					$luas = (!empty($luas[0])) ? ribuan($luas[0]) : 0;
+				echo $ctrlFrm->formText("luas", $luas, $luasAttrib);
+				$luasAttrib = array("size" => 50,"maxlength" => 50, "required"=>"required","placeholder"=>"contoh : 127,045 ","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				
 				?> km&sup2;
 		</td>
 	</tr>
@@ -202,8 +212,9 @@ $numToDisplay = $this->numToDisplay;
 		<td align="center">
 			<? 
 				$jarak_dari_kecamatan =  explode('.',$this->detailPendaftaran['jarak_dari_kecamatan']);
-				$jarak_dari_kecamatanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
-				echo $ctrlFrm->formText("jarak_dari_kecamatan", $jarak_dari_kecamatan[0], $jarak_dari_kecamatanAttrib);
+				$jarak_dari_kecamatan = (!empty($jarak_dari_kecamatan[0])) ? ribuan($jarak_dari_kecamatan[0]) : 0;
+				$jarak_dari_kecamatanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				echo $ctrlFrm->formText("jarak_dari_kecamatan", $jarak_dari_kecamatan, $jarak_dari_kecamatanAttrib);
 			?> km
 		</td>
 	</tr>
@@ -213,9 +224,10 @@ $numToDisplay = $this->numToDisplay;
 		<td align="center">
 			<? 
 				$jarak_dari_kota =  explode('.',$this->detailPendaftaran['jarak_dari_kota']);
-				$jarak_dari_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required");
-				echo $ctrlFrm->formText("jarak_dari_kota", $jarak_dari_kota[0], $jarak_dari_kotaAttrib);
-			?>  km
+				$jarak_dari_kota = (!empty($jarak_dari_kota[0])) ? ribuan($jarak_dari_kota[0]) : 0;
+				$jarak_dari_kotaAttrib = array("id"=>"inputTextId","placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				echo $ctrlFrm->formText("jarak_dari_kota", $jarak_dari_kota, $jarak_dari_kotaAttrib);
+			?>  km 
 		</td>
 	</tr>
 	<tr>
@@ -223,8 +235,9 @@ $numToDisplay = $this->numToDisplay;
 		<td align="center">
 			<? 
 				$jarak_dari_ibukota_kota =  explode('.',$this->detailPendaftaran['jarak_dari_ibukota_kota']);
-				$jarak_dari_ibukota_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required");
-				echo $ctrlFrm->formText("jarak_dari_ibukota_kota", $jarak_dari_ibukota_kota[0], $jarak_dari_ibukota_kotaAttrib);
+				$jarak_dari_ibukota_kota = (!empty($jarak_dari_ibukota_kota[0])) ? ribuan($jarak_dari_ibukota_kota[0]) : 0;
+				$jarak_dari_ibukota_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				echo $ctrlFrm->formText("jarak_dari_ibukota_kota", $jarak_dari_ibukota_kota, $jarak_dari_ibukota_kotaAttrib);
 			?>  km
 		</td>
 	</tr>
@@ -233,7 +246,9 @@ $numToDisplay = $this->numToDisplay;
 		<td align="center">
 			<? 
 				$jarak_dari_ibukota_prov =  explode('.',$this->detailPendaftaran['jarak_dari_ibukota_prov']);
-				$jarak_dari_ibukota_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required");
+				$jarak_dari_ibukota_prov = (!empty($jarak_dari_ibukota_prov[0])) ? ribuan($jarak_dari_ibukota_prov[0]) : 0;
+				
+				$jarak_dari_ibukota_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
 				echo $ctrlFrm->formText("jarak_dari_ibukota_prov", $jarak_dari_ibukota_prov[0], $jarak_dari_ibukota_provAttrib);
 			?>  km
 		</td>
@@ -262,26 +277,18 @@ $numToDisplay = $this->numToDisplay;
 	$(document).ready(function() {
 	$(".validasi").validate();
 });
+
+$.noConflict();
+jQuery( document ).ready(function($) {
+// Code that uses jQuery's $ can follow here.
+	$('.numeric').autoNumeric('init');
+});
+
 </script>
 
-<script language="JavaScript">
-function formatAngka(objek, separator) {
-  a = objek.value;
-  b = a.replace(/[^\d]/g,"");
-  c = "";
-  panjang = b.length;
-  j = 1;
-  for (i = panjang; i > 0; i--) {
-    j = j + 1;
-    if (((j % 3) == 1) && (j != 1)) {
-      c = b.substr(i-1,1) + separator + c;
-    } else {
-      c = b.substr(i-1,1) + c;
-    }
-  }
-  objek.value = c;
-}
 
+
+<script language="JavaScript">
 
 
 function showDialog(val,jum) {      
@@ -299,4 +306,3 @@ function showDialog(val,jum) {
   }
 
 </script>
-

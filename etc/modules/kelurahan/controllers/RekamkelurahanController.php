@@ -298,6 +298,61 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$sarana_jml_balai_pertemuan	= $_POST['sarana_jml_balai_pertemuan'];
 		$sarana_jml_lainnya			= $_POST['sarana_jml_lainnya'];
 		
+		
+		//membuang titik
+		$jml_jiwa 					= str_replace('.', '', $jml_jiwa);
+		$jml_kk 					= str_replace('.', '', $jml_kk);
+		$jml_laki 					= str_replace('.', '', $jml_laki);
+		$jml_perempuan 				= str_replace('.', '', $jml_perempuan);
+		$jml_0_15 					= str_replace('.', '', $jml_0_15);
+		$jml_15_65 					= str_replace('.', '', $jml_15_65);
+		$jml_65_keatas 				= str_replace('.', '', $jml_65_keatas);
+		$jml_pns 					= str_replace('.', '', $jml_pns);
+		$jml_abri 					= str_replace('.', '', $jml_abri);
+		$jml_swasta 				= str_replace('.', '', $jml_swasta);
+		$jml_wiraswasta 			= str_replace('.', '', $jml_wiraswasta);
+		$jml_tani 					= str_replace('.', '', $jml_tani);
+		$jml_pertukangan 			= str_replace('.', '', $jml_pertukangan);		
+		$jml_buruh_tani 			= str_replace('.', '', $jml_buruh_tani);		
+		$jml_pensiunan 				= str_replace('.', '', $jml_pensiunan);		
+		$jml_nelayan 				= str_replace('.', '', $jml_nelayan);		
+		$jml_pemulung 				= str_replace('.', '', $jml_pemulung);		
+		$jml_jasa 					= str_replace('.', '', $jml_jasa);		
+		$jml_lulusan_tk 			= str_replace('.', '', $jml_lulusan_tk);		
+		$jml_lulusan_sd 			= str_replace('.', '', $jml_lulusan_sd);		
+		$jml_lulusan_smp 			= str_replace('.', '', $jml_lulusan_smp);		
+		$jml_lulusan_sma 			= str_replace('.', '', $jml_lulusan_sma);			
+		$jml_lulusan_diploma		=  str_replace('.', '', $jml_lulusan_diploma);	
+		$jml_lulusan_sarjana		=  str_replace('.', '', $jml_lulusan_sarjana);	
+		$jml_lulusan_pascasarjana	=  str_replace('.', '', $jml_lulusan_pascasarjana);	
+		$jml_lulusan_pontren		=  str_replace('.', '', $jml_lulusan_pontren);	
+		$jml_lulusan_keagamaan		=  str_replace('.', '', $jml_lulusan_keagamaan);	
+		$jml_lulusan_slb			=  str_replace('.', '', $jml_lulusan_slb);	
+		$jml_lulusan_kursus			=  str_replace('.', '', $jml_lulusan_kursus);	
+		$jml_jiwa_miskin			=  str_replace('.', '', $jml_jiwa_miskin);	
+		$jml_jiwa_kk				=  str_replace('.', '', $jml_jiwa_kk);	
+		$umr						=  str_replace('.', '', $umr);	
+		$sarana_kantor				=  str_replace('.', '', $sarana_kantor);	
+		$sarana_puskesmas			=  str_replace('.', '', $sarana_puskesmas);	
+		$sarana_jml_posyandu		=  str_replace('.', '', $sarana_jml_posyandu);	
+		$sarana_jml_poliklinik		=  str_replace('.', '', $sarana_jml_poliklinik);	
+		$sarana_jml_paud			=  str_replace('.', '', $sarana_jml_paud);	
+		$sarana_jml_tk				=  str_replace('.', '', $sarana_jml_tk);	
+		$sarana_jml_sd				=  str_replace('.', '', $sarana_jml_sd);	
+		$sarana_jml_smp				=  str_replace('.', '', $sarana_jml_smp);	
+		$sarana_jml_sma				=  str_replace('.', '', $sarana_jml_sma);	
+		$sarana_jml_pt				=  str_replace('.', '', $sarana_jml_pt);	
+		$sarana_jml_masjid			=  str_replace('.', '', $sarana_jml_masjid);	
+		$sarana_jml_mushola			=  str_replace('.', '', $sarana_jml_mushola);	
+		$sarana_jml_gereja			=  str_replace('.', '', $sarana_jml_gereja);	
+		$sarana_jml_pura			=  str_replace('.', '', $sarana_jml_pura);	
+		$sarana_jml_vihara			=  str_replace('.', '', $sarana_jml_vihara);	
+		$sarana_jml_klenteng		=  str_replace('.', '', $sarana_jml_klenteng);	
+		$sarana_jml_olahraga		=  str_replace('.', '', $sarana_jml_olahraga);	
+		$sarana_jml_kesenian		=  str_replace('.', '', $sarana_jml_kesenian);	
+		$sarana_jml_balai_pertemuan	=  str_replace('.', '', $sarana_jml_balai_pertemuan);	
+		$sarana_jml_lainnya			=  str_replace('.', '', $sarana_jml_lainnya);
+		
 		//personil
 		$nama_lurah					= $_POST['nama_lurah'];
 		$nip_lurah					= $_POST['nip_lurah'];
@@ -317,6 +372,12 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$jumlah_aparat_gol2			= $_POST['jumlah_aparat_gol2'];
 		$jumlah_aparat_gol3			= $_POST['jumlah_aparat_gol3'];
 		$jumlah_aparat_gol4			= $_POST['jumlah_aparat_gol4'];
+		
+		//menghapus titik
+		$jumlah_aparat_gol1			= str_replace('.', '', $jumlah_aparat_gol1);
+		$jumlah_aparat_gol2			= str_replace('.', '', $jumlah_aparat_gol2);
+		$jumlah_aparat_gol3			= str_replace('.', '', $jumlah_aparat_gol3);
+		$jumlah_aparat_gol4			= str_replace('.', '', $jumlah_aparat_gol4);
 		
 		//kewenangan
 		$jml_urusan_kota			= $_POST['jml_urusan_kota'];
@@ -344,6 +405,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					*/
 					$nama_program = $_POST['nama_program_pusat_'.$i];
 					$anggaran = $_POST['anggaran_pusat_'.$i];
+					$anggaran			= str_replace('.', '', $anggaran);
 					$kode = $_POST['kode_pusat_'.$i];
 					
 					
@@ -373,6 +435,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					*/
 					$nama_program = $_POST['nama_program_provinsi_'.$i];
 					$anggaran = $_POST['anggaran_provinsi_'.$i];
+					$anggaran			= str_replace('.', '', $anggaran);
 					$kode = $_POST['kode_provinsi_'.$i];
 					
 					$datamasukanprogramkelurahan = array(
@@ -400,6 +463,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					*/
 					$nama_program = $_POST['nama_program_kota_'.$i];
 					$anggaran = $_POST['anggaran_kota_'.$i];
+					$anggaran			= str_replace('.', '', $anggaran);
 					$kode = $_POST['kode_kota_'.$i];
 					
 					$datamasukanprogramkelurahan = array(
@@ -434,6 +498,15 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$sumbangan					= $_POST['sumbangan'];
 		$swadaya					= $_POST['swadaya'];
 		
+		//menghapus titik
+		$anggaran_apbd				= str_replace('.', '', $anggaran_apbd);
+		$bantuan_pusat				= str_replace('.', '', $bantuan_pusat);
+		$bantuan_prov				= str_replace('.', '', $bantuan_prov);
+		$bantuan_kota				= str_replace('.', '', $bantuan_kota);
+		$hibah						= str_replace('.', '', $hibah);
+		$sumbangan					= str_replace('.', '', $sumbangan);
+		$swadaya					= str_replace('.', '', $swadaya);
+		
 		//kelembagaan
 		$lpm_jml_pengurus			= $_POST['lpm_jml_pengurus'];
 		$lpm_jml_anggota			= $_POST['lpm_jml_anggota'];
@@ -453,6 +526,26 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$rata_penghasilan_rt		= $_POST['rata_penghasilan_rt'];
 		$jml_lembaga_lain			= $_POST['jml_lembaga_lain'];
 		
+		//menghapus titik		
+		$lpm_jml_pengurus			= str_replace('.', '', $lpm_jml_pengurus);
+		$lpm_jml_anggota			= str_replace('.', '', $lpm_jml_anggota);
+		$lpm_jml_keg_perbulan		= str_replace('.', '', $lpm_jml_keg_perbulan);
+		$lpm_jml_dana				= str_replace('.', '', $lpm_jml_dana);
+		$lpm_jml_buku_administrasi	= str_replace('.', '', $lpm_jml_buku_administrasi);
+		$pkk_jml_pengurus			= str_replace('.', '', $pkk_jml_pengurus);
+		$pkk_jml_anggota			= str_replace('.', '', $pkk_jml_anggota);
+		$pkk_jml_keg_perbulan		= str_replace('.', '', $pkk_jml_keg_perbulan);
+		$pkk_jml_buku_administrasi	= str_replace('.', '', $pkk_jml_buku_administrasi);
+		$pkk_jml_dana				= str_replace('.', '', $pkk_jml_dana);
+		$taruna_jml					= str_replace('.', '', $taruna_jml);
+		$taruna_jenis				= str_replace('.', '', $taruna_jenis);
+		$taruna_jml_pengurus		= str_replace('.', '', $taruna_jml_pengurus);
+		$jml_rw						= str_replace('.', '', $jml_rw);
+		$jml_rt						= str_replace('.', '', $jml_rt);
+		$rata_penghasilan_rw		= str_replace('.', '', $rata_penghasilan_rw);
+		$rata_penghasilan_rt		= str_replace('.', '', $rata_penghasilan_rt);
+		$jml_lembaga_lain			= str_replace('.', '', $jml_lembaga_lain);
+		
 		//trantib
 		$jml_anggota_linmas			= $_POST['jml_anggota_linmas'];
 		$jml_pos_kamling			= $_POST['jml_pos_kamling'];
@@ -467,6 +560,21 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$jml_pos_bencana			= $_POST['jml_pos_bencana'];
 		$jml_pembalakan_liar		= $_POST['jml_pembalakan_liar'];
 		$jml_pos_hutan_lindung		= $_POST['jml_pos_hutan_lindung'];
+		
+		//menghapus titik
+		$jml_anggota_linmas			= str_replace('.', '', $jml_anggota_linmas);
+		$jml_pos_kamling			= str_replace('.', '', $jml_pos_kamling);
+		$jml_ops_penertiban			= str_replace('.', '', $jml_ops_penertiban);
+		$jml_pencurian				= str_replace('.', '', $jml_pencurian);
+		$jml_perkosaan				= str_replace('.', '', $jml_perkosaan);
+		$jml_kenakalan_remaja		= str_replace('.', '', $jml_kenakalan_remaja);
+		$jml_pembunuhan				= str_replace('.', '', $jml_pembunuhan);
+		$jml_perampokan				= str_replace('.', '', $jml_perampokan);
+		$jml_penipuan				= str_replace('.', '', $jml_penipuan);
+		$jml_bencana				= str_replace('.', '', $jml_bencana);
+		$jml_pos_bencana			= str_replace('.', '', $jml_pos_bencana);
+		$jml_pembalakan_liar		= str_replace('.', '', $jml_pembalakan_liar);
+		$jml_pos_hutan_lindung		= str_replace('.', '', $jml_pos_hutan_lindung);
 	
 		
 		$datamasukanumum = array("tahun" 	=> $tahun,
@@ -535,14 +643,14 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 				"id_pendidikan_lurah"	    => $id_pendidikan_lurah,
 				"tmt_jabatan_lurah"	        => $tmt_jabatan_lurah,
 				"riwayat_jabatan1"         	=> $riwayat_jabatan1,
-				"id_jenkel_lurah"	         => $id_jenkel_lurah,
+				"id_jenkel_lurah"	        => $id_jenkel_lurah,
 				"nama_seklur"	           	=> $nama_seklur,
-				"nip_seklur"	            	=> $nip_seklur,
-				"gol_seklur"	            	=> $gol_seklur,
+				"nip_seklur"	            => $nip_seklur,
+				"gol_seklur"	            => $gol_seklur,
 				"id_pendidikan_seklur"	    => $id_pendidikan_seklur,
-				"tmt_jabatan_seklur"	        => $tmt_jabatan_seklur,
-				"riwayat_jabatan1_seklur"         	=> $riwayat_jabatan1_seklur,
-				"id_jenkel_seklur"	            	=> $id_jenkel_seklur,
+				"tmt_jabatan_seklur"	    => $tmt_jabatan_seklur,
+				"riwayat_jabatan1_seklur"   => $riwayat_jabatan1_seklur,
+				"id_jenkel_seklur"	        => $id_jenkel_seklur,
 				
 				"jumlah_aparat_gol1"	    => $jumlah_aparat_gol1,
 				"jumlah_aparat_gol2"	    => $jumlah_aparat_gol2,
@@ -714,6 +822,61 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$sarana_jml_balai_pertemuan	= $_POST['sarana_jml_balai_pertemuan'];
 		$sarana_jml_lainnya			= $_POST['sarana_jml_lainnya'];
 		
+		//membuang titik
+		$jml_jiwa 					= str_replace('.', '', $jml_jiwa);
+		$jml_kk 					= str_replace('.', '', $jml_kk);
+		$jml_laki 					= str_replace('.', '', $jml_laki);
+		$jml_perempuan 				= str_replace('.', '', $jml_perempuan);
+		$jml_0_15 					= str_replace('.', '', $jml_0_15);
+		$jml_15_65 					= str_replace('.', '', $jml_15_65);
+		$jml_65_keatas 				= str_replace('.', '', $jml_65_keatas);
+		$jml_pns 					= str_replace('.', '', $jml_pns);
+		$jml_abri 					= str_replace('.', '', $jml_abri);
+		$jml_swasta 				= str_replace('.', '', $jml_swasta);
+		$jml_wiraswasta 			= str_replace('.', '', $jml_wiraswasta);
+		$jml_tani 					= str_replace('.', '', $jml_tani);
+		$jml_pertukangan 			= str_replace('.', '', $jml_pertukangan);		
+		$jml_buruh_tani 			= str_replace('.', '', $jml_buruh_tani);		
+		$jml_pensiunan 				= str_replace('.', '', $jml_pensiunan);		
+		$jml_nelayan 				= str_replace('.', '', $jml_nelayan);		
+		$jml_pemulung 				= str_replace('.', '', $jml_pemulung);		
+		$jml_jasa 					= str_replace('.', '', $jml_jasa);		
+		$jml_lulusan_tk 			= str_replace('.', '', $jml_lulusan_tk);		
+		$jml_lulusan_sd 			= str_replace('.', '', $jml_lulusan_sd);		
+		$jml_lulusan_smp 			= str_replace('.', '', $jml_lulusan_smp);		
+		$jml_lulusan_sma 			= str_replace('.', '', $jml_lulusan_sma);			
+		$jml_lulusan_diploma		=  str_replace('.', '', $jml_lulusan_diploma);	
+		$jml_lulusan_sarjana		=  str_replace('.', '', $jml_lulusan_sarjana);	
+		$jml_lulusan_pascasarjana	=  str_replace('.', '', $jml_lulusan_pascasarjana);	
+		$jml_lulusan_pontren		=  str_replace('.', '', $jml_lulusan_pontren);	
+		$jml_lulusan_keagamaan		=  str_replace('.', '', $jml_lulusan_keagamaan);	
+		$jml_lulusan_slb			=  str_replace('.', '', $jml_lulusan_slb);	
+		$jml_lulusan_kursus			=  str_replace('.', '', $jml_lulusan_kursus);	
+		$jml_jiwa_miskin			=  str_replace('.', '', $jml_jiwa_miskin);	
+		$jml_jiwa_kk				=  str_replace('.', '', $jml_jiwa_kk);	
+		$umr						=  str_replace('.', '', $umr);	
+		$sarana_kantor				=  str_replace('.', '', $sarana_kantor);	
+		$sarana_puskesmas			=  str_replace('.', '', $sarana_puskesmas);	
+		$sarana_jml_posyandu		=  str_replace('.', '', $sarana_jml_posyandu);	
+		$sarana_jml_poliklinik		=  str_replace('.', '', $sarana_jml_poliklinik);	
+		$sarana_jml_paud			=  str_replace('.', '', $sarana_jml_paud);	
+		$sarana_jml_tk				=  str_replace('.', '', $sarana_jml_tk);	
+		$sarana_jml_sd				=  str_replace('.', '', $sarana_jml_sd);	
+		$sarana_jml_smp				=  str_replace('.', '', $sarana_jml_smp);	
+		$sarana_jml_sma				=  str_replace('.', '', $sarana_jml_sma);	
+		$sarana_jml_pt				=  str_replace('.', '', $sarana_jml_pt);	
+		$sarana_jml_masjid			=  str_replace('.', '', $sarana_jml_masjid);	
+		$sarana_jml_mushola			=  str_replace('.', '', $sarana_jml_mushola);	
+		$sarana_jml_gereja			=  str_replace('.', '', $sarana_jml_gereja);	
+		$sarana_jml_pura			=  str_replace('.', '', $sarana_jml_pura);	
+		$sarana_jml_vihara			=  str_replace('.', '', $sarana_jml_vihara);	
+		$sarana_jml_klenteng		=  str_replace('.', '', $sarana_jml_klenteng);	
+		$sarana_jml_olahraga		=  str_replace('.', '', $sarana_jml_olahraga);	
+		$sarana_jml_kesenian		=  str_replace('.', '', $sarana_jml_kesenian);	
+		$sarana_jml_balai_pertemuan	=  str_replace('.', '', $sarana_jml_balai_pertemuan);	
+		$sarana_jml_lainnya			=  str_replace('.', '', $sarana_jml_lainnya);	
+	
+		
 		//personil
 		$nama_lurah					= $_POST['nama_lurah'];
 		$nip_lurah					= $_POST['nip_lurah'];
@@ -733,6 +896,12 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$jumlah_aparat_gol2			= $_POST['jumlah_aparat_gol2'];
 		$jumlah_aparat_gol3			= $_POST['jumlah_aparat_gol3'];
 		$jumlah_aparat_gol4			= $_POST['jumlah_aparat_gol4'];
+		
+		//menghapus titik
+		$jumlah_aparat_gol1			= str_replace('.', '', $jumlah_aparat_gol1);
+		$jumlah_aparat_gol2			= str_replace('.', '', $jumlah_aparat_gol2);
+		$jumlah_aparat_gol3			= str_replace('.', '', $jumlah_aparat_gol3);
+		$jumlah_aparat_gol4			= str_replace('.', '', $jumlah_aparat_gol4);
 		
 		//kewenangan
 		$jml_urusan_kota			= $_POST['jml_urusan_kota'];
@@ -760,6 +929,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					*/
 					$nama_program = $_POST['nama_program_pusat_'.$i];
 					$anggaran = $_POST['anggaran_pusat_'.$i];
+					$anggaran			= str_replace('.', '', $anggaran);
 					$kode = $_POST['kode_pusat_'.$i];
 					$idx_program = $_POST['idx_program_'.$i];
 					
@@ -790,6 +960,9 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					*/
 					$nama_program = $_POST['nama_program_provinsi_'.$i];
 					$anggaran = $_POST['anggaran_provinsi_'.$i];
+					
+					$anggaran			= str_replace('.', '', $anggaran);
+					
 					$kode = $_POST['kode_provinsi_'.$i];
 					$idx_program = $_POST['idx_program_'.$i];
 					
@@ -819,6 +992,9 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					*/
 					$nama_program = $_POST['nama_program_kota_'.$i];
 					$anggaran = $_POST['anggaran_kota_'.$i];
+					
+					$anggaran			= str_replace('.', '', $anggaran);
+					
 					$kode = $_POST['kode_kota_'.$i];
 					$idx_program = $_POST['idx_program_'.$i];
 					
@@ -848,6 +1024,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					*/
 					$nama_program = $_POST['nama_program_pusat_'.$i];
 					$anggaran = $_POST['anggaran_pusat_'.$i];
+					$anggaran			= str_replace('.', '', $anggaran);					
 					$kode = $_POST['kode_pusat_'.$i];
 					$idx_program = $_POST['idx_program_'.$i];
 					
@@ -878,6 +1055,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					*/
 					$nama_program = $_POST['nama_program_provinsi_'.$i];
 					$anggaran = $_POST['anggaran_provinsi_'.$i];
+					$anggaran			= str_replace('.', '', $anggaran);
 					$kode = $_POST['kode_provinsi_'.$i];
 					$idx_program = $_POST['idx_program_'.$i];
 					
@@ -907,6 +1085,7 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 					*/
 					$nama_program = $_POST['nama_program_kota_'.$i];
 					$anggaran = $_POST['anggaran_kota_'.$i];
+					$anggaran			= str_replace('.', '', $anggaran);
 					$kode = $_POST['kode_kota_'.$i];
 					$idx_program = $_POST['idx_program_'.$i];
 					
@@ -943,6 +1122,15 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$sumbangan					= $_POST['sumbangan'];
 		$swadaya					= $_POST['swadaya'];
 		
+		//menghapus titik
+		$anggaran_apbd				= str_replace('.', '', $anggaran_apbd);
+		$bantuan_pusat				= str_replace('.', '', $bantuan_pusat);
+		$bantuan_prov				= str_replace('.', '', $bantuan_prov);
+		$bantuan_kota				= str_replace('.', '', $bantuan_kota);
+		$hibah						= str_replace('.', '', $hibah);
+		$sumbangan					= str_replace('.', '', $sumbangan);
+		$swadaya					= str_replace('.', '', $swadaya);
+		
 		//kelembagaan
 		$lpm_jml_pengurus			= $_POST['lpm_jml_pengurus'];
 		$lpm_jml_anggota			= $_POST['lpm_jml_anggota'];
@@ -963,6 +1151,26 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$rata_penghasilan_rt		= $_POST['rata_penghasilan_rt'];
 		$jml_lembaga_lain			= $_POST['jml_lembaga_lain'];
 		
+		//menghapus titik		
+		$lpm_jml_pengurus			= str_replace('.', '', $lpm_jml_pengurus);
+		$lpm_jml_anggota			= str_replace('.', '', $lpm_jml_anggota);
+		$lpm_jml_keg_perbulan		= str_replace('.', '', $lpm_jml_keg_perbulan);
+		$lpm_jml_dana				= str_replace('.', '', $lpm_jml_dana);
+		$lpm_jml_buku_administrasi	= str_replace('.', '', $lpm_jml_buku_administrasi);
+		$pkk_jml_pengurus			= str_replace('.', '', $pkk_jml_pengurus);
+		$pkk_jml_anggota			= str_replace('.', '', $pkk_jml_anggota);
+		$pkk_jml_keg_perbulan		= str_replace('.', '', $pkk_jml_keg_perbulan);
+		$pkk_jml_buku_administrasi	= str_replace('.', '', $pkk_jml_buku_administrasi);
+		$pkk_jml_dana				= str_replace('.', '', $pkk_jml_dana);
+		$taruna_jml					= str_replace('.', '', $taruna_jml);
+		$taruna_jenis				= str_replace('.', '', $taruna_jenis);
+		$taruna_jml_pengurus		= str_replace('.', '', $taruna_jml_pengurus);
+		$jml_rw						= str_replace('.', '', $jml_rw);
+		$jml_rt						= str_replace('.', '', $jml_rt);
+		$rata_penghasilan_rw		= str_replace('.', '', $rata_penghasilan_rw);
+		$rata_penghasilan_rt		= str_replace('.', '', $rata_penghasilan_rt);
+		$jml_lembaga_lain			= str_replace('.', '', $jml_lembaga_lain);
+		
 		//trantib
 		$jml_anggota_linmas			= $_POST['jml_anggota_linmas'];
 		$jml_pos_kamling			= $_POST['jml_pos_kamling'];
@@ -977,6 +1185,21 @@ class Kelurahan_RekamkelurahanController extends Zend_Controller_Action {
 		$jml_pos_bencana			= $_POST['jml_pos_bencana'];
 		$jml_pembalakan_liar		= $_POST['jml_pembalakan_liar'];
 		$jml_pos_hutan_lindung		= $_POST['jml_pos_hutan_lindung'];
+		
+		//menghapus titik
+		$jml_anggota_linmas			= str_replace('.', '', $jml_anggota_linmas);
+		$jml_pos_kamling			= str_replace('.', '', $jml_pos_kamling);
+		$jml_ops_penertiban			= str_replace('.', '', $jml_ops_penertiban);
+		$jml_pencurian				= str_replace('.', '', $jml_pencurian);
+		$jml_perkosaan				= str_replace('.', '', $jml_perkosaan);
+		$jml_kenakalan_remaja		= str_replace('.', '', $jml_kenakalan_remaja);
+		$jml_pembunuhan				= str_replace('.', '', $jml_pembunuhan);
+		$jml_perampokan				= str_replace('.', '', $jml_perampokan);
+		$jml_penipuan				= str_replace('.', '', $jml_penipuan);
+		$jml_bencana				= str_replace('.', '', $jml_bencana);
+		$jml_pos_bencana			= str_replace('.', '', $jml_pos_bencana);
+		$jml_pembalakan_liar		= str_replace('.', '', $jml_pembalakan_liar);
+		$jml_pos_hutan_lindung		= str_replace('.', '', $jml_pos_hutan_lindung);
 		
 		
 		

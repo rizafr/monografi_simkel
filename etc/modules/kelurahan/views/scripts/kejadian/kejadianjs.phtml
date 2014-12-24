@@ -191,11 +191,11 @@ function setvalueuplfile(v,n,f) {
 	    var af=f.split("/");
         var nval=eval("document.forms[0]."+n);
 		var ext=v.substring(v.lastIndexOf(".")+1,v.length);
-		if ((ext==f)||(ext=='pdf')||(ext=='docx')||(ext=='xls')||(ext=='xlsx')||(ext=='jpg')||(ext=='jpeg')||(ext=='gif')||(ext=='png')){ 
+		if ((ext==f)||(ext=='pdf')||(ext=='docx')||(ext=='xls')||(ext=='xlsx')||(ext=='jpg')||(ext=='jpeg')||(ext=='gif')||(ext=='png')||(ext=='PNG')||(ext=='JPG')||(ext=='JPEG')||(ext=='zip')||(ext=='rar')){ 
 		document.forms[0].a_file.value=v; 
 		}
 		else{
-		  alert ("Hanya untuk file berekstensi '"+f+"',docx,pdf,xls,xlsx,jpg,jpeg,gif,png ");
+		  alert ("Hanya untuk file berekstensi '"+f+"' docx,pdf,xls,xlsx,jpg,JPG,jpeg,JPEG,gif,png,rar dan zip ");
 		  nval.value="";
 		  document.forms[0].a_file.value=""; 
 		  return;	  

@@ -142,6 +142,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$lokasi				= trim($_POST['lokasi']);
 		$kerugian			= $_POST['kerugian'];
 		$nominal			= $_POST['nominal'];
+		$nominal = str_replace('.', '', $nominal); 
 		$tanggal_laporan	= $_POST['tanggal_laporan'];
 		$pelapor			= $_POST['pelapor'];
 		$keterangan			= trim($_POST['keterangan']);
@@ -236,6 +237,7 @@ class Kelurahan_KejadianController extends Zend_Controller_Action {
 		$pelapor			= $_POST['pelapor'];
 		$keterangan			= trim($_POST['keterangan']);
 		
+		$nominal = str_replace('.', '', $nominal);
 		
 		$allowed_ext    = array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'rar', 'zip','png','jpg','jpeg');
 		$file_name        = $_FILES['lampiran']['name'];

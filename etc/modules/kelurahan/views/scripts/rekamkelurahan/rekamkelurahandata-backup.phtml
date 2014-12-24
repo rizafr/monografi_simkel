@@ -15,12 +15,6 @@ $currentPage = $this->currentPage;
 $numToDisplay = $this->numToDisplay;
 //konvert ke bulan indonesia
 	$array_bulan = array(1=>'Januari','Februari','Maret', 'April', 'Mei', 'Juni','Juli','Agustus','September','Oktober', 'November','Desember'); 
-	
-	function ribuan($angka)
-	{
-		$hasil =  number_format($angka,0,',','.');
-		return $hasil;
-	}
 ?>
 <div class="navlink">
 <a href="#" onclick="open_url_to_home('<?php echo $this->basePath; ?>/home/index/depan','<?php echo $this->basePath; ?>/home/index/main');">Halaman Utama</a>
@@ -195,18 +189,12 @@ $(function(){
 	<tr>
 		<td align="right" >5. Jumlah Penduduk :</td>
 		<td><? 
-				//fungsi ternary, jika variabel tidak kosong, kasih format ribuan, jika kosong isi dengan 0
-				$jml_jiwa = (!empty($this->detailUmum['jml_jiwa'])) ? ribuan($this->detailUmum['jml_jiwa']) : 0;
-				
-				$jml_jiwaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)", "class"=>"kecil");
-				echo $ctrlFrm->formText("jml_jiwa", $jml_jiwa, $jml_jiwaAttrib);
+				$jml_jiwaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "class"=>"kecil","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_jiwa", $this->detailUmum['jml_jiwa'], $jml_jiwaAttrib);
 			?>   jiwa 
 			<? 
-				//fungsi ternary, jika variabel tidak kosong, kasih format ribuan, jika kosong isi dengan 0
-				$jml_kk = (!empty($this->detailUmum['jml_kk'])) ? ribuan($this->detailUmum['jml_kk']) : 0;
-				
-				$jml_kkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried", "onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)","class"=>"kecil");
-				echo $ctrlFrm->formText("jml_kk", $jml_kk, $jml_kkAttrib);
+				$jml_kkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)" ,"class"=>"kecil", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_kk", $this->detailUmum['jml_kk'], $jml_kkAttrib);
 			?>  kk
 		</td>
 	
@@ -216,11 +204,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; Laki-laki :</td>
 		<td align="center">
 			<? 
-				//fungsi ternary, jika variabel tidak kosong, kasih format ribuan, jika kosong isi dengan 0
-				$jml_laki = (!empty($this->detailUmum['jml_laki'])) ? ribuan($this->detailUmum['jml_laki']) : 0;
-				
-				$jml_lakiAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_laki", $jml_laki, $jml_lakiAttrib);
+				$jml_lakiAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_laki", $this->detailUmum['jml_laki'], $jml_lakiAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -229,11 +214,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; Perempuan :</td>
 		<td align="center">
 			<? 
-				//fungsi ternary, jika variabel tidak kosong, kasih format ribuan, jika kosong isi dengan 0
-				$jml_perempuan = (!empty($this->detailUmum['jml_perempuan'])) ? ribuan($this->detailUmum['jml_perempuan']) : 0;				
-				
-				$jml_perempuanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_perempuan", $jml_perempuan, $jml_perempuanAttrib);
+				$jml_perempuanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_perempuan", $this->detailUmum['jml_perempuan'], $jml_perempuanAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -241,10 +223,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; Usia 0-15 :</td>
 		<td align="center">
 			<? 
-				$jml_0_15 = (!empty($this->detailUmum['jml_0_15'])) ? ribuan($this->detailUmum['jml_0_15']) : 0;
-				
-				$jml_0_15Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_0_15", $jml_0_15, $jml_0_15Attrib);
+				$jml_0_15Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_0_15", $this->detailUmum['jml_0_15'], $jml_0_15Attrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -252,10 +232,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; Usia 15-65:</td>
 		<td align="center">
 			<? 
-				$jml_15_65 = (!empty($this->detailUmum['jml_15_65'])) ? ribuan($this->detailUmum['jml_15_65']) : 0;
-				
-				$jml_15_65Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_15_65", $jml_15_65, $jml_15_65Attrib);
+				$jml_15_65Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_15_65", $this->detailUmum['jml_15_65'], $jml_15_65Attrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -263,10 +241,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; Usia 65 ke-atas:</td>
 		<td align="center">
 			<? 
-				$jml_65_keatas = (!empty($this->detailUmum['jml_65_keatas'])) ? ribuan($this->detailUmum['jml_65_keatas']) : 0;
-				
-				$jml_65_keatasAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_65_keatas", $jml_65_keatas, $jml_65_keatasAttrib);
+				$jml_65_keatasAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_65_keatas", $this->detailUmum['jml_65_keatas'], $jml_65_keatasAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -282,10 +258,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Pegawai Negeri Asli :</td>
 		<td>
 			<? 
-				$jml_pns = (!empty($this->detailUmum['jml_pns'])) ? ribuan($this->detailUmum['jml_pns']) : 0;
-				
-				$jml_pnsAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_pns", $jml_pns, $jml_pnsAttrib);
+				$jml_pnsAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_pns", $this->detailUmum['jml_pns'], $jml_pnsAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -294,9 +268,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2. ABRI :</td>
 		<td>
 			<? 
-				$jml_abri = (!empty($this->detailUmum['jml_abri'])) ? ribuan($this->detailUmum['jml_abri']) : 0;
-				$jml_abriAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_abri", $jml_abri, $jml_abriAttrib);
+				$jml_abriAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_abri", $this->detailUmum['jml_abri'], $jml_abriAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -304,10 +277,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Swasta</td>
 		<td>
 			<? 
-				$jml_swasta = (!empty($this->detailUmum['jml_swasta'])) ? ribuan($this->detailUmum['jml_swasta']) : 0;
-				
-				$jml_swastaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_swasta", $jml_swasta, $jml_swastaAttrib);
+				$jml_swastaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_swasta", $this->detailUmum['jml_swasta'], $jml_swastaAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -316,10 +287,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; b. Wiraswasta / Pedagang</td>
 		<td>	
 			<? 
-				$jml_wiraswasta = (!empty($this->detailUmum['jml_wiraswasta'])) ? ribuan($this->detailUmum['jml_wiraswasta']) : 0;
-				
-				$jml_wiraswastaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_wiraswasta", $jml_wiraswasta, $jml_wiraswastaAttrib);
+				$jml_wiraswastaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_wiraswasta", $this->detailUmum['jml_wiraswasta'], $jml_wiraswastaAttrib);
 			?>  Jiwa
 	</td>
 	</tr>
@@ -328,10 +297,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; c. Tani</td>
 		<td>	
 			<? 
-				$jml_tani = (!empty($this->detailUmum['jml_tani'])) ? ribuan($this->detailUmum['jml_tani']) : 0;
-				
-				$jml_taniAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_tani", $jml_tani, $jml_taniAttrib);
+				$jml_taniAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_tani", $this->detailUmum['jml_tani'], $jml_taniAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -340,10 +307,8 @@ $(function(){
 	    <td align="right" >&nbsp;&nbsp;&nbsp; d. Pertukangan</td>
 		<td>	
 			<? 
-				$jml_pertukangan = (!empty($this->detailUmum['jml_pertukangan'])) ? ribuan($this->detailUmum['jml_pertukangan']) : 0;
-				
-				$jml_pertukanganAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_pertukangan", $jml_pertukangan, $jml_pertukanganAttrib);
+				$jml_pertukanganAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_pertukangan", $this->detailUmum['jml_pertukangan'], $jml_pertukanganAttrib);
 			?>  Jiwa
 		</td>
 	</tr>
@@ -352,9 +317,8 @@ $(function(){
 	    <td align="right" >&nbsp;&nbsp;&nbsp; e. Buruh Tani:</td>
 		<td>	
 			<? 
-				$jml_buruh_tani = (!empty($this->detailUmum['jml_buruh_tani'])) ? ribuan($this->detailUmum['jml_buruh_tani']) : 0;
-				$jml_buruh_taniAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_buruh_tani", $jml_buruh_tani, $jml_buruh_taniAttrib);
+				$jml_buruh_taniAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_buruh_tani", $this->detailUmum['jml_buruh_tani'], $jml_buruh_taniAttrib);
 			?>  Jiwa
 		</td>
 	</td>
@@ -364,9 +328,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; f.Pensiunan :</td>
 		<td>	
 			<? 
-				$jml_pensiunan = (!empty($this->detailUmum['jml_pensiunan'])) ? ribuan($this->detailUmum['jml_pensiunan']) : 0;
-				$jml_pensiunanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_pensiunan", $jml_pensiunan, $jml_pensiunanAttrib);
+				$jml_pensiunanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_pensiunan", $this->detailUmum['jml_pensiunan'], $jml_pensiunanAttrib);
 			?>  Jiwa
 	</td>
 	</tr>
@@ -375,9 +338,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; g. Nelayan :</td>
 		<td>	
 			<? 
-				$jml_nelayan = (!empty($this->detailUmum['jml_nelayan'])) ? ribuan($this->detailUmum['jml_nelayan']) : 0;
-				$jml_nelayanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_nelayan", $jml_nelayan, $jml_nelayanAttrib);
+				$jml_nelayanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_nelayan", $this->detailUmum['jml_nelayan'], $jml_nelayanAttrib);
 			?>  Jiwa
 	</td>
 	</tr>
@@ -386,9 +348,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; h. Pemulung :</td>
 		<td>	
 			<? 
-				$jml_pemulung = (!empty($this->detailUmum['jml_pemulung'])) ? ribuan($this->detailUmum['jml_pemulung']) : 0;
-				$jml_pemulungAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"number","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_pemulung", $jml_pemulung, $jml_pemulungAttrib);
+				$jml_pemulungAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"number","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_pemulung", $this->detailUmum['jml_pemulung'], $jml_pemulungAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -397,9 +358,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; i. Jasa :</td>
 		<td>	
 			<? 
-				$jml_jasa = (!empty($this->detailUmum['jml_jasa'])) ? ribuan($this->detailUmum['jml_jasa']) : 0;
-				$jml_jasaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_jasa", $jml_jasa, $jml_jasaAttrib);
+				$jml_jasaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_jasa", $this->detailUmum['jml_jasa'], $jml_jasaAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -419,9 +379,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  1. Taman Kanak-kanak :</td>
 		<td>	
 			<? 
-				$jml_lulusan_tk = (!empty($this->detailUmum['jml_lulusan_tk'])) ? ribuan($this->detailUmum['jml_lulusan_tk']) : 0;
-				$jml_lulusan_tkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_lulusan_tk", $jml_lulusan_tk, $jml_lulusan_tkAttrib);
+				$jml_lulusan_tkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_lulusan_tk", $this->detailUmum['jml_lulusan_tk'], $jml_lulusan_tkAttrib);
 			?> jiwa
 	</td>
 	</tr>		
@@ -431,9 +390,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Sekolah Dasar :</td>
 		<td>	
 			<? 
-				$jml_lulusan_sd = (!empty($this->detailUmum['jml_lulusan_sd'])) ? ribuan($this->detailUmum['jml_lulusan_sd']) : 0;
-				$jml_lulusan_sdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_lulusan_sd", $jml_lulusan_sd, $jml_lulusan_sdAttrib);
+				$jml_lulusan_sdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_lulusan_sd", $this->detailUmum['jml_lulusan_sd'], $jml_lulusan_sdAttrib);
 			?> jiwa
 	</td>
 	</tr>
@@ -442,9 +400,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. SMP :</td>
 		<td>	
 			<? 
-				$jml_lulusan_smp = (!empty($this->detailUmum['jml_lulusan_smp'])) ? ribuan($this->detailUmum['jml_lulusan_smp']) : 0;
-				$jml_lulusan_smpAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_lulusan_smp", $jml_lulusan_smp, $jml_lulusan_smpAttrib);
+				$jml_lulusan_smpAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_lulusan_smp", $this->detailUmum['jml_lulusan_smp'], $jml_lulusan_smpAttrib);
 			?> jiwa
 	</td>
 	</tr>
@@ -453,9 +410,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. SMA/SMU :</td>
 		<td>	
 			<? 
-				$jml_lulusan_sma = (!empty($this->detailUmum['jml_lulusan_sma'])) ? ribuan($this->detailUmum['jml_lulusan_sma']) : 0;
 				$jml_lulusan_smaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
-				echo $ctrlFrm->formText("jml_lulusan_sma", $jml_lulusan_sma, $jml_lulusan_smaAttrib);
+				echo $ctrlFrm->formText("jml_lulusan_sma", $this->detailUmum['jml_lulusan_sma'], $jml_lulusan_smaAttrib);
 			?> jiwa
 	</td>
 	</tr>
@@ -464,9 +420,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. Akademi /D1-D3 :</td>
 		<td>	
 			<? 
-				$jml_lulusan_diploma = (!empty($this->detailUmum['jml_lulusan_diploma'])) ? ribuan($this->detailUmum['jml_lulusan_diploma']) : 0;
-				$jml_lulusan_diplomaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_lulusan_diploma", $jml_lulusan_diploma, $jml_lulusan_diplomaAttrib);
+				$jml_lulusan_diplomaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_lulusan_diploma", $this->detailUmum['jml_lulusan_diploma'], $jml_lulusan_diplomaAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -475,9 +430,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6. Sarjana :</td>
 		<td>	
 			<? 
-				$jml_lulusan_sarjana = (!empty($this->detailUmum['jml_lulusan_sarjana'])) ? ribuan($this->detailUmum['jml_lulusan_sarjana']) : 0;
-				$jml_lulusan_sarjanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_lulusan_sarjana", $jml_lulusan_sarjana, $jml_lulusan_sarjanaAttrib);
+				$jml_lulusan_sarjanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_lulusan_sarjana", $this->detailUmum['jml_lulusan_sarjana'], $jml_lulusan_sarjanaAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -486,10 +440,9 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7. Pascasarjana :</td>
 		<td>	
-			<? 	
-				$jml_lulusan_pascasarjana = (!empty($this->detailUmum['jml_lulusan_pascasarjana'])) ? ribuan($this->detailUmum['jml_lulusan_pascasarjana']) : 0;
-				$jml_lulusan_pascasarjanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_lulusan_pascasarjana", $jml_lulusan_pascasarjana, $jml_lulusan_pascasarjanaAttrib);
+			<? 
+				$jml_lulusan_pascasarjanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_lulusan_pascasarjana", $this->detailUmum['jml_lulusan_pascasarjana'], $jml_lulusan_pascasarjanaAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -503,9 +456,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Pondok Pesantren :</td>
 		<td>	
 			<? 
-				$jml_lulusan_pontren = (!empty($this->detailUmum['jml_lulusan_pontren'])) ? ribuan($this->detailUmum['jml_lulusan_pontren']) : 0;
-				$jml_lulusan_pontrenAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_lulusan_pontren", $jml_lulusan_pontren, $jml_lulusan_pontrenAttrib);
+				$jml_lulusan_pontrenAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_lulusan_pontren", $this->detailUmum['jml_lulusan_pontren'], $jml_lulusan_pontrenAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -514,9 +466,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Pendidikan Keagamaan :</td>
 		<td>	
 			<? 
-				$jml_lulusan_keagamaan = (!empty($this->detailUmum['jml_lulusan_keagamaan'])) ? ribuan($this->detailUmum['jml_lulusan_keagamaan']) : 0;
-				$jml_lulusan_keagamaanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_lulusan_keagamaan", $jml_lulusan_keagamaan, $jml_lulusan_keagamaanAttrib);
+				$jml_lulusan_keagamaanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_lulusan_keagamaan", $this->detailUmum['jml_lulusan_keagamaan'], $jml_lulusan_keagamaanAttrib);
 			?> jiwa
 		</td>
 	</tr>
@@ -525,9 +476,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Sekolah Luar Biasa:</td>
 		<td>	
 			<? 
-				$jml_lulusan_slb = (!empty($this->detailUmum['jml_lulusan_slb'])) ? ribuan($this->detailUmum['jml_lulusan_slb']) : 0;
-				$jml_lulusan_slbAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_lulusan_slb", $jml_lulusan_slb, $jml_lulusan_slbAttrib);
+				$jml_lulusan_slbAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_lulusan_slb", $this->detailUmum['jml_lulusan_slb'], $jml_lulusan_slbAttrib);
 			?>	jiwa
 		</td>
 	</tr>
@@ -536,9 +486,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Kursus Keterampilan:</td>
 		<td>	
 			<? 
-				$jml_lulusan_kursus = (!empty($this->detailUmum['jml_lulusan_kursus'])) ? ribuan($this->detailUmum['jml_lulusan_kursus']) : 0;
-				$jml_lulusan_kursusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_lulusan_kursus", $jml_lulusan_kursus, $jml_lulusan_kursusAttrib);
+				$jml_lulusan_kursusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_lulusan_kursus", $this->detailUmum['jml_lulusan_kursus'], $jml_lulusan_kursusAttrib);
 			?>	jiwa
 		</td>
 	</tr>
@@ -547,14 +496,12 @@ $(function(){
 		<td align="right" >8. Jumlah Penduduk Miskin:</td>
 		<td>	
 			<? 
-				$jml_jiwa_miskin = (!empty($this->detailUmum['jml_jiwa_miskin'])) ? ribuan($this->detailUmum['jml_jiwa_miskin']) : 0;
-				$jml_jiwa_miskinAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_jiwa_miskin", $jml_jiwa_miskin, $jml_jiwa_miskinAttrib);
+				$jml_jiwa_miskinAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","class"=>"kecil","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_jiwa_miskin", $this->detailUmum['jml_jiwa_miskin'], $jml_jiwa_miskinAttrib);
 			?> jiwa
 			<? 
-				$jml_jiwa_kk = (!empty($this->detailUmum['jml_jiwa_kk'])) ? ribuan($this->detailUmum['jml_jiwa_kk']) : 0;
-				$jml_jiwa_kkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_jiwa_kk", $jml_jiwa_kk, $jml_jiwa_kkAttrib);
+				$jml_jiwa_kkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","class"=>"kecil","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_jiwa_kk", $this->detailUmum['jml_jiwa_kk'], $jml_jiwa_kkAttrib);
 			?>  KK
 		</td>
 	</tr>
@@ -567,12 +514,9 @@ $(function(){
 		<td align="right" >9. UMR Kabupaten / Kota:</td>
 		<td>	
 			Rp &nbsp;
-			<?  
-				
-				$umr= explode('.', $this->detailUmum['umr']);
-				$umr = (!empty($umr[0])) ? ribuan($umr[0]) : 0;
-				$umrAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("umr", $umr, $umrAttrib);
+			<?  $umr= explode('.', $this->detailUmum['umr']);
+				$umrAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("umr", $umr[0], $umrAttrib);
 			?> 
 		</td>
 	</tr>
@@ -608,10 +552,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. UKBM /Posyandu:</td>
 		<td>	
 			<? 
-				$sarana_jml_posyandu = (!empty($this->detailUmum['sarana_jml_posyandu'])) ? ribuan($this->detailUmum['sarana_jml_posyandu']) : 0;
-				
-				$sarana_jml_posyanduAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_posyandu", $sarana_jml_posyandu, $sarana_jml_posyanduAttrib);
+				$sarana_jml_posyanduAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_posyandu", $this->detailUmum['sarana_jml_posyandu'], $sarana_jml_posyanduAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -620,9 +562,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Poliklinik / Balai Pelayanan <br />Masyarat:</td>
 		<td>	
 			<? 
-				$sarana_jml_poliklinik = (!empty($this->detailUmum['sarana_jml_poliklinik'])) ? ribuan($this->detailUmum['sarana_jml_poliklinik']) : 0;
-				$sarana_jml_poliklinikAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_poliklinik", $sarana_jml_poliklinik, $sarana_jml_poliklinikAttrib);
+				$sarana_jml_poliklinikAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50, "required"=>"requried","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_poliklinik", $this->detailUmum['sarana_jml_poliklinik'], $sarana_jml_poliklinikAttrib);
 			?> buah
 		</td>
 	</tr>
@@ -635,10 +576,9 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Gedung Sekolah PAUD:</td>
 		<td>	
-			<? 
-				$sarana_jml_paud = (!empty($this->detailUmum['sarana_jml_paud'])) ? ribuan($this->detailUmum['sarana_jml_paud']) : 0;
-				$sarana_jml_paudAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_paud", $sarana_jml_paud, $sarana_jml_paudAttrib);
+					<? 
+				$sarana_jml_paudAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_paud", $this->detailUmum['sarana_jml_paud'], $sarana_jml_paudAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -647,9 +587,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Gedung Sekolah TK:</td>
 		<td>	
 			<? 
-				$sarana_jml_tk = (!empty($this->detailUmum['sarana_jml_tk'])) ? ribuan($this->detailUmum['sarana_jml_tk']) : 0;
-				$sarana_jml_tkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_tk", $sarana_jml_tk, $sarana_jml_tkAttrib);
+				$sarana_jml_tkAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_tk", $this->detailUmum['sarana_jml_tk'], $sarana_jml_tkAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -658,9 +597,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Gedung Sekolah SD:</td>
 		<td>	
 			<? 
-				$sarana_jml_sd = (!empty($this->detailUmum['sarana_jml_sd'])) ? ribuan($this->detailUmum['sarana_jml_sd']) : 0;
-				$sarana_jml_sdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_sd", $sarana_jml_sd, $sarana_jml_sdAttrib);
+				$sarana_jml_sdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_sd", $this->detailUmum['sarana_jml_sd'], $sarana_jml_sdAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -669,9 +607,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. Gedung Sekolah SMP:</td>
 		<td>	
 			<? 
-				$sarana_jml_smp = (!empty($this->detailUmum['sarana_jml_smp'])) ? ribuan($this->detailUmum['sarana_jml_smp']) : 0;
-				$sarana_jml_smpAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_smp", $sarana_jml_smp, $sarana_jml_smpAttrib);
+				$sarana_jml_smpAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true",  "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_smp", $this->detailUmum['sarana_jml_smp'], $sarana_jml_smpAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -680,9 +617,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. Gedung Sekolah SMA:</td>
 		<td>	
 			<? 
-				$sarana_jml_sma = (!empty($this->detailUmum['sarana_jml_sma'])) ? ribuan($this->detailUmum['sarana_jml_sma']) : 0;
-				$sarana_jml_smaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_sma", $sarana_jml_sma, $sarana_jml_smaAttrib);
+				$sarana_jml_smaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true",  "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_sma", $this->detailUmum['sarana_jml_sma'], $sarana_jml_smaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -691,9 +627,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6. Gedung Perguruan Tinggi:</td>
 		<td>	
 			<? 
-				$sarana_jml_pt = (!empty($this->detailUmum['sarana_jml_pt'])) ? ribuan($this->detailUmum['sarana_jml_pt']) : 0;
-				$sarana_jml_ptAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_pt", $sarana_jml_pt, $sarana_jml_ptAttrib);
+				$sarana_jml_ptAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true","onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_pt", $this->detailUmum['sarana_jml_pt'], $sarana_jml_ptAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -707,9 +642,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Mesjid:</td>
 		<td>	
 			<? 
-				$sarana_jml_masjid = (!empty($this->detailUmum['sarana_jml_masjid'])) ? ribuan($this->detailUmum['sarana_jml_masjid']) : 0;
-				$sarana_jml_masjidAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_masjid", $sarana_jml_masjid, $sarana_jml_masjidAttrib);
+				$sarana_jml_masjidAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true",  "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_masjid", $this->detailUmum['sarana_jml_masjid'], $sarana_jml_masjidAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -718,9 +652,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Mushola:</td>
 		<td>	
 			<? 
-				$sarana_jml_mushola = (!empty($this->detailUmum['sarana_jml_mushola'])) ? ribuan($this->detailUmum['sarana_jml_mushola']) : 0;
-				$sarana_jml_musholaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_mushola", $sarana_jml_mushola, $sarana_jml_musholaAttrib);
+				$sarana_jml_musholaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true",  "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_mushola", $this->detailUmum['sarana_jml_mushola'], $sarana_jml_musholaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -729,9 +662,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Gereja:</td>
 		<td>	
 			<? 
-				$sarana_jml_gereja = (!empty($this->detailUmum['sarana_jml_gereja'])) ? ribuan($this->detailUmum['sarana_jml_gereja']) : 0;
-				$sarana_jml_gerejaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_gereja", $sarana_jml_gereja, $sarana_jml_gerejaAttrib);
+				$sarana_jml_gerejaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_gereja", $this->detailUmum['sarana_jml_gereja'], $sarana_jml_gerejaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -740,9 +672,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. Pura:</td>
 		<td>	
 			<? 
-				$sarana_jml_pura = (!empty($this->detailUmum['sarana_jml_pura'])) ? ribuan($this->detailUmum['sarana_jml_pura']) : 0;
-				$sarana_jml_puraAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_pura", $sarana_jml_pura, $sarana_jml_puraAttrib);
+				$sarana_jml_puraAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_pura", $this->detailUmum['sarana_jml_pura'], $sarana_jml_puraAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -751,9 +682,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. Vihara:</td>
 		<td>	
 			<? 
-				$sarana_jml_vihara = (!empty($this->detailUmum['sarana_jml_vihara'])) ? ribuan($this->detailUmum['sarana_jml_vihara']) : 0;
-				$sarana_jml_viharaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_vihara", $sarana_jml_vihara, $sarana_jml_viharaAttrib);
+				$sarana_jml_viharaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_vihara", $this->detailUmum['sarana_jml_vihara'], $sarana_jml_viharaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -762,9 +692,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6. Klenteng:</td>
 		<td>	
 			<? 
-				$sarana_jml_klenteng = (!empty($this->detailUmum['sarana_jml_klenteng'])) ? ribuan($this->detailUmum['sarana_jml_klenteng']) : 0;
-				$sarana_jml_klentengAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_klenteng", $sarana_jml_klenteng, $sarana_jml_klentengAttrib);
+				$sarana_jml_klentengAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_klenteng", $this->detailUmum['sarana_jml_klenteng'], $sarana_jml_klentengAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -778,9 +707,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Olahraga:</td>
 		<td>	
 			<? 
-				$sarana_jml_olahraga = (!empty($this->detailUmum['sarana_jml_olahraga'])) ? ribuan($this->detailUmum['sarana_jml_olahraga']) : 0;
-				$sarana_jml_olahragaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_olahraga", $sarana_jml_olahraga, $sarana_jml_olahragaAttrib);
+				$sarana_jml_olahragaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_olahraga", $this->detailUmum['sarana_jml_olahraga'], $sarana_jml_olahragaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -789,9 +717,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Kesenian / Budaya:</td>
 		<td>	
 			<? 
-				$sarana_jml_kesenian = (!empty($this->detailUmum['sarana_jml_kesenian'])) ? ribuan($this->detailUmum['sarana_jml_kesenian']) : 0;
-				$sarana_jml_kesenianAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_kesenian", $sarana_jml_kesenian, $sarana_jml_kesenianAttrib);
+				$sarana_jml_kesenianAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_kesenian", $this->detailUmum['sarana_jml_kesenian'], $sarana_jml_kesenianAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -800,9 +727,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Balai Pertemuan:</td>
 		<td>	
 			<? 
-				$sarana_jml_balai_pertemuan = (!empty($this->detailUmum['sarana_jml_balai_pertemuan'])) ? ribuan($this->detailUmum['sarana_jml_balai_pertemuan']) : 0;
-				$sarana_jml_balai_pertemuanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_balai_pertemuan", $sarana_jml_balai_pertemuan, $sarana_jml_balai_pertemuanAttrib);
+				$sarana_jml_balai_pertemuanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_balai_pertemuan", $this->detailUmum['sarana_jml_balai_pertemuan'], $sarana_jml_balai_pertemuanAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -811,9 +737,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. Lainnya:</td>
 		<td>	
 			<? 
-				$sarana_jml_lainnya = (!empty($this->detailUmum['sarana_jml_lainnya'])) ? ribuan($this->detailUmum['sarana_jml_lainnya']) : 0;
-				$sarana_jml_lainnyaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("sarana_jml_lainnya", $sarana_jml_lainnya, $sarana_jml_lainnyaAttrib);
+				$sarana_jml_lainnyaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("sarana_jml_lainnya", $this->detailUmum['sarana_jml_lainnya'], $sarana_jml_lainnyaAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -998,10 +923,9 @@ $(function(){
 	<tr>
 		<td align="right" >&nbsp;&nbsp;&nbsp; a. Golongan I:</td>
 		<td>
-			<?
-				$jumlah_aparat_gol1 = (!empty($this->detailPersonil['jumlah_aparat_gol1'])) ? ribuan($this->detailPersonil['jumlah_aparat_gol1']) : 0;
+			<? 
 				$jumlah_aparat_gol1Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
-				echo $ctrlFrm->formText("jumlah_aparat_gol1", $jumlah_aparat_gol1, $jumlah_aparat_gol1Attrib);
+				echo $ctrlFrm->formText("jumlah_aparat_gol1", $this->detailPersonil['jumlah_aparat_gol1'], $jumlah_aparat_gol1Attrib);
 			?>  orang
 		
 		</td>
@@ -1011,9 +935,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; b.  Golongan II:</td>
 		<td>	
 			<? 
-				$jumlah_aparat_gol2 = (!empty($this->detailPersonil['jumlah_aparat_gol2'])) ? ribuan($this->detailPersonil['jumlah_aparat_gol2']) : 0;
 				$jumlah_aparat_gol2Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
-				echo $ctrlFrm->formText("jumlah_aparat_gol2", $jumlah_aparat_gol2, $jumlah_aparat_gol2Attrib);
+				echo $ctrlFrm->formText("jumlah_aparat_gol2", $this->detailPersonil['jumlah_aparat_gol2'], $jumlah_aparat_gol2Attrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1022,9 +945,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; c.  Golongan III:</td>
 		<td>	
 			<? 
-				$jumlah_aparat_gol3 = (!empty($this->detailPersonil['jumlah_aparat_gol3'])) ? ribuan($this->detailPersonil['jumlah_aparat_gol3']) : 0;
 				$jumlah_aparat_gol3Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
-				echo $ctrlFrm->formText("jumlah_aparat_gol3", $jumlah_aparat_gol3, $jumlah_aparat_gol3Attrib);
+				echo $ctrlFrm->formText("jumlah_aparat_gol3", $this->detailPersonil['jumlah_aparat_gol3'], $jumlah_aparat_gol3Attrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1033,9 +955,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; d.  Golongan IV:</td>
 		<td>	
 			<? 
-				$jumlah_aparat_gol4 = (!empty($this->detailPersonil['jumlah_aparat_gol4'])) ? ribuan($this->detailPersonil['jumlah_aparat_gol4']) : 0;
 				$jumlah_aparat_gol4Attrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
-				echo $ctrlFrm->formText("jumlah_aparat_gol4", $jumlah_aparat_gol4, $jumlah_aparat_gol4Attrib);
+				echo $ctrlFrm->formText("jumlah_aparat_gol4", $this->detailPersonil['jumlah_aparat_gol4'], $jumlah_aparat_gol4Attrib);
 			?>  orang
 		</td>
 	</tr>		
@@ -1050,9 +971,8 @@ $(function(){
 		<td colspan="2" align="right" >1. Jumlah urusan yang dilimpahkan kabupaten/kota</td>
 			<td>
 			<? 
-				$jml_urusan_kota = (!empty($this->detailKewenangan['jml_urusan_kota'])) ? ribuan($this->detailKewenangan['jml_urusan_kota']) : 0;
-				$jml_urusan_kotaAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_urusan_kota", $jml_urusan_kota, $jml_urusan_kotaAttrib);
+				$jml_urusan_kotaAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_urusan_kota", $this->detailKewenangan['jml_urusan_kota'], $jml_urusan_kotaAttrib);
 			?>  buah</td>
 	</tr>
 	
@@ -1060,9 +980,8 @@ $(function(){
 		<td colspan="2" align="right" >2. Urusan yang dilimpahkan oleh kabupaten/kota</td>
 		<td>
 			<? 
-				$jml_urusan_kota = (!empty($this->detailKewenangan['jml_urusan_kota'])) ? ribuan($this->detailKewenangan['jml_urusan_kota']) : 0;
-				$jml_limpah_urusan_kotaAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_limpah_urusan_kota", $jml_limpah_urusan_kota, $jml_limpah_urusan_kotaAttrib);
+				$jml_limpah_urusan_kotaAttrib = array("size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_limpah_urusan_kota", $this->detailKewenangan['jml_limpah_urusan_kota'], $jml_limpah_urusan_kotaAttrib);
 			?>  buah</td>
 	</tr>
 	
@@ -1192,7 +1111,6 @@ $(function(){
 			$nama_program	= $this->escape($val['nama_program']);
 			$anggaran	= $this->escape($val['anggaran']);
 			$anggaran= explode('.', $anggaran);
-			$anggaran = (!empty($anggaran[0])) ? ribuan($anggaran['0']) : 0;
 			
 			$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
 			echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
@@ -1204,7 +1122,7 @@ $(function(){
 				<input name="kode_pusat_<? echo $i?>" value="3" id="kode_pusat" type="hidden">
 				
 				<td class="clleft"><input name="nama_program_pusat_<? echo $i?>" id="nama_program_pusat" type="text" value="<? echo $nama_program;?>"></td></td>
-				<td class="clleft"><input name="anggaran_pusat_<? echo $i?>" id="anggaran_pusat" value="<? echo $anggaran[0];?>" type="text" onkeydown="javascript:return numbersonly(this, event)" onkeyup="javascript:tandaPemisahTitik(this)"></td>
+				<td class="clleft"><input name="anggaran_pusat_<? echo $i?>" id="anggaran_pusat" value="<? echo $anggaran[0];?>" type="text" onkeypress="javascript:return isNumber(event)"></td>
 				<td><input type="button" id="hapusPusat" value="Hapus"></td>
 			<?php $i++;
 			endforeach ; 
@@ -1258,7 +1176,7 @@ $(function(){
 			$nama_program	= $this->escape($val['nama_program']);
 			$anggaran	= $this->escape($val['anggaran']);
 			$anggaran= explode('.', $anggaran);
-			$anggaran = (!empty($anggaran[0])) ? ribuan($anggaran['0']) : 0;
+			
 			$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
 			echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
 						
@@ -1322,7 +1240,7 @@ $(function(){
 			$nama_program	= $this->escape($val['nama_program']);
 			$anggaran	= $this->escape($val['anggaran']);
 			$anggaran= explode('.', $anggaran);
-			$anggaran = (!empty($anggaran[0])) ? ribuan($anggaran['0']) : 0;
+			
 			$noUrut = (($currentPage -1)* $numToDisplay) + $key +1;
 			echo $ctrlFrm->formHidden('kd_kel', $kd_kel, null);
 						
@@ -1363,8 +1281,7 @@ $(function(){
 		<td align="right"> 1. Anggaran Kelurahan dari APBD kabupaten/kota</td>
 		<td> RP &nbsp;
 			<? $anggaran_apbd= explode('.',$this->detailKeuangan['anggaran_apbd']);
-				$anggaran_apbd = (!empty($anggaran_apbd[0])) ? ribuan($anggaran_apbd['0']) : 0;
-				$anggaran_apbdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required", "onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				$anggaran_apbdAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required");
 				echo $ctrlFrm->formText("anggaran_apbd", $anggaran_apbd[0], $anggaran_apbdAttrib);
 			?>  </td>
 	</tr>
@@ -1390,8 +1307,7 @@ $(function(){
 		<td > 
 		RP &nbsp;
 			<? $bantuan_pusat= explode('.',$this->detailKeuangan['bantuan_pusat']);
-				$bantuan_pusat = (!empty($bantuan_pusat[0])) ? ribuan($bantuan_pusat['0']) : 0;
-				$bantuan_pusatAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				$bantuan_pusatAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("bantuan_pusat", $bantuan_pusat[0], $bantuan_pusatAttrib);
 			?>  
 		</td>
@@ -1401,8 +1317,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; b.  Pemerintah Provinsi:</td>
 		<td> RP &nbsp;
 			<? $bantuan_prov= explode('.',$this->detailKeuangan['bantuan_prov']);
-				$bantuan_prov = (!empty($bantuan_prov[0])) ? ribuan($bantuan_prov['0']) : 0;
-				$bantuan_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				$bantuan_provAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("bantuan_prov",$bantuan_prov[0], $bantuan_provAttrib);
 			?>  
 		</td>
@@ -1412,8 +1327,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; c.  Pemerintah Kabupaten / Kota:</td>
 		<td> RP &nbsp;
 			<? $bantuan_kota= explode('.',$this->detailKeuangan['bantuan_kota']);
-				$bantuan_kota = (!empty($bantuan_kota[0])) ? ribuan($bantuan_kota['0']) : 0;
-				$bantuan_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				$bantuan_kotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("bantuan_kota", $bantuan_kota[0], $bantuan_kotaAttrib);
 			?> 
 		</td>
@@ -1423,8 +1337,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; d. Hibah / Bantuan Luar Negeri:</td>
 		<td> RP &nbsp;
 			<? $hibah= explode('.',$this->detailKeuangan['hibah']);
-				$hibah = (!empty($hibah[0])) ? ribuan($hibah['0']) : 0;
-				$hibahAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				$hibahAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("hibah", $hibah[0], $hibahAttrib);
 			?> 
 		</td>
@@ -1434,8 +1347,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; e.  Sumbangan / Bantuan Lain tidak mengikat:</td>
 		<td> RP &nbsp;
 			<?  $sumbangan= explode('.',$this->detailKeuangan['sumbangan']);
-				$sumbangan = (!empty($sumbangan[0])) ? ribuan($sumbangan['0']) : 0;
-				$sumbanganAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				$sumbanganAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("sumbangan", $sumbangan[0], $sumbanganAttrib);
 			?> 
 		</td>
@@ -1445,8 +1357,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; f. Swadaya / Gotong Royong:</td>
 		<td> RP &nbsp;
 			<?  $swadaya= explode('.',$this->detailKeuangan['swadaya']);
-				$swadaya = (!empty($swadaya[0])) ? ribuan($swadaya['0']) : 0;
-				$swadayaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				$swadayaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("swadaya", $swadaya[0], $swadayaAttrib);
 			?> 
 		</td>
@@ -1470,9 +1381,8 @@ $(function(){
 		<td align="right" width="200px;">&nbsp;&nbsp;&nbsp; a. Jumlah Pengurus:</td>
 		<td colspan="2"> 
 			<? 
-				$lpm_jml_pengurus = (!empty($this->detailKelembagaan['lpm_jml_pengurus'])) ? ribuan($this->detailKelembagaan['lpm_jml_pengurus']) : 0;
-				$lpm_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("lpm_jml_pengurus", $lpm_jml_pengurus, $lpm_jml_pengurusAttrib);
+				$lpm_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("lpm_jml_pengurus", $this->detailKelembagaan['lpm_jml_pengurus'], $lpm_jml_pengurusAttrib);
 			?> orang 
 		</td>
 	</tr>
@@ -1481,9 +1391,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; b. Jumlah Anggota:</td>
 		<td colspan="2"> 
 			<? 
-				$lpm_jml_anggota = (!empty($this->detailKelembagaan['lpm_jml_anggota'])) ? ribuan($this->detailKelembagaan['lpm_jml_anggota']) : 0;
-				$lpm_jml_anggotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("lpm_jml_anggota", $lpm_jml_anggota, $lpm_jml_anggotaAttrib);
+				$lpm_jml_anggotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("lpm_jml_anggota", $this->detailKelembagaan['lpm_jml_anggota'], $lpm_jml_anggotaAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1492,9 +1401,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; c.  Jumlah Kegiatan perbulan:</td>
 		<td colspan="2"> 
 			<? 
-				$lpm_jml_keg_perbulan = (!empty($this->detailKelembagaan['lpm_jml_keg_perbulan'])) ? ribuan($this->detailKelembagaan['lpm_jml_keg_perbulan']) : 0;
-				$lpm_jml_keg_perbulanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("lpm_jml_keg_perbulan", $lpm_jml_keg_perbulan, $lpm_jml_keg_perbulanAttrib);
+				$lpm_jml_keg_perbulanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("lpm_jml_keg_perbulan", $this->detailKelembagaan['lpm_jml_keg_perbulan'], $lpm_jml_keg_perbulanAttrib);
 			?>  kegiatan
 		</td>
 	</tr>
@@ -1503,9 +1411,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; d. Jumlah dana yang dikelola:</td>
 		<td> RP &nbsp;
 			<? 
-				$lpm_jml_dana = (!empty($this->detailKelembagaan['lpm_jml_dana'])) ? ribuan($this->detailKelembagaan['lpm_jml_dana']) : 0;
-				$lpm_jml_danaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("lpm_jml_dana", $lpm_jml_dana, $lpm_jml_danaAttrib);
+				$lpm_jml_danaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("lpm_jml_dana", $this->detailKelembagaan['lpm_jml_dana'], $lpm_jml_danaAttrib);
 			?> 
 		</td>
 	</tr>
@@ -1514,9 +1421,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; e.  Jumlah buku administrasi yang dikelola:</td>
 		<td colspan="2"> 
 			<? 
-				$lpm_jml_buku_administrasi = (!empty($this->detailKelembagaan['lpm_jml_buku_administrasi'])) ? ribuan($this->detailKelembagaan['lpm_jml_buku_administrasi']) : 0;
-				$lpm_jml_buku_administrasiAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("lpm_jml_buku_administrasi", $lpm_jml_buku_administrasi, $lpm_jml_buku_administrasiAttrib);
+				$lpm_jml_buku_administrasiAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("lpm_jml_buku_administrasi", $this->detailKelembagaan['lpm_jml_buku_administrasi'], $lpm_jml_buku_administrasiAttrib);
 			?>  kegiatan
 		</td>
 	</tr>
@@ -1532,9 +1438,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; a. Jumlah Pengurus:</td>
 		<td colspan="2"> 
 			<? 
-				$pkk_jml_pengurus = (!empty($this->detailKelembagaan['pkk_jml_pengurus'])) ? ribuan($this->detailKelembagaan['pkk_jml_pengurus']) : 0;
-				$pkk_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("pkk_jml_pengurus", $pkk_jml_pengurus, $pkk_jml_pengurusAttrib);
+				$pkk_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("pkk_jml_pengurus", $this->detailKelembagaan['pkk_jml_pengurus'], $pkk_jml_pengurusAttrib);
 			?> orang 
 		</td>
 	</tr>
@@ -1543,9 +1448,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; b. Jumlah Anggota:</td>
 		<td colspan="2"> 
 			<? 
-				$pkk_jml_anggota = (!empty($this->detailKelembagaan['pkk_jml_anggota'])) ? ribuan($this->detailKelembagaan['pkk_jml_anggota']) : 0;
-				$pkk_jml_anggotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("pkk_jml_anggota", $pkk_jml_anggota, $pkk_jml_anggotaAttrib);
+				$pkk_jml_anggotaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("pkk_jml_anggota", $this->detailKelembagaan['pkk_jml_anggota'], $pkk_jml_anggotaAttrib);
 			?>  orang
 		</td>
 	</tr>
@@ -1554,9 +1458,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; c.  Jumlah Kegiatan perbulan:</td>
 		<td colspan="2"> 
 			<? 
-				$pkk_jml_keg_perbulan = (!empty($this->detailKelembagaan['pkk_jml_keg_perbulan'])) ? ribuan($this->detailKelembagaan['pkk_jml_keg_perbulan']) : 0;
-				$pkk_jml_keg_perbulanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("pkk_jml_keg_perbulan", $pkk_jml_keg_perbulan, $pkk_jml_keg_perbulanAttrib);
+				$pkk_jml_keg_perbulanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("pkk_jml_keg_perbulan", $this->detailKelembagaan['pkk_jml_keg_perbulan'], $pkk_jml_keg_perbulanAttrib);
 			?>  kegiatan
 		</td>
 	</tr>
@@ -1565,9 +1468,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; d.  Jumlah buku administrasi yang dikelola:</td>
 		<td colspan="2"> 
 			<? 
-				$pkk_jml_buku_administrasi = (!empty($this->detailKelembagaan['pkk_jml_buku_administrasi'])) ? ribuan($this->detailKelembagaan['pkk_jml_buku_administrasi']) : 0;
-				$pkk_jml_buku_administrasiAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("pkk_jml_buku_administrasi", $pkk_jml_buku_administrasi, $pkk_jml_buku_administrasiAttrib);
+				$pkk_jml_buku_administrasiAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("pkk_jml_buku_administrasi", $this->detailKelembagaan['pkk_jml_buku_administrasi'], $pkk_jml_buku_administrasiAttrib);
 			?>  kegiatan
 		</td>
 	</tr>
@@ -1576,8 +1478,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; e. Jumlah dana yang dikelola:</td>
 		<td > RP &nbsp;
 			<? $pkk_jml_dana= explode('.',$this->detailKelembagaan['pkk_jml_dana']);
-				$pkk_jml_dana = (!empty($pkk_jml_dana[0])) ? ribuan($pkk_jml_dana[0]) : 0;
-				$pkk_jml_danaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				$pkk_jml_danaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("pkk_jml_dana", $pkk_jml_dana[0], $pkk_jml_danaAttrib);
 			?> 
 		</td>
@@ -1594,9 +1495,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; a. Jumlah Karang Taruna:</td>
 		<td colspan="2"> 
 			<? 
-				$taruna_jml = (!empty($this->detailKelembagaan['taruna_jml'])) ? ribuan($this->detailKelembagaan['taruna_jml']) : 0;
-				$taruna_jmlAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("taruna_jml", $taruna_jml, $taruna_jmlAttrib);
+				$taruna_jmlAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("taruna_jml", $this->detailKelembagaan['taruna_jml'], $taruna_jmlAttrib);
 			?> buah 
 		</td>
 	</tr>
@@ -1605,7 +1505,7 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; b. Jenis Karang Taruna:</td>
 		<td colspan="2"> 
 			<? 
-				$taruna_jenisAttrib = array("placeholder"=>"Jenis Karang Taruna",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				$taruna_jenisAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("taruna_jenis", $this->detailKelembagaan['taruna_jenis'], $taruna_jenisAttrib);
 			?>  orang
 		</td>
@@ -1615,9 +1515,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; c.  Jumlah Pengurus (rata-rata):</td>
 		<td colspan="2"> 
 			<? 
-				$taruna_jml_pengurus = (!empty($this->detailKelembagaan['taruna_jml_pengurus'])) ? ribuan($this->detailKelembagaan['taruna_jml_pengurus']) : 0;
-				$taruna_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("taruna_jml_pengurus", $taruna_jml_pengurus, $taruna_jml_pengurusAttrib);
+				$taruna_jml_pengurusAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("taruna_jml_pengurus", $this->detailKelembagaan['taruna_jml_pengurus'], $taruna_jml_pengurusAttrib);
 			?>  
 		</td>
 	</tr>
@@ -1633,9 +1532,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; a. Jumlah RW:</td>
 		<td colspan="2"> 
 			<? 
-				$jml_rw = (!empty($this->detailKelembagaan['jml_rw'])) ? ribuan($this->detailKelembagaan['jml_rw']) : 0;
-				$jml_rwAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_rw", $jml_rw, $jml_rwAttrib);
+				$jml_rwAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_rw", $this->detailKelembagaan['jml_rw'], $jml_rwAttrib);
 			?> buah 
 		</td>
 	</tr>
@@ -1644,9 +1542,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; b. Jumlah RT:</td>
 		<td colspan="2"> 
 			<? 
-				$jml_rt = (!empty($this->detailKelembagaan['jml_rt'])) ? ribuan($this->detailKelembagaan['jml_rt']) : 0;
-				$jml_rtAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_rt", $jml_rt, $jml_rtAttrib);
+				$jml_rtAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_rt", $this->detailKelembagaan['jml_rt'], $jml_rtAttrib);
 			?>  buah
 		</td>
 	</tr>
@@ -1655,8 +1552,7 @@ $(function(){
 		<td colspan="2" align="right" >&nbsp;&nbsp;&nbsp; c.  Rata-rata penghasilan Ketua RW dalam Sebulan:</td>
 		<td colspan="2"> Rp 
 			<?  $rata_penghasilan_rw= explode('.', $this->detailKelembagaan['rata_penghasilan_rw']);
-				$rata_penghasilan_rw = (!empty($rata_penghasilan_rw[0])) ? ribuan($rata_penghasilan_rw[0]) : 0;
-				$rata_penghasilan_rwAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				$rata_penghasilan_rwAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("rata_penghasilan_rw",$rata_penghasilan_rw[0], $rata_penghasilan_rwAttrib);
 			?>  
 		</td>
@@ -1666,8 +1562,7 @@ $(function(){
 		<td colspan="2" align="right" >&nbsp;&nbsp;&nbsp; d.  Rata-rata penghasilan Ketua RT dalam Sebulan:</td>
 		<td colspan="2"> Rp 
 			<? $rata_penghasilan_rt= explode('.', $this->detailKelembagaan['rata_penghasilan_rt']);
-				$rata_penghasilan_rt = (!empty($rata_penghasilan_rt[0])) ? ribuan($rata_penghasilan_rt[0]) : 0;
-				$rata_penghasilan_rtAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+				$rata_penghasilan_rtAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
 				echo $ctrlFrm->formText("rata_penghasilan_rt",$rata_penghasilan_rt[0], $rata_penghasilan_rtAttrib);
 			?>  
 		</td>
@@ -1684,9 +1579,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; a. Jumlah:</td>
 		<td> 
 			<? 
-				$jml_lembaga_lain = (!empty($this->detailKelembagaan['jml_lembaga_lain'])) ? ribuan($this->detailKelembagaan['jml_lembaga_lain']) : 0;
-				$jml_lembaga_lainAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_lembaga_lain", $jml_lembaga_lain, $jml_lembaga_lainAttrib);
+				$jml_lembaga_lainAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_lembaga_lain", $this->detailKelembagaan['jml_lembaga_lain'], $jml_lembaga_lainAttrib);
 			?> buah 
 		</td>
 	</tr>
@@ -1701,9 +1595,8 @@ $(function(){
 		<td align="right" >1. Jumlah Anggota Linmas:</td>
 		<td>
 			<? 
-				$jml_lembaga_lain = (!empty($this->detailTrantib['jml_anggota_linmas'])) ? ribuan($this->detailTrantib['jml_anggota_linmas']) : 0;
-				$jml_anggota_linmasAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_anggota_linmas", $jml_anggota_linmas, $jml_anggota_linmasAttrib);
+				$jml_anggota_linmasAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_anggota_linmas", $this->detailTrantib['jml_anggota_linmas'], $jml_anggota_linmasAttrib);
 			?> orang
 		</td>
 	</tr>
@@ -1712,9 +1605,8 @@ $(function(){
 		<td align="right" >2. Jumlah Pos kamling:</td>
 		<td>
 			<? 
-				$jml_pos_kamling = (!empty($this->detailTrantib['jml_pos_kamling'])) ? ribuan($this->detailTrantib['jml_pos_kamling']) : 0;
-				$jml_pos_kamlingAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_pos_kamling", $jml_pos_kamling, $jml_pos_kamlingAttrib);
+				$jml_pos_kamlingAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_pos_kamling", $this->detailTrantib['jml_pos_kamling'], $jml_pos_kamlingAttrib);
 			?> pos
 		</td>
 	</tr>
@@ -1723,9 +1615,8 @@ $(function(){
 		<td align="right" >3. Jumlah Operasi Penertiban:</td>
 		<td>
 			<? 
-				$jml_ops_penertiban = (!empty($this->detailTrantib['jml_ops_penertiban'])) ? ribuan($this->detailTrantib['jml_ops_penertiban']) : 0;
-				$jml_ops_penertibanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_ops_penertiban", $jml_ops_penertiban, $jml_ops_penertibanAttrib);
+				$jml_ops_penertibanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_ops_penertiban", $this->detailTrantib['jml_ops_penertiban'], $jml_ops_penertibanAttrib);
 			?> kali
 		</td>
 	</tr>
@@ -1739,9 +1630,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; a. Pencurian:</td>
 		<td> 
 			<? 
-				$jml_pencurian = (!empty($this->detailTrantib['jml_pencurian'])) ? ribuan($this->detailTrantib['jml_pencurian']) : 0;
-				$jml_pencurianAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_pencurian", $jml_pencurian, $jml_pencurianAttrib);
+				$jml_pencurianAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_pencurian", $this->detailTrantib['jml_pencurian'], $jml_pencurianAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1750,9 +1640,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; b. Perkosaan:</td>
 		<td> 
 			<? 
-				$jml_perkosaan = (!empty($this->detailTrantib['jml_perkosaan'])) ? ribuan($this->detailTrantib['jml_perkosaan']) : 0;
-				$jml_perkosaanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_perkosaan", $jml_perkosaan, $jml_perkosaanAttrib);
+				$jml_perkosaanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_perkosaan", $this->detailTrantib['jml_perkosaan'], $jml_perkosaanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1761,9 +1650,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; c. Kenakalan Remaja:</td>
 		<td> 
 			<? 
-				$jml_kenakalan_remaja = (!empty($this->detailTrantib['jml_kenakalan_remaja'])) ? ribuan($this->detailTrantib['jml_kenakalan_remaja']) : 0;
-				$jml_kenakalan_remajaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_kenakalan_remaja", $jml_kenakalan_remaja, $jml_kenakalan_remajaAttrib);
+				$jml_kenakalan_remajaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_kenakalan_remaja", $this->detailTrantib['jml_kenakalan_remaja'], $jml_kenakalan_remajaAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1772,9 +1660,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; d. Pembunuhan:</td>
 		<td> 
 			<? 
-				$jml_pembunuhan = (!empty($this->detailTrantib['jml_pembunuhan'])) ? ribuan($this->detailTrantib['jml_pembunuhan']) : 0;
-				$jml_pembunuhanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_pembunuhan", $jml_pembunuhan, $jml_pembunuhanAttrib);
+				$jml_pembunuhanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_pembunuhan", $this->detailTrantib['jml_pembunuhan'], $jml_pembunuhanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1783,9 +1670,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; e. Perampokan:</td>
 		<td> 
 			<? 
-				$jml_perampokan = (!empty($this->detailTrantib['jml_perampokan'])) ? ribuan($this->detailTrantib['jml_perampokan']) : 0;
-				$jml_perampokanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_perampokan", $jml_perampokan, $jml_perampokanAttrib);
+				$jml_perampokanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_perampokan", $this->detailTrantib['jml_perampokan'], $jml_perampokanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1794,9 +1680,8 @@ $(function(){
 		<td align="right" >&nbsp;&nbsp;&nbsp; f. Penipuan:</td>
 		<td> 
 			<? 
-				$jml_penipuan = (!empty($this->detailTrantib['jml_penipuan'])) ? ribuan($this->detailTrantib['jml_penipuan']) : 0;
-				$jml_penipuanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_penipuan", $jml_penipuan, $jml_penipuanAttrib);
+				$jml_penipuanAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_penipuan", $this->detailTrantib['jml_penipuan'], $jml_penipuanAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1805,9 +1690,8 @@ $(function(){
 		<td align="right" >5. Jumlah Kejadian Alam:</td>
 		<td> 
 			<? 
-				$jml_bencana = (!empty($this->detailTrantib['jml_bencana'])) ? ribuan($this->detailTrantib['jml_bencana']) : 0;
-				$jml_bencanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_bencana", $jml_bencana, $jml_bencanaAttrib);
+				$jml_bencanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_bencana", $this->detailTrantib['jml_bencana'], $jml_bencanaAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1816,9 +1700,8 @@ $(function(){
 		<td align="right" >6. Jumlah Pos Bencana Alam:</td>
 		<td> 
 			<? 
-				$jml_pos_bencana = (!empty($this->detailTrantib['jml_pos_bencana'])) ? ribuan($this->detailTrantib['jml_pos_bencana']) : 0;
-				$jml_pos_bencanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_pos_bencana", $jml_pos_bencana, $jml_pos_bencanaAttrib);
+				$jml_pos_bencanaAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_pos_bencana", $this->detailTrantib['jml_pos_bencana'], $jml_pos_bencanaAttrib);
 			?> pos 
 		</td>
 	</tr>
@@ -1828,9 +1711,8 @@ $(function(){
 		<td align="right" >7. Jumlah Pembalakan Liar:</td>
 		<td> 
 			<? 
-				$jml_pembalakan_liar = (!empty($this->detailTrantib['jml_pembalakan_liar'])) ? ribuan($this->detailTrantib['jml_pembalakan_liar']) : 0;
-				$jml_pembalakan_liarAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_pembalakan_liar", $jml_pembalakan_liar, $jml_pembalakan_liarAttrib);
+				$jml_pembalakan_liarAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_pembalakan_liar", $this->detailTrantib['jml_pembalakan_liar'], $jml_pembalakan_liarAttrib);
 			?> kali 
 		</td>
 	</tr>
@@ -1840,9 +1722,8 @@ $(function(){
 		<td align="right" >8. Jumlah Pos Hutan Lindung:</td>
 		<td> 
 			<? 
-				$jml_pos_hutan_lindung = (!empty($this->detailTrantib['jml_pos_hutan_lindung'])) ? ribuan($this->detailTrantib['jml_pos_hutan_lindung']) : 0;
-				$jml_pos_hutan_lindungAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
-				echo $ctrlFrm->formText("jml_pos_hutan_lindung", $jml_pos_hutan_lindung, $jml_pos_hutan_lindungAttrib);
+				$jml_pos_hutan_lindungAttrib = array("placeholder"=>"Diisi hanya dengan angka. Misal: 5000000",  "size" => 25,"maxlength" => 25,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
+				echo $ctrlFrm->formText("jml_pos_hutan_lindung", $this->detailTrantib['jml_pos_hutan_lindung'], $jml_pos_hutan_lindungAttrib);
 			?> pos 
 		</td>
 	</tr>
@@ -1941,7 +1822,7 @@ $(function(){
                          + '<input name="nomorProvinsi[]" value="'+ nomor +'" type="hidden">'
                          + '<input name="kode_provinsi_'+ nomor +'" value="2" id="kode_provinsi" type="hidden">'
                          + '<td><input name="nama_program_provinsi_'+ nomor +'" id="nama_program_provinsi" type="text"></td>'
-                         + '<td><input name="anggaran_provinsi_'+ nomor +'" id="anggaran_provinsi" type="text" onkeydown="javascript:return numbersonly(this, event)" onkeyup="javascript:tandaPemisahTitik(this)"></td>'
+                         + '<td><input name="anggaran_provinsi_'+ nomor +'" id="anggaran_provinsi" type="text" onkeypress="isNumber(event)"></td>'
                          + '<td><input type="button" id="hapusProvinsi" value="Hapus"></td></tr>'
                     );
                 });
@@ -1978,7 +1859,7 @@ $(function(){
                          + '<input name="nomorKota[]" value="'+ nomor +'" type="hidden">'
                          + '<input name="kode_kota_'+ nomor +'" value="3" id="kode_kota_" type="hidden">'
                          + '<td><input name="nama_program_kota_'+ nomor +'" id="nama_program_kota" type="text"></td>'
-                         + '<td><input name="anggaran_kota_'+ nomor +'" id="anggaranKota" type="text" onkeydown="javascript:return numbersonly(this, event)" onkeyup="javascript:tandaPemisahTitik(this)"></td>'
+                         + '<td><input name="anggaran_kota_'+ nomor +'" id="anggaranKota" type="text" onkeypress="javascript:return isNumber(event)"></td>'
                          + '<td><input type="button" id="hapusKota" value="Hapus"></td></tr>'
                     );
                 });

@@ -72,7 +72,7 @@ $numToDisplay = $this->numToDisplay;
 			</tr>
 
 			<tr>
-				<td align="right" width="100">* Hari :</td>
+				<td align="right" width="100">* Hari Kejadian:</td>
 				<td>	
 					<? 
 						$hariAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
@@ -82,7 +82,7 @@ $numToDisplay = $this->numToDisplay;
 			</tr>
 			
 			<tr>
-				<td align="right" width="100">* Tanggal :</td>
+				<td align="right" width="100">* Tanggal Kejadian :</td>
 				<td>	
 					<? 
 						$tanggalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required");
@@ -131,9 +131,15 @@ $numToDisplay = $this->numToDisplay;
 			<tr>
 				<td align="right" width="100">* Nominal :</td>
 				<td>	
-					<? $nominal = explode('.',$this->detailKejadian['nominal']);
-						$nominalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","digits"=>"true", "onkeypress"=>"javascript:return isNumber(event)");
-						echo $ctrlFrm->formText("nominal", $nominal[0], $nominalAttrib);
+					<? 	
+						// hapus titik dari database
+						$nominal = explode('.',$this->detailKejadian['nominal']);
+						
+						//fungsi ternary, jika variabel tidak kosong, kasih format ribuan, jika kosong isi dengan 0
+						$nominal = (!empty($nominal[0])) ? number_format($nominal[0],0,',','.') : 0;
+						
+						$nominalAttrib = array("size" => 50,"maxlength" => 50,"required"=>"required","onkeydown"=>"javascript:return numbersonly(this, event)","onkeyup"=>"javascript:tandaPemisahTitik(this)");
+						echo $ctrlFrm->formText("nominal", $nominal, $nominalAttrib);
 					?>
 			</td>
 			</tr>

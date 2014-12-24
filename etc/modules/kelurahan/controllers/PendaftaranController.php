@@ -127,7 +127,6 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$kode_pos						= $_POST['kode_pos'];
 			
 		$luas							= $_POST['luas'];
-		$luas = str_replace('.', '', $luas); 
 		
 		$batas_utara					= $_POST['batas_utara'];
 		$batas_selatan					= $_POST['batas_selatan'];
@@ -138,6 +137,12 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$jarak_dari_ibukota_kota		= $_POST['jarak_dari_ibukota_kota'];
 		$jarak_dari_ibukota_prov		= $_POST['jarak_dari_ibukota_prov'];
 	
+		//hapus format titik
+		$luas 						= str_replace('.', '', $luas); 
+		$jarak_dari_kecamatan 		= str_replace('.', '', $jarak_dari_kecamatan); 
+		$jarak_dari_kota 			= str_replace('.', '', $jarak_dari_kota); 
+		$jarak_dari_ibukota_kota 	= str_replace('.', '', $jarak_dari_ibukota_kota); 
+		$jarak_dari_ibukota_prov 	= str_replace('.', '', $jarak_dari_ibukota_prov); 
 
 		$dataMasukan	= array("kd_kel"				=> $kd_kel,
 								"tahun_pembentukan"		=> $tahun_pembentukan,
@@ -181,17 +186,23 @@ class Kelurahan_PendaftaranController extends Zend_Controller_Action {
 		$kode_wilayah					= $_POST['kode_wilayah'];
 		$kode_pos						= $_POST['kode_pos'];
 		$luas							= $_POST['luas'];
-		$luas = str_replace('.', '', $luas); 
+	
 		$batas_utara					= $_POST['batas_utara'];
 		$batas_selatan					= $_POST['batas_selatan'];
 		$batas_barat					= $_POST['batas_barat'];
 		$batas_timur					= $_POST['batas_timur'];
+		
 		$jarak_dari_kecamatan			= $_POST['jarak_dari_kecamatan'];
 		$jarak_dari_kota				= $_POST['jarak_dari_kota'];
 		$jarak_dari_ibukota_kota		= $_POST['jarak_dari_ibukota_kota'];
 		$jarak_dari_ibukota_prov		= $_POST['jarak_dari_ibukota_prov'];
 		
-		
+		//hapus format titik
+		$luas = str_replace('.', '', $luas); 
+		$jarak_dari_kecamatan = str_replace('.', '', $jarak_dari_kecamatan); 
+		$jarak_dari_kota = str_replace('.', '', $jarak_dari_kota); 
+		$jarak_dari_ibukota_kota = str_replace('.', '', $jarak_dari_ibukota_kota); 
+		$jarak_dari_ibukota_prov = str_replace('.', '', $jarak_dari_ibukota_prov); 
 
 
 		$dataMasukan	= array("kd_kel"				=> $kd_kel,
